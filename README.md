@@ -55,7 +55,6 @@ cp -R skills/<skill-name> ~/.claude/skills/<skill-name>
 | Skill | What it does |
 | --- | --- |
 | [`make-pretty-docs`](./skills/make-pretty-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. |
-| [`new-skill`](./skills/new-skill) | Scaffold a new skill in this repo — valid frontmatter, registered in the plugin manifest, validated before commit. |
 
 <!-- Keep this table in step with skills/. `npm run validate` checks the manifests, not this table. -->
 
@@ -73,6 +72,7 @@ skills/
     assets/          # optional — templates and fixtures
 templates/
   SKILL.template.md  # starting point for a new skill
+  frontmatter.md     # every supported SKILL.md frontmatter field
 scripts/
   validate.mjs       # frontmatter + manifest validator (also runs in CI)
 ```
@@ -98,8 +98,8 @@ To try a skill before publishing, symlink it into your agent's skills directory:
 ln -s "$PWD/skills/<name>" ~/.claude/skills/<name>
 ```
 
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for authoring rules, or run the
-[`new-skill`](./skills/new-skill) skill and let it do the scaffolding.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for authoring rules, and start a new
+skill from [`templates/SKILL.template.md`](./templates/SKILL.template.md).
 
 ## License
 

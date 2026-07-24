@@ -33,8 +33,8 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 - Never hand-edit `plugin.json`'s `skills[]` — run `npm run sync`.
 - Adding a skill: `skills/<name>/SKILL.md` where the frontmatter `name` equals the directory name, then sync, validate, add a README table row, and bump `plugin.json` `version` (minor for a new skill, patch for a fix).
-- Use the `new-skill` skill in this repo to scaffold; `CONTRIBUTING.md` holds the authoring rules.
+- Start a new skill from `templates/SKILL.template.md`; `templates/frontmatter.md` documents every supported field and `CONTRIBUTING.md` holds the authoring rules.
 
 ## Current state
 
-Scaffolded 2026-07-24. Two skills shipped (`new-skill`, `make-pretty-docs`); repo validates green at plugin version 0.2.0. Nothing committed yet — no commits, no remote configured.
+Scaffolded 2026-07-24. One skill shipped (`make-pretty-docs`); repo validates green at plugin version 0.3.0. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Initial commit `3f6ce90` on `main`; not pushed, no remote configured.

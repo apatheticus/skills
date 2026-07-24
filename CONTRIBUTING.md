@@ -8,13 +8,11 @@ real target, not just in theory.
 ```bash
 git clone https://github.com/apatheticus/skills.git
 cd skills
-cp -R templates/SKILL.template.md skills/<your-skill>/SKILL.md   # mkdir -p first
+mkdir -p skills/<your-skill>
+cp templates/SKILL.template.md skills/<your-skill>/SKILL.md
 npm run sync        # registers it in .claude-plugin/plugin.json
 npm run validate    # must exit 0
 ```
-
-Inside Claude Code, the [`new-skill`](./skills/new-skill) skill does all of this
-for you.
 
 ## Skill layout
 
@@ -33,7 +31,7 @@ justify it — the validator and both installers handle nesting.
 ## Frontmatter
 
 Two fields are required; everything else is optional. Full reference:
-[`skills/new-skill/reference/frontmatter.md`](./skills/new-skill/reference/frontmatter.md).
+[`templates/frontmatter.md`](./templates/frontmatter.md).
 
 ```yaml
 ---
