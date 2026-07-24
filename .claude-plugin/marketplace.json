@@ -1,0 +1,29 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "apatheticus",
+  "description": "Agent skills published by Zerø Effort, installable via npx skills or as a Claude Code plugin.",
+  "owner": {
+    "name": "Zerø Effort",
+    "url": "https://github.com/apatheticus"
+  },
+  "plugins": [
+    {
+      "name": "apatheticus-skills",
+      "source": "./",
+      "description": "Agent skills published by Zerø Effort. Install the whole bundle as a managed plugin that updates when the repo does.",
+      "category": "productivity",
+      "keywords": [
+        "skills",
+        "agent-skills",
+        "productivity",
+        "workflow"
+      ],
+      "author": {
+        "name": "Zerø Effort",
+        "url": "https://github.com/apatheticus"
+      },
+      "homepage": "https://github.com/apatheticus/skills",
+      "license": "MIT"
+    }
+  ]
+}

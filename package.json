@@ -1,0 +1,20 @@
+{
+  "name": "apatheticus-skills",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agent skills published by Zerø Effort — installable with npx skills or as a Claude Code plugin.",
+  "author": "Zerø Effort (https://github.com/apatheticus)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apatheticus/skills"
+  },
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "sync": "node scripts/validate.mjs --sync"
+  }
+}

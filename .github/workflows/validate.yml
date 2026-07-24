@@ -1,0 +1,30 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  validate:
+    name: skills + manifests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validate skills and plugin manifests
+        run: node scripts/validate.mjs
+
+      - name: Fail if plugin.json is out of sync with skills/
+        run: |
+          node scripts/validate.mjs --sync
+          if ! git diff --quiet -- .claude-plugin/plugin.json; then
+            echo "::error::.claude-plugin/plugin.json is stale. Run 'npm run sync' and commit the result."
+            git --no-pager diff -- .claude-plugin/plugin.json
+            exit 1
+          fi

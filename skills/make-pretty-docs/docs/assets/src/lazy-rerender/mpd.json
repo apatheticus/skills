@@ -1,0 +1,13 @@
+{
+  "name": "lazy-rerender",
+  "doc": "README.md",
+  "tier": "animated-flagship",
+  "facts": [
+    "A visual re-renders only when its facts, source, or design hash changed, its asset is missing, or --refresh-viz forces it",
+    "Prose-only edits change no hash and trigger zero renders"
+  ],
+  "facts_hash": "c486a1a32510117df841321e36914e9f7ed3503a500df704f8314cff7758db9d",
+  "src_hash": "be144f0b0a6e741df15096e526c003f1e473ea2bbb4add7415aa8ce9dd8e694f",
+  "design_hash": "ba4cbfe5b2f8a36f033bbe07cd8e537962276574260a44ea4cb7796afd86285e",
+  "render": { "duration_s": 12, "fps": 15, "width": 1200, "quality": 68 }
+}

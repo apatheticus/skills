@@ -1,0 +1,7 @@
+node_modules/
+.DS_Store
+*.log
+
+# Claude Code working state — transient, never published
+.claude/state/
+.claude/settings.local.json

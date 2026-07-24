@@ -1,0 +1,22 @@
+{
+  "name": "apatheticus-skills",
+  "version": "0.2.0",
+  "description": "Agent skills published by Zerø Effort. Install the whole bundle as a managed plugin that updates when the repo does.",
+  "author": {
+    "name": "Zerø Effort",
+    "url": "https://github.com/apatheticus"
+  },
+  "homepage": "https://github.com/apatheticus/skills",
+  "repository": "https://github.com/apatheticus/skills",
+  "license": "MIT",
+  "keywords": [
+    "skills",
+    "agent-skills",
+    "productivity",
+    "workflow"
+  ],
+  "skills": [
+    "./skills/make-pretty-docs",
+    "./skills/new-skill"
+  ]
+}

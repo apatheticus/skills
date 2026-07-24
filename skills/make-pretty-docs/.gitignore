@@ -1,0 +1,7 @@
+docs/assets/src/**/render.mp4
+docs/assets/src/**/renders/
+docs/assets/src/**/frames/
+docs/assets/src/**/snapshots/
+docs/assets/src/**/qa_*.png
+docs/assets/src/**/check.json
+docs/assets/src/**/node_modules/
