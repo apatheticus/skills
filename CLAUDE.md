@@ -37,4 +37,6 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 ## Current state
 
-Scaffolded 2026-07-24. One skill shipped (`make-pretty-docs`); repo validates green at plugin version 0.3.0. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Initial commit `3f6ce90` on `main`; not pushed, no remote configured.
+Scaffolded 2026-07-24. Two skills shipped (`human-voice`, `make-pretty-docs`); repo validates green at plugin version 0.4.0. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands directly on `main`, which is pushed to `origin` (`github-personal:apatheticus/skills.git`).
+
+Validator constraint worth knowing before authoring: `parseFrontmatter` in `scripts/validate.mjs` treats indented continuation lines as `''`, so a multi-line `description: |` block fails the required-key check. Keep `description` on a single line (≤1024 chars).

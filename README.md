@@ -54,6 +54,7 @@ cp -R skills/<skill-name> ~/.claude/skills/<skill-name>
 
 | Skill | What it does |
 | --- | --- |
+| [`human-voice`](./skills/human-voice) | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored, gated by register — editorial, professional, technical, or regulated — so a spec never gets an essay's voice. Yields to a compliance skill for federal work. |
 | [`make-pretty-docs`](./skills/make-pretty-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. |
 
 <!-- Keep this table in step with skills/. `npm run validate` checks the manifests, not this table. -->
