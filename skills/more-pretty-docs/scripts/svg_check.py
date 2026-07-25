@@ -677,14 +677,21 @@ def check_paint(root, parents, sheet: Stylesheet, palette, limits, catalog,
             if stroke and bg and stroke != bg:
                 ratio = contrast(stroke, bg)
                 if ratio < ui_floor:
-                    f.warn(label, f"graphic contrast {ratio:.2f}:1 on <{tag}> stroke is "
-                                  f"under {ui_floor:g}:1 — fine for decoration, not for a "
-                                  "load-bearing border")
+                    # Counted, not repeated. A hairline grid is one decision applied
+                    # forty times, and forty identical lines bury every other finding.
+                    key = (tag, stroke, bg, round(ratio, 2))
+                    low_ui[key] = low_ui.get(key, 0) + 1
 
         for child in el:
             walk(child, ctx)
 
+    low_ui: dict[tuple, int] = {}
     walk(root, {"data-bg": root.get("data-bg", "background")})
+    for (tag, stroke, bg, ratio), n in sorted(low_ui.items(), key=lambda kv: kv[0][3]):
+        times = "" if n == 1 else f" (x{n})"
+        f.warn(label, f"graphic contrast {ratio:.2f}:1 on <{tag}> stroke {stroke} over "
+                      f"{bg} is under {ui_floor:g}:1{times} — fine for decoration, not "
+                      "for a load-bearing border")
 
 
 def check_attributed(by_tag, catalog: dict, label: str, f: Findings) -> None:
