@@ -60,6 +60,12 @@ Keep `description` on a single line. `parseFrontmatter` in `scripts/validate.mjs
 reads flat scalar keys only, so a multi-line `description: |` block reads as empty
 and fails the required-key check.
 
+Keep colons out of it, or quote the whole value. An unquoted YAML scalar cannot hold
+a colon followed by a space — real parsers throw `Nested mappings are not allowed in
+compact mappings` and installers skip the file, so the skill goes invisible rather
+than failing loudly. `validate` now rejects this, but an em dash usually reads better
+anyway.
+
 <br/>
 
 ## Writing the body
@@ -181,8 +187,9 @@ Before opening the pull request:
 - [ ] `npm run sync && npm run validate` passes locally
 - [ ] Skill was run end to end against a real target, and what broke was folded back in
 - [ ] `description` says what it does **and** the literal phrases that should trigger it
-- [ ] Row added to the Skills table in [README.md](./README.md), all three columns —
-      including the per-skill `npx skills add apatheticus/skills -s <name>` command
+- [ ] Row added to the Skills table in [README.md](./README.md), all three columns.
+      `validate` enforces the link and the `-s <name>` install command; the middle
+      column is yours to write — a short human-facing summary, not the frontmatter
 - [ ] `version` bumped in `.claude-plugin/plugin.json` — minor for a new skill, patch
       for a fix to an existing one. Plugin installs update on version change.
 - [ ] No secrets, tokens, machine-specific absolute paths, or ungated destructive commands
