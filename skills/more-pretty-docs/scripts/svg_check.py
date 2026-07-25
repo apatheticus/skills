@@ -14,6 +14,10 @@ Deterministic, python3 stdlib only. Checks, in order:
   system      every colour traces to a DESIGN.md palette role or a declared
               custom property; text contrast >= 4.5:1 against its data-bg role
   style       the resolved style's forbid / require invariants and relaxed floors
+  fidelity    the style's *minimum* — required primitives, minimum filter-chain
+              depth, minimum drawn geometry. Every other gate here is a ceiling
+              or a legibility floor, so a flat render used to pass clean; this is
+              the half that asks whether the file looks like what it claims
   size        warn at 60 KB, fail over 150 KB
 
 Usage:
@@ -57,6 +61,10 @@ FILTER_PRIMITIVES = {
 COLOUR_PROPS = {"fill", "stroke", "stop-color", "flood-color", "color"}
 # Elements whose rx/ry are geometry, not corner radius — never a radius rule.
 NON_RECT_SHAPES = {"ellipse", "circle", "radialGradient"}
+# What counts as drawn geometry for the density floor. Structural wrappers (<g>,
+# <defs>, <mask>) are excluded: nesting groups is not draughtsmanship.
+DRAWN_TAGS = {"rect", "circle", "ellipse", "line", "path", "polyline", "polygon",
+              "text", "use", "image"}
 EPS = 1e-6
 
 
@@ -64,6 +72,22 @@ EPS = 1e-6
 
 def local(tag: str) -> str:
     return tag.rsplit("}", 1)[-1] if "}" in tag else tag
+
+
+def chain_depth(filt: ET.Element) -> int:
+    """Primitives that are direct children of one <filter> — the chain length."""
+    return sum(1 for c in filt if local(c.tag) in FILTER_PRIMITIVES)
+
+
+def primitives_in(filters: list[ET.Element]) -> set[str]:
+    """Every filter primitive used anywhere in `filters`, by local tag name."""
+    found = set()
+    for filt in filters:
+        for child in filt:
+            name = local(child.tag)
+            if name in FILTER_PRIMITIVES:
+                found.add(name)
+    return found
 
 
 def parse_time(value: str) -> float | None:
@@ -463,23 +487,43 @@ def check_file(path: Path, catalog: dict, slug: str | None,
     # ---- colours, legibility, contrast
     check_paint(root, parents, sheet, palette, limits, catalog, style, label, f)
 
-    # ---- style invariants
-    if style:
-        check_style(root, by_tag, sheet, style, slug or "", label, f)
+    # ---- style invariants and the fidelity floor
+    #
+    # This runs for every file, styled or not. It used to be skipped when no style
+    # resolved, which meant the multi-style contact sheet — the one asset that
+    # depicts all 31 idioms — was the single file exempt from every fidelity gate.
+    check_style(root, by_tag, sheet, style or {}, slug or "", label, f)
+    check_attributed(by_tag, catalog, label, f)
 
     # ---- filter depth
+    #
+    # A multi-style file attributes each filter to the style it depicts with
+    # data-style, and that filter is then measured against its own style's ceiling
+    # rather than the file-wide one. Without attribution a contact sheet inherits
+    # the global default and has to fake every material it shows.
+    styles_cat = catalog.get("styles", {})
     depth_limit = int(limits.get("filter_depth", 1))
     default_depth = int(catalog.get("defaults", {}).get("filter_depth", 1))
     for filt in by_tag.get("filter", []):
-        prims = [c for c in filt if local(c.tag) in FILTER_PRIMITIVES]
+        prims = chain_depth(filt)
         fid = filt.get("id", "?")
-        if len(prims) > depth_limit:
-            f.error(label, f"filter #{fid} chains {len(prims)} primitives, limit is "
-                           f"{depth_limit}")
-        elif len(prims) > default_depth:
-            f.softened(label, f"filter-depth@{depth_limit}",
-                       f"filter #{fid} chains {len(prims)} primitives — allowed by "
-                       f"style floor {depth_limit}")
+        owner = (filt.get("data-style") or "").strip().lower()
+        own_limit, whose = depth_limit, ""
+        if owner:
+            spec = styles_cat.get(owner)
+            if spec is None:
+                f.error(label, f"filter #{fid} declares data-style='{owner}', which is "
+                               "not a catalog style")
+            else:
+                own_limit = int(spec.get("relax", {}).get("filter_depth", default_depth))
+                whose = f" (attributed to '{owner}')"
+        if prims > own_limit:
+            f.error(label, f"filter #{fid} chains {prims} primitives, limit is "
+                           f"{own_limit}{whose}")
+        elif prims > default_depth:
+            f.softened(label, f"filter-depth@{own_limit}",
+                       f"filter #{fid} chains {prims} primitives — allowed by "
+                       f"floor {own_limit}{whose}")
 
     # ---- size
     size = os.path.getsize(path)
@@ -493,6 +537,19 @@ def check_file(path: Path, catalog: dict, slug: str | None,
                    f"but within this style's {fail / 1024:.0f} KB floor")
     elif size > warn_at:
         f.warn(label, f"{size / 1024:.1f} KB is dense (warn at {warn_at / 1024:.0f} KB)")
+
+    # ---- what this file achieved, not only what it avoided
+    #
+    # Every other line here reports a limit respected. Reporting fidelity
+    # positively is what makes a flat render visible in a run report: it passed,
+    # and it passed at depth 1 with 40 elements, which is the tell.
+    filts = by_tag.get("filter", [])
+    deepest = max((chain_depth(x) for x in filts), default=0)
+    drawn = sum(len(by_tag.get(t, [])) for t in DRAWN_TAGS)
+    used = sorted(primitives_in(filts))
+    f.note(label, f"fidelity: deepest chain {deepest}, {len(filts)} filter(s), "
+                  f"{drawn} drawn elements"
+                  + (f", primitives {', '.join(used)}" if used else ", no filters"))
 
 
 def font_role(el: ET.Element) -> str:
@@ -617,6 +674,47 @@ def check_paint(root, parents, sheet: Stylesheet, palette, limits, catalog,
     walk(root, {"data-bg": root.get("data-bg", "background")})
 
 
+def check_attributed(by_tag, catalog: dict, label: str, f: Findings) -> None:
+    """Hold each attributed group in a multi-style file to its own style's floor.
+
+    The contact sheet resolves to one style (`catalog-sheet`), so a file-wide
+    fidelity floor says nothing about whether the wood-grain tile actually has
+    wood grain. Filters tagged `data-style="wood-grain"` are measured against
+    wood-grain's own requirements instead.
+
+    Only the filter gates apply per group. `min_elements` is a whole-canvas
+    density floor and does not scale down to a tile meaningfully, so it stays a
+    file-scope check.
+    """
+    styles_cat = catalog.get("styles", {})
+    groups: dict[str, list] = {}
+    for filt in by_tag.get("filter", []):
+        owner = (filt.get("data-style") or "").strip().lower()
+        if owner:
+            groups.setdefault(owner, []).append(filt)
+
+    for owner, filts in sorted(groups.items()):
+        spec = styles_cat.get(owner)
+        if spec is None:
+            continue  # already reported as an unknown slug by the depth pass
+        require = spec.get("require", {})
+
+        floor = require.get("min_filter_depth")
+        if floor:
+            deepest = max((chain_depth(x) for x in filts), default=0)
+            if deepest < int(floor):
+                f.error(label, f"the '{owner}' group's deepest chain is {deepest}, "
+                               f"below that style's floor of {floor}")
+
+        wanted_all = require.get("require_filter_all")
+        if wanted_all:
+            present = primitives_in(filts)
+            missing = [w for w in wanted_all if w not in present]
+            if missing:
+                f.error(label, f"the '{owner}' group is missing "
+                               f"{', '.join(missing)}, which that style is built from")
+
+
 def check_style(root, by_tag, sheet: Stylesheet, style: dict, slug: str,
                 label: str, f: Findings) -> None:
     for banned in style.get("forbid", []):
@@ -625,10 +723,52 @@ def check_style(root, by_tag, sheet: Stylesheet, style: dict, slug: str,
 
     require = style.get("require", {})
 
-    wanted = require.get("require_filter")
-    if wanted and not any(w in by_tag for w in wanted):
-        f.error(label, f"the '{slug}' style requires one of {', '.join(wanted)} "
+    # `require_filter` is any-of: a menu, satisfied by one entry. That is the right
+    # shape for "blur OR drop-shadow", and the wrong shape for a material built from
+    # a specific chain — one bare feTurbulence used to satisfy wood-grain. Styles
+    # whose look IS the chain use require_filter_all instead.
+    wanted_any = require.get("require_filter_any") or require.get("require_filter")
+    if wanted_any and not any(w in by_tag for w in wanted_any):
+        f.error(label, f"the '{slug}' style requires one of {', '.join(wanted_any)} "
                        "and none is present")
+
+    wanted_all = require.get("require_filter_all")
+    if wanted_all:
+        missing = [w for w in wanted_all if w not in by_tag]
+        if missing:
+            f.error(label,
+                    f"the '{slug}' style is built from {', '.join(wanted_all)} — "
+                    f"{', '.join(missing)} is missing. These primitives are the "
+                    "material itself, not a suggestion of it")
+
+    floor_depth = require.get("min_filter_depth")
+    if floor_depth:
+        deepest = max((chain_depth(x) for x in by_tag.get("filter", [])), default=0)
+        if deepest < int(floor_depth):
+            f.error(label,
+                    f"deepest filter chain is {deepest}; the '{slug}' style needs at "
+                    f"least {floor_depth} chained primitives. A single primitive "
+                    "flattens this material into a gradient")
+
+    # Geometry density is a property of what a diagram *says*, not of its style: a
+    # README flow with four boxes is correct at 23 elements, and forcing it to 76
+    # would mean padding it with decoration. So this floor binds only on specimens —
+    # the catalog samples and contact sheet, whose whole job is to show the style at
+    # full strength. Ordinary visuals get the number reported, not enforced.
+    floor_els = require.get("min_elements")
+    if floor_els:
+        drawn = sum(len(by_tag.get(t, [])) for t in DRAWN_TAGS)
+        is_specimen = (root.get("data-specimen") or "").strip().lower() == "true"
+        if drawn < int(floor_els):
+            if is_specimen:
+                f.error(label,
+                        f"{drawn} drawn elements is below the '{slug}' specimen floor "
+                        f"of {floor_els} — a specimen has to show the style at full "
+                        "strength, and this little geometry cannot")
+            else:
+                f.note(label,
+                       f"{drawn} drawn elements (the '{slug}' specimen floor is "
+                       f"{floor_els}; not enforced outside specimens)")
 
     if require.get("mono_only"):
         families = [sheet.resolve(v) for sel, d in sheet.rules
