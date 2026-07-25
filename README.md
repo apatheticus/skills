@@ -24,10 +24,11 @@ once it has. Agents that support the [Agent Skills](https://agentskills.io) conv
 read them directly.
 
 Everything ships from one `skills/` directory, and there are two managed ways to get it,
-plus a manual copy. `npx skills` writes editable files into your project and you pull
-updates yourself. The Claude Code plugin installs the whole bundle as managed files that
-update when this repo does. Take the first if you expect to edit the skills, the second
-if you would rather not think about it.
+plus a manual copy. `npx skills` takes one skill or all of them, writes editable files
+into your project, and leaves you to pull updates yourself. The Claude Code plugin
+installs the whole set as managed files that update when this repo does. Take the first
+if you want to pick and choose or expect to edit what you get, the second if you would
+rather not think about it.
 
 Nothing here is published to npm. `package.json` is `private` and exists only to hold the
 validation scripts.
@@ -44,10 +45,23 @@ Three ways in. Pick one.
 npx skills add apatheticus/skills
 ```
 
-Pick the skills and the agents you want; the CLI writes editable copies into your
-project. Useful variants:
+That asks which skills and which agents you want, then writes editable copies into your
+project. Nothing here is all-or-nothing — to skip the prompt and name what you want, pass
+`-s` once per skill:
 
 ```bash
+npx skills add apatheticus/skills -s human-voice                       # one skill
+npx skills add apatheticus/skills -s human-voice -s more-pretty-docs   # two
+npx skills add apatheticus/skills --all                                # every skill, every agent
+```
+
+Repeat the flag; `-s a,b` is not a list and matches nothing. The [Skills](#skills) table
+below carries the exact command for each one.
+
+Other useful variants:
+
+```bash
+npx skills add apatheticus/skills -l              # list what's in the repo, install nothing
 npx skills add apatheticus/skills -g              # install globally, not per-project
 npx skills add apatheticus/skills -a claude-code  # target one agent
 npx skills update <skill-name>                    # pull later changes
@@ -70,6 +84,11 @@ Or from a shell:
 claude plugin marketplace add apatheticus/skills
 claude plugin install apatheticus-skills@apatheticus
 ```
+
+This channel is the whole set or none of it: the marketplace lists one plugin sourced from
+the repo root, so every skill under `skills/` arrives together under one version. Unused
+skills cost a session only their `description` line, not their body — but if you want a
+subset, use `npx skills` above.
 
 <br/>
 
@@ -99,13 +118,17 @@ removed skill stays visible until the next session.
 
 ## Skills
 
-| Skill | What it does |
-| --- | --- |
-| [`human-voice`](./skills/human-voice) | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored. Picks a register first (editorial, professional, technical, or regulated) so a spec never gets an essay's voice. Yields to a compliance skill for federal work. |
-| [`make-pretty-docs`](./skills/make-pretty-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. |
-| [`more-pretty-docs`](./skills/more-pretty-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. Ships a 14-style catalog, from Swiss minimal to neo-brutalist, and a bundled checker that proves the loop is seam-exact before anything is committed. |
+| Skill | What it does | Install just this one |
+| --- | --- | --- |
+| [`human-voice`](./skills/human-voice) | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored. Picks a register first (editorial, professional, technical, or regulated) so a spec never gets an essay's voice. Yields to a compliance skill for federal work. | `npx skills add apatheticus/skills -s human-voice` |
+| [`make-pretty-docs`](./skills/make-pretty-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. | `npx skills add apatheticus/skills -s make-pretty-docs` |
+| [`more-pretty-docs`](./skills/more-pretty-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. Ships a 14-style catalog, from Swiss minimal to neo-brutalist, and a bundled checker that proves the loop is seam-exact before anything is committed. | `npx skills add apatheticus/skills -s more-pretty-docs` |
 
-<!-- Keep this table in step with skills/. `npm run validate` checks the manifests, not this table. -->
+Add `-g` to any of those to install globally instead of into the current project. Stack
+`-s` flags to take several at once.
+
+<!-- Keep this table in step with skills/, including the per-skill install command in the
+     third column. `npm run validate` checks the manifests, not this table. -->
 
 <br/>
 

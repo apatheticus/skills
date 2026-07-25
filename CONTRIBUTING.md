@@ -181,7 +181,8 @@ Before opening the pull request:
 - [ ] `npm run sync && npm run validate` passes locally
 - [ ] Skill was run end to end against a real target, and what broke was folded back in
 - [ ] `description` says what it does **and** the literal phrases that should trigger it
-- [ ] Row added to the Skills table in [README.md](./README.md)
+- [ ] Row added to the Skills table in [README.md](./README.md), all three columns —
+      including the per-skill `npx skills add apatheticus/skills -s <name>` command
 - [ ] `version` bumped in `.claude-plugin/plugin.json` — minor for a new skill, patch
       for a fix to an existing one. Plugin installs update on version change.
 - [ ] No secrets, tokens, machine-specific absolute paths, or ungated destructive commands
