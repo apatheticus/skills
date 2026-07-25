@@ -41,11 +41,20 @@ enough to pass the graphic-contrast gate where it carries meaning.
 | --- | --- |
 | display | `Georgia, 'Iowan Old Style', serif` |
 | body    | `Georgia, 'Iowan Old Style', serif` |
+| kicker  | `-apple-system, 'Segoe UI', Helvetica, Arial, sans-serif` |
 | mono    | `ui-monospace, SFMono-Regular, Menlo, monospace` |
 
 System stacks only — never a remote font, which an SVG cannot fetch on GitHub. A serif
 carries the headline and the body here, which is correct for this style and wrong for
 most others. Mono is reserved for literals: a skill name, a flag, a pattern number.
+
+The **kicker** is the one sans role, and it exists because `editorial` requires it:
+*"the kicker is the one place a sans belongs"*, and *"kicker and folio are separate
+roles — collapsing them into one small uppercase grey text role is how this style
+flattens into generic web design."* The first version of this system declared only a
+serif and a mono, so both plates opened with no kicker at all and a caption doing folio
+duty. A sans stack is not a second display face; it is confined to the kicker line and
+never sets a headline, a standfirst, or body copy.
 
 ### Shape language
 
