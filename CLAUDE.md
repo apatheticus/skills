@@ -29,6 +29,13 @@ npm run sync       # rewrite plugin.json skills[] from disk (do this after addin
 
 CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `plugin.json` has drifted from `skills/`.
 
+## Branches
+
+- **`stage` is the default branch.** Do all work there; it has no protection, so push directly.
+- **`main` is protected and requires a pull request.** `enforce_admins` is on, so even the repo owner cannot push to it directly — a direct push is rejected with `GH006: Changes must be made through a pull request`. Ship by opening a `stage` → `main` PR.
+- Self-merge works: `required_approving_review_count` is `0`. No status checks are required on merge yet, so a red CI run does not block a PR — `validate` is advisory until that is turned on.
+- `Closes #N` only auto-closes on merges into the default branch, which is now `stage`. A PR merged into `main` will **not** close the issue; close it by hand.
+
 ## Rules
 
 - Never hand-edit `plugin.json`'s `skills[]` — run `npm run sync`.
