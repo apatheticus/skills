@@ -173,10 +173,21 @@ A green check makes a pull request *eligible* to merge; it does not merge it. Ev
 pull request is reviewed by an admin, who accepts it or closes it. Do not merge your
 own.
 
-Be aware of how this is currently enforced: `required_approving_review_count` on
-`main` is `0` today, so GitHub will not physically stop a merge that skipped review.
-Review is a policy the maintainers hold you to, not yet a branch rule — an approval
-requirement is going on `main` soon.
+Be aware of how this is enforced, because it is not a review count. `main` requires a
+pull request and `enforce_admins` is on, so nobody pushes to it directly — and merging
+a pull request needs write access, which only an admin has. The admin-approval
+guarantee comes from that access model, not from `required_approving_review_count`,
+which stays at `0` deliberately.
+
+It has to stay at `0`. GitHub does not let a pull request author approve their own
+pull request, and this repo has exactly one admin, so requiring an approval would mean
+no pull request could ever satisfy it — `main` would be unmergeable until protection
+was loosened again. Raising the count only makes sense alongside a second admin.
+
+What `main` does enforce: the `skills + manifests` check must be green, and every
+review thread must be resolved before the merge button unlocks
+(`required_conversation_resolution`). If you leave a comment on your own pull request,
+resolve it before merging.
 
 One wrinkle worth knowing: `Closes #N` only auto-closes on merges into the default
 branch, which is `stage`. A pull request merged into `main` will not close the

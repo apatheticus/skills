@@ -33,7 +33,9 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 - **`stage` is the default branch.** Do all work there; it has no protection, so push directly.
 - **`main` is protected and requires a pull request.** `enforce_admins` is on, so even the repo owner cannot push to it directly — a direct push is rejected with `GH006: Changes must be made through a pull request`. Ship by opening a `stage` → `main` PR.
-- **Every PR is reviewed by an admin**, who accepts it or closes it on quality, value, and fit with the collection. Technically `required_approving_review_count` is `0`, so GitHub still permits a self-merge — but that is a gap in enforcement, not permission. An approval requirement is going on `main`; when it lands, update this line and the `required_approving_review_count` paragraph in `CONTRIBUTING.md` together.
+- **Every PR is reviewed by an admin**, who accepts it or closes it on quality, value, and fit with the collection. That guarantee comes from the access model — merging needs write access and `apatheticus` is the only collaborator — not from a review count.
+- **`required_approving_review_count` stays `0`, deliberately. Do not raise it.** GitHub does not let a PR author approve their own PR, and this repo has one admin, so a count of `1` can never be satisfied: `main` goes unmergeable until protection is loosened. Setting it while turning `enforce_admins` off is worse — the requirement becomes decorative *and* direct pushes to `main` stop being blocked. Raise it only after a second admin collaborator exists.
+- `required_conversation_resolution` is **on**: every review thread must be resolved before `main` will merge. This is the enforceable half of the review policy on a single-admin repo.
 - The `validate` workflow's job — status-check context **`skills + manifests`**, pinned to app id `15368` — is a required check, so a red run blocks the merge.
 - That context string is the job's `name:` in `validate.yml`, not the workflow name. **Renaming the job breaks branch protection silently:** the old context never reports, and the PR sits on "Expected — waiting for status" forever. Rename the job and the protection rule together.
 - `strict` is off, so `stage` does not have to be up to date with `main` to merge. Turn it on only if you start committing to `main` outside the `stage` PR flow.
@@ -47,6 +49,10 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 ## Current state
 
-Scaffolded 2026-07-24. Two skills shipped (`human-voice`, `make-pretty-docs`); repo validates green at plugin version 0.4.0. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands directly on `main`, which is pushed to `origin` (`github-personal:apatheticus/skills.git`).
+Scaffolded 2026-07-24. Three skills shipped (`human-voice`, `make-pretty-docs`, `more-pretty-docs`); repo validates green at plugin version 0.5.1. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, `github-personal:apatheticus/skills.git`) and reaches `main` only by PR. As of 2026-07-25 `main` is 6 commits behind `stage`, fast-forwardable — the per-skill install docs, the frontmatter-colon fix, and the README gate are all on `stage` only.
 
-Validator constraint worth knowing before authoring: `parseFrontmatter` in `scripts/validate.mjs` treats indented continuation lines as `''`, so a multi-line `description: |` block fails the required-key check. Keep `description` on a single line (≤1024 chars).
+Validator constraints worth knowing before authoring, both enforced by `scripts/validate.mjs`:
+
+- `parseFrontmatter` reads flat scalar keys only and treats indented continuation lines as `''`, so a multi-line `description: |` block fails the required-key check. Keep `description` on one line (≤1024 chars).
+- An unquoted `description` cannot contain a colon followed by a space. Real YAML parsers throw `Nested mappings are not allowed in compact mappings` and installers **skip the file silently**, so the skill goes invisible instead of failing loudly — this shipped undetected in `make-pretty-docs` until a live `npx skills add` run exposed it. Use an em dash, or quote the whole value.
+- The README Skills table is machine-checked: one row per `skills/<name>`, a link to the skill directory, a non-empty human-written description, and column 3 exactly `npx skills add <slug> -s <name>` (slug derived from `plugin.json`'s `repository`). The table is delimited by `<!-- skills:table start/end -->`; row order is not checked.
