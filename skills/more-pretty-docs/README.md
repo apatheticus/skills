@@ -8,7 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-e0a33e.svg)](../../LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-skill-12324f)](SKILL.md)
 [![Dependencies](https://img.shields.io/badge/dependencies-python3_only-12324f)](#install)
-[![Styles](https://img.shields.io/badge/style_catalog-14-12324f)](reference/styles.md)
+[![Styles](https://img.shields.io/badge/style_catalog-31-12324f)](reference/styles.md)
 <!-- mpd:badges end -->
 
 <!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="d57b421c12d6dc8c0e189681569e63ca02047f9c90a9a59e1fbd50b121f104bf" src-hash="f62f5bdd642db1bf2d651220f0bc4d403b7d75e2cb195fcdfa89e10b0f8f8299" -->
@@ -35,7 +35,7 @@ engine, same honesty-over-polish doctrine. The difference is the visual layer:
 | Needs installing | HyperFrames CLI, ffmpeg, img2webp | nothing beyond `python3` |
 | Build step | HTML composition → MP4 → WebP | none; the `.svg` you write is the asset |
 | Failure mode | preflight STOP on a missing toolchain | warns, never aborts |
-| Visual style | derived from the product | 14-style catalog, or derived |
+| Visual style | derived from the product | 31-style catalog, or derived |
 | Asset budget | ≤ 2.5 MB | ≤ 150 KB |
 
 Use `make-pretty-docs` when you specifically want WebP. Use
@@ -64,20 +64,74 @@ A **style** is the look-and-feel idiom every visual in a repo is rendered in. Pa
 has. Style owns *form* — shape, material, type, composition, motion. The product's
 own brand tokens still own the *palette*.
 
-<!-- mpd:viz name="styles" src="docs/assets/src/styles/" facts-hash="9fa63f8c48ad178bf922877ee47854485801c6b4246ee2d434fe09f59456a8b9" src-hash="e66d825d3a2d3b05888eeedcb6a8312457c2581678b135bdd683dba2dff2cef1" -->
-<img src="docs/assets/styles.svg" alt="A board of fourteen labelled cells, each built in the style it names: swiss-minimal, flat-material, skeuomorphic, neumorphism, claymorphism, glassmorphism, neo-brutalist, editorial, maximalist, y2k-retrofuturist, terminal-minimalist, blueprint, schematic and bento-grid. Every cell carries one motion characteristic of its style — a marching rule, a material ripple, a breathing LED, a stepped nudge, a travelling signal. The one accent-filled cell reports that all fourteen were built and gated clean." width="820" />
+<!-- mpd:viz name="styles" src="docs/assets/src/styles/" facts-hash="ee8709bedc3f2b8e38fdcb5d106371f18dcdae84f4451c6b1c6c98f38063ef73" src-hash="963cae7bd0d95e1a68134cdc4adde549420b3d9dbed69c5ea6942087222ea49e" -->
+<img src="docs/assets/styles.svg" alt="A board of thirty-one labelled cells in alphabetical order, each built in the style it names: bento-grid, blueprint, brushed-metal, claymorphism, codex-leonardo, console-elbow, digital-rain, draughtsman-notebook, editorial, flat-material, glassmorphism, holographic-projection, hud, ide-dark, isometric-3d, lofi-wireframe, maximalist, neo-brutalist, neumorphism, oil-impasto, patent-drawing, pencil-lined-paper, rough-sketch, schematic, skeuomorphic, swiss-minimal, terminal-minimalist, watercolor, whiteboard-marker, wood-grain and y2k-retrofuturist. Every cell carries one motion characteristic of its style — a marching rule, a material sheen travelling along the grain, a breathing LED, a stepped nudge, glyph columns falling out of phase, counter-rotating reticle rings, an isometric block bobbing while its shadow shrinks. The one accent-filled cell reports that all thirty-one were built and gated clean." width="820" />
 <!-- mpd:viz end -->
 
 Every cell above was built and gated for real. If a style could not be produced
 clean at cell scale, its catalog entry was wrong and got fixed. Aliases resolve
-without asking (`brutalist`, `glass`, `soft-ui`, `tui`, `bento`, …), a recognisable
-free-form idiom is synthesized into a full spec and frozen into the repo's
-`DESIGN.md`, and anything unresolvable prompts exactly one question. Details in
-[`reference/styles.md`](reference/styles.md).
+without asking (`brutalist`, `glass`, `soft-ui`, `tui`, `bento`, `excalidraw`,
+`hologram`, `patent`, `whiteboard`, …), a recognisable free-form idiom is synthesized
+into a full spec and frozen into the repo's `DESIGN.md`, and anything unresolvable
+prompts exactly one question.
+
+### Every style, A to Z
+
+Each slug links to its full nine-field spec.
+
+| Style | Axis | What it is |
+| --- | --- | --- |
+| [`bento-grid`](reference/styles/bento-grid.md) | composition | Unequal cells in one tight grid, each with one job |
+| [`blueprint`](reference/styles/blueprint.md) | material | White line work on cyanotype ground, drafted and annotated |
+| [`brushed-metal`](reference/styles/brushed-metal.md) | material | Anisotropic grain, a travelling sheen, engraved type |
+| [`claymorphism`](reference/styles/claymorphism.md) | material | Fat rounded volumes, playful pastel depth |
+| [`codex-leonardo`](reference/styles/codex-leonardo.md) | era | Brown ink on aged rag, cross-hatch, mirrored marginalia |
+| [`console-elbow`](reference/styles/console-elbow.md) | era | Elbow frame on black, flat colour as zoning |
+| [`digital-rain`](reference/styles/digital-rain.md) | era + material | Falling glyph columns; structure in the negative space |
+| [`draughtsman-notebook`](reference/styles/draughtsman-notebook.md) | era | Graphite on gridded stock — precise, but drawn by a person |
+| [`editorial`](reference/styles/editorial.md) | composition | Print hierarchy — a lede, a rule, generous margin |
+| [`flat-material`](reference/styles/flat-material.md) | material | One elevation step, confident colour fields |
+| [`glassmorphism`](reference/styles/glassmorphism.md) | material | Frosted panels over a coloured ground |
+| [`holographic-projection`](reference/styles/holographic-projection.md) | material | Glowing wireframe in a projection cone, scanlines |
+| [`hud`](reference/styles/hud.md) | composition | Reticles, tick scales, brackets instead of boxes |
+| [`ide-dark`](reference/styles/ide-dark.md) | material | Rounded dark panes, hairline dividers, syntax palette |
+| [`isometric-3d`](reference/styles/isometric-3d.md) | composition | Three lit faces per block, shadows that track height |
+| [`lofi-wireframe`](reference/styles/lofi-wireframe.md) | composition | Greyboxes and squiggles — deliberately unfinished |
+| [`maximalist`](reference/styles/maximalist.md) | composition | Density as the message; layered, loud, deliberate |
+| [`neo-brutalist`](reference/styles/neo-brutalist.md) | material | Hard offset shadows, black rules, unapologetic colour |
+| [`neumorphism`](reference/styles/neumorphism.md) | material | Extruded from one surface; shadow and highlight, no borders |
+| [`oil-impasto`](reference/styles/oil-impasto.md) | material | Lit height field, canvas weave, travelling gloss |
+| [`patent-drawing`](reference/styles/patent-drawing.md) | era | Black on white, reference characters, no colour at all |
+| [`pencil-lined-paper`](reference/styles/pencil-lined-paper.md) | material | Handwriting on ruled stock, graphite grain |
+| [`rough-sketch`](reference/styles/rough-sketch.md) | composition | Doubled strokes and hachure fills — the meeting diagram |
+| [`schematic`](reference/styles/schematic.md) | composition | Symbol alphabet, net labels, no perspective |
+| [`skeuomorphic`](reference/styles/skeuomorphic.md) | material | Objects that look like objects — bevel, sheen, weight |
+| [`swiss-minimal`](reference/styles/swiss-minimal.md) | composition | Strict grid, thin rules, type doing the work |
+| [`terminal-minimalist`](reference/styles/terminal-minimalist.md) | material | Mono type on a dark field; a TUI that isn't ASCII art |
+| [`watercolor`](reference/styles/watercolor.md) | material | Transparent washes that multiply, ink line laid last |
+| [`whiteboard-marker`](reference/styles/whiteboard-marker.md) | material | Fat marker strokes at 88% — thinking out loud |
+| [`wood-grain`](reference/styles/wood-grain.md) | material | Wandering grain, travelling varnish, burned labels |
+| [`y2k-retrofuturist`](reference/styles/y2k-retrofuturist.md) | era | Chrome gradients, wide tracking, optimistic tech |
+
+Two dials cut across the table and are usually the right answer when a request lands
+*between* two styles: **roughness** (the hand-drawn family is one displacement scale,
+`0.7` ruled → `4.5` improvised) and **grain ratio** (the material family is one
+`feTurbulence` x:y ratio, equal → isotropic, extreme → directional).
+
+Three cautions the catalog does not paper over. Display faces are **never fetched**,
+so hand-drawn styles degrade to system handwriting on GitHub. `watercolor`,
+`oil-impasto` and `lofi-wireframe` are **decorative**: their contrast floor is *not*
+relaxed, and each spec names the move that earns its labels back. And
+`console-elbow`, `holographic-projection` and `digital-rain` reproduce a visual
+language only — the skill declines to add logos, insignia, wordmarks or fictional
+alphabets on request rather than treating them as a customisation option.
+
+Full rules and the resolution ladder: [`reference/styles.md`](reference/styles.md).
 
 Where a style's look genuinely fights a soft gate, the style wins and the gate
-softens to a **declared floor, never off** — four styles relax anything at all, and
-every relaxation is printed, recorded in `mpd.json`, and named in the run report.
+softens to a **declared floor, never off** — 21 of the 31 relax something, almost
+always filter depth, and every relaxation is printed, recorded in `mpd.json`, and
+named in the run report. `neumorphism` is the only style that relaxes *contrast*.
 Structural and truth gates never soften.
 
 ## How re-authoring is decided

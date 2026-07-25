@@ -122,6 +122,50 @@ skeuomorphic bevels and neo-brutalist zero-radius blocks cannot honour one radiu
 one material. Its own frame, gutters and labels are still bento. This exemption covers
 exactly one file and is stated in the run report.
 
+**Because it is gated without `--style`, the sheet gets no per-style relaxations
+either** — the global `filter_depth: 1` applies to every tile, including the ones
+whose catalog entries declare floors of 3 or 5. That is the constraint, not a
+loophole, and two conventions satisfy it:
+
+- **Grain is turbulence read through a `<mask>`.** One `<filter>` holds a single
+  `feTurbulence`; a rect carrying that filter sits inside a `<mask>`, and a flat
+  palette colour is drawn through it. Depth 1, monochrome, any hue, and the
+  anisotropy still comes free from the `baseFrequency` ratio — `#nmetal` at
+  `1.6 0.006`, `#nwood` at `0.006 0.055`, `#ntooth` at `0.55`.
+- **Hand-drawn tiles are wobbled by hand, not by a filter.** A roughen chain is
+  turbulence *plus* displacement, which is two primitives. At 264×152 the tile's
+  path coordinates are simply drawn off-true instead.
+
+Depth-3-and-up looks — impasto relief, a chained bevel — are *suggested* with
+gradients and offset geometry, exactly as this sheet has always suggested
+skeuomorphic with `url(#skeu)`. A tile shows a style's character at cell scale; it is
+not a reproduction of what that style produces on a full board.
+
+The sheet's height is the other stated exception. At 31 tiles it runs
+**1200 × 2816**, well past the 320–760 range in `viz-production.md`. Three columns is
+forced by the longest slug: `.slug` carries no `data-role`, so it sits on the 18 px
+label floor, and `holographic-projection` needs about 237 user units at that size
+against the 217 a four-column cell would give it.
+
+**Eight accepted graphic-contrast warnings, and why each one stays.** The sheet gates
+at **0 errors**. It also prints eight `WARN`s of the form *"graphic contrast N:1 on
+&lt;shape&gt; stroke is under 3:1 — fine for decoration, not for a load-bearing
+border"*, and the warning is correct in every case: these are the tiles whose subject
+*is* a deliberately faint mark. Raising them would misrepresent the style, so they
+stay, enumerated here rather than left for a reader to rediscover.
+
+| Warn | Where | Why it is right |
+| --- | --- | --- |
+| 1.48:1 | the `#hatch` pattern line in `<defs>` | Measured against the root background because it lives in `defs`; on the vellum it actually paints, `sw-irongall` on `sw-vellum` is **6.30:1** |
+| 1.55:1 | ide-dark pane divider | `#30363d` on `#0d1117` is the real hairline of a dark editor; a visible border is the wrong picture |
+| 2.62:1 ×3 | lofi-wireframe ghost paths | Placeholder squiggles and the image X. The spec requires these be *shapes*, never `<text>`, precisely so their faintness carries no meaning |
+| 1.91:1 | pencil-lined-paper margin rule | A legal pad's margin line is a pale red print, not an outline |
+| 2.53:1 ×2 | wood-grain grain lines | Grain is a figure in the timber; at 3:1 it reads as drawn-on stripes |
+
+No text anywhere on the sheet is below 4.5:1 — every tile that carries a label was
+recoloured until it cleared the floor, including the wood-grain burn, which sits on a
+sanded `sw-timbersand` field for exactly that reason.
+
 | Role | Hex | Notes |
 | --- | --- | --- |
 | sw-paper       | `#f4f1ea` | swiss-minimal ground |
@@ -153,6 +197,42 @@ exactly one file and is stated in the run report.
 | sw-blue2        | `#1f6feb` | schematic data class |
 | sw-lightgray    | `#f4f5f7` | bento ground |
 | sw-indigo       | `#3b5bdb` | bento focal cell |
+| sw-steel        | `#7e888f` | brushed-metal ground |
+| sw-steelface    | `#c3cbd2` | brushed-metal plate face |
+| sw-steeldark    | `#3c4349` | engraved cut, plate edge |
+| sw-vellum       | `#e5d8b8` | codex aged rag |
+| sw-irongall     | `#5a4632` | codex ink |
+| sw-conorange    | `#ff9c00` | console-elbow frame |
+| sw-conrose      | `#cc6666` | console-elbow block |
+| sw-conperi      | `#9999ff` | console-elbow block |
+| sw-rain         | `#00ff41` | digital-rain phosphor |
+| sw-rainhead     | `#9cffb0` | digital-rain head glyph |
+| sw-graphite     | `#3a414d` | draughtsman and pencil lead |
+| sw-void         | `#01070c` | holographic and hud ground |
+| sw-holo         | `#4fd8ff` | holographic body |
+| sw-holoedge     | `#bef3ff` | holographic bright edge |
+| sw-hudcyan      | `#00e5ff` | hud instrument hue |
+| sw-idepane      | `#161b22` | ide-dark pane surface |
+| sw-idediv       | `#30363d` | ide-dark hairline divider |
+| sw-idblue       | `#58a6ff` | ide-dark identifier — 6.85:1 on the pane, where `sw-blue2` is only 3.73:1 |
+| sw-isotop       | `#6f67d6` | isometric top face |
+| sw-isolft       | `#5b54b0` | isometric left face |
+| sw-isorgt       | `#474189` | isometric right face |
+| sw-wiregrey     | `#4a4a4a` | lofi-wireframe line work |
+| sw-wireghost    | `#9a9a9a` | lofi-wireframe placeholder — shapes only, never text |
+| sw-oilground    | `#1e1810` | oil-impasto ground |
+| sw-oilblue      | `#2f4b8f` | oil-impasto pigment |
+| sw-ruled        | `#afc6db` | lined-paper printed rules |
+| sw-margin       | `#e3a6a6` | lined-paper margin line |
+| sw-roughblue    | `#1971c2` | rough-sketch stroke |
+| sw-roughfill    | `#a5d8ff` | rough-sketch hachure |
+| sw-wcblue       | `#5a6ba8` | watercolour wash |
+| sw-wcrose       | `#c4738c` | watercolour wash |
+| sw-wcochre      | `#d2a24c` | watercolour wash |
+| sw-timber       | `#8a5c31` | wood-grain ground |
+| sw-timberlt     | `#a97438` | wood-grain figure |
+| sw-timberdk     | `#3b2410` | wood-grain burn |
+| sw-timbersand   | `#c9a678` | wood-grain sanded label field — `#3b2410` on it is 6.37:1, on raw timber only 2.53:1 |
 
 ## Visual inventory
 
@@ -160,4 +240,4 @@ exactly one file and is stated in the run report.
 | --- | --- | --- | --- | --- |
 | hero | README.md | a hand-authored SVG passes the bundled checker and is committed as-is — no render step in the path | animated-hero | SKILL.md preflight + phase 6; reference/viz-production.md; scripts/svg_check.py |
 | lazy-rerender | README.md | the facts/src/design hash triad decides RE-RENDER vs REUSE; a prose edit re-authors nothing | animated-flagship | reference/embedding.md → Lazy re-render decision |
-| styles | README.md | the 14 catalog styles, each rendered in its own idiom | animated-flagship | reference/styles.md; reference/styles/*.md; scripts/styles.json |
+| styles | README.md | the 31 catalog styles in alphabetical order, each rendered in its own idiom | animated-flagship | reference/styles.md; reference/styles/*.md; scripts/styles.json |

@@ -123,7 +123,7 @@ removed skill stays visible until the next session.
 | --- | --- | --- |
 | [`human-voice`](./skills/human-voice) | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored. Picks a register first (editorial, professional, technical, or regulated) so a spec never gets an essay's voice. Yields to a compliance skill for federal work. | `npx skills add apatheticus/skills -s human-voice` |
 | [`make-pretty-docs`](./skills/make-pretty-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. | `npx skills add apatheticus/skills -s make-pretty-docs` |
-| [`more-pretty-docs`](./skills/more-pretty-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. Ships a 14-style catalog, from Swiss minimal to neo-brutalist, and a bundled checker that proves the loop is seam-exact before anything is committed. | `npx skills add apatheticus/skills -s more-pretty-docs` |
+| [`more-pretty-docs`](./skills/more-pretty-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. Ships a 31-style catalog, from Swiss minimal to oil impasto, and a bundled checker that proves the loop is seam-exact before anything is committed. | `npx skills add apatheticus/skills -s more-pretty-docs` |
 <!-- skills:table end -->
 
 Add `-g` to any of those to install globally instead of into the current project. Stack

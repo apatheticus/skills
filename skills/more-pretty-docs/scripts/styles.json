@@ -1,5 +1,5 @@
 {
-  "$note": "Machine half of the style catalog for more-pretty-docs. Read by svg_check.py. The prose half is reference/styles.md + reference/styles/<slug>.md; the two must agree slug-for-slug.",
+  "$note": "Machine half of the style catalog for more-pretty-docs. Read by svg_check.py and audit_visuals.py. The prose half is reference/styles.md + reference/styles/<slug>.md; the two must agree slug-for-slug. Entries are alphabetical, matching the index.",
   "defaults": {
     "contrast_text": 4.5,
     "contrast_ui": 3.0,
@@ -8,8 +8,56 @@
     "filter_depth": 1
   },
   "styles": {
-    "swiss-minimal": {
-      "aliases": ["swiss", "international", "grid"],
+    "bento-grid": {
+      "aliases": ["bento", "cards", "dashboard"],
+      "relax": {},
+      "forbid": [],
+      "require": { "min_rx": 12 }
+    },
+    "blueprint": {
+      "aliases": ["cyanotype", "drafting"],
+      "relax": {},
+      "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
+      "require": { "max_rx": 0 }
+    },
+    "brushed-metal": {
+      "aliases": ["brushed-steel", "machined-panel", "nameplate"],
+      "relax": { "filter_depth": 3 },
+      "forbid": [],
+      "require": { "require_filter": ["feTurbulence"] }
+    },
+    "claymorphism": {
+      "aliases": ["clay", "3d-soft"],
+      "relax": { "filter_depth": 2 },
+      "forbid": [],
+      "require": { "min_rx": 24 }
+    },
+    "codex-leonardo": {
+      "aliases": ["codex", "renaissance-study", "iron-gall"],
+      "relax": { "filter_depth": 2 },
+      "forbid": ["feDropShadow"],
+      "require": { "require_filter": ["feTurbulence"], "max_rx": 4 }
+    },
+    "console-elbow": {
+      "aliases": ["lcars", "okudagram", "retro-console"],
+      "relax": {},
+      "forbid": ["feGaussianBlur", "feDropShadow", "feTurbulence", "radialGradient"],
+      "require": { "min_rx": 20 }
+    },
+    "digital-rain": {
+      "aliases": ["matrix-rain", "phosphor-crt", "falling-glyphs"],
+      "relax": { "filter_depth": 2 },
+      "forbid": ["feDropShadow"],
+      "require": { "mono_only": true, "max_rx": 0 }
+    },
+    "draughtsman-notebook": {
+      "aliases": ["engineers-notebook", "graphite-draft"],
+      "relax": { "filter_depth": 3 },
+      "forbid": ["feDropShadow", "radialGradient"],
+      "require": { "require_filter": ["feTurbulence"], "max_rx": 4 }
+    },
+    "editorial": {
+      "aliases": ["magazine", "print", "typographic"],
       "relax": {},
       "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
       "require": { "max_rx": 2 }
@@ -20,41 +68,41 @@
       "forbid": ["radialGradient"],
       "require": { "min_rx": 4 }
     },
-    "skeuomorphic": {
-      "aliases": ["realist", "textured"],
-      "relax": { "filter_depth": 2 },
-      "forbid": [],
-      "require": {}
-    },
-    "neumorphism": {
-      "aliases": ["soft-ui", "soft"],
-      "relax": { "contrast_text": 3.0, "contrast_ui": 2.0 },
-      "forbid": [],
-      "require": { "min_rx": 16 }
-    },
-    "claymorphism": {
-      "aliases": ["clay", "3d-soft"],
-      "relax": {},
-      "forbid": [],
-      "require": { "min_rx": 24 }
-    },
     "glassmorphism": {
       "aliases": ["glass", "frosted", "aero"],
       "relax": { "bytes_fail": 204800 },
       "forbid": [],
       "require": { "require_filter": ["feGaussianBlur"] }
     },
-    "neo-brutalist": {
-      "aliases": ["brutalist", "neubrutalism"],
-      "relax": {},
-      "forbid": ["feGaussianBlur", "feDropShadow"],
-      "require": { "max_rx": 0, "min_stroke_width": 3 }
+    "holographic-projection": {
+      "aliases": ["hologram", "holo", "projection"],
+      "relax": { "filter_depth": 2 },
+      "forbid": ["feDropShadow"],
+      "require": { "require_filter": ["feGaussianBlur"] }
     },
-    "editorial": {
-      "aliases": ["magazine", "print", "typographic"],
-      "relax": {},
-      "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
+    "hud": {
+      "aliases": ["heads-up-display", "targeting-hud", "telemetry"],
+      "relax": { "filter_depth": 2 },
+      "forbid": ["feDropShadow"],
       "require": { "max_rx": 2 }
+    },
+    "ide-dark": {
+      "aliases": ["editor-dark", "dev-tool", "ide"],
+      "relax": { "filter_depth": 2 },
+      "forbid": [],
+      "require": { "min_rx": 6 }
+    },
+    "isometric-3d": {
+      "aliases": ["isometric", "iso", "axonometric"],
+      "relax": {},
+      "forbid": ["radialGradient"],
+      "require": { "max_rx": 0 }
+    },
+    "lofi-wireframe": {
+      "aliases": ["wireframe", "greybox", "lo-fi"],
+      "relax": { "filter_depth": 2 },
+      "forbid": ["feDropShadow", "linearGradient", "radialGradient"],
+      "require": { "require_filter": ["feTurbulence"], "max_rx": 4 }
     },
     "maximalist": {
       "aliases": ["max", "dense", "more"],
@@ -62,23 +110,41 @@
       "forbid": [],
       "require": {}
     },
-    "y2k-retrofuturist": {
-      "aliases": ["y2k", "retrofuture", "chrome"],
+    "neo-brutalist": {
+      "aliases": ["brutalist", "neubrutalism"],
       "relax": {},
+      "forbid": ["feGaussianBlur", "feDropShadow"],
+      "require": { "max_rx": 0, "min_stroke_width": 3 }
+    },
+    "neumorphism": {
+      "aliases": ["soft-ui", "soft"],
+      "relax": { "contrast_text": 3.0, "contrast_ui": 2.0, "filter_depth": 2 },
       "forbid": [],
-      "require": {}
+      "require": { "min_rx": 16 }
     },
-    "terminal-minimalist": {
-      "aliases": ["tui", "cli", "terminal", "ascii-adjacent"],
-      "relax": {},
-      "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
-      "require": { "mono_only": true, "max_rx": 0 }
+    "oil-impasto": {
+      "aliases": ["impasto", "oil-paint", "painterly"],
+      "relax": { "filter_depth": 5 },
+      "forbid": ["feDropShadow"],
+      "require": { "require_filter": ["feDiffuseLighting"] }
     },
-    "blueprint": {
-      "aliases": ["cyanotype", "drafting"],
-      "relax": {},
+    "patent-drawing": {
+      "aliases": ["patent", "uspto-figure", "figure-drawing"],
+      "relax": { "filter_depth": 2 },
       "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
-      "require": { "max_rx": 0 }
+      "require": { "require_filter": ["feTurbulence"], "max_rx": 2 }
+    },
+    "pencil-lined-paper": {
+      "aliases": ["lined-paper", "graphite-notes", "legal-pad"],
+      "relax": { "filter_depth": 3 },
+      "forbid": ["feDropShadow", "radialGradient"],
+      "require": { "require_filter": ["feTurbulence"], "max_rx": 4 }
+    },
+    "rough-sketch": {
+      "aliases": ["excalidraw", "roughjs", "rough"],
+      "relax": { "filter_depth": 2 },
+      "forbid": ["feDropShadow"],
+      "require": { "require_filter": ["feTurbulence"], "max_rx": 6 }
     },
     "schematic": {
       "aliases": ["technical-drawing", "circuit", "netlist"],
@@ -86,11 +152,47 @@
       "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
       "require": { "min_stroke_width": 1.5 }
     },
-    "bento-grid": {
-      "aliases": ["bento", "cards", "dashboard"],
-      "relax": {},
+    "skeuomorphic": {
+      "aliases": ["realist", "textured"],
+      "relax": { "filter_depth": 3 },
       "forbid": [],
-      "require": { "min_rx": 12 }
+      "require": {}
+    },
+    "swiss-minimal": {
+      "aliases": ["swiss", "international", "grid"],
+      "relax": {},
+      "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
+      "require": { "max_rx": 2 }
+    },
+    "terminal-minimalist": {
+      "aliases": ["tui", "cli", "terminal", "ascii-adjacent"],
+      "relax": {},
+      "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
+      "require": { "mono_only": true, "max_rx": 0 }
+    },
+    "watercolor": {
+      "aliases": ["watercolour", "wash", "aquarelle"],
+      "relax": { "filter_depth": 3 },
+      "forbid": ["feDropShadow"],
+      "require": { "require_filter": ["feTurbulence"] }
+    },
+    "whiteboard-marker": {
+      "aliases": ["whiteboard", "napkin", "dry-erase"],
+      "relax": { "filter_depth": 2 },
+      "forbid": ["feDropShadow", "linearGradient", "radialGradient"],
+      "require": { "require_filter": ["feTurbulence"], "min_stroke_width": 3 }
+    },
+    "wood-grain": {
+      "aliases": ["wood", "timber", "pyrography"],
+      "relax": { "filter_depth": 3 },
+      "forbid": [],
+      "require": { "require_filter": ["feTurbulence"] }
+    },
+    "y2k-retrofuturist": {
+      "aliases": ["y2k", "retrofuture", "chrome"],
+      "relax": { "filter_depth": 2 },
+      "forbid": [],
+      "require": {}
     }
   }
 }

@@ -55,6 +55,8 @@ FILTER_PRIMITIVES = {
     "feOffset", "feSpecularLighting", "feTile", "feTurbulence",
 }
 COLOUR_PROPS = {"fill", "stroke", "stop-color", "flood-color", "color"}
+# Elements whose rx/ry are geometry, not corner radius — never a radius rule.
+NON_RECT_SHAPES = {"ellipse", "circle", "radialGradient"}
 EPS = 1e-6
 
 
@@ -153,6 +155,26 @@ def split_blocks(css: str) -> list[tuple[str, str]]:
     return out
 
 
+FONT_SIZE_TOKEN = re.compile(r"^\d*\.?\d+(?:px|pt|pc|em|rem|ex|ch|vw|vh|%)(?:/\S+)?$", re.I)
+
+
+def expand_font_shorthand(value: str) -> dict[str, str]:
+    """`font: 600 14px/1.4 Inter, sans-serif` -> font-size + font-family.
+
+    Hand-authored SVG uses the shorthand constantly, and the longhand-only
+    reader silently skipped every one of them: `mono_only` passed vacuously and
+    no FONT_FLOORS applied. Only the two properties this checker actually reads
+    are recovered; a system keyword (`font: menu`) or any value with no
+    unit-bearing size token expands to nothing.
+    """
+    parts = value.split()
+    for i, tok in enumerate(parts):
+        if FONT_SIZE_TOKEN.match(tok) and i + 1 < len(parts):
+            return {"font-size": tok.split("/", 1)[0],
+                    "font-family": " ".join(parts[i + 1:])}
+    return {}
+
+
 def parse_decls(body: str) -> dict[str, str]:
     decls: dict[str, str] = {}
     for part in body.split(";"):
@@ -161,6 +183,10 @@ def parse_decls(body: str) -> dict[str, str]:
         prop, _, value = part.partition(":")
         prop, value = prop.strip().lower(), value.strip()
         if prop and value:
+            # The shorthand lands first so an explicit longhand after it wins,
+            # which is what the cascade does.
+            if prop == "font":
+                decls.update(expand_font_shorthand(value))
             decls[prop] = value
     return decls
 
@@ -618,8 +644,11 @@ def check_style(root, by_tag, sheet: Stylesheet, style: dict, slug: str,
     # SVG clamps rx to half the side, so a min_rx floor is unsatisfiable on a shape
     # narrower than 2*floor — those are skipped rather than failed. A status marker
     # is allowed to be a small square; it just can't be as round as a cell.
+    # Only <rect> has corner radii. On <ellipse>, <circle> and the radial
+    # gradient elements rx/ry are the geometry itself, and reading them as
+    # corners failed every rounded style that drew an ellipse.
     radii: list[tuple[float, float | None]] = []
-    for el in root.iter():
+    for el in by_tag.get("rect", []):
         side: float | None = None
         dims = []
         for key in ("width", "height"):
@@ -637,6 +666,8 @@ def check_style(root, by_tag, sheet: Stylesheet, style: dict, slug: str,
                 if m:
                     radii.append((float(m.group(1)), side))
     for sel, decls in sheet.rules:
+        if sel.split(":")[0].split(".")[0].split("[")[0].strip() in NON_RECT_SHAPES:
+            continue
         for key in ("rx", "ry", "border-radius"):
             if key in decls:
                 m = re.match(r"\s*(\d*\.?\d+)", sheet.resolve(decls[key]))

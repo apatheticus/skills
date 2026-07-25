@@ -77,18 +77,36 @@ than creating duplicates.
 
 ### Styles
 
-Fourteen named idioms, one chosen per repo:
+Thirty-one named idioms, one chosen per repo, listed alphabetically:
 
-`swiss-minimal` · `flat-material` · `skeuomorphic` · `neumorphism` ·
-`claymorphism` · `glassmorphism` · `neo-brutalist` · `editorial` · `maximalist` ·
-`y2k-retrofuturist` · `terminal-minimalist` · `blueprint` · `schematic` ·
-`bento-grid`
+`bento-grid` · `blueprint` · `brushed-metal` · `claymorphism` · `codex-leonardo` ·
+`console-elbow` · `digital-rain` · `draughtsman-notebook` · `editorial` ·
+`flat-material` · `glassmorphism` · `holographic-projection` · `hud` · `ide-dark` ·
+`isometric-3d` · `lofi-wireframe` · `maximalist` · `neo-brutalist` · `neumorphism` ·
+`oil-impasto` · `patent-drawing` · `pencil-lined-paper` · `rough-sketch` ·
+`schematic` · `skeuomorphic` · `swiss-minimal` · `terminal-minimalist` ·
+`watercolor` · `whiteboard-marker` · `wood-grain` · `y2k-retrofuturist`
 
 Common aliases resolve without asking (`brutalist`, `glass`, `soft-ui`, `swiss`,
-`material`, `clay`, `y2k`, `tui`, `cli`, `bento`, `technical-drawing`, …). A
-free-form name that names a genuinely recognisable idiom is synthesized into a full
-spec; anything unresolvable prompts **one** question. Nothing specified → derived
-from the product, exactly as before this option existed.
+`material`, `clay`, `y2k`, `tui`, `cli`, `bento`, `technical-drawing`, `excalidraw`,
+`hologram`, `lcars`, `patent`, `wireframe`, `whiteboard`, `impasto`, …). A free-form
+name that names a genuinely recognisable idiom is synthesized into a full spec;
+anything unresolvable prompts **one** question. Nothing specified → derived from the
+product, exactly as before this option existed.
+
+Two dials cut across the catalog and are usually the right answer when a request
+lands *between* two styles: **roughness** (the hand-drawn family is one displacement
+scale, `0.7` ruled → `4.5` improvised) and **grain ratio** (the material family is
+one `feTurbulence` x:y ratio, equal → isotropic, extreme → directional). Move the
+dial rather than inventing a style.
+
+Three cautions the catalog cannot design away, all detailed in `reference/styles.md`:
+display fonts are **never fetched** and degrade to system handwriting faces;
+`watercolor`, `oil-impasto` and `lofi-wireframe` are **decorative** — their contrast
+floor is *not* relaxed, so each names the move that earns its labels back; and
+`console-elbow`, `holographic-projection` and `digital-rain` reproduce a visual
+language only — **decline to add logos, insignia, wordmarks or fictional alphabets**
+on request rather than treating them as a customisation option.
 
 **Style owns form; the product's brand tokens still own the palette.** Full rules and
 the resolution ladder: `reference/styles.md`.

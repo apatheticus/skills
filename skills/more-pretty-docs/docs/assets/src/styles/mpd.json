@@ -5,17 +5,17 @@
   "producer": "more-pretty-docs",
   "style": "bento-grid",
   "facts": [
-    "The catalog holds 14 styles, indexed in reference/styles.md with one spec file each under reference/styles/",
+    "The catalog holds 31 styles, indexed alphabetically in reference/styles.md with one spec file each under reference/styles/",
     "scripts/styles.json is the checker's machine-readable half of the same catalog",
     "Style owns form; the product's own brand tokens still own the palette"
   ],
-  "facts_hash": "9fa63f8c48ad178bf922877ee47854485801c6b4246ee2d434fe09f59456a8b9",
-  "src_hash": "e66d825d3a2d3b05888eeedcb6a8312457c2581678b135bdd683dba2dff2cef1",
-  "design_hash": "ccfcfdfa8c5419117e23b48b394fd1c5ddc49875485a3041c90b1134e97b0e99",
+  "facts_hash": "ee8709bedc3f2b8e38fdcb5d106371f18dcdae84f4451c6b1c6c98f38063ef73",
+  "src_hash": "963cae7bd0d95e1a68134cdc4adde549420b3d9dbed69c5ea6942087222ea49e",
+  "design_hash": "ded716781b169614a5bf1fc770cffc92d71d7ad9c04e76c8f6ac1b69b999c51e",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 19120
+    "bytes": 44646
   },
   "relaxed": []
 }

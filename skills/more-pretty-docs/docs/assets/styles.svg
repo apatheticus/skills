@@ -1,32 +1,91 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1400" width="1200" height="1400"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 2816" width="1200" height="2816"
      role="img" data-loop-s="12" data-bg="background">
-  <title>The 14-style catalog, each tile built in its own idiom</title>
-  <desc>A board of fourteen labelled cells, one per catalog style: swiss-minimal,
-flat-material, skeuomorphic, neumorphism, claymorphism, glassmorphism, neo-brutalist,
-editorial, maximalist, y2k-retrofuturist, terminal-minimalist, blueprint, schematic and
-bento-grid. Each cell is rendered in the style it names and carries one motion
-characteristic of that style — a marching rule, a material ripple, a breathing LED, a
-stepped nudge, a travelling signal. The one accent-filled cell reports that all fourteen
-were built and gated clean. Style owns form; the repo's own palette is unchanged
-underneath it.</desc>
+  <title>The 31-style catalog, each tile built in its own idiom</title>
+  <desc>A board of thirty-one labelled cells, one per catalog style, in alphabetical order:
+bento-grid, blueprint, brushed-metal, claymorphism, codex-leonardo, console-elbow,
+digital-rain, draughtsman-notebook, editorial, flat-material, glassmorphism,
+holographic-projection, hud, ide-dark, isometric-3d, lofi-wireframe, maximalist,
+neo-brutalist, neumorphism, oil-impasto, patent-drawing, pencil-lined-paper,
+rough-sketch, schematic, skeuomorphic, swiss-minimal, terminal-minimalist, watercolor,
+whiteboard-marker, wood-grain and y2k-retrofuturist. Each cell is rendered in the style
+it names and carries one motion characteristic of that style — a marching rule, a
+material sheen, a breathing LED, a stepped nudge, falling glyph columns, counter-rotating
+reticle rings, a bobbing isometric block. The one accent-filled cell reports that all
+thirty-one were built and gated clean. Style owns form; the repo's own palette is
+unchanged underneath it.</desc>
 
   <defs>
     <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
       <path d="M24 0 L0 0 0 24" fill="none" stroke="var(--dim)" stroke-width="0.6" opacity="0.28"/>
     </pattern>
+    <pattern id="rule" width="26" height="26" patternUnits="userSpaceOnUse">
+      <path d="M26 0 L0 0 0 26" fill="none" stroke="var(--sw-softshade)" stroke-width="0.7"/>
+    </pattern>
+    <pattern id="ruled" width="4" height="26" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="26" x2="4" y2="26" stroke="var(--sw-ruled)" stroke-width="1"/>
+    </pattern>
+    <pattern id="hatch" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(38)">
+      <line x1="0" y1="0" x2="0" y2="9" stroke="var(--sw-irongall)" stroke-width="0.9"/>
+    </pattern>
+    <pattern id="hachB" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(-41)">
+      <line x1="0" y1="0" x2="0" y2="7" stroke="var(--sw-roughfill)" stroke-width="2.2"/>
+    </pattern>
+    <pattern id="dots" width="18" height="18" patternUnits="userSpaceOnUse">
+      <circle cx="5" cy="5" r="2.6" fill="var(--sw-yellow)"/>
+    </pattern>
+    <pattern id="scan" width="6" height="6" patternUnits="userSpaceOnUse">
+      <rect width="6" height="2.4" fill="var(--sw-holo)" opacity="0.1"/>
+    </pattern>
     <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5"
             markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,1 L9,5 L0,9 z" fill="var(--dim)"/>
     </marker>
+    <marker id="tip2" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="var(--sw-graphite)"/>
+    </marker>
+    <marker id="tip3" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="var(--sw-inkdark)"/>
+    </marker>
+    <marker id="tip4" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto">
+      <path d="M0,1 L9,5 L0,9 z" fill="var(--sw-blue2)"/>
+    </marker>
+    <!-- every filter holds exactly one primitive: this sheet is gated at the
+         default depth of 1, so grain is turbulence read through a <mask> -->
     <filter id="mat" x="-25%" y="-25%" width="150%" height="150%">
       <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.3"/>
     </filter>
     <filter id="gblur" x="-40%" y="-40%" width="180%" height="180%">
       <feGaussianBlur stdDeviation="22"/>
     </filter>
+    <filter id="nmetal" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="1.6 0.006" numOctaves="2" seed="7"/>
+    </filter>
+    <filter id="nwood" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.006 0.055" numOctaves="3" seed="19"/>
+    </filter>
+    <filter id="ntooth" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.55" numOctaves="2" seed="3"/>
+    </filter>
+    <mask id="mmetal"><rect x="0" y="0" width="264" height="152" filter="url(#nmetal)"/></mask>
+    <mask id="mwood"><rect x="0" y="0" width="264" height="152" filter="url(#nwood)"/></mask>
+    <mask id="mtooth"><rect x="0" y="0" width="264" height="152" filter="url(#ntooth)"/></mask>
     <linearGradient id="skeu" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="var(--sw-metal)"/>
+      <stop offset="0" stop-color="var(--sw-steelface)"/>
+      <stop offset="0.5" stop-color="var(--sw-metal)"/>
+      <stop offset="0.5" stop-color="var(--sw-steeldark)"/>
       <stop offset="1" stop-color="var(--sw-inkdark)"/>
+    </linearGradient>
+    <radialGradient id="lamp" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="var(--sw-amber)"/>
+      <stop offset="0.55" stop-color="var(--sw-amber)" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="var(--sw-amber)" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="chan" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="var(--sw-softshade)"/>
+      <stop offset="1" stop-color="var(--sw-white)"/>
     </linearGradient>
     <linearGradient id="chrome" x1="0" y1="0" x2="0" y2="1">
       <stop offset="0" stop-color="var(--sw-white)"/>
@@ -34,25 +93,48 @@ underneath it.</desc>
       <stop offset="0.4" stop-color="var(--sw-white)"/>
       <stop offset="1" stop-color="var(--sw-inkdark)"/>
     </linearGradient>
-    <clipPath id="y2kclip"><rect x="26" y="46" width="212" height="56"/></clipPath>
+    <linearGradient id="irid" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="var(--sw-cyan)"/>
+      <stop offset="0.5" stop-color="var(--sw-indigoviolet)"/>
+      <stop offset="1" stop-color="var(--sw-hotpink)"/>
+    </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="var(--sw-white)" stop-opacity="0.75"/>
+      <stop offset="0.5" stop-color="var(--sw-white)" stop-opacity="0.3"/>
+      <stop offset="1" stop-color="var(--sw-white)" stop-opacity="0.12"/>
+    </linearGradient>
+    <clipPath id="y2kclip"><rect x="24" y="30" width="216" height="56"/></clipPath>
     <clipPath id="tileclip"><rect x="0" y="0" width="264" height="152"/></clipPath>
   </defs>
 
   <style>
     svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb;
           --dim:#9fc4e8; --accent:#e0a33e;
-          --sw-paper:#f4f1ea;   --sw-inkdark:#14181d;  --sw-red:#d6452b;
-          --sw-blue:#1e88e5;    --sw-white:#ffffff;    --sw-metal:#4a4f57;
-          --sw-amber:#f0b429;   --sw-soft:#e8ecf2;     --sw-softshade:#b9c2ce;
-          --sw-lilac:#c9b8ff;   --sw-pink:#ff9ec4;     --sw-violet:#7c3aed;
-          --sw-cyan:#0ea5e9;    --sw-yellow:#ffd400;   --sw-black:#000000;
-          --sw-orange:#ff4d3d;  --sw-cream:#fbf9f4;    --sw-rust:#8c2f1f;
-          --sw-magenta:#ff2e88; --sw-teal:#00e5c0;     --sw-indigoviolet:#5b3df5;
-          --sw-silver:#8fa6c4;  --sw-hotpink:#ff3fb4;  --sw-termbg:#0d1117;
-          --sw-termgreen:#3fb950; --sw-offwhite:#f7f7f5; --sw-blue2:#1f6feb;
-          --sw-lightgray:#f4f5f7; --sw-indigo:#3b5bdb; }
+          --sw-paper:#f4f1ea;     --sw-inkdark:#14181d;   --sw-red:#d6452b;
+          --sw-blue:#1e88e5;      --sw-white:#ffffff;     --sw-metal:#4a4f57;
+          --sw-amber:#f0b429;     --sw-soft:#e8ecf2;      --sw-softshade:#b9c2ce;
+          --sw-lilac:#c9b8ff;     --sw-pink:#ff9ec4;      --sw-violet:#7c3aed;
+          --sw-cyan:#0ea5e9;      --sw-yellow:#ffd400;    --sw-black:#000000;
+          --sw-orange:#ff4d3d;    --sw-cream:#fbf9f4;     --sw-rust:#8c2f1f;
+          --sw-magenta:#ff2e88;   --sw-teal:#00e5c0;      --sw-indigoviolet:#5b3df5;
+          --sw-silver:#8fa6c4;    --sw-hotpink:#ff3fb4;   --sw-termbg:#0d1117;
+          --sw-termgreen:#3fb950; --sw-offwhite:#f7f7f5;  --sw-blue2:#1f6feb;
+          --sw-lightgray:#f4f5f7; --sw-indigo:#3b5bdb;
+          --sw-steel:#7e888f;     --sw-steelface:#c3cbd2; --sw-steeldark:#3c4349;
+          --sw-vellum:#e5d8b8;    --sw-irongall:#5a4632;  --sw-conorange:#ff9c00;
+          --sw-conrose:#cc6666;   --sw-conperi:#9999ff;   --sw-rain:#00ff41;
+          --sw-rainhead:#9cffb0;  --sw-graphite:#3a414d;  --sw-void:#01070c;
+          --sw-holo:#4fd8ff;      --sw-holoedge:#bef3ff;  --sw-hudcyan:#00e5ff;
+          --sw-idepane:#161b22;   --sw-idediv:#30363d;    --sw-idblue:#58a6ff;
+          --sw-isotop:#6f67d6;
+          --sw-isolft:#5b54b0;    --sw-isorgt:#474189;    --sw-wiregrey:#4a4a4a;
+          --sw-wireghost:#9a9a9a; --sw-oilground:#1e1810; --sw-oilblue:#2f4b8f;
+          --sw-ruled:#afc6db;     --sw-margin:#e3a6a6;    --sw-roughblue:#1971c2;
+          --sw-roughfill:#a5d8ff; --sw-wcblue:#5a6ba8;    --sw-wcrose:#c4738c;
+          --sw-wcochre:#d2a24c;   --sw-timber:#8a5c31;    --sw-timberlt:#a97438;
+          --sw-timberdk:#3b2410;  --sw-timbersand:#c9a678; }
 
-    /* bento chrome: one radius, one gutter, one accent-filled cell */
+    /* board chrome: one radius, one gutter, one accent-filled cell */
     .bg    { fill: var(--background); }
     .cell  { fill: var(--surface); stroke: var(--dim); stroke-width: 1; }
     .focal { fill: var(--accent); stroke: none; }
@@ -67,14 +149,24 @@ underneath it.</desc>
              font-size: 52px; font-weight: 700; }
     .slug  { fill: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
              font-size: 20px; font-weight: 700; }
+    .rain  { fill: var(--sw-termgreen); font-family: 'Courier New', ui-monospace, monospace;
+             font-size: 19px; }
+    .head  { fill: var(--sw-rainhead); }
 
     /* one motion per tile — 2s, 3s, 4s, 6s and 12s all divide the 12s loop */
+    .d1 { animation-delay: 0s }
+    .d2 { animation-delay: -2s }
+    .d3 { animation-delay: -4s }
+
     .march4 { stroke-dasharray: 18 200; animation: march 4s linear infinite; }
     @keyframes march { from { stroke-dashoffset: 218 } to { stroke-dashoffset: 0 } }
 
     .draw6 { stroke-dasharray: 600; animation: draw 6s ease-in-out infinite; }
     @keyframes draw { 0% { stroke-dashoffset: 600 } 45%, 55% { stroke-dashoffset: 0 }
                       100% { stroke-dashoffset: -600 } }
+
+    .creep6 { animation: creep 6s linear infinite; }
+    @keyframes creep { from { stroke-dashoffset: 20 } to { stroke-dashoffset: 0 } }
 
     .scale4 { transform-box: fill-box; transform-origin: center;
               animation: ripple 4s cubic-bezier(.4,0,.2,1) infinite; }
@@ -86,229 +178,530 @@ underneath it.</desc>
     .pulse3 { animation: pulse 3s ease-in-out infinite; }
     @keyframes pulse { 0%, 100% { opacity: .35 } 50% { opacity: 1 } }
 
+    .breathe12 { animation: breathe 12s ease-in-out infinite; }
+    @keyframes breathe { 0%, 100% { opacity: .5 } 50% { opacity: .9 } }
+
     .press6 { animation: press 6s cubic-bezier(.4,0,.4,1) infinite; }
     @keyframes press { 0%, 100% { opacity: 1 } 50% { opacity: 0 } }
 
-    .bob4 { transform-box: fill-box; transform-origin: center;
-            animation: bob 4s ease-in-out infinite; }
-    @keyframes bob { 0%, 100% { transform: translateY(0) scale(1) }
-                     50% { transform: translateY(-7px) scale(1.03) } }
+    .bob4 { transform-box: fill-box; transform-origin: 50% 100%;
+            animation: bob 4s cubic-bezier(.34,1.56,.64,1) infinite; }
+    @keyframes bob { 0%, 100% { transform: translateY(0) scale(1, 1) }
+                     30% { transform: translateY(-8px) scale(.97, 1.04) }
+                     62% { transform: translateY(0) scale(1.02, .98) } }
+
+    .bobiso6 { animation: isobob 6s ease-in-out infinite; }
+    @keyframes isobob { 0%, 100% { transform: translateY(0) } 50% { transform: translateY(-12px) } }
+    .isosh6 { transform-box: fill-box; transform-origin: center;
+              animation: isosh 6s ease-in-out infinite; }
+    @keyframes isosh { 0%, 100% { transform: scale(1); opacity: .16 }
+                       50% { transform: scale(.86); opacity: .1 } }
 
     .drift12 { animation: drift 12s ease-in-out infinite; }
     @keyframes drift { 0%, 100% { transform: translate(0, 0) }
                        50% { transform: translate(-22px, 14px) } }
 
     .nudge3 { animation: nudge 3s steps(1, end) infinite; }
-    @keyframes nudge { 0%, 49% { transform: translate(0, 0) }
-                       50%, 100% { transform: translate(6px, 6px) } }
+    @keyframes nudge { 0%, 32% { transform: translate(0, 0) }
+                       33%, 65% { transform: translate(4px, 4px) }
+                       66%, 100% { transform: translate(8px, 8px) } }
 
     .spin6 { transform-box: fill-box; transform-origin: center;
              animation: spin 6s linear infinite; }
+    .spin12 { transform-box: fill-box; transform-origin: center;
+              animation: spin 12s linear infinite reverse; }
     @keyframes spin { to { transform: rotate(360deg) } }
 
     .sweep6 { animation: sweep 6s ease-in-out infinite; }
     @keyframes sweep { 0% { transform: translateX(0) } 100% { transform: translateX(320px) } }
 
+    .sheen12 { animation: sheen 12s linear infinite; }
+    @keyframes sheen { from { transform: translateX(0) } to { transform: translateX(400px) } }
+
     .blink2 { animation: blink 2s steps(1, end) infinite; }
     @keyframes blink { 0%, 49% { opacity: 1 } 50%, 100% { opacity: 0 } }
+
+    .lit6 { animation: lit 6s steps(1, end) infinite; }
+    @keyframes lit { 0%, 32% { opacity: 1 } 33%, 100% { opacity: .55 } }
+
+    /* travel is exactly one glyph column, so t=D matches t=0 */
+    .fall6 { animation: fall 6s linear infinite; }
+    @keyframes fall { from { transform: translateY(-96px) } to { transform: translateY(96px) } }
+
+    /* irregular steps read as instability, not as a metronome */
+    .flick6 { animation: flick 6s steps(1, end) infinite; }
+    @keyframes flick { 0%, 17% { opacity: 1 } 18%, 21% { opacity: .72 }
+                       22%, 63% { opacity: 1 } 64%, 66% { opacity: .78 }
+                       67%, 100% { opacity: 1 } }
+
+    .scan6 { animation: scan 6s linear infinite; }
+    @keyframes scan { from { transform: translateY(0) } to { transform: translateY(-6px) } }
 
     .tok { fill: var(--sw-blue2); }
 
     @media (prefers-reduced-motion: reduce) {
-      .march4, .draw6 { animation: none; stroke-dashoffset: 0; }
-      .scale4, .pulse6, .pulse3, .press6, .bob4, .drift12,
-      .nudge3, .spin6, .sweep6, .blink2 { animation: none; opacity: 1; }
+      .march4, .draw6, .creep6 { animation: none; stroke-dashoffset: 0; }
+      .scale4, .pulse6, .pulse3, .press6, .bob4, .bobiso6, .isosh6, .drift12,
+      .nudge3, .spin6, .spin12, .sweep6, .sheen12, .blink2, .lit6, .fall6,
+      .flick6, .scan6, .breathe12 { animation: none; opacity: 1; }
       .tok { display: none; }
     }
   </style>
 
-  <rect class="bg" x="0" y="0" width="1200" height="1400"/>
+  <rect class="bg" x="0" y="0" width="1200" height="2816"/>
 
-  <!-- row 0 — col 0 span 6: the subject -->
+  <!-- header cell, full width -->
   <rect class="cell" x="40" y="40" width="1120" height="140" rx="16" data-bg="surface"/>
   <text class="h"    x="72" y="104" data-role="title" data-bg="surface">Style catalog</text>
-  <text class="lede" x="72" y="146" data-bg="surface">fourteen idioms · --style &lt;slug&gt;, or derived</text>
+  <text class="lede" x="72" y="146" data-bg="surface">thirty-one idioms, A to Z · --style &lt;slug&gt;, or derived</text>
 
-  <!-- row 1 -->
   <rect class="cell" x="40" y="200" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(88,224)" data-bg="sw-paper">
-    <rect x="0" y="0" width="264" height="152" fill="var(--sw-paper)"/>
-    <line x1="88" y1="0" x2="88" y2="152" stroke="var(--sw-inkdark)" stroke-width="1" stroke-opacity="0.16"/>
-    <line x1="176" y1="0" x2="176" y2="152" stroke="var(--sw-inkdark)" stroke-width="1" stroke-opacity="0.16"/>
-    <rect x="24" y="26" width="104" height="12" fill="var(--sw-inkdark)"/>
-    <rect x="24" y="54" width="170" height="4" fill="var(--sw-inkdark)" fill-opacity="0.45"/>
-    <rect x="24" y="66" width="140" height="4" fill="var(--sw-inkdark)" fill-opacity="0.45"/>
-    <rect x="24" y="78" width="158" height="4" fill="var(--sw-inkdark)" fill-opacity="0.45"/>
-    <line class="march4" x1="24" y1="120" x2="240" y2="120" stroke="var(--sw-red)" stroke-width="2.5"/>
+  <g transform="translate(88,224)" data-bg="sw-lightgray">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-lightgray)"/>
+    <rect x="14" y="16" width="122" height="54" rx="12" fill="var(--sw-white)"/>
+    <rect x="146" y="16" width="104" height="54" rx="12" fill="var(--sw-indigo)"/>
+    <rect x="14" y="80" width="104" height="56" rx="12" fill="var(--sw-white)"/>
+    <rect x="128" y="80" width="122" height="56" rx="12" fill="var(--sw-white)"/>
+    <rect x="30" y="34" width="62" height="8" rx="4" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
+    <rect x="146" y="100" width="86" height="8" rx="4" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
+    <circle class="pulse3" cx="40" cy="106" r="9" fill="var(--sw-indigo)"/>
   </g>
-  <text class="slug" x="72" y="402" data-bg="surface">swiss-minimal</text>
+  <text class="slug" x="72" y="402" data-bg="surface">bento-grid</text>
 
   <rect class="cell" x="420" y="200" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(468,224)" data-bg="sw-blue">
-    <rect x="0" y="0" width="264" height="152" fill="var(--sw-blue)"/>
-    <rect x="24" y="26" width="216" height="100" rx="6" fill="var(--sw-white)" filter="url(#mat)"/>
-    <rect x="44" y="48" width="96" height="10" rx="2" fill="var(--sw-blue)"/>
-    <rect x="44" y="72" width="150" height="6" rx="2" fill="var(--sw-inkdark)" fill-opacity="0.22"/>
-    <rect x="44" y="88" width="118" height="6" rx="2" fill="var(--sw-inkdark)" fill-opacity="0.22"/>
-    <circle class="scale4" cx="200" cy="100" r="15" fill="var(--sw-blue)"/>
+  <g transform="translate(468,224)" data-bg="background">
+    <rect x="0" y="0" width="264" height="152" fill="var(--background)"/>
+    <rect x="0" y="0" width="264" height="152" fill="url(#grid)"/>
+    <rect x="34" y="30" width="118" height="66" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
+    <rect class="draw6" x="34" y="30" width="118" height="66" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
+    <line x1="162" y1="30" x2="238" y2="30" stroke="var(--dim)" stroke-width="0.8" stroke-dasharray="6 5"/>
+    <line x1="34" y1="118" x2="152" y2="118" stroke="var(--dim)" stroke-width="0.8"
+          marker-start="url(#tip)" marker-end="url(#tip)"/>
+    <text x="170" y="62" fill="var(--dim)" data-role="metadata"
+          font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="17">118</text>
   </g>
-  <text class="slug" x="452" y="402" data-bg="surface">flat-material</text>
+  <text class="slug" x="452" y="402" data-bg="surface">blueprint</text>
 
   <rect class="cell" x="800" y="200" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(848,224)" data-bg="sw-metal">
-    <rect x="0" y="0" width="264" height="152" fill="var(--sw-metal)"/>
-    <rect x="20" y="22" width="224" height="108" fill="url(#skeu)"/>
-    <rect x="20" y="22" width="224" height="108" fill="none" stroke="var(--sw-white)" stroke-width="1" stroke-opacity="0.3"/>
-    <rect x="36" y="44" width="122" height="32" fill="var(--sw-inkdark)" fill-opacity="0.6"/>
-    <rect x="36" y="44" width="122" height="32" fill="none" stroke="var(--sw-white)" stroke-width="1" stroke-opacity="0.18"/>
-    <circle class="pulse6" cx="206" cy="60" r="13" fill="var(--sw-amber)"/>
-    <rect x="36" y="92" width="172" height="8" fill="var(--sw-inkdark)" fill-opacity="0.4"/>
+  <g transform="translate(848,224)" data-bg="sw-steel">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-steel)"/>
+    <rect x="16" y="18" width="232" height="116" rx="4" fill="var(--sw-steelface)"/>
+    <rect x="16" y="18" width="232" height="116" rx="4" fill="var(--sw-steel)"
+          fill-opacity="0.4" mask="url(#mmetal)"/>
+    <rect x="16" y="18" width="232" height="116" rx="4" fill="none"
+          stroke="var(--sw-inkdark)" stroke-width="1.5"/>
+    <g clip-path="url(#tileclip)">
+      <rect class="sheen12" x="-70" y="18" width="46" height="116"
+            fill="var(--sw-white)" fill-opacity="0.4" transform="skewX(-14)"/>
+    </g>
+    <text x="40" y="86" fill="var(--sw-steeldark)" font-size="24" font-weight="700"
+          letter-spacing="1.5" data-bg="sw-steelface">MILL</text>
   </g>
-  <text class="slug" x="832" y="402" data-bg="surface">skeuomorphic</text>
+  <text class="slug" x="832" y="402" data-bg="surface">brushed-metal</text>
 
-  <!-- row 2 -->
   <rect class="cell" x="40" y="436" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(88,460)" data-bg="sw-soft">
-    <rect x="0" y="0" width="264" height="152" fill="var(--sw-soft)"/>
-    <rect x="50" y="46" width="168" height="70" rx="22" fill="var(--sw-softshade)"/>
-    <rect class="press6" x="38" y="34" width="168" height="70" rx="22" fill="var(--sw-white)"/>
-    <rect x="44" y="40" width="168" height="70" rx="22" fill="var(--sw-soft)"/>
-    <rect x="70" y="66" width="88" height="8" rx="4" fill="var(--sw-inkdark)" fill-opacity="0.42"/>
-    <circle cx="184" cy="70" r="12" fill="var(--sw-softshade)"/>
+  <g transform="translate(88,460)" data-bg="sw-white">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-white)"/>
+    <ellipse cx="86" cy="126" rx="60" ry="12" fill="var(--sw-violet)" fill-opacity="0.16"/>
+    <rect class="bob4" x="26" y="34" width="120" height="82" rx="30" fill="var(--sw-lilac)"/>
+    <ellipse cx="86" cy="34" rx="52" ry="20" fill="var(--sw-white)" fill-opacity="0.34"/>
+    <circle cx="200" cy="76" r="38" fill="var(--sw-pink)"/>
+    <ellipse cx="196" cy="52" rx="18" ry="8" fill="var(--sw-white)" fill-opacity="0.34"/>
   </g>
-  <text class="slug" x="72" y="638" data-bg="surface">neumorphism</text>
+  <text class="slug" x="72" y="638" data-bg="surface">claymorphism</text>
 
   <rect class="cell" x="420" y="436" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(468,460)" data-bg="sw-white">
-    <rect x="0" y="0" width="264" height="152" fill="var(--sw-white)"/>
-    <rect x="30" y="36" width="122" height="84" rx="32" fill="var(--sw-lilac)"/>
-    <rect x="46" y="52" width="88" height="26" rx="13" fill="var(--sw-white)" fill-opacity="0.5"/>
-    <circle class="bob4" cx="198" cy="78" r="36" fill="var(--sw-pink)"/>
-    <ellipse cx="190" cy="62" rx="16" ry="9" fill="var(--sw-white)" fill-opacity="0.45"/>
+  <g transform="translate(468,460)" data-bg="sw-vellum">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-vellum)"/>
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-irongall)" mask="url(#mtooth)" fill-opacity="0.28"/>
+    <path class="breathe12" d="M22 96 h96 v34 h-96 z" fill="url(#hatch)"/>
+    <path d="M23 30 L119 31 L118 66 L22 65 Z" fill="none" stroke="var(--sw-irongall)" stroke-width="1.6"/>
+    <circle cx="70" cy="48" r="27" fill="none" stroke="var(--sw-irongall)" stroke-width="0.8"
+            stroke-opacity="0.5" stroke-dasharray="4 4"/>
+    <text x="140" y="60" fill="var(--sw-irongall)" font-size="21" font-style="italic"
+          font-family="Palatino, 'Iowan Old Style', Georgia, serif">studio</text>
+    <g transform="translate(246,104) scale(-1,1)" aria-hidden="true">
+      <text x="0" y="0" fill="var(--sw-irongall)" font-size="19" font-style="italic"
+            font-family="Palatino, 'Iowan Old Style', Georgia, serif">nota</text>
+    </g>
   </g>
-  <text class="slug" x="452" y="638" data-bg="surface">claymorphism</text>
+  <text class="slug" x="452" y="638" data-bg="surface">codex-leonardo</text>
 
   <rect class="cell" x="800" y="436" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(848,460)" data-bg="sw-termbg">
-    <rect x="0" y="0" width="264" height="152" fill="var(--sw-termbg)"/>
-    <g clip-path="url(#tileclip)"><g class="drift12" filter="url(#gblur)">
-      <circle cx="72" cy="48" r="50" fill="var(--sw-violet)"/>
-      <circle cx="198" cy="112" r="56" fill="var(--sw-cyan)"/>
-    </g></g>
-    <rect x="32" y="44" width="200" height="66" rx="14" fill="var(--sw-white)" fill-opacity="0.16"/>
-    <rect x="32" y="44" width="200" height="66" rx="14" fill="none" stroke="var(--sw-white)" stroke-width="1" stroke-opacity="0.5"/>
-    <rect x="52" y="66" width="92" height="8" rx="4" fill="var(--sw-white)" fill-opacity="0.85"/>
-    <rect x="52" y="84" width="60" height="6" rx="3" fill="var(--sw-white)" fill-opacity="0.55"/>
+  <g transform="translate(848,460)" data-bg="sw-black">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-black)"/>
+    <path class="elbow" d="M14 16 H128 V44 H72 A26 26 0 0 0 46 70 V136 H14 Z" fill="var(--sw-conorange)"/>
+    <rect class="lit6 d1" x="58" y="16" width="92" height="30" rx="15" fill="var(--sw-conrose)"/>
+    <rect class="lit6 d2" x="160" y="16" width="90" height="30" rx="15" fill="var(--sw-conperi)"/>
+    <rect class="lit6 d3" x="58" y="56" width="120" height="30" rx="15" fill="var(--sw-amber)"/>
+    <rect x="58" y="96" width="192" height="30" rx="15" fill="var(--sw-conrose)" fill-opacity="0.45"/>
+    <text x="24" y="38" fill="var(--sw-black)" font-size="19" letter-spacing="1"
+          data-bg="sw-conorange"
+          font-family="Antonio, Oswald, 'Arial Narrow', Impact, sans-serif">4471</text>
   </g>
-  <text class="slug" x="832" y="638" data-bg="surface">glassmorphism</text>
+  <text class="slug" x="832" y="638" data-bg="surface">console-elbow</text>
 
-  <!-- row 3 -->
   <rect class="cell" x="40" y="672" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(88,696)" data-bg="sw-yellow">
-    <rect x="0" y="0" width="264" height="152" fill="var(--sw-yellow)"/>
-    <rect x="42" y="48" width="142" height="68" fill="var(--sw-black)"/>
-    <rect class="nudge3" x="34" y="40" width="142" height="68" fill="var(--sw-orange)"
-          stroke="var(--sw-black)" stroke-width="4"/>
-    <rect x="200" y="40" width="36" height="68" fill="var(--sw-black)"/>
-    <rect x="34" y="124" width="202" height="6" fill="var(--sw-black)"/>
+  <g transform="translate(88,696)" data-bg="sw-black">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-black)"/>
+    <g clip-path="url(#tileclip)">
+      <g class="fall6 d1"><g class="rain"><text x="18" y="20">1</text><text x="18" y="44">0</text>
+        <text x="18" y="68">1</text><text class="head" x="18" y="92">1</text></g></g>
+      <g class="fall6 d2"><g class="rain"><text x="56" y="20">0</text><text x="56" y="44">1</text>
+        <text class="head" x="56" y="68">0</text></g></g>
+      <g class="fall6 d3"><g class="rain"><text x="94" y="20">1</text>
+        <text class="head" x="94" y="44">1</text></g></g>
+    </g>
+    <rect x="126" y="58" width="124" height="38" fill="var(--sw-black)"/>
+    <text x="136" y="84" fill="var(--sw-rain)" font-size="20"
+          font-family="'Courier New', ui-monospace, monospace">ingest</text>
   </g>
-  <text class="slug" x="72" y="874" data-bg="surface">neo-brutalist</text>
+  <text class="slug" x="72" y="874" data-bg="surface">digital-rain</text>
 
   <rect class="cell" x="420" y="672" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(468,696)" data-bg="sw-cream">
-    <rect x="0" y="0" width="264" height="152" fill="var(--sw-cream)"/>
-    <line class="draw6" x1="26" y1="30" x2="238" y2="30" stroke="var(--sw-rust)" stroke-width="3"/>
-    <text x="26" y="74" fill="var(--sw-inkdark)" font-family="Georgia, 'Iowan Old Style', serif"
-          font-size="27" font-weight="700">Editorial</text>
-    <rect x="26" y="94" width="184" height="3" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
-    <rect x="26" y="108" width="152" height="3" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
-    <rect x="26" y="122" width="168" height="3" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
+  <g transform="translate(468,696)" data-bg="sw-paper">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-paper)"/>
+    <rect x="0" y="0" width="264" height="152" fill="url(#rule)"/>
+    <path d="M27 33 L145 31 L146 89 L26 91 Z" fill="none" stroke="var(--sw-graphite)" stroke-width="1.7"/>
+    <path d="M156 40 L232 39" fill="none" stroke="var(--sw-graphite)" stroke-width="0.9" stroke-dasharray="5 4"/>
+    <line class="creep6" x1="27" y1="116" x2="145" y2="115" stroke="var(--sw-graphite)"
+          stroke-width="0.9" stroke-dasharray="6 4" marker-start="url(#tip2)" marker-end="url(#tip2)"/>
+    <text x="164" y="86" fill="var(--sw-graphite)" data-role="metadata" font-size="17"
+          font-family="'Architects Daughter', 'Segoe Print', 'Comic Sans MS', cursive">118</text>
   </g>
-  <text class="slug" x="452" y="874" data-bg="surface">editorial</text>
+  <text class="slug" x="452" y="874" data-bg="surface">draughtsman-notebook</text>
 
   <rect class="cell" x="800" y="672" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(848,696)" data-bg="sw-indigoviolet">
-    <rect x="0" y="0" width="264" height="152" fill="var(--sw-indigoviolet)"/>
-    <rect x="132" y="16" width="110" height="46" fill="var(--sw-magenta)"/>
-    <circle class="spin6" cx="62" cy="44" r="30" fill="var(--sw-teal)"/>
-    <text x="22" y="106" fill="var(--sw-white)" font-size="26" font-weight="900"
-          letter-spacing="-1">MORE</text>
-    <rect x="22" y="118" width="212" height="14" fill="var(--sw-yellow)"/>
-    <circle cx="214" cy="92" r="16" fill="var(--sw-teal)"/>
+  <g transform="translate(848,696)" data-bg="sw-cream">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-cream)"/>
+    <line class="draw6" x1="22" y1="26" x2="242" y2="26" stroke="var(--sw-rust)" stroke-width="3"/>
+    <text x="22" y="42" fill="var(--sw-inkdark)" data-role="metadata" font-size="16"
+          letter-spacing="2.6">SECTION I</text>
+    <text x="22" y="80" fill="var(--sw-inkdark)" font-family="Georgia, 'Iowan Old Style', serif"
+          font-size="27" font-weight="700">Editorial</text>
+    <line x1="152" y1="52" x2="152" y2="140" stroke="var(--sw-inkdark)" stroke-width="1" stroke-opacity="0.16"/>
+    <rect x="22" y="98" width="118" height="3" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
+    <rect x="22" y="112" width="98" height="3" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
+    <rect x="164" y="98" width="78" height="3" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
   </g>
-  <text class="slug" x="832" y="874" data-bg="surface">maximalist</text>
+  <text class="slug" x="832" y="874" data-bg="surface">editorial</text>
 
-  <!-- row 4 -->
   <rect class="cell" x="40" y="908" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(88,932)" data-bg="sw-termbg">
-    <rect x="0" y="0" width="264" height="152" fill="var(--sw-termbg)"/>
-    <rect x="26" y="46" width="212" height="56" rx="28" fill="url(#chrome)"/>
-    <g clip-path="url(#y2kclip)">
-      <rect class="sweep6" x="-46" y="46" width="34" height="56" fill="var(--sw-white)" fill-opacity="0.55"/>
-    </g>
-    <text x="28" y="130" fill="var(--sw-hotpink)" font-size="19" font-weight="700"
-          letter-spacing="3.5">FUTURE</text>
+  <g transform="translate(88,932)" data-bg="sw-blue">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-blue)"/>
+    <rect x="22" y="24" width="220" height="104" rx="6" fill="var(--sw-white)" filter="url(#mat)"/>
+    <rect x="42" y="46" width="96" height="10" rx="2" fill="var(--sw-blue)"/>
+    <rect x="42" y="70" width="150" height="6" rx="2" fill="var(--sw-inkdark)" fill-opacity="0.22"/>
+    <rect x="42" y="86" width="118" height="6" rx="2" fill="var(--sw-inkdark)" fill-opacity="0.22"/>
+    <circle class="scale4" cx="200" cy="98" r="15" fill="var(--sw-blue)"/>
   </g>
-  <text class="slug" x="72" y="1110" data-bg="surface">y2k-retrofuturist</text>
+  <text class="slug" x="72" y="1110" data-bg="surface">flat-material</text>
 
   <rect class="cell" x="420" y="908" width="360" height="216" rx="16" data-bg="surface"/>
   <g transform="translate(468,932)" data-bg="sw-termbg">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-termbg)"/>
-    <text x="20" y="42" fill="var(--sw-termgreen)"
-          font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19">$ svg_check</text>
-    <text x="20" y="72" fill="var(--sw-white)"
-          font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19">0 errors</text>
-    <rect class="blink2" x="20" y="92" width="11" height="20" fill="var(--sw-white)"/>
-    <rect x="20" y="126" width="216" height="8" fill="var(--sw-termgreen)" fill-opacity="0.3"/>
-    <rect x="20" y="126" width="150" height="8" fill="var(--sw-termgreen)"/>
+    <g clip-path="url(#tileclip)"><g class="drift12" filter="url(#gblur)">
+      <circle cx="68" cy="44" r="50" fill="var(--sw-violet)"/>
+      <circle cx="196" cy="112" r="56" fill="var(--sw-cyan)"/>
+    </g></g>
+    <rect x="30" y="42" width="204" height="68" rx="14" fill="var(--sw-white)" fill-opacity="0.16"/>
+    <rect x="30" y="42" width="204" height="68" rx="14" fill="none" stroke="url(#edge)" stroke-width="1"/>
+    <rect x="50" y="64" width="92" height="8" rx="4" fill="var(--sw-white)" fill-opacity="0.85"/>
+    <rect x="50" y="82" width="60" height="6" rx="3" fill="var(--sw-white)" fill-opacity="0.55"/>
   </g>
-  <text class="slug" x="452" y="1110" data-bg="surface">terminal-minimalist</text>
+  <text class="slug" x="452" y="1110" data-bg="surface">glassmorphism</text>
 
   <rect class="cell" x="800" y="908" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(848,932)" data-bg="background">
-    <rect x="0" y="0" width="264" height="152" fill="var(--background)"/>
-    <rect x="0" y="0" width="264" height="152" fill="url(#grid)"/>
-    <rect x="40" y="34" width="118" height="66" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
-    <rect class="draw6" x="40" y="34" width="118" height="66" fill="none" stroke="var(--accent)" stroke-width="1.6"/>
-    <line x1="168" y1="34" x2="238" y2="34" stroke="var(--dim)" stroke-width="0.8" stroke-dasharray="6 5"/>
-    <line x1="40" y1="120" x2="158" y2="120" stroke="var(--dim)" stroke-width="0.8"
-          marker-start="url(#tip)" marker-end="url(#tip)"/>
-    <text x="176" y="64" fill="var(--dim)"
-          font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">118</text>
+  <g transform="translate(848,932)" data-bg="sw-void">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-void)"/>
+    <path d="M132 138 L54 44 L210 44 L132 138 Z" fill="var(--sw-holo)" fill-opacity="0.09"/>
+    <ellipse cx="132" cy="138" rx="52" ry="11" fill="var(--sw-holoedge)" fill-opacity="0.24"/>
+    <g class="flick6">
+      <rect x="66" y="34" width="132" height="56" fill="var(--sw-holo)" fill-opacity="0.08"
+            stroke="var(--sw-holo)" stroke-width="1.4"/>
+      <path d="M66 62 H198 M132 34 V90" stroke="var(--sw-holo)" stroke-width="0.8" stroke-opacity="0.6"/>
+    </g>
+    <rect class="scan6" x="0" y="0" width="264" height="152" fill="url(#scan)"/>
   </g>
-  <text class="slug" x="832" y="1110" data-bg="surface">blueprint</text>
+  <text class="slug" x="832" y="1110" data-bg="surface">holographic-projection</text>
 
-  <!-- row 5 — two tiles and the one accent-filled verdict cell -->
   <rect class="cell" x="40" y="1144" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(88,1168)" data-bg="sw-offwhite">
+  <g transform="translate(88,1168)" data-bg="sw-void">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-void)"/>
+    <path d="M40 34 h-16 v16 M224 34 h16 v16 M40 122 h-16 v-16 M224 122 h16 v-16"
+          fill="none" stroke="var(--sw-hudcyan)" stroke-width="1.4"/>
+    <circle class="spin12" cx="132" cy="78" r="44" fill="none" stroke="var(--sw-hudcyan)"
+            stroke-width="1.2" stroke-opacity="0.6" stroke-dasharray="30 12"/>
+    <circle class="spin6" cx="132" cy="78" r="28" fill="none" stroke="var(--sw-hudcyan)"
+            stroke-width="1.2" stroke-opacity="0.6" stroke-dasharray="14 8"/>
+    <circle cx="132" cy="78" r="6" fill="var(--sw-amber)"/>
+    <path d="M24 138 v-10 M48 138 v-7 M72 138 v-7 M96 138 v-7 M120 138 v-10"
+          stroke="var(--sw-hudcyan)" stroke-width="0.8" stroke-opacity="0.5"/>
+    <text x="188" y="142" fill="var(--sw-hudcyan)" data-role="metadata" font-size="17"
+          letter-spacing="1" font-family="ui-monospace, SFMono-Regular, Menlo, monospace">0.62</text>
+  </g>
+  <text class="slug" x="72" y="1346" data-bg="surface">hud</text>
+
+  <rect class="cell" x="420" y="1144" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(468,1168)" data-bg="sw-termbg">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-termbg)"/>
+    <rect x="12" y="14" width="62" height="124" rx="8" fill="var(--sw-idepane)"/>
+    <rect x="84" y="14" width="168" height="124" rx="8" fill="var(--sw-idepane)"/>
+    <line x1="84" y1="108" x2="252" y2="108" stroke="var(--sw-idediv)" stroke-width="1"/>
+    <rect x="24" y="30" width="38" height="7" rx="3" fill="var(--sw-idediv)"/>
+    <rect x="24" y="46" width="30" height="7" rx="3" fill="var(--sw-idediv)"/>
+    <text x="98" y="46" fill="var(--sw-idblue)" font-size="19" data-bg="sw-idepane"
+          font-family="'JetBrains Mono', ui-monospace, Menlo, monospace">parse</text>
+    <rect class="blink2" x="182" y="30" width="9" height="20" fill="var(--sw-white)"/>
+    <text x="98" y="130" fill="var(--sw-termgreen)" data-role="metadata" font-size="17"
+          data-bg="sw-idepane"
+          font-family="'JetBrains Mono', ui-monospace, Menlo, monospace">0 problems</text>
+  </g>
+  <text class="slug" x="452" y="1346" data-bg="surface">ide-dark</text>
+
+  <rect class="cell" x="800" y="1144" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(848,1168)" data-bg="sw-lightgray">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-lightgray)"/>
+    <ellipse class="isosh6" cx="86" cy="122" rx="46" ry="14" fill="var(--sw-isorgt)" fill-opacity="0.16"/>
+    <g class="bobiso6">
+      <path fill="var(--sw-isotop)" d="M86 34 L136 60 L86 86 L36 60 Z"/>
+      <path fill="var(--sw-isolft)" d="M36 60 L86 86 L86 112 L36 86 Z"/>
+      <path fill="var(--sw-isorgt)" d="M136 60 L86 86 L86 112 L136 86 Z"/>
+    </g>
+    <path fill="var(--sw-isotop)" d="M196 66 L238 88 L196 110 L154 88 Z"/>
+    <path fill="var(--sw-isolft)" d="M154 88 L196 110 L196 130 L154 108 Z"/>
+    <path fill="var(--sw-isorgt)" d="M238 88 L196 110 L196 130 L238 108 Z"/>
+  </g>
+  <text class="slug" x="832" y="1346" data-bg="surface">isometric-3d</text>
+
+  <rect class="cell" x="40" y="1380" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(88,1404)" data-bg="sw-offwhite">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-offwhite)"/>
-    <rect x="22" y="30" width="74" height="40" fill="var(--sw-white)" stroke="var(--sw-inkdark)" stroke-width="2"/>
-    <rect x="168" y="86" width="74" height="40" fill="var(--sw-white)" stroke="var(--sw-inkdark)" stroke-width="2"/>
-    <path id="netTile" d="M96,50 H132 V106 H168" fill="none" stroke="var(--sw-blue2)" stroke-width="1.5"/>
-    <circle cx="132" cy="50" r="3.5" fill="var(--sw-blue2)"/>
+    <path d="M22 26 L146 24 L147 82 L21 84 Z" fill="none" stroke="var(--sw-wiregrey)" stroke-width="1.8"/>
+    <path d="M22 26 L147 82 M147 24 L21 84" fill="none" stroke="var(--sw-wireghost)" stroke-width="1.8"/>
+    <path d="M22 104 q6 -5 12 0 t12 0 t12 0 t12 0 t12 0 t12 0 t12 0"
+          fill="none" stroke="var(--sw-wireghost)" stroke-width="1.8"/>
+    <path d="M22 124 q6 -5 12 0 t12 0 t12 0 t12 0 t12 0"
+          fill="none" stroke="var(--sw-wireghost)" stroke-width="1.8"/>
+    <path class="creep6" d="M162 24 L243 26 L242 84 L161 82 Z" fill="none"
+          stroke="var(--sw-blue2)" stroke-width="1.8" stroke-dasharray="10 6"/>
+  </g>
+  <text class="slug" x="72" y="1582" data-bg="surface">lofi-wireframe</text>
+
+  <rect class="cell" x="420" y="1380" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(468,1404)" data-bg="sw-indigoviolet">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-indigoviolet)"/>
+    <rect x="0" y="0" width="264" height="152" fill="url(#dots)" opacity="0.5"/>
+    <rect x="128" y="12" width="112" height="46" fill="var(--sw-magenta)"/>
+    <circle class="spin6" cx="58" cy="42" r="30" fill="var(--sw-teal)"/>
+    <rect x="18" y="88" width="164" height="26" fill="var(--sw-white)"/>
+    <text x="28" y="108" fill="var(--sw-indigoviolet)" font-size="19" font-weight="900"
+          letter-spacing="-0.5" data-bg="sw-white">MORE · MORE</text>
+    <rect x="18" y="124" width="222" height="14" fill="var(--sw-yellow)"/>
+    <circle cx="208" cy="92" r="16" fill="var(--sw-teal)"/>
+  </g>
+  <text class="slug" x="452" y="1582" data-bg="surface">maximalist</text>
+
+  <rect class="cell" x="800" y="1380" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(848,1404)" data-bg="sw-yellow">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-yellow)"/>
+    <rect x="38" y="46" width="138" height="66" fill="var(--sw-black)"/>
+    <rect class="nudge3" x="30" y="38" width="138" height="66" fill="var(--sw-orange)"
+          stroke="var(--sw-black)" stroke-width="4"/>
+    <rect x="192" y="38" width="36" height="66" fill="var(--sw-black)"/>
+    <rect x="30" y="122" width="198" height="6" fill="var(--sw-black)"/>
+  </g>
+  <text class="slug" x="832" y="1582" data-bg="surface">neo-brutalist</text>
+
+  <rect class="cell" x="40" y="1616" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(88,1640)" data-bg="sw-soft">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-soft)"/>
+    <rect x="48" y="44" width="164" height="68" rx="22" fill="var(--sw-softshade)"/>
+    <rect class="press6" x="36" y="32" width="164" height="68" rx="22" fill="var(--sw-white)"/>
+    <rect x="42" y="38" width="164" height="68" rx="22" fill="var(--sw-soft)"/>
+    <rect x="68" y="64" width="86" height="8" rx="4" fill="var(--sw-inkdark)" fill-opacity="0.42"/>
+    <rect x="66" y="122" width="132" height="12" rx="6" fill="url(#chan)"/>
+  </g>
+  <text class="slug" x="72" y="1818" data-bg="surface">neumorphism</text>
+
+  <rect class="cell" x="420" y="1616" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(468,1640)" data-bg="sw-oilground">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-oilground)"/>
+    <path class="paint" d="M20 30 L136 26 L140 88 L18 92 Z" fill="var(--sw-oilblue)"/>
+    <path class="paint" d="M148 42 L246 38 L244 104 L150 100 Z" fill="var(--sw-rust)"/>
+    <path class="paint" d="M28 100 L128 104 L124 132 L26 128 Z" fill="var(--sw-amber)"/>
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-cream)" mask="url(#mtooth)" fill-opacity="0.22"/>
+    <g clip-path="url(#tileclip)">
+      <rect class="sheen12" x="-70" y="0" width="34" height="152"
+            fill="var(--sw-cream)" fill-opacity="0.28" transform="skewX(-12)"/>
+    </g>
+  </g>
+  <text class="slug" x="452" y="1818" data-bg="surface">oil-impasto</text>
+
+  <rect class="cell" x="800" y="1616" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(848,1640)" data-bg="sw-white">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-white)"/>
+    <path d="M26 34 L142 32 L144 92 L28 94 Z" fill="none" stroke="var(--sw-black)"
+          stroke-width="1.5" stroke-linecap="square"/>
+    <path d="M160 46 L232 44 L234 82 L162 84 Z" fill="none" stroke="var(--sw-black)"
+          stroke-width="1.5" stroke-dasharray="7 5" stroke-linecap="square"/>
+    <line class="creep6" x1="144" y1="46" x2="176" y2="30" stroke="var(--sw-black)"
+          stroke-width="1.5" stroke-dasharray="6 4"/>
+    <text x="182" y="28" fill="var(--sw-black)" font-size="19" letter-spacing="1"
+          font-family="'Century Gothic', Futura, 'Trebuchet MS', sans-serif">102</text>
+    <text x="26" y="132" fill="var(--sw-black)" font-size="19" letter-spacing="2"
+          font-family="'Century Gothic', Futura, 'Trebuchet MS', sans-serif">FIG. 1</text>
+  </g>
+  <text class="slug" x="832" y="1818" data-bg="surface">patent-drawing</text>
+
+  <rect class="cell" x="40" y="1852" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(88,1876)" data-bg="sw-offwhite">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-offwhite)"/>
+    <rect x="0" y="0" width="264" height="152" fill="url(#ruled)"/>
+    <line x1="42" y1="0" x2="42" y2="152" stroke="var(--sw-margin)" stroke-width="1.4"/>
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-graphite)" mask="url(#mtooth)" fill-opacity="0.2"/>
+    <rect class="breathe12" x="56" y="44" width="122" height="20" fill="var(--sw-amber)" fill-opacity="0.45"/>
+    <text x="58" y="60" fill="var(--sw-graphite)" font-size="22"
+          font-family="Caveat, 'Bradley Hand', 'Segoe Script', 'Comic Sans MS', cursive">source → store</text>
+    <path d="M58 92 L176 90 M58 118 L146 116" fill="none" stroke="var(--sw-graphite)" stroke-width="1.6"/>
+  </g>
+  <text class="slug" x="72" y="2054" data-bg="surface">pencil-lined-paper</text>
+
+  <rect class="cell" x="420" y="1852" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(468,1876)" data-bg="sw-white">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-white)"/>
+    <rect x="20" y="30" width="104" height="58" fill="url(#hachB)"/>
+    <path d="M20 30 L124 31 L123 88 L21 87 Z" fill="none" stroke="var(--sw-roughblue)" stroke-width="1.9"/>
+    <path d="M21 31 L125 33 L124 90 L22 88 Z" fill="none" stroke="var(--sw-roughblue)"
+          stroke-width="1.9" opacity="0.65"/>
+    <path d="M152 34 L244 32 L245 86 L153 88 Z" fill="none" stroke="var(--sw-red)" stroke-width="1.9"/>
+    <line class="march4" x1="126" y1="60" x2="150" y2="59" stroke="var(--sw-inkdark)"
+          stroke-width="1.9" marker-end="url(#tip3)"/>
+    <path d="M22 116 q7 -5 14 0 t14 0 t14 0 t14 0" fill="none"
+          stroke="var(--sw-inkdark)" stroke-width="1.6" stroke-opacity="0.5"/>
+  </g>
+  <text class="slug" x="452" y="2054" data-bg="surface">rough-sketch</text>
+
+  <rect class="cell" x="800" y="1852" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(848,1876)" data-bg="sw-offwhite">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-offwhite)"/>
+    <rect x="18" y="28" width="74" height="40" fill="var(--sw-white)" stroke="var(--sw-inkdark)" stroke-width="2"/>
+    <rect x="164" y="84" width="74" height="40" fill="var(--sw-white)" stroke="var(--sw-inkdark)" stroke-width="2"/>
+    <path id="netTile" d="M92,48 H128 V104 H164" fill="none" stroke="var(--sw-blue2)" stroke-width="1.5"/>
+    <circle cx="128" cy="48" r="3.5" fill="var(--sw-blue2)"/>
     <circle class="tok" r="5">
       <animateMotion dur="6s" repeatCount="indefinite"><mpath href="#netTile"/></animateMotion>
     </circle>
   </g>
-  <text class="slug" x="72" y="1346" data-bg="surface">schematic</text>
+  <text class="slug" x="832" y="2054" data-bg="surface">schematic</text>
 
-  <rect class="cell" x="420" y="1144" width="360" height="216" rx="16" data-bg="surface"/>
-  <g transform="translate(468,1168)" data-bg="sw-lightgray">
-    <rect x="0" y="0" width="264" height="152" fill="var(--sw-lightgray)"/>
-    <rect x="18" y="20" width="130" height="54" rx="10" fill="var(--sw-white)"
-          stroke="var(--sw-inkdark)" stroke-width="1" stroke-opacity="0.16"/>
-    <rect x="158" y="20" width="88" height="54" rx="10" fill="var(--sw-indigo)"/>
-    <rect x="18" y="84" width="88" height="50" rx="10" fill="var(--sw-white)"
-          stroke="var(--sw-inkdark)" stroke-width="1" stroke-opacity="0.16"/>
-    <rect x="116" y="84" width="130" height="50" rx="10" fill="var(--sw-white)"
-          stroke="var(--sw-inkdark)" stroke-width="1" stroke-opacity="0.16"/>
-    <rect x="36" y="38" width="66" height="8" rx="4" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
-    <rect x="134" y="104" width="88" height="8" rx="4" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
-    <circle class="pulse3" cx="46" cy="109" r="9" fill="var(--sw-indigo)"/>
+  <rect class="cell" x="40" y="2088" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(88,2112)" data-bg="sw-metal">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-metal)"/>
+    <rect x="16" y="18" width="232" height="116" fill="url(#skeu)"/>
+    <rect x="16" y="18" width="232" height="116" fill="var(--sw-metal)"
+          fill-opacity="0.4" mask="url(#mmetal)"/>
+    <rect x="16" y="18" width="232" height="116" fill="none" stroke="var(--sw-white)"
+          stroke-width="1" stroke-opacity="0.3"/>
+    <path d="M16 18 H248 V54 Q132 74 16 56 Z" fill="var(--sw-white)" fill-opacity="0.12"/>
+    <rect x="32" y="42" width="118" height="32" fill="var(--sw-inkdark)" fill-opacity="0.6"/>
+    <circle class="pulse6" cx="204" cy="58" r="13" fill="url(#lamp)"/>
+    <path d="M32 106 Q132 132 232 106" fill="none" stroke="var(--sw-steelface)"
+          stroke-width="4" stroke-linecap="round"/>
   </g>
-  <text class="slug" x="452" y="1346" data-bg="surface">bento-grid</text>
+  <text class="slug" x="72" y="2290" data-bg="surface">skeuomorphic</text>
 
-  <rect class="focal" x="800" y="1144" width="360" height="216" rx="16" data-bg="accent-primary"/>
-  <text class="lab-f" x="832" y="1204" data-bg="accent-primary">Built and gated clean</text>
-  <text class="val-f" x="832" y="1284" data-bg="accent-primary">14 / 14</text>
+  <rect class="cell" x="420" y="2088" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(468,2112)" data-bg="sw-paper">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-paper)"/>
+    <line x1="88" y1="0" x2="88" y2="152" stroke="var(--sw-inkdark)" stroke-width="1" stroke-opacity="0.16"/>
+    <line x1="176" y1="0" x2="176" y2="152" stroke="var(--sw-inkdark)" stroke-width="1" stroke-opacity="0.16"/>
+    <rect x="22" y="24" width="104" height="12" fill="var(--sw-inkdark)"/>
+    <rect x="22" y="52" width="170" height="4" fill="var(--sw-inkdark)" fill-opacity="0.45"/>
+    <rect x="22" y="64" width="140" height="4" fill="var(--sw-inkdark)" fill-opacity="0.45"/>
+    <rect x="22" y="76" width="158" height="4" fill="var(--sw-inkdark)" fill-opacity="0.45"/>
+    <line class="march4" x1="22" y1="118" x2="242" y2="118" stroke="var(--sw-red)" stroke-width="2.5"/>
+  </g>
+  <text class="slug" x="452" y="2290" data-bg="surface">swiss-minimal</text>
+
+  <rect class="cell" x="800" y="2088" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(848,2112)" data-bg="sw-termbg">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-termbg)"/>
+    <rect x="14" y="18" width="3" height="98" fill="var(--sw-termgreen)"/>
+    <text x="28" y="40" fill="var(--sw-termgreen)" font-size="19"
+          font-family="'JetBrains Mono', ui-monospace, Menlo, monospace">$ svg_check</text>
+    <text x="28" y="70" fill="var(--sw-white)" font-size="19"
+          font-family="'JetBrains Mono', ui-monospace, Menlo, monospace">0 errors  0 ≠</text>
+    <rect class="blink2" x="28" y="88" width="11" height="20" fill="var(--sw-white)"/>
+    <rect x="14" y="122" width="236" height="24" fill="var(--sw-termgreen)"/>
+    <text x="24" y="140" fill="var(--sw-termbg)" font-size="19" data-bg="sw-termgreen"
+          font-family="'JetBrains Mono', ui-monospace, Menlo, monospace">exit 0</text>
+  </g>
+  <text class="slug" x="832" y="2290" data-bg="surface">terminal-minimalist</text>
+
+  <rect class="cell" x="40" y="2324" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(88,2348)" data-bg="sw-cream">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-cream)"/>
+    <path class="breathe12" d="M24 30 Q86 20 140 34 Q150 70 134 92 Q80 104 26 90 Q16 58 24 30 Z"
+          fill="var(--sw-wcblue)" fill-opacity="0.5"/>
+    <path d="M104 52 Q168 40 234 56 Q244 92 226 116 Q160 128 108 112 Q96 80 104 52 Z"
+          fill="var(--sw-wcochre)" fill-opacity="0.5"/>
+    <path d="M56 84 Q112 74 158 88 Q166 114 150 132 Q98 140 60 126 Q50 104 56 84 Z"
+          fill="var(--sw-wcrose)" fill-opacity="0.42"/>
+    <path d="M26 32 Q88 22 142 36" fill="none" stroke="var(--sw-inkdark)" stroke-width="1.4"/>
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-inkdark)" mask="url(#mtooth)" fill-opacity="0.16"/>
+  </g>
+  <text class="slug" x="72" y="2526" data-bg="surface">watercolor</text>
+
+  <rect class="cell" x="420" y="2324" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(468,2348)" data-bg="sw-offwhite">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-offwhite)"/>
+    <path d="M24 32 H130 V88 H20 V26" fill="none" stroke="var(--sw-inkdark)" stroke-width="3.4"
+          stroke-linecap="round" stroke-linejoin="round" opacity="0.88"/>
+    <path d="M132 60 H176" fill="none" stroke="var(--sw-blue2)" stroke-width="3.4"
+          stroke-linecap="round" opacity="0.88" marker-end="url(#tip4)"/>
+    <path d="M196 34 H246 V86 H192 V30" fill="none" stroke="var(--sw-blue2)" stroke-width="3.4"
+          stroke-linecap="round" stroke-linejoin="round" opacity="0.88"/>
+    <ellipse class="creep6" cx="132" cy="118" rx="98" ry="24" fill="none" stroke="var(--sw-red)"
+             stroke-width="3.4" stroke-linecap="round" opacity="0.88" stroke-dasharray="14 8"/>
+  </g>
+  <text class="slug" x="452" y="2526" data-bg="surface">whiteboard-marker</text>
+
+  <rect class="cell" x="800" y="2324" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(848,2348)" data-bg="sw-timber">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-timber)"/>
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-timberlt)" mask="url(#mwood)"/>
+    <path d="M0 34 Q80 26 160 36 Q220 44 264 38" fill="none" stroke="var(--sw-timberdk)"
+          stroke-width="2" stroke-opacity="0.4"/>
+    <path d="M0 118 Q76 110 154 120 Q214 128 264 122" fill="none" stroke="var(--sw-timberdk)"
+          stroke-width="2" stroke-opacity="0.4"/>
+    <rect x="34" y="54" width="196" height="44" rx="6" fill="var(--sw-timbersand)"/>
+    <text x="54" y="86" fill="var(--sw-timberdk)" font-size="24" letter-spacing="1"
+          data-bg="sw-timbersand" font-family="Rockwell, 'Bookman Old Style', Georgia, serif">TIMBER</text>
+    <g clip-path="url(#tileclip)">
+      <rect class="sheen12" x="-70" y="0" width="40" height="152"
+            fill="var(--sw-cream)" fill-opacity="0.22" transform="skewX(-10)"/>
+    </g>
+  </g>
+  <text class="slug" x="832" y="2526" data-bg="surface">wood-grain</text>
+
+  <rect class="cell" x="40" y="2560" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(88,2584)" data-bg="sw-termbg">
+    <rect x="0" y="0" width="264" height="152" fill="var(--sw-termbg)"/>
+    <path d="M0 152 L132 92 L264 152 M44 152 L132 92 M220 152 L132 92" fill="none"
+          stroke="var(--sw-hotpink)" stroke-width="0.8" stroke-opacity="0.35"/>
+    <rect x="24" y="30" width="216" height="56" rx="28" fill="url(#chrome)"/>
+    <rect x="24" y="30" width="216" height="56" rx="28" fill="none" stroke="url(#irid)" stroke-width="2"/>
+    <g clip-path="url(#y2kclip)">
+      <rect class="sweep6" x="-46" y="30" width="34" height="56" fill="var(--sw-white)" fill-opacity="0.55"/>
+    </g>
+    <text x="26" y="122" fill="var(--sw-hotpink)" font-size="19" font-weight="700"
+          letter-spacing="3.5">FUTURE</text>
+  </g>
+  <text class="slug" x="72" y="2762" data-bg="surface">y2k-retrofuturist</text>
+
+  <!-- the verdict cell, spanning the last two columns -->
+  <rect class="focal" x="420" y="2560" width="740" height="216" rx="16" data-bg="accent-primary"/>
+  <text class="lab-f" x="452" y="2620" data-bg="accent-primary">Built and gated clean</text>
+  <text class="val-f" x="452" y="2700" data-bg="accent-primary">31 / 31</text>
 </svg>
