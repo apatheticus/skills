@@ -1,11 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1060" width="1200" height="1060"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1400" width="1200" height="1400"
      role="img" data-loop-s="12" data-bg="background">
   <title>The 14-style catalog, each tile built in its own idiom</title>
-  <desc>A drafted contact sheet of fourteen labelled tiles, one per catalog style: swiss-minimal,
-flat-material, skeuomorphic, neumorphism, claymorphism, glassmorphism, neo-brutalist, editorial,
-maximalist, y2k-retrofuturist, terminal-minimalist, blueprint, schematic and bento-grid. Each tile
-is rendered in the style it names and carries one motion characteristic of that style. A note panel
-states the rule: style owns form, while the product's own brand tokens still own the palette.</desc>
+  <desc>A board of fourteen labelled cells, one per catalog style: swiss-minimal,
+flat-material, skeuomorphic, neumorphism, claymorphism, glassmorphism, neo-brutalist,
+editorial, maximalist, y2k-retrofuturist, terminal-minimalist, blueprint, schematic and
+bento-grid. Each cell is rendered in the style it names and carries one motion
+characteristic of that style — a marching rule, a material ripple, a breathing LED, a
+stepped nudge, a travelling signal. The one accent-filled cell reports that all fourteen
+were built and gated clean. Style owns form; the repo's own palette is unchanged
+underneath it.</desc>
 
   <defs>
     <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
@@ -49,24 +52,21 @@ states the rule: style owns form, while the product's own brand tokens still own
           --sw-termgreen:#3fb950; --sw-offwhite:#f7f7f5; --sw-blue2:#1f6feb;
           --sw-lightgray:#f4f5f7; --sw-indigo:#3b5bdb; }
 
+    /* bento chrome: one radius, one gutter, one accent-filled cell */
     .bg    { fill: var(--background); }
-    .sheet { fill: url(#grid); }
-    .panel { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
-    .thin  { fill: none; stroke: var(--dim); stroke-width: 0.8; }
-    .frame { fill: none; stroke: var(--dim); stroke-width: 0.8; }
+    .cell  { fill: var(--surface); stroke: var(--dim); stroke-width: 1; }
+    .focal { fill: var(--accent); stroke: none; }
 
-    .title { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
-             font-size: 44px; font-weight: 700; letter-spacing: 1px; }
-    .sub   { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-             font-size: 21px; }
+    .h     { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 44px; font-weight: 700; letter-spacing: -0.5px; }
+    .lede  { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 23px; font-weight: 600; }
+    .lab-f { fill: var(--background); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 23px; font-weight: 600; }
+    .val-f { fill: var(--background); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 52px; font-weight: 700; }
     .slug  { fill: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-             font-size: 20px; }
-    .stn   { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
-             font-size: 26px; font-weight: 700; letter-spacing: 1.2px; }
-    .mono  { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-             font-size: 19px; }
-    .block { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-             font-size: 18px; letter-spacing: .6px; }
+             font-size: 20px; font-weight: 700; }
 
     /* one motion per tile — 2s, 3s, 4s, 6s and 12s all divide the 12s loop */
     .march4 { stroke-dasharray: 18 200; animation: march 4s linear infinite; }
@@ -122,15 +122,16 @@ states the rule: style owns form, while the product's own brand tokens still own
     }
   </style>
 
-  <rect class="bg" x="0" y="0" width="1200" height="1060"/>
-  <rect class="sheet" x="0" y="0" width="1200" height="1060"/>
+  <rect class="bg" x="0" y="0" width="1200" height="1400"/>
 
-  <text class="title" x="48" y="86" data-role="title">STYLE CATALOG</text>
-  <text class="sub" x="48" y="120">fourteen idioms · --style &lt;slug&gt;, or derived from the product</text>
-  <line class="thin" x1="48" y1="146" x2="1176" y2="146"/>
+  <!-- row 0 — col 0 span 6: the subject -->
+  <rect class="cell" x="40" y="40" width="1120" height="140" rx="16" data-bg="surface"/>
+  <text class="h"    x="72" y="104" data-role="title" data-bg="surface">Style catalog</text>
+  <text class="lede" x="72" y="146" data-bg="surface">fourteen idioms · --style &lt;slug&gt;, or derived</text>
 
   <!-- row 1 -->
-  <g transform="translate(48,176)" data-bg="sw-paper">
+  <rect class="cell" x="40" y="200" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(88,224)" data-bg="sw-paper">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-paper)"/>
     <line x1="88" y1="0" x2="88" y2="152" stroke="var(--sw-inkdark)" stroke-width="1" stroke-opacity="0.16"/>
     <line x1="176" y1="0" x2="176" y2="152" stroke="var(--sw-inkdark)" stroke-width="1" stroke-opacity="0.16"/>
@@ -140,10 +141,10 @@ states the rule: style owns form, while the product's own brand tokens still own
     <rect x="24" y="78" width="158" height="4" fill="var(--sw-inkdark)" fill-opacity="0.45"/>
     <line class="march4" x1="24" y1="120" x2="240" y2="120" stroke="var(--sw-red)" stroke-width="2.5"/>
   </g>
-  <rect class="frame" x="48" y="176" width="264" height="152"/>
-  <text class="slug" x="48" y="354">swiss-minimal</text>
+  <text class="slug" x="72" y="402" data-bg="surface">swiss-minimal</text>
 
-  <g transform="translate(336,176)" data-bg="sw-blue">
+  <rect class="cell" x="420" y="200" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(468,224)" data-bg="sw-blue">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-blue)"/>
     <rect x="24" y="26" width="216" height="100" rx="6" fill="var(--sw-white)" filter="url(#mat)"/>
     <rect x="44" y="48" width="96" height="10" rx="2" fill="var(--sw-blue)"/>
@@ -151,10 +152,10 @@ states the rule: style owns form, while the product's own brand tokens still own
     <rect x="44" y="88" width="118" height="6" rx="2" fill="var(--sw-inkdark)" fill-opacity="0.22"/>
     <circle class="scale4" cx="200" cy="100" r="15" fill="var(--sw-blue)"/>
   </g>
-  <rect class="frame" x="336" y="176" width="264" height="152"/>
-  <text class="slug" x="336" y="354">flat-material</text>
+  <text class="slug" x="452" y="402" data-bg="surface">flat-material</text>
 
-  <g transform="translate(624,176)" data-bg="sw-metal">
+  <rect class="cell" x="800" y="200" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(848,224)" data-bg="sw-metal">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-metal)"/>
     <rect x="20" y="22" width="224" height="108" fill="url(#skeu)"/>
     <rect x="20" y="22" width="224" height="108" fill="none" stroke="var(--sw-white)" stroke-width="1" stroke-opacity="0.3"/>
@@ -163,10 +164,11 @@ states the rule: style owns form, while the product's own brand tokens still own
     <circle class="pulse6" cx="206" cy="60" r="13" fill="var(--sw-amber)"/>
     <rect x="36" y="92" width="172" height="8" fill="var(--sw-inkdark)" fill-opacity="0.4"/>
   </g>
-  <rect class="frame" x="624" y="176" width="264" height="152"/>
-  <text class="slug" x="624" y="354">skeuomorphic</text>
+  <text class="slug" x="832" y="402" data-bg="surface">skeuomorphic</text>
 
-  <g transform="translate(912,176)" data-bg="sw-soft">
+  <!-- row 2 -->
+  <rect class="cell" x="40" y="436" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(88,460)" data-bg="sw-soft">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-soft)"/>
     <rect x="50" y="46" width="168" height="70" rx="22" fill="var(--sw-softshade)"/>
     <rect class="press6" x="38" y="34" width="168" height="70" rx="22" fill="var(--sw-white)"/>
@@ -174,21 +176,20 @@ states the rule: style owns form, while the product's own brand tokens still own
     <rect x="70" y="66" width="88" height="8" rx="4" fill="var(--sw-inkdark)" fill-opacity="0.42"/>
     <circle cx="184" cy="70" r="12" fill="var(--sw-softshade)"/>
   </g>
-  <rect class="frame" x="912" y="176" width="264" height="152"/>
-  <text class="slug" x="912" y="354">neumorphism</text>
+  <text class="slug" x="72" y="638" data-bg="surface">neumorphism</text>
 
-  <!-- row 2 -->
-  <g transform="translate(48,386)" data-bg="sw-white">
+  <rect class="cell" x="420" y="436" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(468,460)" data-bg="sw-white">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-white)"/>
     <rect x="30" y="36" width="122" height="84" rx="32" fill="var(--sw-lilac)"/>
     <rect x="46" y="52" width="88" height="26" rx="13" fill="var(--sw-white)" fill-opacity="0.5"/>
     <circle class="bob4" cx="198" cy="78" r="36" fill="var(--sw-pink)"/>
     <ellipse cx="190" cy="62" rx="16" ry="9" fill="var(--sw-white)" fill-opacity="0.45"/>
   </g>
-  <rect class="frame" x="48" y="386" width="264" height="152"/>
-  <text class="slug" x="48" y="564">claymorphism</text>
+  <text class="slug" x="452" y="638" data-bg="surface">claymorphism</text>
 
-  <g transform="translate(336,386)" data-bg="sw-termbg">
+  <rect class="cell" x="800" y="436" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(848,460)" data-bg="sw-termbg">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-termbg)"/>
     <g clip-path="url(#tileclip)"><g class="drift12" filter="url(#gblur)">
       <circle cx="72" cy="48" r="50" fill="var(--sw-violet)"/>
@@ -199,10 +200,11 @@ states the rule: style owns form, while the product's own brand tokens still own
     <rect x="52" y="66" width="92" height="8" rx="4" fill="var(--sw-white)" fill-opacity="0.85"/>
     <rect x="52" y="84" width="60" height="6" rx="3" fill="var(--sw-white)" fill-opacity="0.55"/>
   </g>
-  <rect class="frame" x="336" y="386" width="264" height="152"/>
-  <text class="slug" x="336" y="564">glassmorphism</text>
+  <text class="slug" x="832" y="638" data-bg="surface">glassmorphism</text>
 
-  <g transform="translate(624,386)" data-bg="sw-yellow">
+  <!-- row 3 -->
+  <rect class="cell" x="40" y="672" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(88,696)" data-bg="sw-yellow">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-yellow)"/>
     <rect x="42" y="48" width="142" height="68" fill="var(--sw-black)"/>
     <rect class="nudge3" x="34" y="40" width="142" height="68" fill="var(--sw-orange)"
@@ -210,10 +212,10 @@ states the rule: style owns form, while the product's own brand tokens still own
     <rect x="200" y="40" width="36" height="68" fill="var(--sw-black)"/>
     <rect x="34" y="124" width="202" height="6" fill="var(--sw-black)"/>
   </g>
-  <rect class="frame" x="624" y="386" width="264" height="152"/>
-  <text class="slug" x="624" y="564">neo-brutalist</text>
+  <text class="slug" x="72" y="874" data-bg="surface">neo-brutalist</text>
 
-  <g transform="translate(912,386)" data-bg="sw-cream">
+  <rect class="cell" x="420" y="672" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(468,696)" data-bg="sw-cream">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-cream)"/>
     <line class="draw6" x1="26" y1="30" x2="238" y2="30" stroke="var(--sw-rust)" stroke-width="3"/>
     <text x="26" y="74" fill="var(--sw-inkdark)" font-family="Georgia, 'Iowan Old Style', serif"
@@ -222,11 +224,10 @@ states the rule: style owns form, while the product's own brand tokens still own
     <rect x="26" y="108" width="152" height="3" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
     <rect x="26" y="122" width="168" height="3" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
   </g>
-  <rect class="frame" x="912" y="386" width="264" height="152"/>
-  <text class="slug" x="912" y="564">editorial</text>
+  <text class="slug" x="452" y="874" data-bg="surface">editorial</text>
 
-  <!-- row 3 -->
-  <g transform="translate(48,596)" data-bg="sw-indigoviolet">
+  <rect class="cell" x="800" y="672" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(848,696)" data-bg="sw-indigoviolet">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-indigoviolet)"/>
     <rect x="132" y="16" width="110" height="46" fill="var(--sw-magenta)"/>
     <circle class="spin6" cx="62" cy="44" r="30" fill="var(--sw-teal)"/>
@@ -235,10 +236,11 @@ states the rule: style owns form, while the product's own brand tokens still own
     <rect x="22" y="118" width="212" height="14" fill="var(--sw-yellow)"/>
     <circle cx="214" cy="92" r="16" fill="var(--sw-teal)"/>
   </g>
-  <rect class="frame" x="48" y="596" width="264" height="152"/>
-  <text class="slug" x="48" y="774">maximalist</text>
+  <text class="slug" x="832" y="874" data-bg="surface">maximalist</text>
 
-  <g transform="translate(336,596)" data-bg="sw-termbg">
+  <!-- row 4 -->
+  <rect class="cell" x="40" y="908" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(88,932)" data-bg="sw-termbg">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-termbg)"/>
     <rect x="26" y="46" width="212" height="56" rx="28" fill="url(#chrome)"/>
     <g clip-path="url(#y2kclip)">
@@ -247,10 +249,10 @@ states the rule: style owns form, while the product's own brand tokens still own
     <text x="28" y="130" fill="var(--sw-hotpink)" font-size="19" font-weight="700"
           letter-spacing="3.5">FUTURE</text>
   </g>
-  <rect class="frame" x="336" y="596" width="264" height="152"/>
-  <text class="slug" x="336" y="774">y2k-retrofuturist</text>
+  <text class="slug" x="72" y="1110" data-bg="surface">y2k-retrofuturist</text>
 
-  <g transform="translate(624,596)" data-bg="sw-termbg">
+  <rect class="cell" x="420" y="908" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(468,932)" data-bg="sw-termbg">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-termbg)"/>
     <text x="20" y="42" fill="var(--sw-termgreen)"
           font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="19">$ svg_check</text>
@@ -260,10 +262,10 @@ states the rule: style owns form, while the product's own brand tokens still own
     <rect x="20" y="126" width="216" height="8" fill="var(--sw-termgreen)" fill-opacity="0.3"/>
     <rect x="20" y="126" width="150" height="8" fill="var(--sw-termgreen)"/>
   </g>
-  <rect class="frame" x="624" y="596" width="264" height="152"/>
-  <text class="slug" x="624" y="774">terminal-minimalist</text>
+  <text class="slug" x="452" y="1110" data-bg="surface">terminal-minimalist</text>
 
-  <g transform="translate(912,596)" data-bg="background">
+  <rect class="cell" x="800" y="908" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(848,932)" data-bg="background">
     <rect x="0" y="0" width="264" height="152" fill="var(--background)"/>
     <rect x="0" y="0" width="264" height="152" fill="url(#grid)"/>
     <rect x="40" y="34" width="118" height="66" fill="none" stroke="var(--ink)" stroke-width="1.6"/>
@@ -274,11 +276,11 @@ states the rule: style owns form, while the product's own brand tokens still own
     <text x="176" y="64" fill="var(--dim)"
           font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="18">118</text>
   </g>
-  <rect class="frame" x="912" y="596" width="264" height="152"/>
-  <text class="slug" x="912" y="774">blueprint</text>
+  <text class="slug" x="832" y="1110" data-bg="surface">blueprint</text>
 
-  <!-- row 4 -->
-  <g transform="translate(48,806)" data-bg="sw-offwhite">
+  <!-- row 5 — two tiles and the one accent-filled verdict cell -->
+  <rect class="cell" x="40" y="1144" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(88,1168)" data-bg="sw-offwhite">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-offwhite)"/>
     <rect x="22" y="30" width="74" height="40" fill="var(--sw-white)" stroke="var(--sw-inkdark)" stroke-width="2"/>
     <rect x="168" y="86" width="74" height="40" fill="var(--sw-white)" stroke="var(--sw-inkdark)" stroke-width="2"/>
@@ -288,10 +290,10 @@ states the rule: style owns form, while the product's own brand tokens still own
       <animateMotion dur="6s" repeatCount="indefinite"><mpath href="#netTile"/></animateMotion>
     </circle>
   </g>
-  <rect class="frame" x="48" y="806" width="264" height="152"/>
-  <text class="slug" x="48" y="984">schematic</text>
+  <text class="slug" x="72" y="1346" data-bg="surface">schematic</text>
 
-  <g transform="translate(336,806)" data-bg="sw-lightgray">
+  <rect class="cell" x="420" y="1144" width="360" height="216" rx="16" data-bg="surface"/>
+  <g transform="translate(468,1168)" data-bg="sw-lightgray">
     <rect x="0" y="0" width="264" height="152" fill="var(--sw-lightgray)"/>
     <rect x="18" y="20" width="130" height="54" rx="10" fill="var(--sw-white)"
           stroke="var(--sw-inkdark)" stroke-width="1" stroke-opacity="0.16"/>
@@ -304,16 +306,9 @@ states the rule: style owns form, while the product's own brand tokens still own
     <rect x="134" y="104" width="88" height="8" rx="4" fill="var(--sw-inkdark)" fill-opacity="0.3"/>
     <circle class="pulse3" cx="46" cy="109" r="9" fill="var(--sw-indigo)"/>
   </g>
-  <rect class="frame" x="336" y="806" width="264" height="152"/>
-  <text class="slug" x="336" y="984">bento-grid</text>
+  <text class="slug" x="452" y="1346" data-bg="surface">bento-grid</text>
 
-  <!-- note panel, spanning the last two cells -->
-  <rect class="panel" x="624" y="806" width="552" height="152" data-bg="surface"/>
-  <text class="stn"  x="648" y="848" data-bg="surface">--style &lt;slug&gt;</text>
-  <text class="mono" x="648" y="884" data-bg="surface">style owns form: shape, material, motion</text>
-  <text class="mono" x="648" y="912" data-bg="surface">brand tokens still own the palette</text>
-  <text class="mono" x="648" y="940" data-bg="surface">reference/styles.md — one file each</text>
-
-  <line class="thin" x1="920" y1="1014" x2="1176" y2="1014"/>
-  <text class="block" x="920" y="1040" data-role="metadata">SHEET 3 · STYLE CATALOG</text>
+  <rect class="focal" x="800" y="1144" width="360" height="216" rx="16" data-bg="accent-primary"/>
+  <text class="lab-f" x="832" y="1204" data-bg="accent-primary">Built and gated clean</text>
+  <text class="val-f" x="832" y="1284" data-bg="accent-primary">14 / 14</text>
 </svg>

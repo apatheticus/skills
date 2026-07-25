@@ -11,8 +11,8 @@
 [![Styles](https://img.shields.io/badge/style_catalog-14-12324f)](reference/styles.md)
 <!-- mpd:badges end -->
 
-<!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="d57b421c12d6dc8c0e189681569e63ca02047f9c90a9a59e1fbd50b121f104bf" src-hash="740e3c500f25d312eb7c8dfbea59a24648cebbc3ba683569746528dd97eb09a1" -->
-<img src="docs/assets/hero.svg" alt="Animated overview on a drafted cyanotype sheet: three stations — AUTHOR writes docs/assets/name.svg, GATE runs svg_check.py until it reports zero errors, COMMIT ships that same file — with a dash travelling between them and a dashed return edge for a visual that fails the gate. There is no render station: the committed asset is its own source, and python3 is the only requirement." width="820" />
+<!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="d57b421c12d6dc8c0e189681569e63ca02047f9c90a9a59e1fbd50b121f104bf" src-hash="f62f5bdd642db1bf2d651220f0bc4d403b7d75e2cb195fcdfa89e10b0f8f8299" -->
+<img src="docs/assets/hero.svg" alt="Animated overview on a board of six cells: the project name, a runtime cell reading python3, and a focal cell reporting zero dependencies. Along the bottom, three numbered cells carry the pipeline — author name.svg, gate it until svg_check.py reports zero errors, commit that same file — and a status dot lights them one at a time. There is no render cell: the committed asset is its own source, and python3 is the only requirement." width="820" />
 <!-- mpd:viz end -->
 
 </div>
@@ -41,7 +41,7 @@ engine, same honesty-over-polish doctrine. The difference is the visual layer:
 Use `make-pretty-docs` when you specifically want WebP. Use
 [`update-docs`](https://github.com/apatheticus/skills) for plain text-only docs.
 Otherwise use this one — and note that every visual on this page was authored and
-gated by the skill itself.
+gated by the skill itself, in the `bento-grid` style.
 
 ## What a run produces
 
@@ -64,12 +64,12 @@ A **style** is the look-and-feel idiom every visual in a repo is rendered in. Pa
 has. Style owns *form* — shape, material, type, composition, motion. The product's
 own brand tokens still own the *palette*.
 
-<!-- mpd:viz name="styles" src="docs/assets/src/styles/" facts-hash="9fa63f8c48ad178bf922877ee47854485801c6b4246ee2d434fe09f59456a8b9" src-hash="eb1d54baee0b070a402ee90ca46396001e2b8706c138aa0dbb7390b066ab2540" -->
-<img src="docs/assets/styles.svg" alt="A drafted contact sheet of fourteen labelled tiles, each built in the style it names: swiss-minimal, flat-material, skeuomorphic, neumorphism, claymorphism, glassmorphism, neo-brutalist, editorial, maximalist, y2k-retrofuturist, terminal-minimalist, blueprint, schematic and bento-grid. Every tile carries one motion characteristic of its style — a marching rule, a material ripple, a breathing LED, a stepped nudge, a travelling signal. A note panel states the rule: style owns form, brand tokens still own the palette." width="820" />
+<!-- mpd:viz name="styles" src="docs/assets/src/styles/" facts-hash="9fa63f8c48ad178bf922877ee47854485801c6b4246ee2d434fe09f59456a8b9" src-hash="e66d825d3a2d3b05888eeedcb6a8312457c2581678b135bdd683dba2dff2cef1" -->
+<img src="docs/assets/styles.svg" alt="A board of fourteen labelled cells, each built in the style it names: swiss-minimal, flat-material, skeuomorphic, neumorphism, claymorphism, glassmorphism, neo-brutalist, editorial, maximalist, y2k-retrofuturist, terminal-minimalist, blueprint, schematic and bento-grid. Every cell carries one motion characteristic of its style — a marching rule, a material ripple, a breathing LED, a stepped nudge, a travelling signal. The one accent-filled cell reports that all fourteen were built and gated clean." width="820" />
 <!-- mpd:viz end -->
 
-Every tile above was built and gated for real. If a style could not be produced
-clean at tile scale, its catalog entry was wrong and got fixed. Aliases resolve
+Every cell above was built and gated for real. If a style could not be produced
+clean at cell scale, its catalog entry was wrong and got fixed. Aliases resolve
 without asking (`brutalist`, `glass`, `soft-ui`, `tui`, `bento`, …), a recognisable
 free-form idiom is synthesized into a full spec and frozen into the repo's
 `DESIGN.md`, and anything unresolvable prompts exactly one question. Details in
@@ -86,8 +86,8 @@ Every embed carries hashes for the facts it depicts, the asset itself, and the
 design system. A later run rewrites a visual only when one of those changed, its
 asset is missing, or `--refresh-viz` forces it:
 
-<!-- mpd:viz name="lazy-rerender" src="docs/assets/src/lazy-rerender/" facts-hash="6212d58383a4f88e8afae3c5ae3d7168f6ab9620428169a5fe2e4476f8257292" src-hash="9b947d02145931b833626ab315b439ee6be678b61047a5d4b9be6e0998368721" -->
-<img src="docs/assets/lazy-rerender.svg" alt="Animated decision flow on a drafted sheet: the stored facts, src and design hashes feed a single question — do they all still match? When everything matches the visual is reused and zero files are written. When one hash has moved, that visual alone goes back through the gate, is committed, and its hashes agree again. A prose-only edit moves no hash and re-authors nothing." width="820" />
+<!-- mpd:viz name="lazy-rerender" src="docs/assets/src/lazy-rerender/" facts-hash="6212d58383a4f88e8afae3c5ae3d7168f6ab9620428169a5fe2e4476f8257292" src-hash="c133cdd2fb823db9f7d7da302b071195201ab9f802bbbc3133ee0352914919c3" -->
+<img src="docs/assets/lazy-rerender.svg" alt="Animated decision board: three cells name the hashes that get compared — the facts the visual depicts, the committed svg itself, and the design system — and a status dot visits them one at a time. The focal cell holds the verdict: while all three still match, the visual is reused. If any one has moved, that visual alone is re-authored and commits fresh hashes. A prose-only edit moves no hash and re-authors nothing." width="820" />
 <!-- mpd:viz end -->
 
 Because the style spec lives inside `DESIGN.md`, changing the style moves

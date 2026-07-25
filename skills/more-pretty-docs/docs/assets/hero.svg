@@ -1,91 +1,86 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="1200" height="380"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400"
      role="img" data-loop-s="12" data-bg="background">
   <title>more-pretty-docs — animated SVG, authored not rendered</title>
-  <desc>Three drafted stations on a cyanotype sheet: AUTHOR writes docs/assets/name.svg,
-GATE runs svg_check.py until it reports zero errors, COMMIT ships that same file. A dash
-travels along the leader lines between them. There is no render station, because the
-committed asset is its own source.</desc>
-
-  <defs>
-    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
-      <path d="M24 0 L0 0 0 24" fill="none" stroke="var(--dim)" stroke-width="0.6" opacity="0.28"/>
-    </pattern>
-    <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5"
-            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
-      <path d="M0,1 L9,5 L0,9 z" fill="var(--dim)"/>
-    </marker>
-  </defs>
+  <desc>A board of six cells. The project name and its one-line claim fill the widest
+cell; a runtime cell reads python3; the focal cell reports zero dependencies. Along the
+bottom row, three cells number the pipeline — author the svg, gate it until the checker
+reports zero errors, commit that same file — and a status dot moves through them one at
+a time. There is no render cell, because the committed asset is its own source.</desc>
 
   <style>
     svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb;
           --dim:#9fc4e8; --accent:#e0a33e; }
 
-    .bg      { fill: var(--background); }
-    .sheet   { fill: url(#grid); }
-    .panel   { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
-    .keyline { fill: none; stroke: var(--accent); stroke-width: 1.6; }
-    .thin    { fill: none; stroke: var(--dim); stroke-width: 0.8; }
-    .hidden  { fill: none; stroke: var(--dim); stroke-width: 0.8; stroke-dasharray: 6 5; }
+    .bg    { fill: var(--background); }
+    .cell  { fill: var(--surface); stroke: var(--dim); stroke-width: 1; }
+    .focal { fill: var(--accent); stroke: none; }
 
-    .title { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
-             font-size: 46px; font-weight: 700; letter-spacing: 1px; }
-    .sub   { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-             font-size: 21px; letter-spacing: .5px; }
-    .stn   { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
-             font-size: 27px; font-weight: 700; letter-spacing: 1.4px; }
-    .mono  { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-             font-size: 19px; }
-    .block { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-             font-size: 18px; letter-spacing: .6px; }
+    .hero  { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 48px; font-weight: 700; letter-spacing: -0.5px; }
+    .lede  { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 23px; font-weight: 600; }
+    .lab   { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 23px; font-weight: 600; }
+    .lab-f { fill: var(--background); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 23px; font-weight: 600; }
+    .val   { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 46px; font-weight: 700; }
+    .val-m { fill: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 38px; font-weight: 700; }
+    .val-f { fill: var(--background); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 64px; font-weight: 700; }
+    .step  { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 20px; font-weight: 700; letter-spacing: 1px; }
 
-    /* motion — 4s and 6s both divide the 12s loop */
-    .march { stroke-dasharray: 16 180; animation: march 4s linear infinite; }
-    @keyframes march { from { stroke-dashoffset: 196 } to { stroke-dashoffset: 0 } }
+    /* motion — the grid is static; one cell reads live at a time.
+       6s divides the 12s loop twice; the negative delays cost no extra time. */
+    .dot { fill: var(--accent); animation: live 6s ease-in-out infinite; }
+    .n1  { animation-delay: 0s; }
+    .n2  { animation-delay: -2s; }
+    .n3  { animation-delay: -4s; }
+    @keyframes live { 0%, 66%, 100% { opacity: .2 } 12%, 33% { opacity: 1 } }
 
-    .gate { animation: gate 6s ease-in-out infinite; }
-    @keyframes gate { 0%, 100% { opacity: .35 } 50% { opacity: 1 } }
+    .bar { fill: none; stroke: var(--accent); stroke-width: 5; stroke-linecap: round;
+           stroke-dasharray: 232; animation: fill 6s linear infinite; }
+    @keyframes fill { 0% { stroke-dashoffset: 232 } 70%, 100% { stroke-dashoffset: 0 } }
 
     @media (prefers-reduced-motion: reduce) {
-      .march { animation: none; stroke-dashoffset: 0; }
-      .gate  { animation: none; opacity: 1; }
+      .dot { animation: none; opacity: 1; }
+      .bar { animation: none; stroke-dashoffset: 0; }
     }
   </style>
 
-  <rect class="bg" x="0" y="0" width="1200" height="380"/>
-  <rect class="sheet" x="0" y="0" width="1200" height="380"/>
+  <rect class="bg" x="0" y="0" width="1200" height="400"/>
 
-  <!-- sheet title -->
-  <text class="title" x="64" y="88" data-role="title">MORE-PRETTY-DOCS</text>
-  <text class="sub" x="64" y="122">animated SVG, authored — never rendered</text>
-  <line class="thin" x1="64" y1="146" x2="1136" y2="146"/>
+  <!-- row 1 — col 0 span 3: the name -->
+  <rect class="cell" x="40" y="40" width="550" height="150" rx="16" data-bg="surface"/>
+  <text class="hero" x="72" y="112" data-role="hero" data-bg="surface">more-pretty-docs</text>
+  <text class="lede" x="72" y="152" data-bg="surface">animated SVG, authored — not rendered</text>
 
-  <!-- station 1: author -->
-  <rect class="panel" x="64" y="196" width="290" height="104" data-bg="surface"/>
-  <text class="stn"  x="88" y="234" data-bg="surface">AUTHOR</text>
-  <text class="mono" x="88" y="270" data-bg="surface">docs/assets/name.svg</text>
+  <!-- row 1 — col 3 span 2: the runtime -->
+  <rect class="cell" x="610" y="40" width="360" height="150" rx="16" data-bg="surface"/>
+  <text class="lab"   x="642" y="86"  data-bg="surface">Runtime</text>
+  <text class="val-m" x="642" y="146" data-bg="surface">python3</text>
 
-  <!-- station 2: gate (the one warm callout) -->
-  <rect class="panel" x="455" y="196" width="290" height="104" data-bg="surface"/>
-  <rect class="keyline gate" x="449" y="190" width="302" height="116"/>
-  <text class="stn"  x="479" y="234" data-bg="surface">GATE</text>
-  <text class="mono" x="479" y="270" data-bg="surface">svg_check.py — 0 errors</text>
+  <!-- row 1 — col 5 span 1: the focal cell, the one accent fill -->
+  <rect class="focal" x="990" y="40" width="170" height="150" rx="16" data-bg="accent-primary"/>
+  <text class="lab-f" x="1022" y="86"  data-bg="accent-primary">Deps</text>
+  <text class="val-f" x="1022" y="158" data-bg="accent-primary">0</text>
 
-  <!-- station 3: commit -->
-  <rect class="panel" x="846" y="196" width="290" height="104" data-bg="surface"/>
-  <text class="stn"  x="870" y="234" data-bg="surface">COMMIT</text>
-  <text class="mono" x="870" y="270" data-bg="surface">the same file, as-is</text>
+  <!-- row 2 — the pipeline, one cell per station -->
+  <rect class="cell" x="40" y="210" width="360" height="150" rx="16" data-bg="surface"/>
+  <text class="step"  x="72" y="252" data-bg="surface">01 · AUTHOR</text>
+  <text class="val-m" x="72" y="312" data-bg="surface">name.svg</text>
+  <circle class="dot n1" cx="368" cy="243" r="9"/>
 
-  <!-- leader lines carrying the travelling dash -->
-  <line class="thin"          x1="354" y1="248" x2="449" y2="248" marker-end="url(#tip)"/>
-  <line class="thin march"    x1="354" y1="248" x2="449" y2="248"/>
-  <line class="thin"          x1="751" y1="248" x2="846" y2="248" marker-end="url(#tip)"/>
-  <line class="thin march"    x1="751" y1="248" x2="846" y2="248"/>
+  <rect class="cell" x="420" y="210" width="360" height="150" rx="16" data-bg="surface"/>
+  <text class="step"  x="452" y="252" data-bg="surface">02 · GATE</text>
+  <text class="val"   x="452" y="312" data-bg="surface">0 errors</text>
+  <circle class="dot n2" cx="748" cy="243" r="9"/>
+  <line class="bar" x1="452" y1="336" x2="684" y2="336"/>
 
-  <!-- gate feedback: the dashed return edge is the re-author loop -->
-  <path class="hidden" d="M600,300 V330 H209 V304" marker-end="url(#tip)"/>
-  <text class="block" x="64" y="358">fails → re-author, never ship</text>
-
-  <!-- title block, lower right -->
-  <line class="thin" x1="920" y1="336" x2="1136" y2="336"/>
-  <text class="block" x="920" y="360" data-role="metadata">SHEET 1 · PIPELINE</text>
+  <rect class="cell" x="800" y="210" width="360" height="150" rx="16" data-bg="surface"/>
+  <text class="step"  x="832" y="252" data-bg="surface">03 · COMMIT</text>
+  <text class="val-m" x="832" y="312" data-bg="surface">same file</text>
+  <circle class="dot n3" cx="1128" cy="243" r="9"/>
 </svg>

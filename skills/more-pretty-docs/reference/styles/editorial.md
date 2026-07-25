@@ -78,6 +78,13 @@ rule visible", and the loop is seam-exact at `6s` inside `12s`.
 Nothing. The muted caption color still has to clear 4.5:1, which usually means a
 darker gray than print instinct suggests.
 
+Budget **two** neutrals, not one. `#d8d3c8` measures about 1.4:1 on paper — correct for
+the hairline under a headline, and a graphic-contrast WARN the moment you use it to
+bound a figure that separates one item of content from another. Keep the pale tint for
+pure typography and declare a second, darker `keyline` role (around `#8f8a7e`, ~3.4:1)
+for any box that carries meaning. One accent still means one accent; a second neutral
+is not an accent.
+
 ## Never
 
 Centered body text, more than one accent, a shadowed card, cramped margins (keep

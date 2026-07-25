@@ -614,33 +614,48 @@ def check_style(root, by_tag, sheet: Stylesheet, style: dict, slug: str,
                 f.error(label, f"the '{slug}' style is monospace-only, found "
                                f"font-family: {fam}")
 
-    radii: list[float] = []
+    # Each entry is (radius, shortest side of the shape or None when unknown).
+    # SVG clamps rx to half the side, so a min_rx floor is unsatisfiable on a shape
+    # narrower than 2*floor — those are skipped rather than failed. A status marker
+    # is allowed to be a small square; it just can't be as round as a cell.
+    radii: list[tuple[float, float | None]] = []
     for el in root.iter():
+        side: float | None = None
+        dims = []
+        for key in ("width", "height"):
+            value = el.get(key)
+            if value:
+                m = re.match(r"\s*(\d*\.?\d+)", value)
+                if m:
+                    dims.append(float(m.group(1)))
+        if len(dims) == 2:
+            side = min(dims)
         for key in ("rx", "ry"):
             value = el.get(key)
             if value:
                 m = re.match(r"\s*(\d*\.?\d+)", value)
                 if m:
-                    radii.append(float(m.group(1)))
+                    radii.append((float(m.group(1)), side))
     for sel, decls in sheet.rules:
         for key in ("rx", "ry", "border-radius"):
             if key in decls:
                 m = re.match(r"\s*(\d*\.?\d+)", sheet.resolve(decls[key]))
                 if m:
-                    radii.append(float(m.group(1)))
+                    radii.append((float(m.group(1)), None))
 
     if "max_rx" in require:
         cap = float(require["max_rx"])
-        for r in radii:
+        for r, _ in radii:
             if r > cap + EPS:
                 f.error(label, f"corner radius {r:g} exceeds the '{slug}' maximum {cap:g}")
     if "min_rx" in require:
         floor = float(require["min_rx"])
-        nonzero = [r for r in radii if r > EPS]
-        if not nonzero:
+        checkable = [(r, s) for r, s in radii
+                     if r > EPS and (s is None or s >= 2 * floor - EPS)]
+        if not checkable:
             f.warn(label, f"the '{slug}' style expects rounded shapes (radius "
                           f">= {floor:g}) and nothing is rounded")
-        for r in nonzero:
+        for r, _ in checkable:
             if r < floor - EPS:
                 f.error(label, f"corner radius {r:g} is below the '{slug}' minimum "
                                f"{floor:g}")

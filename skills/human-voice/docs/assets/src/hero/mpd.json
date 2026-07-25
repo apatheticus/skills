@@ -1,0 +1,21 @@
+{
+  "name": "hero",
+  "doc": "README.md",
+  "tier": "animated-hero",
+  "producer": "more-pretty-docs",
+  "style": "editorial",
+  "facts": [
+    "Step 1 selects the register before a single pattern is read; every downstream decision depends on it",
+    "The four registers are Editorial, Professional, Technical and Regulated, profiled in reference/registers.md",
+    "Professional is the default when the genre is unclear, and the skill never defaults to Editorial"
+  ],
+  "facts_hash": "8365fab90fb869b4fe0b3f3785a590c50276a30047770dbc6f0f220a422e91c5",
+  "src_hash": "bbc1c15c1ad6318423b61f6777873c3f47e7ea58f999faa714d81de83eb84420",
+  "design_hash": "2f6dd9cfbd85cb7200257fd585b70889bdc50d5653da731cfaaa92bad5913327",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 3566
+  },
+  "relaxed": []
+}

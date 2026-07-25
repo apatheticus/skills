@@ -1,0 +1,21 @@
+{
+  "name": "pattern-gates",
+  "doc": "README.md",
+  "tier": "animated-flagship",
+  "producer": "more-pretty-docs",
+  "style": "editorial",
+  "facts": [
+    "reference/patterns.md catalogues 33 numbered patterns",
+    "22 of the 33 are always on and never conflict with a house style",
+    "11 are register-gated \u2014 they change or switch off \u2014 alongside the voice-injection switch"
+  ],
+  "facts_hash": "32e1fffd47d3559ffb2907af82af16d596a45e5e00876aeeac5364f5c4af017b",
+  "src_hash": "b9446c994169f80bd0b6a38acb0032eb9c58a8f50361943efb28860c95a91d53",
+  "design_hash": "2f6dd9cfbd85cb7200257fd585b70889bdc50d5653da731cfaaa92bad5913327",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 4496
+  },
+  "relaxed": []
+}

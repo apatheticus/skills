@@ -9,23 +9,26 @@ Audience:     developers who want their repo docs generated, truthful, and desig
 Value:        writes standard project docs and authors their key diagrams as seamless-loop animated SVG, with nothing to install
 Proof:        every visual in this skill's own README was authored and gated by the skill itself
 First action: copy the folder into `.claude/skills/` and run `/more-pretty-docs`
-Theme:        the drafted specification — a diagram that states its own tolerances and is checked against them
+Theme:        the artefact that reports its own state — a board of cells, each holding one checked fact
 
 ## Frozen system
 
-No product brand tokens exist for this skill, so the resolved style's palette
-treatment fills the gap (`styles.md` → "style owns form; the product's brand tokens
-own the palette"). The cyanotype ground below comes from the `blueprint` entry.
+No product brand tokens exist for this skill, so the palette below was filled from a
+style's palette treatment when the system was first derived. **It does not change
+when the style changes.** Style owns form; the palette is the product's, even when
+the product had nothing to say and a style had to speak for it (`styles.md` →
+precedence). The cyanotype hexes are therefore unchanged under `bento-grid`, and the
+result is a dark board rather than the light one bento is usually seen in.
 
 ### Palette
 
 | Role | Hex | Notes |
 | --- | --- | --- |
-| background       | `#12324f` | cyanotype ground |
-| surface          | `#17405f` | panel tint, title block |
-| ink              | `#e8f2fb` | white line work and primary text |
-| dim              | `#9fc4e8` | grid, dimension lines, mono annotation |
-| accent-primary   | `#e0a33e` | the one warm callout per board |
+| background       | `#12324f` | board ground |
+| surface          | `#17405f` | cell fill |
+| ink              | `#e8f2fb` | primary text and values |
+| dim              | `#9fc4e8` | cell hairlines and labels |
+| accent-primary   | `#e0a33e` | the one focal cell per board |
 | warn             | `#e2725b` | rust; stale and failed states only |
 
 ### Typography
@@ -36,26 +39,30 @@ own the palette"). The cyanotype ground below comes from the `blueprint` entry.
 | body    | same as display |
 | mono    | `ui-monospace, SFMono-Regular, Menlo, monospace` |
 
-System stacks only — never a remote font, which an SVG cannot fetch on GitHub.
-Dimensions, hashes, slugs and part labels are always mono; sheet titles use the
-display stack, uppercase at `+1` tracking.
+System stacks only — never a remote font, which an SVG cannot fetch on GitHub. Cell
+labels use the display stack at `600`; a cell's one value uses `700`, or the mono
+stack when the value is a literal (a filename, a hash, a command).
 
 ### Shape language
 
-Radius `0` everywhere (the `blueprint` invariant, enforced as `max_rx: 0`). Three
-line weights: `1.6` primary geometry, `0.8` dimension and leader lines, `0.8` dashed
-for planned or simulated edges. `1200`-unit-wide canvas, `48+` unit edge margins.
+Radius `16` on every cell, identical. **One gutter value: `20`.** Six columns on the
+1200 canvas with `40` outer margins: `x = 40 + col × 190`, cell width
+`span × 170 + (span − 1) × 20`. Spans of 1, 2 and 3 only — the unequal spans are the
+composition. Cells carry a `1`-unit `dim` hairline and no shadow.
 
 ### Motif
 
-The **drafted sheet**: a faint 24-unit grid, white line work over it, leader lines to
-mono labels, and a title block in the lower-right corner naming the sheet. Repeated
-lightly — grid and title block on every board, never wallpaper.
+The **verdict cell**: every board carries exactly one cell that reports the state of
+the thing the board describes — `0 errors`, `all match`, `14 / 14`. Live motion is
+confined to a single status pulse that visits one cell at a time, and to that verdict
+cell's own fill; the cells themselves never move. Derived from what the product does
+(nothing ships until the bundled checker reports zero errors), so it survives a change
+of style.
 
 ### Composition rules
 
-Compact-technical register, drafted. One strong composition per visual, reading
-left-to-right. Labels sit at the end of leader lines, never on top of geometry.
+One tight grid per board, no leftover slivers. Each cell does exactly one job: one
+label, at most one value. A cell that needs three lines of body text is two cells.
 Important content clear of the edges; legible at rendered width (1200 units in an
 820 px embed).
 
@@ -63,8 +70,9 @@ Important content clear of the edges; legible at rendered width (1200 units in a
 
 - Seamless ambient loops, `data-loop-s="12"` on every animated board; every animation
   duration divides 12 exactly.
-- A drawing being made: `stroke-dashoffset` extension, then a hold. `linear` for
-  continuous travel, `ease-in-out` for a state change. Calm and mechanical.
+- **The grid never moves.** Motion is confined to the verdict cell and to a staggered
+  status pulse that runs one cell at a time, phase-shifted with negative delays.
+- Ease `ease-in-out` for a state change, `linear` for a bar filling. Calm.
 - No strobing, no flicker, no idle bobbing. Motion communicates flow or a state change.
 - Every animated visual carries a `prefers-reduced-motion` block that stops all motion
   and leaves a legible still.
@@ -73,25 +81,31 @@ Important content clear of the edges; legible at rendered width (1200 units in a
 
 | Field | Value |
 | --- | --- |
-| Slug | `blueprint` |
-| Source | derived (no brand tokens; docs/spec register) |
-| Primary axis | material — the medium is a cyanotype print |
+| Slug | `bento-grid` |
+| Source | catalog (`--style bento-grid`) |
+| Primary axis | composition — the grid decides everything else |
 
-- **Intent** — a drafted specification: white line work on cyanotype, annotated.
-- **Palette treatment** — deep blue ground; line work in `ink` at full and `dim` at
-  low opacity; exactly one `accent-primary` callout per board.
-- **Shape language** — radius `0`; three line weights (`1.6` / `0.8` / `0.8` dashed).
-- **Material / depth** — ink on paper. No shadow, gradient, or blur; line weight
-  carries depth.
-- **Type treatment** — uppercase display at `+1` tracking for titles, mono for
-  dimensions, slugs and annotation.
-- **Motion character** — geometry draws itself and holds; dimension arrows arrive
-  after what they measure; the grid never moves.
-- **SVG recipes** — `reference/styles/blueprint.md`: the grid `<pattern>`, the
-  `auto-start-reverse` arrow marker, the `stroke-dashoffset` draw cycle.
-- **Relaxations** — none. `blueprint` runs on every default gate.
-- **Never** — filled colour at full opacity, shadows, gradients, rounded corners,
-  labels over geometry, a date or version in the title block.
+- **Intent** — unequal cells in one tight grid, each holding one fact; the right call
+  for a board that must carry five or six unrelated facts at once.
+- **Palette treatment** — quiet ground, cells in `surface`, exactly **one** cell
+  promoted to an `accent-primary` fill as the focal point. Semantic colour inside a
+  cell (a status dot) is fine; a second accent-filled cell is not.
+- **Shape language** — radius `16` on every cell, one `20` gutter, spans of 1–3 on the
+  six-column grid above.
+- **Material / depth** — a `1`-unit hairline in `dim`. No shadow, no gradient. One
+  device for every cell, never both.
+- **Type treatment** — two steps per cell: a `23` label at `600` and one `44+` value at
+  `700`. Sentence case for labels; a literal value takes the mono stack.
+- **Motion character** — the grid is static. One cell moves at a time: a status dot
+  pulsing, a bar filling. Stagger with negative delays so at most one cell reads as
+  live at any moment.
+- **SVG recipes** — `reference/styles/bento-grid.md`: the six-column arithmetic, the
+  focal cell, the staggered per-cell pulse.
+- **Relaxations** — none. `bento-grid` runs on every default gate; the hairline the
+  UI-contrast gate is checking for is exactly what makes a cell visible.
+- **Never** — varying gutters or radius, a second accent-filled cell, a cell with three
+  lines of body text, cells off the grid, every cell animating at once, or a grid so
+  uniform it may as well be a table.
 
 ### Catalog swatches
 
@@ -103,10 +117,10 @@ in this repo uses them.
 
 The sheet is also the one asset in this repo gated **without** `--style`. Every
 structural, seam, legibility, contrast, palette and byte gate still applies to it;
-only the `blueprint` *form* invariants are lifted, because a plate showing
-claymorphism and glassmorphism cannot simultaneously honour `max_rx: 0` and a
-gradient ban. Its frame, labels and title block are still blueprint. This exemption
-covers exactly one file and is stated in the run report.
+only the `bento-grid` *form* invariants are lifted, because a plate showing
+skeuomorphic bevels and neo-brutalist zero-radius blocks cannot honour one radius and
+one material. Its own frame, gutters and labels are still bento. This exemption covers
+exactly one file and is stated in the run report.
 
 | Role | Hex | Notes |
 | --- | --- | --- |

@@ -19,11 +19,19 @@ extra colored cells are not.
 ## Shape language
 
 Radius `12–20`, identical on every cell. **One gutter value everywhere** — `16` or `20`
-units, never varied. Cells span whole grid units: on a 1200 canvas, a 6-column grid at
-`188` + `20` gutter gives spans of 1, 2, or 3 columns and nothing in between.
+units, never varied. Cells span whole grid units: spans of 1, 2, or 3 columns and
+nothing in between.
 
-The grid is the discipline. Sketch the cell rectangles first, confirm they tile with no
-leftover slivers, then fill them.
+Do the arithmetic before drawing anything. On a 1200 canvas with `40` outer margins and
+a `20` gutter, six columns leaves `1200 − 80 − 5×20 = 1020`, so a column is `170`:
+
+```
+x = 40 + col × 190            col 0…5 → 40, 230, 420, 610, 800, 990
+w = span × 170 + (span−1) × 20    span 1→170, 2→360, 3→550
+```
+
+The last cell ends at `990 + 170 = 1160`, exactly one margin from the edge. Sketch the
+rectangles first, confirm they tile with no leftover slivers, then fill them.
 
 ## Material / depth
 
@@ -68,9 +76,9 @@ The grid, the focal cell, and a staggered per-cell pulse:
   @media (prefers-reduced-motion: reduce) { .dot { animation: none; opacity: 1 } }
 </style>
 
-<!-- 6-col grid: x = 40 + col*208, w = span*188 + (span-1)*20 -->
-<rect class="cell"  x="40"  y="40" width="396" height="180" rx="16"/>
-<rect class="focal" x="456" y="40" width="188" height="180" rx="16"/>
+<!-- 6-col grid: x = 40 + col*190, w = span*170 + (span-1)*20 -->
+<rect class="cell"  x="40"  y="40" width="360" height="180" rx="16"/>  <!-- col 0, span 2 -->
+<rect class="focal" x="420" y="40" width="170" height="180" rx="16"/>  <!-- col 2, span 1 -->
 ```
 
 The negative delays spread three dots across one `4s` cycle without changing any
