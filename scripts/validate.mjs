@@ -82,11 +82,21 @@ function parseFrontmatter(source, file) {
     if (key in data) err(file, `duplicate frontmatter key \`${key}\``);
     lastKey = key;
     let value = rawValue.trim();
-    if (
+    const quoted =
       (value.startsWith('"') && value.endsWith('"') && value.length > 1) ||
-      (value.startsWith("'") && value.endsWith("'") && value.length > 1)
-    ) {
+      (value.startsWith("'") && value.endsWith("'") && value.length > 1);
+    if (quoted) {
       value = value.slice(1, -1);
+    } else if (/:\s/.test(value) || value.endsWith(':')) {
+      // A real YAML parser reads `key: some text: more` as a nested mapping and throws
+      // ("Nested mappings are not allowed in compact mappings"), which makes installers
+      // skip the whole skill. This parser is naive enough to accept it, so check it here.
+      err(
+        file,
+        `frontmatter key \`${key}\` has an unquoted value containing a colon followed by a ` +
+          `space, which is not valid YAML — rewrite the colon (an em dash reads well) or ` +
+          `quote the whole value`
+      );
     }
     data[key] = value;
   }
