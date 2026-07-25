@@ -1,0 +1,16 @@
+{
+  "name": "hero",
+  "doc": "README.md",
+  "tier": "animated-hero",
+  "facts": [
+    "Every skill lives at skills/<name>/SKILL.md, with optional reference/, scripts/, and assets/ directories",
+    "npx skills add apatheticus/skills writes editable copies of the skills into a project",
+    "The Claude Code channel adds the marketplace, then installs apatheticus-skills@apatheticus as a managed bundle",
+    "Both channels read the same skills/ directory; the plugin manifest sources the repository root",
+    "scripts/validate.mjs validates every skill and both plugin manifests"
+  ],
+  "facts_hash": "e80dc438d0637e7a65b534b879dc1fda6ebe72ee145886a7496cff6b72fb3185",
+  "src_hash": "3df42bbf22933406f74a4f54ed46c893ab3699f186aa38837952cfe9950317a6",
+  "design_hash": "88837cadfe298d62c9f832bfba3e4492672eb4ddc663fe1d08028fc8fdcee271",
+  "render": { "duration_s": 12, "fps": 15, "width": 1200, "quality": 68 }
+}
