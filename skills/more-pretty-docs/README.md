@@ -64,7 +64,7 @@ A **style** is the look-and-feel idiom every visual in a repo is rendered in. Pa
 has. Style owns *form* — shape, material, type, composition, motion. The product's
 own brand tokens still own the *palette*.
 
-<!-- mpd:viz name="styles" src="docs/assets/src/styles/" facts-hash="9fa63f8c48ad178bf922877ee47854485801c6b4246ee2d434fe09f59456a8b9" src-hash="a11c17b5c2818cf2777e5c7f648064223d302729af1bb7c3b1d68c59c772e8b0" -->
+<!-- mpd:viz name="styles" src="docs/assets/src/styles/" facts-hash="9fa63f8c48ad178bf922877ee47854485801c6b4246ee2d434fe09f59456a8b9" src-hash="eb1d54baee0b070a402ee90ca46396001e2b8706c138aa0dbb7390b066ab2540" -->
 <img src="docs/assets/styles.svg" alt="A drafted contact sheet of fourteen labelled tiles, each built in the style it names: swiss-minimal, flat-material, skeuomorphic, neumorphism, claymorphism, glassmorphism, neo-brutalist, editorial, maximalist, y2k-retrofuturist, terminal-minimalist, blueprint, schematic and bento-grid. Every tile carries one motion characteristic of its style — a marching rule, a material ripple, a breathing LED, a stepped nudge, a travelling signal. A note panel states the rule: style owns form, brand tokens still own the palette." width="820" />
 <!-- mpd:viz end -->
 

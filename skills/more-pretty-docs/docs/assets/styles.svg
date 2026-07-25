@@ -126,7 +126,7 @@ states the rule: style owns form, while the product's own brand tokens still own
   <rect class="sheet" x="0" y="0" width="1200" height="1060"/>
 
   <text class="title" x="48" y="86" data-role="title">STYLE CATALOG</text>
-  <text class="sub" x="48" y="120">fourteen idioms — --style &lt;slug&gt;, or derived from the product</text>
+  <text class="sub" x="48" y="120">fourteen idioms · --style &lt;slug&gt;, or derived from the product</text>
   <line class="thin" x1="48" y1="146" x2="1176" y2="146"/>
 
   <!-- row 1 -->

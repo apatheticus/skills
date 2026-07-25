@@ -10,12 +10,12 @@
     "Style owns form; the product's own brand tokens still own the palette"
   ],
   "facts_hash": "9fa63f8c48ad178bf922877ee47854485801c6b4246ee2d434fe09f59456a8b9",
-  "src_hash": "a11c17b5c2818cf2777e5c7f648064223d302729af1bb7c3b1d68c59c772e8b0",
+  "src_hash": "eb1d54baee0b070a402ee90ca46396001e2b8706c138aa0dbb7390b066ab2540",
   "design_hash": "a37e005cc4853efb01eaa84d1a404595630293bb40ee02520428a5e2324e6eea",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 18816
+    "bytes": 18815
   },
   "relaxed": []
 }
