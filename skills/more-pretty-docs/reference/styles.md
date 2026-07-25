@@ -62,9 +62,11 @@ pick schematic.
    strong brand color and a consumer audience lands on `flat-material` or
    `bento-grid`. `--style auto` forces this path even when `docsmeta` holds a slug.
 
-Persist the result in two places: the slug in `.github/docsmeta.json` as
-`viz.style`, and the full nine-field spec under `## Style` in
-`docs/assets/src/DESIGN.md`. **The spec in `DESIGN.md` is what visuals derive
+Persist the full nine-field spec under `## Style` in `docs/assets/src/DESIGN.md`.
+In a repo with a single doc root, also record the bare slug in
+`.github/docsmeta.json` as `viz.style`; **omit that key when the repo has more than
+one doc root**, since it is repo-wide and would then name the wrong style for every
+root but one. **The spec in `DESIGN.md` is what visuals derive
 from** — and because it lives in that file, changing the style moves `design_hash`
 and re-authors every visual in the repo. Say so in the phase-3 plan, with a count,
 before touching anything.

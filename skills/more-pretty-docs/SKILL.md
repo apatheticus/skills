@@ -174,8 +174,8 @@ Then read `reference/design-system.md` and derive or load
 
 - Exists and identity + style unchanged → load it; it is **frozen** for this run.
 - Missing → derive it (mapping from product identity when one exists; otherwise from
-  product semantics), write the resolved style into its `## Style` section, and save
-  the slug to `.github/docsmeta.json` as `viz.style`.
+  product semantics), write the resolved style into its `## Style` section, and — in a
+  single-doc-root repo only — save the slug to `.github/docsmeta.json` as `viz.style`.
 - Re-derive an existing one only when the product's identity clearly changed, the
   style changed, or the user asked. Changing it invalidates every visual
   (design-hash drift), so say so in the plan.

@@ -317,6 +317,10 @@ first; only the values you had to ask for need storing here.
   Written once, then reused so no later run re-asks. `--style` overrides and
   rewrites it; the full resolved spec lives under `## Style` in
   `docs/assets/src/DESIGN.md`, which is what visuals actually derive from.
+  **Omit this key in a repo with more than one doc root.** The file is repo-wide but
+  a style is per-root, so one slug would assert the wrong style for every root but
+  one — worse than no answer. Each root's `DESIGN.md` is authoritative and is loaded
+  before the resolution ladder runs, so an absent key costs a later run nothing.
 - Empty strings mean "not set" → the skill omits the corresponding output (e.g. no
   disclaimer line) rather than inventing it.
 - Read the current year from the session date; do not hardcode it and do not write a
