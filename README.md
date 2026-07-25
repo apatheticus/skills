@@ -6,9 +6,11 @@ Agent skills published by Zerø Effort ([@apatheticus](https://github.com/apathe
 [![validate](https://github.com/apatheticus/skills/actions/workflows/validate.yml/badge.svg)](https://github.com/apatheticus/skills/actions/workflows/validate.yml)
 [![license: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-Every skill here ships through two channels from the same source tree — copy the
-files into your project with `npx skills`, or subscribe to the whole bundle as a
-managed Claude Code plugin.
+Every skill here ships from one source tree through two managed channels, plus a
+manual copy. `npx skills` writes editable files into your project and you pull
+updates yourself. The Claude Code plugin installs the whole bundle as managed
+files that update when this repo does. Take the first if you expect to edit the
+skills, the second if you would rather not think about it.
 
 ## Install
 
@@ -50,11 +52,24 @@ git clone https://github.com/apatheticus/skills.git
 cp -R skills/<skill-name> ~/.claude/skills/<skill-name>
 ```
 
+### Removing
+
+`npx skills` and manual copies are yours to delete: remove the skill directory
+the install wrote. The plugin comes out through Claude Code:
+
+```bash
+claude plugin uninstall apatheticus-skills@apatheticus
+claude plugin marketplace remove apatheticus
+```
+
+Restart Claude Code afterward. The skill list is read at session start, so a
+removed skill stays visible until the next session.
+
 ## Skills
 
 | Skill | What it does |
 | --- | --- |
-| [`human-voice`](./skills/human-voice) | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored, gated by register — editorial, professional, technical, or regulated — so a spec never gets an essay's voice. Yields to a compliance skill for federal work. |
+| [`human-voice`](./skills/human-voice) | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored. Picks a register first (editorial, professional, technical, or regulated) so a spec never gets an essay's voice. Yields to a compliance skill for federal work. |
 | [`make-pretty-docs`](./skills/make-pretty-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. |
 
 <!-- Keep this table in step with skills/. `npm run validate` checks the manifests, not this table. -->
@@ -78,8 +93,8 @@ scripts/
   validate.mjs       # frontmatter + manifest validator (also runs in CI)
 ```
 
-One plugin, sourced from the repo root, listing every skill under `skills/`.
-That single layout satisfies both installers with no duplicated files: `npx skills`
+The plugin is sourced from the repo root and lists every skill under `skills/`.
+This layout satisfies both installers with no duplicated files: `npx skills`
 discovers `skills/*/SKILL.md` directly, and the plugin manifest points at the same
 directories.
 
