@@ -49,9 +49,11 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 ## Current state
 
-Scaffolded 2026-07-24. Three skills shipped (`human-voice`, `make-pretty-docs`, `more-pretty-docs`); repo validates green at plugin version 0.5.1. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, `github-personal:apatheticus/skills.git`) and reaches `main` only by PR. As of 2026-07-25 `main` is 6 commits behind `stage`, fast-forwardable — the per-skill install docs, the frontmatter-colon fix, and the README gate are all on `stage` only.
+Scaffolded 2026-07-24. Three skills shipped (`human-voice`, `make-pretty-docs`, `more-pretty-docs`); repo validates green at plugin version 0.5.3. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, `github-personal:apatheticus/skills.git`) and reaches `main` only by PR. PR #2 merged `stage` into `main` on 2026-07-25, shipping 0.4.0 → 0.5.3.
 
-Validator constraints worth knowing before authoring, both enforced by `scripts/validate.mjs`:
+**Do not read branch skew as commit counts.** Merges into `main` use a merge commit deliberately — squash or rebase would rewrite the SHAs and permanently diverge the two branches — so `main` shows as one commit "ahead" of `stage` per merge while the content is identical. Compare with `git diff origin/main origin/stage` (empty means in sync); `git rev-list --count` will mislead you.
+
+Validator constraints worth knowing before authoring, all enforced by `scripts/validate.mjs`:
 
 - `parseFrontmatter` reads flat scalar keys only and treats indented continuation lines as `''`, so a multi-line `description: |` block fails the required-key check. Keep `description` on one line (≤1024 chars).
 - An unquoted `description` cannot contain a colon followed by a space. Real YAML parsers throw `Nested mappings are not allowed in compact mappings` and installers **skip the file silently**, so the skill goes invisible instead of failing loudly — this shipped undetected in `make-pretty-docs` until a live `npx skills add` run exposed it. Use an em dash, or quote the whole value.
