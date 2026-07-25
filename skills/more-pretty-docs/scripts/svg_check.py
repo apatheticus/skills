@@ -570,11 +570,24 @@ def check_paint(root, parents, sheet: Stylesheet, palette, limits, catalog,
 
     seen_off_system: set[str] = set()
 
+    # A style specimen is not governed by the repo's design system — that is the
+    # point of one. Its palette comes from the style spec, so its tints are on-system
+    # by definition and reporting each as a deviation buries the real findings. The
+    # off-system *error* below still fires on any undeclared raw hex, and contrast is
+    # checked exactly the same way.
+    specimen = (root.get("data-specimen") or "").strip().lower() == "true"
+    off_palette = []
     for name, value in sheet.tokens.items():
         h = norm_hex(sheet.resolve(value))
         if h and palette and h not in palette_hexes:
-            f.warn(label, f"{name}: {h} is a derived tint, not a DESIGN.md palette role "
-                          "— note it in DESIGN.md if it is load-bearing")
+            if specimen:
+                off_palette.append(name)
+            else:
+                f.warn(label, f"{name}: {h} is a derived tint, not a DESIGN.md palette "
+                              "role — note it in DESIGN.md if it is load-bearing")
+    if off_palette:
+        f.note(label, f"specimen palette: {len(off_palette)} token(s) from the style "
+                      "spec rather than DESIGN.md — expected for a specimen")
 
     def paint_of(el, inherited: dict) -> dict:
         classes = (el.get("class") or "").split()
