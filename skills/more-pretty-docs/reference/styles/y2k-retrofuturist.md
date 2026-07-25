@@ -2,6 +2,9 @@
 
 **Primary axis:** era · **Aliases:** `y2k`, `retrofuture`, `chrome`
 
+<img src="../../docs/samples/y2k-retrofuturist.svg" alt="The y2k-retrofuturist specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 The turn-of-the-millennium future: chrome gradients, translucent plastic, wide

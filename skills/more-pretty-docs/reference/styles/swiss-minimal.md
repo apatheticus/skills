@@ -2,6 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `swiss`, `international`, `grid`
 
+<img src="../../docs/samples/swiss-minimal.svg" alt="The swiss-minimal specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 The International Typographic Style: a strict grid, hairline rules, asymmetric

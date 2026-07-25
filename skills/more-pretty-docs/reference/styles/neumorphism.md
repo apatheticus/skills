@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `soft-ui`, `soft`
 
+<img src="../../docs/samples/neumorphism.svg" alt="The neumorphism specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Everything extruded from one continuous surface: no borders, no color fields, just a

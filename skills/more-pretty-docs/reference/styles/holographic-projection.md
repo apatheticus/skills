@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `hologram`, `holo`, `projection`
 
+<img src="../../docs/samples/holographic-projection.svg" alt="The holographic-projection specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Light projected into a dark volume: a cone rising from an emitter, geometry rendered

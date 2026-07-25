@@ -2,6 +2,9 @@
 
 **Primary axis:** era · **Aliases:** `lcars`, `okudagram`, `retro-console`
 
+<img src="../../docs/samples/console-elbow.svg" alt="The console-elbow specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 A flat-panel operations console: a black field framed by a fat rounded elbow, blocks

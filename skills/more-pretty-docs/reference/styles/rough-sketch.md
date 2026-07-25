@@ -2,6 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `excalidraw`, `roughjs`, `rough`
 
+<img src="../../docs/samples/rough-sketch.svg" alt="The rough-sketch specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 The collaborative whiteboard diagram everyone recognises: every edge drawn twice with

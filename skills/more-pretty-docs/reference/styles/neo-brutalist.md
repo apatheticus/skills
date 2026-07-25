@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `brutalist`, `neubrutalism`
 
+<img src="../../docs/samples/neo-brutalist.svg" alt="The neo-brutalist specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Thick black rules, hard offset shadows with zero blur, flat saturated color, and

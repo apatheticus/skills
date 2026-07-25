@@ -115,56 +115,69 @@ content, not the chrome. They are declared here as named roles so nothing enters
 visual as an untraceable hex, and they are scoped to that one asset. No other visual
 in this repo uses them.
 
-The sheet is also the one asset in this repo gated **without** `--style`. Every
-structural, seam, legibility, contrast, palette and byte gate still applies to it;
-only the `bento-grid` *form* invariants are lifted, because a plate showing
-skeuomorphic bevels and neo-brutalist zero-radius blocks cannot honour one radius and
-one material. Its own frame, gutters and labels are still bento. This exemption covers
-exactly one file and is stated in the run report.
+The sheet used to be the one asset gated **without** `--style`, on the argument that
+a plate showing skeuomorphic bevels and neo-brutalist zero-radius blocks cannot
+honour one radius and one material. That was true about *form* and disastrous about
+*fidelity*: with no style resolved, the sheet inherited the global `filter_depth: 1`
+and `check_style` skipped it entirely, so the one asset depicting all 31 idioms was
+the single file exempt from every fidelity gate. Every material on it was faked —
+grain through a mask, roughness wobbled into path coordinates by hand, impasto
+relief *suggested* with gradients. It gated at zero errors and looked it.
 
-**Because it is gated without `--style`, the sheet gets no per-style relaxations
-either** — the global `filter_depth: 1` applies to every tile, including the ones
-whose catalog entries declare floors of 3 or 5. That is the constraint, not a
-loophole, and two conventions satisfy it:
+It is now a **declared style**, `catalog-sheet`, with its own entry in
+`scripts/styles.json`: `filter_depth: 5`, `bytes_fail: 300 KB`, `min_elements: 620`.
+An honest declaration beats a prose exemption — the numbers are in the catalog where
+the checker reads them, not in a paragraph here.
 
-- **Grain is turbulence read through a `<mask>`.** One `<filter>` holds a single
-  `feTurbulence`; a rect carrying that filter sits inside a `<mask>`, and a flat
-  palette colour is drawn through it. Depth 1, monochrome, any hue, and the
-  anisotropy still comes free from the `baseFrequency` ratio — `#nmetal` at
-  `1.6 0.006`, `#nwood` at `0.006 0.055`, `#ntooth` at `0.55`.
-- **Hand-drawn tiles are wobbled by hand, not by a filter.** A roughen chain is
-  turbulence *plus* displacement, which is two primitives. At 264×152 the tile's
-  path coordinates are simply drawn off-true instead.
+Two things follow from that:
 
-Depth-3-and-up looks — impasto relief, a chained bevel — are *suggested* with
-gradients and offset geometry, exactly as this sheet has always suggested
-skeuomorphic with `url(#skeu)`. A tile shows a style's character at cell scale; it is
-not a reproduction of what that style produces on a full board.
+- **Each tile is the style's own specimen, scaled.** `docs/samples/<slug>.svg` is
+  built and gated at 1200 × 460 under `--style <slug>`, then composed into a
+  550 × 211 cell. The sheet therefore cannot be less faithful than the catalog it
+  indexes, and it cannot drift from it either.
+- **Filters carry `data-style="<slug>"`.** Each tile's chain is measured against the
+  floor of the style it depicts rather than the file-wide ceiling, which is what
+  lets `oil-impasto` keep its five-primitive lit relief on a sheet that also holds
+  `swiss-minimal`.
 
-The sheet's height is the other stated exception. At 31 tiles it runs
-**1200 × 2816**, well past the 320–760 range in `viz-production.md`. Three columns is
-forced by the longest slug: `.slug` carries no `data-role`, so it sits on the 18 px
-label floor, and `holographic-projection` needs about 237 user units at that size
-against the 217 a four-column cell would give it.
+Token names are namespaced per specimen (`--oil-impasto-ground`). `var()` inside a
+`<defs>` filter resolves against the `<defs>` element, not the tile referencing it,
+so 31 sets of `--ground` and `--ink` on one root would collide. Each tile group also
+carries `isolation: isolate`, or a specimen's `mix-blend-mode` overlay composites
+against the whole sheet, and its own `data-bg`, or its captions are measured for
+contrast against the sheet's dark background instead of the surface they sit on.
 
-**Eight accepted graphic-contrast warnings, and why each one stays.** The sheet gates
-at **0 errors**. It also prints eight `WARN`s of the form *"graphic contrast N:1 on
-&lt;shape&gt; stroke is under 3:1 — fine for decoration, not for a load-bearing
-border"*, and the warning is correct in every case: these are the tiles whose subject
-*is* a deliberately faint mark. Raising them would misrepresent the style, so they
-stay, enumerated here rather than left for a reader to rediscover.
+The sheet's height is the remaining stated exception: two columns of 16 rows runs
+**1200 × 4458**, well past the 320–760 range in `viz-production.md`. That is the cost
+of showing every idiom at a scale where its material is still visible, and the sheet
+is an index meant to be scrolled.
 
-| Warn | Where | Why it is right |
-| --- | --- | --- |
-| 1.48:1 | the `#hatch` pattern line in `<defs>` | Measured against the root background because it lives in `defs`; on the vellum it actually paints, `sw-irongall` on `sw-vellum` is **6.30:1** |
-| 1.55:1 | ide-dark pane divider | `#30363d` on `#0d1117` is the real hairline of a dark editor; a visible border is the wrong picture |
-| 2.62:1 ×3 | lofi-wireframe ghost paths | Placeholder squiggles and the image X. The spec requires these be *shapes*, never `<text>`, precisely so their faintness carries no meaning |
-| 1.91:1 | pencil-lined-paper margin rule | A legal pad's margin line is a pale red print, not an outline |
-| 2.53:1 ×2 | wood-grain grain lines | Grain is a figure in the timber; at 3:1 it reads as drawn-on stripes |
+**Accepted graphic-contrast warnings.** The sheet gates at **0 errors**, and prints
+`WARN`s of the form *"graphic contrast N:1 on &lt;shape&gt; stroke … is under 3:1 —
+fine for decoration, not for a load-bearing border"*. Identical warnings are
+aggregated with an `(xN)` count, so a hairline grid applied thirty-one times reads as
+one finding rather than thirty-one.
 
-No text anywhere on the sheet is below 4.5:1 — every tile that carries a label was
-recoloured until it cleared the floor, including the wood-grain burn, which sits on a
-sanded `sw-timbersand` field for exactly that reason.
+Every one of them is correct, and every one is a mark whose subject *is* faintness:
+the HUD's `#0b2a38` grid on `#04121a`, a dark editor's pane hairline, the pencil pad's
+pale red margin rule, wood grain figured into the timber, a skeuomorphic bevel
+highlight. Raising any of them to 3:1 would misrepresent the style. None is a border
+anything depends on.
+
+Two floors are **not** softened anywhere on the sheet:
+
+- **No text is below 4.5:1.** Every specimen that carries a label was recoloured until
+  it cleared the floor — `wood-grain` reverses to `#F4ECE0` on the plank (4.90:1) and
+  sits its plate numbers on a sanded field, `oil-impasto` dropped its ochre body a
+  step, `isometric-3d` gained a dedicated on-face ink.
+- **The one exemption is WCAG 1.4.3's**, for purely decorative text. `digital-rain`'s
+  280 falling glyphs are texture, not reading matter; they are marked
+  `aria-hidden="true"`, and the checker reports how many it exempted so the exemption
+  cannot be used quietly to launder an unreadable label.
+
+The `sw-*` roles below are retained for `hero.svg` and `lazy-rerender.svg`. The
+contact sheet no longer draws from them: each tile now carries its specimen's own
+palette, namespaced per style.
 
 | Role | Hex | Notes |
 | --- | --- | --- |

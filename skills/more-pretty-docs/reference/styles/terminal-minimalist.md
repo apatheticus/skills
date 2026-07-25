@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `tui`, `cli`, `terminal`, `ascii-adjacent`
 
+<img src="../../docs/samples/terminal-minimalist.svg" alt="The terminal-minimalist specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 A terminal UI rendered properly: monospace type on a dark field, box-drawing structure

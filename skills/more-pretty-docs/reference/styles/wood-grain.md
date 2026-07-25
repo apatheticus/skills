@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `wood`, `timber`, `pyrography`
 
+<img src="../../docs/samples/wood-grain.svg" alt="The wood-grain specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 A finished timber panel: long wandering grain with visible figure, a varnish

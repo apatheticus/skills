@@ -2,6 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `isometric`, `iso`, `axonometric`
 
+<img src="../../docs/samples/isometric-3d.svg" alt="The isometric-3d specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Axonometric projection: every element is a box seen from the same fixed angle, with a

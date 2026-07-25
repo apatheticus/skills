@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `impasto`, `oil-paint`, `painterly`
 
+<img src="../../docs/samples/oil-impasto.svg" alt="The oil-impasto specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Paint laid on thick: a lit height field where the relief follows the brush strokes, a

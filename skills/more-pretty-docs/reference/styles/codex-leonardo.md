@@ -2,6 +2,9 @@
 
 **Primary axis:** era · **Aliases:** `codex`, `renaissance-study`, `iron-gall`
 
+<img src="../../docs/samples/codex-leonardo.svg" alt="The codex-leonardo specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 A Renaissance inventor's working page: brown iron-gall ink on aged rag paper,

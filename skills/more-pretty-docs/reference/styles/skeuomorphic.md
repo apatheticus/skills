@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `realist`, `textured`
 
+<img src="../../docs/samples/skeuomorphic.svg" alt="The skeuomorphic specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Controls that look like physical objects: bevelled edges, a top-lit sheen, inset

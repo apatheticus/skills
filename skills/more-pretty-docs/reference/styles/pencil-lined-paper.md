@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `lined-paper`, `graphite-notes`, `legal-pad`
 
+<img src="../../docs/samples/pencil-lined-paper.svg" alt="The pencil-lined-paper specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 A page torn out of a notebook: printed blue rules, a red margin line down the left,

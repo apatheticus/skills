@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `whiteboard`, `napkin`, `dry-erase`
 
+<img src="../../docs/samples/whiteboard-marker.svg" alt="The whiteboard-marker specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Thinking out loud: fat dry-erase strokes at partial opacity, boxes that overshoot at

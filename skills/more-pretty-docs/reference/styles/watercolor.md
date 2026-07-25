@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `watercolour`, `wash`, `aquarelle`
 
+<img src="../../docs/samples/watercolor.svg" alt="The watercolor specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Pigment in water on cold-press paper: soft-edged washes that darken where they pool

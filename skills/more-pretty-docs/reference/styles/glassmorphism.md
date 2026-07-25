@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `glass`, `frosted`, `aero`
 
+<img src="../../docs/samples/glassmorphism.svg" alt="The glassmorphism specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Frosted translucent panels floating over a colored, blurred ground — depth through

@@ -2,6 +2,9 @@
 
 **Primary axis:** era · **Aliases:** `patent`, `uspto-figure`, `figure-drawing`
 
+<img src="../../docs/samples/patent-drawing.svg" alt="The patent-drawing specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 A formal disclosure figure: black line work on white, no colour, no shading, every

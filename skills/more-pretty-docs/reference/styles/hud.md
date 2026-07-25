@@ -2,6 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `heads-up-display`, `targeting-hud`, `telemetry`
 
+<img src="../../docs/samples/hud.svg" alt="The hud specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 An instrument overlay: reticles, tick scales along the frame edges, corner brackets

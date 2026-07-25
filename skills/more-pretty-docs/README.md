@@ -64,12 +64,16 @@ A **style** is the look-and-feel idiom every visual in a repo is rendered in. Pa
 has. Style owns *form* — shape, material, type, composition, motion. The product's
 own brand tokens still own the *palette*.
 
-<!-- mpd:viz name="styles" src="docs/assets/src/styles/" facts-hash="ee8709bedc3f2b8e38fdcb5d106371f18dcdae84f4451c6b1c6c98f38063ef73" src-hash="963cae7bd0d95e1a68134cdc4adde549420b3d9dbed69c5ea6942087222ea49e" -->
-<img src="docs/assets/styles.svg" alt="A board of thirty-one labelled cells in alphabetical order, each built in the style it names: bento-grid, blueprint, brushed-metal, claymorphism, codex-leonardo, console-elbow, digital-rain, draughtsman-notebook, editorial, flat-material, glassmorphism, holographic-projection, hud, ide-dark, isometric-3d, lofi-wireframe, maximalist, neo-brutalist, neumorphism, oil-impasto, patent-drawing, pencil-lined-paper, rough-sketch, schematic, skeuomorphic, swiss-minimal, terminal-minimalist, watercolor, whiteboard-marker, wood-grain and y2k-retrofuturist. Every cell carries one motion characteristic of its style — a marching rule, a material sheen travelling along the grain, a breathing LED, a stepped nudge, glyph columns falling out of phase, counter-rotating reticle rings, an isometric block bobbing while its shadow shrinks. The one accent-filled cell reports that all thirty-one were built and gated clean." width="820" />
+<!-- mpd:viz name="styles" src="docs/assets/src/styles/" facts-hash="33ebe05a0c9d07aebe81b14ad473b53cba1c9f2a06b373fbd52bc50b74da294a" src-hash="f729b4bd84d58499c2a9a70c513e4e4d29a7d17c60fd903aaa6c45f8b3ffdd7c" -->
+<img src="docs/assets/styles.svg" alt="A contact sheet of thirty-one animated style specimens in alphabetical order, two to a row: bento-grid, blueprint, brushed-metal, claymorphism, codex-leonardo, console-elbow, digital-rain, draughtsman-notebook, editorial, flat-material, glassmorphism, holographic-projection, hud, ide-dark, isometric-3d, lofi-wireframe, maximalist, neo-brutalist, neumorphism, oil-impasto, patent-drawing, pencil-lined-paper, rough-sketch, schematic, skeuomorphic, swiss-minimal, terminal-minimalist, watercolor, whiteboard-marker, wood-grain and y2k-retrofuturist. Every cell is that style’s own full-width specimen scaled down, so each carries its real filter chains, grain and lighting — lit impasto relief, displaced wood grain, anisotropic brushed metal, true backdrop blur — rather than a flattened imitation. Each also carries one motion characteristic of its style. The final accent-bordered cell reports that all thirty-one were built and gated at their declared filter floors." width="820" />
 <!-- mpd:viz end -->
 
-Every cell above was built and gated for real. If a style could not be produced
-clean at cell scale, its catalog entry was wrong and got fixed. Aliases resolve
+Every cell above **is** that style's own specimen, scaled — not a redrawing of it.
+Each specimen is built at 1200 × 460 and gated under its own `--style`, so it gets
+that style's real filter floors: `oil-impasto` keeps its five-primitive lit relief,
+`wood-grain` its displaced growth rings. Every specimen also ships full-width under
+[`docs/samples/`](docs/samples/) and is embedded at the top of its spec file. If a
+style could not be produced clean, its catalog entry was wrong and got fixed. Aliases resolve
 without asking (`brutalist`, `glass`, `soft-ui`, `tui`, `bento`, `excalidraw`,
 `hologram`, `patent`, `whiteboard`, …), a recognisable free-form idiom is synthesized
 into a full spec and frozen into the repo's `DESIGN.md`, and anything unresolvable

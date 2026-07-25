@@ -2,6 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `max`, `dense`, `more`
 
+<img src="../../docs/samples/maximalist.svg" alt="The maximalist specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Density as the message: layered panels, multiple simultaneous type scales, color

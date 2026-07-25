@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `material`, `flat`
 
+<img src="../../docs/samples/flat-material.svg" alt="The flat-material specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Flat color fields with exactly one step of elevation — the Material Design idea,

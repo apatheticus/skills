@@ -198,6 +198,35 @@ Every catalog entry — and every ad-hoc spec you synthesize — has exactly the
 | Relaxes | Which gates soften, and to what floor |
 | Never | The moves that break the style |
 
+## The fidelity floor
+
+Every gate above is a **ceiling** (max filter depth, max radius, max bytes) or a
+**legibility floor** (font size, contrast, stroke width). None of them asks whether a
+visual looks like the style it claims. That gap was real: the contact sheet once
+rendered `oil-impasto` as flat gradients and `wood-grain` with no displacement at all,
+and passed with zero errors.
+
+So each style also declares a minimum, in the same `scripts/styles.json` entry:
+
+| Key | Meaning |
+| --- | --- |
+| `require_filter_all` | Every named primitive must be present. `require_filter` (now `require_filter_any`) is a *menu* satisfied by one entry — right for "blur or drop-shadow", wrong for a material built from a specific chain, where one bare `feTurbulence` used to satisfy `wood-grain`. |
+| `min_filter_depth` | The deepest chain in the file must reach this. The mirror of the `filter_depth` ceiling, and the gate that actually kills a single-primitive imitation. |
+| `min_elements` | Minimum drawn geometry. **Binds only on specimens** — a root carrying `data-specimen="true"`. A README flow diagram with four boxes is correct at 23 elements, and padding it to hit a density number would be worse output. |
+
+The filter gates apply to **every** visual: if a repo's diagram claims `wood-grain`,
+it has to actually have wood grain. Only the density floor is specimen-scoped.
+
+`svg_check.py` also reports what a file *achieved* — deepest chain, filter count,
+drawn elements, primitives used — because silent success is how a flat render ships.
+A `NOTE` reading `fidelity: deepest chain 1, 5 filter(s), 299 drawn elements` is the
+tell, and it is now impossible to miss in a run report.
+
+Each style's specimen lives at `docs/samples/<slug>.svg`, is gated under its own
+`--style`, and is embedded at the top of that style's spec file. The contact sheet
+composes those same specimens rather than redrawing them, so it cannot be less
+faithful than the catalog it indexes.
+
 ## Gate softening
 
 Twenty-one of the thirty-one styles relax something; the other ten run entirely on

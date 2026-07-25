@@ -2,6 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `magazine`, `print`, `typographic`
 
+<img src="../../docs/samples/editorial.svg" alt="The editorial specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Print hierarchy carried into a diagram: a headline, a lede, a hairline rule, a wide

@@ -2,6 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `wireframe`, `greybox`, `lo-fi`
 
+<img src="../../docs/samples/lofi-wireframe.svg" alt="The lofi-wireframe specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 A greybox: boxes standing in for content, squiggles standing in for text, an X across

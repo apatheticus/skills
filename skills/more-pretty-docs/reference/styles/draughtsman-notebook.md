@@ -2,6 +2,9 @@
 
 **Primary axis:** era · **Aliases:** `engineers-notebook`, `graphite-draft`
 
+<img src="../../docs/samples/draughtsman-notebook.svg" alt="The draughtsman-notebook specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 An engineer's bound notebook: a faint blue-grey grid printed on warm stock, graphite

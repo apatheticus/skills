@@ -94,6 +94,16 @@ name that names a genuinely recognisable idiom is synthesized into a full spec;
 anything unresolvable prompts **one** question. Nothing specified → derived from the
 product, exactly as before this option existed.
 
+Every style ships a full-width **specimen** at `docs/samples/<slug>.svg`, embedded at
+the top of its spec file, showing the same Source → Transform → Store diagram so the
+idioms are directly comparable. `docs/assets/styles.svg` is the contact sheet of all
+thirty-one, composed from those specimens rather than redrawn.
+
+Each style also declares a **fidelity floor** — the primitives its material is built
+from, a minimum filter-chain depth, and a minimum drawn density. `svg_check.py`
+enforces it and reports what each visual achieved, so a style cannot be rendered as a
+flat imitation of itself and still gate clean. See `styles.md`.
+
 Two dials cut across the catalog and are usually the right answer when a request
 lands *between* two styles: **roughness** (the hand-drawn family is one displacement
 scale, `0.7` ruled → `4.5` improvised) and **grain ratio** (the material family is

@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `clay`, `3d-soft`
 
+<img src="../../docs/samples/claymorphism.svg" alt="The claymorphism specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Fat, rounded, pastel volumes that look pressed out of modelling clay — inflated

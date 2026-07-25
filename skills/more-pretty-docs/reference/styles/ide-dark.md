@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `editor-dark`, `dev-tool`, `ide`
 
+<img src="../../docs/samples/ide-dark.svg" alt="The ide-dark specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 The chrome of a dark-theme code editor: softly rounded panes on a near-black canvas,

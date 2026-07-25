@@ -2,6 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `bento`, `cards`, `dashboard`
 
+<img src="../../docs/samples/bento-grid.svg" alt="The bento-grid specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Unequal cells packed into one tight grid, each cell doing exactly one job — the layout
