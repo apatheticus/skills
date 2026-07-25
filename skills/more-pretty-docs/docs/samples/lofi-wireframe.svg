@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="12" data-bg="var(--ground)" data-specimen="true">
+<title>Lo-fi wireframe — Source, Transform, Store</title>
+<desc>Deliberately unfinished greyboxes with wobbling outlines, crossed image placeholders and bar-shaped dummy text. A brown block steps along the connector.</desc>
+<defs>
+  <filter id="lw-a" data-style="lofi-wireframe" x="-10%" y="-18%" width="120%" height="136%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.03 0.038" numOctaves="3" seed="13" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4.8" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="lw-b" data-style="lofi-wireframe" x="-10%" y="-18%" width="120%" height="136%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.034 0.042" numOctaves="2" seed="41" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="3.6" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</defs>
+<style>
+svg { --ground:#F1F1EF; --ink:#2B2B2B; --muted:#4F4F4F; --box:#E0E0DC; --box2:#D4D4CF; --ghost:#BFBFB9; --accent:#7A3E00; }
+  .lw-h { font: 400 38px "Comic Sans MS", "Segoe Print", cursive; fill: var(--ink); }
+  .lw-t { font: 400 24px "Comic Sans MS", "Segoe Print", cursive; fill: var(--ink); }
+  .lw-s { font: 400 19px "Comic Sans MS", "Segoe Print", cursive; fill: var(--muted); }
+  .lw-f { font: 400 16px "Comic Sans MS", "Segoe Print", cursive; fill: var(--muted); }
+  .lw-b { fill: none; stroke: var(--ink); stroke-width: 2; }
+  .lw-g { fill: none; stroke: var(--ghost); stroke-width: 1.6; }
+  .lw-bar { fill: var(--ghost); }
+  .lw-p { fill: var(--accent); animation: lw-p 6s steps(6, end) infinite; }
+  @keyframes lw-p { 0% { transform: translateX(0) } 100% { transform: translateX(370px) } }
+  @media (prefers-reduced-motion: reduce) { .lw-p { animation: none; opacity: 0 } }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<text class="lw-h" x="80" y="88">[ wireframe ]</text>
+<text class="lw-f" data-role="metadata" x="80" y="118">greybox — content TBD</text>
+<rect class="lw-b" x="80" y="132" width="1040" height="2" filter="url(#lw-b)"/>
+<rect x="80" y="180" width="300" height="150" rx="4" fill="var(--box)" filter="url(#lw-a)"/>
+<rect class="lw-b" x="80" y="180" width="300" height="150" rx="4" filter="url(#lw-a)"/>
+<rect x="80" y="180" width="300" height="30" fill="var(--box2)" filter="url(#lw-b)"/>
+<rect class="lw-g" x="96" y="278" width="52" height="38" filter="url(#lw-b)"/>
+<line class="lw-g" x1="96" y1="278" x2="148" y2="316" filter="url(#lw-b)"/>
+<line class="lw-g" x1="148" y1="278" x2="96" y2="316" filter="url(#lw-b)"/>
+<rect class="lw-bar" x="160" y="282" width="180" height="7" filter="url(#lw-b)"/>
+<rect class="lw-bar" x="160" y="295" width="156" height="7" filter="url(#lw-b)"/>
+<rect class="lw-bar" x="160" y="308" width="132" height="7" filter="url(#lw-b)"/>
+<text class="lw-f" data-role="metadata" x="92" y="201">box 1</text>
+<rect x="450" y="180" width="300" height="150" rx="4" fill="var(--box)" filter="url(#lw-a)"/>
+<rect class="lw-b" x="450" y="180" width="300" height="150" rx="4" filter="url(#lw-a)"/>
+<rect x="450" y="180" width="300" height="30" fill="var(--box2)" filter="url(#lw-b)"/>
+<rect class="lw-g" x="466" y="278" width="52" height="38" filter="url(#lw-b)"/>
+<line class="lw-g" x1="466" y1="278" x2="518" y2="316" filter="url(#lw-b)"/>
+<line class="lw-g" x1="518" y1="278" x2="466" y2="316" filter="url(#lw-b)"/>
+<rect class="lw-bar" x="530" y="282" width="180" height="7" filter="url(#lw-b)"/>
+<rect class="lw-bar" x="530" y="295" width="156" height="7" filter="url(#lw-b)"/>
+<rect class="lw-bar" x="530" y="308" width="132" height="7" filter="url(#lw-b)"/>
+<text class="lw-f" data-role="metadata" x="462" y="201">box 2</text>
+<rect x="820" y="180" width="300" height="150" rx="4" fill="var(--box)" filter="url(#lw-a)"/>
+<rect class="lw-b" x="820" y="180" width="300" height="150" rx="4" filter="url(#lw-a)"/>
+<rect x="820" y="180" width="300" height="30" fill="var(--box2)" filter="url(#lw-b)"/>
+<rect class="lw-g" x="836" y="278" width="52" height="38" filter="url(#lw-b)"/>
+<line class="lw-g" x1="836" y1="278" x2="888" y2="316" filter="url(#lw-b)"/>
+<line class="lw-g" x1="888" y1="278" x2="836" y2="316" filter="url(#lw-b)"/>
+<rect class="lw-bar" x="900" y="282" width="180" height="7" filter="url(#lw-b)"/>
+<rect class="lw-bar" x="900" y="295" width="156" height="7" filter="url(#lw-b)"/>
+<rect class="lw-bar" x="900" y="308" width="132" height="7" filter="url(#lw-b)"/>
+<text class="lw-f" data-role="metadata" x="832" y="201">box 3</text>
+<g data-bg="var(--box)">
+  <text class="lw-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="lw-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--box)">
+  <text class="lw-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="lw-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--box)">
+  <text class="lw-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="lw-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<line class="lw-b" x1="380" y1="261" x2="450" y2="261" filter="url(#lw-a)"/>
+<line class="lw-b" x1="750" y1="261" x2="820" y2="261" filter="url(#lw-a)"/>
+<rect class="lw-p" x="382" y="253" width="14" height="14"/>
+<rect class="lw-g" x="80" y="374" width="1040" height="54" filter="url(#lw-b)"/>
+<text class="lw-f" data-role="metadata" x="98" y="406">lorem ipsum placeholder — do not ship</text>
+<line class="lw-g" x1="600" y1="180" x2="600" y2="150" filter="url(#lw-b)"/>
+<circle cx="600" cy="146" r="5" fill="var(--accent)"/>
+<text class="lw-f" data-role="metadata" x="614" y="152">needs copy</text>
+</svg>
