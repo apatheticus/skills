@@ -11,8 +11,8 @@
 [![Styles](https://img.shields.io/badge/style_catalog-31-12324f)](reference/styles.md)
 <!-- mpd:badges end -->
 
-<!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="d57b421c12d6dc8c0e189681569e63ca02047f9c90a9a59e1fbd50b121f104bf" src-hash="f62f5bdd642db1bf2d651220f0bc4d403b7d75e2cb195fcdfa89e10b0f8f8299" -->
-<img src="docs/assets/hero.svg" alt="Animated overview on a board of six cells: the project name, a runtime cell reading python3, and a focal cell reporting zero dependencies. Along the bottom, three numbered cells carry the pipeline — author name.svg, gate it until svg_check.py reports zero errors, commit that same file — and a status dot lights them one at a time. There is no render cell: the committed asset is its own source, and python3 is the only requirement." width="820" />
+<!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="e427d9ffd6fe932b10a704f334210d0ec7362a9c45e6ab2567ebeeda7fdf3746" src-hash="a4a9864ca05ef250866c1dbf69a2ca931541420f7656a9d65abbcff568a8695b" -->
+<img src="docs/assets/hero.svg" alt="Animated board of eight cells. The widest names the skill and its claim — animated SVG, authored, not rendered. A runtime cell reads python3 and nothing else, and the single accent-filled cell reports zero dependencies. One cell nests the pipeline as a small diagram, author then gate then commit, with a status dot visiting each station in turn and no render station between them, because the committed asset is its own source. Two cells count what the skill carries: thirty-one catalog idioms, of which one is chosen per repo, and the eight classes the bundled checker applies to every visual, the eighth being fidelity. Along the bottom the verdict cell reads zero errors, required before any visual is embedded, beside a meter that fills and settles, and the last cell gives the loop as twelve seconds, seam-exact." width="820" />
 <!-- mpd:viz end -->
 
 </div>
@@ -144,8 +144,8 @@ Every embed carries hashes for the facts it depicts, the asset itself, and the
 design system. A later run rewrites a visual only when one of those changed, its
 asset is missing, or `--refresh-viz` forces it:
 
-<!-- mpd:viz name="lazy-rerender" src="docs/assets/src/lazy-rerender/" facts-hash="6212d58383a4f88e8afae3c5ae3d7168f6ab9620428169a5fe2e4476f8257292" src-hash="c133cdd2fb823db9f7d7da302b071195201ab9f802bbbc3133ee0352914919c3" -->
-<img src="docs/assets/lazy-rerender.svg" alt="Animated decision board: three cells name the hashes that get compared — the facts the visual depicts, the committed svg itself, and the design system — and a status dot visits them one at a time. The focal cell holds the verdict: while all three still match, the visual is reused. If any one has moved, that visual alone is re-authored and commits fresh hashes. A prose-only edit moves no hash and re-authors nothing." width="820" />
+<!-- mpd:viz name="lazy-rerender" src="docs/assets/src/lazy-rerender/" facts-hash="067f0007dc5ac5559540bec44975e82534b0e7882282f43b860120261a42ae14" src-hash="cc0a27310154cf93a8189496fd976be3062edf2682d39b6d10036c51f8e709ad" -->
+<img src="docs/assets/lazy-rerender.svg" alt="Animated board of ten cells. The accent-filled cell holds the verdict when none of the six triggers fired: reuse, meaning the embed may be rewritten but nothing is rendered. Three cells name the hashes that are compared, each showing its digest twice, stored above fresh, as two identical rows that read as a match: the facts the visual depicts, which moves when the evidence does; the committed svg itself, where a hand-edit shows up; and the design system, which moves every visual at once. A status dot visits the three in turn. Three further cells carry the triggers that are not hashes at all — the asset missing from its path, a marker disagreeing with its manifest, and a run forced with refresh-viz. The last row states both outcomes: if any one of the six fired, that visual alone is re-authored and commits fresh hashes while every other visual is left alone; a prose-only edit moves no hash and re-authors nothing." width="820" />
 <!-- mpd:viz end -->
 
 Because the style spec lives inside `DESIGN.md`, changing the style moves

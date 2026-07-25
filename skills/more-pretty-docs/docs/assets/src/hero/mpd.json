@@ -5,17 +5,20 @@
   "producer": "more-pretty-docs",
   "style": "bento-grid",
   "facts": [
-    "The committed docs/assets/<name>.svg is both the asset and its own source; src_hash is computed over it",
-    "scripts/svg_check.py must report zero errors before a visual's marker and manifest are written",
-    "The only runtime requirement is python3 \u2014 no renderer, no ffmpeg, no CLI in the path"
+    "python3 is the only requirement — no renderer, no CLI, no network dependency",
+    "The committed .svg is both the asset and its own source; there is no render step between authoring and committing",
+    "The style catalog holds 31 named idioms, one resolved per repo",
+    "svg_check.py applies eight check classes to every visual: structural, seam, motion a11y, legibility, system, style, fidelity and size",
+    "Zero svg_check.py errors is required before a visual may be embedded",
+    "Animated visuals loop seam-exact at the declared data-loop-s"
   ],
-  "facts_hash": "d57b421c12d6dc8c0e189681569e63ca02047f9c90a9a59e1fbd50b121f104bf",
-  "src_hash": "f62f5bdd642db1bf2d651220f0bc4d403b7d75e2cb195fcdfa89e10b0f8f8299",
+  "facts_hash": "e427d9ffd6fe932b10a704f334210d0ec7362a9c45e6ab2567ebeeda7fdf3746",
+  "src_hash": "a4a9864ca05ef250866c1dbf69a2ca931541420f7656a9d65abbcff568a8695b",
   "design_hash": "de0372cc1fc3c743271a44b3d2ae365fccca73980ba2abc0dfd1dc7c4aef140b",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 4988
+    "bytes": 10797
   },
   "relaxed": []
 }
