@@ -15,3 +15,7 @@ docs/assets/src/**/snapshots/
 docs/assets/src/**/qa_*.png
 docs/assets/src/**/check.json
 docs/assets/src/**/node_modules/
+
+# more-pretty-docs authors SVG directly, so the asset is its own source; only the
+# scrub harness and its screenshots are byproducts
+docs/assets/src/**/_qa/

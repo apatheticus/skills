@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 500" width="1200" height="500"
+     role="img" data-loop-s="12" data-bg="background">
+  <title>How a re-author is decided</title>
+  <desc>Three stored hashes — facts, src and design — feed one question: do they all still
+match? When they do, the visual is reused and nothing is written. When one has moved, that
+visual alone goes back through the gate and is committed with fresh hashes. A prose-only
+edit moves no hash, so a full documentation pass writes zero new visuals.</desc>
+
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0 L0 0 0 24" fill="none" stroke="var(--dim)" stroke-width="0.6" opacity="0.28"/>
+    </pattern>
+    <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="var(--dim)"/>
+    </marker>
+  </defs>
+
+  <style>
+    svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb;
+          --dim:#9fc4e8; --accent:#e0a33e; }
+
+    .bg      { fill: var(--background); }
+    .sheet   { fill: url(#grid); }
+    .panel   { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
+    .keyline { fill: none; stroke: var(--accent); stroke-width: 1.6; }
+    .thin    { fill: none; stroke: var(--dim); stroke-width: 0.8; }
+    .hidden  { fill: none; stroke: var(--dim); stroke-width: 0.8; stroke-dasharray: 6 5; }
+
+    .title { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 44px; font-weight: 700; letter-spacing: 1px; }
+    .sub   { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 21px; }
+    .stn   { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 26px; font-weight: 700; letter-spacing: 1.2px; }
+    .mono  { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 19px; }
+    .hash  { fill: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 20px; }
+    .block { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 18px; letter-spacing: .6px; }
+
+    /* motion — 3s, 4s and 6s all divide the 12s loop */
+    .march { stroke-dasharray: 16 200; animation: march 4s linear infinite; }
+    @keyframes march { from { stroke-dashoffset: 216 } to { stroke-dashoffset: 0 } }
+
+    .gate { animation: gate 6s ease-in-out infinite; }
+    @keyframes gate { 0%, 100% { opacity: .35 } 50% { opacity: 1 } }
+
+    .tick { animation: tick 3s ease-in-out infinite; }
+    .t2   { animation-delay: -1s; }
+    .t3   { animation-delay: -2s; }
+    @keyframes tick { 0%, 100% { opacity: .45 } 50% { opacity: 1 } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .march { animation: none; stroke-dashoffset: 0; }
+      .gate  { animation: none; opacity: 1; }
+      .tick  { animation: none; opacity: 1; }
+    }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1200" height="500"/>
+  <rect class="sheet" x="0" y="0" width="1200" height="500"/>
+
+  <text class="title" x="64" y="86" data-role="title">LAZY RE-AUTHOR</text>
+  <text class="sub" x="64" y="120">one hash moves — one visual is re-authored</text>
+  <line class="thin" x1="64" y1="146" x2="1136" y2="146"/>
+
+  <!-- the stored hash triad -->
+  <rect class="panel tick"    x="64" y="188" width="366" height="40" data-bg="surface"/>
+  <text class="hash" x="84" y="215" data-bg="surface">facts_hash</text>
+  <rect class="panel tick t2" x="64" y="242" width="366" height="40" data-bg="surface"/>
+  <text class="hash" x="84" y="269" data-bg="surface">src_hash</text>
+  <rect class="panel tick t3" x="64" y="296" width="366" height="40" data-bg="surface"/>
+  <text class="hash" x="84" y="323" data-bg="surface">design_hash</text>
+  <text class="block" x="64" y="366">src_hash covers the committed .svg</text>
+
+  <!-- bus into the decision -->
+  <line class="thin" x1="430" y1="208" x2="470" y2="208"/>
+  <line class="thin" x1="430" y1="262" x2="470" y2="262"/>
+  <line class="thin" x1="430" y1="316" x2="470" y2="316"/>
+  <line class="thin" x1="470" y1="208" x2="470" y2="316"/>
+  <line class="thin march" x1="470" y1="262" x2="520" y2="262"/>
+  <line class="thin" x1="470" y1="262" x2="520" y2="262" marker-end="url(#tip)"/>
+
+  <!-- decision -->
+  <path class="panel" d="M620,200 L720,262 L620,324 L520,262 Z" data-bg="surface"/>
+  <text class="mono" x="620" y="257" text-anchor="middle" data-bg="surface">ALL</text>
+  <text class="mono" x="620" y="280" text-anchor="middle" data-bg="surface">MATCH?</text>
+
+  <!-- yes -> reuse -->
+  <path class="thin" d="M720,262 H770 V226 H820" marker-end="url(#tip)"/>
+  <text class="block" x="734" y="218">yes</text>
+  <rect class="panel" x="820" y="186" width="316" height="80" data-bg="surface"/>
+  <text class="stn"  x="844" y="220" data-bg="surface">REUSE</text>
+  <text class="mono" x="844" y="250" data-bg="surface">0 files written</text>
+
+  <!-- no -> re-author (the one warm callout) -->
+  <path class="thin march" d="M720,262 H770 V346 H820"/>
+  <path class="thin" d="M720,262 H770 V346 H820" marker-end="url(#tip)"/>
+  <text class="block" x="734" y="316">no</text>
+  <rect class="panel" x="820" y="306" width="316" height="80" data-bg="surface"/>
+  <rect class="keyline gate" x="814" y="300" width="328" height="92"/>
+  <text class="stn"  x="844" y="340" data-bg="surface">RE-AUTHOR</text>
+  <text class="mono" x="844" y="370" data-bg="surface">gate, commit, new hashes</text>
+
+  <!-- the hashes agree again -->
+  <path class="hidden" d="M978,392 V424 H470 V322" marker-end="url(#tip)"/>
+
+  <text class="block" x="64" y="452">prose edit → no hash moves → nothing re-authored</text>
+  <line class="thin" x1="846" y1="430" x2="1136" y2="430"/>
+  <text class="block" x="846" y="456" data-role="metadata">SHEET 2 · RE-AUTHOR DECISION</text>
+</svg>

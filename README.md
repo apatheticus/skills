@@ -103,6 +103,7 @@ removed skill stays visible until the next session.
 | --- | --- |
 | [`human-voice`](./skills/human-voice) | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored. Picks a register first (editorial, professional, technical, or regulated) so a spec never gets an essay's voice. Yields to a compliance skill for federal work. |
 | [`make-pretty-docs`](./skills/make-pretty-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. |
+| [`more-pretty-docs`](./skills/more-pretty-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. Ships a 14-style catalog, from Swiss minimal to neo-brutalist, and a bundled checker that proves the loop is seam-exact before anything is committed. |
 
 <!-- Keep this table in step with skills/. `npm run validate` checks the manifests, not this table. -->
 

@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 380" width="1200" height="380"
+     role="img" data-loop-s="12" data-bg="background">
+  <title>more-pretty-docs — animated SVG, authored not rendered</title>
+  <desc>Three drafted stations on a cyanotype sheet: AUTHOR writes docs/assets/name.svg,
+GATE runs svg_check.py until it reports zero errors, COMMIT ships that same file. A dash
+travels along the leader lines between them. There is no render station, because the
+committed asset is its own source.</desc>
+
+  <defs>
+    <pattern id="grid" width="24" height="24" patternUnits="userSpaceOnUse">
+      <path d="M24 0 L0 0 0 24" fill="none" stroke="var(--dim)" stroke-width="0.6" opacity="0.28"/>
+    </pattern>
+    <marker id="tip" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,1 L9,5 L0,9 z" fill="var(--dim)"/>
+    </marker>
+  </defs>
+
+  <style>
+    svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb;
+          --dim:#9fc4e8; --accent:#e0a33e; }
+
+    .bg      { fill: var(--background); }
+    .sheet   { fill: url(#grid); }
+    .panel   { fill: var(--surface); stroke: var(--ink); stroke-width: 1.6; }
+    .keyline { fill: none; stroke: var(--accent); stroke-width: 1.6; }
+    .thin    { fill: none; stroke: var(--dim); stroke-width: 0.8; }
+    .hidden  { fill: none; stroke: var(--dim); stroke-width: 0.8; stroke-dasharray: 6 5; }
+
+    .title { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 46px; font-weight: 700; letter-spacing: 1px; }
+    .sub   { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 21px; letter-spacing: .5px; }
+    .stn   { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 27px; font-weight: 700; letter-spacing: 1.4px; }
+    .mono  { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 19px; }
+    .block { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 18px; letter-spacing: .6px; }
+
+    /* motion — 4s and 6s both divide the 12s loop */
+    .march { stroke-dasharray: 16 180; animation: march 4s linear infinite; }
+    @keyframes march { from { stroke-dashoffset: 196 } to { stroke-dashoffset: 0 } }
+
+    .gate { animation: gate 6s ease-in-out infinite; }
+    @keyframes gate { 0%, 100% { opacity: .35 } 50% { opacity: 1 } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .march { animation: none; stroke-dashoffset: 0; }
+      .gate  { animation: none; opacity: 1; }
+    }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1200" height="380"/>
+  <rect class="sheet" x="0" y="0" width="1200" height="380"/>
+
+  <!-- sheet title -->
+  <text class="title" x="64" y="88" data-role="title">MORE-PRETTY-DOCS</text>
+  <text class="sub" x="64" y="122">animated SVG, authored — never rendered</text>
+  <line class="thin" x1="64" y1="146" x2="1136" y2="146"/>
+
+  <!-- station 1: author -->
+  <rect class="panel" x="64" y="196" width="290" height="104" data-bg="surface"/>
+  <text class="stn"  x="88" y="234" data-bg="surface">AUTHOR</text>
+  <text class="mono" x="88" y="270" data-bg="surface">docs/assets/name.svg</text>
+
+  <!-- station 2: gate (the one warm callout) -->
+  <rect class="panel" x="455" y="196" width="290" height="104" data-bg="surface"/>
+  <rect class="keyline gate" x="449" y="190" width="302" height="116"/>
+  <text class="stn"  x="479" y="234" data-bg="surface">GATE</text>
+  <text class="mono" x="479" y="270" data-bg="surface">svg_check.py — 0 errors</text>
+
+  <!-- station 3: commit -->
+  <rect class="panel" x="846" y="196" width="290" height="104" data-bg="surface"/>
+  <text class="stn"  x="870" y="234" data-bg="surface">COMMIT</text>
+  <text class="mono" x="870" y="270" data-bg="surface">the same file, as-is</text>
+
+  <!-- leader lines carrying the travelling dash -->
+  <line class="thin"          x1="354" y1="248" x2="449" y2="248" marker-end="url(#tip)"/>
+  <line class="thin march"    x1="354" y1="248" x2="449" y2="248"/>
+  <line class="thin"          x1="751" y1="248" x2="846" y2="248" marker-end="url(#tip)"/>
+  <line class="thin march"    x1="751" y1="248" x2="846" y2="248"/>
+
+  <!-- gate feedback: the dashed return edge is the re-author loop -->
+  <path class="hidden" d="M600,300 V330 H209 V304" marker-end="url(#tip)"/>
+  <text class="block" x="64" y="358">fails → re-author, never ship</text>
+
+  <!-- title block, lower right -->
+  <line class="thin" x1="920" y1="336" x2="1136" y2="336"/>
+  <text class="block" x="920" y="360" data-role="metadata">SHEET 1 · PIPELINE</text>
+</svg>

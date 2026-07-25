@@ -1,0 +1,96 @@
+{
+  "$note": "Machine half of the style catalog for more-pretty-docs. Read by svg_check.py. The prose half is reference/styles.md + reference/styles/<slug>.md; the two must agree slug-for-slug.",
+  "defaults": {
+    "contrast_text": 4.5,
+    "contrast_ui": 3.0,
+    "bytes_warn": 61440,
+    "bytes_fail": 153600,
+    "filter_depth": 1
+  },
+  "styles": {
+    "swiss-minimal": {
+      "aliases": ["swiss", "international", "grid"],
+      "relax": {},
+      "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
+      "require": { "max_rx": 2 }
+    },
+    "flat-material": {
+      "aliases": ["material", "flat"],
+      "relax": {},
+      "forbid": ["radialGradient"],
+      "require": { "min_rx": 4 }
+    },
+    "skeuomorphic": {
+      "aliases": ["realist", "textured"],
+      "relax": { "filter_depth": 2 },
+      "forbid": [],
+      "require": {}
+    },
+    "neumorphism": {
+      "aliases": ["soft-ui", "soft"],
+      "relax": { "contrast_text": 3.0, "contrast_ui": 2.0 },
+      "forbid": [],
+      "require": { "min_rx": 16 }
+    },
+    "claymorphism": {
+      "aliases": ["clay", "3d-soft"],
+      "relax": {},
+      "forbid": [],
+      "require": { "min_rx": 24 }
+    },
+    "glassmorphism": {
+      "aliases": ["glass", "frosted", "aero"],
+      "relax": { "bytes_fail": 204800 },
+      "forbid": [],
+      "require": { "require_filter": ["feGaussianBlur"] }
+    },
+    "neo-brutalist": {
+      "aliases": ["brutalist", "neubrutalism"],
+      "relax": {},
+      "forbid": ["feGaussianBlur", "feDropShadow"],
+      "require": { "max_rx": 0, "min_stroke_width": 3 }
+    },
+    "editorial": {
+      "aliases": ["magazine", "print", "typographic"],
+      "relax": {},
+      "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
+      "require": { "max_rx": 2 }
+    },
+    "maximalist": {
+      "aliases": ["max", "dense", "more"],
+      "relax": { "bytes_fail": 256000 },
+      "forbid": [],
+      "require": {}
+    },
+    "y2k-retrofuturist": {
+      "aliases": ["y2k", "retrofuture", "chrome"],
+      "relax": {},
+      "forbid": [],
+      "require": {}
+    },
+    "terminal-minimalist": {
+      "aliases": ["tui", "cli", "terminal", "ascii-adjacent"],
+      "relax": {},
+      "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
+      "require": { "mono_only": true, "max_rx": 0 }
+    },
+    "blueprint": {
+      "aliases": ["cyanotype", "drafting"],
+      "relax": {},
+      "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
+      "require": { "max_rx": 0 }
+    },
+    "schematic": {
+      "aliases": ["technical-drawing", "circuit", "netlist"],
+      "relax": {},
+      "forbid": ["feGaussianBlur", "feDropShadow", "linearGradient", "radialGradient"],
+      "require": { "min_stroke_width": 1.5 }
+    },
+    "bento-grid": {
+      "aliases": ["bento", "cards", "dashboard"],
+      "relax": {},
+      "forbid": [],
+      "require": { "min_rx": 12 }
+    }
+  }
+}
