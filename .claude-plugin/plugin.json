@@ -1,6 +1,6 @@
 {
   "name": "apatheticus-skills",
-  "version": "0.4.0",
+  "version": "0.5.3",
   "description": "Agent skills published by Zerø Effort. Install the whole bundle as a managed plugin that updates when the repo does.",
   "author": {
     "name": "Zerø Effort",
@@ -17,6 +17,7 @@
   ],
   "skills": [
     "./skills/human-voice",
-    "./skills/make-pretty-docs"
+    "./skills/make-pretty-docs",
+    "./skills/more-pretty-docs"
   ]
 }

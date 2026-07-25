@@ -82,11 +82,21 @@ function parseFrontmatter(source, file) {
     if (key in data) err(file, `duplicate frontmatter key \`${key}\``);
     lastKey = key;
     let value = rawValue.trim();
-    if (
+    const quoted =
       (value.startsWith('"') && value.endsWith('"') && value.length > 1) ||
-      (value.startsWith("'") && value.endsWith("'") && value.length > 1)
-    ) {
+      (value.startsWith("'") && value.endsWith("'") && value.length > 1);
+    if (quoted) {
       value = value.slice(1, -1);
+    } else if (/:\s/.test(value) || value.endsWith(':')) {
+      // A real YAML parser reads `key: some text: more` as a nested mapping and throws
+      // ("Nested mappings are not allowed in compact mappings"), which makes installers
+      // skip the whole skill. This parser is naive enough to accept it, so check it here.
+      err(
+        file,
+        `frontmatter key \`${key}\` has an unquoted value containing a colon followed by a ` +
+          `space, which is not valid YAML — rewrite the colon (an em dash reads well) or ` +
+          `quote the whole value`
+      );
     }
     data[key] = value;
   }
@@ -262,6 +272,100 @@ if (marketplace) {
           label,
           `${at} name \`${entry.name}\` must match plugin.json name \`${plugin.name}\``,
         );
+      }
+    }
+  }
+}
+
+// ------------------------------------------------------------ README table
+
+/**
+ * The Skills table is the only place a human learns a skill exists, so a new skill that
+ * never gets a row ships invisible. Columns 1 and 3 are derivable and checked exactly;
+ * column 2 is prose written at a human — the frontmatter `description` is written at an
+ * agent and runs 4-6x longer, so it is deliberately NOT reused here. Presence only.
+ */
+const README = join(ROOT, 'README.md');
+const TABLE_START = '<!-- skills:table start -->';
+const TABLE_END = '<!-- skills:table end -->';
+
+/** `https://github.com/owner/repo` -> `owner/repo`, so the install command is never hardcoded. */
+function repoSlug(source) {
+  const raw = typeof source === 'string' ? source : source?.url;
+  return String(raw ?? '').match(/github\.com[/:]([^/]+\/[^/.]+?)(?:\.git)?\/*$/)?.[1] ?? null;
+}
+
+/** Split a markdown table row into cells, honouring `\|` escapes inside a cell. */
+const cellsOf = (row) =>
+  row
+    .replace(/^\|/, '')
+    .replace(/\|$/, '')
+    .split(/(?<!\\)\|/)
+    .map((c) => c.trim());
+
+if (!existsSync(README)) {
+  err('README.md', 'file is missing');
+} else {
+  const label = 'README.md';
+  const source = readFileSync(README, 'utf8');
+  const start = source.indexOf(TABLE_START);
+  const end = source.indexOf(TABLE_END);
+  const slug = repoSlug(plugin?.repository);
+
+  if (start === -1 || end === -1 || end < start) {
+    err(label, `the Skills table must be wrapped in \`${TABLE_START}\` and \`${TABLE_END}\``);
+  } else if (!slug) {
+    err(
+      rel(PLUGIN_MANIFEST),
+      '`repository` is not a github.com URL, so the install command cannot be derived',
+    );
+  } else {
+    const lines = source
+      .slice(start + TABLE_START.length, end)
+      .split(/\r?\n/)
+      .map((l) => l.trim())
+      .filter((l) => l.startsWith('|') && !/^\|[\s|:-]+\|$/.test(l));
+
+    const [header, ...rows] = lines;
+    if (!header || cellsOf(header).length !== 3) {
+      err(label, 'the Skills table needs exactly 3 columns: skill, description, install command');
+    }
+
+    const rowNames = new Map();
+    for (const row of rows) {
+      const cells = cellsOf(row);
+      if (cells.length !== 3) {
+        err(label, `Skills table row has ${cells.length} columns, expected 3 -> ${row.slice(0, 60)}`);
+        continue;
+      }
+      const [first, description, command] = cells;
+      const link = first.match(/^\[`([^`]+)`\]\(\.\/(.+?)\/?\)$/);
+      if (!link) {
+        err(label, `Skills table column 1 must be \`[\`name\`](./skills/name)\` -> ${first}`);
+        continue;
+      }
+      const [, name, path] = link;
+
+      if (rowNames.has(name)) err(label, `Skills table lists \`${name}\` twice`);
+      rowNames.set(name, true);
+
+      const dir = seenNames.get(name);
+      if (!dir) {
+        err(label, `Skills table row \`${name}\` matches no skill under skills/`);
+        continue;
+      }
+      if (path !== dir) err(label, `row \`${name}\` links to \`./${path}\`, but the skill is at \`./${dir}\``);
+      if (!description) err(label, `row \`${name}\` has an empty description — write one, do not paste the frontmatter`);
+
+      const expected = `\`npx skills add ${slug} -s ${name}\``;
+      if (command !== expected) {
+        err(label, `row \`${name}\` column 3 should be ${expected}, got ${command || '(empty)'}`);
+      }
+    }
+
+    for (const name of seenNames.keys()) {
+      if (!rowNames.has(name)) {
+        err(label, `skill \`${name}\` has no row in the Skills table — add one, all three columns`);
       }
     }
   }

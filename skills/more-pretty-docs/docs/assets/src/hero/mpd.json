@@ -1,0 +1,21 @@
+{
+  "name": "hero",
+  "doc": "README.md",
+  "tier": "animated-hero",
+  "producer": "more-pretty-docs",
+  "style": "bento-grid",
+  "facts": [
+    "The committed docs/assets/<name>.svg is both the asset and its own source; src_hash is computed over it",
+    "scripts/svg_check.py must report zero errors before a visual's marker and manifest are written",
+    "The only runtime requirement is python3 \u2014 no renderer, no ffmpeg, no CLI in the path"
+  ],
+  "facts_hash": "d57b421c12d6dc8c0e189681569e63ca02047f9c90a9a59e1fbd50b121f104bf",
+  "src_hash": "f62f5bdd642db1bf2d651220f0bc4d403b7d75e2cb195fcdfa89e10b0f8f8299",
+  "design_hash": "ccfcfdfa8c5419117e23b48b394fd1c5ddc49875485a3041c90b1134e97b0e99",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 4988
+  },
+  "relaxed": []
+}

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460"
+     role="img" data-loop-s="12" data-bg="background">
+  <title>Thirty-three patterns, two behaviours</title>
+  <desc>A printed plate in two columns. The catalog holds thirty-three patterns. Twenty-two
+of them apply in every register — significance inflation, AI vocabulary, passive voice,
+sycophancy and the rest — and never conflict with a house style. Eleven change or switch
+off depending on the register, among them the em-dash ban, title-case headings, hedging
+and signposting, plus voice injection itself. Below, a demonstration: the word leverage is
+struck through in rust and replaced by use.</desc>
+
+  <style>
+    svg { --background:#fbf9f4; --ink:#1a1a18; --muted:#6b6862;
+          --accent:#8c2f1f; --rule:#d8d3c8; --keyline:#8f8a7e; }
+
+    .bg    { fill: var(--background); }
+
+    .h     { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
+             font-size: 44px; font-weight: 700; letter-spacing: -1px; }
+    .fig   { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
+             font-size: 76px; font-weight: 700; letter-spacing: -2px; }
+    .body  { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
+             font-size: 22px; font-weight: 400; }
+    .mut   { fill: var(--muted); font-family: Georgia, 'Iowan Old Style', serif;
+             font-size: 22px; font-weight: 400; }
+    .cap   { fill: var(--muted); font-family: Georgia, 'Iowan Old Style', serif;
+             font-size: 16px; font-weight: 500; letter-spacing: 0.8px; }
+    .mono  { fill: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 26px; font-weight: 400; }
+    .monod { fill: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 26px; font-weight: 400; }
+
+    .hair  { fill: none; stroke: var(--rule); stroke-width: 1; }
+    .col   { fill: none; stroke: var(--keyline); stroke-width: 1; }
+
+    /* the plate's opening rule: enters, holds, leaves — t=0 and t=12 both show nothing */
+    .draw  { fill: none; stroke: var(--accent); stroke-width: 3;
+             stroke-dasharray: 1040; animation: draw 6s ease-in-out infinite; }
+    @keyframes draw {
+      0%      { stroke-dashoffset: 1040 }
+      45%,55% { stroke-dashoffset: 0 }
+      100%    { stroke-dashoffset: -1040 }
+    }
+
+    /* the proof mark: a strikethrough arriving over a banned word, then clearing */
+    .strike { fill: none; stroke: var(--accent); stroke-width: 3;
+              stroke-dasharray: 132; animation: strike 6s ease-in-out infinite; }
+    @keyframes strike {
+      0%,10%  { stroke-dashoffset: 132 }
+      40%,70% { stroke-dashoffset: 0 }
+      100%    { stroke-dashoffset: -132 }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .draw, .strike { animation: none; stroke-dashoffset: 0; }
+    }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1200" height="460"/>
+
+  <line class="draw" x1="80" y1="72" x2="1120" y2="72"/>
+
+  <text class="h" x="80" y="134" data-role="title">Thirty-three patterns, two behaviours</text>
+  <line class="hair" x1="80" y1="164" x2="1120" y2="164"/>
+
+  <!-- left column: the always-on majority -->
+  <text class="fig"  x="80" y="262">22</text>
+  <text class="cap"  x="80" y="292" data-role="metadata">ALWAYS ON — EVERY REGISTER</text>
+  <text class="body" x="80" y="326">Significance inflation, AI vocabulary,</text>
+  <text class="body" x="80" y="354">passive voice, sycophancy, filler.</text>
+  <text class="mut"  x="80" y="382">Never conflicts with a house style.</text>
+
+  <line class="col" x1="600" y1="200" x2="600" y2="392"/>
+
+  <!-- right column: the register-gated minority -->
+  <text class="fig"  x="656" y="262">11</text>
+  <text class="cap"  x="656" y="292" data-role="metadata">CHANGE OR SWITCH OFF BY REGISTER</text>
+  <text class="body" x="656" y="326">The em-dash ban, title-case headings,</text>
+  <text class="body" x="656" y="354">hedging, signposting — plus personality.</text>
+  <text class="mut"  x="656" y="382">Applying them blind breaks documents.</text>
+
+  <!-- the proof mark, demonstrated -->
+  <line class="hair" x1="80" y1="410" x2="1120" y2="410"/>
+  <text class="monod" x="80"  y="444">leverage</text>
+  <line class="strike" x1="76" y1="436" x2="208" y2="436"/>
+  <text class="mono"  x="240" y="444">use</text>
+  <text class="cap"   x="330" y="444" data-role="metadata">ONE PATTERN, DEMONSTRATED</text>
+</svg>

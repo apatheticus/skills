@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430"
+     role="img" data-loop-s="12" data-bg="background">
+  <title>human-voice — the register is chosen before a single edit</title>
+  <desc>A printed plate. The title sits under a rust rule that draws itself across the
+page. Below the standfirst, four keyline boxes name the registers this skill writes in —
+editorial, professional, technical and regulated. Professional is marked with a rust
+keyline because it is the default when the genre is unclear; the skill never defaults to
+editorial, since injecting voice into a document that did not want it is the most
+damaging thing it can do. The register is selected first, and only that register's
+patterns are then applied.</desc>
+
+  <style>
+    svg { --background:#fbf9f4; --ink:#1a1a18; --muted:#6b6862;
+          --accent:#8c2f1f; --rule:#d8d3c8; --keyline:#8f8a7e; }
+
+    .bg   { fill: var(--background); }
+
+    .h    { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
+            font-size: 64px; font-weight: 700; letter-spacing: -1.5px; }
+    .lede { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
+            font-size: 28px; font-weight: 400; }
+    .body { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
+            font-size: 24px; font-weight: 400; }
+    .reg  { fill: var(--muted); font-family: Georgia, 'Iowan Old Style', serif;
+            font-size: 24px; font-weight: 400; }
+    .cap  { fill: var(--muted); font-family: Georgia, 'Iowan Old Style', serif;
+            font-size: 16px; font-weight: 500; letter-spacing: 0.8px; }
+
+    .hair { fill: none; stroke: var(--rule); stroke-width: 1; }
+    .key  { fill: none; stroke: var(--keyline); stroke-width: 1.5; }
+    .keyon { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+
+    /* the proof rule enters, holds, and leaves the other side, so t=0 and t=12
+       are both "no rule visible". 6s divides the 12s loop twice. */
+    .draw { fill: none; stroke: var(--accent); stroke-width: 3;
+            stroke-dasharray: 1040; animation: draw 6s ease-in-out infinite; }
+    @keyframes draw {
+      0%      { stroke-dashoffset: 1040 }
+      45%,55% { stroke-dashoffset: 0 }
+      100%    { stroke-dashoffset: -1040 }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .draw { animation: none; stroke-dashoffset: 0; }
+    }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1200" height="430"/>
+
+  <!-- the heavy rust rule that opens the piece -->
+  <line class="draw" x1="80" y1="72" x2="1120" y2="72"/>
+
+  <text class="h"    x="80" y="152" data-role="hero">human-voice</text>
+  <text class="lede" x="80" y="204">Rewrite prose so it reads as written by a person. The</text>
+  <text class="lede" x="80" y="240">register is chosen first, then only its patterns apply.</text>
+
+  <line class="hair" x1="80" y1="272" x2="1120" y2="272"/>
+
+  <!-- the four registers; the default one carries the proof rule as its keyline -->
+  <rect class="key"   x="80"  y="300" width="245" height="72"/>
+  <text class="reg"   x="104" y="344">Editorial</text>
+
+  <rect class="keyon" x="345" y="300" width="245" height="72"/>
+  <text class="body"  x="369" y="344">Professional</text>
+
+  <rect class="key"   x="610" y="300" width="245" height="72"/>
+  <text class="reg"   x="634" y="344">Technical</text>
+
+  <rect class="key"   x="875" y="300" width="245" height="72"/>
+  <text class="reg"   x="899" y="344">Regulated</text>
+
+  <text class="cap" x="369" y="404" data-role="metadata">DEFAULT WHEN UNCLEAR</text>
+</svg>

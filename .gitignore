@@ -5,3 +5,17 @@ node_modules/
 # Claude Code working state — transient, never published
 .claude/state/
 .claude/settings.local.json
+
+# Doc-visual render byproducts — the committed artefacts are the .webp files
+# in docs/assets/ plus each composition's index.html and mpd.json
+docs/assets/src/**/render.mp4
+docs/assets/src/**/renders/
+docs/assets/src/**/frames/
+docs/assets/src/**/snapshots/
+docs/assets/src/**/qa_*.png
+docs/assets/src/**/check.json
+docs/assets/src/**/node_modules/
+
+# more-pretty-docs authors SVG directly, so the asset is its own source; only the
+# scrub harness and its screenshots are byproducts
+docs/assets/src/**/_qa/

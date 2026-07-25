@@ -1,0 +1,21 @@
+{
+  "name": "styles",
+  "doc": "README.md",
+  "tier": "animated-flagship",
+  "producer": "more-pretty-docs",
+  "style": "bento-grid",
+  "facts": [
+    "The catalog holds 14 styles, indexed in reference/styles.md with one spec file each under reference/styles/",
+    "scripts/styles.json is the checker's machine-readable half of the same catalog",
+    "Style owns form; the product's own brand tokens still own the palette"
+  ],
+  "facts_hash": "9fa63f8c48ad178bf922877ee47854485801c6b4246ee2d434fe09f59456a8b9",
+  "src_hash": "e66d825d3a2d3b05888eeedcb6a8312457c2581678b135bdd683dba2dff2cef1",
+  "design_hash": "ccfcfdfa8c5419117e23b48b394fd1c5ddc49875485a3041c90b1134e97b0e99",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 19120
+  },
+  "relaxed": []
+}

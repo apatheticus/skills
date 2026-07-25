@@ -1,0 +1,17 @@
+{
+  "$schema_note": "Config for the make-pretty-docs skill. Committed. No secrets.",
+  "org": "Zerø Effort",
+  "year_policy": "range",
+  "first_year": 2026,
+  "license": "MIT",
+  "disclaimer": "",
+  "assets": {},
+  "repo_url": "https://github.com/apatheticus/skills",
+  "host": "github",
+  "support": {
+    "issues_url": "https://github.com/apatheticus/skills/issues",
+    "discussions_enabled": false,
+    "security_email": "",
+    "briefing_contact": ""
+  }
+}
