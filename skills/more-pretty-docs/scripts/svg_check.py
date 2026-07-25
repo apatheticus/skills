@@ -74,6 +74,18 @@ def local(tag: str) -> str:
     return tag.rsplit("}", 1)[-1] if "}" in tag else tag
 
 
+def decorative(el: ET.Element, parents: dict) -> bool:
+    """True when the element, or any ancestor, is aria-hidden."""
+    node = el
+    seen = 0
+    while node is not None and seen < 64:
+        if (node.get("aria-hidden") or "").strip().lower() == "true":
+            return True
+        node = parents.get(node)
+        seen += 1
+    return False
+
+
 def chain_depth(filt: ET.Element) -> int:
     """Primitives that are direct children of one <filter> — the chain length."""
     return sum(1 for c in filt if local(c.tag) in FILTER_PRIMITIVES)
@@ -569,6 +581,7 @@ def check_paint(root, parents, sheet: Stylesheet, palette, limits, catalog,
     ui_floor = float(limits.get("contrast_ui", 3.0))
 
     seen_off_system: set[str] = set()
+    decor_text = [0]   # aria-hidden text exempted from the contrast floor
 
     # A style specimen is not governed by the repo's design system — that is the
     # point of one. Its palette comes from the style spec, so its tints are on-system
@@ -660,7 +673,15 @@ def check_paint(root, parents, sheet: Stylesheet, palette, limits, catalog,
                         pass
                 ratio = contrast(composite(fg, bg, alpha), bg)
                 snippet = (el.text or "").strip()[:24]
-                if ratio < text_floor:
+                # WCAG 1.4.3 exempts purely decorative text from the contrast
+                # floor. aria-hidden is the author asserting exactly that, and it
+                # is the only signal that a glyph is texture rather than reading
+                # matter — a rain column or an engraving underlight is not text a
+                # person is meant to read. Counted below so the exemption cannot
+                # be used quietly to launder unreadable labels.
+                if decorative(el, parents):
+                    decor_text[0] += 1
+                elif ratio < text_floor:
                     f.error(label, f"text contrast {ratio:.2f}:1 is below the "
                                    f"{text_floor:g}:1 floor — \"{snippet}\"")
                 elif ratio < text_default:
@@ -687,6 +708,10 @@ def check_paint(root, parents, sheet: Stylesheet, palette, limits, catalog,
 
     low_ui: dict[tuple, int] = {}
     walk(root, {"data-bg": root.get("data-bg", "background")})
+    if decor_text[0]:
+        f.note(label, f"{decor_text[0]} aria-hidden text node(s) exempted from the "
+                      "contrast floor as decoration (WCAG 1.4.3) — they must carry "
+                      "no meaning")
     for (tag, stroke, bg, ratio), n in sorted(low_ui.items(), key=lambda kv: kv[0][3]):
         times = "" if n == 1 else f" (x{n})"
         f.warn(label, f"graphic contrast {ratio:.2f}:1 on <{tag}> stroke {stroke} over "

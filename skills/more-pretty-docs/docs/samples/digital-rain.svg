@@ -1,0 +1,370 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="12" data-bg="var(--ground)" data-specimen="true">
+<title>Digital rain — Source, Transform, Store</title>
+<desc>Columns of monospaced glyphs falling at three rates behind dimmed panels, each column led by a bright glowing head glyph. Every column repeats exactly one tile, so the fall seams.</desc>
+<defs>
+  <filter id="dr-glow" data-style="digital-rain" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="4" result="g"/>
+    <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+</defs>
+<style>
+svg { --ground:#04120A; --green:#22C55E; --greenlt:#86EFAC; --head:#ECFDF5; --dim:#14532D; --panel:#07200F; --ink:#BBF7D0; --muted:#86EFAC; }
+  .dr-h { font: 700 34px ui-monospace, Menlo, monospace; fill: var(--head); letter-spacing: 3px; }
+  .dr-t { font: 700 24px ui-monospace, Menlo, monospace; fill: var(--ink); }
+  .dr-s { font: 400 19px ui-monospace, Menlo, monospace; fill: var(--muted); }
+  .dr-f { font: 400 18px ui-monospace, Menlo, monospace; fill: var(--muted); }
+  .dr-g { font: 400 20px ui-monospace, Menlo, monospace; fill: var(--green); }
+  .dr-hd { font: 400 20px ui-monospace, Menlo, monospace; fill: var(--head); }
+  .dr-col { animation: dr-fall 6s linear infinite; }
+  .dr-col2 { animation: dr-fall 4s linear infinite; }
+  .dr-col3 { animation: dr-fall 3s linear infinite; }
+  /* the column is drawn twice, one tile apart, and travels exactly one tile */
+  @keyframes dr-fall { from { transform: translateY(-240px) } to { transform: translateY(0) } }
+  @media (prefers-reduced-motion: reduce) { .dr-col, .dr-col2, .dr-col3 { animation: none } }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<g class="dr-col" aria-hidden="true">
+  <text class="dr-g" x="24" y="0" opacity="0.16">0</text>
+  <text class="dr-g" x="24" y="24" opacity="0.24">B</text>
+  <text class="dr-g" x="24" y="48" opacity="0.32">E</text>
+  <text class="dr-g" x="24" y="72" opacity="0.40">}</text>
+  <text class="dr-g" x="24" y="96" opacity="0.48">#</text>
+  <text class="dr-g" x="24" y="120" opacity="0.56">*</text>
+  <text class="dr-g" x="24" y="144" opacity="0.64">/</text>
+  <text class="dr-g" x="24" y="168" opacity="0.72">1</text>
+  <text class="dr-g" x="24" y="192" opacity="0.80">C</text>
+  <text class="dr-hd" x="24" y="216" filter="url(#dr-glow)">F</text>
+  <text class="dr-g" x="24" y="240" opacity="0.16">0</text>
+  <text class="dr-g" x="24" y="264" opacity="0.24">B</text>
+  <text class="dr-g" x="24" y="288" opacity="0.32">E</text>
+  <text class="dr-g" x="24" y="312" opacity="0.40">}</text>
+  <text class="dr-g" x="24" y="336" opacity="0.48">#</text>
+  <text class="dr-g" x="24" y="360" opacity="0.56">*</text>
+  <text class="dr-g" x="24" y="384" opacity="0.64">/</text>
+  <text class="dr-g" x="24" y="408" opacity="0.72">1</text>
+  <text class="dr-g" x="24" y="432" opacity="0.80">C</text>
+  <text class="dr-hd" x="24" y="456" filter="url(#dr-glow)">F</text>
+</g>
+<g class="dr-col2" aria-hidden="true">
+  <text class="dr-g" x="110" y="0" opacity="0.16">F</text>
+  <text class="dr-g" x="110" y="24" opacity="0.24">[</text>
+  <text class="dr-g" x="110" y="48" opacity="0.32">$</text>
+  <text class="dr-g" x="110" y="72" opacity="0.40">+</text>
+  <text class="dr-g" x="110" y="96" opacity="0.48">|</text>
+  <text class="dr-g" x="110" y="120" opacity="0.56">A</text>
+  <text class="dr-g" x="110" y="144" opacity="0.64">D</text>
+  <text class="dr-g" x="110" y="168" opacity="0.72">{</text>
+  <text class="dr-g" x="110" y="192" opacity="0.80">]</text>
+  <text class="dr-hd" x="110" y="216" filter="url(#dr-glow)">%</text>
+  <text class="dr-g" x="110" y="240" opacity="0.16">F</text>
+  <text class="dr-g" x="110" y="264" opacity="0.24">[</text>
+  <text class="dr-g" x="110" y="288" opacity="0.32">$</text>
+  <text class="dr-g" x="110" y="312" opacity="0.40">+</text>
+  <text class="dr-g" x="110" y="336" opacity="0.48">|</text>
+  <text class="dr-g" x="110" y="360" opacity="0.56">A</text>
+  <text class="dr-g" x="110" y="384" opacity="0.64">D</text>
+  <text class="dr-g" x="110" y="408" opacity="0.72">{</text>
+  <text class="dr-g" x="110" y="432" opacity="0.80">]</text>
+  <text class="dr-hd" x="110" y="456" filter="url(#dr-glow)">%</text>
+</g>
+<g class="dr-col3" aria-hidden="true">
+  <text class="dr-g" x="196" y="0" opacity="0.16">%</text>
+  <text class="dr-g" x="196" y="24" opacity="0.24">=</text>
+  <text class="dr-g" x="196" y="48" opacity="0.32">0</text>
+  <text class="dr-g" x="196" y="72" opacity="0.40">B</text>
+  <text class="dr-g" x="196" y="96" opacity="0.48">E</text>
+  <text class="dr-g" x="196" y="120" opacity="0.56">}</text>
+  <text class="dr-g" x="196" y="144" opacity="0.64">#</text>
+  <text class="dr-g" x="196" y="168" opacity="0.72">*</text>
+  <text class="dr-g" x="196" y="192" opacity="0.80">/</text>
+  <text class="dr-hd" x="196" y="216" filter="url(#dr-glow)">1</text>
+  <text class="dr-g" x="196" y="240" opacity="0.16">%</text>
+  <text class="dr-g" x="196" y="264" opacity="0.24">=</text>
+  <text class="dr-g" x="196" y="288" opacity="0.32">0</text>
+  <text class="dr-g" x="196" y="312" opacity="0.40">B</text>
+  <text class="dr-g" x="196" y="336" opacity="0.48">E</text>
+  <text class="dr-g" x="196" y="360" opacity="0.56">}</text>
+  <text class="dr-g" x="196" y="384" opacity="0.64">#</text>
+  <text class="dr-g" x="196" y="408" opacity="0.72">*</text>
+  <text class="dr-g" x="196" y="432" opacity="0.80">/</text>
+  <text class="dr-hd" x="196" y="456" filter="url(#dr-glow)">1</text>
+</g>
+<g class="dr-col" aria-hidden="true">
+  <text class="dr-g" x="282" y="0" opacity="0.16">1</text>
+  <text class="dr-g" x="282" y="24" opacity="0.24">C</text>
+  <text class="dr-g" x="282" y="48" opacity="0.32">F</text>
+  <text class="dr-g" x="282" y="72" opacity="0.40">[</text>
+  <text class="dr-g" x="282" y="96" opacity="0.48">$</text>
+  <text class="dr-g" x="282" y="120" opacity="0.56">+</text>
+  <text class="dr-g" x="282" y="144" opacity="0.64">|</text>
+  <text class="dr-g" x="282" y="168" opacity="0.72">A</text>
+  <text class="dr-g" x="282" y="192" opacity="0.80">D</text>
+  <text class="dr-hd" x="282" y="216" filter="url(#dr-glow)">{</text>
+  <text class="dr-g" x="282" y="240" opacity="0.16">1</text>
+  <text class="dr-g" x="282" y="264" opacity="0.24">C</text>
+  <text class="dr-g" x="282" y="288" opacity="0.32">F</text>
+  <text class="dr-g" x="282" y="312" opacity="0.40">[</text>
+  <text class="dr-g" x="282" y="336" opacity="0.48">$</text>
+  <text class="dr-g" x="282" y="360" opacity="0.56">+</text>
+  <text class="dr-g" x="282" y="384" opacity="0.64">|</text>
+  <text class="dr-g" x="282" y="408" opacity="0.72">A</text>
+  <text class="dr-g" x="282" y="432" opacity="0.80">D</text>
+  <text class="dr-hd" x="282" y="456" filter="url(#dr-glow)">{</text>
+</g>
+<g class="dr-col2" aria-hidden="true">
+  <text class="dr-g" x="368" y="0" opacity="0.16">{</text>
+  <text class="dr-g" x="368" y="24" opacity="0.24">]</text>
+  <text class="dr-g" x="368" y="48" opacity="0.32">%</text>
+  <text class="dr-g" x="368" y="72" opacity="0.40">=</text>
+  <text class="dr-g" x="368" y="96" opacity="0.48">0</text>
+  <text class="dr-g" x="368" y="120" opacity="0.56">B</text>
+  <text class="dr-g" x="368" y="144" opacity="0.64">E</text>
+  <text class="dr-g" x="368" y="168" opacity="0.72">}</text>
+  <text class="dr-g" x="368" y="192" opacity="0.80">#</text>
+  <text class="dr-hd" x="368" y="216" filter="url(#dr-glow)">*</text>
+  <text class="dr-g" x="368" y="240" opacity="0.16">{</text>
+  <text class="dr-g" x="368" y="264" opacity="0.24">]</text>
+  <text class="dr-g" x="368" y="288" opacity="0.32">%</text>
+  <text class="dr-g" x="368" y="312" opacity="0.40">=</text>
+  <text class="dr-g" x="368" y="336" opacity="0.48">0</text>
+  <text class="dr-g" x="368" y="360" opacity="0.56">B</text>
+  <text class="dr-g" x="368" y="384" opacity="0.64">E</text>
+  <text class="dr-g" x="368" y="408" opacity="0.72">}</text>
+  <text class="dr-g" x="368" y="432" opacity="0.80">#</text>
+  <text class="dr-hd" x="368" y="456" filter="url(#dr-glow)">*</text>
+</g>
+<g class="dr-col3" aria-hidden="true">
+  <text class="dr-g" x="454" y="0" opacity="0.16">*</text>
+  <text class="dr-g" x="454" y="24" opacity="0.24">/</text>
+  <text class="dr-g" x="454" y="48" opacity="0.32">1</text>
+  <text class="dr-g" x="454" y="72" opacity="0.40">C</text>
+  <text class="dr-g" x="454" y="96" opacity="0.48">F</text>
+  <text class="dr-g" x="454" y="120" opacity="0.56">[</text>
+  <text class="dr-g" x="454" y="144" opacity="0.64">$</text>
+  <text class="dr-g" x="454" y="168" opacity="0.72">+</text>
+  <text class="dr-g" x="454" y="192" opacity="0.80">|</text>
+  <text class="dr-hd" x="454" y="216" filter="url(#dr-glow)">A</text>
+  <text class="dr-g" x="454" y="240" opacity="0.16">*</text>
+  <text class="dr-g" x="454" y="264" opacity="0.24">/</text>
+  <text class="dr-g" x="454" y="288" opacity="0.32">1</text>
+  <text class="dr-g" x="454" y="312" opacity="0.40">C</text>
+  <text class="dr-g" x="454" y="336" opacity="0.48">F</text>
+  <text class="dr-g" x="454" y="360" opacity="0.56">[</text>
+  <text class="dr-g" x="454" y="384" opacity="0.64">$</text>
+  <text class="dr-g" x="454" y="408" opacity="0.72">+</text>
+  <text class="dr-g" x="454" y="432" opacity="0.80">|</text>
+  <text class="dr-hd" x="454" y="456" filter="url(#dr-glow)">A</text>
+</g>
+<g class="dr-col" aria-hidden="true">
+  <text class="dr-g" x="540" y="0" opacity="0.16">A</text>
+  <text class="dr-g" x="540" y="24" opacity="0.24">D</text>
+  <text class="dr-g" x="540" y="48" opacity="0.32">{</text>
+  <text class="dr-g" x="540" y="72" opacity="0.40">]</text>
+  <text class="dr-g" x="540" y="96" opacity="0.48">%</text>
+  <text class="dr-g" x="540" y="120" opacity="0.56">=</text>
+  <text class="dr-g" x="540" y="144" opacity="0.64">0</text>
+  <text class="dr-g" x="540" y="168" opacity="0.72">B</text>
+  <text class="dr-g" x="540" y="192" opacity="0.80">E</text>
+  <text class="dr-hd" x="540" y="216" filter="url(#dr-glow)">}</text>
+  <text class="dr-g" x="540" y="240" opacity="0.16">A</text>
+  <text class="dr-g" x="540" y="264" opacity="0.24">D</text>
+  <text class="dr-g" x="540" y="288" opacity="0.32">{</text>
+  <text class="dr-g" x="540" y="312" opacity="0.40">]</text>
+  <text class="dr-g" x="540" y="336" opacity="0.48">%</text>
+  <text class="dr-g" x="540" y="360" opacity="0.56">=</text>
+  <text class="dr-g" x="540" y="384" opacity="0.64">0</text>
+  <text class="dr-g" x="540" y="408" opacity="0.72">B</text>
+  <text class="dr-g" x="540" y="432" opacity="0.80">E</text>
+  <text class="dr-hd" x="540" y="456" filter="url(#dr-glow)">}</text>
+</g>
+<g class="dr-col2" aria-hidden="true">
+  <text class="dr-g" x="626" y="0" opacity="0.16">}</text>
+  <text class="dr-g" x="626" y="24" opacity="0.24">#</text>
+  <text class="dr-g" x="626" y="48" opacity="0.32">*</text>
+  <text class="dr-g" x="626" y="72" opacity="0.40">/</text>
+  <text class="dr-g" x="626" y="96" opacity="0.48">1</text>
+  <text class="dr-g" x="626" y="120" opacity="0.56">C</text>
+  <text class="dr-g" x="626" y="144" opacity="0.64">F</text>
+  <text class="dr-g" x="626" y="168" opacity="0.72">[</text>
+  <text class="dr-g" x="626" y="192" opacity="0.80">$</text>
+  <text class="dr-hd" x="626" y="216" filter="url(#dr-glow)">+</text>
+  <text class="dr-g" x="626" y="240" opacity="0.16">}</text>
+  <text class="dr-g" x="626" y="264" opacity="0.24">#</text>
+  <text class="dr-g" x="626" y="288" opacity="0.32">*</text>
+  <text class="dr-g" x="626" y="312" opacity="0.40">/</text>
+  <text class="dr-g" x="626" y="336" opacity="0.48">1</text>
+  <text class="dr-g" x="626" y="360" opacity="0.56">C</text>
+  <text class="dr-g" x="626" y="384" opacity="0.64">F</text>
+  <text class="dr-g" x="626" y="408" opacity="0.72">[</text>
+  <text class="dr-g" x="626" y="432" opacity="0.80">$</text>
+  <text class="dr-hd" x="626" y="456" filter="url(#dr-glow)">+</text>
+</g>
+<g class="dr-col3" aria-hidden="true">
+  <text class="dr-g" x="712" y="0" opacity="0.16">+</text>
+  <text class="dr-g" x="712" y="24" opacity="0.24">|</text>
+  <text class="dr-g" x="712" y="48" opacity="0.32">A</text>
+  <text class="dr-g" x="712" y="72" opacity="0.40">D</text>
+  <text class="dr-g" x="712" y="96" opacity="0.48">{</text>
+  <text class="dr-g" x="712" y="120" opacity="0.56">]</text>
+  <text class="dr-g" x="712" y="144" opacity="0.64">%</text>
+  <text class="dr-g" x="712" y="168" opacity="0.72">=</text>
+  <text class="dr-g" x="712" y="192" opacity="0.80">0</text>
+  <text class="dr-hd" x="712" y="216" filter="url(#dr-glow)">B</text>
+  <text class="dr-g" x="712" y="240" opacity="0.16">+</text>
+  <text class="dr-g" x="712" y="264" opacity="0.24">|</text>
+  <text class="dr-g" x="712" y="288" opacity="0.32">A</text>
+  <text class="dr-g" x="712" y="312" opacity="0.40">D</text>
+  <text class="dr-g" x="712" y="336" opacity="0.48">{</text>
+  <text class="dr-g" x="712" y="360" opacity="0.56">]</text>
+  <text class="dr-g" x="712" y="384" opacity="0.64">%</text>
+  <text class="dr-g" x="712" y="408" opacity="0.72">=</text>
+  <text class="dr-g" x="712" y="432" opacity="0.80">0</text>
+  <text class="dr-hd" x="712" y="456" filter="url(#dr-glow)">B</text>
+</g>
+<g class="dr-col" aria-hidden="true">
+  <text class="dr-g" x="798" y="0" opacity="0.16">B</text>
+  <text class="dr-g" x="798" y="24" opacity="0.24">E</text>
+  <text class="dr-g" x="798" y="48" opacity="0.32">}</text>
+  <text class="dr-g" x="798" y="72" opacity="0.40">#</text>
+  <text class="dr-g" x="798" y="96" opacity="0.48">*</text>
+  <text class="dr-g" x="798" y="120" opacity="0.56">/</text>
+  <text class="dr-g" x="798" y="144" opacity="0.64">1</text>
+  <text class="dr-g" x="798" y="168" opacity="0.72">C</text>
+  <text class="dr-g" x="798" y="192" opacity="0.80">F</text>
+  <text class="dr-hd" x="798" y="216" filter="url(#dr-glow)">[</text>
+  <text class="dr-g" x="798" y="240" opacity="0.16">B</text>
+  <text class="dr-g" x="798" y="264" opacity="0.24">E</text>
+  <text class="dr-g" x="798" y="288" opacity="0.32">}</text>
+  <text class="dr-g" x="798" y="312" opacity="0.40">#</text>
+  <text class="dr-g" x="798" y="336" opacity="0.48">*</text>
+  <text class="dr-g" x="798" y="360" opacity="0.56">/</text>
+  <text class="dr-g" x="798" y="384" opacity="0.64">1</text>
+  <text class="dr-g" x="798" y="408" opacity="0.72">C</text>
+  <text class="dr-g" x="798" y="432" opacity="0.80">F</text>
+  <text class="dr-hd" x="798" y="456" filter="url(#dr-glow)">[</text>
+</g>
+<g class="dr-col2" aria-hidden="true">
+  <text class="dr-g" x="884" y="0" opacity="0.16">[</text>
+  <text class="dr-g" x="884" y="24" opacity="0.24">$</text>
+  <text class="dr-g" x="884" y="48" opacity="0.32">+</text>
+  <text class="dr-g" x="884" y="72" opacity="0.40">|</text>
+  <text class="dr-g" x="884" y="96" opacity="0.48">A</text>
+  <text class="dr-g" x="884" y="120" opacity="0.56">D</text>
+  <text class="dr-g" x="884" y="144" opacity="0.64">{</text>
+  <text class="dr-g" x="884" y="168" opacity="0.72">]</text>
+  <text class="dr-g" x="884" y="192" opacity="0.80">%</text>
+  <text class="dr-hd" x="884" y="216" filter="url(#dr-glow)">=</text>
+  <text class="dr-g" x="884" y="240" opacity="0.16">[</text>
+  <text class="dr-g" x="884" y="264" opacity="0.24">$</text>
+  <text class="dr-g" x="884" y="288" opacity="0.32">+</text>
+  <text class="dr-g" x="884" y="312" opacity="0.40">|</text>
+  <text class="dr-g" x="884" y="336" opacity="0.48">A</text>
+  <text class="dr-g" x="884" y="360" opacity="0.56">D</text>
+  <text class="dr-g" x="884" y="384" opacity="0.64">{</text>
+  <text class="dr-g" x="884" y="408" opacity="0.72">]</text>
+  <text class="dr-g" x="884" y="432" opacity="0.80">%</text>
+  <text class="dr-hd" x="884" y="456" filter="url(#dr-glow)">=</text>
+</g>
+<g class="dr-col3" aria-hidden="true">
+  <text class="dr-g" x="970" y="0" opacity="0.16">=</text>
+  <text class="dr-g" x="970" y="24" opacity="0.24">0</text>
+  <text class="dr-g" x="970" y="48" opacity="0.32">B</text>
+  <text class="dr-g" x="970" y="72" opacity="0.40">E</text>
+  <text class="dr-g" x="970" y="96" opacity="0.48">}</text>
+  <text class="dr-g" x="970" y="120" opacity="0.56">#</text>
+  <text class="dr-g" x="970" y="144" opacity="0.64">*</text>
+  <text class="dr-g" x="970" y="168" opacity="0.72">/</text>
+  <text class="dr-g" x="970" y="192" opacity="0.80">1</text>
+  <text class="dr-hd" x="970" y="216" filter="url(#dr-glow)">C</text>
+  <text class="dr-g" x="970" y="240" opacity="0.16">=</text>
+  <text class="dr-g" x="970" y="264" opacity="0.24">0</text>
+  <text class="dr-g" x="970" y="288" opacity="0.32">B</text>
+  <text class="dr-g" x="970" y="312" opacity="0.40">E</text>
+  <text class="dr-g" x="970" y="336" opacity="0.48">}</text>
+  <text class="dr-g" x="970" y="360" opacity="0.56">#</text>
+  <text class="dr-g" x="970" y="384" opacity="0.64">*</text>
+  <text class="dr-g" x="970" y="408" opacity="0.72">/</text>
+  <text class="dr-g" x="970" y="432" opacity="0.80">1</text>
+  <text class="dr-hd" x="970" y="456" filter="url(#dr-glow)">C</text>
+</g>
+<g class="dr-col" aria-hidden="true">
+  <text class="dr-g" x="1056" y="0" opacity="0.16">C</text>
+  <text class="dr-g" x="1056" y="24" opacity="0.24">F</text>
+  <text class="dr-g" x="1056" y="48" opacity="0.32">[</text>
+  <text class="dr-g" x="1056" y="72" opacity="0.40">$</text>
+  <text class="dr-g" x="1056" y="96" opacity="0.48">+</text>
+  <text class="dr-g" x="1056" y="120" opacity="0.56">|</text>
+  <text class="dr-g" x="1056" y="144" opacity="0.64">A</text>
+  <text class="dr-g" x="1056" y="168" opacity="0.72">D</text>
+  <text class="dr-g" x="1056" y="192" opacity="0.80">{</text>
+  <text class="dr-hd" x="1056" y="216" filter="url(#dr-glow)">]</text>
+  <text class="dr-g" x="1056" y="240" opacity="0.16">C</text>
+  <text class="dr-g" x="1056" y="264" opacity="0.24">F</text>
+  <text class="dr-g" x="1056" y="288" opacity="0.32">[</text>
+  <text class="dr-g" x="1056" y="312" opacity="0.40">$</text>
+  <text class="dr-g" x="1056" y="336" opacity="0.48">+</text>
+  <text class="dr-g" x="1056" y="360" opacity="0.56">|</text>
+  <text class="dr-g" x="1056" y="384" opacity="0.64">A</text>
+  <text class="dr-g" x="1056" y="408" opacity="0.72">D</text>
+  <text class="dr-g" x="1056" y="432" opacity="0.80">{</text>
+  <text class="dr-hd" x="1056" y="456" filter="url(#dr-glow)">]</text>
+</g>
+<g class="dr-col2" aria-hidden="true">
+  <text class="dr-g" x="1142" y="0" opacity="0.16">]</text>
+  <text class="dr-g" x="1142" y="24" opacity="0.24">%</text>
+  <text class="dr-g" x="1142" y="48" opacity="0.32">=</text>
+  <text class="dr-g" x="1142" y="72" opacity="0.40">0</text>
+  <text class="dr-g" x="1142" y="96" opacity="0.48">B</text>
+  <text class="dr-g" x="1142" y="120" opacity="0.56">E</text>
+  <text class="dr-g" x="1142" y="144" opacity="0.64">}</text>
+  <text class="dr-g" x="1142" y="168" opacity="0.72">#</text>
+  <text class="dr-g" x="1142" y="192" opacity="0.80">*</text>
+  <text class="dr-hd" x="1142" y="216" filter="url(#dr-glow)">/</text>
+  <text class="dr-g" x="1142" y="240" opacity="0.16">]</text>
+  <text class="dr-g" x="1142" y="264" opacity="0.24">%</text>
+  <text class="dr-g" x="1142" y="288" opacity="0.32">=</text>
+  <text class="dr-g" x="1142" y="312" opacity="0.40">0</text>
+  <text class="dr-g" x="1142" y="336" opacity="0.48">B</text>
+  <text class="dr-g" x="1142" y="360" opacity="0.56">E</text>
+  <text class="dr-g" x="1142" y="384" opacity="0.64">}</text>
+  <text class="dr-g" x="1142" y="408" opacity="0.72">#</text>
+  <text class="dr-g" x="1142" y="432" opacity="0.80">*</text>
+  <text class="dr-hd" x="1142" y="456" filter="url(#dr-glow)">/</text>
+</g>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)" opacity=".55"/>
+<text class="dr-h" x="80" y="80" filter="url(#dr-glow)">TRACE ACTIVE</text>
+<text class="dr-f" x="80" y="112">stream decoding — 3 stages</text>
+<rect x="80" y="180" width="300" height="150" fill="var(--panel)" opacity=".92"/>
+<rect x="80" y="180" width="300" height="150" fill="none" stroke="var(--dim)" stroke-width="1.5"/>
+<rect x="80" y="180" width="300" height="3" fill="var(--green)"/>
+<g data-bg="var(--panel)"><text class="dr-f" x="94" y="212">node.1</text></g>
+<rect x="94" y="304" width="272" height="8" fill="var(--dim)"/>
+<rect x="94" y="304" width="90" height="8" fill="var(--green)"/>
+<rect x="450" y="180" width="300" height="150" fill="var(--panel)" opacity=".92"/>
+<rect x="450" y="180" width="300" height="150" fill="none" stroke="var(--dim)" stroke-width="1.5"/>
+<rect x="450" y="180" width="300" height="3" fill="var(--green)"/>
+<g data-bg="var(--panel)"><text class="dr-f" x="464" y="212">node.2</text></g>
+<rect x="464" y="304" width="272" height="8" fill="var(--dim)"/>
+<rect x="464" y="304" width="181" height="8" fill="var(--green)"/>
+<rect x="820" y="180" width="300" height="150" fill="var(--panel)" opacity=".92"/>
+<rect x="820" y="180" width="300" height="150" fill="none" stroke="var(--dim)" stroke-width="1.5"/>
+<rect x="820" y="180" width="300" height="3" fill="var(--green)"/>
+<g data-bg="var(--panel)"><text class="dr-f" x="834" y="212">node.3</text></g>
+<rect x="834" y="304" width="272" height="8" fill="var(--dim)"/>
+<rect x="834" y="304" width="272" height="8" fill="var(--green)"/>
+<g data-bg="var(--panel)">
+  <text class="dr-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="dr-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--panel)">
+  <text class="dr-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="dr-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--panel)">
+  <text class="dr-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="dr-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<rect x="380" y="259" width="70" height="3" fill="var(--green)" filter="url(#dr-glow)"/>
+<rect x="750" y="259" width="70" height="3" fill="var(--green)" filter="url(#dr-glow)"/>
+<text class="dr-f" x="80" y="420">decode &gt; verify &gt; persist</text>
+</svg>
