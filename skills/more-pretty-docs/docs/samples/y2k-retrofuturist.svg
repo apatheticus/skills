@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="12" data-bg="var(--ground)" data-specimen="true">
+<title>Y2K retrofuturist — Source, Transform, Store</title>
+<desc>Chrome pills with a hard light band and a dark break at the base, iridescent edges and a perspective floor. Type sits on solid inner pills, never on the chrome ramp.</desc>
+<defs>
+  <linearGradient id="y2-chrome" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="var(--chromelt)"/>
+    <stop offset="0.34" stop-color="var(--chromemid)"/>
+    <stop offset="0.40" stop-color="var(--chromehi)"/>
+    <stop offset="0.62" stop-color="var(--chromelo)"/>
+    <stop offset="1" stop-color="var(--chromedk)"/>
+  </linearGradient>
+  <linearGradient id="y2-irid" x1="0" y1="0" x2="1" y2="0">
+    <stop offset="0" stop-color="var(--cy)"/>
+    <stop offset="0.5" stop-color="var(--violet)"/>
+    <stop offset="1" stop-color="var(--hot)"/>
+  </linearGradient>
+  <linearGradient id="y2-scan" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0" stop-color="var(--cy)" stop-opacity="0"/>
+    <stop offset="0.5" stop-color="var(--cy)" stop-opacity=".2"/>
+    <stop offset="1" stop-color="var(--cy)" stop-opacity="0"/>
+  </linearGradient>
+</defs>
+<style>
+svg { --ground:#070B18; --ink:#EAF2FF; --muted:#B9C7E8; --chromelt:#DFE9F5; --chromemid:#8FA6C4; --chromehi:#FFFFFF; --chromelo:#5B7196; --chromedk:#2B3A52; --hot:#FF3FB4; --cy:#4BF0FF; --violet:#7B2FFF; --pill:#141B33; --grid:#243156; }
+  .y2-h { font: 700 44px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); letter-spacing: 4px; }
+  .y2-t { font: 700 25px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); letter-spacing: 3px; }
+  .y2-s { font: 400 19px ui-monospace, Menlo, monospace; fill: var(--muted); }
+  .y2-f { font: 400 18px ui-monospace, Menlo, monospace; fill: var(--muted); letter-spacing: 2px; }
+  .y2-e { fill: none; stroke: url(#y2-irid); stroke-width: 2; }
+  .y2-g { stroke: var(--grid); stroke-width: 1; }
+  /* one pass per 12s: 0.083 Hz, far below the 3 Hz ceiling */
+  .y2-band { animation: y2-band 12s linear infinite; }
+  @keyframes y2-band { from { transform: translateY(-140px) } to { transform: translateY(500px) } }
+  .y2-glint { animation: y2-glint 6s ease-in-out infinite; }
+  @keyframes y2-glint { 0% { transform: translateX(-120px) } 100% { transform: translateX(420px) } }
+  @media (prefers-reduced-motion: reduce) { .y2-band, .y2-glint { animation: none; opacity: 0 } }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<line class="y2-g" x1="6" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="72" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="138" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="204" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="270" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="336" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="402" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="468" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="534" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="600" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="666" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="732" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="798" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="864" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="930" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="996" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1062" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1128" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1194" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1260" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1326" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1392" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1458" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1524" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1590" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1656" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1722" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1788" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1854" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1920" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="1986" y1="460" x2="600" y2="196" opacity=".5"/>
+<line class="y2-g" x1="0" y1="196" x2="1200" y2="196" opacity=".4"/>
+<line class="y2-g" x1="0" y1="210" x2="1200" y2="210" opacity=".4"/>
+<line class="y2-g" x1="0" y1="236" x2="1200" y2="236" opacity=".4"/>
+<line class="y2-g" x1="0" y1="274" x2="1200" y2="274" opacity=".4"/>
+<line class="y2-g" x1="0" y1="324" x2="1200" y2="324" opacity=".4"/>
+<line class="y2-g" x1="0" y1="386" x2="1200" y2="386" opacity=".4"/>
+<line class="y2-g" x1="0" y1="460" x2="1200" y2="460" opacity=".4"/>
+<text class="y2-h" x="80" y="86">DATAFLOW 2000</text>
+<text class="y2-f" x="80" y="118">CHROME / PLASTIC / OPTIMISM</text>
+<clipPath id="y2-clip"><rect x="80" y="140" width="420" height="34" rx="17"/></clipPath>
+<rect x="80" y="140" width="420" height="34" rx="17" fill="url(#y2-chrome)"/>
+<rect class="y2-e" x="80" y="140" width="420" height="34" rx="17"/>
+<g clip-path="url(#y2-clip)"><rect class="y2-glint" x="0" y="140" width="56" height="34" fill="var(--chromehi)" opacity=".55" transform="skewX(-18)"/></g>
+<rect x="80" y="180" width="300" height="150" rx="75" fill="url(#y2-chrome)"/>
+<rect x="94" y="194" width="272" height="122" rx="61" fill="var(--pill)" opacity=".94"/>
+<rect class="y2-e" x="94" y="194" width="272" height="122" rx="61"/>
+<ellipse cx="230" cy="210" rx="110" ry="9" fill="var(--chromehi)" opacity=".3"/>
+<g data-bg="var(--pill)"><text class="y2-f" x="230" y="300" text-anchor="middle">01</text></g>
+<rect x="450" y="180" width="300" height="150" rx="75" fill="url(#y2-chrome)"/>
+<rect x="464" y="194" width="272" height="122" rx="61" fill="var(--pill)" opacity=".94"/>
+<rect class="y2-e" x="464" y="194" width="272" height="122" rx="61"/>
+<ellipse cx="600" cy="210" rx="110" ry="9" fill="var(--chromehi)" opacity=".3"/>
+<g data-bg="var(--pill)"><text class="y2-f" x="600" y="300" text-anchor="middle">02</text></g>
+<rect x="820" y="180" width="300" height="150" rx="75" fill="url(#y2-chrome)"/>
+<rect x="834" y="194" width="272" height="122" rx="61" fill="var(--pill)" opacity=".94"/>
+<rect class="y2-e" x="834" y="194" width="272" height="122" rx="61"/>
+<ellipse cx="970" cy="210" rx="110" ry="9" fill="var(--chromehi)" opacity=".3"/>
+<g data-bg="var(--pill)"><text class="y2-f" x="970" y="300" text-anchor="middle">03</text></g>
+<g data-bg="var(--pill)">
+  <text class="y2-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="y2-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--pill)">
+  <text class="y2-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="y2-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--pill)">
+  <text class="y2-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="y2-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<rect x="380" y="254" width="70" height="16" rx="8" fill="url(#y2-chrome)"/>
+<rect class="y2-e" x="380" y="254" width="70" height="16" rx="8"/>
+<rect x="750" y="254" width="70" height="16" rx="8" fill="url(#y2-chrome)"/>
+<rect class="y2-e" x="750" y="254" width="70" height="16" rx="8"/>
+<rect x="80" y="392" width="420" height="34" rx="17" fill="var(--pill)"/>
+<rect class="y2-e" x="80" y="392" width="420" height="34" rx="17"/>
+<g data-bg="var(--pill)"><text class="y2-f" x="110" y="415">STATUS / ONLINE</text></g>
+<circle cx="560" cy="409" r="11" fill="var(--hot)" opacity="0.35"/>
+<circle cx="600" cy="409" r="11" fill="var(--hot)" opacity="0.50"/>
+<circle cx="640" cy="409" r="11" fill="var(--hot)" opacity="0.65"/>
+<circle cx="680" cy="409" r="11" fill="var(--hot)" opacity="0.80"/>
+<circle cx="720" cy="409" r="11" fill="var(--hot)" opacity="0.95"/>
+<rect class="y2-band" x="0" y="0" width="1200" height="140" fill="url(#y2-scan)"/>
+</svg>

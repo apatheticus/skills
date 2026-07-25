@@ -38,17 +38,17 @@ svg { --ground:#FCFAF0; --ruled:#AFC4DC; --margin:#D98C9A; --ink:#3A3A40; --mute
 <line class="pl-r" x1="0" y1="366" x2="1200" y2="366"/>
 <line class="pl-r" x1="0" y1="400" x2="1200" y2="400"/>
 <line class="pl-r" x1="0" y1="434" x2="1200" y2="434"/>
-<line class="pl-m" x1="96" y1="0" x2="96" y2="460"/>
-<line class="pl-m" x1="102" y1="0" x2="102" y2="460"/>
-<text class="pl-h" x="120" y="88">how it flows</text>
-<text class="pl-f" data-role="metadata" x="120" y="120">scribbled in the margin</text>
-<rect x="120" y="180" width="260" height="150" rx="4" fill="var(--panel)" filter="url(#pl-a)"/>
-<rect class="pl-b" x="120" y="180" width="260" height="150" rx="4" filter="url(#pl-a)"/>
-<line class="pl-b" x1="132" y1="222" x2="368" y2="222" filter="url(#pl-a)"/>
-<text class="pl-f" data-role="metadata" x="132" y="210">1)</text>
-<line class="pl-b" x1="136" y1="296" x2="346" y2="296" opacity=".45" filter="url(#pl-a)"/>
-<line class="pl-b" x1="136" y1="307" x2="316" y2="307" opacity=".45" filter="url(#pl-a)"/>
-<line class="pl-b" x1="136" y1="318" x2="286" y2="318" opacity=".45" filter="url(#pl-a)"/>
+<line class="pl-m" x1="52" y1="0" x2="52" y2="460"/>
+<line class="pl-m" x1="58" y1="0" x2="58" y2="460"/>
+<text class="pl-h" x="80" y="88">how it flows</text>
+<text class="pl-f" data-role="metadata" x="80" y="120">scribbled in the margin</text>
+<rect x="80" y="180" width="300" height="150" rx="4" fill="var(--panel)" filter="url(#pl-a)"/>
+<rect class="pl-b" x="80" y="180" width="300" height="150" rx="4" filter="url(#pl-a)"/>
+<line class="pl-b" x1="92" y1="222" x2="368" y2="222" filter="url(#pl-a)"/>
+<text class="pl-f" data-role="metadata" x="92" y="210">1)</text>
+<line class="pl-b" x1="96" y1="296" x2="306" y2="296" opacity=".45" filter="url(#pl-a)"/>
+<line class="pl-b" x1="96" y1="307" x2="276" y2="307" opacity=".45" filter="url(#pl-a)"/>
+<line class="pl-b" x1="96" y1="318" x2="246" y2="318" opacity=".45" filter="url(#pl-a)"/>
 <rect x="450" y="180" width="300" height="150" rx="4" fill="var(--panel)" filter="url(#pl-a)"/>
 <rect class="pl-b" x="450" y="180" width="300" height="150" rx="4" filter="url(#pl-a)"/>
 <line class="pl-b" x1="462" y1="222" x2="738" y2="222" filter="url(#pl-a)"/>
@@ -80,6 +80,6 @@ svg { --ground:#FCFAF0; --ruled:#AFC4DC; --margin:#D98C9A; --ink:#3A3A40; --mute
 <line class="pl-b" x1="750" y1="261" x2="820" y2="261" filter="url(#pl-a)"/>
 <path class="pl-b" d="M809 256 L820 261 L809 266" filter="url(#pl-a)"/>
 <circle class="pl-p" cx="386" cy="261" r="6"/>
-<text class="pl-f" data-role="metadata" x="120" y="418">— check this against the schema</text>
+<text class="pl-f" data-role="metadata" x="80" y="418">— check this against the schema</text>
 <rect x="0" y="0" width="1200" height="460" filter="url(#pl-g)" style="mix-blend-mode:multiply"/>
 </svg>
