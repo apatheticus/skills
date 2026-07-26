@@ -2,7 +2,9 @@
 
 **Primary axis:** material (the medium) · **Aliases:** `cyanotype`, `drafting`
 
+<div align="center">
 <img src="../../docs/samples/blueprint.svg" alt="The blueprint specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

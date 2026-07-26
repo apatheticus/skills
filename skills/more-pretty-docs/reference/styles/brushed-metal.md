@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `brushed-steel`, `machined-panel`, `nameplate`
 
+<div align="center">
 <img src="../../docs/samples/brushed-metal.svg" alt="The brushed-metal specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

@@ -2,7 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `swiss`, `international`, `grid`
 
+<div align="center">
 <img src="../../docs/samples/swiss-minimal.svg" alt="The swiss-minimal specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

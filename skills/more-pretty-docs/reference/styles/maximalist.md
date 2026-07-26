@@ -2,7 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `max`, `dense`, `more`
 
+<div align="center">
 <img src="../../docs/samples/maximalist.svg" alt="The maximalist specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

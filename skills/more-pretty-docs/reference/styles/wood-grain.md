@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `wood`, `timber`, `pyrography`
 
+<div align="center">
 <img src="../../docs/samples/wood-grain.svg" alt="The wood-grain specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `watercolour`, `wash`, `aquarelle`
 
+<div align="center">
 <img src="../../docs/samples/watercolor.svg" alt="The watercolor specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

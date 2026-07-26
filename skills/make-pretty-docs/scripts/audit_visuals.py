@@ -2,8 +2,8 @@
 """Mechanical half of the make-pretty-docs visual audit.
 
 Scans markdown docs for mpd:viz marker pairs and reports one verdict per
-visual: OK / MISSING / STALE / DRIFT / BUDGET, plus doc-level findings
-(unbalanced markers, budget overruns, any marker in LICENSE/NOTICE).
+visual: OK / MISSING / UNCENTERED / STALE / DRIFT / BUDGET, plus doc-level
+findings (unbalanced markers, budget overruns, any marker in LICENSE/NOTICE).
 
 The CONTRADICTS verdict needs the evidence pass and is judged by Claude;
 this script surfaces each visual's stored facts list for that judgment.
@@ -30,6 +30,19 @@ MARKER_OPEN = re.compile(
 MARKER_CLOSE = re.compile(r"<!--\s*mpd:viz\s+end\s*-->")
 # Matches markdown images and HTML <img> embeds (the README spec uses <img> for width control)
 IMAGE = re.compile(r"!\[[^\]]*\]\(([^)\s]+)\)|<img\s[^>]*?src=\"([^\"]+)\"")
+# An embed is centered by a block wrapper carrying align="center" — GitHub's sanitizer
+# strips style=, so that attribute is the only mechanism. align on the <img> itself is
+# inline vertical alignment and does not center, so it deliberately does not match here.
+# DOTALL because alt text routinely wraps across lines, and the <img> arm skips over
+# quoted attribute values rather than stopping at the first ">" — alt text says things
+# like "client -> server", and a naive [^>]* would read that as the end of the tag.
+CENTERED = re.compile(
+    r'<(?P<tag>div|p)\s+align=["\']center["\']\s*>\s*'
+    r'(?:!\[[^\]]*\]\([^)\s]+\)'
+    r'|<img\b(?:[^>"\']|"[^"]*"|\'[^\']*\')*/?>)\s*'
+    r'</(?P=tag)\s*>',
+    re.IGNORECASE | re.DOTALL,
+)
 
 # Per-doc visual budgets: max marker pairs. None = unlimited (not used today).
 BUDGETS = {
@@ -82,6 +95,9 @@ def audit_doc(doc: Path, root: Path, design_hash: str | None, rows: list, proble
             verdicts.append("MISSING (no image in block)")
         elif not asset.exists():
             verdicts.append(f"MISSING ({img_path})")
+
+        if img and not CENTERED.search(block):
+            verdicts.append("UNCENTERED (image not wrapped in a centering element)")
 
         src_dir = root / src
         meta_path = src_dir / "mpd.json"

@@ -2,7 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `wireframe`, `greybox`, `lo-fi`
 
+<div align="center">
 <img src="../../docs/samples/lofi-wireframe.svg" alt="The lofi-wireframe specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

@@ -2,7 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `magazine`, `print`, `typographic`
 
+<div align="center">
 <img src="../../docs/samples/editorial.svg" alt="The editorial specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

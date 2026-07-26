@@ -104,8 +104,10 @@ exists and what doesn't — e.g. no CI, no test runner.>
 ## Runtime view
 
 <!-- mpd:viz name="runtime-view" src="docs/assets/src/runtime-view/" facts-hash="…" src-hash="…" -->
+<div align="center">
 <img src="docs/assets/runtime-view.svg" alt="<Runtime boundaries and data flow: client,
 server, storage tiers and the requests between them.>" width="820" />
+</div>
 <!-- mpd:viz end -->
 
 <details>
@@ -144,8 +146,10 @@ flowchart TB
 ## Request lifecycle
 
 <!-- mpd:viz name="request-lifecycle" src="docs/assets/src/request-lifecycle/" facts-hash="…" src-hash="…" -->
+<div align="center">
 <img src="docs/assets/request-lifecycle.svg" alt="<One request's path: client to handler
 to datastore and back, in order.>" width="820" />
+</div>
 <!-- mpd:viz end -->
 
 <details>

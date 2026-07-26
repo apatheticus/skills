@@ -12,7 +12,9 @@
 <!-- mpd:badges end -->
 
 <!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="b26beb7f8d33557cc8587b7fd9b8e115ff8d8b75f0d876065917fd9d5328996b" src-hash="c8211a124b09c94319705a147a645ed0a049d9566ea33426054e90e8ad3e379b" -->
+<div align="center">
 <img src="docs/assets/hero.svg" alt="An animated printed plate. A rust proof rule draws itself across the head of the page above the kicker, step one, choose the register; the folio reads plate one. Under the headline and a hairline, the standfirst says the skill rewrites prose so it reads as written by a person, that the register is chosen first and only then do its patterns apply, and that Professional is the default when the genre is unclear. Below, four columns divided by vertical hairlines name the registers with their genres — Editorial for essays, posts and marketing copy; Professional for memos, policies, reports and proposals; Technical for specs, runbooks, API docs and RFCs; Regulated for filings, compliance, clinical and safety material. A filled mark under Editorial reads voice on, and it is the only one: the other three read voice off, because neutral and plain is the human voice there. Professional alone is opened by the rust rule and marked default, since injecting voice into a document that did not want it is the most damaging thing this skill can do." width="820" />
+</div>
 <!-- mpd:viz end -->
 
 </div>
@@ -57,7 +59,9 @@ live in [`reference/registers.md`](reference/registers.md).
 ## How the pattern catalog is gated
 
 <!-- mpd:viz name="pattern-gates" src="docs/assets/src/pattern-gates/" facts-hash="09360c647dc68f049f27d3653c3c57620b64fbc139b2860d2c3740c8640e5aeb" src-hash="83a584f079dfef7eba91c7795e30db8d2d7a63b5c2107117449a7cbe974a2822" -->
+<div align="center">
 <img src="docs/assets/pattern-gates.svg" alt="An animated printed plate setting the register gate table. A rust proof rule draws itself across the head above the kicker, step three, pattern gates; the folio reads plate two. The standfirst says that of the 36 catalogued patterns, 21 apply in every register, and that these fifteen do not — applying them blind is how this skill breaks documents. Below, sixteen rows are set in two stacks divided by a vertical hairline, each row a pattern and each of four columns a register: editorial, professional, technical, regulated. The em dash budget, signposting and diff-anchored writing are on almost everywhere; inline-header lists, title-case headings, hyphenated pairs, aphorism formulas, rhetorical openers and colon reveals switch off in technical and regulated; manufactured punchlines, faux-insight setups, rhetorical setups and voice injection are editorial-only. Emojis are limited in editorial and on elsewhere; excessive hedging is limited in technical and regulated, because calibrated uncertainty there is content rather than hedging. Three ringed rust marks carry the elevated state: diff-anchored writing in technical, and elegant variation in technical and regulated, where the fix direction inverts because a component must get the same name every time. A key sets the four states, and a closing line notes that a pattern with no tag for the selected register is off." width="820" />
+</div>
 <!-- mpd:viz end -->
 
 Three gates are worth knowing before you trust the output, because getting them

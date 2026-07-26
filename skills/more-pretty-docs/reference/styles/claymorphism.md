@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `clay`, `3d-soft`
 
+<div align="center">
 <img src="../../docs/samples/claymorphism.svg" alt="The claymorphism specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

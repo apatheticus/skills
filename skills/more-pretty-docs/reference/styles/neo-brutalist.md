@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `brutalist`, `neubrutalism`
 
+<div align="center">
 <img src="../../docs/samples/neo-brutalist.svg" alt="The neo-brutalist specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

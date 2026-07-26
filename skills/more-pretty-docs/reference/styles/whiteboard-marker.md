@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `whiteboard`, `napkin`, `dry-erase`
 
+<div align="center">
 <img src="../../docs/samples/whiteboard-marker.svg" alt="The whiteboard-marker specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

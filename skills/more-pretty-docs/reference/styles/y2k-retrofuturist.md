@@ -2,7 +2,9 @@
 
 **Primary axis:** era · **Aliases:** `y2k`, `retrofuture`, `chrome`
 
+<div align="center">
 <img src="../../docs/samples/y2k-retrofuturist.svg" alt="The y2k-retrofuturist specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

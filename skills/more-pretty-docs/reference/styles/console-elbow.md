@@ -2,7 +2,9 @@
 
 **Primary axis:** era · **Aliases:** `lcars`, `okudagram`, `retro-console`
 
+<div align="center">
 <img src="../../docs/samples/console-elbow.svg" alt="The console-elbow specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

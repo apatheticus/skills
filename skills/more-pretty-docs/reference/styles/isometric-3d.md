@@ -2,7 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `isometric`, `iso`, `axonometric`
 
+<div align="center">
 <img src="../../docs/samples/isometric-3d.svg" alt="The isometric-3d specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

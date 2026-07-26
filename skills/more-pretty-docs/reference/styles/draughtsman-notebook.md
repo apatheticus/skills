@@ -2,7 +2,9 @@
 
 **Primary axis:** era · **Aliases:** `engineers-notebook`, `graphite-draft`
 
+<div align="center">
 <img src="../../docs/samples/draughtsman-notebook.svg" alt="The draughtsman-notebook specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent
