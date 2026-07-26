@@ -7,7 +7,7 @@ One frozen system; all repo visuals derive from it. Facts come from the repo
 
 Audience:     writers and engineers shipping prose that a reader did not ask for
 Value:        rewrites text so it reads as human-authored, in the register the document actually calls for
-Proof:        33 catalogued patterns, of which 22 apply everywhere and 11 change or switch off by register
+Proof:        36 catalogued patterns, of which 21 apply everywhere and 15 change or switch off by register
 First action: hand it a draft and let it name the register before it edits a word
 Theme:        a proof pass on a page — the register is chosen in the margin before a single mark is made
 
@@ -124,4 +124,4 @@ in an 820 px embed).
 | Asset | Doc | Depicts | Tier | Source facts |
 | --- | --- | --- | --- | --- |
 | hero | README.md | the register is selected before any pattern is read, and Professional is the default when the genre is unclear | animated-hero | SKILL.md → Step 1; reference/registers.md |
-| pattern-gates | README.md | the 33-pattern catalog splits into 22 that apply in every register and 11 that change or switch off | animated-flagship | SKILL.md → Step 3; reference/patterns.md |
+| pattern-gates | README.md | the 36-pattern catalog splits into 21 that apply in every register and 15 that change or switch off | animated-flagship | SKILL.md → Step 3; reference/patterns.md |

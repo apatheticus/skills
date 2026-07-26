@@ -2,7 +2,7 @@
 name: human-voice
 description: Remove signs of AI-generated writing and rewrite prose so it reads as human-authored, adapting to the document's register (editorial, professional, technical, regulated). Use whenever the user wants to humanize, de-AI, or de-slop text; make writing sound natural, human, or less like ChatGPT; strip AI tells, em dashes, or AI words; pass or avoid AI detection (GPTZero, Originality.ai, Turnitin, Copyleaks); or asks "does this sound AI-generated?" Also use when editing, polishing, or reviewing drafted prose for voice, tone, and readability, including blog posts, articles, thought leadership, marketing copy, memos, policies, reports, specs, technical docs, and proposals. For anything a U.S. federal agency, evaluator, or auditor will read, invoke the federal-technical-writing skill first for compliance, then apply this skill's regulated register inside those constraints.
 license: MIT
-version: 1.0.0
+version: 1.1.0
 allowed-tools: Read, Write, Edit, Grep, Glob, AskUserQuestion
 ---
 
@@ -48,43 +48,91 @@ skill can produce, and it is not visible to the person who asked for it.
 Full profiles, including opening and closing rules and each register's
 characteristic failure mode: `reference/registers.md`.
 
-## Step 2 — Calibrate to a sample (optional, Editorial and Professional)
+**Two more questions, when the draft does not already answer them.** Register is a
+coarse instrument. A blog post written for engineers and one written for a buyer
+are both Editorial, and every opening and closing rule differs between them.
 
-If the user supplies their own prior writing, read it before rewriting anything
-and note: sentence length distribution, vocabulary level, how paragraphs open,
-punctuation habits, recurring tics, how transitions are handled.
+- **Who is this for, and where will it be published?** Sets the specificity
+  currency and the opening.
+- **What should the reader think, feel, or do after reading it?** Sets the closing,
+  which no register can check without it.
+
+Ask only what the draft leaves open, in the same `AskUserQuestion` call as the
+register question. A draft with a named audience and an obvious ask needs neither.
+
+## Step 1b — Detect, or edit?
+
+Two jobs. Decide which one was asked for before rewriting a word.
+
+**Detect.** The user asks whether something reads as AI-generated, or asks for an
+audit, a scan, or a flag pass. Report; do not rewrite:
+
+- Each pattern found, by number and name, with the line quoted.
+- The fix, in a few words.
+- Nothing else. Do not rewrite the draft, do not score it, and do not claim to
+  know whether a model wrote it. Detectors guess. A named pattern with a quoted
+  line is evidence the user can check.
+
+Offer the rewrite at the end, then stop. Steps 2 through 5 run only if the user
+takes the offer.
+
+**Edit (default).** Everything else, including "clean this up" and "make this
+sound human". Continue to Step 2.
+
+The fork sits after register selection, not before it. Which patterns are even
+reportable depends on the register, and flagging a runbook's inline-header lists
+or a filing's mandated signposting is a false positive, not a finding.
+
+## Step 2 — Calibrate to the writer (Editorial and Professional)
+
+**Always, sample or no sample.** Before changing anything, read the draft in hand
+and name three to five voice signals to preserve: vocabulary, sentence-length
+habit, bluntness, humor, admitted uncertainty, digressions, level of polish. Keep
+the note internal. Every signal you do not name is one the rewrite will quietly
+replace with a generic substitute.
+
+**If the user supplies their own prior writing,** read that too and note the same
+things, plus how paragraphs open, punctuation habits, recurring tics, and how
+transitions are handled. A sample is the stronger evidence. The draft is the
+evidence you always have.
 
 Then match those patterns rather than substituting generic "human" ones. If they
 write short, do not hand back long. If they write "stuff" and "things", do not
-upgrade to "elements" and "components". Absent a sample, use the register
-defaults.
+upgrade to "elements" and "components". Fall back to the register defaults only
+for what neither the draft nor a sample settles, and never manufacture texture: an
+aside you invented is as machine-made as the sentence it replaced.
 
 Skip this step for Technical and Regulated — those registers are set by house
 style and authority, not by an individual voice.
 
 ## Step 3 — Apply the patterns
 
-The full catalog of 33 patterns, each with a before/after and its register tags,
+The full catalog of 36 patterns, each with a before/after and its register tags,
 lives in `reference/patterns.md`. Read it on every run. Vocabulary lists live
 separately in `reference/vocabulary.md` because they are register-scoped.
 
-**Always on, every register.** These 22 never conflict with any house style, and
+**Always on, every register.** These 21 never conflict with any house style, and
 several of them actively reinforce plain-language requirements:
 
 > §1 significance inflation · §2 notability padding · §3 superficial -ing
-> analyses · §4 promotional language · §5 vague attribution · §6 formulaic
-> "Challenges" sections · §7 AI vocabulary · §8 copula avoidance · §9 negative
-> parallelism · §10 rule of three · §11 elegant variation · §12 false ranges ·
-> §13 passive voice · §15 boldface overuse · §19 curly quotes · §20 chatbot
-> artifacts · §21 speculative gap-filling · §22 sycophancy · §23 filler phrases ·
-> §25 generic positive conclusions · §27 authority tropes · §29 fragmented headers
+> analyses · §4 promotional language · §5 vague attribution *(elevate in P and R)*
+> · §6 formulaic "Challenges" sections · §7 AI vocabulary · §8 copula avoidance ·
+> §9 negative parallelism · §10 rule of three · §12 false ranges · §13 passive
+> voice *(hard rule in R)* · §15 boldface overuse · §19 curly quotes · §20 chatbot
+> artifacts · §21 speculative gap-filling *(blocker in P and R)* · §22 sycophancy ·
+> §23 filler phrases · §25 generic positive conclusions · §27 authority tropes
+> *(rare outside E)* · §29 fragmented headers
+
+Always on means the pattern never switches off. Four of them change *severity* by
+register, marked above; §21 changes enough to get its own note below.
 
 **Register-gated.** These change or switch off. Applying them blind is how this
 skill breaks documents:
 
 | Pattern | E | P | T | R | Why it varies |
 | --- | :-: | :-: | :-: | :-: | --- |
-| §14 em dash ban | ● | ● | ● | ○ | House style governs in Regulated (GPO, agency guides) |
+| §11 elegant variation | ● | ● | ◑ | ◑ | **Inverts** in Technical and Regulated — one name per thing; cutting repetition is a correctness bug |
+| §14 em dash budget | ● | ● | ● | ○ | House style governs in Regulated (GPO, agency guides) |
 | §16 inline-header lists | ● | ● | ○ | ○ | Runbooks and compliance docs are legitimately list-shaped |
 | §17 title-case headings | ● | ● | ○ | ○ | Project or agency style guide wins |
 | §18 emojis | ◐ | ● | ● | ● | Sparingly allowed in Editorial, banned elsewhere |
@@ -94,13 +142,22 @@ skill breaks documents:
 | §30 diff-anchored writing | ● | ● | ◑ | ● | **Elevate** in Technical — the most common failure there |
 | §31 manufactured punchlines | ● | ○ | ○ | ○ | An editorial tell; absent elsewhere |
 | §32 aphorism formulas | ● | ● | ○ | ○ | Rare in Technical and Regulated |
-| §33 rhetorical openers | ● | ○ | ○ | ○ | An editorial tell; absent elsewhere |
+| §33 rhetorical openers | ● | ● | ○ | ○ | "Let me be clear" and "I'll be honest" are memo staples, not just essay hooks |
+| §34 colon reveals | ● | ● | ○ | ○ | The labelled colon is the house pattern in T and R; the dramatic one is rare |
+| §35 faux-insight setups | ● | ○ | ○ | ○ | An editorial tell; absent elsewhere |
+| §36 rhetorical setups | ● | ○ | ○ | ○ | An editorial tell; absent elsewhere |
 | PERSONALITY (voice injection) | ● | ○ | ○ | ○ | Neutral and plain **is** the human voice for P, T, R |
 
-● on · ◐ limited · ◑ elevated · ○ off
+● on · ◐ limited · ◑ elevated or inverted · ○ off
 
-Two gates deserve spelling out, because getting them backwards is the most
+Three gates deserve spelling out, because getting them backwards is the most
 expensive mistake available here:
+
+**§11 in Technical and Regulated — the fix direction reverses.** Everywhere else,
+cycling synonyms is a repetition-penalty artifact to remove. In a spec or a
+filing, a component gets the same name every time, without exception, and
+"varying" a term is a correctness bug rather than a style choice. Do not cut
+repetition of a technical term to make prose read better.
 
 **§24 in Technical and Regulated.** "This may fail under load" is hedging.
 "Throughput degrades above roughly 4k concurrent connections; we have not tested
@@ -162,7 +219,10 @@ because burstiness and plain-language brevity genuinely want opposite things.
 3. **Opener diversity.** Read the first word of every sentence. If any word opens
    more than twice in a section, rewrite one.
 4. **Structure.** Does it preview itself? Does the conclusion restate the
-   introduction? Both are AI tells in every register. Restructure.
+   introduction? Both are AI tells in every register. Restructure. Then read the
+   last line on its own: if it exists to sound deep, delete it and end on the
+   clearest concrete sentence already in the draft (§31), or add a plain takeaway
+   or next action. Do not rewrite it into a better version of itself.
 5. **Specificity.** Find every general claim with no supporting detail. Add the
    detail in the register's currency, or cut the claim.
 6. **Stance.** Does the piece commit to anything? Editorial takes a position,
@@ -178,7 +238,8 @@ because burstiness and plain-language brevity genuinely want opposite things.
 
 ## Step 5 — Deliver
 
-Produce, in this order:
+For a detect request, Step 1b's findings report *is* the delivery. Stop there and
+offer the rewrite. For an edit, produce, in this order:
 
 1. The **register** chosen, in one line, with the reason. If federal routing
    applied, say whether `federal-technical-writing` ran.
@@ -217,7 +278,7 @@ underperforms.
 
 - `reference/registers.md` — the four register profiles in full, plus the
   plain-language floor for Regulated when no compliance skill is installed
-- `reference/patterns.md` — all 33 patterns with before/after and register tags,
+- `reference/patterns.md` — all 36 patterns with before/after and register tags,
   plus the false-positive and signs-of-human-writing lists
 - `reference/vocabulary.md` — global and register-scoped word and phrase lists,
   with the technical-term carve-outs
@@ -229,5 +290,7 @@ underperforms.
 The pattern catalog derives from the MIT-licensed
 [`humanizer`](https://github.com/blader/humanizer) skill (© 2025 Siqi Chen) and,
 through it, from [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing)
-(CC BY-SA 4.0), maintained by WikiProject AI Cleanup. Full provenance and license
-terms: `reference/attribution.md`.
+(CC BY-SA 4.0), maintained by WikiProject AI Cleanup. Patterns §34–§36, the kicker
+repair procedure, and the em dash budget derive from the MIT-licensed
+[`no-ai-slop`](https://github.com/petergyang/no-ai-slop) skill (© 2026 Peter Yang).
+Full provenance and license terms: `reference/attribution.md`.

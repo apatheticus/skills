@@ -20,10 +20,43 @@ Changed: every pattern carries register tags and several are now conditional or
 off by register; the vocabulary list is split into tiers with technical
 carve-outs; the personality section became one register profile rather than a
 global mode with an inline exception; a federal routing rule was added; the
-em dash ban became register-scoped rather than absolute.
+em dash ban became register-scoped, then became a budget rather than a ban
+(see below).
 
 MIT permits this reuse with attribution. The license text is reproduced in the
 upstream repository.
+
+## Patterns §34–§36, and four rule changes
+
+Derived from the **`no-ai-slop`** skill.
+
+- Repository: <https://github.com/petergyang/no-ai-slop>
+- Author: Peter Yang (<https://github.com/petergyang>)
+- License: MIT, © 2026 Peter Yang
+- Commit this skill derived from: **`61c21c3`**
+
+Taken from there, then register-gated and re-exampled here:
+
+- **§34 colon reveals**, **§35 faux-insight setups**, and **§36 rhetorical setups**
+  — three patterns with no equivalent in the `humanizer` taxonomy. The names and
+  the watch phrases come from `no-ai-slop`; the before/after pairs, the
+  label-versus-reveal test in §34, and the register tags are original here.
+- **The kicker repair procedure** in §31 — delete the line, do not rewrite it into
+  a better metaphor, then end on the clearest concrete sentence already in the
+  draft. `humanizer` named the pattern; it did not say how to fix it, and §32's
+  original example modelled the paraphrase this rule forbids.
+- **The em dash budget** in §14 — none in short copy, one or two in a longer draft.
+  Replaces an absolute "replace every dash", which contradicted this skill's own
+  false-positive list.
+- **The detect/edit fork** in Step 1b of `SKILL.md` — report patterns with quoted
+  lines and no rewrite, and never claim to know whether a model wrote the text.
+  `no-ai-slop` splits its two jobs before anything else; here the fork sits after
+  register selection, because which patterns are reportable is register-dependent.
+
+Not taken: the unconditional word bans (*robust*, *leverage*, *harness*,
+*streamline*, *facilitate*, *utilize*), which are terms of art in technical and
+federal writing. `vocabulary.md`'s tiering exists to keep those decisions
+register-scoped.
 
 ## Underlying source
 

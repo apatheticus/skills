@@ -1,21 +1,24 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 740" width="1200" height="740"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" width="1200" height="820"
      role="img" data-loop-s="12" data-bg="background">
   <title>human-voice — which patterns run in which register</title>
   <desc>A printed plate setting the register gate table. A rust proof rule draws itself
 across the head above the kicker, step three, pattern gates; the folio reads plate two.
-The standfirst says that of the 33 catalogued patterns, 22 apply in every register and
-never conflict with a house style, that these eleven do not, and that applying them blind
-is how a register-aware skill breaks documents. Below, twelve rows are set in two stacks
+The standfirst says that of the 36 catalogued patterns, 21 apply in every register and
+never conflict with a house style, that these fifteen do not, and that applying them blind
+is how a register-aware skill breaks documents. Below, sixteen rows are set in two stacks
 divided by a vertical hairline, each row a pattern and each of four columns a register —
-editorial, professional, technical, regulated. The em dash ban, signposting and
+editorial, professional, technical, regulated. The em dash budget, signposting and
 diff-anchored writing are on almost everywhere; inline-header lists, title-case headings,
-hyphenated pairs and aphorism formulas switch off in technical and regulated; manufactured
-punchlines, rhetorical openers and voice injection are editorial-only, on in editorial and
-off in the other three. Emojis are limited in editorial and on elsewhere; excessive hedging
-is limited in technical and regulated, because calibrated uncertainty there is content
-rather than hedging; diff-anchored writing is elevated in technical, marked by the one
-ringed rust mark on the plate. A key sets the four states — on, limited, elevated, off —
-and a closing line notes that a pattern with no tag for the selected register is off.</desc>
+hyphenated pairs, aphorism formulas, rhetorical openers and colon reveals switch off in
+technical and regulated; manufactured punchlines, faux-insight setups, rhetorical setups
+and voice injection are editorial-only, on in editorial and off in the other three. Emojis
+are limited in editorial and on elsewhere; excessive hedging is limited in technical and
+regulated, because calibrated uncertainty there is content rather than hedging. Three
+ringed rust marks carry the elevated state: diff-anchored writing in technical, and
+elegant variation in technical and regulated, where the fix direction inverts because a
+component must get the same name every time. A key sets the four states — on, limited,
+elevated or inverted, off — and a closing line notes that a pattern with no tag for the
+selected register is off.</desc>
 
   <style>
     svg { --background:#fbf9f4; --ink:#1a1a18; --muted:#6b6862;
@@ -66,16 +69,16 @@ and a closing line notes that a pattern with no tag for the selected register is
     }
   </style>
 
-  <rect class="bg" x="0" y="0" width="1200" height="740"/>
+  <rect class="bg" x="0" y="0" width="1200" height="820"/>
   <line class="draw" x1="80" y1="72" x2="1120" y2="72"/>
   <text class="kick"  x="80" y="120">STEP THREE · PATTERN GATES</text>
   <text class="h"     x="80" y="188" data-role="title">Which patterns run</text>
   <text class="folio" x="1120" y="188" text-anchor="end" data-role="metadata">PLATE II</text>
   <line class="hair"  x1="80" y1="218" x2="1120" y2="218"/>
-  <text class="lede" x="80" y="262">Of the 33 catalogued patterns, 22 apply in every register. These</text>
-  <text class="lede" x="80" y="298">eleven do not — applying them blind is how this skill breaks documents.</text>
-  <text class="sect" x="80" y="346" data-role="metadata">II · THE REGISTER-GATED ELEVEN, AND VOICE INJECTION</text>
-  <line class="hair" x1="600" y1="376" x2="600" y2="614"/>
+  <text class="lede" x="80" y="262">Of the 36 catalogued patterns, 21 apply in every register. These</text>
+  <text class="lede" x="80" y="298">fifteen do not — applying them blind is how this skill breaks documents.</text>
+  <text class="sect" x="80" y="346" data-role="metadata">II · THE REGISTER-GATED FIFTEEN, AND VOICE INJECTION</text>
+  <line class="hair" x1="600" y1="376" x2="600" y2="694"/>
   <text class="colh" x="400" y="384" text-anchor="middle" data-role="metadata">ED</text>
   <text class="colh" x="446" y="384" text-anchor="middle" data-role="metadata">PRO</text>
   <text class="colh" x="492" y="384" text-anchor="middle" data-role="metadata">TEC</text>
@@ -84,93 +87,119 @@ and a closing line notes that a pattern with no tag for the selected register is
   <text class="colh" x="986" y="384" text-anchor="middle" data-role="metadata">PRO</text>
   <text class="colh" x="1032" y="384" text-anchor="middle" data-role="metadata">TEC</text>
   <text class="colh" x="1078" y="384" text-anchor="middle" data-role="metadata">REG</text>
-  <text class="row" x="80" y="400">§14 em dash ban</text>
+  <text class="row" x="80" y="400">§11 elegant variation</text>
   <circle class="m-on" cx="400" cy="394" r="8"/>
   <circle class="m-on" cx="446" cy="394" r="8"/>
-  <circle class="m-on" cx="492" cy="394" r="8"/>
-  <circle class="m-off" cx="538" cy="394" r="8"/>
+  <circle class="m-elev" cx="492" cy="394" r="8"/>
+  <circle class="m-elevring" cx="492" cy="394" r="13"/>
+  <circle class="m-elev" cx="538" cy="394" r="8"/>
+  <circle class="m-elevring" cx="538" cy="394" r="13"/>
   <line class="hair" x1="80" y1="414" x2="560" y2="414"/>
-  <text class="row" x="80" y="440">§16 inline-header lists</text>
+  <text class="row" x="80" y="440">§14 em dash budget</text>
   <circle class="m-on" cx="400" cy="434" r="8"/>
   <circle class="m-on" cx="446" cy="434" r="8"/>
-  <circle class="m-off" cx="492" cy="434" r="8"/>
+  <circle class="m-on" cx="492" cy="434" r="8"/>
   <circle class="m-off" cx="538" cy="434" r="8"/>
   <line class="hair" x1="80" y1="454" x2="560" y2="454"/>
-  <text class="row" x="80" y="480">§17 title-case headings</text>
+  <text class="row" x="80" y="480">§16 inline-header lists</text>
   <circle class="m-on" cx="400" cy="474" r="8"/>
   <circle class="m-on" cx="446" cy="474" r="8"/>
   <circle class="m-off" cx="492" cy="474" r="8"/>
   <circle class="m-off" cx="538" cy="474" r="8"/>
   <line class="hair" x1="80" y1="494" x2="560" y2="494"/>
-  <text class="row" x="80" y="520">§18 emojis</text>
-  <circle class="m-ring" cx="400" cy="514" r="8"/>
-  <circle class="m-on" cx="400" cy="514" r="3.5"/>
+  <text class="row" x="80" y="520">§17 title-case headings</text>
+  <circle class="m-on" cx="400" cy="514" r="8"/>
   <circle class="m-on" cx="446" cy="514" r="8"/>
-  <circle class="m-on" cx="492" cy="514" r="8"/>
-  <circle class="m-on" cx="538" cy="514" r="8"/>
+  <circle class="m-off" cx="492" cy="514" r="8"/>
+  <circle class="m-off" cx="538" cy="514" r="8"/>
   <line class="hair" x1="80" y1="534" x2="560" y2="534"/>
-  <text class="row" x="80" y="560">§24 excessive hedging</text>
-  <circle class="m-on" cx="400" cy="554" r="8"/>
+  <text class="row" x="80" y="560">§18 emojis</text>
+  <circle class="m-ring" cx="400" cy="554" r="8"/>
+  <circle class="m-on" cx="400" cy="554" r="3.5"/>
   <circle class="m-on" cx="446" cy="554" r="8"/>
-  <circle class="m-ring" cx="492" cy="554" r="8"/>
-  <circle class="m-on" cx="492" cy="554" r="3.5"/>
-  <circle class="m-ring" cx="538" cy="554" r="8"/>
-  <circle class="m-on" cx="538" cy="554" r="3.5"/>
+  <circle class="m-on" cx="492" cy="554" r="8"/>
+  <circle class="m-on" cx="538" cy="554" r="8"/>
   <line class="hair" x1="80" y1="574" x2="560" y2="574"/>
-  <text class="row" x="80" y="600">§26 hyphenated pairs</text>
+  <text class="row" x="80" y="600">§24 excessive hedging</text>
   <circle class="m-on" cx="400" cy="594" r="8"/>
   <circle class="m-on" cx="446" cy="594" r="8"/>
-  <circle class="m-off" cx="492" cy="594" r="8"/>
-  <circle class="m-off" cx="538" cy="594" r="8"/>
+  <circle class="m-ring" cx="492" cy="594" r="8"/>
+  <circle class="m-on" cx="492" cy="594" r="3.5"/>
+  <circle class="m-ring" cx="538" cy="594" r="8"/>
+  <circle class="m-on" cx="538" cy="594" r="3.5"/>
   <line class="hair" x1="80" y1="614" x2="560" y2="614"/>
-  <text class="row" x="620" y="400">§28 signposting</text>
+  <text class="row" x="80" y="640">§26 hyphenated pairs</text>
+  <circle class="m-on" cx="400" cy="634" r="8"/>
+  <circle class="m-on" cx="446" cy="634" r="8"/>
+  <circle class="m-off" cx="492" cy="634" r="8"/>
+  <circle class="m-off" cx="538" cy="634" r="8"/>
+  <line class="hair" x1="80" y1="654" x2="560" y2="654"/>
+  <text class="row" x="80" y="680">§28 signposting</text>
+  <circle class="m-on" cx="400" cy="674" r="8"/>
+  <circle class="m-on" cx="446" cy="674" r="8"/>
+  <circle class="m-on" cx="492" cy="674" r="8"/>
+  <circle class="m-off" cx="538" cy="674" r="8"/>
+  <line class="hair" x1="80" y1="694" x2="560" y2="694"/>
+  <text class="row" x="620" y="400">§30 diff-anchored writing</text>
   <circle class="m-on" cx="940" cy="394" r="8"/>
   <circle class="m-on" cx="986" cy="394" r="8"/>
-  <circle class="m-on" cx="1032" cy="394" r="8"/>
-  <circle class="m-off" cx="1078" cy="394" r="8"/>
+  <circle class="m-elev" cx="1032" cy="394" r="8"/>
+  <circle class="m-elevring" cx="1032" cy="394" r="13"/>
+  <circle class="m-on" cx="1078" cy="394" r="8"/>
   <line class="hair" x1="620" y1="414" x2="1100" y2="414"/>
-  <text class="row" x="620" y="440">§30 diff-anchored writing</text>
+  <text class="row" x="620" y="440">§31 manufactured punchlines</text>
   <circle class="m-on" cx="940" cy="434" r="8"/>
-  <circle class="m-on" cx="986" cy="434" r="8"/>
-  <circle class="m-elev" cx="1032" cy="434" r="8"/>
-  <circle class="m-elevring" cx="1032" cy="434" r="13"/>
-  <circle class="m-on" cx="1078" cy="434" r="8"/>
+  <circle class="m-off" cx="986" cy="434" r="8"/>
+  <circle class="m-off" cx="1032" cy="434" r="8"/>
+  <circle class="m-off" cx="1078" cy="434" r="8"/>
   <line class="hair" x1="620" y1="454" x2="1100" y2="454"/>
-  <text class="row" x="620" y="480">§31 manufactured punchlines</text>
+  <text class="row" x="620" y="480">§32 aphorism formulas</text>
   <circle class="m-on" cx="940" cy="474" r="8"/>
-  <circle class="m-off" cx="986" cy="474" r="8"/>
+  <circle class="m-on" cx="986" cy="474" r="8"/>
   <circle class="m-off" cx="1032" cy="474" r="8"/>
   <circle class="m-off" cx="1078" cy="474" r="8"/>
   <line class="hair" x1="620" y1="494" x2="1100" y2="494"/>
-  <text class="row" x="620" y="520">§32 aphorism formulas</text>
+  <text class="row" x="620" y="520">§33 rhetorical openers</text>
   <circle class="m-on" cx="940" cy="514" r="8"/>
   <circle class="m-on" cx="986" cy="514" r="8"/>
   <circle class="m-off" cx="1032" cy="514" r="8"/>
   <circle class="m-off" cx="1078" cy="514" r="8"/>
   <line class="hair" x1="620" y1="534" x2="1100" y2="534"/>
-  <text class="row" x="620" y="560">§33 rhetorical openers</text>
+  <text class="row" x="620" y="560">§34 colon reveals</text>
   <circle class="m-on" cx="940" cy="554" r="8"/>
-  <circle class="m-off" cx="986" cy="554" r="8"/>
+  <circle class="m-on" cx="986" cy="554" r="8"/>
   <circle class="m-off" cx="1032" cy="554" r="8"/>
   <circle class="m-off" cx="1078" cy="554" r="8"/>
   <line class="hair" x1="620" y1="574" x2="1100" y2="574"/>
-  <text class="row" x="620" y="600">PERSONALITY voice injection</text>
+  <text class="row" x="620" y="600">§35 faux-insight setups</text>
   <circle class="m-on" cx="940" cy="594" r="8"/>
   <circle class="m-off" cx="986" cy="594" r="8"/>
   <circle class="m-off" cx="1032" cy="594" r="8"/>
   <circle class="m-off" cx="1078" cy="594" r="8"/>
   <line class="hair" x1="620" y1="614" x2="1100" y2="614"/>
-  <text class="sect" x="80" y="663" data-role="metadata">KEY</text>
-  <circle class="m-on" cx="150" cy="656" r="8"/>
-  <text class="leg" x="170" y="663">on</text>
-  <circle class="m-ring" cx="300" cy="656" r="8"/>
-  <circle class="m-on" cx="300" cy="656" r="3.5"/>
-  <text class="leg" x="320" y="663">limited</text>
-  <circle class="m-elev" cx="450" cy="656" r="8"/>
-  <circle class="m-elevring" cx="450" cy="656" r="13"/>
-  <text class="leg" x="470" y="663">elevated</text>
-  <circle class="m-off" cx="600" cy="656" r="8"/>
-  <text class="leg" x="620" y="663">off</text>
-  <line class="hair" x1="80" y1="694" x2="1120" y2="694"/>
-  <text class="sub" x="80" y="720" data-role="metadata">A pattern with no tag for the selected register is off — do not apply it.</text>
+  <text class="row" x="620" y="640">§36 rhetorical setups</text>
+  <circle class="m-on" cx="940" cy="634" r="8"/>
+  <circle class="m-off" cx="986" cy="634" r="8"/>
+  <circle class="m-off" cx="1032" cy="634" r="8"/>
+  <circle class="m-off" cx="1078" cy="634" r="8"/>
+  <line class="hair" x1="620" y1="654" x2="1100" y2="654"/>
+  <text class="row" x="620" y="680">PERSONALITY voice injection</text>
+  <circle class="m-on" cx="940" cy="674" r="8"/>
+  <circle class="m-off" cx="986" cy="674" r="8"/>
+  <circle class="m-off" cx="1032" cy="674" r="8"/>
+  <circle class="m-off" cx="1078" cy="674" r="8"/>
+  <line class="hair" x1="620" y1="694" x2="1100" y2="694"/>
+  <text class="sect" x="80" y="743" data-role="metadata">KEY</text>
+  <circle class="m-on" cx="150" cy="736" r="8"/>
+  <text class="leg" x="170" y="743">on</text>
+  <circle class="m-ring" cx="300" cy="736" r="8"/>
+  <circle class="m-on" cx="300" cy="736" r="3.5"/>
+  <text class="leg" x="320" y="743">limited</text>
+  <circle class="m-elev" cx="450" cy="736" r="8"/>
+  <circle class="m-elevring" cx="450" cy="736" r="13"/>
+  <text class="leg" x="470" y="743">elevated or inverted</text>
+  <circle class="m-off" cx="700" cy="736" r="8"/>
+  <text class="leg" x="720" y="743">off</text>
+  <line class="hair" x1="80" y1="774" x2="1120" y2="774"/>
+  <text class="sub" x="80" y="800" data-role="metadata">A pattern with no tag for the selected register is off — do not apply it.</text>
 </svg>

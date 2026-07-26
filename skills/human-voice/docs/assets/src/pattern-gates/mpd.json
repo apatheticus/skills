@@ -5,20 +5,20 @@
   "producer": "more-pretty-docs",
   "style": "editorial",
   "facts": [
-    "The catalog holds 33 patterns, each tagged with the registers it applies to",
-    "22 patterns are always on and never conflict with a house style",
-    "11 patterns are register-gated, plus personality injection; applying them blind is how a register-aware skill breaks documents",
-    "The four gate states are on, limited, elevated and off",
+    "The catalog holds 36 patterns, each tagged with the registers it applies to",
+    "21 patterns are always on and never conflict with a house style",
+    "15 patterns are register-gated, plus personality injection; applying them blind is how a register-aware skill breaks documents",
+    "The four gate states are on, limited, elevated or inverted, and off",
     "§24 excessive hedging is limited in Technical and Regulated, because calibrated uncertainty there is content rather than hedging",
-    "§30 diff-anchored writing is elevated in Technical, the only elevated gate in the table"
+    "§30 diff-anchored writing is elevated in Technical, and §11 elegant variation inverts in Technical and Regulated, where the fix direction reverses"
   ],
-  "facts_hash": "604da93f1fe8ce2b383e6ed84a44d92d1ed42f6af7b6225aa1dd8f2f0ca58680",
-  "src_hash": "580c8cb0d3dbdd9cc41238290315cc195e77ab3d0aa7aa198054cef9ede8dddf",
-  "design_hash": "06ae37640ab5faa52ea64fe879c66ad97706b15084de5544478d6e2feb670331",
+  "facts_hash": "09360c647dc68f049f27d3653c3c57620b64fbc139b2860d2c3740c8640e5aeb",
+  "src_hash": "83a584f079dfef7eba91c7795e30db8d2d7a63b5c2107117449a7cbe974a2822",
+  "design_hash": "c9ea5e3459128e2458d738e87e32de04f6c214057337b405371a6f4cf086a911",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 10511
+    "bytes": 12133
   },
   "relaxed": []
 }
