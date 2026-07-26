@@ -127,7 +127,7 @@ volatile facts) — a baked-in `v2.4.1` goes stale silently and can't be greped.
 [![Security](https://img.shields.io/badge/Security-policy-112E51)](SECURITY.md)
 <!-- pd:badges end -->
 
-<!-- pd:viz name="hero" src="docs/assets/src/hero/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/hero.webp" alt="<Rich description: what the project does, the
 pieces involved, and how they connect — meaningful with images off.>" width="820" />
@@ -140,7 +140,7 @@ pieces involved, and how they connect — meaningful with images off.>" width="8
 
 <Two or three concrete paragraphs: the problem, the solution, who runs it.>
 
-<!-- pd:viz name="<body-diagram>" src="docs/assets/src/<body-diagram>/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="<body-diagram>" src=".prettydocs/src/<body-diagram>/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/<body-diagram>.webp" alt="<Rich description of the one thing
 this diagram shows, in the order a reader meets it.>" width="820" />

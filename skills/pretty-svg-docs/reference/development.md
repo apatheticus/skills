@@ -86,7 +86,7 @@ together, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Quick start
 
-<!-- pd:viz name="dev-loop" src="docs/assets/src/dev-loop/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="dev-loop" src=".prettydocs/src/dev-loop/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/dev-loop.svg" alt="<Local dev loop in order: clone, install,
 build/seed, run, open — the exact steps below.>" width="820" />

@@ -8,7 +8,7 @@
 [![install: npx skills](https://img.shields.io/badge/install-npx%20skills-E2E6FB)](https://skills.sh) [![validate](https://github.com/apatheticus/skills/actions/workflows/validate.yml/badge.svg)](https://github.com/apatheticus/skills/actions/workflows/validate.yml) [![license: MIT](https://img.shields.io/badge/license-MIT-E2E6FB)](./LICENSE) [![contributing](https://img.shields.io/badge/contributing-guidelines-0B0F1A)](./CONTRIBUTING.md)
 <!-- pd:badges end -->
 
-<!-- pd:viz name="hero" src="docs/assets/src/hero/" facts-hash="e80dc438d0637e7a65b534b879dc1fda6ebe72ee145886a7496cff6b72fb3185" src-hash="3df42bbf22933406f74a4f54ed46c893ab3699f186aa38837952cfe9950317a6" -->
+<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="e80dc438d0637e7a65b534b879dc1fda6ebe72ee145886a7496cff6b72fb3185" src-hash="3df42bbf22933406f74a4f54ed46c893ab3699f186aa38837952cfe9950317a6" -->
 <div align="center">
 <img src="docs/assets/hero.webp" width="860" alt="One source tree feeding two install channels. On the left, a skill directory: skills/&lt;name&gt;/ holding SKILL.md plus optional reference/, scripts/, and assets/ folders. Two paths lead right from it. The first is skills.sh — running npx skills add apatheticus/skills writes editable copies into your own project. The second is the Claude Code plugin — adding the marketplace and installing apatheticus-skills@apatheticus gives you a managed bundle that updates when the repo does. Both channels read the same skills/ directory." />
 </div>
@@ -170,7 +170,7 @@ A skill is read in stages, and only the first stage sits in front of the agent a
 time. That is the reason the format is worth learning: the trigger text stays cheap, and
 the depth stays out of the way until something actually needs it.
 
-<!-- pd:viz name="skill-anatomy" src="docs/assets/src/skill-anatomy/" facts-hash="7d2f878624d25964e317eef475d24e995c77ac8e7f918b3087938b601db24f06" src-hash="33cc44c049c02ccbfa70ef53b4c7e4d2986b031eafff50190527f98259a20973" -->
+<!-- pd:viz name="skill-anatomy" src=".prettydocs/src/skill-anatomy/" facts-hash="7d2f878624d25964e317eef475d24e995c77ac8e7f918b3087938b601db24f06" src-hash="33cc44c049c02ccbfa70ef53b4c7e4d2986b031eafff50190527f98259a20973" -->
 <div align="center">
 <img src="docs/assets/skill-anatomy.webp" width="860" alt="The three stages an agent reads a skill in. Stage one, always loaded: the SKILL.md frontmatter, which requires exactly two keys, name and description. The description is the only text an agent reads when deciding whether to load the skill at all. Stage two, loaded when the skill fires: the SKILL.md body, written as instructions aimed at the agent, opening with when not to use it, and kept under roughly 500 lines. Stage three, loaded on demand: reference/*.md, scripts/*, and assets/*, linked by relative path so they cost nothing until the skill reaches for them." />
 </div>
@@ -243,7 +243,7 @@ ln -s "$PWD/skills/<name>" ~/.claude/skills/<name>
 
 - [CONTRIBUTING.md](./CONTRIBUTING.md) — how to add a skill and get it merged.
 - [`templates/frontmatter.md`](./templates/frontmatter.md) — every supported `SKILL.md` frontmatter field.
-- [`docs/assets/src/DESIGN.md`](./docs/assets/src/DESIGN.md) — the frozen design system behind the diagrams above.
+- [`.prettydocs/prettydocs.md`](./.prettydocs/prettydocs.md) — the frozen design system behind the diagrams above.
 
 <br/>
 

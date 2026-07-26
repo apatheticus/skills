@@ -114,7 +114,7 @@ feat(<scope>): <subject>
 
 ## Pull request process
 
-<!-- pd:viz name="pr-lifecycle" src="docs/assets/src/pr-lifecycle/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="pr-lifecycle" src=".prettydocs/src/pr-lifecycle/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/pr-lifecycle.svg" alt="<Contribution lifecycle in order: branch
 from base, commit, push, open PR, review, and either loop back or merge.>" width="820" />
