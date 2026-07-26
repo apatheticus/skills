@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Mechanical half of the pretty-hyper-docs visual audit.
 
-Scans markdown docs for mpd:viz marker pairs and reports one verdict per
+Scans markdown docs for pd:viz marker pairs and reports one verdict per
 visual: OK / MISSING / UNCENTERED / STALE / DRIFT / BUDGET, plus doc-level
 findings (unbalanced markers, budget overruns, any marker in LICENSE/NOTICE).
 
@@ -23,11 +23,17 @@ import re
 import sys
 from pathlib import Path
 
+# `m?pd:` accepts both the current `pd:` prefix and the legacy `mpd:` one. Repos
+# processed before the rename carry `mpd:` markers and an `mpd.json` manifest; the
+# skill reads them and rewrites them to the current form the next time it touches
+# that block, so no third-party repo needs a migration pass to keep auditing clean.
 MARKER_OPEN = re.compile(
-    r'<!--\s*mpd:viz\s+name="(?P<name>[^"]+)"\s+src="(?P<src>[^"]+)"'
+    r'<!--\s*m?pd:viz\s+name="(?P<name>[^"]+)"\s+src="(?P<src>[^"]+)"'
     r'\s+facts-hash="(?P<facts_hash>[^"]*)"\s+src-hash="(?P<src_hash>[^"]*)"\s*-->'
 )
-MARKER_CLOSE = re.compile(r"<!--\s*mpd:viz\s+end\s*-->")
+MARKER_CLOSE = re.compile(r"<!--\s*m?pd:viz\s+end\s*-->")
+MANIFEST_NAME = "viz.json"
+MANIFEST_LEGACY = "mpd.json"
 # Matches markdown images and HTML <img> embeds (the README spec uses <img> for width control)
 IMAGE = re.compile(r"!\[[^\]]*\]\(([^)\s]+)\)|<img\s[^>]*?src=\"([^\"]+)\"")
 # An embed is centered by a block wrapper carrying align="center" — GitHub's sanitizer
@@ -76,7 +82,7 @@ def audit_doc(doc: Path, root: Path, design_hash: str | None, rows: list, proble
         return
 
     if len(opens) != len(closes):
-        problems.append(f"{doc}: unbalanced mpd:viz markers ({len(opens)} open / {len(closes)} close)")
+        problems.append(f"{doc}: unbalanced pd:viz markers ({len(opens)} open / {len(closes)} close)")
 
     budget = BUDGETS.get(key)
     if budget is not None and len(opens) > budget:
@@ -100,10 +106,12 @@ def audit_doc(doc: Path, root: Path, design_hash: str | None, rows: list, proble
             verdicts.append("UNCENTERED (image not wrapped in a centering element)")
 
         src_dir = root / src
-        meta_path = src_dir / "mpd.json"
+        meta_path = src_dir / MANIFEST_NAME
+        if not meta_path.exists() and (src_dir / MANIFEST_LEGACY).exists():
+            meta_path = src_dir / MANIFEST_LEGACY
         facts: list[str] = []
         if not meta_path.exists():
-            verdicts.append("STALE (mpd.json absent)")
+            verdicts.append(f"STALE ({MANIFEST_NAME} absent)")
         else:
             meta = json.loads(meta_path.read_text(encoding="utf-8"))
             facts = meta.get("facts", [])

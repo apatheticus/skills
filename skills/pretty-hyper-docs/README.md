@@ -4,17 +4,17 @@
 
 **A Claude Code skill that writes a repository's standard docs and renders their key diagrams as seamless-loop animated WebPs.**
 
-<!-- mpd:badges start -->
+<!-- pd:badges start -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-4cc38a.svg)](../../LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-skill-233041)](SKILL.md)
 [![HyperFrames](https://img.shields.io/badge/HyperFrames-required-233041)](https://github.com/heygen-com/hyperframes)
-<!-- mpd:badges end -->
+<!-- pd:badges end -->
 
-<!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="8b82995ecc4d715057f2c9b1e7d8c20994532e5c1ca58dca33f7b8d2ae1f6dee" src-hash="e572eceae9ae7529bdac9bfec9043370aaa93f36722ccf76c31743bd8cd5cf65" -->
+<!-- pd:viz name="hero" src="docs/assets/src/hero/" facts-hash="8b82995ecc4d715057f2c9b1e7d8c20994532e5c1ca58dca33f7b8d2ae1f6dee" src-hash="e572eceae9ae7529bdac9bfec9043370aaa93f36722ccf76c31743bd8cd5cf65" -->
 <div align="center">
 <img src="docs/assets/hero.webp" alt="Animated overview: a plain markdown document flows through the render pipeline and comes out the other side as a live, looping diagram — docs in, motion out. Renders are seamless loops capped at 2.5 MB." width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 </div>
 
@@ -42,7 +42,7 @@ running the skill on this folder.
   SECURITY/CODE_OF_CONDUCT: one attention banner).
 - `docs/assets/src/DESIGN.md` — the frozen design system every visual derives
   from (mapped from the product's own brand when it has one).
-- `docs/assets/src/<viz>/` — each visual's composition source and `mpd.json`
+- `docs/assets/src/<viz>/` — each visual's composition source and `viz.json`
   manifest; render byproducts are gitignored.
 
 LICENSE and NOTICE are never visualized or reformatted.
@@ -53,11 +53,11 @@ Every embed carries hashes for the facts it depicts, its composition source,
 and the design system. A later run re-renders a visual only when one of those
 changed, its asset is missing, or `--refresh-viz` forces it:
 
-<!-- mpd:viz name="lazy-rerender" src="docs/assets/src/lazy-rerender/" facts-hash="c486a1a32510117df841321e36914e9f7ed3503a500df704f8314cff7758db9d" src-hash="be144f0b0a6e741df15096e526c003f1e473ea2bbb4add7415aa8ce9dd8e694f" -->
+<!-- pd:viz name="lazy-rerender" src="docs/assets/src/lazy-rerender/" facts-hash="c486a1a32510117df841321e36914e9f7ed3503a500df704f8314cff7758db9d" src-hash="be144f0b0a6e741df15096e526c003f1e473ea2bbb4add7415aa8ce9dd8e694f" -->
 <div align="center">
 <img src="docs/assets/lazy-rerender.webp" alt="Animated decision flow: the stored facts, source, and design hashes feed a single question — do they match? When everything matches the visual is reused with zero renders; when one hash changes, only that visual goes back through the gate loop to a new WebP, after which the hashes agree again. A prose-only edit changes no hash and renders nothing." width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 ## Install
 
@@ -109,11 +109,11 @@ pretty-hyper-docs/
 
 Released under the [MIT License](../../LICENSE) of the repository that ships it.
 
-<!-- mpd:footer start -->
+<!-- pd:footer start -->
 <div align="center">
 <br/>
 
 **Copyright © 2026 Zerø Effort. Released under the MIT license.**
 
 </div>
-<!-- mpd:footer end -->
+<!-- pd:footer end -->

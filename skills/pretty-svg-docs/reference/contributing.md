@@ -114,12 +114,12 @@ feat(<scope>): <subject>
 
 ## Pull request process
 
-<!-- mpd:viz name="pr-lifecycle" src="docs/assets/src/pr-lifecycle/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="pr-lifecycle" src="docs/assets/src/pr-lifecycle/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/pr-lifecycle.svg" alt="<Contribution lifecycle in order: branch
 from base, commit, push, open PR, review, and either loop back or merge.>" width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 <details>
 <summary>Diagram source (Mermaid)</summary>
@@ -148,7 +148,7 @@ Don't open a public issue for a vulnerability — see [SECURITY.md](SECURITY.md)
 Licensed under <license> (see [LICENSE](LICENSE)). Contributions are accepted under
 the same license.
 
-<!-- mpd:footer start -->
+<!-- pd:footer start -->
 <!-- … shared footer … -->
-<!-- mpd:footer end -->
+<!-- pd:footer end -->
 ```

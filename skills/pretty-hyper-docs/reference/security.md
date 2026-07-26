@@ -27,7 +27,7 @@ to miss —
 
 That banner is a static designed SVG or a short seamless-loop animated WebP from the
 repo's frozen design system (`design-system.md`), produced per `viz-production.md` and
-embedded with the `mpd:viz` marker per `embedding.md`. Everything else in the file —
+embedded with the `pd:viz` marker per `embedding.md`. Everything else in the file —
 the supported-versions table, the disclosure flow, the trust boundary — carries **no
 designed visual**. A `sequenceDiagram` or `flowchart` may still appear where the
 sections below call for it; those are plain Mermaid, not part of this budget.
@@ -90,12 +90,12 @@ design system or the private-reporting instruction itself changes.
 ## Neutral exemplar (shape only)
 
 ````markdown
-<!-- mpd:viz id=security-banner … -->
+<!-- pd:viz id=security-banner … -->
 <div align="center">
 <img src="docs/assets/security-banner.webp"
      alt="Report vulnerabilities privately. Never in a public issue." width="100%" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 # Security policy
 
@@ -137,7 +137,7 @@ sequenceDiagram
 - Runtime: <list>.
 - Development: <list>.
 
-<!-- mpd:footer start -->
+<!-- pd:footer start -->
 <!-- … shared footer … -->
-<!-- mpd:footer end -->
+<!-- pd:footer end -->
 ````

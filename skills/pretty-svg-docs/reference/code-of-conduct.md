@@ -39,7 +39,7 @@ very top of the document, carrying the document's core expectation —
 
 The banner is a static designed SVG or a short seamless-loop animated SVG from the
 repo's frozen design system (`design-system.md`), produced per `viz-production.md` and
-embedded with the `mpd:viz` marker per `embedding.md` — centered at `width="100%"`
+embedded with the `pd:viz` marker per `embedding.md` — centered at `width="100%"`
 like every other embed (`embedding.md` → Centering). It sits **above** the Covenant
 heading. The takeaway must also read in plain text immediately below the banner so the
 expectation survives with images off (house-style quality gate: works without images).

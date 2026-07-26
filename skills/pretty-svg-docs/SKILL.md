@@ -158,7 +158,7 @@ seam-exact. Under-spending the budget is always allowed.
 docs/assets/<viz-name>.svg         # committed — the asset AND its own source
 docs/assets/src/DESIGN.md          # committed — frozen design system + resolved style
 docs/assets/src/<viz-name>/
-├── mpd.json                       # committed — facts, hashes, svg params (embedding.md)
+├── viz.json                       # committed — facts, hashes, svg params (embedding.md)
 └── _qa/                           # gitignored — filmstrip.html, phase_*.png
 ```
 
@@ -186,7 +186,7 @@ username is never a candidate). **Additionally detect the product's visual
 identity:** logos/icons, brand tokens (CSS custom properties, Tailwind config, theme
 files), an existing style guide or DESIGN.md. These feed phase 2.
 
-Also detect **foreign visuals** — `mpd.json` files whose `producer` isn't
+Also detect **foreign visuals** — `viz.json` files whose `producer` isn't
 `pretty-svg-docs`, or embeds pointing at `.webp`. Those are adoption candidates
 (`embedding.md` → Adopting visuals from another producer).
 
@@ -241,7 +241,7 @@ with no pre-fill.
 On a repo with existing docs, write after planning; on a brand-new repo, present the
 plan and get a go-ahead first. Edit **section by section**, never whole-file
 regeneration. Preserve human prose; update facts in place. Insert embeds and
-`mpd:viz` markers per `reference/embedding.md`; add the `<details>` Mermaid fallback
+`pd:viz` markers per `reference/embedding.md`; add the `<details>` Mermaid fallback
 in technical docs. Humanize the prose you wrote (house-style → Humanize).
 
 ### 6. Apply — visuals
@@ -249,7 +249,7 @@ in technical docs. Humanize the prose you wrote (house-style → Humanize).
 For each `RENDER`/`RE-RENDER` visual, follow `reference/viz-production.md` exactly:
 author `docs/assets/<name>.svg` → **gate loop** (`scripts/svg_check.py` until 0
 errors) → `scripts/svg_filmstrip.py` → serve over HTTP and **read the pixels** →
-write `mpd.json` + marker hashes together. Statics are the same file format minus the
+write `viz.json` + marker hashes together. Statics are the same file format minus the
 animation block. Maintain the `.gitignore` entry.
 
 Record every `SOFTENED` line the checker emitted into that visual's `relaxed` array.
@@ -300,7 +300,7 @@ In-chat summary only (the git diff is the audit trail):
 - **LICENSE and NOTICE are never visualized or formatted.** Verbatim only.
 - **Every doc works with images off** — alt text, `<details>` Mermaid, adjacent
   banner text. This is what makes a softened contrast gate survivable.
-- **Ground every visual**; its `mpd.json` facts list is part of the truth the gates
+- **Ground every visual**; its `viz.json` facts list is part of the truth the gates
   check.
 - **Reproduce, don't author, legal text** (`reference/tier2/license.md`).
 - **Never delete another producer's artefacts.** Adoption rewrites embeds and reports

@@ -2,7 +2,7 @@
   "name": "hero",
   "doc": "README.md",
   "tier": "animated-hero",
-  "producer": "more-pretty-docs",
+  "producer": "pretty-svg-docs",
   "style": "flat-material",
   "facts": [
     "Each cycle runs exactly one security-audit into run-N under the engagement directory",

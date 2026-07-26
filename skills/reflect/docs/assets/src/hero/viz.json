@@ -2,7 +2,7 @@
   "name": "hero",
   "doc": "README.md",
   "tier": "animated-hero",
-  "producer": "more-pretty-docs",
+  "producer": "pretty-svg-docs",
   "style": "neumorphism",
   "facts": [
     "Transcripts are enumerated from ~/.claude/projects and filtered to the window, excluding the session running the pass",

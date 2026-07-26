@@ -2,7 +2,7 @@
   "name": "pattern-gates",
   "doc": "README.md",
   "tier": "animated-flagship",
-  "producer": "more-pretty-docs",
+  "producer": "pretty-svg-docs",
   "style": "editorial",
   "facts": [
     "The catalog holds 36 patterns, each tagged with the registers it applies to",

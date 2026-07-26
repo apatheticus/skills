@@ -1,5 +1,5 @@
 {
-  "producer": "more-pretty-docs",
+  "producer": "pretty-svg-docs",
   "kind": "style-specimens",
   "note": "One record per style specimen. Specimens are gated with --style <slug> so each gets its own filter floors, and they carry data-specimen=\"true\" so the min_elements density floor binds on them.",
   "design_hash": "de0372cc1fc3c743271a44b3d2ae365fccca73980ba2abc0dfd1dc7c4aef140b",

@@ -127,7 +127,7 @@ Every managed Markdown document ends with the same centered footer, wrapped in
 marker comments so it can be regenerated wholesale. Build it from `docsmeta`:
 
 ```html
-<!-- mpd:footer start -->
+<!-- pd:footer start -->
 <div align="center">
 <br/>
 <img src="{icon_asset}" alt="{org}" width="28" height="28" align="center" />
@@ -137,7 +137,7 @@ marker comments so it can be regenerated wholesale. Build it from `docsmeta`:
 <sub>{disclaimer}</sub>
 
 </div>
-<!-- mpd:footer end -->
+<!-- pd:footer end -->
 ```
 
 - `{icon_asset}` — the small brand icon path from `docsmeta.assets.icon`. If none is
@@ -178,17 +178,17 @@ actually true of the repo:
   the header reads as one designed unit with the hero.
 
 Use `https://img.shields.io/badge/...` static badges built from `docsmeta` + the
-evidence pass. Wrap the whole badge cluster in `<!-- mpd:badges start -->` /
-`<!-- mpd:badges end -->` markers so it regenerates cleanly.
+evidence pass. Wrap the whole badge cluster in `<!-- pd:badges start -->` /
+`<!-- pd:badges end -->` markers so it regenerates cleanly.
 
 ## Marker comments
 
 Three marker families delimit fully generated regions; everything **outside**
 markers is matched by heading and edited surgically:
 
-- `<!-- mpd:footer start -->` … `<!-- mpd:footer end -->` — the shared footer.
-- `<!-- mpd:badges start -->` … `<!-- mpd:badges end -->` — the README badge row.
-- `<!-- mpd:viz … -->` … `<!-- mpd:viz end -->` — each embedded visual, carrying
+- `<!-- pd:footer start -->` … `<!-- pd:footer end -->` — the shared footer.
+- `<!-- pd:badges start -->` … `<!-- pd:badges end -->` — the README badge row.
+- `<!-- pd:viz … -->` … `<!-- pd:viz end -->` — each embedded visual, carrying
   the hashes that drive lazy re-rendering. Format and semantics in `embedding.md`.
 
 Rules:
@@ -201,9 +201,12 @@ Rules:
   copyright line; contiguous badge cluster under the title), not by a marker. Never
   add markers to a doc you're otherwise leaving untouched, and never duplicate a
   block.
-- **Legacy markers:** if a doc contains `update-docs:` markers from the sibling
-  skill, treat them as the same regions and rewrite them to the `mpd:` prefix —
-  but only when you're already rewriting that block.
+- **Legacy markers:** two older prefixes name the same regions — `mpd:`, used by
+  both doc skills before they were renamed, and `update-docs:` from the text-only
+  sibling. Read either as the current form and rewrite it to `pd:` — but only when
+  you're already rewriting that block. A repo carrying `mpd:` markers and `mpd.json`
+  manifests audits clean as-is; it needs no migration pass, and `audit_visuals.py`
+  accepts both spellings.
 - LICENSE and NOTICE never contain any marker.
 
 ## Cross-linking
@@ -310,7 +313,7 @@ first; only the values you had to ask for need storing here.
 - If a `.github/docsmeta.json` written by the sibling `update-docs` skill exists,
   reuse it as-is; the schema is compatible.
 
-Per-visual state lives elsewhere: each visual's `mpd.json` next to its composition
+Per-visual state lives elsewhere: each visual's `viz.json` next to its composition
 source (see `embedding.md`), and the repo-wide design system in
 `docs/assets/src/DESIGN.md` (see `design-system.md`).
 
@@ -377,8 +380,8 @@ human content. Gates 1–5 are textual; gates 6–10 are visual and detailed in
    `hyperframes check` with **0 errors** before render.
 7. **Asset presence + size.** Every embedded `.webp`/`.svg` exists at its
    referenced path; every animated WebP is **≤ 2.5 MB**.
-8. **Marker/manifest integrity.** Every `mpd:viz` marker pair is balanced, points
-   at an existing source dir with a `mpd.json`, and marker hashes match the
+8. **Marker/manifest integrity.** Every `pd:viz` marker pair is balanced, points
+   at an existing source dir with a `viz.json`, and marker hashes match the
    manifest (`scripts/audit_visuals.py` checks this mechanically).
 9. **Works without images.** With every image stripped, each doc still makes its
    point: README alt text carries the meaning; technical-doc animations have their
@@ -402,7 +405,7 @@ complete-looking diagram.
   and does X" or "absent," never collapse a partially-tooled repo to "none."
 - **Ground every visual.** An animated diagram asserts facts with more authority
   than prose — so its depicted components, flows, and labels must all be verifiable
-  from the code/config, and its `mpd.json` fact list records exactly which. An
+  from the code/config, and its `viz.json` fact list records exactly which. An
   accurate partial diagram beats a complete fictional one. Decorative motion
   (motif, background texture) carries no facts and needs no grounding.
 - **Ask or defer over invent.** When a section needs a fact you can't find and

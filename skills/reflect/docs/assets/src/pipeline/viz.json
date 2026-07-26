@@ -2,7 +2,7 @@
   "name": "pipeline",
   "doc": "README.md",
   "tier": "animated-flagship",
-  "producer": "more-pretty-docs",
+  "producer": "pretty-svg-docs",
   "style": "neumorphism",
   "facts": [
     "The pipeline has six phases, numbered 0 through 5",

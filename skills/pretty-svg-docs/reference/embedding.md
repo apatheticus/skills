@@ -1,7 +1,7 @@
 # Embedding — markers, manifests, lazy re-rendering, and the visual audit
 
 Read this before writing any visual embed into a doc, and before any `check` run.
-It defines the `mpd:viz` marker family, the per-visual `mpd.json` manifest, the
+It defines the `pd:viz` marker family, the per-visual `viz.json` manifest, the
 rules that decide when a visual re-renders, and the audit verdicts.
 
 ## Contents
@@ -9,8 +9,8 @@ rules that decide when a visual re-renders, and the audit verdicts.
 - [Embed shape per doc type](#embed-shape-per-doc-type)
 - [Centering](#centering)
 - [Alt-text doctrine](#alt-text-doctrine)
-- [The mpd:viz marker](#the-mpdviz-marker)
-- [The mpd.json manifest](#the-mpdjson-manifest)
+- [The pd:viz marker](#the-pdviz-marker)
+- [The viz.json manifest](#the-vizjson-manifest)
 - [Hashes](#hashes)
 - [Lazy re-render decision](#lazy-re-render-decision)
 - [Adopting visuals from another producer](#adopting-visuals-from-another-producer)
@@ -18,18 +18,18 @@ rules that decide when a visual re-renders, and the audit verdicts.
 
 ## Embed shape per doc type
 
-Every visual embed sits inside one `mpd:viz` marker pair. What goes inside the
+Every visual embed sits inside one `pd:viz` marker pair. What goes inside the
 pair depends on the doc:
 
 **README** (hero + body diagrams) — a centered image with rich alt text, nothing
 else:
 
 ```markdown
-<!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="hero" src="docs/assets/src/hero/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/hero.svg" alt="Animated overview: requests enter the gateway, fan out to the auth, billing, and search services, and results merge back to the client." width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 ```
 
 **Technical docs** (ARCHITECTURE, DEVELOPMENT, CONTRIBUTING) — the same centered
@@ -37,7 +37,7 @@ image, plus the collapsed Mermaid equivalent inside the pair and **outside** the
 centering wrapper:
 
 ```markdown
-<!-- mpd:viz name="request-flow" src="docs/assets/src/request-flow/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="request-flow" src="docs/assets/src/request-flow/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/request-flow.svg" alt="Animated sequence: a request passes the gateway, is authenticated, then handled by the matching service." width="820" />
 </div>
@@ -54,7 +54,7 @@ sequenceDiagram
 ```
 
 </details>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 ```
 
 The Mermaid block must parse (gate 1) and must state the same structure the
@@ -67,7 +67,7 @@ immediately below the pair.
 
 **Statics** (non-flagship diagrams, SUPPORT header) — same marker pair, same file
 format. A static visual is simply an SVG with no animation block, so it declares
-`"loop_s": 0` in its `svg` block. It still gets a full `mpd.json` so the audit can
+`"loop_s": 0` in its `svg` block. It still gets a full `viz.json` so the audit can
 track its facts and design hash.
 
 **LICENSE / NOTICE — never.** No marker, no image, under any flag.
@@ -126,27 +126,27 @@ mechanism:
   never in a public issue.").
 - No volatile facts in alt text (it's still doc text).
 
-## The mpd:viz marker
+## The pd:viz marker
 
 ```
-<!-- mpd:viz name="<slug>" src="<path-to-composition-dir>/" facts-hash="<sha256>" src-hash="<sha256>" -->
+<!-- pd:viz name="<slug>" src="<path-to-composition-dir>/" facts-hash="<sha256>" src-hash="<sha256>" -->
 …embed content…
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 ```
 
 | Attribute | Meaning |
 | --- | --- |
 | `name` | Kebab-case visual slug. Unique per repo. Matches the asset basename (`docs/assets/<name>.svg`) and the composition dir (`docs/assets/src/<name>/`). |
-| `src` | Repo-relative path to the visual's state dir (trailing slash). It holds `mpd.json` and the gitignored `_qa/` scratch — **not** a copy of the SVG. |
-| `facts-hash` | Copy of `facts_hash` from `mpd.json` at last render/write. |
-| `src-hash` | Copy of `src_hash` from `mpd.json` at last render/write. |
+| `src` | Repo-relative path to the visual's state dir (trailing slash). It holds `viz.json` and the gitignored `_qa/` scratch — **not** a copy of the SVG. |
+| `facts-hash` | Copy of `facts_hash` from `viz.json` at last render/write. |
+| `src-hash` | Copy of `src_hash` from `viz.json` at last render/write. |
 
 **The asset is the source.** For SVG there is no separate composition to render
 from, so nothing under `src/<name>/` duplicates the artwork:
 
 ```text
 docs/assets/<name>.svg            committed — the asset AND the source; src_hash covers it
-docs/assets/src/<name>/mpd.json   committed — facts, hashes, svg params
+docs/assets/src/<name>/viz.json   committed — facts, hashes, svg params
 docs/assets/src/<name>/_qa/       gitignored — filmstrip.html, phase_*.png
 docs/assets/src/DESIGN.md         committed — the frozen design system
 ```
@@ -159,24 +159,24 @@ Rules:
 
 - Attributes are double-quoted, in the order shown. One marker pair per visual;
   pairs never nest.
-- The marker and its `mpd.json` are written **together, atomically with the
-  visual** — once the SVG passes `svg_check.py`, update `mpd.json` first, then
+- The marker and its `viz.json` are written **together, atomically with the
+  visual** — once the SVG passes `svg_check.py`, update `viz.json` first, then
   rewrite the marker with the same hashes. A marker whose hashes disagree with its
-  `mpd.json` means someone hand-edited one of them; `check` reports it, apply
+  `viz.json` means someone hand-edited one of them; `check` reports it, apply
   mode treats the visual as stale and re-authors to re-sync.
 - Everything between the markers is regenerable wholesale. Prose belongs outside
   the pair.
 
-## The mpd.json manifest
+## The viz.json manifest
 
-Committed at `docs/assets/src/<name>/mpd.json`:
+Committed at `docs/assets/src/<name>/viz.json`:
 
 ```json
 {
   "name": "request-flow",
   "doc": "ARCHITECTURE.md",
   "tier": "animated-flagship",
-  "producer": "more-pretty-docs",
+  "producer": "pretty-svg-docs",
   "style": "swiss-minimal",
   "facts": [
     "Requests enter through src/gateway.ts and are authenticated before routing",
@@ -191,8 +191,11 @@ Committed at `docs/assets/src/<name>/mpd.json`:
 ```
 
 - `tier`: `animated-flagship` · `animated-hero` · `banner` · `static`.
-- `producer`: always `more-pretty-docs` for a visual this skill authored. Any other
-  value means the visual came from a different producer — see
+- `producer`: always `pretty-svg-docs` for a visual this skill authored. The legacy
+  value `more-pretty-docs` means the same thing — it is what every visual written
+  before the rename carries — so both count as owned, and both are rewritten to
+  `pretty-svg-docs` the next time the manifest is touched. Any *other* value means
+  the visual came from a different producer — see
   [Adopting visuals from another producer](#adopting-visuals-from-another-producer).
 - `style`: the resolved style slug the visual was authored in. Same for every
   visual in a repo; it mirrors `docsmeta.viz.style` and the `## Style` section of
@@ -229,7 +232,7 @@ Computed per visual during the plan phase. **RE-RENDER** iff any of:
    Because the asset is the source, a hand-edit to the SVG shows up here.
 3. **Design drift** — recomputed `design_hash` of `DESIGN.md` ≠ stored.
 4. **Asset missing** — the committed `.svg` doesn't exist at its path.
-5. **Marker/manifest mismatch** — marker hashes ≠ `mpd.json` hashes.
+5. **Marker/manifest mismatch** — marker hashes ≠ `viz.json` hashes.
 6. **Forced** — the run was invoked with `--refresh-viz`.
 
 Otherwise **REUSE**: the embed line may be rewritten (alt text, position) but no
@@ -246,14 +249,14 @@ render happens. Consequences worth stating plainly:
   in the repo is re-authored. Say so in the phase-3 plan, with the count, before
   starting.
 
-After re-authoring: write `mpd.json` (new hashes, same stable field order), then
+After re-authoring: write `viz.json` (new hashes, same stable field order), then
 rewrite the marker pair with matching hashes, then confirm the asset passed the
 size gate.
 
 ## Adopting visuals from another producer
 
 A repo may already carry visuals from the sibling `pretty-hyper-docs` skill: the
-same marker family, the same `mpd.json`, but `.webp` assets rendered through
+same marker family, the same `viz.json`, but `.webp` assets rendered through
 HyperFrames. The manifests there have no `producer` field, which is how they're
 recognised.
 
@@ -264,7 +267,7 @@ Adoption rewrites the embed and leaves the old artefacts alone:
 2. Rewrite the `<img src>` in the marker block from `.webp` to `.svg`, and add the
    centering wrapper if the old embed lacked one. The marker attributes and the
    `src` dir are unchanged.
-3. Rewrite `mpd.json` in the new shape: add `producer`, `style`, `relaxed`, replace
+3. Rewrite `viz.json` in the new shape: add `producer`, `style`, `relaxed`, replace
    `render` with `svg`, recompute `src_hash` over the new `.svg`.
 4. **Report, never delete.** Emit one `ORPHANED` line per leftover — the old
    `docs/assets/<name>.webp`, the composition sources under
@@ -293,11 +296,11 @@ judgment is yours (it needs the evidence pass).
 | `DRIFT` | `design_hash` ≠ current `DESIGN.md` (includes any style change) | script |
 | `CONTRADICTS` | A stored fact conflicts with what the evidence pass now shows | you — the script prints each visual's `facts` list for judgment |
 | `BUDGET` | Doc exceeds its visual budget, the asset exceeds the byte cap, or **any** visual/marker found in LICENSE/NOTICE (hard violation) | script |
-| `FOREIGN` | `producer` is absent or is not `more-pretty-docs` — the visual came from another skill and is a candidate for adoption | script |
+| `FOREIGN` | `producer` is absent, or is neither `pretty-svg-docs` nor the legacy `more-pretty-docs` — the visual came from another skill and is a candidate for adoption | script |
 
 The audit also prints each visual's `style` and `relaxed` list, so a `check` run
 shows what was softened without re-running `svg_check.py` over every asset.
 
-`check` writes nothing — no new assets, no marker edits, no mpd.json updates. The
+`check` writes nothing — no new assets, no marker edits, no viz.json updates. The
 verdicts feed the report table; in apply mode the same computations feed the
 RE-RENDER/REUSE plan.

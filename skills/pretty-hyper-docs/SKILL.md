@@ -108,7 +108,7 @@ docs/assets/<viz-name>.svg         # committed — static visuals
 docs/assets/src/DESIGN.md          # committed — frozen design system
 docs/assets/src/<viz-name>/
 ├── index.html                     # committed — HyperFrames composition (or source .svg for statics)
-├── mpd.json                       # committed — facts, hashes, render params (see embedding.md)
+├── viz.json                       # committed — facts, hashes, render params (see embedding.md)
 ├── hyperframes.json, package.json, meta.json   # committed — init scaffold config
 │                                  #   (meta.json is HyperFrames' own file, not ours)
 └── render.mp4, renders/, frames/, snapshots/, qa_*.png, check.json   # gitignored byproducts
@@ -187,7 +187,7 @@ candidate at all → ask with no pre-fill.
 On a repo with existing docs, write after planning; on a brand-new repo,
 present the plan and get a go-ahead first. Edit **section by section**, never
 whole-file regeneration. Preserve human prose; update facts in place. Insert
-embeds and `mpd:viz` markers per `reference/embedding.md`; add the `<details>`
+embeds and `pd:viz` markers per `reference/embedding.md`; add the `<details>`
 Mermaid fallback in technical docs. Humanize the prose you wrote (house-style →
 Humanize).
 
@@ -197,7 +197,7 @@ For each `RENDER`/`RE-RENDER` visual, follow `reference/viz-production.md`
 exactly: scaffold → author to DESIGN.md → **gate loop** (lint → snapshot at 3
 timestamps and read the frames → `hyperframes check` with 0 errors) → render →
 `scripts/viz_to_webp.sh` (enforces the 2.5 MB cap) → verify real pixels →
-update `mpd.json` + marker hashes together. Statics: author per the
+update `viz.json` + marker hashes together. Statics: author per the
 static-SVG section of the same reference. Maintain the `.gitignore` entries.
 
 ### 7. Verify
@@ -236,7 +236,7 @@ In-chat summary only (the git diff is the audit trail):
 - **LICENSE and NOTICE are never visualized or formatted.** Verbatim only.
 - **Every doc works with images off** — alt text, `<details>` Mermaid, adjacent
   banner text.
-- **Ground every visual**; its `mpd.json` facts list is part of the truth the
+- **Ground every visual**; its `viz.json` facts list is part of the truth the
   gates check.
 - **Reproduce, don't author, legal text** (`reference/tier2/license.md`).
 - **Reflect reality, not aspiration** — in prose and in pixels.

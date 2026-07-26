@@ -3,7 +3,7 @@
 GitHub issue forms/templates, generated from a standard skeleton adapted to the
 project. On-demand only. Location follows host detection (GitHub: `.github/ISSUE_TEMPLATE/`).
 
-These are forms, not prose docs: they carry **no visuals, banners, badges, or `mpd:`
+These are forms, not prose docs: they carry **no visuals, banners, badges, or `pd:`
 markers** — just the template fields.
 
 ## What to create

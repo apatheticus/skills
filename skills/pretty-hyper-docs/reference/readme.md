@@ -86,7 +86,7 @@ The README is the most visual document in the set. Its budget:
 That's the ceiling: **hero + at most 3 animated diagrams.** A `--brief` README still
 gets its hero; `--no-viz` drops all of them and the doc must still read cleanly.
 
-Every README visual is an animated WebP embedded through a `mpd:viz` marker (format
+Every README visual is an animated WebP embedded through a `pd:viz` marker (format
 and hash mechanics in [embedding.md](embedding.md)), produced by the pipeline in
 [viz-production.md](viz-production.md), and styled by the frozen design system in
 [design-system.md](design-system.md). Don't restate the marker or hash mechanics
@@ -119,20 +119,20 @@ volatile facts) — a baked-in `v2.4.1` goes stale silently and can't be greped.
 
 **<One-sentence description of what this project is and does.>**
 
-<!-- mpd:badges start -->
+<!-- pd:badges start -->
 [![<Runtime> <major>](https://img.shields.io/badge/<runtime>-<major>-<hex>)](<url>)
 [![License: <SPDX>](https://img.shields.io/badge/License-<SPDX>-<hex>.svg)](LICENSE)
 [![Architecture](https://img.shields.io/badge/Architecture-design-112E51)](ARCHITECTURE.md)
 [![Contributing](https://img.shields.io/badge/Contributing-guidelines-112E51)](CONTRIBUTING.md)
 [![Security](https://img.shields.io/badge/Security-policy-112E51)](SECURITY.md)
-<!-- mpd:badges end -->
+<!-- pd:badges end -->
 
-<!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="hero" src="docs/assets/src/hero/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/hero.webp" alt="<Rich description: what the project does, the
 pieces involved, and how they connect — meaningful with images off.>" width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 </div>
 
@@ -140,12 +140,12 @@ pieces involved, and how they connect — meaningful with images off.>" width="8
 
 <Two or three concrete paragraphs: the problem, the solution, who runs it.>
 
-<!-- mpd:viz name="<body-diagram>" src="docs/assets/src/<body-diagram>/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="<body-diagram>" src="docs/assets/src/<body-diagram>/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/<body-diagram>.webp" alt="<Rich description of the one thing
 this diagram shows, in the order a reader meets it.>" width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 ## Technology stack
 
@@ -196,12 +196,12 @@ See [DEVELOPMENT.md](DEVELOPMENT.md#testing) for how tests are run.
 
 Released under the [<License Name>](LICENSE).
 
-<!-- mpd:footer start -->
+<!-- pd:footer start -->
 <div align="center">
 <br/>
 
 **Copyright © <year> <Org>. Released under the <SPDX-id> license.**
 
 </div>
-<!-- mpd:footer end -->
+<!-- pd:footer end -->
 ```

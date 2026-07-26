@@ -10,7 +10,7 @@ SUPPORT is a routing document, not a showcase. Its visual budget is **a single s
 designed header at most** — optional, static SVG only, **no animation**. If a header
 adds nothing, skip it; a plain `# Support` heading is fine. The "How do I get help?"
 decision tree stays a **Mermaid `flowchart` or a static SVG** — never an animated SVG.
-No `mpd:viz` animated embeds appear in this file. Any header is centered like every
+No `pd:viz` animated embeds appear in this file. Any header is centered like every
 other embed (`embedding.md` → Centering) and carries no version or date (house-style →
 No volatile facts).
 
@@ -93,7 +93,7 @@ For vulnerabilities, don't open a public issue — follow [SECURITY.md](SECURITY
 
 - **<Real limitation>.** <Plain explanation.>
 
-<!-- mpd:footer start -->
+<!-- pd:footer start -->
 <!-- … shared footer … -->
-<!-- mpd:footer end -->
+<!-- pd:footer end -->
 ````

@@ -2,7 +2,7 @@
   "name": "hero",
   "doc": "README.md",
   "tier": "animated-hero",
-  "producer": "more-pretty-docs",
+  "producer": "pretty-svg-docs",
   "style": "editorial",
   "facts": [
     "Step 1 selects the register before a single pattern is read; every downstream decision depends on it",

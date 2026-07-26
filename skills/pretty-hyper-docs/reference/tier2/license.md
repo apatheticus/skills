@@ -6,9 +6,9 @@ Legal text. The governing rule: **reproduce, never author, and never choose.**
 
 **LICENSE is an official legal document. It gets ZERO visuals, zero banners, zero
 badges, zero markers, and zero formatting beyond the verbatim legal text.** No
-`mpd:viz` embed, no `mpd:footer`, no `mpd:badges`, no attention banner, no design-system
+`pd:viz` embed, no `pd:footer`, no `pd:badges`, no attention banner, no design-system
 styling — nothing. The file is the canonical license text and the single filled
-copyright line, and nothing else. **Any `mpd:` marker or image in this file is a hard
+copyright line, and nothing else. **Any `pd:` marker or image in this file is a hard
 quality-gate violation** (house-style → Quality gates 3 and 10).
 
 ## Rules

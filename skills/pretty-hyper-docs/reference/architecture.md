@@ -84,7 +84,7 @@ wrong.
 All remaining diagrams (the layer map, the data model, secondary flows) are **static
 SVG in the frozen design system** or **plain Mermaid** — not animated. Ground every
 depicted component, flow, and label in the code; record the fact list in the visual's
-`mpd.json`. Keep versions and dates out of the rendered pixels (house-style → No
+`viz.json`. Keep versions and dates out of the rendered pixels (house-style → No
 volatile facts).
 
 Marker format and hash mechanics live in [embedding.md](embedding.md); production in
@@ -103,12 +103,12 @@ exists and what doesn't — e.g. no CI, no test runner.>
 
 ## Runtime view
 
-<!-- mpd:viz name="runtime-view" src="docs/assets/src/runtime-view/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="runtime-view" src="docs/assets/src/runtime-view/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/runtime-view.webp" alt="<Runtime boundaries and data flow: client,
 server, storage tiers and the requests between them.>" width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 <details>
 <summary>Diagram source (Mermaid)</summary>
@@ -145,12 +145,12 @@ flowchart TB
 
 ## Request lifecycle
 
-<!-- mpd:viz name="request-lifecycle" src="docs/assets/src/request-lifecycle/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="request-lifecycle" src="docs/assets/src/request-lifecycle/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/request-lifecycle.webp" alt="<One request's path: client to handler
 to datastore and back, in order.>" width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 <details>
 <summary>Diagram source (Mermaid)</summary>
@@ -174,7 +174,7 @@ sequenceDiagram
 - [CONTRIBUTING.md](CONTRIBUTING.md) — contribution process.
 - [SECURITY.md](SECURITY.md) — security posture.
 
-<!-- mpd:footer start -->
+<!-- pd:footer start -->
 <!-- … shared footer … -->
-<!-- mpd:footer end -->
+<!-- pd:footer end -->
 ```

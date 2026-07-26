@@ -2,7 +2,7 @@
   "name": "hero",
   "doc": "README.md",
   "tier": "animated-hero",
-  "producer": "more-pretty-docs",
+  "producer": "pretty-svg-docs",
   "style": "bento-grid",
   "facts": [
     "python3 is the only requirement — no renderer, no CLI, no network dependency",

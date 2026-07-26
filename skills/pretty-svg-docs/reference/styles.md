@@ -267,7 +267,7 @@ and not the other is a bug.
 
 When a value falls between the default and the floor, the checker prints one
 `SOFTENED` line — not a silent pass. Below the floor it's a plain `ERROR`. Every
-softened gate is recorded in the visual's `mpd.json` as `"relaxed":
+softened gate is recorded in the visual's `viz.json` as `"relaxed":
 ["contrast-text@3.0"]` and listed in the phase-8 report with the count of visuals
 affected.
 

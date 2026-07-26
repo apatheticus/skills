@@ -21,7 +21,7 @@ budgeted WebP. Every visual is styled by the repo's frozen design system
 docs/assets/src/DESIGN.md          frozen design system (all visuals derive from it)
 docs/assets/src/<viz-name>/        one composition per visual
   index.html                       the HyperFrames composition (committed)
-  mpd.json                         per-visual state + grounded fact list (committed)
+  viz.json                         per-visual state + grounded fact list (committed)
   hyperframes.json, package.json,  scaffold config written by `hyperframes init`
   meta.json                        (committed — the CLI needs them to re-render;
                                    meta.json here is HyperFrames' own file, NOT ours)
@@ -34,9 +34,9 @@ docs/assets/src/<viz-name>/        one composition per visual
 docs/assets/<viz-name>.webp        final committed WebP
 ```
 
-Committed per visual: `index.html`, `mpd.json`, the small scaffold config files
+Committed per visual: `index.html`, `viz.json`, the small scaffold config files
 (`hyperframes.json`, `package.json`, and HyperFrames' own `meta.json` — do not
-confuse it with `mpd.json`), and the final `docs/assets/<viz-name>.webp`. The
+confuse it with `viz.json`), and the final `docs/assets/<viz-name>.webp`. The
 skill maintains the `.gitignore` entries for the byproducts.
 
 ## 1. Scaffold
@@ -172,7 +172,7 @@ State which frames/timestamps you inspected and that seams/overlays/fonts passed
 
 `render.mp4`, `renders/`, `frames/`, `snapshots/`, `qa_*.png`, and `check.json`
 are gitignored (the skill maintains the entries). Committed: `index.html`,
-`mpd.json`, the scaffold config (`hyperframes.json`, `package.json`, HyperFrames'
+`viz.json`, the scaffold config (`hyperframes.json`, `package.json`, HyperFrames'
 own `meta.json`), and the final `docs/assets/<viz-name>.webp`.
 
 ---

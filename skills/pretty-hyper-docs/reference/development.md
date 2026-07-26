@@ -86,12 +86,12 @@ together, see [ARCHITECTURE.md](ARCHITECTURE.md).
 
 ## Quick start
 
-<!-- mpd:viz name="dev-loop" src="docs/assets/src/dev-loop/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="dev-loop" src="docs/assets/src/dev-loop/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/dev-loop.webp" alt="<Local dev loop in order: clone, install,
 build/seed, run, open — the exact steps below.>" width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 <details>
 <summary>Diagram source (Mermaid)</summary>
@@ -132,7 +132,7 @@ cd <project>
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [SECURITY.md](SECURITY.md)
 
-<!-- mpd:footer start -->
+<!-- pd:footer start -->
 <!-- … shared footer … -->
-<!-- mpd:footer end -->
+<!-- pd:footer end -->
 ```

@@ -1,7 +1,7 @@
 # Embedding — markers, manifests, lazy re-rendering, and the visual audit
 
 Read this before writing any visual embed into a doc, and before any `check` run.
-It defines the `mpd:viz` marker family, the per-visual `mpd.json` manifest, the
+It defines the `pd:viz` marker family, the per-visual `viz.json` manifest, the
 rules that decide when a visual re-renders, and the audit verdicts.
 
 ## Contents
@@ -9,26 +9,26 @@ rules that decide when a visual re-renders, and the audit verdicts.
 - [Embed shape per doc type](#embed-shape-per-doc-type)
 - [Centering](#centering)
 - [Alt-text doctrine](#alt-text-doctrine)
-- [The mpd:viz marker](#the-mpdviz-marker)
-- [The mpd.json manifest](#the-mpdjson-manifest)
+- [The pd:viz marker](#the-pdviz-marker)
+- [The viz.json manifest](#the-vizjson-manifest)
 - [Hashes](#hashes)
 - [Lazy re-render decision](#lazy-re-render-decision)
 - [Check-mode visual audit](#check-mode-visual-audit)
 
 ## Embed shape per doc type
 
-Every visual embed sits inside one `mpd:viz` marker pair. What goes inside the
+Every visual embed sits inside one `pd:viz` marker pair. What goes inside the
 pair depends on the doc:
 
 **README** (hero + body diagrams) — a centered image with rich alt text, nothing
 else:
 
 ```markdown
-<!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="hero" src="docs/assets/src/hero/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/hero.webp" alt="Animated overview: requests enter the gateway, fan out to the auth, billing, and search services, and results merge back to the client." width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 ```
 
 **Technical docs** (ARCHITECTURE, DEVELOPMENT, CONTRIBUTING) — the same centered
@@ -36,7 +36,7 @@ image, plus the collapsed Mermaid equivalent inside the pair and **outside** the
 centering wrapper:
 
 ```markdown
-<!-- mpd:viz name="request-flow" src="docs/assets/src/request-flow/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="request-flow" src="docs/assets/src/request-flow/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/request-flow.webp" alt="Animated sequence: a request passes the gateway, is authenticated, then handled by the matching service." width="820" />
 </div>
@@ -53,7 +53,7 @@ sequenceDiagram
 ```
 
 </details>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 ```
 
 The Mermaid block must parse (gate 1) and must state the same structure the
@@ -66,7 +66,7 @@ immediately below the pair.
 
 **Static SVGs** (non-flagship diagrams, SUPPORT header) — same marker pair, image
 pointing at a committed `.svg` in `docs/assets/`. Static visuals still get a
-`mpd.json` (their `render` block is omitted) so the audit can track their facts
+`viz.json` (their `render` block is omitted) so the audit can track their facts
 and design hash.
 
 **LICENSE / NOTICE — never.** No marker, no image, under any flag.
@@ -125,36 +125,36 @@ mechanism:
   never in a public issue.").
 - No volatile facts in alt text (it's still doc text).
 
-## The mpd:viz marker
+## The pd:viz marker
 
 ```
-<!-- mpd:viz name="<slug>" src="<path-to-composition-dir>/" facts-hash="<sha256>" src-hash="<sha256>" -->
+<!-- pd:viz name="<slug>" src="<path-to-composition-dir>/" facts-hash="<sha256>" src-hash="<sha256>" -->
 …embed content…
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 ```
 
 | Attribute | Meaning |
 | --- | --- |
 | `name` | Kebab-case visual slug. Unique per repo. Matches the asset basename (`docs/assets/<name>.webp` or `.svg`) and the composition dir (`docs/assets/src/<name>/`). |
-| `src` | Repo-relative path to the composition source dir (trailing slash). For hand-authored static SVGs this dir holds the SVG source and `mpd.json`. |
-| `facts-hash` | Copy of `facts_hash` from `mpd.json` at last render/write. |
-| `src-hash` | Copy of `src_hash` from `mpd.json` at last render/write. |
+| `src` | Repo-relative path to the composition source dir (trailing slash). For hand-authored static SVGs this dir holds the SVG source and `viz.json`. |
+| `facts-hash` | Copy of `facts_hash` from `viz.json` at last render/write. |
+| `src-hash` | Copy of `src_hash` from `viz.json` at last render/write. |
 
 Rules:
 
 - Attributes are double-quoted, in the order shown. One marker pair per visual;
   pairs never nest.
-- The marker and its `mpd.json` are written **together, atomically with the
-  render** — after a successful render/conversion, update `mpd.json` first, then
+- The marker and its `viz.json` are written **together, atomically with the
+  render** — after a successful render/conversion, update `viz.json` first, then
   rewrite the marker with the same hashes. A marker whose hashes disagree with its
-  `mpd.json` means someone hand-edited one of them; `check` reports it, apply
+  `viz.json` means someone hand-edited one of them; `check` reports it, apply
   mode treats the visual as stale and re-renders to re-sync.
 - Everything between the markers is regenerable wholesale. Prose belongs outside
   the pair.
 
-## The mpd.json manifest
+## The viz.json manifest
 
-Committed at `docs/assets/src/<name>/mpd.json`:
+Committed at `docs/assets/src/<name>/viz.json`:
 
 ```json
 {
@@ -199,7 +199,7 @@ Computed per visual during the plan phase. **RE-RENDER** iff any of:
 2. **Source edited** — recomputed `src_hash` of the composition source ≠ stored.
 3. **Design drift** — recomputed `design_hash` of `DESIGN.md` ≠ stored.
 4. **Asset missing** — the committed `.webp`/`.svg` doesn't exist at its path.
-5. **Marker/manifest mismatch** — marker hashes ≠ `mpd.json` hashes.
+5. **Marker/manifest mismatch** — marker hashes ≠ `viz.json` hashes.
 6. **Forced** — the run was invoked with `--refresh-viz`.
 
 Otherwise **REUSE**: the embed line may be rewritten (alt text, position) but no
@@ -212,7 +212,7 @@ render happens. Consequences worth stating plainly:
   That's why the design system is frozen per run and only re-derived on identity
   change or explicit request.
 
-After a re-render: write `mpd.json` (new hashes, same stable field order), then
+After a re-render: write `viz.json` (new hashes, same stable field order), then
 rewrite the marker pair with matching hashes, then confirm the asset passed the
 size gate.
 
@@ -232,6 +232,6 @@ judgment is yours (it needs the evidence pass).
 | `CONTRADICTS` | A stored fact conflicts with what the evidence pass now shows | you — the script prints each visual's `facts` list for judgment |
 | `BUDGET` | Doc exceeds its visual budget, or **any** visual/marker found in LICENSE/NOTICE (hard violation) | script |
 
-`check` writes nothing — no renders, no marker edits, no mpd.json updates. The
+`check` writes nothing — no renders, no marker edits, no viz.json updates. The
 verdicts feed the report table; in apply mode the same computations feed the
 RE-RENDER/REUSE plan.

@@ -25,7 +25,7 @@ Usage:
 
 Output is one line per finding: ERROR / SOFTENED / WARN / NOTE.
 Exit 0 = no errors, exit 1 = at least one ERROR. SOFTENED lines are passes that
-used a declared style relaxation; record them in mpd.json's `relaxed` array.
+used a declared style relaxation; record them in viz.json's `relaxed` array.
 """
 
 from __future__ import annotations
@@ -331,7 +331,7 @@ class Findings:
     def note(self, p: str, m: str) -> None: self.add("NOTE", p, m)
 
     def softened(self, p: str, token: str, m: str) -> None:
-        """`token` is the gate@floor string recorded in mpd.json's `relaxed` array."""
+        """`token` is the gate@floor string recorded in viz.json's `relaxed` array."""
         self.relaxed.add(token)
         self.add("SOFTENED", p, m)
 

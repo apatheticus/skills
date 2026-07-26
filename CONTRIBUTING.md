@@ -140,7 +140,7 @@ docs: tighten README install section, add removal steps
 
 ## Pull request process
 
-<!-- mpd:viz name="pr-lifecycle" src="docs/assets/src/pr-lifecycle/" facts-hash="89531feffe8bc4da26f2162440c17406dc4c65fed50d676eaa2657e19f9d8f11" src-hash="86e743b4b5e0751b31ca6e81c244a59325b630205772773ba3111427c396cf21" -->
+<!-- pd:viz name="pr-lifecycle" src="docs/assets/src/pr-lifecycle/" facts-hash="89531feffe8bc4da26f2162440c17406dc4c65fed50d676eaa2657e19f9d8f11" src-hash="86e743b4b5e0751b31ca6e81c244a59325b630205772773ba3111427c396cf21" -->
 <div align="center">
 <img src="docs/assets/pr-lifecycle.webp" width="860" alt="The six steps a change takes from stage to main: work on stage, add the skill and run it end to end against a real target, run npm run sync and npm run validate, push and open a pull request into main, let the required skills + manifests check run, then have an admin review it and either accept it or close it on quality, value, and fit." />
 </div>
@@ -162,7 +162,7 @@ flowchart TD
 ```
 
 </details>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 The required status check on `main` is the `validate` workflow's job, whose context
 name is **`skills + manifests`**. That string is the job's `name:` in
@@ -256,11 +256,11 @@ as a security issue, not a bug.
 This project is licensed under [MIT](./LICENSE). Contributions are accepted under
 the same license.
 
-<!-- mpd:footer start -->
+<!-- pd:footer start -->
 <div align="center">
 <br/>
 
 **Copyright © 2026 Zerø Effort. Released under the MIT license.**
 
 </div>
-<!-- mpd:footer end -->
+<!-- pd:footer end -->

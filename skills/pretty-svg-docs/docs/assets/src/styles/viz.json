@@ -2,7 +2,7 @@
   "name": "styles",
   "doc": "README.md",
   "tier": "animated-flagship",
-  "producer": "more-pretty-docs",
+  "producer": "pretty-svg-docs",
   "style": "catalog-sheet",
   "facts": [
     "The catalog holds 31 styles, indexed alphabetically in reference/styles.md with one spec file each under reference/styles/",

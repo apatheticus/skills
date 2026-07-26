@@ -4,7 +4,7 @@ A `CODEOWNERS` file (GitHub: `.github/CODEOWNERS`) mapping paths to review owner
 On-demand only, and it **always requires asking** — owners can't be safely inferred.
 
 This is a config file, not a prose doc: it carries **no visuals, banners, badges, or
-`mpd:` markers** — just the path→owner rules (and any `# TODO:` comment).
+`pd:` markers** — just the path→owner rules (and any `# TODO:` comment).
 
 ## Rules
 

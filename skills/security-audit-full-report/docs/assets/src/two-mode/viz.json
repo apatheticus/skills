@@ -2,7 +2,7 @@
   "name": "two-mode",
   "doc": "README.md",
   "tier": "animated-flagship",
-  "producer": "more-pretty-docs",
+  "producer": "pretty-svg-docs",
   "style": "flat-material",
   "facts": [
     "Every invocation picks its mode by reading ledger.md before doing anything else",

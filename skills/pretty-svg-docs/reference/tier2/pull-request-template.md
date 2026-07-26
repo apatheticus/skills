@@ -3,7 +3,7 @@
 A `PULL_REQUEST_TEMPLATE.md` (GitHub: repo root or `.github/`), generated from the
 project's real review gates. On-demand only.
 
-This is a form, not a prose doc: it carries **no visuals, banners, badges, or `mpd:`
+This is a form, not a prose doc: it carries **no visuals, banners, badges, or `pd:`
 markers** — just the template fields.
 
 ## Content

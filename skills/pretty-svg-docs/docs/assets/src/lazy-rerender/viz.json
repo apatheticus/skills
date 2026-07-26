@@ -2,7 +2,7 @@
   "name": "lazy-rerender",
   "doc": "README.md",
   "tier": "animated-flagship",
-  "producer": "more-pretty-docs",
+  "producer": "pretty-svg-docs",
   "style": "bento-grid",
   "facts": [
     "RE-RENDER fires on any of six triggers: facts hash moved, src hash moved, design hash moved, the asset is missing, marker and manifest disagree, or the run was forced with --refresh-viz",

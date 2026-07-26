@@ -4,18 +4,18 @@
 
 **A Claude Code skill that writes a repository's standard docs and authors their key diagrams as seamless-loop animated SVG — with nothing to install.**
 
-<!-- mpd:badges start -->
+<!-- pd:badges start -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-e0a33e.svg)](../../LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-skill-12324f)](SKILL.md)
 [![Dependencies](https://img.shields.io/badge/dependencies-python3_only-12324f)](#install)
 [![Styles](https://img.shields.io/badge/style_catalog-31-12324f)](reference/styles.md)
-<!-- mpd:badges end -->
+<!-- pd:badges end -->
 
-<!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="e427d9ffd6fe932b10a704f334210d0ec7362a9c45e6ab2567ebeeda7fdf3746" src-hash="a4a9864ca05ef250866c1dbf69a2ca931541420f7656a9d65abbcff568a8695b" -->
+<!-- pd:viz name="hero" src="docs/assets/src/hero/" facts-hash="e427d9ffd6fe932b10a704f334210d0ec7362a9c45e6ab2567ebeeda7fdf3746" src-hash="a4a9864ca05ef250866c1dbf69a2ca931541420f7656a9d65abbcff568a8695b" -->
 <div align="center">
 <img src="docs/assets/hero.svg" alt="Animated board of eight cells. The widest names the skill and its claim — animated SVG, authored, not rendered. A runtime cell reads python3 and nothing else, and the single accent-filled cell reports zero dependencies. One cell nests the pipeline as a small diagram, author then gate then commit, with a status dot visiting each station in turn and no render station between them, because the committed asset is its own source. Two cells count what the skill carries: thirty-one catalog idioms, of which one is chosen per repo, and the eight classes the bundled checker applies to every visual, the eighth being fidelity. Along the bottom the verdict cell reads zero errors, required before any visual is embedded, beside a meter that fills and settles, and the last cell gives the loop as twelve seconds, seam-exact." width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 </div>
 
@@ -54,7 +54,7 @@ gated by the skill itself, in the `bento-grid` style.
   SECURITY/CODE_OF_CONDUCT: one attention banner).
 - `docs/assets/src/DESIGN.md` — the frozen design system every visual derives from,
   including the resolved style spec.
-- `docs/assets/src/<viz>/mpd.json` — each visual's facts, hashes and parameters.
+- `docs/assets/src/<viz>/viz.json` — each visual's facts, hashes and parameters.
   There is no composition source next to it, because the asset *is* the source.
 
 LICENSE and NOTICE are never visualized or reformatted.
@@ -66,11 +66,11 @@ A **style** is the look-and-feel idiom every visual in a repo is rendered in. Pa
 has. Style owns *form* — shape, material, type, composition, motion. The product's
 own brand tokens still own the *palette*.
 
-<!-- mpd:viz name="styles" src="docs/assets/src/styles/" facts-hash="33ebe05a0c9d07aebe81b14ad473b53cba1c9f2a06b373fbd52bc50b74da294a" src-hash="f729b4bd84d58499c2a9a70c513e4e4d29a7d17c60fd903aaa6c45f8b3ffdd7c" -->
+<!-- pd:viz name="styles" src="docs/assets/src/styles/" facts-hash="33ebe05a0c9d07aebe81b14ad473b53cba1c9f2a06b373fbd52bc50b74da294a" src-hash="f729b4bd84d58499c2a9a70c513e4e4d29a7d17c60fd903aaa6c45f8b3ffdd7c" -->
 <div align="center">
 <img src="docs/assets/styles.svg" alt="A contact sheet of thirty-one animated style specimens in alphabetical order, two to a row: bento-grid, blueprint, brushed-metal, claymorphism, codex-leonardo, console-elbow, digital-rain, draughtsman-notebook, editorial, flat-material, glassmorphism, holographic-projection, hud, ide-dark, isometric-3d, lofi-wireframe, maximalist, neo-brutalist, neumorphism, oil-impasto, patent-drawing, pencil-lined-paper, rough-sketch, schematic, skeuomorphic, swiss-minimal, terminal-minimalist, watercolor, whiteboard-marker, wood-grain and y2k-retrofuturist. Every cell is that style’s own full-width specimen scaled down, so each carries its real filter chains, grain and lighting — lit impasto relief, displaced wood grain, anisotropic brushed metal, true backdrop blur — rather than a flattened imitation. Each also carries one motion characteristic of its style. The final accent-bordered cell reports that all thirty-one were built and gated at their declared filter floors." width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 Every cell above **is** that style's own specimen, scaled — not a redrawing of it.
 Each specimen is built at 1200 × 460 and gated under its own `--style`, so it gets
@@ -138,7 +138,7 @@ Full rules and the resolution ladder: [`reference/styles.md`](reference/styles.m
 
 Where a style's look genuinely fights a soft gate, the style wins and the gate
 softens to a **declared floor, never off** — 21 of the 31 relax something, almost
-always filter depth, and every relaxation is printed, recorded in `mpd.json`, and
+always filter depth, and every relaxation is printed, recorded in `viz.json`, and
 named in the run report. `neumorphism` is the only style that relaxes *contrast*.
 Structural and truth gates never soften.
 
@@ -148,11 +148,11 @@ Every embed carries hashes for the facts it depicts, the asset itself, and the
 design system. A later run rewrites a visual only when one of those changed, its
 asset is missing, or `--refresh-viz` forces it:
 
-<!-- mpd:viz name="lazy-rerender" src="docs/assets/src/lazy-rerender/" facts-hash="067f0007dc5ac5559540bec44975e82534b0e7882282f43b860120261a42ae14" src-hash="cc0a27310154cf93a8189496fd976be3062edf2682d39b6d10036c51f8e709ad" -->
+<!-- pd:viz name="lazy-rerender" src="docs/assets/src/lazy-rerender/" facts-hash="067f0007dc5ac5559540bec44975e82534b0e7882282f43b860120261a42ae14" src-hash="cc0a27310154cf93a8189496fd976be3062edf2682d39b6d10036c51f8e709ad" -->
 <div align="center">
 <img src="docs/assets/lazy-rerender.svg" alt="Animated board of ten cells. The accent-filled cell holds the verdict when none of the six triggers fired: reuse, meaning the embed may be rewritten but nothing is rendered. Three cells name the hashes that are compared, each showing its digest twice, stored above fresh, as two identical rows that read as a match: the facts the visual depicts, which moves when the evidence does; the committed svg itself, where a hand-edit shows up; and the design system, which moves every visual at once. A status dot visits the three in turn. Three further cells carry the triggers that are not hashes at all — the asset missing from its path, a marker disagreeing with its manifest, and a run forced with refresh-viz. The last row states both outcomes: if any one of the six fired, that visual alone is re-authored and commits fresh hashes while every other visual is left alone; a prose-only edit moves no hash and re-authors nothing." width="820" />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 Because the style spec lives inside `DESIGN.md`, changing the style moves
 `design_hash` and re-authors every visual in the repo. The plan phase says so, with
@@ -216,11 +216,11 @@ pretty-svg-docs/
 
 Released under the [MIT License](../../LICENSE) of the repository that ships it.
 
-<!-- mpd:footer start -->
+<!-- pd:footer start -->
 <div align="center">
 <br/>
 
 **Copyright © 2026 Zerø Effort. Released under the MIT license.**
 
 </div>
-<!-- mpd:footer end -->
+<!-- pd:footer end -->

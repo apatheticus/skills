@@ -26,7 +26,7 @@ Nothing else. No CLI, no `ffmpeg`, no `img2webp`, no network.
 docs/assets/src/DESIGN.md          frozen design system + resolved style (all visuals derive from it)
 docs/assets/<viz-name>.svg         committed — the asset AND the source
 docs/assets/src/<viz-name>/
-  mpd.json                         committed — facts, hashes, svg params (see embedding.md)
+  viz.json                         committed — facts, hashes, svg params (see embedding.md)
   _qa/filmstrip.html               gitignored — the scrub harness
   _qa/phase_*.png                  gitignored — verification stills
 ```
@@ -186,7 +186,7 @@ labels below the legibility floor and never quietly drop content.
 
 ## 2. Gate loop (mandatory, per visual)
 
-Iterate until clean. **Do not write `mpd.json` or the marker until this passes.**
+Iterate until clean. **Do not write `viz.json` or the marker until this passes.**
 
 ```bash
 python3 scripts/svg_check.py --design docs/assets/src/DESIGN.md \
@@ -232,7 +232,7 @@ Two attributes matter here:
   style's own floor and ceiling instead of the file-wide one.
 
 Exit code is non-zero on any `ERROR`. `SOFTENED` lines are passes that used a
-declared style relaxation — they belong in the run report and in `mpd.json`'s
+declared style relaxation — they belong in the run report and in `viz.json`'s
 `relaxed` array. `WARN` lines are advisory, and identical graphic-contrast warnings
 are aggregated with an `(xN)` count.
 
@@ -276,10 +276,10 @@ no browser tool; `svg_check.py` passed."* Never imply pixels were inspected.
 
 Only now, and in this order:
 
-1. Write `docs/assets/src/<viz-name>/mpd.json` — facts, `facts_hash`, `src_hash`
+1. Write `docs/assets/src/<viz-name>/viz.json` — facts, `facts_hash`, `src_hash`
    over the committed `.svg`, `design_hash`, `producer`, `style`, the `svg` block,
    and the `relaxed` array from step 2.
-2. Rewrite the `mpd:viz` marker with the same `facts-hash` and `src-hash`.
+2. Rewrite the `pd:viz` marker with the same `facts-hash` and `src-hash`.
 3. Confirm `docs/assets/src/**/_qa/` is in `.gitignore`.
 
 A marker and manifest that disagree mean one was hand-edited; the audit reports it
@@ -290,7 +290,7 @@ and the next apply run re-authors the visual to re-sync.
 ## Statics
 
 A static visual is the same file format with no `<style>` animation block. Set
-`data-loop-s="0"` and `"loop_s": 0` in `mpd.json`; the checker skips the seam and
+`data-loop-s="0"` and `"loop_s": 0` in `viz.json`; the checker skips the seam and
 reduced-motion classes and applies everything else unchanged. Statics get the same
 `<title>`/`<desc>`, the same palette conformance, the same legibility floors, and
 the same byte cap.

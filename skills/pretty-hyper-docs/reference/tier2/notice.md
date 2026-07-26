@@ -7,9 +7,9 @@ An attribution file, created/maintained **only when** the license calls for it
 
 **NOTICE is an official legal document. It gets ZERO visuals, zero banners, zero
 badges, zero markers, and zero formatting beyond the verbatim attribution text.** No
-`mpd:viz` embed, no `mpd:footer`, no `mpd:badges`, no design-system styling — nothing.
+`pd:viz` embed, no `pd:footer`, no `pd:badges`, no design-system styling — nothing.
 The file is the project name, the copyright attribution line, and any obligated
-third-party attributions, in plain text. **Any `mpd:` marker or image in this file is a
+third-party attributions, in plain text. **Any `pd:` marker or image in this file is a
 hard quality-gate violation** (house-style → Quality gates 3 and 10).
 
 ## Rules
