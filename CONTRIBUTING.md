@@ -101,10 +101,11 @@ anyway.
 
 ## Branching model
 
-`stage` is the default branch and carries no protection, so day-to-day work is
-committed and pushed there directly. `main` is protected with `enforce_admins`
-turned on, which means nobody — including the repo owner — can push to it. It only
-takes changes through a pull request from `stage`.
+`main` is the default branch, and it is protected with `enforce_admins` turned on,
+which means nobody — including the repo owner — can push to it. It only takes
+changes through a pull request. `stage` carries no protection, so day-to-day work
+is committed and pushed there directly and reaches `main` by opening a pull
+request from it.
 
 ```mermaid
 gitGraph
@@ -189,9 +190,9 @@ review thread must be resolved before the merge button unlocks
 (`required_conversation_resolution`). If you leave a comment on your own pull request,
 resolve it before merging.
 
-One wrinkle worth knowing: `Closes #N` only auto-closes on merges into the default
-branch, which is `stage`. A pull request merged into `main` will not close the
-issue, so close it by hand.
+`Closes #N` auto-closes on merges into the default branch, which is `main`, so put
+the keyword in the pull request that targets it. Pushing straight to `stage` does
+not close anything, however the commit is worded.
 
 Before opening the pull request:
 
