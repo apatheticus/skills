@@ -158,9 +158,11 @@ How you get the new names depends on the channel you installed through:
 rm -rf .claude/skills/make-pretty-docs .claude/skills/more-pretty-docs
 ```
 
-Existing visuals keep working. The marker and manifest names changed too — `pd:viz` →
-`pd:viz`, `viz.json` → `viz.json` — but both skills still read the old forms and rewrite
-them in place the next time they touch a doc, so nothing needs re-rendering.
+Existing visuals keep working. The marker and manifest names changed too — `mpd:viz` →
+`pd:viz`, `mpd.json` → `viz.json` — and the frozen design system moved from
+`docs/assets/src/DESIGN.md` to `.prettydocs/prettydocs.md`. Both skills still read every
+old form and rewrite it in place the next time they touch a doc, so nothing needs
+re-rendering.
 
 <br/>
 
@@ -202,8 +204,13 @@ scripts/
   validate.mjs       # frontmatter + manifest validator (also runs in CI)
 docs/assets/
   *.webp             # the animated diagrams embedded above
-  src/               # their compositions, and the repo's frozen design system
+.prettydocs/
+  prettydocs.md      # the repo's frozen design system
+  src/<viz>/         # each diagram's composition and its viz.json manifest
 ```
+
+Every project root repeats the `docs/assets/` + `.prettydocs/` pair — this repo is six of
+them, the root plus each `skills/<name>/`.
 
 The plugin is sourced from the repo root and lists every skill under `skills/`. That
 satisfies both installers with no duplicated files: `npx skills` discovers
