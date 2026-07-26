@@ -1,0 +1,201 @@
+/* =====================================================================
+   NEUMORPHIC FRESH — Component Primitives
+   components.css  (depends on colors_and_type.css)
+   Reusable soft-UI building blocks: surfaces, buttons, fields, toggles,
+   sliders, badges, progress, spinners, etc. Class-prefixed `nf-`.
+   ===================================================================== */
+
+/* ---------------- SURFACES ---------------- */
+.nf-surface   { background: var(--surface); border-radius: var(--r-lg); box-shadow: var(--el-2); }
+.nf-surface-sm{ background: var(--surface); border-radius: var(--r-md); box-shadow: var(--el-1); }
+.nf-surface-lg{ background: var(--surface); border-radius: var(--r-xl); box-shadow: var(--el-3); }
+.nf-inset     { background: var(--surface-inset); border-radius: var(--r-md); box-shadow: var(--inset-1); }
+.nf-card {
+  background: var(--surface);
+  border-radius: var(--r-lg);
+  box-shadow: var(--el-2);
+  padding: var(--sp-5);
+  transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+.nf-card--hover:hover { box-shadow: var(--el-3); transform: translateY(-3px); }
+.nf-glass {
+  background: var(--glass);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--r-lg);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+}
+
+/* ---------------- BUTTONS ---------------- */
+.nf-btn {
+  --_pad-y: 0.7em; --_pad-x: 1.25em;
+  font-family: var(--font-display);
+  font-weight: var(--weight-semibold);
+  font-size: var(--fs-sm);
+  letter-spacing: var(--tracking-snug);
+  color: var(--fg1);
+  background: var(--surface);
+  border: none;
+  border-radius: var(--r-pill);
+  padding: var(--_pad-y) var(--_pad-x);
+  box-shadow: var(--el-1);
+  cursor: pointer;
+  display: inline-flex; align-items: center; gap: 0.5em;
+  transition: box-shadow var(--dur-fast) var(--ease-out),
+              transform var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out);
+  user-select: none;
+  white-space: nowrap;
+}
+.nf-btn:hover { box-shadow: var(--el-2); transform: translateY(-1px); color: var(--accent-press); }
+.nf-btn:active { box-shadow: var(--inset-1); transform: translateY(0) scale(0.985); color: var(--fg2); }
+.nf-btn:focus-visible { outline: none; box-shadow: var(--el-1), 0 0 0 3px var(--accent-wash); }
+
+/* primary — accent fill with soft glow */
+.nf-btn--primary {
+  color: var(--fg-on-accent);
+  background: var(--grad-fresh);
+  box-shadow: var(--el-1), var(--glow-accent);
+}
+.nf-btn--primary:hover { color: var(--fg-on-accent); transform: translateY(-2px); box-shadow: var(--el-2), var(--glow-accent); }
+.nf-btn--primary:active { box-shadow: var(--inset-1); transform: scale(0.98); }
+
+/* ghost / pressed-in pill */
+.nf-btn--ghost { box-shadow: var(--inset-1); color: var(--fg2); }
+.nf-btn--ghost:hover { color: var(--accent-press); box-shadow: var(--inset-1); transform: none; }
+
+/* danger */
+.nf-btn--danger { color: #fff; background: var(--danger); box-shadow: var(--el-1), var(--glow-danger); }
+.nf-btn--danger:hover { color:#fff; transform: translateY(-2px); }
+
+.nf-btn--lg { font-size: var(--fs-base); --_pad-y: 0.85em; --_pad-x: 1.6em; }
+.nf-btn--sm { font-size: var(--fs-xs); --_pad-y: 0.55em; --_pad-x: 0.95em; }
+.nf-btn--icon { --_pad-x: 0.7em; border-radius: var(--r-pill); aspect-ratio: 1; justify-content:center; }
+.nf-btn[disabled] { opacity: 0.5; cursor: not-allowed; box-shadow: var(--inset-1); transform:none; }
+
+/* ---------------- BADGES / CHIPS / STATUS ---------------- */
+.nf-badge {
+  display: inline-flex; align-items: center; gap: 0.4em;
+  font-family: var(--font-body); font-weight: var(--weight-semibold);
+  font-size: var(--fs-xs); letter-spacing: var(--tracking-snug);
+  padding: 0.35em 0.8em; border-radius: var(--r-pill);
+  background: var(--accent-wash); color: var(--accent-press);
+  white-space: nowrap;
+}
+.nf-badge--success { background: var(--success-wash); color: var(--success); }
+.nf-badge--warning { background: var(--warning-wash); color: var(--warning); }
+.nf-badge--danger  { background: var(--danger-wash);  color: var(--danger); }
+.nf-badge--info    { background: var(--info-wash);    color: var(--info); }
+.nf-badge--neutral { background: var(--surface-inset); color: var(--fg2); box-shadow: var(--inset-1); }
+
+.nf-chip {
+  display:inline-flex; align-items:center; gap:0.45em;
+  font-size: var(--fs-sm); font-weight: var(--weight-medium); color: var(--fg2);
+  padding: 0.5em 0.95em; border-radius: var(--r-pill);
+  background: var(--surface); box-shadow: var(--el-1); cursor:pointer;
+  transition: all var(--dur-fast) var(--ease-out);
+}
+.nf-chip[aria-pressed="true"], .nf-chip.is-active {
+  color: var(--fg-on-accent); background: var(--grad-fresh); box-shadow: var(--el-1), var(--glow-accent);
+}
+
+.nf-dot { width:0.6em; height:0.6em; border-radius:50%; display:inline-block; }
+.nf-dot--live { background: var(--success); box-shadow: 0 0 0 0 rgba(47,201,122,0.6); animation: nf-pulse 1.8s var(--ease-out) infinite; }
+.nf-dot--warn { background: var(--warning); }
+.nf-dot--off  { background: var(--fg3); }
+@keyframes nf-pulse { 0%{box-shadow:0 0 0 0 rgba(47,201,122,0.55);} 70%{box-shadow:0 0 0 8px rgba(47,201,122,0);} 100%{box-shadow:0 0 0 0 rgba(47,201,122,0);} }
+
+/* ---------------- FORM FIELDS ---------------- */
+.nf-field { display:flex; flex-direction:column; gap:0.45em; }
+.nf-label { font-size: var(--fs-sm); font-weight: var(--weight-semibold); color: var(--fg2); }
+.nf-input, .nf-textarea, .nf-select {
+  font-family: var(--font-body); font-size: var(--fs-base); color: var(--fg1);
+  background: var(--surface-inset); border: none;
+  border-radius: var(--r-md); padding: 0.85em 1.1em;
+  box-shadow: var(--inset-1);
+  transition: box-shadow var(--dur-base) var(--ease-out);
+  width: 100%;
+}
+.nf-input::placeholder, .nf-textarea::placeholder { color: var(--fg3); }
+.nf-input:focus, .nf-textarea:focus, .nf-select:focus {
+  outline: none; box-shadow: var(--inset-2), 0 0 0 3px var(--accent-wash);
+}
+.nf-textarea { resize: vertical; min-height: 5rem; line-height: var(--lh-normal); }
+
+/* checkbox & radio (soft) */
+.nf-check {
+  appearance:none; width:1.4em; height:1.4em; border-radius: var(--r-xs);
+  background: var(--surface); box-shadow: var(--el-1); cursor:pointer;
+  display:inline-grid; place-content:center; transition: all var(--dur-fast) var(--ease-spring);
+}
+.nf-check:checked { background: var(--grad-fresh); box-shadow: var(--inset-1); }
+.nf-check:checked::after { content:""; width:0.5em; height:0.85em; border:solid var(--fg-on-accent); border-width:0 0.18em 0.18em 0; transform: rotate(42deg) translateY(-1px); }
+.nf-radio { border-radius: 50%; }
+.nf-radio:checked::after { content:""; width:0.55em; height:0.55em; border-radius:50%; border:none; background: var(--fg-on-accent); transform:none; }
+
+/* ---------------- TOGGLE SWITCH ---------------- */
+.nf-switch { position:relative; width: 3.4em; height: 1.85em; display:inline-block; cursor:pointer; }
+.nf-switch input { position:absolute; opacity:0; }
+.nf-switch .track {
+  position:absolute; inset:0; border-radius: var(--r-pill);
+  background: var(--surface-inset); box-shadow: var(--inset-1);
+  transition: background var(--dur-base) var(--ease-out);
+}
+.nf-switch .thumb {
+  position:absolute; top:50%; left: 0.22em; width: 1.4em; height:1.4em;
+  transform: translateY(-50%); border-radius:50%;
+  background: var(--surface); box-shadow: var(--el-1);
+  transition: left var(--dur-base) var(--ease-spring), background var(--dur-base) var(--ease-out);
+}
+.nf-switch input:checked ~ .track { background: var(--grad-fresh); box-shadow: var(--inset-1); }
+.nf-switch input:checked ~ .thumb { left: calc(100% - 1.62em); }
+
+/* ---------------- SEGMENTED CONTROL ---------------- */
+.nf-segment { display:inline-flex; padding: 0.3em; gap:0.2em; border-radius: var(--r-pill); background: var(--surface-inset); box-shadow: var(--inset-1); }
+.nf-segment button {
+  border:none; background:transparent; cursor:pointer; font-family: var(--font-display);
+  font-weight: var(--weight-semibold); font-size: var(--fs-sm); color: var(--fg2);
+  padding: 0.5em 1.1em; border-radius: var(--r-pill); transition: all var(--dur-base) var(--ease-out);
+}
+.nf-segment button.is-active { color: var(--fg1); background: var(--surface); box-shadow: var(--el-1); }
+
+/* ---------------- SLIDER (range) ---------------- */
+.nf-range { -webkit-appearance:none; appearance:none; width:100%; height: 1.1em; background:transparent; cursor:pointer; }
+.nf-range::-webkit-slider-runnable-track { height: 0.7em; border-radius: var(--r-pill); background: var(--surface-inset); box-shadow: var(--inset-1); }
+.nf-range::-moz-range-track { height: 0.7em; border-radius: var(--r-pill); background: var(--surface-inset); box-shadow: var(--inset-1); }
+.nf-range::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:1.35em; height:1.35em; margin-top:-0.33em; border-radius:50%; background: var(--surface); box-shadow: var(--el-1), var(--glow-accent); border: 2px solid var(--mint); transition: transform var(--dur-fast) var(--ease-spring); }
+.nf-range::-webkit-slider-thumb:active { transform: scale(1.15); }
+.nf-range::-moz-range-thumb { width:1.35em; height:1.35em; border-radius:50%; background: var(--surface); box-shadow: var(--el-1); border: 2px solid var(--mint); }
+
+/* ---------------- PROGRESS ---------------- */
+.nf-progress { height: 0.7em; border-radius: var(--r-pill); background: var(--surface-inset); box-shadow: var(--inset-1); overflow:hidden; }
+.nf-progress > span { display:block; height:100%; border-radius: var(--r-pill); background: var(--grad-fresh); box-shadow: var(--glow-accent); transition: width var(--dur-slow) var(--ease-out); }
+.nf-progress--striped > span { background-image: var(--grad-fresh), repeating-linear-gradient(45deg, rgba(255,255,255,0.18) 0 8px, transparent 8px 16px); animation: nf-stripes 1s linear infinite; }
+@keyframes nf-stripes { to { background-position: 32px 0, 0 0; } }
+
+/* ---------------- SPINNERS ---------------- */
+.nf-spinner { width: 2.4em; height:2.4em; border-radius:50%; background: conic-gradient(from 0deg, var(--mint), var(--cyan), transparent 75%); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 0); mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 0); animation: nf-spin 0.9s linear infinite; }
+@keyframes nf-spin { to { transform: rotate(360deg); } }
+.nf-dots { display:inline-flex; gap:0.4em; }
+.nf-dots i { width:0.6em; height:0.6em; border-radius:50%; background: var(--accent); display:inline-block; animation: nf-bounce 1s var(--ease-in-out) infinite; }
+.nf-dots i:nth-child(2){ animation-delay:0.15s; } .nf-dots i:nth-child(3){ animation-delay:0.3s; }
+@keyframes nf-bounce { 0%,80%,100%{ transform: translateY(0); opacity:0.5; } 40%{ transform: translateY(-0.55em); opacity:1; } }
+
+/* skeleton shimmer */
+.nf-skeleton { background: var(--surface-inset); border-radius: var(--r-sm); position:relative; overflow:hidden; box-shadow: var(--inset-1); }
+.nf-skeleton::after { content:""; position:absolute; inset:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent); transform: translateX(-100%); animation: nf-shimmer 1.4s infinite; }
+[data-theme="dark"] .nf-skeleton::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); }
+@keyframes nf-shimmer { to { transform: translateX(100%); } }
+
+/* ---------------- TOOLTIP ---------------- */
+.nf-tip { position:relative; }
+.nf-tip::after { content: attr(data-tip); position:absolute; bottom:calc(100% + 8px); left:50%; transform: translateX(-50%) translateY(4px); white-space:nowrap; font-size: var(--fs-xs); font-weight:var(--weight-medium); color: var(--fg1); background: var(--surface); box-shadow: var(--el-2); padding:0.4em 0.7em; border-radius: var(--r-sm); opacity:0; pointer-events:none; transition: all var(--dur-fast) var(--ease-out); }
+.nf-tip:hover::after { opacity:1; transform: translateX(-50%) translateY(0); }
+
+/* ---------------- AVATAR ---------------- */
+.nf-avatar { width:2.6em; height:2.6em; border-radius:50%; background: var(--surface); box-shadow: var(--el-1); display:grid; place-content:center; font-family:var(--font-display); font-weight:var(--weight-bold); color: var(--accent-press); overflow:hidden; }
+.nf-avatar img { width:100%; height:100%; object-fit:cover; }
+
+/* ---------------- DIVIDER ---------------- */
+.nf-divider { height:1px; background: var(--line); border:none; margin: var(--sp-4) 0; }
+.nf-divider--soft { height: 2px; border-radius: var(--r-pill); background: var(--surface); box-shadow: var(--inset-1); }
