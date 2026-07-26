@@ -1,0 +1,4 @@
+# Visual QA byproducts. The committed artefacts are the .svg files in docs/assets/
+# plus each visual's mpd.json — the asset is its own source, so there is nothing
+# else to keep.
+docs/assets/src/**/_qa/

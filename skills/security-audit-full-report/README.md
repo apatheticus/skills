@@ -1,22 +1,26 @@
-<p align="center">
-  <img src="docs/assets/hero.svg" width="100%" alt="security-audit-full-report — a Claude Code agent skill that loops a security audit until findings converge, then merges every run into one consolidated interactive HTML report">
-</p>
-
 <div align="center">
 
-<!-- update-docs:badges start -->
-[![Claude Code skill](https://img.shields.io/badge/Claude_Code-agent_skill-5B5FEF)](SKILL.md)
-[![Orchestrates security-audit](https://img.shields.io/badge/orchestrates-security--audit-EF4458)](SKILL.md)
-[![Loop until convergence](https://img.shields.io/badge/loop-until_convergence-F9A03F)](SKILL.md)
-[![Output: single HTML report](https://img.shields.io/badge/output-single_HTML_report-2ECC9A)](assets/template.html)
+# security-audit-full-report
+
+**A Claude Code skill that audits a codebase over and over until a cycle stops finding anything new, then merges every run into one interactive HTML report.**
+
+<!-- mpd:badges start -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-5B5FEF.svg)](../../LICENSE)
-<!-- update-docs:badges end -->
+[![Claude Code](https://img.shields.io/badge/Claude_Code-skill-23265E)](SKILL.md)
+[![Orchestrates](https://img.shields.io/badge/orchestrates-security--audit-EF4458)](https://github.com/cloudflare/security-audit-skill)
+[![Loop](https://img.shields.io/badge/loop-until_convergence-23265E)](#how-it-works)
+[![Output](https://img.shields.io/badge/output-one_HTML_report-2ECC9A)](assets/template.html)
+<!-- mpd:badges end -->
+
+<!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="de21d7126585db4a9d5c830b93114aa40a4b07443b7cab873016b887eaf8deda" src-hash="9a09abc21dcb1ee37a81ace7a53eb02896729f1d340db0fd112ec788f0e096b6" -->
+<img src="docs/assets/hero.svg" alt="An animated board showing one engagement. Four cycle cards run left to right, one security-audit run each, lit in turn. Run 1 and run 2 each add more than zero new medium-or-higher findings, so the convergence counter resets to zero both times. Run 3 adds none and the counter reaches one; run 4 adds none and the counter reaches two. A dark stop card on the right states the rule the ledger applies: stop when the counter reaches two consecutive zero-new cycles, or when the run number reaches max_cycles. Either way the loop ends and one consolidated report is written once, at the stop — every run merged into a single HTML file that stays filterable by run, with every claim traced back to that run's findings.json and the page built from the bundled assets/template.html." width="820" />
+<!-- mpd:viz end -->
 
 </div>
 
 ## What this is
 
-`security-audit-full-report` is an agent skill for Claude Code. It runs a **repeated** security assessment against a codebase and produces one shareable HTML report. Ask for "an iterative security audit", "keep auditing until it's clean", or invoke `/security-audit-full-report`, and it drives the underlying [`security-audit`](SKILL.md) skill in a `/loop` — one audit per cycle, each targeting the gaps the earlier cycles left — until findings converge or a cycle budget is reached, then merges every run into a single consolidated report.
+`security-audit-full-report` is an agent skill for Claude Code. It runs a **repeated** security assessment against a codebase and produces one shareable HTML report. Ask for "an iterative security audit", "keep auditing until it's clean", or invoke `/security-audit-full-report`, and it drives the underlying [`security-audit`](https://github.com/cloudflare/security-audit-skill) skill in a `/loop` — one audit per cycle, each targeting the gaps the earlier cycles left — until findings converge or a cycle budget is reached, then merges every run into a single consolidated report.
 
 The skill is an **orchestrator**: it does not re-implement the hunting or the report rendering. `security-audit` does the actual vulnerability discovery; the report step is a folded-in copy of the `generate-cf-secaudit-report` workflow, with that skill's `template.html` bundled here so the whole thing stays self-contained and portable across teams.
 
@@ -29,18 +33,9 @@ It is also **stateful and resumable**. All finding data lives on disk under the 
 
 The skill has a **two-mode contract**, decided by whether today's engagement directory already exists:
 
-```mermaid
-flowchart TD
-    Start(["/security-audit-full-report"]) --> Mode{"ledger.md exists,<br/>status: running?"}
-    Mode -- "no" --> Pre["Preflight (interactive):<br/>check install, gitignore,<br/>create engagement, start loop"]
-    Pre --> Loop["/loop re-invokes each cycle"]
-    Mode -- "yes" --> Cycle["Cycle mode (unattended):<br/>run one security-audit,<br/>count new medium+ findings,<br/>update ledger.md"]
-    Loop --> Cycle
-    Cycle --> Decide{"converged or<br/>max cycles?"}
-    Decide -- "no" --> Loop
-    Decide -- "yes" --> Report["Merge all runs into one<br/>consolidated HTML report"]
-    Report --> Done(["status: done"])
-```
+<!-- mpd:viz name="two-mode" src="docs/assets/src/two-mode/" facts-hash="aa4928901408dd15be9081e523a1255b817450ff1a2fabba284a3f897bc89e94" src-hash="7ec6291a918f718152d690f16808f46ce4cb24f7529c5f2bca56d26caa360cae" -->
+<img src="docs/assets/two-mode.svg" alt="Two mode cards side by side. Every invocation reads ledger.md first and picks its mode from what it finds. With no ledger, the skill enters preflight mode, which runs once with the user present and covers sections 1 to 3: check that the security-audit skill is installed, offer to add .audit/ to .gitignore, create the engagement directory and write ledger.md, then start the loop and stop for that turn. With a ledger whose status is running, it enters cycle mode, which fires on every loop invocation, never asks a question, and covers sections 4a to 4d: run one security-audit into run-N, count the new medium-or-higher findings against the ledger, update the convergence counter and the per-cycle log, then either continue or stop and write the report — each of those four steps rippling in turn because cycle mode is the half that repeats. A band underneath carries the ledger's own status values: running, then converged or max-cycles-reached, then done." width="820" />
+<!-- mpd:viz end -->
 
 - **Preflight** is the only mode allowed to ask questions. It verifies `security-audit` is installed, offers to add `.audit/` to `.gitignore`, creates the dated engagement directory, writes `ledger.md`, and starts the self-paced loop.
 - **Cycle mode** runs unattended each time `/loop` fires. It runs exactly one audit into `run-N/`, counts how many confirmed medium-or-higher findings are genuinely new, updates the convergence counter, and decides whether to continue.
@@ -115,16 +110,20 @@ No third-party Python packages; the report template has no external dependencies
 
 ```
 skills/security-audit-full-report/
-├── SKILL.md            the skill contract: two-mode workflow, loop, report steps
+├── SKILL.md              the skill contract: two-mode workflow, loop, report steps
+├── README.md             this file
 ├── assets/
-│   └── template.html   the consolidated report template (SaaS Pro, data-driven)
-└── docs/assets/        README artwork (this page's hero)
+│   └── template.html     the consolidated report template (SaaS Pro, data-driven)
+└── docs/assets/
+    ├── hero.svg          the cycle, the stop rule, and the one report
+    ├── two-mode.svg      preflight versus cycle mode
+    └── src/              the frozen design system, and a manifest per visual
 ```
 
 ## Related skills
 
 - [`security-audit`](https://github.com/cloudflare/security-audit-skill) — the single-run vulnerability hunter this skill loops. Use it directly for a one-shot audit.
-- `generate-cf-secaudit-report` — turns an existing audit directory into a styled report. Its workflow is folded into this skill's §5 and its template is bundled in `assets/`, kept in sync as of the date noted in [SKILL.md](SKILL.md).
+- `generate-cf-secaudit-report` — turns an existing audit directory into a styled report. Its workflow is folded into this skill's §5 and its template is bundled in `assets/`. That copy can drift from the source; [SKILL.md](SKILL.md) records the sync point.
 
 This skill is the end-to-end orchestrator of both.
 
@@ -141,11 +140,11 @@ There are no automated tests. Correctness rests on two other guarantees: the cro
 
 Released under the [MIT License](../../LICENSE) of the repository that ships it.
 
-<!-- update-docs:footer start -->
+<!-- mpd:footer start -->
 <div align="center">
 <br/>
 
 **Copyright © 2026 Zerø Effort. Released under the MIT license.**
 
 </div>
-<!-- update-docs:footer end -->
+<!-- mpd:footer end -->

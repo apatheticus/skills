@@ -1,80 +1,131 @@
-<svg xmlns="http://www.w3.org/2000/svg"
-     width="1200" height="340" viewBox="0 0 1200 340"
-     role="img" aria-labelledby="title desc">
-  <title id="title">security-audit-full-report</title>
-  <desc id="desc">A Claude Code agent skill that loops a security audit until findings converge, then merges every run into one consolidated, interactive HTML report.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="1200" height="620"
+     role="img" data-loop-s="12" data-bg="background">
+  <title>security-audit-full-report — the loop stops itself, then writes one report</title>
+  <desc>Four cycle cards run left to right, one security-audit run each, lit in turn. Run 1
+and run 2 each add more than zero new medium-or-higher findings, so the convergence counter
+resets to zero both times. Run 3 adds none and the counter reaches one; run 4 adds none and
+the counter reaches two. A dark stop card on the right states the rule the ledger applies:
+stop when the counter reaches two consecutive zero-new cycles, or when the run number
+reaches max_cycles. Either way the loop ends and a single consolidated report is written
+once, at the stop — every run merged into one HTML file, filterable by run, built from the
+bundled template and traced back to each run's findings.json.</desc>
 
-  <rect width="1200" height="340" rx="24" fill="#0A0C13"/>
+  <style>
+    svg { --background:#F6F7FC; --surface:#FFFFFF; --surface-deep:#23265E;
+          --ink:#12142B; --muted:#4C5273; --accent-primary:#5B5FEF;
+          --high:#EF4458; --clean:#2ECC9A; --rule:#DDDFEB; }
 
-  <g id="title-block" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif">
-    <text x="64" y="84" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-          font-size="18" letter-spacing="2.5" fill="#F0879A">CLAUDE CODE &#183; AGENT SKILL</text>
-    <text x="62" y="144" font-size="52" font-weight="700" letter-spacing="-1"
-          fill="#F2F4FB">security-audit-full-report</text>
-    <text x="64" y="184" font-size="20" fill="#AEB4C9">Loop a security audit until findings converge,</text>
-    <text x="64" y="211" font-size="20" fill="#AEB4C9">then merge every run into one consolidated,</text>
-    <text x="64" y="238" font-size="20" fill="#AEB4C9">interactive HTML report.</text>
+    .bg    { fill: var(--background); }
+    .card  { fill: var(--surface); filter: url(#e1); }
+    .deep  { fill: var(--surface-deep); filter: url(#e1); }
+    .band  { fill: var(--accent-primary); filter: url(#e1); }
 
-    <g id="chips" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="14">
-      <rect x="64" y="258" width="150" height="32" rx="16" fill="#131726" stroke="#2A2F45"/>
-      <text x="139" y="279" text-anchor="middle" fill="#AEB4C9">stateful loop</text>
-      <rect x="228" y="258" width="190" height="32" rx="16" fill="#131726" stroke="#2A2F45"/>
-      <text x="323" y="279" text-anchor="middle" fill="#AEB4C9">resumable ledger.md</text>
-      <rect x="432" y="258" width="196" height="32" rx="16" fill="#131726" stroke="#2A2F45"/>
-      <text x="530" y="279" text-anchor="middle" fill="#AEB4C9">runs to convergence</text>
-    </g>
-  </g>
+    .sans  { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    .mono  { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
 
-  <g id="project-proof" transform="translate(690 42)">
-    <rect width="450" height="256" rx="16" fill="#10131D" stroke="#262C45" stroke-width="1.5"/>
+    .kick  { fill: var(--muted); font-size: 17px; font-weight: 700; letter-spacing: 2.4px; }
+    .h     { fill: var(--ink);   font-size: 52px; font-weight: 700; letter-spacing: -1.2px; }
+    .lede  { fill: var(--muted); font-size: 22px; font-weight: 400; }
+    .sect  { fill: var(--muted); font-size: 17px; font-weight: 700; letter-spacing: 2.2px; }
 
-    <text x="20" y="30" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-          font-size="14" letter-spacing="2" fill="#F0879A">SECURITY AUDIT</text>
-    <rect x="322" y="10" width="108" height="24" rx="12" fill="#152B22"/>
-    <text x="376" y="26" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace"
-          font-size="12" fill="#5FE0AE">converged</text>
-    <line x1="20" y1="48" x2="430" y2="48" stroke="#1E2338"/>
+    .run   { fill: var(--ink);   font-size: 21px; font-weight: 500; }
+    .unit  { fill: var(--muted); font-size: 17px; font-weight: 500; }
+    .big   { fill: var(--ink);   font-size: 30px; font-weight: 700; }
 
-    <g id="severity-donut" transform="translate(78 138)">
-      <circle r="46" fill="none" stroke="#1E2338" stroke-width="16"/>
-      <circle r="46" fill="none" stroke="#EF4458" stroke-width="16"
-              stroke-dasharray="72 289" transform="rotate(-90)"/>
-      <circle r="46" fill="none" stroke="#F9A03F" stroke-width="16"
-              stroke-dasharray="101 289" stroke-dashoffset="-72" transform="rotate(-90)"/>
-      <circle r="46" fill="none" stroke="#3B82F6" stroke-width="16"
-              stroke-dasharray="116 289" stroke-dashoffset="-173" transform="rotate(-90)"/>
-      <text y="-2" text-anchor="middle" font-family="-apple-system, BlinkMacSystemFont, sans-serif"
-            font-size="30" font-weight="700" fill="#F2F4FB">23</text>
-      <text y="20" text-anchor="middle" font-family="ui-monospace, Menlo, monospace"
-            font-size="11" letter-spacing="1" fill="#6E7591">FINDINGS</text>
-    </g>
+    .dlab  { fill: var(--rule);    font-size: 17px; font-weight: 700; letter-spacing: 2.2px; }
+    .dval  { fill: var(--surface); font-size: 20px; font-weight: 500; }
 
-    <g id="severity-legend" font-family="-apple-system, BlinkMacSystemFont, sans-serif" transform="translate(198 78)">
-      <rect x="0" y="0" width="10" height="10" rx="2" fill="#EF4458"/>
-      <text x="20" y="9" font-size="14" fill="#C7CCDE">High</text>
-      <text x="212" y="9" font-size="14" font-weight="700" text-anchor="end" fill="#F2F4FB">5</text>
-      <rect x="0" y="34" width="10" height="10" rx="2" fill="#F9A03F"/>
-      <text x="20" y="43" font-size="14" fill="#C7CCDE">Medium</text>
-      <text x="212" y="43" font-size="14" font-weight="700" text-anchor="end" fill="#F2F4FB">7</text>
-      <rect x="0" y="68" width="10" height="10" rx="2" fill="#3B82F6"/>
-      <text x="20" y="77" font-size="14" fill="#C7CCDE">Low</text>
-      <text x="212" y="77" font-size="14" font-weight="700" text-anchor="end" fill="#F2F4FB">11</text>
-      <line x1="0" y1="96" x2="212" y2="96" stroke="#1E2338"/>
-      <text x="0" y="118" font-size="13" fill="#8A8FF5">3 cycles</text>
-      <text x="212" y="118" font-size="13" text-anchor="end" fill="#8A8FF5">4 runs merged</text>
-    </g>
+    .btit  { fill: var(--surface); font-size: 26px; font-weight: 700; }
+    .bsub  { fill: var(--surface); font-size: 19px; font-weight: 400; }
+    .bmono { fill: var(--surface); font-size: 20px; font-weight: 500; }
 
-    <g id="cycle-strip" transform="translate(20 210)" font-family="ui-monospace, Menlo, monospace" font-size="11">
-      <text x="0" y="0" letter-spacing="1.5" fill="#6E7591">CONVERGENCE</text>
-      <circle cx="8" cy="24" r="8" fill="#EF4458"/>
-      <text x="8" y="27" text-anchor="middle" font-size="9" fill="#0A0C13">1</text>
-      <line x1="18" y1="24" x2="66" y2="24" stroke="#2A2F45" stroke-width="2"/>
-      <circle cx="76" cy="24" r="8" fill="#F9A03F"/>
-      <text x="76" y="27" text-anchor="middle" font-size="9" fill="#0A0C13">2</text>
-      <line x1="86" y1="24" x2="134" y2="24" stroke="#2A2F45" stroke-width="2"/>
-      <circle cx="144" cy="24" r="8" fill="#2ECC9A"/>
-      <text x="144" y="27" text-anchor="middle" font-size="9" fill="#0A0C13">3</text>
-      <text x="176" y="28" font-size="12" fill="#5FE0AE">0 new med+ &#215;2 &#8594; stop</text>
-    </g>
-  </g>
+    .conn  { fill: none; stroke: var(--accent-primary); stroke-width: 2; }
+    .head  { fill: var(--accent-primary); }
+    .found { fill: var(--high); }
+    .zero  { fill: var(--clean); }
+
+    /* one sequence: each cycle card is lit in turn, left to right. 12s is the loop,
+       so the four negative delays are the same animation phase-shifted by 3s each. */
+    .dot   { opacity: 1; animation: seq 12s cubic-bezier(.4,0,.2,1) infinite; }
+    @keyframes seq { 0%,12% { opacity: .38 } 20%,28% { opacity: 1 } 36%,100% { opacity: .38 } }
+    .d1 { animation-delay: 0s }
+    .d2 { animation-delay: -9s }
+    .d3 { animation-delay: -6s }
+    .d4 { animation-delay: -3s }
+
+    /* one ripple where the decision lands. It begins and ends invisible, so the
+       reset is unseen; 3s divides the 12s loop four times. */
+    .ripple { fill: var(--accent-primary); transform-box: view-box;
+              transform-origin: 1040px 498px;
+              animation: ripple 3s cubic-bezier(.4,0,.2,1) infinite; }
+    @keyframes ripple {
+      0%   { transform: scale(.35); opacity: 0 }
+      15%  { opacity: .5 }
+      70%  { transform: scale(1.9); opacity: 0 }
+      100% { transform: scale(.35); opacity: 0 }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dot    { animation: none; opacity: 1 }
+      .ripple { animation: none; opacity: 0 }
+    }
+  </style>
+
+  <defs>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="620"/>
+
+  <text class="sans kick" x="64" y="84" data-role="metadata">ITERATIVE ASSESSMENT · ONE REPORT</text>
+  <text class="sans h"    x="64" y="148" data-role="hero">security-audit-full-report</text>
+  <text class="sans lede" x="64" y="196" data-role="essential">One security-audit run per cycle, each hunting the ground the last one missed.</text>
+  <text class="sans lede" x="64" y="228" data-role="essential">The loop stops itself, and the report is written once — at the stop.</text>
+
+  <text class="sans sect" x="64" y="288" data-role="metadata">CYCLE MODE · ledger.md DECIDES</text>
+
+  <rect class="card" x="64" y="306" width="196" height="156" rx="8"/>
+  <circle class="found dot d1" cx="230" cy="340" r="9"/>
+  <text class="mono run"  x="86" y="348" data-bg="surface">run-1</text>
+  <text class="sans unit" x="86" y="384" data-bg="surface" data-role="metadata">new med+</text>
+  <text class="mono big"  x="86" y="420" data-bg="surface">&gt; 0</text>
+  <text class="sans unit" x="86" y="448" data-bg="surface" data-role="metadata">counter → 0</text>
+
+  <rect class="card" x="284" y="306" width="196" height="156" rx="8"/>
+  <circle class="found dot d2" cx="450" cy="340" r="9"/>
+  <text class="mono run"  x="306" y="348" data-bg="surface">run-2</text>
+  <text class="sans unit" x="306" y="384" data-bg="surface" data-role="metadata">new med+</text>
+  <text class="mono big"  x="306" y="420" data-bg="surface">&gt; 0</text>
+  <text class="sans unit" x="306" y="448" data-bg="surface" data-role="metadata">counter → 0</text>
+
+  <rect class="card" x="504" y="306" width="196" height="156" rx="8"/>
+  <circle class="zero dot d3" cx="670" cy="340" r="9"/>
+  <text class="mono run"  x="526" y="348" data-bg="surface">run-3</text>
+  <text class="sans unit" x="526" y="384" data-bg="surface" data-role="metadata">new med+</text>
+  <text class="mono big"  x="526" y="420" data-bg="surface">= 0</text>
+  <text class="sans unit" x="526" y="448" data-bg="surface" data-role="metadata">counter → 1</text>
+
+  <rect class="card" x="724" y="306" width="196" height="156" rx="8"/>
+  <circle class="zero dot d4" cx="890" cy="340" r="9"/>
+  <text class="mono run"  x="746" y="348" data-bg="surface">run-4</text>
+  <text class="sans unit" x="746" y="384" data-bg="surface" data-role="metadata">new med+</text>
+  <text class="mono big"  x="746" y="420" data-bg="surface">= 0</text>
+  <text class="sans unit" x="746" y="448" data-bg="surface" data-role="metadata">counter → 2</text>
+
+  <rect class="deep" x="944" y="306" width="192" height="156" rx="8"/>
+  <text class="sans dlab" x="966" y="342" data-bg="surface-deep" data-role="metadata">STOP WHEN</text>
+  <text class="mono dval" x="966" y="382" data-bg="surface-deep" data-role="essential">counter = 2</text>
+  <text class="sans dlab" x="966" y="414" data-bg="surface-deep" data-role="metadata">OR</text>
+  <text class="mono dval" x="966" y="448" data-bg="surface-deep" data-role="essential">run = max</text>
+
+  <circle class="ripple" cx="1040" cy="498" r="22"/>
+  <path class="conn" d="M1040 462 V488"/>
+  <path class="head" d="M1040 500 l-8 -14 h16 Z"/>
+
+  <rect class="band" x="64" y="498" width="1072" height="90" rx="8"/>
+  <text class="sans btit"  x="88" y="536" data-bg="accent-primary">One consolidated report</text>
+  <text class="sans bsub"  x="88" y="566" data-bg="accent-primary">every run merged · filterable by run · every claim traced to that run's findings.json</text>
+  <text class="mono bmono" x="1112" y="546" text-anchor="end" data-bg="accent-primary" data-role="essential">assets/template.html</text>
 </svg>
