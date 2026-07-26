@@ -1,0 +1,25 @@
+{
+  "name": "hero",
+  "doc": "README.md",
+  "tier": "animated-hero",
+  "producer": "pretty-svg-docs",
+  "style": "neumorphism",
+  "facts": [
+    "Transcripts are enumerated from ~/.claude/projects and filtered to the window, excluding the session running the pass",
+    "Triage scores every in-window session from cheap metadata before any extractor agent runs",
+    "Extraction returns signals in four families: friction and failure, repetition and missed automation, wins and effective patterns, environment gaps",
+    "Signals are merged and deduped into cross-session clusters before any verdict is decided",
+    "A new-skill verdict needs at least 3 distinct sessions; automation and fix need at least 2"
+  ],
+  "facts_hash": "5ebfafd6760d4ed6f86744530184d0cbaa15df53f892ab06555d4f41416b0330",
+  "src_hash": "f3bddae14244b6edaec40b3e5d63610328f94bbdad13f590537b5529c608fbc1",
+  "design_hash": "9c880d313dd7da56b813ded7e7602c9ba7d60ab9a018746ae0ea88c9c96130a9",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 7553
+  },
+  "relaxed": [
+    "filter-depth@2"
+  ]
+}

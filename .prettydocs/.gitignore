@@ -1,0 +1,14 @@
+# Doc-visual byproducts. Patterns here contain a slash, so they anchor to this
+# file's own directory — .prettydocs/ is self-contained and needs no entry in the
+# project's root .gitignore. The committed artefacts are the .webp/.svg files in
+# docs/assets/ plus each visual's index.html and viz.json.
+src/**/render.mp4
+src/**/renders/
+src/**/frames/
+src/**/snapshots/
+src/**/qa_*.png
+src/**/check.json
+src/**/node_modules/
+
+# Visual QA harness written by the sibling pretty-svg-docs skill
+src/**/_qa/

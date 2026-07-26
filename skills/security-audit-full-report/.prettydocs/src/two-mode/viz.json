@@ -1,0 +1,24 @@
+{
+  "name": "two-mode",
+  "doc": "README.md",
+  "tier": "animated-flagship",
+  "producer": "pretty-svg-docs",
+  "style": "flat-material",
+  "facts": [
+    "Every invocation picks its mode by reading ledger.md before doing anything else",
+    "Preflight mode runs when no engagement ledger exists, and is the only mode allowed to ask a question",
+    "Preflight covers \u00a71 to \u00a73: check security-audit is installed, offer to gitignore .audit/, create the engagement and start the loop",
+    "Cycle mode runs on every /loop firing while status is running, and never asks a question",
+    "Cycle mode covers \u00a74a to \u00a74d: run one audit, count new medium-or-higher findings, update the counter, then continue or report",
+    "The ledger's status moves from running to converged or max-cycles-reached, and then to done"
+  ],
+  "facts_hash": "aa4928901408dd15be9081e523a1255b817450ff1a2fabba284a3f897bc89e94",
+  "src_hash": "7ec6291a918f718152d690f16808f46ce4cb24f7529c5f2bca56d26caa360cae",
+  "design_hash": "89eb004c92fa3a95fab4f829cbfa225aed66497cc3aa904d14f5013138359662",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 8102
+  },
+  "relaxed": []
+}

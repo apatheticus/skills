@@ -4,13 +4,15 @@
 
 **Agent skills published by Zerø Effort, installable from one source tree through two managed channels.**
 
-<!-- mpd:badges start -->
+<!-- pd:badges start -->
 [![install: npx skills](https://img.shields.io/badge/install-npx%20skills-E2E6FB)](https://skills.sh) [![validate](https://github.com/apatheticus/skills/actions/workflows/validate.yml/badge.svg)](https://github.com/apatheticus/skills/actions/workflows/validate.yml) [![license: MIT](https://img.shields.io/badge/license-MIT-E2E6FB)](./LICENSE) [![contributing](https://img.shields.io/badge/contributing-guidelines-0B0F1A)](./CONTRIBUTING.md)
-<!-- mpd:badges end -->
+<!-- pd:badges end -->
 
-<!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="e80dc438d0637e7a65b534b879dc1fda6ebe72ee145886a7496cff6b72fb3185" src-hash="3df42bbf22933406f74a4f54ed46c893ab3699f186aa38837952cfe9950317a6" -->
+<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="e80dc438d0637e7a65b534b879dc1fda6ebe72ee145886a7496cff6b72fb3185" src-hash="3df42bbf22933406f74a4f54ed46c893ab3699f186aa38837952cfe9950317a6" -->
+<div align="center">
 <img src="docs/assets/hero.webp" width="860" alt="One source tree feeding two install channels. On the left, a skill directory: skills/&lt;name&gt;/ holding SKILL.md plus optional reference/, scripts/, and assets/ folders. Two paths lead right from it. The first is skills.sh — running npx skills add apatheticus/skills writes editable copies into your own project. The second is the Claude Code plugin — adding the marketplace and installing apatheticus-skills@apatheticus gives you a managed bundle that updates when the repo does. Both channels read the same skills/ directory." />
-<!-- mpd:viz end -->
+</div>
+<!-- pd:viz end -->
 
 </div>
 
@@ -51,7 +53,7 @@ project. Nothing here is all-or-nothing — to skip the prompt and name what you
 
 ```bash
 npx skills add apatheticus/skills -s human-voice                       # one skill
-npx skills add apatheticus/skills -s human-voice -s more-pretty-docs   # two
+npx skills add apatheticus/skills -s human-voice -s pretty-svg-docs   # two
 npx skills add apatheticus/skills --all                                # every skill, every agent
 ```
 
@@ -122,8 +124,8 @@ removed skill stays visible until the next session.
 | Skill | What it does | Install just this one |
 | --- | --- | --- |
 | [`human-voice`](./skills/human-voice) | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored. Picks a register first (editorial, professional, technical, or regulated) so a spec never gets an essay's voice. Yields to a compliance skill for federal work. | `npx skills add apatheticus/skills -s human-voice` |
-| [`make-pretty-docs`](./skills/make-pretty-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. | `npx skills add apatheticus/skills -s make-pretty-docs` |
-| [`more-pretty-docs`](./skills/more-pretty-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. Ships a 31-style catalog, from Swiss minimal to oil impasto, each with a gated full-width specimen, and a bundled checker that proves the loop is seam-exact before anything is committed. | `npx skills add apatheticus/skills -s more-pretty-docs` |
+| [`pretty-hyper-docs`](./skills/pretty-hyper-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. | `npx skills add apatheticus/skills -s pretty-hyper-docs` |
+| [`pretty-svg-docs`](./skills/pretty-svg-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. Ships a 31-style catalog, from Swiss minimal to oil impasto, each with a gated full-width specimen, and a bundled checker that proves the loop is seam-exact before anything is committed. | `npx skills add apatheticus/skills -s pretty-svg-docs` |
 | [`security-audit-full-report`](./skills/security-audit-full-report) | Loop a security audit over a codebase until it stops finding anything new — each cycle hunts the ground the last one missed — then merge every run into one interactive HTML report. State lives on disk, so a run survives compaction and resumes where it stopped. Drives Cloudflare's `security-audit` skill; it does not re-implement the hunting. | `npx skills add apatheticus/skills -s security-audit-full-report` |
 | [`reflect`](./skills/reflect) | Mine your own Claude Code session transcripts for what keeps going wrong, what quietly works, and which setup changes would pay off most — then hand back one self-contained interactive HTML report. Every recommendation cites a session ID and a verbatim quote; a proposed skill needs three separate sessions behind it. Diagnosis only, and nothing leaves the machine. | `npx skills add apatheticus/skills -s reflect` |
 <!-- skills:table end -->
@@ -135,6 +137,33 @@ Add `-g` to any of those to install globally instead of into the current project
      directory, a non-empty description you write yourself, and the exact install command.
      Row order is not checked, so curate it. -->
 
+### Renamed in 0.10.0
+
+Two skills were renamed so the name says which renderer you get:
+
+| Was | Now |
+| --- | --- |
+| `make-pretty-docs` | [`pretty-hyper-docs`](./skills/pretty-hyper-docs) — HyperFrames → animated WebP |
+| `more-pretty-docs` | [`pretty-svg-docs`](./skills/pretty-svg-docs) — animated SVG, nothing to install |
+
+How you get the new names depends on the channel you installed through:
+
+- **Plugin channel** re-syncs the whole plugin, so the old directories disappear on update.
+  Nothing to do.
+- **`npx skills` channel** copies into `.claude/skills/<name>/`. The old commands stop
+  resolving, but an existing local copy **persists beside** the new one, and two skills with
+  overlapping descriptions will both compete to trigger. Delete the old copies once:
+
+```bash
+rm -rf .claude/skills/make-pretty-docs .claude/skills/more-pretty-docs
+```
+
+Existing visuals keep working. The marker and manifest names changed too — `mpd:viz` →
+`pd:viz`, `mpd.json` → `viz.json` — and the frozen design system moved from
+`docs/assets/src/DESIGN.md` to `.prettydocs/prettydocs.md`. Both skills still read every
+old form and rewrite it in place the next time they touch a doc, so nothing needs
+re-rendering.
+
 <br/>
 
 ## What a skill looks like
@@ -143,11 +172,11 @@ A skill is read in stages, and only the first stage sits in front of the agent a
 time. That is the reason the format is worth learning: the trigger text stays cheap, and
 the depth stays out of the way until something actually needs it.
 
-<!-- mpd:viz name="skill-anatomy" src="docs/assets/src/skill-anatomy/" facts-hash="7d2f878624d25964e317eef475d24e995c77ac8e7f918b3087938b601db24f06" src-hash="33cc44c049c02ccbfa70ef53b4c7e4d2986b031eafff50190527f98259a20973" -->
+<!-- pd:viz name="skill-anatomy" src=".prettydocs/src/skill-anatomy/" facts-hash="7d2f878624d25964e317eef475d24e995c77ac8e7f918b3087938b601db24f06" src-hash="33cc44c049c02ccbfa70ef53b4c7e4d2986b031eafff50190527f98259a20973" -->
 <div align="center">
 <img src="docs/assets/skill-anatomy.webp" width="860" alt="The three stages an agent reads a skill in. Stage one, always loaded: the SKILL.md frontmatter, which requires exactly two keys, name and description. The description is the only text an agent reads when deciding whether to load the skill at all. Stage two, loaded when the skill fires: the SKILL.md body, written as instructions aimed at the agent, opening with when not to use it, and kept under roughly 500 lines. Stage three, loaded on demand: reference/*.md, scripts/*, and assets/*, linked by relative path so they cost nothing until the skill reaches for them." />
 </div>
-<!-- mpd:viz end -->
+<!-- pd:viz end -->
 
 Both required frontmatter keys are checked by `scripts/validate.mjs`: `name` must be
 lowercase kebab-case and match the directory it sits in, and `description` must be under
@@ -175,8 +204,13 @@ scripts/
   validate.mjs       # frontmatter + manifest validator (also runs in CI)
 docs/assets/
   *.webp             # the animated diagrams embedded above
-  src/               # their compositions, and the repo's frozen design system
+.prettydocs/
+  prettydocs.md      # the repo's frozen design system
+  src/<viz>/         # each diagram's composition and its viz.json manifest
 ```
+
+Every project root repeats the `docs/assets/` + `.prettydocs/` pair — this repo is six of
+them, the root plus each `skills/<name>/`.
 
 The plugin is sourced from the repo root and lists every skill under `skills/`. That
 satisfies both installers with no duplicated files: `npx skills` discovers
@@ -216,7 +250,7 @@ ln -s "$PWD/skills/<name>" ~/.claude/skills/<name>
 
 - [CONTRIBUTING.md](./CONTRIBUTING.md) — how to add a skill and get it merged.
 - [`templates/frontmatter.md`](./templates/frontmatter.md) — every supported `SKILL.md` frontmatter field.
-- [`docs/assets/src/DESIGN.md`](./docs/assets/src/DESIGN.md) — the frozen design system behind the diagrams above.
+- [`.prettydocs/prettydocs.md`](./.prettydocs/prettydocs.md) — the frozen design system behind the diagrams above.
 
 <br/>
 
@@ -224,11 +258,11 @@ ln -s "$PWD/skills/<name>" ~/.claude/skills/<name>
 
 Released under the [MIT License](./LICENSE).
 
-<!-- mpd:footer start -->
+<!-- pd:footer start -->
 <div align="center">
 <br/>
 
 **Copyright © 2026 Zerø Effort. Released under the MIT license.**
 
 </div>
-<!-- mpd:footer end -->
+<!-- pd:footer end -->

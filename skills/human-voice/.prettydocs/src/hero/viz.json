@@ -1,0 +1,22 @@
+{
+  "name": "hero",
+  "doc": "README.md",
+  "tier": "animated-hero",
+  "producer": "pretty-svg-docs",
+  "style": "editorial",
+  "facts": [
+    "Step 1 selects the register before a single pattern is read; every downstream decision depends on it",
+    "The four registers are Editorial, Professional, Technical and Regulated, profiled in reference/registers.md",
+    "Professional is the default when the genre is unclear, and the skill never defaults to Editorial",
+    "Personality (voice injection) is on only in Editorial; for Professional, Technical and Regulated neutral and plain is the human voice"
+  ],
+  "facts_hash": "b26beb7f8d33557cc8587b7fd9b8e115ff8d8b75f0d876065917fd9d5328996b",
+  "src_hash": "c8211a124b09c94319705a147a645ed0a049d9566ea33426054e90e8ad3e379b",
+  "design_hash": "c9ea5e3459128e2458d738e87e32de04f6c214057337b405371a6f4cf086a911",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 7720
+  },
+  "relaxed": []
+}
