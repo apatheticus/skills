@@ -138,7 +138,7 @@ skeuomorphic. One material applied flat across the board → brushed-metal.
    strong brand color and a consumer audience lands on `flat-material` or
    `bento-grid`. `--style auto` forces this path even when `docsmeta` holds a slug.
 
-Persist the full nine-field spec under `## Style` in `docs/assets/src/DESIGN.md`.
+Persist the full nine-field spec under `## Style` in `.prettydocs/prettydocs.md`.
 In a repo with a single doc root, also record the bare slug in
 `.github/docsmeta.json` as `viz.style`; **omit that key when the repo has more than
 one doc root**, since it is repo-wide and would then name the wrong style for every

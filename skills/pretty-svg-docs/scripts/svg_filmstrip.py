@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build a scrub harness for an animated SVG so one screenshot shows every phase.
 
-Writes docs/assets/src/<name>/_qa/filmstrip.html: N inline copies of the SVG, each
+Writes .prettydocs/src/<name>/_qa/filmstrip.html: N inline copies of the SVG, each
 frozen at a different point in the loop via `animation-play-state: paused` plus a
 negative `animation-delay`, labelled with its timestamp. The wrap-around copy
 repeats phase 0 so the seam is visible side by side.
@@ -111,7 +111,7 @@ def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("file")
     ap.add_argument("--phases", type=int, default=6, help="phases to pose (default 6)")
-    ap.add_argument("--out", help="output dir (default docs/assets/src/<name>/_qa)")
+    ap.add_argument("--out", help="output dir (default .prettydocs/src/<name>/_qa)")
     ap.add_argument("--width", type=int, default=560, help="min tile width in px")
     args = ap.parse_args()
 

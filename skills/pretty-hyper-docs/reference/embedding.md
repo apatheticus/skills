@@ -24,7 +24,7 @@ pair depends on the doc:
 else:
 
 ```markdown
-<!-- pd:viz name="hero" src="docs/assets/src/hero/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/hero.webp" alt="Animated overview: requests enter the gateway, fan out to the auth, billing, and search services, and results merge back to the client." width="820" />
 </div>
@@ -36,7 +36,7 @@ image, plus the collapsed Mermaid equivalent inside the pair and **outside** the
 centering wrapper:
 
 ```markdown
-<!-- pd:viz name="request-flow" src="docs/assets/src/request-flow/" facts-hash="…" src-hash="…" -->
+<!-- pd:viz name="request-flow" src=".prettydocs/src/request-flow/" facts-hash="…" src-hash="…" -->
 <div align="center">
 <img src="docs/assets/request-flow.webp" alt="Animated sequence: a request passes the gateway, is authenticated, then handled by the matching service." width="820" />
 </div>
@@ -135,7 +135,7 @@ mechanism:
 
 | Attribute | Meaning |
 | --- | --- |
-| `name` | Kebab-case visual slug. Unique per repo. Matches the asset basename (`docs/assets/<name>.webp` or `.svg`) and the composition dir (`docs/assets/src/<name>/`). |
+| `name` | Kebab-case visual slug. Unique per repo. Matches the asset basename (`docs/assets/<name>.webp` or `.svg`) and the state dir (`.prettydocs/src/<name>/`). |
 | `src` | Repo-relative path to the composition source dir (trailing slash). For hand-authored static SVGs this dir holds the SVG source and `viz.json`. |
 | `facts-hash` | Copy of `facts_hash` from `viz.json` at last render/write. |
 | `src-hash` | Copy of `src_hash` from `viz.json` at last render/write. |
@@ -154,7 +154,7 @@ Rules:
 
 ## The viz.json manifest
 
-Committed at `docs/assets/src/<name>/viz.json`:
+Committed at `<project>/.prettydocs/src/<name>/viz.json`:
 
 ```json
 {
@@ -167,7 +167,9 @@ Committed at `docs/assets/src/<name>/viz.json`:
   ],
   "facts_hash": "sha256-of-facts",
   "src_hash": "sha256-of-composition-source",
-  "design_hash": "sha256-of-DESIGN.md",
+  "design_hash": "sha256-of-prettydocs.md",
+  "design_source_path": "docs/brand/DESIGN.md",
+  "design_source_hash": "sha256-of-that-source",
   "render": { "duration_s": 10, "fps": 15, "width": 1200, "quality": 68 }
 }
 ```
@@ -177,6 +179,10 @@ Committed at `docs/assets/src/<name>/viz.json`:
   same facts gate 4 checks against the evidence pass. Order them stably (don't
   reshuffle on rewrite; that would churn the hash). Purely decorative visuals
   (motif texture) get `"facts": []`.
+- `design_source_path` / `design_source_hash`: **optional**, written only when the
+  design system was derived from something upstream rather than authored fresh —
+  the repo-relative path the discovery ladder landed on, and its hash at derivation
+  time. Omit both when there was no prior identity.
 - `render`: the parameters the WebP was produced with. Omit for static SVGs.
 - No timestamps, no version numbers — the file must not churn between runs.
 
@@ -188,7 +194,26 @@ All hashes are SHA-256 via `shasum -a 256`, first field only.
 | --- | --- |
 | `facts_hash` | The `facts` array joined with `\n` (exact strings, exact order), e.g. `printf '%s\n' "fact one" "fact two" \| shasum -a 256` |
 | `src_hash` | The bytes of the composition source: `shasum -a 256 index.html` (animated) or the source `.svg` (static) |
-| `design_hash` | The bytes of the repo's `docs/assets/src/DESIGN.md` |
+| `design_hash` | The bytes of the project's `.prettydocs/prettydocs.md` — the frozen contract, wherever it was derived from |
+| `design_source_hash` | The bytes of the upstream source named by `design_source_path`, as of derivation. Optional |
+
+Because every one of these is taken over file **bytes**, moving a file without
+editing it yields the same hash. That is what makes the `.prettydocs/` migration a
+path rewrite rather than a re-render.
+
+`design_hash` covers `prettydocs.md` **only** — never the source it was derived
+from. That separation is the point: a repo's own upstream design file may churn for
+reasons that have nothing to do with doc visuals, and letting it drive `design_hash`
+would re-render everything each time. See `design-system.md` → A hit below rung 2 is
+a source, never the contract.
+
+### Upstream drift is a warning, not a re-render
+
+When `design_source_path` is set, recompute `design_source_hash` on each run. A
+mismatch means the upstream identity moved on: **warn and offer to re-derive**
+`prettydocs.md`. Do not re-render on it, and do not silently update the stored hash
+— that would discard the only signal that the two have diverged. Only `design_hash`
+participates in the decision below.
 
 ## Lazy re-render decision
 
@@ -197,7 +222,7 @@ Computed per visual during the plan phase. **RE-RENDER** iff any of:
 1. **Facts changed** — the facts you would state for this visual today (from the
    current evidence pass) hash differently from stored `facts_hash`.
 2. **Source edited** — recomputed `src_hash` of the composition source ≠ stored.
-3. **Design drift** — recomputed `design_hash` of `DESIGN.md` ≠ stored.
+3. **Design drift** — recomputed `design_hash` of `prettydocs.md` ≠ stored.
 4. **Asset missing** — the committed `.webp`/`.svg` doesn't exist at its path.
 5. **Marker/manifest mismatch** — marker hashes ≠ `viz.json` hashes.
 6. **Forced** — the run was invoked with `--refresh-viz`.
@@ -208,7 +233,7 @@ render happens. Consequences worth stating plainly:
 - A pure prose edit touches no hash → a full doc pass does **zero renders**.
 - Renaming or rewording a fact re-renders its visual — that's correct; the visual
   asserts the fact.
-- Editing `DESIGN.md` re-renders **everything** (all visuals derive from it).
+- Editing `prettydocs.md` re-renders **everything** (all visuals derive from it).
   That's why the design system is frozen per run and only re-derived on identity
   change or explicit request.
 
@@ -228,7 +253,7 @@ judgment is yours (it needs the evidence pass).
 | `MISSING` | Embedded asset file absent | script |
 | `UNCENTERED` | The image in the marker block is not wrapped in a centering element — see [Centering](#centering) | script |
 | `STALE` | `src_hash` or marker/manifest mismatch (source edited since render) — or, judged by you, `facts_hash` no longer matches current evidence | script + you |
-| `DRIFT` | `design_hash` ≠ current `DESIGN.md` | script |
+| `DRIFT` | `design_hash` ≠ current `prettydocs.md` | script |
 | `CONTRADICTS` | A stored fact conflicts with what the evidence pass now shows | you — the script prints each visual's `facts` list for judgment |
 | `BUDGET` | Doc exceeds its visual budget, or **any** visual/marker found in LICENSE/NOTICE (hard violation) | script |
 

@@ -93,9 +93,49 @@ def load_byte_floors() -> tuple[int, dict[str, int]]:
 
 BYTES_FAIL_DEFAULT, STYLE_BYTE_FLOORS = load_byte_floors()
 
+CONTRACT = ".prettydocs/prettydocs.md"       # current location
+LEGACY_CONTRACT = "docs/assets/src/DESIGN.md"  # pre-.prettydocs location
+
 
 def sha256_file(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def project_chain(root: Path) -> list[Path]:
+    """The project dir, then each ancestor up to and including the repo root.
+
+    Bounded by the directory holding `.git` so the walk can never wander above the
+    repo into unrelated parts of the filesystem. A repo with no `.git` (a tarball,
+    a fixture) yields the project dir alone.
+    """
+    top = next((d for d in [root, *root.parents] if (d / ".git").exists()), None)
+    chain = [root]
+    if top is not None and top != root:
+        for parent in root.parents:
+            chain.append(parent)
+            if parent == top:
+                break
+    return chain
+
+
+def resolve_contract(root: Path) -> tuple[Path | None, str]:
+    """Locate this project's frozen design contract.
+
+    Nearest wins, then inheritance: a project without its own `prettydocs.md` uses
+    the closest ancestor's, which is what keeps a monorepo visually coherent, and
+    dropping one into the project overrides that. Falls back to the legacy path so
+    a repo written before the move keeps auditing until its migration is accepted.
+
+    Returns (path, how) where how is own / inherited / legacy / missing.
+    """
+    for depth, directory in enumerate(project_chain(root)):
+        candidate = directory / CONTRACT
+        if candidate.exists():
+            return candidate, "own" if depth == 0 else "inherited"
+    legacy = root / LEGACY_CONTRACT
+    if legacy.exists():
+        return legacy, "legacy"
+    return None, "missing"
 
 
 def doc_key(path: Path) -> str:
@@ -191,15 +231,13 @@ def audit_doc(doc: Path, root: Path, design_hash: str | None, rows: list, proble
 
 def main() -> int:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--root", default=".", help="repo root (asset paths resolve against this)")
+    ap.add_argument("--root", default=".", help="project root (asset paths resolve against this)")
     ap.add_argument("docs", nargs="+")
     args = ap.parse_args()
     root = Path(args.root).resolve()
 
-    design = root / "docs/assets/src/DESIGN.md"
-    design_hash = sha256_file(design) if design.exists() else None
-    if design_hash is None:
-        print("note: docs/assets/src/DESIGN.md not found — DRIFT checks skipped", file=sys.stderr)
+    design, how = resolve_contract(root)
+    design_hash = sha256_file(design) if design is not None else None
 
     rows: list = []
     problems: list = []
@@ -209,6 +247,23 @@ def main() -> int:
             problems.append(f"{d}: file not found")
             continue
         audit_doc(p, root, design_hash, rows, problems)
+
+    # A project that embeds visuals but has no design contract is a hard finding, not
+    # a skipped check. Reporting it as a note and exiting 0 (the old behaviour) meant
+    # every DRIFT comparison silently became unreachable while the run still looked
+    # clean — the one failure mode that hides all the others.
+    if rows and design is None:
+        problems.append(
+            f"{root}: no design contract for this project — looked for {CONTRACT} here "
+            f"and in every ancestor up to the repo root, then {LEGACY_CONTRACT}. "
+            f"DRIFT is unenforceable for all {len(rows)} visual(s) until one exists."
+        )
+    elif how == "legacy":
+        print(f"note: reading the pre-.prettydocs contract at {LEGACY_CONTRACT} — offer to "
+              f"migrate it to {CONTRACT}. Every hash is taken over file bytes, so the move "
+              f"changes no hash and re-renders nothing.", file=sys.stderr)
+    elif how == "inherited":
+        print(f"note: no {CONTRACT} in this project — inheriting {design}", file=sys.stderr)
 
     w = max([len(r["name"]) for r in rows] + [6])
     print(f"{'DOC':<22} {'VISUAL':<{w}} VERDICT")

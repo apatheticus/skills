@@ -315,7 +315,7 @@ first; only the values you had to ask for need storing here.
 
 Per-visual state lives elsewhere: each visual's `viz.json` next to its composition
 source (see `embedding.md`), and the repo-wide design system in
-`docs/assets/src/DESIGN.md` (see `design-system.md`).
+`.prettydocs/prettydocs.md` (see `design-system.md`).
 
 ## Copyright, ownership, and the identity guardrail
 

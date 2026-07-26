@@ -100,31 +100,46 @@ existing convention rather than creating duplicates.
 Under-spending the budget is always allowed. A diagram that wouldn't earn a
 place in a printed engineering doc doesn't get animated.
 
-## Target-repo layout (the skill maintains this)
+## Target layout (the skill maintains this)
+
+One block per project. A repo documenting several projects repeats it per project
+root — see `design-system.md` → What counts as a project.
 
 ```
-docs/assets/<viz-name>.webp        # committed — embedded animated visuals
-docs/assets/<viz-name>.svg         # committed — static visuals
-docs/assets/src/DESIGN.md          # committed — frozen design system
-docs/assets/src/<viz-name>/
-├── index.html                     # committed — HyperFrames composition (or source .svg for statics)
-├── viz.json                       # committed — facts, hashes, render params (see embedding.md)
-├── hyperframes.json, package.json, meta.json   # committed — init scaffold config
-│                                  #   (meta.json is HyperFrames' own file, not ours)
-└── render.mp4, renders/, frames/, snapshots/, qa_*.png, check.json   # gitignored byproducts
+<project>/docs/assets/<viz-name>.webp   # committed — embedded animated visuals
+<project>/docs/assets/<viz-name>.svg    # committed — static visuals
+<project>/.prettydocs/
+├── .gitignore                     # committed — byproduct rules, self-contained
+├── prettydocs.md                  # committed — frozen design system + provenance
+└── src/<viz-name>/
+    ├── index.html                 # committed — HyperFrames composition (or source .svg for statics)
+    ├── viz.json                   # committed — facts, hashes, render params (see embedding.md)
+    ├── hyperframes.json, package.json, meta.json   # committed — init scaffold config
+    │                              #   (meta.json is HyperFrames' own file, not ours)
+    └── render.mp4, renders/, frames/, snapshots/, qa_*.png, check.json   # gitignored
 ```
 
-The skill adds/maintains these `.gitignore` entries:
+Rendered assets stay under `docs/assets/` so a deployment can exclude the whole
+`.prettydocs/` machinery and still serve every embedded visual.
+
+Ignore rules go in **`<project>/.prettydocs/.gitignore`**, not the project's root
+one. A pattern containing a slash anchors to its own `.gitignore`'s directory, so
+these resolve correctly and the folder stays self-contained:
 
 ```
-docs/assets/src/**/render.mp4
-docs/assets/src/**/renders/
-docs/assets/src/**/frames/
-docs/assets/src/**/snapshots/
-docs/assets/src/**/qa_*.png
-docs/assets/src/**/check.json
-docs/assets/src/**/node_modules/
+src/**/render.mp4
+src/**/renders/
+src/**/frames/
+src/**/snapshots/
+src/**/qa_*.png
+src/**/check.json
+src/**/node_modules/
 ```
+
+**Pre-existing repos** may carry the older layout — `docs/assets/src/DESIGN.md`
+with the per-visual state beside it. Offer the migration (`design-system.md` →
+Migrating a project off the old layout); never write a second system alongside the
+first. Every hash is taken over file bytes, so the move re-renders nothing.
 
 ## Workflow
 
@@ -143,18 +158,26 @@ user-account name or `git config user.name` only becomes the pre-filled default
 for phase 4; the OS username is never a candidate). **Additionally detect the
 product's visual identity:** logos/icons, brand tokens (CSS custom properties,
 Tailwind config, theme files), an existing style guide or DESIGN.md. These feed
-phase 2.
+phase 2. **Also resolve the project roots** — a repo may document more than one,
+and each carries its own design system.
 
 ### 2. Design system
 
-Read `reference/design-system.md`, then derive or load
-`docs/assets/src/DESIGN.md`:
+Read `reference/design-system.md` and walk its discovery ladder per project, then
+derive or load `<project>/.prettydocs/prettydocs.md`:
 
-- Exists and identity unchanged → load it; it is **frozen** for this run.
-- Missing → derive it (mapping from product identity when one exists; otherwise
-  from product semantics) and write it.
-- Re-derive an existing one only when the product's identity clearly changed or
-  the user asked. Changing it invalidates every visual (design-hash drift), so
+- **Own contract exists** and identity unchanged → load it; **frozen** for this run.
+- **An ancestor's exists** → inherit it as the base. A project overrides by
+  carrying its own.
+- **A design source was found instead** (a `DESIGN.md`, a README stating a palette,
+  brand tokens) → derive `prettydocs.md` *from* it and record
+  `design_source_path` / `design_source_hash`. A source is never the contract.
+- **Nothing found** → derive from product identity when one exists, otherwise from
+  product semantics, and write it.
+- **Old layout found** (`docs/assets/src/DESIGN.md`, no `.prettydocs/`) → offer the
+  migration rather than deriving a second system.
+- Re-derive an existing contract only when the product's identity clearly changed
+  or the user asked. Changing it invalidates every visual (design-hash drift), so
   say so in the plan.
 
 ### 3. Plan
@@ -194,11 +217,12 @@ Humanize).
 ### 6. Apply — visuals
 
 For each `RENDER`/`RE-RENDER` visual, follow `reference/viz-production.md`
-exactly: scaffold → author to DESIGN.md → **gate loop** (lint → snapshot at 3
+exactly: scaffold → author to `prettydocs.md` → **gate loop** (lint → snapshot at 3
 timestamps and read the frames → `hyperframes check` with 0 errors) → render →
 `scripts/viz_to_webp.sh` (enforces the 2.5 MB cap) → verify real pixels →
 update `viz.json` + marker hashes together. Statics: author per the
-static-SVG section of the same reference. Maintain the `.gitignore` entries.
+static-SVG section of the same reference. Write `.prettydocs/.gitignore` if the
+project has none yet; its rules are project-relative, so they need no upkeep after.
 
 ### 7. Verify
 

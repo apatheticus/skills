@@ -52,9 +52,9 @@ gated by the skill itself, in the `bento-grid` style.
 - `docs/assets/*.svg` — the committed visuals, each within a per-doc budget
   (README: hero + up to 3; technical docs: 1–2 flagship each;
   SECURITY/CODE_OF_CONDUCT: one attention banner).
-- `docs/assets/src/DESIGN.md` — the frozen design system every visual derives from,
+- `.prettydocs/prettydocs.md` — the frozen design system every visual derives from,
   including the resolved style spec.
-- `docs/assets/src/<viz>/viz.json` — each visual's facts, hashes and parameters.
+- `.prettydocs/src/<viz>/viz.json` — each visual's facts, hashes and parameters.
   There is no composition source next to it, because the asset *is* the source.
 
 LICENSE and NOTICE are never visualized or reformatted.

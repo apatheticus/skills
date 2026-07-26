@@ -11,7 +11,7 @@ Deterministic, python3 stdlib only. Checks, in order:
               class AND every SMIL-animated element (CSS cannot stop SMIL, so
               those need display:none / visibility:hidden)
   legibility  every font-size meets its role floor
-  system      every colour traces to a DESIGN.md palette role or a declared
+  system      every colour traces to a prettydocs.md palette role or a declared
               custom property; text contrast >= 4.5:1 against its data-bg role
   style       the resolved style's forbid / require invariants and relaxed floors
   fidelity    the style's *minimum* — required primitives, minimum filter-chain
@@ -21,7 +21,7 @@ Deterministic, python3 stdlib only. Checks, in order:
   size        warn at 60 KB, fail over 150 KB
 
 Usage:
-    svg_check.py [--design DESIGN.md] [--style SLUG] [--json] FILE.svg [FILE.svg ...]
+    svg_check.py [--design prettydocs.md] [--style SLUG] [--json] FILE.svg [FILE.svg ...]
 
 Output is one line per finding: ERROR / SOFTENED / WARN / NOTE.
 Exit 0 = no errors, exit 1 = at least one ERROR. SOFTENED lines are passes that
@@ -301,7 +301,7 @@ class Stylesheet:
 # ------------------------------------------------------------------ palette
 
 def load_palette(path: Path) -> dict[str, str]:
-    """Read the Palette table out of a DESIGN.md: | role | `#hex` | notes |."""
+    """Read the Palette table out of a prettydocs.md: | role | `#hex` | notes |."""
     palette: dict[str, str] = {}
     for line in path.read_text(encoding="utf-8").splitlines():
         if not line.lstrip().startswith("|"):
@@ -596,11 +596,11 @@ def check_paint(root, parents, sheet: Stylesheet, palette, limits, catalog,
             if specimen:
                 off_palette.append(name)
             else:
-                f.warn(label, f"{name}: {h} is a derived tint, not a DESIGN.md palette "
-                              "role — note it in DESIGN.md if it is load-bearing")
+                f.warn(label, f"{name}: {h} is a derived tint, not a prettydocs.md palette "
+                              "role — note it in prettydocs.md if it is load-bearing")
     if off_palette:
         f.note(label, f"specimen palette: {len(off_palette)} token(s) from the style "
-                      "spec rather than DESIGN.md — expected for a specimen")
+                      "spec rather than prettydocs.md — expected for a specimen")
 
     def paint_of(el, inherited: dict) -> dict:
         classes = (el.get("class") or "").split()
@@ -644,7 +644,7 @@ def check_paint(root, parents, sheet: Stylesheet, palette, limits, catalog,
             if palette and h not in palette_hexes and h not in declared and h not in seen_off_system:
                 seen_off_system.add(h)
                 f.error(label, f"off-system colour {h} on <{tag}> {prop} — use "
-                               "var(--role) from the DESIGN.md palette, or declare it "
+                               "var(--role) from the prettydocs.md palette, or declare it "
                                "as a custom property if it is a derived tint")
 
         if tag == "text" or tag == "tspan":
@@ -901,7 +901,7 @@ def check_style(root, by_tag, sheet: Stylesheet, style: dict, slug: str,
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     ap.add_argument("files", nargs="+")
-    ap.add_argument("--design", help="path to DESIGN.md (palette + contrast grounds)")
+    ap.add_argument("--design", help="path to prettydocs.md (palette + contrast grounds)")
     ap.add_argument("--style", help="resolved style slug or alias")
     ap.add_argument("--catalog", help="path to styles.json (defaults to alongside this script)")
     ap.add_argument("--json", action="store_true", help="emit a JSON summary as well")
@@ -933,7 +933,7 @@ def main() -> int:
                 f.note(str(design), "no palette table found — colour and contrast "
                                     "checks are limited")
         else:
-            f.note(str(design), "DESIGN.md not found — colour and contrast checks skipped")
+            f.note(str(design), "prettydocs.md not found — colour and contrast checks skipped")
     else:
         f.note("-", "no --design given — colour and contrast checks skipped")
 

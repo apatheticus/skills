@@ -3,7 +3,7 @@
 The pipeline that turns a design decision into a GitHub-safe, seamless-loop
 animated WebP: author an HTML composition, gate it, render an MP4, convert to a
 budgeted WebP. Every visual is styled by the repo's frozen design system
-(`docs/assets/src/DESIGN.md`, see `design-system.md`) and embedded per
+(`.prettydocs/prettydocs.md`, see `design-system.md`) and embedded per
 `embedding.md`. This file is self-contained; follow it in order per visual.
 
 ## Preconditions
@@ -18,8 +18,8 @@ budgeted WebP. Every visual is styled by the repo's frozen design system
 ## Where things live
 
 ```text
-docs/assets/src/DESIGN.md          frozen design system (all visuals derive from it)
-docs/assets/src/<viz-name>/        one composition per visual
+.prettydocs/prettydocs.md          frozen design system (all visuals derive from it)
+.prettydocs/src/<viz-name>/        one composition per visual
   index.html                       the HyperFrames composition (committed)
   viz.json                         per-visual state + grounded fact list (committed)
   hyperframes.json, package.json,  scaffold config written by `hyperframes init`
@@ -37,14 +37,15 @@ docs/assets/<viz-name>.webp        final committed WebP
 Committed per visual: `index.html`, `viz.json`, the small scaffold config files
 (`hyperframes.json`, `package.json`, and HyperFrames' own `meta.json` — do not
 confuse it with `viz.json`), and the final `docs/assets/<viz-name>.webp`. The
-skill maintains the `.gitignore` entries for the byproducts.
+skill writes `.prettydocs/.gitignore` once; its rules are relative to that file, so
+they need no per-visual upkeep.
 
 ## 1. Scaffold
 
 One project per visual:
 
 ```bash
-HYPERFRAMES_SKIP_SKILLS=1 npx hyperframes init docs/assets/src/<viz-name> \
+HYPERFRAMES_SKIP_SKILLS=1 npx hyperframes init .prettydocs/src/<viz-name> \
   --non-interactive --example blank
 ```
 
@@ -65,7 +66,7 @@ apply this doctrine (proven; from the reference pipeline):
   it's the design-system rule).
 - **Z-index discipline.** An SVG overlay that draws over HTML cards needs an
   explicit z-index above them, or edges vanish behind nodes.
-- **All styling from `docs/assets/src/DESIGN.md`** — palette, type, motif, motion
+- **All styling from `.prettydocs/prettydocs.md`** — palette, type, motif, motion
   character. Nothing off-system.
 
 ### Seamless-loop rules (mandatory — the loop is steady-state)
@@ -121,7 +122,7 @@ npx hyperframes render --quality high --output render.mp4
 Use the bundled script (don't hand-run the two commands unless debugging):
 
 ```bash
-scripts/viz_to_webp.sh docs/assets/src/<viz-name> docs/assets/<viz-name>.webp
+scripts/viz_to_webp.sh .prettydocs/src/<viz-name> docs/assets/<viz-name>.webp
 ```
 
 Parameters and defaults:
@@ -171,7 +172,7 @@ State which frames/timestamps you inspected and that seams/overlays/fonts passed
 ## 7. Byproduct hygiene
 
 `render.mp4`, `renders/`, `frames/`, `snapshots/`, `qa_*.png`, and `check.json`
-are gitignored (the skill maintains the entries). Committed: `index.html`,
+are gitignored by `.prettydocs/.gitignore`. Committed: `index.html`,
 `viz.json`, the scaffold config (`hyperframes.json`, `package.json`, HyperFrames'
 own `meta.json`), and the final `docs/assets/<viz-name>.webp`.
 
@@ -180,7 +181,7 @@ own `meta.json`), and the final `docs/assets/<viz-name>.webp`.
 ## Static-SVG production (non-flagship visuals and banners)
 
 Visuals outside the animated budget are hand-authored SVG, styled strictly from
-`docs/assets/src/DESIGN.md`. These must survive GitHub's SVG sanitizer and read on
+`.prettydocs/prettydocs.md`. These must survive GitHub's SVG sanitizer and read on
 both themes.
 
 ### GitHub-safe hard rules

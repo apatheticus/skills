@@ -3,7 +3,7 @@
 The pipeline that turns a design decision into a committed, seamless-loop animated
 SVG. There is no renderer and no conversion step: you write the `.svg`, a bundled
 `python3` script gates it, and that same file is what ships. Every visual is styled
-by the repo's frozen design system (`docs/assets/src/DESIGN.md`, see
+by the repo's frozen design system (`.prettydocs/prettydocs.md`, see
 `design-system.md`) in the run's resolved style (`styles.md`), and embedded per
 `embedding.md`.
 
@@ -23,9 +23,9 @@ Nothing else. No CLI, no `ffmpeg`, no `img2webp`, no network.
 ## Where things live
 
 ```text
-docs/assets/src/DESIGN.md          frozen design system + resolved style (all visuals derive from it)
+.prettydocs/prettydocs.md          frozen design system + resolved style (all visuals derive from it)
 docs/assets/<viz-name>.svg         committed — the asset AND the source
-docs/assets/src/<viz-name>/
+.prettydocs/src/<viz-name>/
   viz.json                         committed — facts, hashes, svg params (see embedding.md)
   _qa/filmstrip.html               gitignored — the scrub harness
   _qa/phase_*.png                  gitignored — verification stills
@@ -34,7 +34,7 @@ docs/assets/src/<viz-name>/
 One `.gitignore` entry covers the byproducts:
 
 ```
-docs/assets/src/**/_qa/
+src/**/_qa/
 ```
 
 The asset is the source, so nothing under `src/<viz-name>/` duplicates the artwork.
@@ -189,7 +189,7 @@ labels below the legibility floor and never quietly drop content.
 Iterate until clean. **Do not write `viz.json` or the marker until this passes.**
 
 ```bash
-python3 scripts/svg_check.py --design docs/assets/src/DESIGN.md \
+python3 scripts/svg_check.py --design .prettydocs/prettydocs.md \
   --style <slug> docs/assets/<viz-name>.svg
 ```
 
@@ -244,7 +244,7 @@ Zero errors, not "only warnings."
 python3 scripts/svg_filmstrip.py docs/assets/<viz-name>.svg --phases 6
 ```
 
-Writes `docs/assets/src/<viz-name>/_qa/filmstrip.html`: six inline copies of the
+Writes `.prettydocs/src/<viz-name>/_qa/filmstrip.html`: six inline copies of the
 SVG, each paused at a different phase of the loop via a negative
 `animation-delay`, labelled with its timestamp. One screenshot then shows the whole
 cycle. The harness is gitignored and never committed, which is why it may use the
@@ -255,7 +255,7 @@ cycle. The harness is gitignored and never committed, which is why it may use th
 Serve over HTTP — **never** a `file://` URL, browser tools block it:
 
 ```bash
-python3 -m http.server 8765 --directory docs/assets/src/<viz-name>/_qa
+python3 -m http.server 8765 --directory .prettydocs/src/<viz-name>/_qa
 # then open http://localhost:8765/filmstrip.html
 ```
 
@@ -276,11 +276,11 @@ no browser tool; `svg_check.py` passed."* Never imply pixels were inspected.
 
 Only now, and in this order:
 
-1. Write `docs/assets/src/<viz-name>/viz.json` — facts, `facts_hash`, `src_hash`
+1. Write `.prettydocs/src/<viz-name>/viz.json` — facts, `facts_hash`, `src_hash`
    over the committed `.svg`, `design_hash`, `producer`, `style`, the `svg` block,
    and the `relaxed` array from step 2.
 2. Rewrite the `pd:viz` marker with the same `facts-hash` and `src-hash`.
-3. Confirm `docs/assets/src/**/_qa/` is in `.gitignore`.
+3. Confirm `src/**/_qa/` is in `.gitignore`.
 
 A marker and manifest that disagree mean one was hand-edited; the audit reports it
 and the next apply run re-authors the visual to re-sync.

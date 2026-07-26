@@ -40,9 +40,9 @@ running the skill on this folder.
 - `docs/assets/*.webp` / `*.svg` — the committed visuals, each within a per-doc
   budget (README: hero + up to 3; technical docs: 1–2 flagship each;
   SECURITY/CODE_OF_CONDUCT: one attention banner).
-- `docs/assets/src/DESIGN.md` — the frozen design system every visual derives
+- `.prettydocs/prettydocs.md` — the frozen design system every visual derives
   from (mapped from the product's own brand when it has one).
-- `docs/assets/src/<viz>/` — each visual's composition source and `viz.json`
+- `.prettydocs/src/<viz>/` — each visual's composition source and `viz.json`
   manifest; render byproducts are gitignored.
 
 LICENSE and NOTICE are never visualized or reformatted.
