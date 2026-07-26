@@ -7,6 +7,7 @@ rules that decide when a visual re-renders, and the audit verdicts.
 ## Contents
 
 - [Embed shape per doc type](#embed-shape-per-doc-type)
+- [Centering](#centering)
 - [Alt-text doctrine](#alt-text-doctrine)
 - [The mpd:viz marker](#the-mpdviz-marker)
 - [The mpd.json manifest](#the-mpdjson-manifest)
@@ -19,20 +20,26 @@ rules that decide when a visual re-renders, and the audit verdicts.
 Every visual embed sits inside one `mpd:viz` marker pair. What goes inside the
 pair depends on the doc:
 
-**README** (hero + body diagrams) — image with rich alt text, nothing else:
+**README** (hero + body diagrams) — a centered image with rich alt text, nothing
+else:
 
 ```markdown
 <!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="…" src-hash="…" -->
-![Animated overview: requests enter the gateway, fan out to the auth, billing, and search services, and results merge back to the client.](docs/assets/hero.webp)
+<div align="center">
+<img src="docs/assets/hero.webp" alt="Animated overview: requests enter the gateway, fan out to the auth, billing, and search services, and results merge back to the client." width="820" />
+</div>
 <!-- mpd:viz end -->
 ```
 
-**Technical docs** (ARCHITECTURE, DEVELOPMENT, CONTRIBUTING) — image plus the
-collapsed Mermaid equivalent, both inside the pair:
+**Technical docs** (ARCHITECTURE, DEVELOPMENT, CONTRIBUTING) — the same centered
+image, plus the collapsed Mermaid equivalent inside the pair and **outside** the
+centering wrapper:
 
 ```markdown
 <!-- mpd:viz name="request-flow" src="docs/assets/src/request-flow/" facts-hash="…" src-hash="…" -->
-![Animated sequence: a request passes the gateway, is authenticated, then handled by the matching service.](docs/assets/request-flow.webp)
+<div align="center">
+<img src="docs/assets/request-flow.webp" alt="Animated sequence: a request passes the gateway, is authenticated, then handled by the matching service." width="820" />
+</div>
 
 <details>
 <summary>Diagram source (Mermaid)</summary>
@@ -54,7 +61,8 @@ animation shows (gate 4). It is the machine-checkable record of what the
 animation claims.
 
 **SECURITY / CODE_OF_CONDUCT banners** — one marker pair at the top of the doc,
-image only, with the takeaway repeated in plain text immediately below the pair.
+centered image only at `width="100%"`, with the takeaway repeated in plain text
+immediately below the pair.
 
 **Static SVGs** (non-flagship diagrams, SUPPORT header) — same marker pair, image
 pointing at a committed `.svg` in `docs/assets/`. Static visuals still get a
@@ -62,6 +70,44 @@ pointing at a committed `.svg` in `docs/assets/`. Static visuals still get a
 and design hash.
 
 **LICENSE / NOTICE — never.** No marker, no image, under any flag.
+
+## Centering
+
+**Every embed is centered.** The wrapper is a block element carrying
+`align="center"`, it sits *inside* the marker pair, and it wraps the image and
+nothing else:
+
+```markdown
+<div align="center">
+<img src="docs/assets/<name>.webp" alt="…" width="820" />
+</div>
+```
+
+`width` is `820` in a README or technical doc and `100%` for a banner. Three
+things make this narrower than it looks:
+
+- **`align` on the wrapper, not `style`.** GitHub's HTML sanitiser strips `style`
+  attributes, so `align="center"` on a `<div>` (or `<p>`) is the only centering
+  mechanism that survives rendering. Don't reach for `text-align` or a `<center>`
+  tag.
+- **`align="center"` on the `<img>` itself does not center it.** That attribute is
+  inline *vertical* alignment. The footer icon in `house-style.md` uses it for
+  exactly that purpose and is correct as written — don't "fix" it, and don't
+  mistake it for a centered embed.
+- **Markdown image syntax cannot be centered**, which is why a marker-pair embed is
+  always an `<img>` tag. `![alt](path)` also carries no width, so it loses the
+  size control every doc exemplar depends on.
+
+The wrapper belongs inside the pair, not around it. A README's header block already
+sits in a `<div align="center">`, so a hero nested in it looks centered without a
+wrapper of its own — but that is inheritance, not the rule: it silently breaks the
+moment the embed moves below the header, and it leaves the rule uncheckable from
+the marker block alone. Nest the wrapper anyway; `div` inside `div` is valid and
+renders identically.
+
+In a technical doc the `<details>` Mermaid block stays outside the centering
+wrapper. A fenced code block inside an HTML block element does not parse on
+GitHub, and a centered `<summary>` reads as a mistake.
 
 ## Alt-text doctrine
 
@@ -180,6 +226,7 @@ judgment is yours (it needs the evidence pass).
 | --- | --- | --- |
 | `OK` | Asset present, all hashes consistent, budget respected | script |
 | `MISSING` | Embedded asset file absent | script |
+| `UNCENTERED` | The image in the marker block is not wrapped in a centering element — see [Centering](#centering) | script |
 | `STALE` | `src_hash` or marker/manifest mismatch (source edited since render) — or, judged by you, `facts_hash` no longer matches current evidence | script + you |
 | `DRIFT` | `design_hash` ≠ current `DESIGN.md` | script |
 | `CONTRADICTS` | A stored fact conflicts with what the evidence pass now shows | you — the script prints each visual's `facts` list for judgment |

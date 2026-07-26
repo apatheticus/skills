@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `material`, `flat`
 
+<div align="center">
 <img src="../../docs/samples/flat-material.svg" alt="The flat-material specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

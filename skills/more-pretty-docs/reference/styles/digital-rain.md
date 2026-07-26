@@ -2,7 +2,9 @@
 
 **Primary axis:** era + material · **Aliases:** `matrix-rain`, `phosphor-crt`, `falling-glyphs`
 
+<div align="center">
 <img src="../../docs/samples/digital-rain.svg" alt="The digital-rain specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

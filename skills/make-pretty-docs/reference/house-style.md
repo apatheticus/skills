@@ -385,7 +385,10 @@ human content. Gates 1–5 are textual; gates 6–10 are visual and detailed in
    `<details>` Mermaid equivalent; banners are reinforced by adjacent text.
 10. **Budget + placement.** No doc exceeds its visual budget; **LICENSE and NOTICE
     contain zero visuals, badges, or markers** — any visual there is a hard
-    violation.
+    violation. **Every embed is centered** — an `<img>` inside a
+    `<div align="center">` wrapper, inside its marker pair
+    ([embedding.md](embedding.md) → Centering). `audit_visuals.py` reports
+    `UNCENTERED` otherwise.
 
 ## Anti-fabrication rules
 

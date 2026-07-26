@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `hologram`, `holo`, `projection`
 
+<div align="center">
 <img src="../../docs/samples/holographic-projection.svg" alt="The holographic-projection specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

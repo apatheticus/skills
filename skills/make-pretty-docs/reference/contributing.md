@@ -115,8 +115,10 @@ feat(<scope>): <subject>
 ## Pull request process
 
 <!-- mpd:viz name="pr-lifecycle" src="docs/assets/src/pr-lifecycle/" facts-hash="…" src-hash="…" -->
+<div align="center">
 <img src="docs/assets/pr-lifecycle.webp" alt="<Contribution lifecycle in order: branch
 from base, commit, push, open PR, review, and either loop back or merge.>" width="820" />
+</div>
 <!-- mpd:viz end -->
 
 <details>

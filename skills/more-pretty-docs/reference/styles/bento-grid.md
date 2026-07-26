@@ -2,7 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `bento`, `cards`, `dashboard`
 
+<div align="center">
 <img src="../../docs/samples/bento-grid.svg" alt="The bento-grid specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

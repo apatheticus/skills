@@ -117,7 +117,12 @@ None of them soften for any style:
 - **`1200`-unit-wide `viewBox`** for full-width modules. Typical heights: hero
   `300–420`, section banner `120–170`, diagram `320–760`.
 - Set explicit `width`/`height` matching the viewBox, and embed with `width="820"`
-  (README) or `width="100%"` so the host doesn't guess.
+  (README, technical docs) or `width="100%"` (banners) so the host doesn't guess.
+- **Every embed is centered** in the doc — an `<img>` inside a
+  `<div align="center">` wrapper, inside the marker pair. Shape and the traps
+  around it: [embedding.md](embedding.md) → Centering. This is the embed's position
+  on the page, not the artwork's position in the viewBox; composition inside the
+  canvas is the style's call, and several styles compose deliberately left-aligned.
 - Include `<title>` and `<desc>` in every file, plus meaningful `alt` on the embed.
 - Keep important content `48–64` units from the edges.
 

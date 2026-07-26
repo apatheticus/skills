@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `realist`, `textured`
 
+<div align="center">
 <img src="../../docs/samples/skeuomorphic.svg" alt="The skeuomorphic specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

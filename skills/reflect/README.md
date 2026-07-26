@@ -13,7 +13,9 @@
 <!-- mpd:badges end -->
 
 <!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="5ebfafd6760d4ed6f86744530184d0cbaa15df53f892ab06555d4f41416b0330" src-hash="f3bddae14244b6edaec40b3e5d63610328f94bbdad13f590537b5529c608fbc1" -->
+<div align="center">
 <img src="docs/assets/hero.svg" alt="An animated board. A recessed well holds the raw material: the session transcripts already under ~/.claude/projects that fall inside the window, with the session running the pass excluded from its own corpus. Triage scores every one of them from cheap metadata before any agent runs, so effort goes where the friction is. Three cards lift out of that well in order, each marked in turn. The first, extract, pulls signals in four families — friction and failure, repetition and missed automation, wins and effective patterns, environment gaps — every one cited with a session ID and a verbatim quote. The second, cluster, merges and dedupes those signals across sessions. The third, decide, turns each cluster into a single verdict, and it presses in and releases because a cluster only earns one when enough distinct sessions back it: three for a new skill, two for an automation or a fix." width="820" />
+</div>
 <!-- mpd:viz end -->
 
 </div>
@@ -45,7 +47,9 @@ The report is styled with the bundled **Neumorphic Fresh** design system (see [r
 `reflect` runs six phases, numbered 0 through 5. The heavy extraction stage fans out across many sub-agents through the Workflow tool; everything a session touches stays local.
 
 <!-- mpd:viz name="pipeline" src="docs/assets/src/pipeline/" facts-hash="8862876d778e86f3577ab83da43ae01334086acdd480d717ba6628520f14e7e3" src-hash="726560b1c050707f5fa344f0d55d0473db39f32bb7e32aabb85b9d524b928819" -->
+<div align="center">
 <img src="docs/assets/pipeline.svg" alt="Six cards, read left to right and top to bottom, each marked in turn as the pass moves through them. Phase 0 scopes the corpus: enumerate the in-window transcripts and load the prior report so this run can be diffed against it. Phase 1 is the insights gate, and it gates on recency rather than coverage, because /insights samples a few hundred recent sessions instead of the whole corpus. Phase 2 triages, scoring every session from cheap metadata before any agent is spent. Phase 3 extracts: fan out over batched transcripts, cluster the signals, decide a verdict per cluster, then corroborate against the /insights data. Phase 4 renders one self-contained HTML file with inline SVG and no external requests. Phase 5 delivers that file with a summary of the top findings and anything the run had to skip. Nothing leaves the machine, and nothing is built — recommending the change is the deliverable." width="820" />
+</div>
 <!-- mpd:viz end -->
 
 | Phase | What happens |

@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `soft-ui`, `soft`
 
+<div align="center">
 <img src="../../docs/samples/neumorphism.svg" alt="The neumorphism specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

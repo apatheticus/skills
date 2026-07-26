@@ -2,7 +2,9 @@
 
 **Primary axis:** composition · **Aliases:** `excalidraw`, `roughjs`, `rough`
 
+<div align="center">
 <img src="../../docs/samples/rough-sketch.svg" alt="The rough-sketch specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

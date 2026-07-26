@@ -13,7 +13,9 @@
 <!-- mpd:badges end -->
 
 <!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="de21d7126585db4a9d5c830b93114aa40a4b07443b7cab873016b887eaf8deda" src-hash="9a09abc21dcb1ee37a81ace7a53eb02896729f1d340db0fd112ec788f0e096b6" -->
+<div align="center">
 <img src="docs/assets/hero.svg" alt="An animated board showing one engagement. Four cycle cards run left to right, one security-audit run each, lit in turn. Run 1 and run 2 each add more than zero new medium-or-higher findings, so the convergence counter resets to zero both times. Run 3 adds none and the counter reaches one; run 4 adds none and the counter reaches two. A dark stop card on the right states the rule the ledger applies: stop when the counter reaches two consecutive zero-new cycles, or when the run number reaches max_cycles. Either way the loop ends and one consolidated report is written once, at the stop — every run merged into a single HTML file that stays filterable by run, with every claim traced back to that run's findings.json and the page built from the bundled assets/template.html." width="820" />
+</div>
 <!-- mpd:viz end -->
 
 </div>
@@ -34,7 +36,9 @@ It is also **stateful and resumable**. All finding data lives on disk under the 
 The skill has a **two-mode contract**, decided by whether today's engagement directory already exists:
 
 <!-- mpd:viz name="two-mode" src="docs/assets/src/two-mode/" facts-hash="aa4928901408dd15be9081e523a1255b817450ff1a2fabba284a3f897bc89e94" src-hash="7ec6291a918f718152d690f16808f46ce4cb24f7529c5f2bca56d26caa360cae" -->
+<div align="center">
 <img src="docs/assets/two-mode.svg" alt="Two mode cards side by side. Every invocation reads ledger.md first and picks its mode from what it finds. With no ledger, the skill enters preflight mode, which runs once with the user present and covers sections 1 to 3: check that the security-audit skill is installed, offer to add .audit/ to .gitignore, create the engagement directory and write ledger.md, then start the loop and stop for that turn. With a ledger whose status is running, it enters cycle mode, which fires on every loop invocation, never asks a question, and covers sections 4a to 4d: run one security-audit into run-N, count the new medium-or-higher findings against the ledger, update the convergence counter and the per-cycle log, then either continue or stop and write the report — each of those four steps rippling in turn because cycle mode is the half that repeats. A band underneath carries the ledger's own status values: running, then converged or max-cycles-reached, then done." width="820" />
+</div>
 <!-- mpd:viz end -->
 
 - **Preflight** is the only mode allowed to ask questions. It verifies `security-audit` is installed, offers to add `.audit/` to `.gitignore`, creates the dated engagement directory, writes `ledger.md`, and starts the self-paced loop.

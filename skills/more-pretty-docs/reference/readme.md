@@ -92,6 +92,12 @@ and hash mechanics in [embedding.md](embedding.md)), produced by the pipeline in
 [design-system.md](design-system.md). Don't restate the marker or hash mechanics
 here — point at those specs.
 
+**Every embed is centered**, hero and body diagrams alike, each in its own
+`<div align="center">` wrapper inside its marker pair. The hero looks centered
+already because the header block encloses it; that inheritance is not the rule and
+disappears the moment the embed moves. Shape and the traps around it:
+[embedding.md](embedding.md) → Centering.
+
 **README animations carry rich alt text instead of a Mermaid fallback.** Unlike the
 technical docs, a README embed gets **no** `<details>` Mermaid block. Its `alt`
 attribute must convey the diagram's actual meaning — the components, the direction of
@@ -122,8 +128,10 @@ volatile facts) — a baked-in `v2.4.1` goes stale silently and can't be greped.
 <!-- mpd:badges end -->
 
 <!-- mpd:viz name="hero" src="docs/assets/src/hero/" facts-hash="…" src-hash="…" -->
+<div align="center">
 <img src="docs/assets/hero.svg" alt="<Rich description: what the project does, the
 pieces involved, and how they connect — meaningful with images off.>" width="820" />
+</div>
 <!-- mpd:viz end -->
 
 </div>
@@ -131,6 +139,13 @@ pieces involved, and how they connect — meaningful with images off.>" width="8
 ## What this is
 
 <Two or three concrete paragraphs: the problem, the solution, who runs it.>
+
+<!-- mpd:viz name="<body-diagram>" src="docs/assets/src/<body-diagram>/" facts-hash="…" src-hash="…" -->
+<div align="center">
+<img src="docs/assets/<body-diagram>.svg" alt="<Rich description of the one thing
+this diagram shows, in the order a reader meets it.>" width="820" />
+</div>
+<!-- mpd:viz end -->
 
 ## Technology stack
 

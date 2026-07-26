@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `tui`, `cli`, `terminal`, `ascii-adjacent`
 
+<div align="center">
 <img src="../../docs/samples/terminal-minimalist.svg" alt="The terminal-minimalist specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

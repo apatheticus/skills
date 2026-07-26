@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `editor-dark`, `dev-tool`, `ide`
 
+<div align="center">
 <img src="../../docs/samples/ide-dark.svg" alt="The ide-dark specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent

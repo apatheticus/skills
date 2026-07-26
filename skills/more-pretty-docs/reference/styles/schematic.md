@@ -2,7 +2,9 @@
 
 **Primary axis:** composition (the notation) · **Aliases:** `technical-drawing`,
 
+<div align="center">
 <img src="../../docs/samples/schematic.svg" alt="The schematic specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 `circuit`, `netlist`
 

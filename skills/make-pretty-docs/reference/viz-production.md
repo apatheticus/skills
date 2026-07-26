@@ -200,8 +200,13 @@ An SVG that violates any of these is silently broken on GitHub:
 
 - **`1200`-unit-wide `viewBox`** for full-width modules. Typical heights: hero
   `300–420`, section banner `120–170`, diagram `320–760`.
-- Include `<title>` and `<desc>` on every major module; embed with `width="100%"`
-  via a markdown image and meaningful `alt`.
+- Include `<title>` and `<desc>` on every major module, plus meaningful `alt` on
+  the embed. Embed with `width="820"` (README, technical docs) or `width="100%"`
+  (banners) so the host doesn't guess.
+- **Every embed is centered** in the doc — an `<img>` inside a
+  `<div align="center">` wrapper, inside the marker pair. Shape and the traps
+  around it: [embedding.md](embedding.md) → Centering. This is the embed's position
+  on the page, not the artwork's position in the canvas.
 - Keep important content `48–64` units from the edges.
 
 ### Legible at rendered scale

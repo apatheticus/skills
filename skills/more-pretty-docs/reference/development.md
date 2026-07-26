@@ -87,8 +87,10 @@ together, see [ARCHITECTURE.md](ARCHITECTURE.md).
 ## Quick start
 
 <!-- mpd:viz name="dev-loop" src="docs/assets/src/dev-loop/" facts-hash="…" src-hash="…" -->
+<div align="center">
 <img src="docs/assets/dev-loop.svg" alt="<Local dev loop in order: clone, install,
 build/seed, run, open — the exact steps below.>" width="820" />
+</div>
 <!-- mpd:viz end -->
 
 <details>

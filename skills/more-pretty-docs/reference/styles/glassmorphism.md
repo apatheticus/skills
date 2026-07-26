@@ -2,7 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `glass`, `frosted`, `aero`
 
+<div align="center">
 <img src="../../docs/samples/glassmorphism.svg" alt="The glassmorphism specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+</div>
 
 
 ## Intent
