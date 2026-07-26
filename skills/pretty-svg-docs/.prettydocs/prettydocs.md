@@ -1,4 +1,4 @@
-# more-pretty-docs — visual design system
+# pretty-svg-docs — visual design system
 
 One frozen system; all repo visuals derive from it. Facts come from the repo
 (SKILL.md, reference/, scripts/), never invented. Frozen for this run.
@@ -8,7 +8,7 @@ One frozen system; all repo visuals derive from it. Facts come from the repo
 Audience:     developers who want their repo docs generated, truthful, and designed
 Value:        writes standard project docs and authors their key diagrams as seamless-loop animated SVG, with nothing to install
 Proof:        every visual in this skill's own README was authored and gated by the skill itself
-First action: copy the folder into `.claude/skills/` and run `/more-pretty-docs`
+First action: copy the folder into `.claude/skills/` and run `/pretty-svg-docs`
 Theme:        the artefact that reports its own state — a board of cells, each holding one checked fact
 
 ## Frozen system

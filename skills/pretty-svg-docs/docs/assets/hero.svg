@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520"
      role="img" data-loop-s="12" data-bg="background">
-  <title>more-pretty-docs — animated SVG, authored not rendered</title>
+  <title>pretty-svg-docs — animated SVG, authored not rendered</title>
   <desc>A board of eight cells. The widest names the skill and its claim: animated SVG,
 authored — not rendered. A runtime cell reads python3 and nothing else; the single
 accent-filled cell reports zero dependencies. One cell nests the pipeline as a small
@@ -25,7 +25,7 @@ seconds, seam-exact.</desc>
     .tally    { fill: var(--dim); }
     .tally-on { fill: var(--accent); }
 
-    /* display stack for structure, mono for literals — DESIGN.md typography */
+    /* display stack for structure, mono for literals — prettydocs.md typography */
     .hero  { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
              font-size: 48px; font-weight: 700; letter-spacing: -0.5px; }
     .eye   { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
@@ -79,7 +79,7 @@ seconds, seam-exact.</desc>
   <rect class="bg" x="0" y="0" width="1200" height="520"/>
   <rect class="cell" x="40" y="40" width="550" height="160" rx="16" data-bg="surface"/>
   <text class="eye"  x="72" y="84"  data-bg="surface">SKILL</text>
-  <text class="hero" x="72" y="140" data-role="hero" data-bg="surface">more-pretty-docs</text>
+  <text class="hero" x="72" y="140" data-role="hero" data-bg="surface">pretty-svg-docs</text>
   <text class="lab"  x="72" y="176" data-bg="surface">animated SVG, authored — not rendered</text>
   <rect class="cell" x="610" y="40" width="360" height="160" rx="16" data-bg="surface"/>
   <text class="eye"   x="642" y="84"  data-bg="surface">REQUIRES</text>

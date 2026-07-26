@@ -7,7 +7,12 @@
     "Rendered animated WebPs are capped at 2.5 MB by scripts/viz_to_webp.sh"
   ],
   "facts_hash": "8b82995ecc4d715057f2c9b1e7d8c20994532e5c1ca58dca33f7b8d2ae1f6dee",
-  "src_hash": "e572eceae9ae7529bdac9bfec9043370aaa93f36722ccf76c31743bd8cd5cf65",
-  "design_hash": "ba4cbfe5b2f8a36f033bbe07cd8e537962276574260a44ea4cb7796afd86285e",
-  "render": { "duration_s": 12, "fps": 15, "width": 1200, "quality": 68 }
+  "src_hash": "f179730ac7cfa15542b3195f4cb8148a7932acf4d280799659f836da5dd5be2e",
+  "design_hash": "0e5b16c740958f07839eee7fbd2210f6f44f606f3ddfa6e14622bc041356b3af",
+  "render": {
+    "duration_s": 12,
+    "fps": 15,
+    "width": 1200,
+    "quality": 68
+  }
 }

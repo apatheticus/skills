@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 4458" width="1200" height="4458" role="img" data-loop-s="12" data-bg="var(--bg)" data-specimen="true">
-<title>The more-pretty-docs style catalog — 31 idioms</title>
+<title>The pretty-svg-docs style catalog — 31 idioms</title>
 <desc>A contact sheet of thirty-one animated style specimens in alphabetical order, two to a row. Every cell is that style’s own full specimen scaled down, so each carries its real filter chains, grain and lighting rather than a flattened imitation.</desc>
 <defs>
 
@@ -540,7 +540,7 @@ svg { --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --muted:#9FB0C0; --rule:#3
   @media (prefers-reduced-motion: reduce) { .y2-band, .y2-glint { animation: none; opacity: 0 } }
 </style>
 <rect x="0" y="0" width="1200" height="4458" fill="var(--bg)"/>
-<text class="sh-kicker" x="40" y="52">MORE-PRETTY-DOCS</text>
+<text class="sh-kicker" x="40" y="52">PRETTY-SVG-DOCS</text>
 <text class="sh-title" x="40" y="112">The style catalog</text>
 <text class="sh-body" x="40" y="146">Source, Transform, Store — the same diagram in every idiom, alphabetically</text>
 <line x1="40" y1="152" x2="1160" y2="152" stroke="var(--rule)" stroke-width="1"/>

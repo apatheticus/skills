@@ -224,7 +224,7 @@ All hashes are SHA-256 via `shasum -a 256`, first field only.
 
 | Hash | Computed over |
 | --- | --- |
-| `facts_hash` | The `facts` array joined with `\n` (exact strings, exact order), e.g. `printf '%s\n' "fact one" "fact two" \| shasum -a 256` |
+| `facts_hash` | Each `facts` entry followed by a newline — exact strings, exact order, **including the trailing newline** after the last one: `printf '%s\n' "fact one" "fact two" \| shasum -a 256` |
 | `src_hash` | The bytes of the committed asset, which *is* the source: `shasum -a 256 docs/assets/<name>.svg` |
 | `design_hash` | The bytes of the project's `.prettydocs/prettydocs.md` — the frozen contract, wherever it was derived from |
 | `design_source_hash` | The bytes of the upstream source named by `design_source_path`, as of derivation. Optional |

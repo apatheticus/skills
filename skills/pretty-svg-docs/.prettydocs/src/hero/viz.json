@@ -5,7 +5,7 @@
   "producer": "pretty-svg-docs",
   "style": "bento-grid",
   "facts": [
-    "python3 is the only requirement — no renderer, no CLI, no network dependency",
+    "python3 is the only requirement \u2014 no renderer, no CLI, no network dependency",
     "The committed .svg is both the asset and its own source; there is no render step between authoring and committing",
     "The style catalog holds 31 named idioms, one resolved per repo",
     "svg_check.py applies eight check classes to every visual: structural, seam, motion a11y, legibility, system, style, fidelity and size",
@@ -13,12 +13,12 @@
     "Animated visuals loop seam-exact at the declared data-loop-s"
   ],
   "facts_hash": "e427d9ffd6fe932b10a704f334210d0ec7362a9c45e6ab2567ebeeda7fdf3746",
-  "src_hash": "a4a9864ca05ef250866c1dbf69a2ca931541420f7656a9d65abbcff568a8695b",
-  "design_hash": "de0372cc1fc3c743271a44b3d2ae365fccca73980ba2abc0dfd1dc7c4aef140b",
+  "src_hash": "d115683ab5235fb3865e6753ec919fe27eaf9560264a7fd2f32537cfc86acdb7",
+  "design_hash": "c8b9c9df1384b8defdb8909ee7677c88400164ba43c80fdfca914f9159851860",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 10797
+    "bytes": 10799
   },
   "relaxed": []
 }

@@ -1,4 +1,4 @@
-# make-pretty-docs — visual design system
+# pretty-hyper-docs — visual design system
 
 One frozen system; all repo visuals derive from it. Facts come from the repo
 (SKILL.md, reference/, scripts/), never invented. Frozen for this run.
@@ -8,7 +8,7 @@ One frozen system; all repo visuals derive from it. Facts come from the repo
 Audience:     developers who want their repo docs generated, truthful, and designed
 Value:        writes standard project docs and renders their key diagrams as seamless-loop animated WebPs
 Proof:        the hero and diagram in this skill's own README were produced by the skill's pipeline
-First action: copy the folder into `.claude/skills/` and run `/make-pretty-docs`
+First action: copy the folder into `.claude/skills/` and run `/pretty-hyper-docs`
 Theme:        docs in, motion out — a plain markdown skeleton transforms into a living diagram
 
 ## Frozen system

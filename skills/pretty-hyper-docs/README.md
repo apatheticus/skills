@@ -10,7 +10,7 @@
 [![HyperFrames](https://img.shields.io/badge/HyperFrames-required-233041)](https://github.com/heygen-com/hyperframes)
 <!-- pd:badges end -->
 
-<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="8b82995ecc4d715057f2c9b1e7d8c20994532e5c1ca58dca33f7b8d2ae1f6dee" src-hash="e572eceae9ae7529bdac9bfec9043370aaa93f36722ccf76c31743bd8cd5cf65" -->
+<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="8b82995ecc4d715057f2c9b1e7d8c20994532e5c1ca58dca33f7b8d2ae1f6dee" src-hash="f179730ac7cfa15542b3195f4cb8148a7932acf4d280799659f836da5dd5be2e" -->
 <div align="center">
 <img src="docs/assets/hero.webp" alt="Animated overview: a plain markdown document flows through the render pipeline and comes out the other side as a live, looping diagram — docs in, motion out. Renders are seamless loops capped at 2.5 MB." width="820" />
 </div>
@@ -53,7 +53,7 @@ Every embed carries hashes for the facts it depicts, its composition source,
 and the design system. A later run re-renders a visual only when one of those
 changed, its asset is missing, or `--refresh-viz` forces it:
 
-<!-- pd:viz name="lazy-rerender" src=".prettydocs/src/lazy-rerender/" facts-hash="c486a1a32510117df841321e36914e9f7ed3503a500df704f8314cff7758db9d" src-hash="be144f0b0a6e741df15096e526c003f1e473ea2bbb4add7415aa8ce9dd8e694f" -->
+<!-- pd:viz name="lazy-rerender" src=".prettydocs/src/lazy-rerender/" facts-hash="c486a1a32510117df841321e36914e9f7ed3503a500df704f8314cff7758db9d" src-hash="49449bf4b724b4286418b645e74a2e1ccd1add23e9f4f853f87cd8747ef41f21" -->
 <div align="center">
 <img src="docs/assets/lazy-rerender.webp" alt="Animated decision flow: the stored facts, source, and design hashes feed a single question — do they match? When everything matches the visual is reused with zero renders; when one hash changes, only that visual goes back through the gate loop to a new WebP, after which the hashes agree again. A prose-only edit changes no hash and renders nothing." width="820" />
 </div>

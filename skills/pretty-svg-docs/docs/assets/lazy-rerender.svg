@@ -138,7 +138,7 @@ re-authors nothing.</desc>
   <rect class="cell" x="420" y="420" width="360" height="110" rx="16" data-bg="surface"/>
   <rect class="flag" x="452" y="446" width="6" height="52" rx="3"/>
   <text class="eye"   x="472" y="466" data-bg="surface">MARKER MISMATCH</text>
-  <text class="val-s" x="472" y="504" data-bg="surface">marker ≠ mpd.json</text>
+  <text class="val-s" x="472" y="504" data-bg="surface">marker ≠ viz.json</text>
   <rect class="cell" x="800" y="420" width="360" height="110" rx="16" data-bg="surface"/>
   <rect class="flag" x="832" y="446" width="6" height="52" rx="3"/>
   <text class="eye"   x="852" y="466" data-bg="surface">FORCED</text>

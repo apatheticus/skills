@@ -11,12 +11,12 @@
     "scripts/styles.json is the checker's machine-readable half of the same catalog"
   ],
   "facts_hash": "33ebe05a0c9d07aebe81b14ad473b53cba1c9f2a06b373fbd52bc50b74da294a",
-  "src_hash": "f729b4bd84d58499c2a9a70c513e4e4d29a7d17c60fd903aaa6c45f8b3ffdd7c",
-  "design_hash": "de0372cc1fc3c743271a44b3d2ae365fccca73980ba2abc0dfd1dc7c4aef140b",
+  "src_hash": "fb22c210ca132ec3dbb7ab756a1e0c5cdbb5233305815b18637bbf58fe7f7e19",
+  "design_hash": "c8b9c9df1384b8defdb8909ee7677c88400164ba43c80fdfca914f9159851860",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 243425
+    "bytes": 243423
   },
   "relaxed": [
     "bytes@300KB",
