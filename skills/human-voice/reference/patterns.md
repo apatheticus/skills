@@ -1,6 +1,6 @@
 # Pattern catalog
 
-33 patterns. Each carries its register tags: **E**ditorial, **P**rofessional,
+36 patterns. Each carries its register tags: **E**ditorial, **P**rofessional,
 **T**echnical, **R**egulated. A pattern with no tag for the selected register is
 off — do not apply it.
 
@@ -102,8 +102,10 @@ register-scoped tiers with carve-outs.
 ### §9. Negative parallelism and tailing negation
 **Registers:** E P T R
 
-"Not only... but...", "It's not just X, it's Y", plus clipped fragments like "no
-guessing" or "no wasted motion" bolted onto a sentence.
+"Not only... but...", "It's not just X, it's Y", "The question isn't X, it's Y",
+plus clipped fragments like "no guessing" or "no wasted motion" bolted onto a
+sentence. State Y directly and drop the negated half: "The question isn't the
+model, it's the eval" becomes "The eval matters more than the model."
 
 **Before:** It's not just about the beat riding under the vocals; it's part of the aggression. It's not merely a song, it's a statement.
 
@@ -151,12 +153,23 @@ same name every time, without exception.
 
 ## Style
 
-### §14. Em dashes and en dashes
+### §14. Em dash and en dash budget
 **Registers:** E P T — **off in R** (house style governs)
 
-Replace every `—` and `–`, in rough order of preference: a period, a comma, a
-colon, parentheses, or a restructured sentence. Catch spaced ` — ` and double
-hyphens ` -- ` too. Scan the final draft for both characters before returning it.
+A dash is not a tell. A dash used as the default rhythm is. Budget them instead of
+banning them: **none in short copy, one or two in a longer draft** where a dash
+clearly beats a comma, a period, a colon, or parentheses. Cut the rest, and cut
+every cluster and decorative dash first. Catch spaced ` — ` and double hyphens
+` -- ` too.
+
+When replacing one, prefer in this order: a period, a comma, a colon,
+parentheses, or a restructured sentence. Scan the final draft and count both
+characters before returning it. Two dashes on a page is a habit; six is the tell.
+
+An explicit instruction outranks the budget. If the user asks for every dash
+removed, remove every dash. Do not enforce a zero count on your own initiative in
+Editorial work, where the false-positive list is explicit that heavy em dash use
+is ordinary in edited prose.
 
 **Before:** The term is promoted by institutions—not by the people themselves. You don't say "Netherlands, Europe" as an address—yet this continues—even in official documents.
 
@@ -234,7 +247,7 @@ plausible filler. Say what is not known, or cut the sentence.
 
 ---
 
-## Filler and hedging
+## Filler, hedging, and rhetorical moves
 
 ### §23. Filler phrases
 **Registers:** E P T R — reinforces plain language
@@ -261,9 +274,16 @@ the qualifier tells the reader something actionable.
 ### §25. Generic positive conclusions
 **Registers:** E P T R
 
+**Watch:** In conclusion, Ultimately, Overall, To sum up — plus any closing
+paragraph that restates the piece.
+
 **Before:** The future looks bright for the company. Exciting times lie ahead as they continue their journey toward excellence.
 
 **After:** The company plans to open two more locations next year.
+
+The reader was just there, so a recap is not an ending. Cut it and let the piece
+end on its last concrete point, the takeaway, or the next action. The opposite
+failure — inventing a closer instead of restating one — is §31.
 
 ### §26. Hyphenated word-pair overuse
 **Registers:** E P — **off in T and R**
@@ -336,23 +356,99 @@ them sounds engineered.
 
 **After:** AlphaEvolve changed the search because it did not favor symmetry or human-looking designs, which made some older assumptions less useful.
 
+**Repairing a kicker: delete it, do not improve it.** When the last line exists to
+sound deep, do not rewrite it into a better metaphor and do not preserve its
+rhythm. Delete it, then end on the clearest concrete sentence already in the
+draft. If the ending then feels unfinished, add a plain takeaway or a next action.
+Smoothing the kicker into a quieter sentence leaves the piece still ending on a
+manufactured closer, which is the failure this pattern names.
+
 ### §32. Aphorism formulas
 **Registers:** E P — rare in T and R
 
 **Watch:** X is the Y of Z, X becomes a trap, X is not a tool but a mirror, the language of, the currency of, the architecture of
 
-**Before:** Symmetry is the language of trust. Efficiency becomes a trap when teams forget the human layer.
+**Before:** Teams kept optimizing the checkout flow until nobody could explain why step four existed. Efficiency becomes a trap. Symmetry is the language of trust.
 
-**After:** Symmetric layouts often feel more predictable to users. Teams can over-optimize workflows and miss how people actually use them.
+**After:** Teams kept optimizing the checkout flow until nobody could explain why step four existed.
+
+Delete is the default repair, as in §31. Paraphrasing the aphorism into a plainer
+sentence — "symmetric layouts often feel more predictable to users" — keeps the
+closer and only lowers its volume. Rewrite instead of deleting in the one case
+where the aphorism is the only place a real claim appears; then state that claim
+plainly and put it where the argument needs it, not at the end as a flourish.
 
 ### §33. Conversational rhetorical openers
-**Registers:** E only
+**Registers:** E P — **off in T and R**
 
-**Watch:** Honestly?, Look, Here's the thing, The thing is, Let's be honest, Real talk — used as standalone hooks or fake-candid pauses.
+**Watch:** Honestly?, Look, Here's the thing, Here's what I mean, The thing is, Let's be honest, Let me be clear, I'll be honest, The uncomfortable truth is, Real talk — used as standalone hooks or fake-candid pauses.
 
 **Before:** Is it worth the price? Honestly? It depends on how often you'll use it.
 
 **After:** Whether it's worth the price depends on how often you'll use it.
+
+**Before:** Let me be clear: the migration slipped because we lost two engineers in March.
+
+**After:** The migration slipped because we lost two engineers in March.
+
+On in Professional, not only Editorial. "Let me be clear" and "I'll be honest" are
+staples of executive memos, all-hands notes, and internal comms, and they delay
+the point there exactly as they do in an essay. Cut the opener and state the
+point. Keep "honestly" or "look" mid-sentence, which is ordinary speech — see the
+false-positive list.
+
+### §34. Colon reveals
+**Registers:** E P — **off in T and R**
+
+**Watch:** The best part:, The catch:, The result:, The problem:, The detail that makes it work:, Here's the kicker: — a bare noun phrase, a colon, then a lowercase payload.
+
+The colon withholds a short point for a beat of theatre the sentence has not
+earned. Rewrite as a plain sentence.
+
+**Before:** The detail that makes it work: a separate agent grades every draft. The best part: it learns from the corrections.
+
+**After:** A separate agent grades every draft, which is what makes it work. It also learns from the corrections.
+
+Colons are correct for lists, labels, quotations, and ratios. The test is whether
+the colon **labels** the content or **withholds** it. "Known limits: no cache
+warming" is a label. "The tradeoff we are accepting: Vendor A's reporting is
+weaker" is a label with substance behind it. "The best part: it learns" is a
+reveal. Off in Technical and Regulated, where the labelled colon is the house
+pattern and the dramatic one is rare.
+
+Corollary: after a colon, use sentence case unless grammar, a proper noun, a
+title, or code requires otherwise.
+
+### §35. Faux-insight setups
+**Registers:** E only
+
+**Watch:** here's what nobody tells you, what most people get wrong, the part everyone misses, this is the part most people skip, nobody talks about, few people realize, the part nobody warns you about
+
+The setup flatters the writer as the one person holding the insight, and it does
+that whether or not the claim behind it is any good. Cut the setup and let the
+claim stand alone. If the claim cannot stand alone, the setup was doing all the
+work and the claim needs evidence, not a frame.
+
+**Before:** Here's what nobody tells you about launching a product: distribution is the real moat.
+
+**After:** Distribution is the moat.
+
+Distinct from §27 authority tropes, which inflate the topic ("the real question
+is", "at its core"). This one inflates the author.
+
+### §36. Rhetorical setups and self-answered questions
+**Registers:** E only
+
+**Watch:** What if I told you, Think about it:, Plot twist:, Here's a thought:, Sound familiar? — plus any question the writer poses and answers in the next breath.
+
+**Before:** What if I told you the eval matters more than the model? Think about it. Why did every team we talked to have the same problem? Because nobody was measuring.
+
+**After:** Every team we talked to had the same problem, and none of them was measuring anything. The eval matters more than the model.
+
+A question answered in the next sentence was never a question; it is a pause for
+effect. Ask one only when the reader is meant to sit with it, which in practice is
+rare. §28 covers announcement signposting ("let's dive in") and §33 covers
+standalone candor openers; this one covers the manufactured question.
 
 ---
 
@@ -378,6 +474,13 @@ these is a reliable indicator on its own:
   Flag staccato drama only for a run of them.
 - **"Honestly" or "look" mid-sentence.** Ordinary in casual writing. The tell is
   the standalone theatrical opener.
+- **A labelled colon.** "Known limits:", "Next steps:", "The tradeoff we are
+  accepting:" all label what follows, and they belong in professional and
+  technical prose. §34 is about a colon that withholds a short payload for drama,
+  not about every colon.
+- **A question left open.** A question the reader is meant to carry is a device,
+  and good writers use it. §36 is about the question the writer answers in the
+  next breath.
 - **Unsourced claims.** Most writing is unsourced. It proves nothing on its own.
 - **Correct, complex formatting.** Templates and visual editors produce clean
   output with no AI involved.

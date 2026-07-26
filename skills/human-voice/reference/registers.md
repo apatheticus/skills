@@ -2,7 +2,7 @@
 
 Four profiles. Pick one in Step 1 of `SKILL.md` before reading any pattern.
 
-The register is not a style preference — it decides which of the 33 patterns run,
+The register is not a style preference — it decides which of the 36 patterns run,
 which vocabulary tier applies, and what "sounds human" even means for this
 document. A spec that reads like an essay has failed just as badly as an essay
 that reads like a spec.
@@ -23,7 +23,7 @@ newsletters, personal writing, social posts.
 | Contractions | Yes |
 | Lists | Avoid. Prose carries analysis; bullets fragment it |
 | Opening | A specific, unexpected hook. Never a broad generalization about the state of an industry |
-| Closing | Something memorable. Never a summary of what was just said |
+| Closing | The strongest concrete thing in the piece. Never a summary of what was just said, and never a manufactured aphorism (§31, §32) |
 | Sentence policy | Widest variance of any register. Fragments are allowed. One-sentence paragraphs land hard |
 
 **Voice work.** Avoiding AI patterns is only half the job here — sterile,
@@ -33,8 +33,14 @@ humor or edge, reads like a press release.
 
 Fixes: react to facts rather than reporting them; vary rhythm deliberately
 (short punchy sentence, then a longer one that takes its time getting where it is
-going); let some mess in — tangents, asides, and half-formed thoughts are human,
-and perfect structure reads as algorithmic.
+going); keep the mess the writer already put there — tangents, asides, and
+half-formed thoughts are human, and smoothing them out is what makes structure
+read as algorithmic.
+
+Keep, do not manufacture. An aside you invented is not the writer's voice, it is
+generic texture in place of generic polish. Step 2 of `SKILL.md` names three to
+five signals out of the draft itself for exactly this reason: the material to
+preserve is already on the page.
 
 **Characteristic failure mode.** Over-compression. The first rewrite strips the
 AI tells *and* the texture, returning something clean, short, and lifeless. Cover
@@ -58,6 +64,11 @@ executive summaries, board material.
 | Opening | State the purpose in the first sentence. No executive-summary throat-clearing |
 | Closing | A decision, an ask, or an owner and a date. Not a restatement |
 | Sentence policy | 15–25 word average, moderate variance, at least one short sentence per section |
+
+**§33 and §34 apply here, not only in Editorial.** "Let me be clear" and "I'll be
+honest" are memo and all-hands staples, and a colon reveal in an executive summary
+is the same withholding trick it is in an essay. Cut both. A colon that labels
+content — "Next steps:", "Decision needed:" — stays.
 
 **Elevate §21 (speculative gap-filling) to a blocker.** An unsourced claim in an
 essay is a style problem. The same sentence in a policy or a proposal is a

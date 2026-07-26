@@ -32,7 +32,9 @@ the product.
 - §10 rule of three, twice ("patience, humility, and resilience")
 - §9 negative parallelism ("not just a sport — it's a...")
 - §6 formulaic "Despite these challenges" pivot
-- §25 generic positive conclusion; §18 emoji; §14 em dashes
+- §25 generic positive conclusion; §18 emoji; §14 one em dash in three paragraphs
+  of short copy, where the budget is none — and it sits inside the §9 construction,
+  so it goes with that rewrite
 - Tier 1 vocabulary: *transformative*, *invaluable*, *profound*, *underscores*
 - No specific detail anywhere. Nothing here happened to a particular person on a
   particular day.
@@ -41,7 +43,7 @@ the product.
 
 > I have been learning to sail for about eight months and I am still bad at it.
 >
-> The part nobody warns you about is how much of it is waiting. You rig the boat,
+> Most of it is waiting. You rig the boat,
 > you check the forecast, you drive forty minutes to the marina, and then the wind
 > dies and you sit there. My instructor calls this "sailing." I called it
 > something else for the first two months.
@@ -58,7 +60,8 @@ the product.
 
 Personality **on**: an opinion, a specific Tuesday, an unresolved feeling, a
 sentence fragment, wide length variance, a closing that refuses the upbeat
-ending.
+ending. "Most of it is waiting" states the claim without the §35 setup ("the part
+nobody warns you about") that would have flattered the writer for knowing it.
 
 ---
 
@@ -111,6 +114,10 @@ ending.
 
 Personality **off**. Stance **directive**: a named recommendation, a named
 tradeoff, a price, a date, an owner, and the cost of delay.
+
+The colon in "The tradeoff we are accepting:" stays. §34 catches the colon that
+withholds a short payload for drama, not the one that labels substance — the test
+is in that entry, and this is the boundary case it describes.
 
 ---
 
