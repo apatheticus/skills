@@ -1,0 +1,124 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="1200" height="680"
+     role="img" data-loop-s="12" data-bg="background">
+  <title>security-audit-full-report — one entry point, two modes</title>
+  <desc>Every invocation reads ledger.md first and picks a mode from what it finds. If no
+ledger exists, the skill enters preflight mode, which runs once with the user present: check
+that the security-audit skill is installed, offer to add .audit/ to .gitignore, create the
+dated engagement directory and write ledger.md, then start the loop and stop for this turn —
+sections 1 to 3. If a ledger exists with status running, the skill enters cycle mode, which
+runs on every loop firing and never asks a question: run one security-audit into run-N,
+count the new medium-or-higher findings against the ledger, update the convergence counter
+and the per-cycle log, then either continue or stop and write the report — sections 4a to
+4d. The ledger's own status field carries the outcome: running, then converged or
+max-cycles-reached, then done.</desc>
+
+  <style>
+    svg { --background:#F6F7FC; --surface:#FFFFFF; --surface-deep:#23265E;
+          --ink:#12142B; --muted:#4C5273; --accent-primary:#5B5FEF; --rule:#DDDFEB; }
+
+    .bg   { fill: var(--background); }
+    .card { fill: var(--surface); filter: url(#e1); }
+    .deep { fill: var(--surface-deep); filter: url(#e1); }
+    .head { fill: var(--accent-primary); }
+
+    .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+    .kick { fill: var(--muted); font-size: 17px; font-weight: 700; letter-spacing: 2.4px; }
+    .h    { fill: var(--ink);   font-size: 40px; font-weight: 700; letter-spacing: -0.8px; }
+    .lede { fill: var(--muted); font-size: 22px; font-weight: 400; }
+
+    .hlab { fill: var(--surface); font-size: 21px; font-weight: 700; letter-spacing: 1.4px; }
+    .hcon { fill: var(--surface); font-size: 18px; font-weight: 500; }
+
+    .step { fill: var(--ink);   font-size: 20px; font-weight: 400; }
+    .num  { fill: var(--surface); font-size: 16px; font-weight: 700; }
+    .foot { fill: var(--muted); font-size: 18px; font-weight: 500; }
+
+    .mark { fill: var(--accent-primary); }
+    .dlab { fill: var(--rule);    font-size: 17px; font-weight: 700; letter-spacing: 2.2px; }
+    .dval { fill: var(--surface); font-size: 20px; font-weight: 500; }
+
+    /* Preflight runs once, so nothing about it moves. Cycle mode repeats, so a ring
+       ripples out from each of its four steps in turn — one 12s animation phase-
+       shifted by 3s. The ripple is a ring, never the marker itself: fading a marker
+       that carries a numeral would drop that numeral below the contrast floor for
+       part of every loop. It begins and ends invisible, so the reset is unseen. */
+    .tick { fill: none; stroke: var(--accent-primary); stroke-width: 3;
+            transform-box: fill-box; transform-origin: center;
+            animation: rip 12s cubic-bezier(.4,0,.2,1) infinite; }
+    @keyframes rip {
+      0%   { transform: scale(1);    opacity: 0 }
+      5%   { transform: scale(1.05); opacity: .6 }
+      30%  { transform: scale(2.3);  opacity: 0 }
+      100% { transform: scale(1);    opacity: 0 }
+    }
+    .t1 { animation-delay: 0s }
+    .t2 { animation-delay: -9s }
+    .t3 { animation-delay: -6s }
+    .t4 { animation-delay: -3s }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tick { animation: none; opacity: 0 }
+    }
+  </style>
+
+  <defs>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.28"/>
+    </filter>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="680"/>
+
+  <text class="sans kick" x="64" y="76" data-role="metadata">ONE ENTRY POINT · TWO MODES</text>
+  <text class="sans h"    x="64" y="128" data-role="title">The mode is read off disk, not remembered</text>
+  <text class="sans lede" x="64" y="170" data-role="essential">Every invocation reads ledger.md first and picks its mode from what it finds.</text>
+  <text class="sans lede" x="64" y="202" data-role="essential">Preflight is the only mode that may ask a question — a /loop firing runs unattended.</text>
+
+  <rect class="card" x="64" y="240" width="520" height="312" rx="8"/>
+  <path class="head" d="M64 288 V248 a8 8 0 0 1 8 -8 H576 a8 8 0 0 1 8 8 V288 Z"/>
+  <text class="sans hlab" x="86"  y="274" data-bg="accent-primary">PREFLIGHT MODE</text>
+  <text class="mono hcon" x="562" y="274" text-anchor="end" data-bg="accent-primary">no ledger.md</text>
+
+  <circle class="mark" cx="100" cy="330" r="13"/>
+  <text class="sans num"  x="100" y="336" text-anchor="middle" data-bg="accent-primary" data-role="metadata">1</text>
+  <text class="sans step" x="126" y="337" data-bg="surface" data-role="essential">Check security-audit is installed</text>
+  <circle class="mark" cx="100" cy="380" r="13"/>
+  <text class="sans num"  x="100" y="386" text-anchor="middle" data-bg="accent-primary" data-role="metadata">2</text>
+  <text class="sans step" x="126" y="387" data-bg="surface" data-role="essential">Offer to add .audit/ to .gitignore</text>
+  <circle class="mark" cx="100" cy="430" r="13"/>
+  <text class="sans num"  x="100" y="436" text-anchor="middle" data-bg="accent-primary" data-role="metadata">3</text>
+  <text class="sans step" x="126" y="437" data-bg="surface" data-role="essential">Create the engagement, write ledger.md</text>
+  <circle class="mark" cx="100" cy="480" r="13"/>
+  <text class="sans num"  x="100" y="486" text-anchor="middle" data-bg="accent-primary" data-role="metadata">4</text>
+  <text class="sans step" x="126" y="487" data-bg="surface" data-role="essential">Start the loop — then stop for this turn</text>
+  <text class="mono foot" x="86" y="528" data-bg="surface">§1 – §3 · runs once</text>
+
+  <rect class="card" x="616" y="240" width="520" height="312" rx="8"/>
+  <path class="head" d="M616 288 V248 a8 8 0 0 1 8 -8 H1128 a8 8 0 0 1 8 8 V288 Z"/>
+  <text class="sans hlab" x="638"  y="274" data-bg="accent-primary">CYCLE MODE</text>
+  <text class="mono hcon" x="1114" y="274" text-anchor="end" data-bg="accent-primary">status: running</text>
+
+  <circle class="tick t1" cx="652" cy="330" r="13"/>
+  <circle class="mark" cx="652" cy="330" r="13"/>
+  <text class="sans num"  x="652" y="336" text-anchor="middle" data-bg="accent-primary" data-role="metadata">a</text>
+  <text class="sans step" x="678" y="337" data-bg="surface" data-role="essential">Run one security-audit into run-N</text>
+  <circle class="tick t2" cx="652" cy="380" r="13"/>
+  <circle class="mark" cx="652" cy="380" r="13"/>
+  <text class="sans num"  x="652" y="386" text-anchor="middle" data-bg="accent-primary" data-role="metadata">b</text>
+  <text class="sans step" x="678" y="387" data-bg="surface" data-role="essential">Count new med+ against the ledger</text>
+  <circle class="tick t3" cx="652" cy="430" r="13"/>
+  <circle class="mark" cx="652" cy="430" r="13"/>
+  <text class="sans num"  x="652" y="436" text-anchor="middle" data-bg="accent-primary" data-role="metadata">c</text>
+  <text class="sans step" x="678" y="437" data-bg="surface" data-role="essential">Update the counter and per-cycle log</text>
+  <circle class="tick t4" cx="652" cy="480" r="13"/>
+  <circle class="mark" cx="652" cy="480" r="13"/>
+  <text class="sans num"  x="652" y="486" text-anchor="middle" data-bg="accent-primary" data-role="metadata">d</text>
+  <text class="sans step" x="678" y="487" data-bg="surface" data-role="essential">Continue, or stop and write the report</text>
+  <text class="mono foot" x="638" y="528" data-bg="surface">§4a – §4d · runs every firing</text>
+
+  <rect class="deep" x="64" y="584" width="1072" height="56" rx="8"/>
+  <text class="sans dlab" x="88"  y="619" data-bg="surface-deep" data-role="metadata">LEDGER STATUS</text>
+  <text class="mono dval" x="304" y="619" data-bg="surface-deep" data-role="essential">running → converged | max-cycles-reached → done</text>
+</svg>

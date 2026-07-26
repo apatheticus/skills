@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660"
+     role="img" data-loop-s="12" data-bg="background">
+  <title>reflect — sessions already on disk become signals, clusters, then verdicts</title>
+  <desc>A recessed well holds the raw material: the session transcripts already under
+~/.claude/projects that fall inside the window, with the currently running session excluded.
+Triage scores every one of them from cheap metadata before any agent runs, so effort goes
+where the friction is. Three cards lift out of that well in order. The first, extract, pulls
+signals in four families — friction and failure, repetition and missed automation, wins and
+effective patterns, environment gaps — each cited with a session ID and a verbatim quote.
+The second, cluster, merges and dedupes those signals across sessions. The third, decide,
+turns each cluster into one verdict, and it presses in and releases because a cluster only
+earns one if enough distinct sessions back it: three for a new skill, two for an automation
+or a fix.</desc>
+
+  <style>
+    svg { --background:#E6E9EF; --surface:#E6E9EF; --surface-inset:#E1E5EC;
+          --ink:#2B303B; --muted:#5B6472; --accent-primary:#11D3A3;
+          --accent-cool:#12B5C9; --nm-light:#FFFFFF; --nm-dark:#C3CAD6; }
+
+    .bg      { fill: var(--background); }
+    .raised  { fill: var(--surface); filter: url(#raise); }
+    .pressed { fill: var(--surface); filter: url(#press); }
+    .well    { fill: var(--surface-inset); filter: url(#press); }
+
+    .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+    .kick { fill: var(--muted); font-size: 17px; font-weight: 600; letter-spacing: 2.4px; }
+    .h    { fill: var(--ink);   font-size: 52px; font-weight: 700; letter-spacing: -1.2px; }
+    .lede { fill: var(--muted); font-size: 22px; font-weight: 400; }
+
+    .path { fill: var(--muted); font-size: 18px; font-weight: 600; }
+    .note { fill: var(--muted); font-size: 17px; font-weight: 600; }
+
+    .lab  { fill: var(--muted); font-size: 18px; font-weight: 600; letter-spacing: 1.2px; }
+    .ct   { fill: var(--ink);   font-size: 24px; font-weight: 700; }
+    .cs   { fill: var(--muted); font-size: 17px; font-weight: 600; }
+
+    .dot   { fill: var(--nm-dark); }
+    .hot   { fill: var(--accent-cool); }
+    .mark  { fill: var(--accent-primary); }
+
+    /* Each stage is lifted in turn — one 12s animation phase-shifted by 4s. */
+    .lift { opacity: 1; animation: lift 12s cubic-bezier(.4,0,.4,1) infinite; }
+    @keyframes lift { 0%,14% { opacity: .4 } 24%,34% { opacity: 1 } 44%,100% { opacity: .4 } }
+    .l1 { animation-delay: 0s }
+    .l2 { animation-delay: -8s }
+    .l3 { animation-delay: -4s }
+
+    /* The canonical neumorphic motion: a raised copy cross-fading over a pressed
+       one, so the decide card presses in and releases. 6s divides the 12s loop. */
+    .sink { animation: sink 6s cubic-bezier(.4,0,.4,1) infinite; }
+    @keyframes sink { 0%,100% { opacity: 1 } 50% { opacity: 0 } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lift { animation: none; opacity: 1 }
+      .sink { animation: none; opacity: 1 }
+    }
+  </style>
+
+  <defs>
+    <filter id="raise" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="7"  dy="7"  stdDeviation="9" flood-color="#C3CAD6" flood-opacity=".9"/>
+      <feDropShadow dx="-7" dy="-7" stdDeviation="9" flood-color="#FFFFFF" flood-opacity=".9"/>
+    </filter>
+    <filter id="press" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="3.5"  dy="3.5"  stdDeviation="4.5" flood-color="#C3CAD6" flood-opacity=".45"/>
+      <feDropShadow dx="-3.5" dy="-3.5" stdDeviation="4.5" flood-color="#FFFFFF" flood-opacity=".45"/>
+    </filter>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="660"/>
+
+  <text class="sans kick" x="64" y="84" data-role="metadata">YOUR OWN SESSIONS, READ BACK</text>
+  <text class="sans h"    x="64" y="148" data-role="hero">reflect</text>
+  <text class="sans lede" x="64" y="196" data-role="essential">Mines the transcripts already on your disk and hands back a ranked diagnosis:</text>
+  <text class="sans lede" x="64" y="228" data-role="essential">what keeps going wrong, what quietly works, and which change would pay off most.</text>
+
+  <rect class="well" x="64" y="272" width="1072" height="140" rx="24"/>
+  <text class="mono path" x="88"   y="310" data-bg="surface-inset">~/.claude/projects/ · in-window transcripts</text>
+  <text class="sans note" x="1112" y="310" text-anchor="end" data-bg="surface-inset" data-role="metadata">triage scores every one before an agent runs</text>
+  <circle class="dot" cx="100"  cy="356" r="7"/>
+  <circle class="dot" cx="142"  cy="356" r="7"/>
+  <circle class="hot" cx="184"  cy="356" r="7"/>
+  <circle class="dot" cx="226"  cy="356" r="7"/>
+  <circle class="dot" cx="268"  cy="356" r="7"/>
+  <circle class="hot" cx="310"  cy="356" r="7"/>
+  <circle class="hot" cx="352"  cy="356" r="7"/>
+  <circle class="dot" cx="394"  cy="356" r="7"/>
+  <circle class="dot" cx="436"  cy="356" r="7"/>
+  <circle class="dot" cx="478"  cy="356" r="7"/>
+  <circle class="hot" cx="520"  cy="356" r="7"/>
+  <circle class="dot" cx="562"  cy="356" r="7"/>
+  <circle class="dot" cx="604"  cy="356" r="7"/>
+  <circle class="hot" cx="646"  cy="356" r="7"/>
+  <circle class="dot" cx="688"  cy="356" r="7"/>
+  <circle class="dot" cx="730"  cy="356" r="7"/>
+  <circle class="hot" cx="772"  cy="356" r="7"/>
+  <circle class="dot" cx="814"  cy="356" r="7"/>
+  <circle class="dot" cx="856"  cy="356" r="7"/>
+  <circle class="dot" cx="898"  cy="356" r="7"/>
+  <circle class="hot" cx="940"  cy="356" r="7"/>
+  <circle class="dot" cx="982"  cy="356" r="7"/>
+  <circle class="dot" cx="1024" cy="356" r="7"/>
+  <circle class="hot" cx="1066" cy="356" r="7"/>
+  <text class="sans note" x="88" y="394" data-bg="surface-inset" data-role="metadata">the session running this pass is excluded from its own corpus</text>
+
+  <rect class="raised" x="64" y="456" width="340" height="152" rx="24"/>
+  <circle class="mark lift l1" cx="106" cy="492" r="11"/>
+  <text class="mono lab" x="128" y="498" data-role="label">01 · extract</text>
+  <text class="sans ct"  x="92"  y="540">Signals</text>
+  <text class="sans cs"  x="92"  y="570" data-role="metadata">friction · repetition · wins ·</text>
+  <text class="sans cs"  x="92"  y="594" data-role="metadata">environment gaps</text>
+
+  <rect class="raised" x="430" y="456" width="340" height="152" rx="24"/>
+  <circle class="mark lift l2" cx="472" cy="492" r="11"/>
+  <text class="mono lab" x="494" y="498" data-role="label">02 · cluster</text>
+  <text class="sans ct"  x="458" y="540">Clusters</text>
+  <text class="sans cs"  x="458" y="570" data-role="metadata">merged and deduped across</text>
+  <text class="sans cs"  x="458" y="594" data-role="metadata">every session in the window</text>
+
+  <rect class="pressed"     x="796" y="456" width="340" height="152" rx="24"/>
+  <rect class="raised sink" x="796" y="456" width="340" height="152" rx="24"/>
+  <circle class="mark lift l3" cx="838" cy="492" r="11"/>
+  <text class="mono lab" x="860" y="498" data-role="label">03 · decide</text>
+  <text class="sans ct"  x="824" y="540">Verdicts</text>
+  <text class="sans cs"  x="824" y="570" data-role="metadata">new-skill needs 3 sessions</text>
+  <text class="sans cs"  x="824" y="594" data-role="metadata">automation and fix need 2</text>
+</svg>
