@@ -1,9 +1,9 @@
 ---
-name: make-pretty-docs
-description: Requires the HyperFrames toolchain, ffmpeg, and img2webp. Creates and maintains a repository's standard documentation — README, ARCHITECTURE, DEVELOPMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, plus on-demand LICENSE, NOTICE, issue/PR templates, and CODEOWNERS — and beautifies it with a per-repo design system and seamless-loop animated WebP visuals rendered from HTML compositions via HyperFrames. Use this only when the user specifically wants WebP visuals or names HyperFrames, or invokes /make-pretty-docs, or is maintaining a repo whose existing visuals were already produced this way. For a generic request for beautiful, illustrated, animated, or visually polished docs — and on any machine without the HyperFrames toolchain installed — the sibling more-pretty-docs skill is the better fit — it authors animated SVG directly with zero external dependencies and offers a named-style picker. For plain text-only doc maintenance without visuals, the sibling update-docs skill fits better.
+name: pretty-hyper-docs
+description: Requires the HyperFrames toolchain, ffmpeg, and img2webp. Creates and maintains a repository's standard documentation — README, ARCHITECTURE, DEVELOPMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, plus on-demand LICENSE, NOTICE, issue/PR templates, and CODEOWNERS — and beautifies it with a per-repo design system and seamless-loop animated WebP visuals rendered from HTML compositions via HyperFrames. Use this only when the user specifically wants WebP visuals or names HyperFrames, or invokes /pretty-hyper-docs, or is maintaining a repo whose existing visuals were already produced this way. For a generic request for beautiful, illustrated, animated, or visually polished docs — and on any machine without the HyperFrames toolchain installed — the sibling pretty-svg-docs skill is the better fit — it authors animated SVG directly with zero external dependencies and offers a named-style picker. For plain text-only doc maintenance without visuals, the sibling update-docs skill fits better.
 ---
 
-# make-pretty-docs
+# pretty-hyper-docs
 
 Create and maintain a repository's standard documentation so it reflects the
 **actual current truth** of the project — then make it genuinely beautiful:
@@ -66,9 +66,9 @@ existing convention rather than creating duplicates.
 
 | Invocation | Effect |
 | --- | --- |
-| `/make-pretty-docs` | Full pass over Tier 1: content + visuals |
-| `/make-pretty-docs <target> [<target>…]` | Only the named docs (`readme`, `security`, …; Tier 2 by explicit name) |
-| `/make-pretty-docs check` | **Read-only audit** — content verdicts (`CREATE`/`UPDATE`/`OK`) *and* visual verdicts (`OK`/`MISSING`/`STALE`/`DRIFT`/`CONTRADICTS`/`BUDGET`). Writes nothing. |
+| `/pretty-hyper-docs` | Full pass over Tier 1: content + visuals |
+| `/pretty-hyper-docs <target> [<target>…]` | Only the named docs (`readme`, `security`, …; Tier 2 by explicit name) |
+| `/pretty-hyper-docs check` | **Read-only audit** — content verdicts (`CREATE`/`UPDATE`/`OK`) *and* visual verdicts (`OK`/`MISSING`/`STALE`/`DRIFT`/`CONTRADICTS`/`BUDGET`). Writes nothing. |
 | `--refresh-viz` | Force re-render of every in-scope visual regardless of hashes |
 | `--no-viz` | Content-only run; leave every existing visual and marker untouched |
 | `--budget <doc>=<n>` | Override a doc's animated-visual budget for this run (e.g. `--budget readme=1`) |

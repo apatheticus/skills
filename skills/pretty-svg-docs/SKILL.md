@@ -1,9 +1,9 @@
 ---
-name: more-pretty-docs
-description: Create and maintain a repository's standard documentation — README, ARCHITECTURE, DEVELOPMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, plus on-demand LICENSE, NOTICE, issue/PR templates, and CODEOWNERS — and beautify it with a per-repo design system and seamless-loop animated SVG visuals authored directly, with zero external dependencies — no renderer, nothing to install. Use this whenever the user wants beautiful, illustrated, animated, or visually polished project docs; wants a README with an animated hero or animated diagrams; wants doc visuals refreshed, restyled, or audited for staleness; wants a named visual style such as Swiss minimal, neo-brutalist, blueprint, or bento grid; or invokes /more-pretty-docs — even when they name only one file or none at all. For plain text-only docs without visuals, the sibling update-docs skill fits better; use the sibling make-pretty-docs only when the user specifically wants WebP or names HyperFrames.
+name: pretty-svg-docs
+description: Create and maintain a repository's standard documentation — README, ARCHITECTURE, DEVELOPMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, plus on-demand LICENSE, NOTICE, issue/PR templates, and CODEOWNERS — and beautify it with a per-repo design system and seamless-loop animated SVG visuals authored directly, with zero external dependencies — no renderer, nothing to install. Use this whenever the user wants beautiful, illustrated, animated, or visually polished project docs; wants a README with an animated hero or animated diagrams; wants doc visuals refreshed, restyled, or audited for staleness; wants a named visual style such as Swiss minimal, neo-brutalist, blueprint, or bento grid; or invokes /pretty-svg-docs — even when they name only one file or none at all. For plain text-only docs without visuals, the sibling update-docs skill fits better; use the sibling pretty-hyper-docs only when the user specifically wants WebP or names HyperFrames.
 ---
 
-# more-pretty-docs
+# pretty-svg-docs
 
 Create and maintain a repository's standard documentation so it reflects the
 **actual current truth** of the project — then make it genuinely beautiful: a frozen
@@ -65,9 +65,9 @@ than creating duplicates.
 
 | Invocation | Effect |
 | --- | --- |
-| `/more-pretty-docs` | Full pass over Tier 1: content + visuals |
-| `/more-pretty-docs <target> [<target>…]` | Only the named docs (`readme`, `security`, …; Tier 2 by explicit name) |
-| `/more-pretty-docs check` | **Read-only audit** — content verdicts (`CREATE`/`UPDATE`/`OK`) *and* visual verdicts (`OK`/`MISSING`/`STALE`/`DRIFT`/`CONTRADICTS`/`BUDGET`/`FOREIGN`). Writes nothing. |
+| `/pretty-svg-docs` | Full pass over Tier 1: content + visuals |
+| `/pretty-svg-docs <target> [<target>…]` | Only the named docs (`readme`, `security`, …; Tier 2 by explicit name) |
+| `/pretty-svg-docs check` | **Read-only audit** — content verdicts (`CREATE`/`UPDATE`/`OK`) *and* visual verdicts (`OK`/`MISSING`/`STALE`/`DRIFT`/`CONTRADICTS`/`BUDGET`/`FOREIGN`). Writes nothing. |
 | `--style <slug\|free-form>` | Set the visual style for this repo (see below). Persisted; re-runs reuse it. |
 | `--style auto` | Force re-derivation of the style from product identity, ignoring the stored slug |
 | `--refresh-viz` | Force re-authoring of every in-scope visual regardless of hashes |
@@ -187,7 +187,7 @@ identity:** logos/icons, brand tokens (CSS custom properties, Tailwind config, t
 files), an existing style guide or DESIGN.md. These feed phase 2.
 
 Also detect **foreign visuals** — `mpd.json` files whose `producer` isn't
-`more-pretty-docs`, or embeds pointing at `.webp`. Those are adoption candidates
+`pretty-svg-docs`, or embeds pointing at `.webp`. Those are adoption candidates
 (`embedding.md` → Adopting visuals from another producer).
 
 ### 2. Design system and style

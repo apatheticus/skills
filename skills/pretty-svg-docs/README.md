@@ -1,6 +1,6 @@
 <div align="center">
 
-# more-pretty-docs
+# pretty-svg-docs
 
 **A Claude Code skill that writes a repository's standard docs and authors their key diagrams as seamless-loop animated SVG — with nothing to install.**
 
@@ -21,17 +21,17 @@
 
 ## What this is
 
-more-pretty-docs creates and maintains a repository's standard documentation —
+pretty-svg-docs creates and maintains a repository's standard documentation —
 README, ARCHITECTURE, DEVELOPMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY,
 SUPPORT, plus tier-2 files on request — and makes it look designed. Each run
 derives a frozen per-repo design system, picks a named visual style, then writes
 the docs' key diagrams as animated SVG by hand.
 
-It is the sibling of [`make-pretty-docs`](../make-pretty-docs), which does the same
+It is the sibling of [`pretty-hyper-docs`](../pretty-hyper-docs), which does the same
 job with animated WebP rendered through the HyperFrames toolchain. Same content
 engine, same honesty-over-polish doctrine. The difference is the visual layer:
 
-|  | `make-pretty-docs` | `more-pretty-docs` |
+|  | `pretty-hyper-docs` | `pretty-svg-docs` |
 | --- | --- | --- |
 | Visual format | animated WebP | animated SVG |
 | Needs installing | HyperFrames CLI, ffmpeg, img2webp | nothing beyond `python3` |
@@ -40,7 +40,7 @@ engine, same honesty-over-polish doctrine. The difference is the visual layer:
 | Visual style | derived from the product | 31-style catalog, or derived |
 | Asset budget | ≤ 2.5 MB | ≤ 150 KB |
 
-Use `make-pretty-docs` when you specifically want WebP. Use
+Use `pretty-hyper-docs` when you specifically want WebP. Use
 [`update-docs`](https://github.com/apatheticus/skills) for plain text-only docs.
 Otherwise use this one — and note that every visual on this page was authored and
 gated by the skill itself, in the `bento-grid` style.
@@ -161,7 +161,7 @@ a count, before touching anything.
 ## Install
 
 ```bash
-npx skills add apatheticus/skills --skill more-pretty-docs
+npx skills add apatheticus/skills --skill pretty-svg-docs
 ```
 
 Or as part of the Claude Code plugin bundle:
@@ -174,7 +174,7 @@ Or as part of the Claude Code plugin bundle:
 Or copy the folder straight into a repo's skill directory:
 
 ```bash
-cp -R skills/more-pretty-docs /path/to/repo/.claude/skills/more-pretty-docs
+cp -R skills/pretty-svg-docs /path/to/repo/.claude/skills/pretty-svg-docs
 ```
 
 The skill is self-contained. At run time it needs `python3` for its two bundled
@@ -186,9 +186,9 @@ available the run says the pixel review was skipped rather than implying it pass
 
 | Command | Effect |
 | --- | --- |
-| `/more-pretty-docs` | Full tier-1 pass: content + visuals |
-| `/more-pretty-docs readme security` | Only the named docs |
-| `/more-pretty-docs check` | Read-only audit of content and visual staleness |
+| `/pretty-svg-docs` | Full tier-1 pass: content + visuals |
+| `/pretty-svg-docs readme security` | Only the named docs |
+| `/pretty-svg-docs check` | Read-only audit of content and visual staleness |
 | `--style <slug>` | Pick a catalog style (or a recognisable free-form idiom) |
 | `--style auto` | Re-derive the style from the product, ignoring the stored slug |
 | `--refresh-viz` / `--no-viz` / `--budget <doc>=<n>` / `--brief` / `--full` | Modifiers — see `SKILL.md` |
@@ -196,7 +196,7 @@ available the run says the pixel review was skipped rather than implying it pass
 ## Layout
 
 ```
-more-pretty-docs/
+pretty-svg-docs/
 ├── SKILL.md              entry point: preflight, workflow, budgets, audience matrix
 ├── reference/            house style, per-doc specs, design-system / viz-production /
 │   │                     svg-animation / embedding doctrine

@@ -1,6 +1,6 @@
 <div align="center">
 
-# make-pretty-docs
+# pretty-hyper-docs
 
 **A Claude Code skill that writes a repository's standard docs and renders their key diagrams as seamless-loop animated WebPs.**
 
@@ -20,7 +20,7 @@
 
 ## What this is
 
-make-pretty-docs creates and maintains a repository's standard documentation —
+pretty-hyper-docs creates and maintains a repository's standard documentation —
 README, ARCHITECTURE, DEVELOPMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY,
 SUPPORT, plus tier-2 files on request — and makes it look designed. Each run
 derives a frozen per-repo design system, then renders the docs' key diagrams as
@@ -62,7 +62,7 @@ changed, its asset is missing, or `--refresh-viz` forces it:
 ## Install
 
 ```bash
-npx skills add apatheticus/skills --skill make-pretty-docs
+npx skills add apatheticus/skills --skill pretty-hyper-docs
 ```
 
 Or as part of the Claude Code plugin bundle:
@@ -75,7 +75,7 @@ Or as part of the Claude Code plugin bundle:
 Or copy the folder straight into a repo's skill directory:
 
 ```bash
-cp -R skills/make-pretty-docs /path/to/repo/.claude/skills/make-pretty-docs
+cp -R skills/pretty-hyper-docs /path/to/repo/.claude/skills/pretty-hyper-docs
 ```
 
 The skill is self-contained — no other skill needs to be installed. At run
@@ -87,15 +87,15 @@ the skill prints install instructions if it's missing) plus `ffmpeg` and
 
 | Command | Effect |
 | --- | --- |
-| `/make-pretty-docs` | Full tier-1 pass: content + visuals |
-| `/make-pretty-docs readme security` | Only the named docs |
-| `/make-pretty-docs check` | Read-only audit of content and visual staleness |
+| `/pretty-hyper-docs` | Full tier-1 pass: content + visuals |
+| `/pretty-hyper-docs readme security` | Only the named docs |
+| `/pretty-hyper-docs check` | Read-only audit of content and visual staleness |
 | `--refresh-viz` / `--no-viz` / `--budget <doc>=<n>` / `--brief` / `--full` | Modifiers — see `SKILL.md` |
 
 ## Layout
 
 ```
-make-pretty-docs/
+pretty-hyper-docs/
 ├── SKILL.md              entry point: preflight, workflow, budgets, audience matrix
 ├── reference/            house style, per-doc specs, design-system / viz-production / embedding doctrine
 │   └── tier2/            LICENSE, NOTICE, templates, CODEOWNERS specs

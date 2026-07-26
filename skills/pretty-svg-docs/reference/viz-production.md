@@ -38,7 +38,7 @@ docs/assets/src/**/_qa/
 ```
 
 The asset is the source, so nothing under `src/<viz-name>/` duplicates the artwork.
-That is the one structural difference from the sibling `make-pretty-docs` layout;
+That is the one structural difference from the sibling `pretty-hyper-docs` layout;
 the marker shape is identical.
 
 ## 1. Author `docs/assets/<viz-name>.svg`

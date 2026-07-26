@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Gate for hand-authored animated SVG produced by the more-pretty-docs skill.
+"""Gate for hand-authored animated SVG produced by the pretty-svg-docs skill.
 
 Deterministic, python3 stdlib only. Checks, in order:
 

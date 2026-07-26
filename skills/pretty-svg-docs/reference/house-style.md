@@ -292,7 +292,7 @@ first; only the values you had to ask for need storing here.
 
 ```json
 {
-  "$schema_note": "Config for the more-pretty-docs skill. Committed. No secrets.",
+  "$schema_note": "Config for the pretty-docs skills (pretty-hyper-docs, pretty-svg-docs, update-docs). Committed. No secrets.",
   "org": "Example Org, Inc.",
   "year_policy": "range",
   "first_year": 2026,

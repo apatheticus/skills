@@ -152,7 +152,7 @@ docs/assets/src/DESIGN.md         committed — the frozen design system
 ```
 
 The `src` attribute still points at the state dir, so a repo's marker shape is
-identical to the sibling `make-pretty-docs` layout and adoption is a path rewrite
+identical to the sibling `pretty-hyper-docs` layout and adoption is a path rewrite
 rather than a restructure.
 
 Rules:
@@ -252,7 +252,7 @@ size gate.
 
 ## Adopting visuals from another producer
 
-A repo may already carry visuals from the sibling `make-pretty-docs` skill: the
+A repo may already carry visuals from the sibling `pretty-hyper-docs` skill: the
 same marker family, the same `mpd.json`, but `.webp` assets rendered through
 HyperFrames. The manifests there have no `producer` field, which is how they're
 recognised.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Mechanical half of the make-pretty-docs visual audit.
+"""Mechanical half of the pretty-hyper-docs visual audit.
 
 Scans markdown docs for mpd:viz marker pairs and reports one verdict per
 visual: OK / MISSING / UNCENTERED / STALE / DRIFT / BUDGET, plus doc-level

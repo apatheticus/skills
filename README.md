@@ -51,7 +51,7 @@ project. Nothing here is all-or-nothing — to skip the prompt and name what you
 
 ```bash
 npx skills add apatheticus/skills -s human-voice                       # one skill
-npx skills add apatheticus/skills -s human-voice -s more-pretty-docs   # two
+npx skills add apatheticus/skills -s human-voice -s pretty-svg-docs   # two
 npx skills add apatheticus/skills --all                                # every skill, every agent
 ```
 
@@ -122,8 +122,8 @@ removed skill stays visible until the next session.
 | Skill | What it does | Install just this one |
 | --- | --- | --- |
 | [`human-voice`](./skills/human-voice) | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored. Picks a register first (editorial, professional, technical, or regulated) so a spec never gets an essay's voice. Yields to a compliance skill for federal work. | `npx skills add apatheticus/skills -s human-voice` |
-| [`make-pretty-docs`](./skills/make-pretty-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. | `npx skills add apatheticus/skills -s make-pretty-docs` |
-| [`more-pretty-docs`](./skills/more-pretty-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. Ships a 31-style catalog, from Swiss minimal to oil impasto, each with a gated full-width specimen, and a bundled checker that proves the loop is seam-exact before anything is committed. | `npx skills add apatheticus/skills -s more-pretty-docs` |
+| [`pretty-hyper-docs`](./skills/pretty-hyper-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. | `npx skills add apatheticus/skills -s pretty-hyper-docs` |
+| [`pretty-svg-docs`](./skills/pretty-svg-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. Ships a 31-style catalog, from Swiss minimal to oil impasto, each with a gated full-width specimen, and a bundled checker that proves the loop is seam-exact before anything is committed. | `npx skills add apatheticus/skills -s pretty-svg-docs` |
 | [`security-audit-full-report`](./skills/security-audit-full-report) | Loop a security audit over a codebase until it stops finding anything new — each cycle hunts the ground the last one missed — then merge every run into one interactive HTML report. State lives on disk, so a run survives compaction and resumes where it stopped. Drives Cloudflare's `security-audit` skill; it does not re-implement the hunting. | `npx skills add apatheticus/skills -s security-audit-full-report` |
 | [`reflect`](./skills/reflect) | Mine your own Claude Code session transcripts for what keeps going wrong, what quietly works, and which setup changes would pay off most — then hand back one self-contained interactive HTML report. Every recommendation cites a session ID and a verbatim quote; a proposed skill needs three separate sessions behind it. Diagnosis only, and nothing leaves the machine. | `npx skills add apatheticus/skills -s reflect` |
 <!-- skills:table end -->
@@ -134,6 +134,31 @@ Add `-g` to any of those to install globally instead of into the current project
 <!-- `npm run validate` enforces this table: one row per skills/<name>, a link to the skill
      directory, a non-empty description you write yourself, and the exact install command.
      Row order is not checked, so curate it. -->
+
+### Renamed in 0.10.0
+
+Two skills were renamed so the name says which renderer you get:
+
+| Was | Now |
+| --- | --- |
+| `make-pretty-docs` | [`pretty-hyper-docs`](./skills/pretty-hyper-docs) — HyperFrames → animated WebP |
+| `more-pretty-docs` | [`pretty-svg-docs`](./skills/pretty-svg-docs) — animated SVG, nothing to install |
+
+How you get the new names depends on the channel you installed through:
+
+- **Plugin channel** re-syncs the whole plugin, so the old directories disappear on update.
+  Nothing to do.
+- **`npx skills` channel** copies into `.claude/skills/<name>/`. The old commands stop
+  resolving, but an existing local copy **persists beside** the new one, and two skills with
+  overlapping descriptions will both compete to trigger. Delete the old copies once:
+
+```bash
+rm -rf .claude/skills/make-pretty-docs .claude/skills/more-pretty-docs
+```
+
+Existing visuals keep working. The marker and manifest names changed too — `mpd:viz` →
+`pd:viz`, `mpd.json` → `viz.json` — but both skills still read the old forms and rewrite
+them in place the next time they touch a doc, so nothing needs re-rendering.
 
 <br/>
 

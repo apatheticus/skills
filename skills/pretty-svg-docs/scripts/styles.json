@@ -1,5 +1,5 @@
 {
-  "$note": "Machine half of the style catalog for more-pretty-docs. Read by svg_check.py and audit_visuals.py. The prose half is reference/styles.md + reference/styles/<slug>.md; the two must agree slug-for-slug. Entries are alphabetical, matching the index.",
+  "$note": "Machine half of the style catalog for pretty-svg-docs. Read by svg_check.py and audit_visuals.py. The prose half is reference/styles.md + reference/styles/<slug>.md; the two must agree slug-for-slug. Entries are alphabetical, matching the index.",
   "defaults": {
     "contrast_text": 4.5,
     "contrast_ui": 3.0,
