@@ -31,7 +31,7 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 ## Branches
 
-- **`stage` is the default branch.** Do all work there; it has no protection, so push directly.
+- **`main` is the default branch.** `stage` is still where work happens — it has no protection, so push directly — but `main` is what a clone, a fork, and a bare `gh pr create` now target. Pass `--head stage` explicitly when opening a PR from a local `stage`.
 - **`main` is protected and requires a pull request.** `enforce_admins` is on, so even the repo owner cannot push to it directly — a direct push is rejected with `GH006: Changes must be made through a pull request`. Ship by opening a `stage` → `main` PR.
 - **Every PR is reviewed by an admin**, who accepts it or closes it on quality, value, and fit with the collection. That guarantee comes from the access model — merging needs write access and `apatheticus` is the only collaborator — not from a review count.
 - **`required_approving_review_count` stays `0`, deliberately. Do not raise it.** GitHub does not let a PR author approve their own PR, and this repo has one admin, so a count of `1` can never be satisfied: `main` goes unmergeable until protection is loosened. Setting it while turning `enforce_admins` off is worse — the requirement becomes decorative *and* direct pushes to `main` stop being blocked. Raise it only after a second admin collaborator exists.
@@ -39,7 +39,7 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 - The `validate` workflow's job — status-check context **`skills + manifests`**, pinned to app id `15368` — is a required check, so a red run blocks the merge.
 - That context string is the job's `name:` in `validate.yml`, not the workflow name. **Renaming the job breaks branch protection silently:** the old context never reports, and the PR sits on "Expected — waiting for status" forever. Rename the job and the protection rule together.
 - `strict` is off, so `stage` does not have to be up to date with `main` to merge. Turn it on only if you start committing to `main` outside the `stage` PR flow.
-- `Closes #N` only auto-closes on merges into the default branch, which is now `stage`. A PR merged into `main` will **not** close the issue; close it by hand.
+- `Closes #N` auto-closes on merges into the default branch, which is `main` — so a `stage` → `main` PR carrying the keyword now closes its issue on merge. It does **not** fire when work is pushed straight to `stage`; that is the case to close by hand.
 
 ## Rules
 
