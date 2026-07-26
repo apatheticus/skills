@@ -7,15 +7,16 @@
   "facts": [
     "Step 1 selects the register before a single pattern is read; every downstream decision depends on it",
     "The four registers are Editorial, Professional, Technical and Regulated, profiled in reference/registers.md",
-    "Professional is the default when the genre is unclear, and the skill never defaults to Editorial"
+    "Professional is the default when the genre is unclear, and the skill never defaults to Editorial",
+    "Personality (voice injection) is on only in Editorial; for Professional, Technical and Regulated neutral and plain is the human voice"
   ],
-  "facts_hash": "8365fab90fb869b4fe0b3f3785a590c50276a30047770dbc6f0f220a422e91c5",
-  "src_hash": "bbc1c15c1ad6318423b61f6777873c3f47e7ea58f999faa714d81de83eb84420",
-  "design_hash": "2f6dd9cfbd85cb7200257fd585b70889bdc50d5653da731cfaaa92bad5913327",
+  "facts_hash": "b26beb7f8d33557cc8587b7fd9b8e115ff8d8b75f0d876065917fd9d5328996b",
+  "src_hash": "c8211a124b09c94319705a147a645ed0a049d9566ea33426054e90e8ad3e379b",
+  "design_hash": "06ae37640ab5faa52ea64fe879c66ad97706b15084de5544478d6e2feb670331",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 3566
+    "bytes": 7720
   },
   "relaxed": []
 }

@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="12" data-bg="var(--ground)" data-specimen="true">
+<title>Rough sketch — Source, Transform, Store</title>
+<desc>Three hand-drawn boxes with doubled, wobbling outlines and pastel fills on off-white, joined by sketched arrows. An orange dot drifts along the first connector.</desc>
+<defs>
+  <filter id="rs-a" data-style="rough-sketch" x="-10%" y="-18%" width="120%" height="136%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.028 0.036" numOctaves="3" seed="11" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4.4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="rs-b" data-style="rough-sketch" x="-10%" y="-18%" width="120%" height="136%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.031 0.04" numOctaves="3" seed="29" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="5.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</defs>
+<style>
+svg { --ground:#FDFCF8; --ink:#1F2933; --muted:#4A5568; --fill1:#DCE9F7; --fill2:#F7E4DC; --fill3:#E2F0DE; --accent:#C2410C; }
+  .rs-h { font: 400 40px "Comic Sans MS", "Bradley Hand", cursive; fill: var(--ink); }
+  .rs-t { font: 400 25px "Comic Sans MS", "Bradley Hand", cursive; fill: var(--ink); }
+  .rs-s { font: 400 19px "Comic Sans MS", "Bradley Hand", cursive; fill: var(--muted); }
+  .rs-f { font: 400 16px "Comic Sans MS", "Bradley Hand", cursive; fill: var(--muted); }
+  .rs-b { fill: none; stroke: var(--ink); stroke-width: 2.2; }
+  .rs-b2 { fill: none; stroke: var(--ink); stroke-width: 1.6; opacity: .55; }
+  .rs-l { stroke: var(--ink); stroke-width: 2.2; fill: none; }
+  .rs-dot { fill: var(--accent); animation: rs-dot 4s ease-in-out infinite; }
+  @keyframes rs-dot { 0%,100% { transform: translateX(0) } 50% { transform: translateX(370px) } }
+  @media (prefers-reduced-motion: reduce) { .rs-dot { animation: none; opacity: 0 } }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<text class="rs-h" x="80" y="92">how the data moves</text>
+<line class="rs-l" x1="80" y1="108" x2="470" y2="108" filter="url(#rs-b)"/>
+<text class="rs-f" data-role="metadata" x="80" y="136">sketched, not specified</text>
+<rect x="80" y="180" width="300" height="150" rx="6" fill="var(--fill1)" filter="url(#rs-a)"/>
+<rect class="rs-b" x="80" y="180" width="300" height="150" rx="6" filter="url(#rs-a)"/>
+<rect class="rs-b2" x="78" y="182" width="300" height="150" rx="6" filter="url(#rs-b)"/>
+<line class="rs-b" x1="94" y1="222" x2="366" y2="222" filter="url(#rs-b)"/>
+<text class="rs-f" data-role="metadata" x="94" y="210">1.</text>
+<line class="rs-b2" x1="98" y1="296" x2="328" y2="296" filter="url(#rs-b)"/>
+<line class="rs-b2" x1="98" y1="306" x2="251" y2="306" filter="url(#rs-b)"/>
+<line class="rs-b2" x1="98" y1="316" x2="174" y2="316" filter="url(#rs-b)"/>
+<rect x="450" y="180" width="300" height="150" rx="6" fill="var(--fill2)" filter="url(#rs-a)"/>
+<rect class="rs-b" x="450" y="180" width="300" height="150" rx="6" filter="url(#rs-a)"/>
+<rect class="rs-b2" x="448" y="182" width="300" height="150" rx="6" filter="url(#rs-b)"/>
+<line class="rs-b" x1="464" y1="222" x2="736" y2="222" filter="url(#rs-b)"/>
+<text class="rs-f" data-role="metadata" x="464" y="210">2.</text>
+<line class="rs-b2" x1="468" y1="296" x2="698" y2="296" filter="url(#rs-b)"/>
+<line class="rs-b2" x1="468" y1="306" x2="621" y2="306" filter="url(#rs-b)"/>
+<line class="rs-b2" x1="468" y1="316" x2="544" y2="316" filter="url(#rs-b)"/>
+<rect x="820" y="180" width="300" height="150" rx="6" fill="var(--fill3)" filter="url(#rs-a)"/>
+<rect class="rs-b" x="820" y="180" width="300" height="150" rx="6" filter="url(#rs-a)"/>
+<rect class="rs-b2" x="818" y="182" width="300" height="150" rx="6" filter="url(#rs-b)"/>
+<line class="rs-b" x1="834" y1="222" x2="1106" y2="222" filter="url(#rs-b)"/>
+<text class="rs-f" data-role="metadata" x="834" y="210">3.</text>
+<line class="rs-b2" x1="838" y1="296" x2="1068" y2="296" filter="url(#rs-b)"/>
+<line class="rs-b2" x1="838" y1="306" x2="991" y2="306" filter="url(#rs-b)"/>
+<line class="rs-b2" x1="838" y1="316" x2="914" y2="316" filter="url(#rs-b)"/>
+<g data-bg="var(--fill1)">
+  <text class="rs-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="rs-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--fill1)">
+  <text class="rs-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="rs-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--fill1)">
+  <text class="rs-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="rs-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<line class="rs-l" x1="380" y1="261" x2="450" y2="261" filter="url(#rs-a)"/>
+<path class="rs-l" d="M438 255 L450 261 L438 267" filter="url(#rs-a)"/>
+<line class="rs-l" x1="750" y1="261" x2="820" y2="261" filter="url(#rs-a)"/>
+<path class="rs-l" d="M808 255 L820 261 L808 267" filter="url(#rs-a)"/>
+<circle class="rs-dot" cx="386" cy="261" r="7"/>
+<rect class="rs-b2" x="80" y="372" width="1040" height="56" rx="6" filter="url(#rs-b)"/>
+<text class="rs-f" data-role="metadata" x="98" y="406">continuous — no manual step</text>
+<path class="rs-l" d="M980 384 q18 12 0 24 q-18 -12 0 -24" filter="url(#rs-b)"/>
+<path class="rs-b2" d="M1020 380 q10 0 10 10 q0 10 10 10 q-10 0 -10 10 q0 10 -10 10" filter="url(#rs-b)"/>
+</svg>

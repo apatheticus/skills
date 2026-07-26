@@ -2,6 +2,9 @@
 
 **Primary axis:** material · **Aliases:** `material`, `flat`
 
+<img src="../../docs/samples/flat-material.svg" alt="The flat-material specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
+
 ## Intent
 
 Flat color fields with exactly one step of elevation — the Material Design idea,
@@ -14,6 +17,12 @@ Confident, saturated fields. The accent is a *surface* color, not just a line co
 cards and bars get filled. Two elevation tiers only: `background` for the canvas,
 `surface` for anything raised. One `warn` color, used only for warnings.
 
+**The trap this style walks into every time is white text on a mid-value accent.**
+The Material palette's amber and orange are the worst offenders: white on `#F9A825`
+measures about **1.97:1**, nowhere near the 4.5:1 floor, and it looks right on a
+monitor while failing outright. On any accent lighter than roughly `#767676`, the
+label goes near-black, not white. Measure the pairing; do not eyeball it.
+
 ## Shape language
 
 Rounded rectangles, radius `4–8`, consistent across the board. Circular icon
@@ -25,6 +34,11 @@ most edges are color boundaries, not strokes.
 One drop shadow, one primitive deep, soft and short: offset `0 2`, blur `4`, low
 opacity. Raised elements share the *same* shadow — varying it invents elevation tiers
 that don't mean anything.
+
+**The shadow is not optional.** A board with no elevation at all is `swiss-minimal`
+with rounded corners, not flat-material; the one honest elevation step is the whole
+distinction between the two, and dropping it is the most common way this style is
+mis-built.
 
 ## Type treatment
 
@@ -52,7 +66,9 @@ The single elevation shadow, defined once and reused:
   svg { --background:#eceff1; --surface:#ffffff; --ink:#212121; --accent:#1e88e5; --warn:#f4511e; }
   .card { fill: var(--surface); filter: url(#e1); }
   .fill { fill: var(--accent); }
-  .ripple { fill: var(--accent); transform-box: fill-box; transform-origin: center;
+  /* transform-origin in *user units*, not `center`, when the ripple must start
+     from the point that was touched rather than the shape's middle */
+  .ripple { fill: var(--accent); transform-box: view-box; transform-origin: 640px 300px;
             animation: ripple 3s cubic-bezier(.4,0,.2,1) infinite; }
   @keyframes ripple {
     0%   { transform: scale(.4); opacity: .55 }
@@ -72,6 +88,6 @@ Nothing. One `feDropShadow` is exactly the default filter depth of 1.
 
 ## Never
 
-Two different shadow recipes in one repo, gradients standing in for elevation,
-radial gradients at all, more than one accent doing the same job, radius drifting
-card to card.
+Two different shadow recipes in one repo, no elevation at all, gradients standing in
+for elevation, radial gradients at all, white text on a mid-value accent, more than
+one accent doing the same job, radius drifting card to card.

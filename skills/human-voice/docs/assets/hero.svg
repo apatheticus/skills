@@ -1,13 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 430" width="1200" height="430"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" width="1200" height="650"
      role="img" data-loop-s="12" data-bg="background">
   <title>human-voice — the register is chosen before a single edit</title>
-  <desc>A printed plate. The title sits under a rust rule that draws itself across the
-page. Below the standfirst, four keyline boxes name the registers this skill writes in —
-editorial, professional, technical and regulated. Professional is marked with a rust
-keyline because it is the default when the genre is unclear; the skill never defaults to
-editorial, since injecting voice into a document that did not want it is the most
-damaging thing it can do. The register is selected first, and only that register's
-patterns are then applied.</desc>
+  <desc>A printed plate. A rust proof rule draws itself across the head of the page above
+the kicker, step one, choose the register; the folio reads plate one. Under the headline
+and a hairline, the standfirst says the skill rewrites prose so it reads as written by a
+person, that the register is chosen first and only then do its patterns apply, and that
+Professional is the default when the genre is unclear. Below, four columns divided by
+vertical hairlines name the registers with their genres — Editorial for essays, posts and
+marketing copy; Professional for memos, policies, reports and proposals; Technical for
+specs, runbooks, API docs and RFCs; Regulated for filings, compliance, clinical and safety
+material. A filled mark under Editorial reads voice on, and it is the only one: the other
+three read voice off, because neutral and plain is the human voice there. Professional
+alone is opened by the rust rule and marked default when unclear — the skill never
+defaults to Editorial, since injecting voice into a document that did not want it is the
+most damaging thing it can do.</desc>
 
   <style>
     svg { --background:#fbf9f4; --ink:#1a1a18; --muted:#6b6862;
@@ -15,23 +21,41 @@ patterns are then applied.</desc>
 
     .bg   { fill: var(--background); }
 
-    .h    { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
-            font-size: 64px; font-weight: 700; letter-spacing: -1.5px; }
-    .lede { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
-            font-size: 28px; font-weight: 400; }
-    .body { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
-            font-size: 24px; font-weight: 400; }
-    .reg  { fill: var(--muted); font-family: Georgia, 'Iowan Old Style', serif;
-            font-size: 24px; font-weight: 400; }
-    .cap  { fill: var(--muted); font-family: Georgia, 'Iowan Old Style', serif;
-            font-size: 16px; font-weight: 500; letter-spacing: 0.8px; }
+    /* the kicker is the one sans role in this system — see DESIGN.md typography */
+    .kick  { fill: var(--muted); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 18px; font-weight: 600; letter-spacing: 2.6px; }
+    .folio { fill: var(--muted); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 16px; font-weight: 600; letter-spacing: 2.2px; }
+    .sect  { fill: var(--muted); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 16px; font-weight: 600; letter-spacing: 2.2px; }
 
-    .hair { fill: none; stroke: var(--rule); stroke-width: 1; }
-    .key  { fill: none; stroke: var(--keyline); stroke-width: 1.5; }
-    .keyon { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+    .h     { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
+             font-size: 64px; font-weight: 700; letter-spacing: -1.5px; }
+    .lede  { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
+             font-size: 28px; font-weight: 400; }
+    .name  { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
+             font-size: 30px; font-weight: 700; }
+    .gen   { fill: var(--muted); font-family: Georgia, 'Iowan Old Style', serif;
+             font-size: 19px; font-weight: 400; }
+    .voice { fill: var(--ink); font-family: Georgia, 'Iowan Old Style', serif;
+             font-size: 20px; font-weight: 400; }
+    .num   { fill: var(--muted); font-family: Georgia, 'Iowan Old Style', serif;
+             font-size: 18px; font-weight: 400; letter-spacing: 1.4px; }
+    .sub   { fill: var(--muted); font-family: Georgia, 'Iowan Old Style', serif;
+             font-size: 17px; font-weight: 400; }
+    .dflt  { fill: var(--accent); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 16px; font-weight: 600; letter-spacing: 1.6px; }
+
+    /* rule: pure typography, never bounds content. keyline: bounds meaning. */
+    .hair    { fill: none; stroke: var(--rule); stroke-width: 1; }
+    .colrule { fill: none; stroke: var(--keyline); stroke-width: 1.5; }
+    .coldraw { fill: none; stroke: var(--accent); stroke-width: 3; }
+    .mark-on  { fill: var(--ink); }
+    .mark-off { fill: none; stroke: var(--keyline); stroke-width: 1.5; }
 
     /* the proof rule enters, holds, and leaves the other side, so t=0 and t=12
-       are both "no rule visible". 6s divides the 12s loop twice. */
+       are both "no rule visible". 6s divides the 12s loop twice. Motion you
+       would not notice on a first pass is correctly tuned for this style. */
     .draw { fill: none; stroke: var(--accent); stroke-width: 3;
             stroke-dasharray: 1040; animation: draw 6s ease-in-out infinite; }
     @keyframes draw {
@@ -45,29 +69,54 @@ patterns are then applied.</desc>
     }
   </style>
 
-  <rect class="bg" x="0" y="0" width="1200" height="430"/>
-
-  <!-- the heavy rust rule that opens the piece -->
+  <rect class="bg" x="0" y="0" width="1200" height="650"/>
   <line class="draw" x1="80" y1="72" x2="1120" y2="72"/>
-
-  <text class="h"    x="80" y="152" data-role="hero">human-voice</text>
-  <text class="lede" x="80" y="204">Rewrite prose so it reads as written by a person. The</text>
-  <text class="lede" x="80" y="240">register is chosen first, then only its patterns apply.</text>
-
-  <line class="hair" x1="80" y1="272" x2="1120" y2="272"/>
-
-  <!-- the four registers; the default one carries the proof rule as its keyline -->
-  <rect class="key"   x="80"  y="300" width="245" height="72"/>
-  <text class="reg"   x="104" y="344">Editorial</text>
-
-  <rect class="keyon" x="345" y="300" width="245" height="72"/>
-  <text class="body"  x="369" y="344">Professional</text>
-
-  <rect class="key"   x="610" y="300" width="245" height="72"/>
-  <text class="reg"   x="634" y="344">Technical</text>
-
-  <rect class="key"   x="875" y="300" width="245" height="72"/>
-  <text class="reg"   x="899" y="344">Regulated</text>
-
-  <text class="cap" x="369" y="404" data-role="metadata">DEFAULT WHEN UNCLEAR</text>
+  <text class="kick" x="80" y="120">STEP ONE · CHOOSE THE REGISTER</text>
+  <text class="h"    x="80" y="188" data-role="hero">human-voice</text>
+  <text class="folio" x="1120" y="188" text-anchor="end" data-role="metadata">PLATE I</text>
+  <line class="hair" x1="80" y1="218" x2="1120" y2="218"/>
+  <text class="lede" x="80" y="262">Rewrite prose so it reads as written by a person.</text>
+  <text class="lede" x="80" y="298">The register is chosen first; only then do its patterns</text>
+  <text class="lede" x="80" y="334">apply. Professional is the default when the genre is unclear.</text>
+  <text class="sect" x="80" y="378" data-role="metadata">I · THE FOUR REGISTERS</text>
+  <line class="hair" x1="334" y1="396" x2="334" y2="608"/>
+  <line class="hair" x1="600" y1="396" x2="600" y2="608"/>
+  <line class="hair" x1="866" y1="396" x2="866" y2="608"/>
+  <line class="colrule" x1="80" y1="396" x2="322" y2="396"/>
+  <text class="num"  x="80" y="424" data-role="metadata">i</text>
+  <text class="name" x="80" y="460">Editorial</text>
+  <text class="gen"  x="80" y="490">essays, posts,</text>
+  <text class="gen"  x="80" y="512">marketing copy</text>
+  <circle class="mark-on" cx="88" cy="542" r="8"/>
+  <text class="voice" x="108" y="549">Voice on</text>
+  <text class="sub"  x="80" y="580" data-role="metadata">the only register where</text>
+  <text class="sub"  x="80" y="602" data-role="metadata">voice injection is correct</text>
+  <line class="coldraw" x1="346" y1="396" x2="588" y2="396"/>
+  <text class="num"  x="346" y="424" data-role="metadata">ii</text>
+  <text class="dflt" x="588" y="424" text-anchor="end" data-role="metadata">DEFAULT</text>
+  <text class="name" x="346" y="460">Professional</text>
+  <text class="gen"  x="346" y="490">memos, policies,</text>
+  <text class="gen"  x="346" y="512">reports, proposals</text>
+  <circle class="mark-off" cx="354" cy="542" r="8"/>
+  <text class="voice" x="374" y="549">Voice off</text>
+  <text class="sub"  x="346" y="580" data-role="metadata">neutral and plain</text>
+  <text class="sub"  x="346" y="602" data-role="metadata">is the human voice here</text>
+  <line class="colrule" x1="612" y1="396" x2="854" y2="396"/>
+  <text class="num"  x="612" y="424" data-role="metadata">iii</text>
+  <text class="name" x="612" y="460">Technical</text>
+  <text class="gen"  x="612" y="490">specs, runbooks,</text>
+  <text class="gen"  x="612" y="512">API docs, RFCs</text>
+  <circle class="mark-off" cx="620" cy="542" r="8"/>
+  <text class="voice" x="640" y="549">Voice off</text>
+  <text class="sub"  x="612" y="580" data-role="metadata">candid — name the</text>
+  <text class="sub"  x="612" y="602" data-role="metadata">tradeoff and the limit</text>
+  <line class="colrule" x1="878" y1="396" x2="1120" y2="396"/>
+  <text class="num"  x="878" y="424" data-role="metadata">iv</text>
+  <text class="name" x="878" y="460">Regulated</text>
+  <text class="gen"  x="878" y="490">filings, compliance,</text>
+  <text class="gen"  x="878" y="512">clinical, safety</text>
+  <circle class="mark-off" cx="886" cy="542" r="8"/>
+  <text class="voice" x="906" y="549">Voice off</text>
+  <text class="sub"  x="878" y="580" data-role="metadata">precise — claim only</text>
+  <text class="sub"  x="878" y="602" data-role="metadata">what is sourced</text>
 </svg>

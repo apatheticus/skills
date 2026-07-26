@@ -3,19 +3,25 @@
   "doc": "README.md",
   "tier": "animated-flagship",
   "producer": "more-pretty-docs",
-  "style": "bento-grid",
+  "style": "catalog-sheet",
   "facts": [
-    "The catalog holds 14 styles, indexed in reference/styles.md with one spec file each under reference/styles/",
-    "scripts/styles.json is the checker's machine-readable half of the same catalog",
-    "Style owns form; the product's own brand tokens still own the palette"
+    "The catalog holds 31 styles, indexed alphabetically in reference/styles.md with one spec file each under reference/styles/",
+    "Every cell is that style's own full-width specimen from docs/samples/, scaled down \u2014 not a redrawing of it",
+    "The sheet is gated as the declared 'catalog-sheet' style, so each tile's filters are measured against the floor of the style they depict",
+    "scripts/styles.json is the checker's machine-readable half of the same catalog"
   ],
-  "facts_hash": "9fa63f8c48ad178bf922877ee47854485801c6b4246ee2d434fe09f59456a8b9",
-  "src_hash": "e66d825d3a2d3b05888eeedcb6a8312457c2581678b135bdd683dba2dff2cef1",
-  "design_hash": "ccfcfdfa8c5419117e23b48b394fd1c5ddc49875485a3041c90b1134e97b0e99",
+  "facts_hash": "33ebe05a0c9d07aebe81b14ad473b53cba1c9f2a06b373fbd52bc50b74da294a",
+  "src_hash": "f729b4bd84d58499c2a9a70c513e4e4d29a7d17c60fd903aaa6c45f8b3ffdd7c",
+  "design_hash": "de0372cc1fc3c743271a44b3d2ae365fccca73980ba2abc0dfd1dc7c4aef140b",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 19120
+    "bytes": 243425
   },
-  "relaxed": []
+  "relaxed": [
+    "bytes@300KB",
+    "filter-depth@2",
+    "filter-depth@3",
+    "filter-depth@5"
+  ]
 }

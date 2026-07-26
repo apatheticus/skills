@@ -198,11 +198,38 @@ What it checks, in order:
 | Legibility | every `font-size` meets its role floor |
 | System | every `fill`/`stroke` hex traces to a `DESIGN.md` palette role; text contrast ≥ 4.5:1 against its `data-bg` role |
 | Style | the resolved style's `forbid` / `require` invariants |
+| **Fidelity** | the style's **minimum**: `require_filter_all` primitives present, deepest chain ≥ `min_filter_depth`, drawn geometry ≥ `min_elements` (specimens only) |
 | Size | warn at 60 KB, fail over 150 KB |
+
+Every other class above is a ceiling or a legibility floor, so a flat, styleless
+render used to pass clean. The fidelity class is the half that asks whether the file
+looks like what it claims — if a visual is authored in `wood-grain`, it must actually
+carry the turbulence-and-displacement chain that *is* wood grain, not a gradient that
+suggests one.
+
+The checker also emits a positive `NOTE` per file:
+
+```
+NOTE  docs/assets/foo.svg: fidelity: deepest chain 3, 2 filter(s), 61 drawn elements,
+      primitives feColorMatrix, feComponentTransfer, feTurbulence
+```
+
+Read it. `deepest chain 1` on a style that declares a floor of 3 is the tell that the
+material was faked, and it is the one line in the report that says so.
+
+Two attributes matter here:
+
+- `data-specimen="true"` on the root marks a visual as a **specimen** of its style —
+  a catalog sample, not a working diagram. Only specimens are held to `min_elements`,
+  because geometry density is a property of what a diagram says, not of its style.
+- `data-style="<slug>"` on a `<filter>` attributes that chain to the style it depicts,
+  so a **multi-style** visual (the contact sheet) measures each filter against that
+  style's own floor and ceiling instead of the file-wide one.
 
 Exit code is non-zero on any `ERROR`. `SOFTENED` lines are passes that used a
 declared style relaxation — they belong in the run report and in `mpd.json`'s
-`relaxed` array. `WARN` lines are advisory.
+`relaxed` array. `WARN` lines are advisory, and identical graphic-contrast warnings
+are aggregated with an `(xN)` count.
 
 Zero errors, not "only warnings."
 

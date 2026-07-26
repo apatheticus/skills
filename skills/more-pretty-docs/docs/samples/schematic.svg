@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="12" data-bg="var(--ground)" data-specimen="true">
+<title>Schematic — Source, Transform, Store</title>
+<desc>A drawn circuit sheet: ruled border, reference designators, pin stubs with junction dots, a supply rail and a ground symbol. A red carrier travels the signal path.</desc>
+<defs>
+
+</defs>
+<style>
+svg { --ground:#FAFAF6; --ink:#16181C; --muted:#42464E; --wire:#16181C; --hot:#B03A2E; --cold:#1F618D; --panel:#F0F0EA; --rule:#B9BCC2; }
+  .sc-h { font: 400 32px ui-monospace, Menlo, monospace; fill: var(--ink); letter-spacing: 2px; }
+  .sc-t { font: 700 23px ui-monospace, Menlo, monospace; fill: var(--ink); }
+  .sc-s { font: 400 19px ui-monospace, Menlo, monospace; fill: var(--muted); }
+  .sc-f { font: 400 17px ui-monospace, Menlo, monospace; fill: var(--muted); }
+  .sc-w { fill: none; stroke: var(--wire); stroke-width: 1.8; }
+  .sc-b { fill: none; stroke: var(--ink); stroke-width: 1.8; }
+  .sc-r { stroke: var(--rule); stroke-width: 1.5; }
+  .sc-p { fill: var(--hot); animation: sc-p 4s linear infinite; }
+  @keyframes sc-p { 0% { transform: translateX(0) } 100% { transform: translateX(370px) } }
+  @media (prefers-reduced-motion: reduce) { .sc-p { animation: none; opacity: 0 } }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<rect class="sc-b" x="40" y="26" width="1120" height="408"/>
+<text class="sc-h" x="80" y="82">SCH. 3 — DATA PATH</text>
+<line class="sc-r" x1="80" y1="98" x2="1120" y2="98"/>
+<text class="sc-f" data-role="metadata" x="80" y="126">REF DES: U1 U2 U3 — REV C</text>
+<rect x="80" y="180" width="300" height="150" fill="var(--panel)"/>
+<rect class="sc-b" x="80" y="180" width="300" height="150"/>
+<line class="sc-r" x1="80" y1="222" x2="380" y2="222"/>
+<g data-bg="var(--panel)"><text class="sc-f" data-role="metadata" x="92" y="210">U1</text>
+<text class="sc-f" data-role="metadata" x="368" y="210" text-anchor="end">DIP-8</text></g>
+<line class="sc-w" x1="62" y1="242" x2="80" y2="242"/>
+<line class="sc-w" x1="380" y1="242" x2="398" y2="242"/>
+<circle cx="62" cy="242" r="3" fill="var(--wire)"/>
+<line class="sc-w" x1="62" y1="266" x2="80" y2="266"/>
+<line class="sc-w" x1="380" y1="266" x2="398" y2="266"/>
+<circle cx="62" cy="266" r="3" fill="var(--wire)"/>
+<line class="sc-w" x1="62" y1="290" x2="80" y2="290"/>
+<line class="sc-w" x1="380" y1="290" x2="398" y2="290"/>
+<circle cx="62" cy="290" r="3" fill="var(--wire)"/>
+<line class="sc-w" x1="62" y1="314" x2="80" y2="314"/>
+<line class="sc-w" x1="380" y1="314" x2="398" y2="314"/>
+<circle cx="62" cy="314" r="3" fill="var(--wire)"/>
+<rect x="450" y="180" width="300" height="150" fill="var(--panel)"/>
+<rect class="sc-b" x="450" y="180" width="300" height="150"/>
+<line class="sc-r" x1="450" y1="222" x2="750" y2="222"/>
+<g data-bg="var(--panel)"><text class="sc-f" data-role="metadata" x="462" y="210">U2</text>
+<text class="sc-f" data-role="metadata" x="738" y="210" text-anchor="end">DIP-8</text></g>
+<line class="sc-w" x1="432" y1="242" x2="450" y2="242"/>
+<line class="sc-w" x1="750" y1="242" x2="768" y2="242"/>
+<circle cx="432" cy="242" r="3" fill="var(--wire)"/>
+<line class="sc-w" x1="432" y1="266" x2="450" y2="266"/>
+<line class="sc-w" x1="750" y1="266" x2="768" y2="266"/>
+<circle cx="432" cy="266" r="3" fill="var(--wire)"/>
+<line class="sc-w" x1="432" y1="290" x2="450" y2="290"/>
+<line class="sc-w" x1="750" y1="290" x2="768" y2="290"/>
+<circle cx="432" cy="290" r="3" fill="var(--wire)"/>
+<line class="sc-w" x1="432" y1="314" x2="450" y2="314"/>
+<line class="sc-w" x1="750" y1="314" x2="768" y2="314"/>
+<circle cx="432" cy="314" r="3" fill="var(--wire)"/>
+<rect x="820" y="180" width="300" height="150" fill="var(--panel)"/>
+<rect class="sc-b" x="820" y="180" width="300" height="150"/>
+<line class="sc-r" x1="820" y1="222" x2="1120" y2="222"/>
+<g data-bg="var(--panel)"><text class="sc-f" data-role="metadata" x="832" y="210">U3</text>
+<text class="sc-f" data-role="metadata" x="1108" y="210" text-anchor="end">DIP-8</text></g>
+<line class="sc-w" x1="802" y1="242" x2="820" y2="242"/>
+<line class="sc-w" x1="1120" y1="242" x2="1138" y2="242"/>
+<circle cx="802" cy="242" r="3" fill="var(--wire)"/>
+<line class="sc-w" x1="802" y1="266" x2="820" y2="266"/>
+<line class="sc-w" x1="1120" y1="266" x2="1138" y2="266"/>
+<circle cx="802" cy="266" r="3" fill="var(--wire)"/>
+<line class="sc-w" x1="802" y1="290" x2="820" y2="290"/>
+<line class="sc-w" x1="1120" y1="290" x2="1138" y2="290"/>
+<circle cx="802" cy="290" r="3" fill="var(--wire)"/>
+<line class="sc-w" x1="802" y1="314" x2="820" y2="314"/>
+<line class="sc-w" x1="1120" y1="314" x2="1138" y2="314"/>
+<circle cx="802" cy="314" r="3" fill="var(--wire)"/>
+<g data-bg="var(--panel)">
+  <text class="sc-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="sc-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--panel)">
+  <text class="sc-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="sc-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--panel)">
+  <text class="sc-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="sc-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<line class="sc-w" x1="380" y1="261" x2="450" y2="261"/>
+<circle cx="380" cy="261" r="4" fill="var(--wire)"/>
+<circle cx="450" cy="261" r="4" fill="var(--wire)"/>
+<line class="sc-w" x1="750" y1="261" x2="820" y2="261"/>
+<circle cx="750" cy="261" r="4" fill="var(--wire)"/>
+<circle cx="820" cy="261" r="4" fill="var(--wire)"/>
+<circle class="sc-p" cx="386" cy="261" r="5"/>
+<line class="sc-w" x1="600" y1="366" x2="600" y2="392"/>
+<line class="sc-w" x1="578" y1="392" x2="622" y2="392"/>
+<line class="sc-w" x1="585" y1="400" x2="615" y2="400"/>
+<line class="sc-w" x1="592" y1="408" x2="608" y2="408"/>
+<line class="sc-w" x1="140" y1="150" x2="1060" y2="150" stroke="var(--cold)"/>
+<text class="sc-f" data-role="metadata" x="140" y="142" fill="var(--cold)">+3V3</text>
+<line class="sc-w" x1="200" y1="150" x2="200" y2="176" stroke="var(--cold)"/>
+<line class="sc-w" x1="360" y1="150" x2="360" y2="176" stroke="var(--cold)"/>
+<line class="sc-w" x1="520" y1="150" x2="520" y2="176" stroke="var(--cold)"/>
+<line class="sc-w" x1="680" y1="150" x2="680" y2="176" stroke="var(--cold)"/>
+<line class="sc-w" x1="840" y1="150" x2="840" y2="176" stroke="var(--cold)"/>
+<line class="sc-w" x1="1000" y1="150" x2="1000" y2="176" stroke="var(--cold)"/>
+</svg>

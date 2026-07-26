@@ -19,3 +19,8 @@ docs/assets/src/**/node_modules/
 # more-pretty-docs authors SVG directly, so the asset is its own source; only the
 # scrub harness and its screenshots are byproducts
 docs/assets/src/**/_qa/
+
+# browser-automation byproducts from the visual QA pass
+.playwright-mcp/
+
+__pycache__/

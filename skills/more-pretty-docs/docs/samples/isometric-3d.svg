@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="12" data-bg="var(--ground)" data-specimen="true">
+<title>Isometric — Source, Transform, Store</title>
+<desc>Three extruded blocks in a 2:1 isometric projection, each with a lit top and two shaded side faces, cast shadows that lengthen with height, and a marker hopping between them.</desc>
+<defs>
+
+</defs>
+<style>
+svg { --ground:#EEF1F6; --ink:#1E2430; --muted:#4A5464; --onface:#2A303C; --top:#7EA6E0; --left:#4A73B0; --right:#35547F; --top2:#E8A87C; --left2:#B87A52; --right2:#8A5738; --top3:#84C7A8; --left3:#4E9575; --right3:#376C55; --shadow:#C9D2E0; --accent:#C2410C; }
+  .is-h { font: 600 38px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); }
+  .is-t { font: 600 24px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); }
+  .is-s { font: 400 19px "Helvetica Neue", Arial, sans-serif; fill: var(--onface); }
+  .is-f { font: 400 18px "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
+  .is-hop { animation: is-hop 4s ease-in-out infinite; }
+  @keyframes is-hop { 0%,100% { transform: translate(0,0) } 50% { transform: translate(186px,-46px) } }
+  @media (prefers-reduced-motion: reduce) { .is-hop { animation: none; opacity: 0 } }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<text class="is-h" x="80" y="88">Three stages, in relief</text>
+<text class="is-f" x="80" y="120">2:1 projection — shadows track height</text>
+<line x1="-480" y1="150" x2="-180" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="-480" y1="450" x2="-180" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="-400" y1="150" x2="-100" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="-400" y1="450" x2="-100" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="-320" y1="150" x2="-20" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="-320" y1="450" x2="-20" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="-240" y1="150" x2="60" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="-240" y1="450" x2="60" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="-160" y1="150" x2="140" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="-160" y1="450" x2="140" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="-80" y1="150" x2="220" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="-80" y1="450" x2="220" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="0" y1="150" x2="300" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="0" y1="450" x2="300" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="80" y1="150" x2="380" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="80" y1="450" x2="380" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="160" y1="150" x2="460" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="160" y1="450" x2="460" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="240" y1="150" x2="540" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="240" y1="450" x2="540" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="320" y1="150" x2="620" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="320" y1="450" x2="620" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="400" y1="150" x2="700" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="400" y1="450" x2="700" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="480" y1="150" x2="780" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="480" y1="450" x2="780" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="560" y1="150" x2="860" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="560" y1="450" x2="860" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="640" y1="150" x2="940" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="640" y1="450" x2="940" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="720" y1="150" x2="1020" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="720" y1="450" x2="1020" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="800" y1="150" x2="1100" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="800" y1="450" x2="1100" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="880" y1="150" x2="1180" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="880" y1="450" x2="1180" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="960" y1="150" x2="1260" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="960" y1="450" x2="1260" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1040" y1="150" x2="1340" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1040" y1="450" x2="1340" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1120" y1="150" x2="1420" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1120" y1="450" x2="1420" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1200" y1="150" x2="1500" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1200" y1="450" x2="1500" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1280" y1="150" x2="1580" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1280" y1="450" x2="1580" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1360" y1="150" x2="1660" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1360" y1="450" x2="1660" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1440" y1="150" x2="1740" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1440" y1="450" x2="1740" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1520" y1="150" x2="1820" y2="450" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<line x1="1520" y1="450" x2="1820" y2="150" stroke="var(--shadow)" stroke-width="1" opacity=".55"/>
+<polygon points="280,318 456,383 280,448 104,383" fill="var(--shadow)" opacity=".6"/>
+<polygon points="280,254 410,319 280,384 150,319" fill="var(--top)"/>
+<polygon points="150,319 280,384 280,430 150,365" fill="var(--left)"/>
+<polygon points="410,319 280,384 280,430 410,365" fill="var(--right)"/>
+<g data-bg="var(--top)">
+  <text class="is-t" x="280" y="312" text-anchor="middle">Source</text>
+  <text class="is-s" x="280" y="338" text-anchor="middle">event stream</text>
+</g>
+<text class="is-f" x="280" y="450" text-anchor="middle">h=46</text>
+<polygon points="600,318 804,383 600,448 396,383" fill="var(--shadow)" opacity=".6"/>
+<polygon points="600,226 730,291 600,356 470,291" fill="var(--top2)"/>
+<polygon points="470,291 600,356 600,430 470,365" fill="var(--left2)"/>
+<polygon points="730,291 600,356 600,430 730,365" fill="var(--right2)"/>
+<g data-bg="var(--top2)">
+  <text class="is-t" x="600" y="284" text-anchor="middle">Transform</text>
+  <text class="is-s" x="600" y="310" text-anchor="middle">map, filter</text>
+</g>
+<text class="is-f" x="600" y="450" text-anchor="middle">h=74</text>
+<polygon points="920,318 1108,383 920,448 732,383" fill="var(--shadow)" opacity=".6"/>
+<polygon points="920,242 1050,307 920,372 790,307" fill="var(--top3)"/>
+<polygon points="790,307 920,372 920,430 790,365" fill="var(--left3)"/>
+<polygon points="1050,307 920,372 920,430 1050,365" fill="var(--right3)"/>
+<g data-bg="var(--top3)">
+  <text class="is-t" x="920" y="300" text-anchor="middle">Store</text>
+  <text class="is-s" x="920" y="326" text-anchor="middle">warehouse</text>
+</g>
+<text class="is-f" x="920" y="450" text-anchor="middle">h=58</text>
+<circle class="is-hop" cx="410" cy="292" r="9" fill="var(--accent)"/>
+<text class="is-f" x="80" y="432">volume implies cost; the tallest stage is the transform</text>
+</svg>

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="12" data-bg="var(--ground)" data-specimen="true">
+<title>Terminal — Source, Transform, Store</title>
+<desc>A monospaced terminal view with square corners, three-unit status rails, a blinking block cursor and a green exit strip. No radii, no gradients, no shadow.</desc>
+<defs>
+
+</defs>
+<style>
+svg { --ground:#0B0E12; --panel:#12161C; --ink:#D7E0EA; --muted:#93A1B0; --green:#5FD787; --amber:#E8B84B; --red:#E06C75; --rule:#232A33; }
+  .tm-h { font: 700 34px ui-monospace, Menlo, monospace; fill: var(--green); letter-spacing: 1px; }
+  .tm-t { font: 700 24px ui-monospace, Menlo, monospace; fill: var(--ink); }
+  .tm-s { font: 400 19px ui-monospace, Menlo, monospace; fill: var(--muted); }
+  .tm-f { font: 400 18px ui-monospace, Menlo, monospace; fill: var(--muted); }
+  .tm-b { fill: none; stroke: var(--rule); stroke-width: 1; }
+  .tm-cur { fill: var(--green); animation: tm-cur 1s steps(2, end) infinite; }
+  @keyframes tm-cur { 0%,49% { opacity: 1 } 50%,100% { opacity: 0 } }
+  @media (prefers-reduced-motion: reduce) { .tm-cur { animation: none; opacity: 1 } }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<text class="tm-h" x="80" y="72">$ pipeline --watch</text>
+<rect class="tm-cur" x="452" y="52" width="13" height="24"/>
+<line class="tm-b" x1="80" y1="94" x2="1120" y2="94"/>
+<text class="tm-f" x="80" y="124">3 stages — 0 errors — exit 0</text>
+<rect x="80" y="180" width="300" height="150" fill="var(--panel)"/>
+<rect class="tm-b" x="80" y="180" width="300" height="150"/>
+<rect x="80" y="180" width="3" height="150" fill="var(--green)"/>
+<line class="tm-b" x1="80" y1="222" x2="380" y2="222"/>
+<g data-bg="var(--panel)"><text class="tm-f" x="96" y="210">[1] ok</text></g>
+<text class="tm-f" data-role="metadata" x="96" y="284" fill="var(--muted)">.. read</text>
+<text class="tm-f" data-role="metadata" x="96" y="300" fill="var(--muted)">... map</text>
+<text class="tm-f" data-role="metadata" x="96" y="316" fill="var(--muted)">.... join</text>
+<text class="tm-f" data-role="metadata" x="96" y="332" fill="var(--muted)">..... emit</text>
+<rect x="450" y="180" width="300" height="150" fill="var(--panel)"/>
+<rect class="tm-b" x="450" y="180" width="300" height="150"/>
+<rect x="450" y="180" width="3" height="150" fill="var(--amber)"/>
+<line class="tm-b" x1="450" y1="222" x2="750" y2="222"/>
+<g data-bg="var(--panel)"><text class="tm-f" x="466" y="210">[2] warn</text></g>
+<text class="tm-f" data-role="metadata" x="466" y="284" fill="var(--muted)">.. read</text>
+<text class="tm-f" data-role="metadata" x="466" y="300" fill="var(--muted)">... map</text>
+<text class="tm-f" data-role="metadata" x="466" y="316" fill="var(--muted)">.... join</text>
+<text class="tm-f" data-role="metadata" x="466" y="332" fill="var(--muted)">..... emit</text>
+<rect x="820" y="180" width="300" height="150" fill="var(--panel)"/>
+<rect class="tm-b" x="820" y="180" width="300" height="150"/>
+<rect x="820" y="180" width="3" height="150" fill="var(--green)"/>
+<line class="tm-b" x1="820" y1="222" x2="1120" y2="222"/>
+<g data-bg="var(--panel)"><text class="tm-f" x="836" y="210">[3] ok</text></g>
+<text class="tm-f" data-role="metadata" x="836" y="284" fill="var(--muted)">.. read</text>
+<text class="tm-f" data-role="metadata" x="836" y="300" fill="var(--muted)">... map</text>
+<text class="tm-f" data-role="metadata" x="836" y="316" fill="var(--muted)">.... join</text>
+<text class="tm-f" data-role="metadata" x="836" y="332" fill="var(--muted)">..... emit</text>
+<g data-bg="var(--panel)">
+  <text class="tm-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="tm-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--panel)">
+  <text class="tm-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="tm-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--panel)">
+  <text class="tm-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="tm-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<rect x="380" y="259" width="70" height="3" fill="var(--rule)"/>
+<rect x="440" y="255" width="10" height="11" fill="var(--green)"/>
+<rect x="750" y="259" width="70" height="3" fill="var(--rule)"/>
+<rect x="810" y="255" width="10" height="11" fill="var(--green)"/>
+<rect x="80" y="352" width="106" height="10" fill="var(--rule)"/>
+<rect x="80" y="352" width="26" height="10" fill="var(--green)"/>
+<rect x="210" y="352" width="106" height="10" fill="var(--rule)"/>
+<rect x="210" y="352" width="36" height="10" fill="var(--green)"/>
+<rect x="340" y="352" width="106" height="10" fill="var(--rule)"/>
+<rect x="340" y="352" width="46" height="10" fill="var(--green)"/>
+<rect x="470" y="352" width="106" height="10" fill="var(--rule)"/>
+<rect x="470" y="352" width="56" height="10" fill="var(--green)"/>
+<rect x="600" y="352" width="106" height="10" fill="var(--rule)"/>
+<rect x="600" y="352" width="66" height="10" fill="var(--green)"/>
+<rect x="730" y="352" width="106" height="10" fill="var(--rule)"/>
+<rect x="730" y="352" width="76" height="10" fill="var(--green)"/>
+<rect x="860" y="352" width="106" height="10" fill="var(--rule)"/>
+<rect x="860" y="352" width="86" height="10" fill="var(--green)"/>
+<rect x="990" y="352" width="106" height="10" fill="var(--rule)"/>
+<rect x="990" y="352" width="96" height="10" fill="var(--green)"/>
+<line class="tm-b" x1="80" y1="376" x2="1120" y2="376"/>
+<text class="tm-f" x="80" y="404">== equal    != changed    -&gt; flows to</text>
+<rect x="1000" y="386" width="120" height="26" fill="var(--green)"/>
+<g data-bg="var(--green)"><text class="tm-f" x="1060" y="405" text-anchor="middle" fill="#0B0E12">exit 0</text></g>
+</svg>

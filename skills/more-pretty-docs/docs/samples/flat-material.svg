@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="12" data-bg="var(--ground)" data-specimen="true">
+<title>Flat material — Source, Transform, Store</title>
+<desc>Flat cards on a light ground at two elevations, a coloured app bar, per-card accent rules and progress tracks, with a ripple expanding from the middle of the flow.</desc>
+<defs>
+  <filter id="fm-e1" data-style="flat-material" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity=".24"/>
+  </filter>
+  <filter id="fm-e4" data-style="flat-material" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#000000" flood-opacity=".26"/>
+  </filter>
+</defs>
+<style>
+svg { --ground:#F5F5F5; --surface:#FFFFFF; --ink:#1C1C1C; --muted:#4A4A4A; --primary:#1565C0; --primarydk:#0D47A1; --amber:#8A6100; --teal:#00695C; --ripple:#90CAF9; }
+  .fm-h { font: 500 38px Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--ink); }
+  .fm-t { font: 500 25px Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--ink); }
+  .fm-s { font: 400 19px Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
+  .fm-f { font: 400 18px Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
+  .fm-bar { font: 500 20px Roboto, Arial, sans-serif; fill: #FFFFFF; }
+  .fm-rip { fill: var(--ripple); transform-origin: 600px 255px;
+            animation: fm-rip 4s ease-out infinite; }
+  @keyframes fm-rip { 0% { transform: scale(0); opacity: .55 } 100% { transform: scale(1); opacity: 0 } }
+  @media (prefers-reduced-motion: reduce) { .fm-rip { animation: none; opacity: 0 } }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<g filter="url(#fm-e4)"><rect x="0" y="0" width="1200" height="88" fill="var(--primary)"/></g>
+<g data-bg="var(--primary)"><text class="fm-bar" x="40" y="54">Data pipeline</text>
+<text class="fm-bar" x="1160" y="54" text-anchor="end">v4</text></g>
+<g filter="url(#fm-e1)"><rect x="80" y="180" width="300" height="150" rx="4" fill="var(--surface)"/></g>
+<rect x="80" y="180" width="300" height="6" fill="var(--primarydk)"/>
+<circle cx="114" cy="222" r="16" fill="var(--primarydk)"/>
+<g data-bg="var(--primarydk)"><text class="fm-f" x="114" y="228" text-anchor="middle" fill="#FFFFFF">1</text></g>
+<rect x="96" y="292" width="268" height="4" rx="2" fill="var(--ground)"/>
+<rect x="96" y="292" width="89" height="4" rx="2" fill="var(--primarydk)"/>
+<text class="fm-f" x="96" y="316">33%</text>
+<g filter="url(#fm-e1)"><rect x="450" y="180" width="300" height="150" rx="4" fill="var(--surface)"/></g>
+<rect x="450" y="180" width="300" height="6" fill="var(--amber)"/>
+<circle cx="484" cy="222" r="16" fill="var(--amber)"/>
+<g data-bg="var(--amber)"><text class="fm-f" x="484" y="228" text-anchor="middle" fill="#FFFFFF">2</text></g>
+<rect x="466" y="292" width="268" height="4" rx="2" fill="var(--ground)"/>
+<rect x="466" y="292" width="178" height="4" rx="2" fill="var(--amber)"/>
+<text class="fm-f" x="466" y="316">66%</text>
+<g filter="url(#fm-e1)"><rect x="820" y="180" width="300" height="150" rx="4" fill="var(--surface)"/></g>
+<rect x="820" y="180" width="300" height="6" fill="var(--teal)"/>
+<circle cx="854" cy="222" r="16" fill="var(--teal)"/>
+<g data-bg="var(--teal)"><text class="fm-f" x="854" y="228" text-anchor="middle" fill="#FFFFFF">3</text></g>
+<rect x="836" y="292" width="268" height="4" rx="2" fill="var(--ground)"/>
+<rect x="836" y="292" width="268" height="4" rx="2" fill="var(--teal)"/>
+<text class="fm-f" x="836" y="316">99%</text>
+<g data-bg="var(--surface)">
+  <text class="fm-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="fm-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--surface)">
+  <text class="fm-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="fm-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--surface)">
+  <text class="fm-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="fm-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<rect x="380" y="258" width="70" height="6" rx="3" fill="var(--primary)"/>
+<rect x="750" y="258" width="70" height="6" rx="3" fill="var(--primary)"/>
+<circle class="fm-rip" cx="600" cy="255" r="70"/>
+<g filter="url(#fm-e4)"><circle cx="1092" cy="388" r="34" fill="var(--amber)"/></g>
+<g data-bg="var(--amber)"><text class="fm-bar" x="1092" y="396" text-anchor="middle" fill="#FFFFFF">+</text></g>
+<text class="fm-f" x="80" y="404">elevation 1 for cards, elevation 4 for the bar</text>
+</svg>

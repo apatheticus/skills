@@ -1,6 +1,9 @@
 # schematic
 
 **Primary axis:** composition (the notation) · **Aliases:** `technical-drawing`,
+
+<img src="../../docs/samples/schematic.svg" alt="The schematic specimen — the Source, Transform, Store diagram rendered in this style at full width." width="820">
+
 `circuit`, `netlist`
 
 ## Intent

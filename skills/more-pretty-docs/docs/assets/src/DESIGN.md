@@ -115,12 +115,69 @@ content, not the chrome. They are declared here as named roles so nothing enters
 visual as an untraceable hex, and they are scoped to that one asset. No other visual
 in this repo uses them.
 
-The sheet is also the one asset in this repo gated **without** `--style`. Every
-structural, seam, legibility, contrast, palette and byte gate still applies to it;
-only the `bento-grid` *form* invariants are lifted, because a plate showing
-skeuomorphic bevels and neo-brutalist zero-radius blocks cannot honour one radius and
-one material. Its own frame, gutters and labels are still bento. This exemption covers
-exactly one file and is stated in the run report.
+The sheet used to be the one asset gated **without** `--style`, on the argument that
+a plate showing skeuomorphic bevels and neo-brutalist zero-radius blocks cannot
+honour one radius and one material. That was true about *form* and disastrous about
+*fidelity*: with no style resolved, the sheet inherited the global `filter_depth: 1`
+and `check_style` skipped it entirely, so the one asset depicting all 31 idioms was
+the single file exempt from every fidelity gate. Every material on it was faked —
+grain through a mask, roughness wobbled into path coordinates by hand, impasto
+relief *suggested* with gradients. It gated at zero errors and looked it.
+
+It is now a **declared style**, `catalog-sheet`, with its own entry in
+`scripts/styles.json`: `filter_depth: 5`, `bytes_fail: 300 KB`, `min_elements: 620`.
+An honest declaration beats a prose exemption — the numbers are in the catalog where
+the checker reads them, not in a paragraph here.
+
+Two things follow from that:
+
+- **Each tile is the style's own specimen, scaled.** `docs/samples/<slug>.svg` is
+  built and gated at 1200 × 460 under `--style <slug>`, then composed into a
+  550 × 211 cell. The sheet therefore cannot be less faithful than the catalog it
+  indexes, and it cannot drift from it either.
+- **Filters carry `data-style="<slug>"`.** Each tile's chain is measured against the
+  floor of the style it depicts rather than the file-wide ceiling, which is what
+  lets `oil-impasto` keep its five-primitive lit relief on a sheet that also holds
+  `swiss-minimal`.
+
+Token names are namespaced per specimen (`--oil-impasto-ground`). `var()` inside a
+`<defs>` filter resolves against the `<defs>` element, not the tile referencing it,
+so 31 sets of `--ground` and `--ink` on one root would collide. Each tile group also
+carries `isolation: isolate`, or a specimen's `mix-blend-mode` overlay composites
+against the whole sheet, and its own `data-bg`, or its captions are measured for
+contrast against the sheet's dark background instead of the surface they sit on.
+
+The sheet's height is the remaining stated exception: two columns of 16 rows runs
+**1200 × 4458**, well past the 320–760 range in `viz-production.md`. That is the cost
+of showing every idiom at a scale where its material is still visible, and the sheet
+is an index meant to be scrolled.
+
+**Accepted graphic-contrast warnings.** The sheet gates at **0 errors**, and prints
+`WARN`s of the form *"graphic contrast N:1 on &lt;shape&gt; stroke … is under 3:1 —
+fine for decoration, not for a load-bearing border"*. Identical warnings are
+aggregated with an `(xN)` count, so a hairline grid applied thirty-one times reads as
+one finding rather than thirty-one.
+
+Every one of them is correct, and every one is a mark whose subject *is* faintness:
+the HUD's `#0b2a38` grid on `#04121a`, a dark editor's pane hairline, the pencil pad's
+pale red margin rule, wood grain figured into the timber, a skeuomorphic bevel
+highlight. Raising any of them to 3:1 would misrepresent the style. None is a border
+anything depends on.
+
+Two floors are **not** softened anywhere on the sheet:
+
+- **No text is below 4.5:1.** Every specimen that carries a label was recoloured until
+  it cleared the floor — `wood-grain` reverses to `#F4ECE0` on the plank (4.90:1) and
+  sits its plate numbers on a sanded field, `oil-impasto` dropped its ochre body a
+  step, `isometric-3d` gained a dedicated on-face ink.
+- **The one exemption is WCAG 1.4.3's**, for purely decorative text. `digital-rain`'s
+  280 falling glyphs are texture, not reading matter; they are marked
+  `aria-hidden="true"`, and the checker reports how many it exempted so the exemption
+  cannot be used quietly to launder an unreadable label.
+
+The `sw-*` roles below are retained for `hero.svg` and `lazy-rerender.svg`. The
+contact sheet no longer draws from them: each tile now carries its specimen's own
+palette, namespaced per style.
 
 | Role | Hex | Notes |
 | --- | --- | --- |
@@ -153,6 +210,42 @@ exactly one file and is stated in the run report.
 | sw-blue2        | `#1f6feb` | schematic data class |
 | sw-lightgray    | `#f4f5f7` | bento ground |
 | sw-indigo       | `#3b5bdb` | bento focal cell |
+| sw-steel        | `#7e888f` | brushed-metal ground |
+| sw-steelface    | `#c3cbd2` | brushed-metal plate face |
+| sw-steeldark    | `#3c4349` | engraved cut, plate edge |
+| sw-vellum       | `#e5d8b8` | codex aged rag |
+| sw-irongall     | `#5a4632` | codex ink |
+| sw-conorange    | `#ff9c00` | console-elbow frame |
+| sw-conrose      | `#cc6666` | console-elbow block |
+| sw-conperi      | `#9999ff` | console-elbow block |
+| sw-rain         | `#00ff41` | digital-rain phosphor |
+| sw-rainhead     | `#9cffb0` | digital-rain head glyph |
+| sw-graphite     | `#3a414d` | draughtsman and pencil lead |
+| sw-void         | `#01070c` | holographic and hud ground |
+| sw-holo         | `#4fd8ff` | holographic body |
+| sw-holoedge     | `#bef3ff` | holographic bright edge |
+| sw-hudcyan      | `#00e5ff` | hud instrument hue |
+| sw-idepane      | `#161b22` | ide-dark pane surface |
+| sw-idediv       | `#30363d` | ide-dark hairline divider |
+| sw-idblue       | `#58a6ff` | ide-dark identifier — 6.85:1 on the pane, where `sw-blue2` is only 3.73:1 |
+| sw-isotop       | `#6f67d6` | isometric top face |
+| sw-isolft       | `#5b54b0` | isometric left face |
+| sw-isorgt       | `#474189` | isometric right face |
+| sw-wiregrey     | `#4a4a4a` | lofi-wireframe line work |
+| sw-wireghost    | `#9a9a9a` | lofi-wireframe placeholder — shapes only, never text |
+| sw-oilground    | `#1e1810` | oil-impasto ground |
+| sw-oilblue      | `#2f4b8f` | oil-impasto pigment |
+| sw-ruled        | `#afc6db` | lined-paper printed rules |
+| sw-margin       | `#e3a6a6` | lined-paper margin line |
+| sw-roughblue    | `#1971c2` | rough-sketch stroke |
+| sw-roughfill    | `#a5d8ff` | rough-sketch hachure |
+| sw-wcblue       | `#5a6ba8` | watercolour wash |
+| sw-wcrose       | `#c4738c` | watercolour wash |
+| sw-wcochre      | `#d2a24c` | watercolour wash |
+| sw-timber       | `#8a5c31` | wood-grain ground |
+| sw-timberlt     | `#a97438` | wood-grain figure |
+| sw-timberdk     | `#3b2410` | wood-grain burn |
+| sw-timbersand   | `#c9a678` | wood-grain sanded label field — `#3b2410` on it is 6.37:1, on raw timber only 2.53:1 |
 
 ## Visual inventory
 
@@ -160,4 +253,4 @@ exactly one file and is stated in the run report.
 | --- | --- | --- | --- | --- |
 | hero | README.md | a hand-authored SVG passes the bundled checker and is committed as-is — no render step in the path | animated-hero | SKILL.md preflight + phase 6; reference/viz-production.md; scripts/svg_check.py |
 | lazy-rerender | README.md | the facts/src/design hash triad decides RE-RENDER vs REUSE; a prose edit re-authors nothing | animated-flagship | reference/embedding.md → Lazy re-render decision |
-| styles | README.md | the 14 catalog styles, each rendered in its own idiom | animated-flagship | reference/styles.md; reference/styles/*.md; scripts/styles.json |
+| styles | README.md | the 31 catalog styles in alphabetical order, each rendered in its own idiom | animated-flagship | reference/styles.md; reference/styles/*.md; scripts/styles.json |

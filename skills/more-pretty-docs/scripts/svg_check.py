@@ -14,6 +14,10 @@ Deterministic, python3 stdlib only. Checks, in order:
   system      every colour traces to a DESIGN.md palette role or a declared
               custom property; text contrast >= 4.5:1 against its data-bg role
   style       the resolved style's forbid / require invariants and relaxed floors
+  fidelity    the style's *minimum* — required primitives, minimum filter-chain
+              depth, minimum drawn geometry. Every other gate here is a ceiling
+              or a legibility floor, so a flat render used to pass clean; this is
+              the half that asks whether the file looks like what it claims
   size        warn at 60 KB, fail over 150 KB
 
 Usage:
@@ -55,6 +59,12 @@ FILTER_PRIMITIVES = {
     "feOffset", "feSpecularLighting", "feTile", "feTurbulence",
 }
 COLOUR_PROPS = {"fill", "stroke", "stop-color", "flood-color", "color"}
+# Elements whose rx/ry are geometry, not corner radius — never a radius rule.
+NON_RECT_SHAPES = {"ellipse", "circle", "radialGradient"}
+# What counts as drawn geometry for the density floor. Structural wrappers (<g>,
+# <defs>, <mask>) are excluded: nesting groups is not draughtsmanship.
+DRAWN_TAGS = {"rect", "circle", "ellipse", "line", "path", "polyline", "polygon",
+              "text", "use", "image"}
 EPS = 1e-6
 
 
@@ -62,6 +72,34 @@ EPS = 1e-6
 
 def local(tag: str) -> str:
     return tag.rsplit("}", 1)[-1] if "}" in tag else tag
+
+
+def decorative(el: ET.Element, parents: dict) -> bool:
+    """True when the element, or any ancestor, is aria-hidden."""
+    node = el
+    seen = 0
+    while node is not None and seen < 64:
+        if (node.get("aria-hidden") or "").strip().lower() == "true":
+            return True
+        node = parents.get(node)
+        seen += 1
+    return False
+
+
+def chain_depth(filt: ET.Element) -> int:
+    """Primitives that are direct children of one <filter> — the chain length."""
+    return sum(1 for c in filt if local(c.tag) in FILTER_PRIMITIVES)
+
+
+def primitives_in(filters: list[ET.Element]) -> set[str]:
+    """Every filter primitive used anywhere in `filters`, by local tag name."""
+    found = set()
+    for filt in filters:
+        for child in filt:
+            name = local(child.tag)
+            if name in FILTER_PRIMITIVES:
+                found.add(name)
+    return found
 
 
 def parse_time(value: str) -> float | None:
@@ -153,6 +191,26 @@ def split_blocks(css: str) -> list[tuple[str, str]]:
     return out
 
 
+FONT_SIZE_TOKEN = re.compile(r"^\d*\.?\d+(?:px|pt|pc|em|rem|ex|ch|vw|vh|%)(?:/\S+)?$", re.I)
+
+
+def expand_font_shorthand(value: str) -> dict[str, str]:
+    """`font: 600 14px/1.4 Inter, sans-serif` -> font-size + font-family.
+
+    Hand-authored SVG uses the shorthand constantly, and the longhand-only
+    reader silently skipped every one of them: `mono_only` passed vacuously and
+    no FONT_FLOORS applied. Only the two properties this checker actually reads
+    are recovered; a system keyword (`font: menu`) or any value with no
+    unit-bearing size token expands to nothing.
+    """
+    parts = value.split()
+    for i, tok in enumerate(parts):
+        if FONT_SIZE_TOKEN.match(tok) and i + 1 < len(parts):
+            return {"font-size": tok.split("/", 1)[0],
+                    "font-family": " ".join(parts[i + 1:])}
+    return {}
+
+
 def parse_decls(body: str) -> dict[str, str]:
     decls: dict[str, str] = {}
     for part in body.split(";"):
@@ -161,6 +219,10 @@ def parse_decls(body: str) -> dict[str, str]:
         prop, _, value = part.partition(":")
         prop, value = prop.strip().lower(), value.strip()
         if prop and value:
+            # The shorthand lands first so an explicit longhand after it wins,
+            # which is what the cascade does.
+            if prop == "font":
+                decls.update(expand_font_shorthand(value))
             decls[prop] = value
     return decls
 
@@ -437,23 +499,43 @@ def check_file(path: Path, catalog: dict, slug: str | None,
     # ---- colours, legibility, contrast
     check_paint(root, parents, sheet, palette, limits, catalog, style, label, f)
 
-    # ---- style invariants
-    if style:
-        check_style(root, by_tag, sheet, style, slug or "", label, f)
+    # ---- style invariants and the fidelity floor
+    #
+    # This runs for every file, styled or not. It used to be skipped when no style
+    # resolved, which meant the multi-style contact sheet — the one asset that
+    # depicts all 31 idioms — was the single file exempt from every fidelity gate.
+    check_style(root, by_tag, sheet, style or {}, slug or "", label, f)
+    check_attributed(by_tag, catalog, label, f)
 
     # ---- filter depth
+    #
+    # A multi-style file attributes each filter to the style it depicts with
+    # data-style, and that filter is then measured against its own style's ceiling
+    # rather than the file-wide one. Without attribution a contact sheet inherits
+    # the global default and has to fake every material it shows.
+    styles_cat = catalog.get("styles", {})
     depth_limit = int(limits.get("filter_depth", 1))
     default_depth = int(catalog.get("defaults", {}).get("filter_depth", 1))
     for filt in by_tag.get("filter", []):
-        prims = [c for c in filt if local(c.tag) in FILTER_PRIMITIVES]
+        prims = chain_depth(filt)
         fid = filt.get("id", "?")
-        if len(prims) > depth_limit:
-            f.error(label, f"filter #{fid} chains {len(prims)} primitives, limit is "
-                           f"{depth_limit}")
-        elif len(prims) > default_depth:
-            f.softened(label, f"filter-depth@{depth_limit}",
-                       f"filter #{fid} chains {len(prims)} primitives — allowed by "
-                       f"style floor {depth_limit}")
+        owner = (filt.get("data-style") or "").strip().lower()
+        own_limit, whose = depth_limit, ""
+        if owner:
+            spec = styles_cat.get(owner)
+            if spec is None:
+                f.error(label, f"filter #{fid} declares data-style='{owner}', which is "
+                               "not a catalog style")
+            else:
+                own_limit = int(spec.get("relax", {}).get("filter_depth", default_depth))
+                whose = f" (attributed to '{owner}')"
+        if prims > own_limit:
+            f.error(label, f"filter #{fid} chains {prims} primitives, limit is "
+                           f"{own_limit}{whose}")
+        elif prims > default_depth:
+            f.softened(label, f"filter-depth@{own_limit}",
+                       f"filter #{fid} chains {prims} primitives — allowed by "
+                       f"floor {own_limit}{whose}")
 
     # ---- size
     size = os.path.getsize(path)
@@ -467,6 +549,19 @@ def check_file(path: Path, catalog: dict, slug: str | None,
                    f"but within this style's {fail / 1024:.0f} KB floor")
     elif size > warn_at:
         f.warn(label, f"{size / 1024:.1f} KB is dense (warn at {warn_at / 1024:.0f} KB)")
+
+    # ---- what this file achieved, not only what it avoided
+    #
+    # Every other line here reports a limit respected. Reporting fidelity
+    # positively is what makes a flat render visible in a run report: it passed,
+    # and it passed at depth 1 with 40 elements, which is the tell.
+    filts = by_tag.get("filter", [])
+    deepest = max((chain_depth(x) for x in filts), default=0)
+    drawn = sum(len(by_tag.get(t, [])) for t in DRAWN_TAGS)
+    used = sorted(primitives_in(filts))
+    f.note(label, f"fidelity: deepest chain {deepest}, {len(filts)} filter(s), "
+                  f"{drawn} drawn elements"
+                  + (f", primitives {', '.join(used)}" if used else ", no filters"))
 
 
 def font_role(el: ET.Element) -> str:
@@ -486,12 +581,26 @@ def check_paint(root, parents, sheet: Stylesheet, palette, limits, catalog,
     ui_floor = float(limits.get("contrast_ui", 3.0))
 
     seen_off_system: set[str] = set()
+    decor_text = [0]   # aria-hidden text exempted from the contrast floor
 
+    # A style specimen is not governed by the repo's design system — that is the
+    # point of one. Its palette comes from the style spec, so its tints are on-system
+    # by definition and reporting each as a deviation buries the real findings. The
+    # off-system *error* below still fires on any undeclared raw hex, and contrast is
+    # checked exactly the same way.
+    specimen = (root.get("data-specimen") or "").strip().lower() == "true"
+    off_palette = []
     for name, value in sheet.tokens.items():
         h = norm_hex(sheet.resolve(value))
         if h and palette and h not in palette_hexes:
-            f.warn(label, f"{name}: {h} is a derived tint, not a DESIGN.md palette role "
-                          "— note it in DESIGN.md if it is load-bearing")
+            if specimen:
+                off_palette.append(name)
+            else:
+                f.warn(label, f"{name}: {h} is a derived tint, not a DESIGN.md palette "
+                              "role — note it in DESIGN.md if it is load-bearing")
+    if off_palette:
+        f.note(label, f"specimen palette: {len(off_palette)} token(s) from the style "
+                      "spec rather than DESIGN.md — expected for a specimen")
 
     def paint_of(el, inherited: dict) -> dict:
         classes = (el.get("class") or "").split()
@@ -564,7 +673,15 @@ def check_paint(root, parents, sheet: Stylesheet, palette, limits, catalog,
                         pass
                 ratio = contrast(composite(fg, bg, alpha), bg)
                 snippet = (el.text or "").strip()[:24]
-                if ratio < text_floor:
+                # WCAG 1.4.3 exempts purely decorative text from the contrast
+                # floor. aria-hidden is the author asserting exactly that, and it
+                # is the only signal that a glyph is texture rather than reading
+                # matter — a rain column or an engraving underlight is not text a
+                # person is meant to read. Counted below so the exemption cannot
+                # be used quietly to launder unreadable labels.
+                if decorative(el, parents):
+                    decor_text[0] += 1
+                elif ratio < text_floor:
                     f.error(label, f"text contrast {ratio:.2f}:1 is below the "
                                    f"{text_floor:g}:1 floor — \"{snippet}\"")
                 elif ratio < text_default:
@@ -581,14 +698,66 @@ def check_paint(root, parents, sheet: Stylesheet, palette, limits, catalog,
             if stroke and bg and stroke != bg:
                 ratio = contrast(stroke, bg)
                 if ratio < ui_floor:
-                    f.warn(label, f"graphic contrast {ratio:.2f}:1 on <{tag}> stroke is "
-                                  f"under {ui_floor:g}:1 — fine for decoration, not for a "
-                                  "load-bearing border")
+                    # Counted, not repeated. A hairline grid is one decision applied
+                    # forty times, and forty identical lines bury every other finding.
+                    key = (tag, stroke, bg, round(ratio, 2))
+                    low_ui[key] = low_ui.get(key, 0) + 1
 
         for child in el:
             walk(child, ctx)
 
+    low_ui: dict[tuple, int] = {}
     walk(root, {"data-bg": root.get("data-bg", "background")})
+    if decor_text[0]:
+        f.note(label, f"{decor_text[0]} aria-hidden text node(s) exempted from the "
+                      "contrast floor as decoration (WCAG 1.4.3) — they must carry "
+                      "no meaning")
+    for (tag, stroke, bg, ratio), n in sorted(low_ui.items(), key=lambda kv: kv[0][3]):
+        times = "" if n == 1 else f" (x{n})"
+        f.warn(label, f"graphic contrast {ratio:.2f}:1 on <{tag}> stroke {stroke} over "
+                      f"{bg} is under {ui_floor:g}:1{times} — fine for decoration, not "
+                      "for a load-bearing border")
+
+
+def check_attributed(by_tag, catalog: dict, label: str, f: Findings) -> None:
+    """Hold each attributed group in a multi-style file to its own style's floor.
+
+    The contact sheet resolves to one style (`catalog-sheet`), so a file-wide
+    fidelity floor says nothing about whether the wood-grain tile actually has
+    wood grain. Filters tagged `data-style="wood-grain"` are measured against
+    wood-grain's own requirements instead.
+
+    Only the filter gates apply per group. `min_elements` is a whole-canvas
+    density floor and does not scale down to a tile meaningfully, so it stays a
+    file-scope check.
+    """
+    styles_cat = catalog.get("styles", {})
+    groups: dict[str, list] = {}
+    for filt in by_tag.get("filter", []):
+        owner = (filt.get("data-style") or "").strip().lower()
+        if owner:
+            groups.setdefault(owner, []).append(filt)
+
+    for owner, filts in sorted(groups.items()):
+        spec = styles_cat.get(owner)
+        if spec is None:
+            continue  # already reported as an unknown slug by the depth pass
+        require = spec.get("require", {})
+
+        floor = require.get("min_filter_depth")
+        if floor:
+            deepest = max((chain_depth(x) for x in filts), default=0)
+            if deepest < int(floor):
+                f.error(label, f"the '{owner}' group's deepest chain is {deepest}, "
+                               f"below that style's floor of {floor}")
+
+        wanted_all = require.get("require_filter_all")
+        if wanted_all:
+            present = primitives_in(filts)
+            missing = [w for w in wanted_all if w not in present]
+            if missing:
+                f.error(label, f"the '{owner}' group is missing "
+                               f"{', '.join(missing)}, which that style is built from")
 
 
 def check_style(root, by_tag, sheet: Stylesheet, style: dict, slug: str,
@@ -599,10 +768,52 @@ def check_style(root, by_tag, sheet: Stylesheet, style: dict, slug: str,
 
     require = style.get("require", {})
 
-    wanted = require.get("require_filter")
-    if wanted and not any(w in by_tag for w in wanted):
-        f.error(label, f"the '{slug}' style requires one of {', '.join(wanted)} "
+    # `require_filter` is any-of: a menu, satisfied by one entry. That is the right
+    # shape for "blur OR drop-shadow", and the wrong shape for a material built from
+    # a specific chain — one bare feTurbulence used to satisfy wood-grain. Styles
+    # whose look IS the chain use require_filter_all instead.
+    wanted_any = require.get("require_filter_any") or require.get("require_filter")
+    if wanted_any and not any(w in by_tag for w in wanted_any):
+        f.error(label, f"the '{slug}' style requires one of {', '.join(wanted_any)} "
                        "and none is present")
+
+    wanted_all = require.get("require_filter_all")
+    if wanted_all:
+        missing = [w for w in wanted_all if w not in by_tag]
+        if missing:
+            f.error(label,
+                    f"the '{slug}' style is built from {', '.join(wanted_all)} — "
+                    f"{', '.join(missing)} is missing. These primitives are the "
+                    "material itself, not a suggestion of it")
+
+    floor_depth = require.get("min_filter_depth")
+    if floor_depth:
+        deepest = max((chain_depth(x) for x in by_tag.get("filter", [])), default=0)
+        if deepest < int(floor_depth):
+            f.error(label,
+                    f"deepest filter chain is {deepest}; the '{slug}' style needs at "
+                    f"least {floor_depth} chained primitives. A single primitive "
+                    "flattens this material into a gradient")
+
+    # Geometry density is a property of what a diagram *says*, not of its style: a
+    # README flow with four boxes is correct at 23 elements, and forcing it to 76
+    # would mean padding it with decoration. So this floor binds only on specimens —
+    # the catalog samples and contact sheet, whose whole job is to show the style at
+    # full strength. Ordinary visuals get the number reported, not enforced.
+    floor_els = require.get("min_elements")
+    if floor_els:
+        drawn = sum(len(by_tag.get(t, [])) for t in DRAWN_TAGS)
+        is_specimen = (root.get("data-specimen") or "").strip().lower() == "true"
+        if drawn < int(floor_els):
+            if is_specimen:
+                f.error(label,
+                        f"{drawn} drawn elements is below the '{slug}' specimen floor "
+                        f"of {floor_els} — a specimen has to show the style at full "
+                        "strength, and this little geometry cannot")
+            else:
+                f.note(label,
+                       f"{drawn} drawn elements (the '{slug}' specimen floor is "
+                       f"{floor_els}; not enforced outside specimens)")
 
     if require.get("mono_only"):
         families = [sheet.resolve(v) for sel, d in sheet.rules
@@ -618,8 +829,11 @@ def check_style(root, by_tag, sheet: Stylesheet, style: dict, slug: str,
     # SVG clamps rx to half the side, so a min_rx floor is unsatisfiable on a shape
     # narrower than 2*floor — those are skipped rather than failed. A status marker
     # is allowed to be a small square; it just can't be as round as a cell.
+    # Only <rect> has corner radii. On <ellipse>, <circle> and the radial
+    # gradient elements rx/ry are the geometry itself, and reading them as
+    # corners failed every rounded style that drew an ellipse.
     radii: list[tuple[float, float | None]] = []
-    for el in root.iter():
+    for el in by_tag.get("rect", []):
         side: float | None = None
         dims = []
         for key in ("width", "height"):
@@ -637,6 +851,8 @@ def check_style(root, by_tag, sheet: Stylesheet, style: dict, slug: str,
                 if m:
                     radii.append((float(m.group(1)), side))
     for sel, decls in sheet.rules:
+        if sel.split(":")[0].split(".")[0].split("[")[0].strip() in NON_RECT_SHAPES:
+            continue
         for key in ("rx", "ry", "border-radius"):
             if key in decls:
                 m = re.match(r"\s*(\d*\.?\d+)", sheet.resolve(decls[key]))

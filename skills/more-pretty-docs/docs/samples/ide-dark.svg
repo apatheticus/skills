@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="12" data-bg="var(--ground)" data-specimen="true">
+<title>IDE dark — Source, Transform, Store</title>
+<desc>A dark editor: tab strip, line-number gutter, rounded panes with syntax-coloured headers, a blinking caret and a status bar. Authentic dark themes carry no pane borders.</desc>
+<defs>
+
+</defs>
+<style>
+svg { --ground:#0D1117; --pane:#161B22; --gutter:#10151C; --ink:#C9D1D9; --muted:#8B949E; --blue:#58A6FF; --purple:#BC8CFF; --green:#7EE787; --orange:#FFA657; --sel:#1F2937; }
+  .id-h { font: 600 32px ui-monospace, Menlo, monospace; fill: var(--ink); }
+  .id-t { font: 600 24px ui-monospace, Menlo, monospace; fill: var(--ink); }
+  .id-s { font: 400 19px ui-monospace, Menlo, monospace; fill: var(--muted); }
+  .id-f { font: 400 18px ui-monospace, Menlo, monospace; fill: var(--muted); }
+  .id-cur { fill: var(--blue); animation: id-cur 1.5s steps(2, end) infinite; }
+  @keyframes id-cur { 0%,49% { opacity: 1 } 50%,100% { opacity: 0 } }
+  @media (prefers-reduced-motion: reduce) { .id-cur { animation: none; opacity: 1 } }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<rect x="0" y="0" width="1200" height="46" fill="var(--pane)" rx="6"/>
+<rect x="20" y="8" width="170" height="38" rx="6" fill="var(--pane)"/>
+<g data-bg="var(--pane)"><text class="id-f" x="36" y="33">source.ts</text></g>
+<rect x="200" y="8" width="170" height="38" rx="6" fill="var(--ground)"/>
+<g data-bg="var(--ground)"><text class="id-f" x="216" y="33">transform.ts</text></g>
+<rect x="380" y="8" width="170" height="38" rx="6" fill="var(--pane)"/>
+<g data-bg="var(--pane)"><text class="id-f" x="396" y="33">store.ts</text></g>
+<rect x="0" y="60" width="52" height="374" fill="var(--gutter)" rx="6"/>
+<text class="id-f" data-role="metadata" x="38" y="92" text-anchor="end">1</text>
+<text class="id-f" data-role="metadata" x="38" y="124" text-anchor="end">2</text>
+<text class="id-f" data-role="metadata" x="38" y="156" text-anchor="end">3</text>
+<text class="id-f" data-role="metadata" x="38" y="188" text-anchor="end">4</text>
+<text class="id-f" data-role="metadata" x="38" y="220" text-anchor="end">5</text>
+<text class="id-f" data-role="metadata" x="38" y="252" text-anchor="end">6</text>
+<text class="id-f" data-role="metadata" x="38" y="284" text-anchor="end">7</text>
+<text class="id-f" data-role="metadata" x="38" y="316" text-anchor="end">8</text>
+<text class="id-f" data-role="metadata" x="38" y="348" text-anchor="end">9</text>
+<text class="id-f" data-role="metadata" x="38" y="380" text-anchor="end">10</text>
+<text class="id-f" data-role="metadata" x="38" y="412" text-anchor="end">11</text>
+<text class="id-h" x="80" y="96">const flow = [</text>
+<rect class="id-cur" x="326" y="74" width="12" height="26"/>
+<rect x="80" y="180" width="300" height="150" rx="8" fill="var(--pane)"/>
+<rect x="80" y="180" width="300" height="30" rx="6" fill="var(--sel)"/>
+<g data-bg="var(--sel)"><text class="id-f" x="94" y="202" fill="var(--blue)">1. stage</text></g>
+<rect x="94" y="292" width="210" height="6" rx="3" fill="var(--blue)" opacity=".45"/>
+<rect x="94" y="306" width="160" height="6" rx="3" fill="var(--muted)" opacity=".35"/>
+<circle cx="356" cy="195" r="6" fill="var(--blue)"/>
+<rect x="450" y="180" width="300" height="150" rx="8" fill="var(--pane)"/>
+<rect x="450" y="180" width="300" height="30" rx="6" fill="var(--sel)"/>
+<g data-bg="var(--sel)"><text class="id-f" x="464" y="202" fill="var(--purple)">2. stage</text></g>
+<rect x="464" y="292" width="210" height="6" rx="3" fill="var(--purple)" opacity=".45"/>
+<rect x="464" y="306" width="160" height="6" rx="3" fill="var(--muted)" opacity=".35"/>
+<circle cx="726" cy="195" r="6" fill="var(--purple)"/>
+<rect x="820" y="180" width="300" height="150" rx="8" fill="var(--pane)"/>
+<rect x="820" y="180" width="300" height="30" rx="6" fill="var(--sel)"/>
+<g data-bg="var(--sel)"><text class="id-f" x="834" y="202" fill="var(--green)">3. stage</text></g>
+<rect x="834" y="292" width="210" height="6" rx="3" fill="var(--green)" opacity=".45"/>
+<rect x="834" y="306" width="160" height="6" rx="3" fill="var(--muted)" opacity=".35"/>
+<circle cx="1096" cy="195" r="6" fill="var(--green)"/>
+<g data-bg="var(--pane)">
+  <text class="id-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="id-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--pane)">
+  <text class="id-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="id-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--pane)">
+  <text class="id-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="id-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<rect x="380" y="258" width="70" height="7" rx="3.5" fill="var(--blue)" opacity=".7"/>
+<rect x="750" y="258" width="70" height="7" rx="3.5" fill="var(--blue)" opacity=".7"/>
+<rect x="0" y="410" width="1200" height="50" fill="var(--pane)" rx="6"/>
+<g data-bg="var(--pane)"><text class="id-f" x="80" y="441">main*  0 problems  Prettier</text>
+<text class="id-f" x="1160" y="441" text-anchor="end" fill="var(--green)">TypeScript 5.6</text></g>
+<rect x="620" y="428" width="40" height="14" rx="7" fill="var(--sel)"/>
+<rect x="674" y="428" width="40" height="14" rx="7" fill="var(--sel)"/>
+<rect x="728" y="428" width="40" height="14" rx="7" fill="var(--sel)"/>
+<rect x="782" y="428" width="40" height="14" rx="7" fill="var(--sel)"/>
+<rect x="836" y="428" width="40" height="14" rx="7" fill="var(--sel)"/>
+<rect x="890" y="428" width="40" height="14" rx="7" fill="var(--sel)"/>
+<rect x="1150" y="70" width="16" height="7" rx="3" fill="var(--sel)"/>
+<rect x="1150" y="108" width="24" height="7" rx="3" fill="var(--sel)"/>
+<rect x="1150" y="146" width="32" height="7" rx="3" fill="var(--sel)"/>
+<rect x="1150" y="184" width="40" height="7" rx="3" fill="var(--sel)"/>
+<rect x="1150" y="222" width="16" height="7" rx="3" fill="var(--sel)"/>
+<rect x="1150" y="260" width="24" height="7" rx="3" fill="var(--sel)"/>
+<rect x="1150" y="298" width="32" height="7" rx="3" fill="var(--sel)"/>
+<rect x="1150" y="336" width="40" height="7" rx="3" fill="var(--sel)"/>
+<rect x="1150" y="374" width="16" height="7" rx="3" fill="var(--sel)"/>
+</svg>

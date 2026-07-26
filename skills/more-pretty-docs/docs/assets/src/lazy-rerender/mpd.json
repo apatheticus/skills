@@ -5,17 +5,19 @@
   "producer": "more-pretty-docs",
   "style": "bento-grid",
   "facts": [
-    "A visual is re-authored when facts_hash, src_hash or design_hash changes, its asset is missing, its marker disagrees with mpd.json, or --refresh-viz is passed",
-    "src_hash is the SHA-256 of the committed .svg, so a hand-edit to the asset is detected",
-    "A prose-only edit moves no hash, so a full documentation pass writes zero new visuals"
+    "RE-RENDER fires on any of six triggers: facts hash moved, src hash moved, design hash moved, the asset is missing, marker and manifest disagree, or the run was forced with --refresh-viz",
+    "facts_hash covers the facts the visual depicts, src_hash the committed .svg, design_hash the repo's DESIGN.md",
+    "When none of the six fired the visual is REUSED — the embed may be rewritten, but nothing is rendered",
+    "design_hash moving invalidates every visual in the repo at once",
+    "A prose-only edit moves no hash and re-authors nothing"
   ],
-  "facts_hash": "6212d58383a4f88e8afae3c5ae3d7168f6ab9620428169a5fe2e4476f8257292",
-  "src_hash": "c133cdd2fb823db9f7d7da302b071195201ab9f802bbbc3133ee0352914919c3",
-  "design_hash": "ccfcfdfa8c5419117e23b48b394fd1c5ddc49875485a3041c90b1134e97b0e99",
+  "facts_hash": "067f0007dc5ac5559540bec44975e82534b0e7882282f43b860120261a42ae14",
+  "src_hash": "cc0a27310154cf93a8189496fd976be3062edf2682d39b6d10036c51f8e709ad",
+  "design_hash": "de0372cc1fc3c743271a44b3d2ae365fccca73980ba2abc0dfd1dc7c4aef140b",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 4984
+    "bytes": 10326
   },
   "relaxed": []
 }

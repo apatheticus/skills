@@ -1,12 +1,17 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520"
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 690" width="1200" height="690"
      role="img" data-loop-s="12" data-bg="background">
   <title>How a re-author is decided</title>
-  <desc>A board of seven cells. The focal cell holds the verdict: when all three stored
-hashes still match, the visual is reused and no file is written. Three cells name the
-hashes that are compared — the facts the visual depicts, the committed svg itself, and
-the design system — and a status dot visits them one at a time. The last row states both
-outcomes: if any one hash moved, that visual alone is re-authored and commits fresh
-hashes; a prose-only edit moves no hash and re-authors nothing.</desc>
+  <desc>A board of ten cells. The accent-filled cell holds the verdict when none of the
+six triggers fired: reuse — the embed may be rewritten, but nothing is rendered. Three
+cells name the hashes that are compared, each showing its digest twice, stored above
+fresh, as two identical rows that read as a match: the facts the visual depicts, which
+moves when the evidence does; the committed svg itself, where a hand-edit to the asset
+shows up; and the design system, which moves every visual in the repo at once. A status
+dot visits the three in turn. Three further cells carry the triggers that are not hashes
+at all — the asset missing from its path, a marker disagreeing with its manifest, and a
+run forced with refresh-viz. The last row states both outcomes: if any one of the six
+fired, that visual alone is re-authored and commits fresh hashes; a prose-only edit
+re-authors nothing.</desc>
 
   <style>
     svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb;
@@ -16,71 +21,134 @@ hashes; a prose-only edit moves no hash and re-authors nothing.</desc>
     .cell  { fill: var(--surface); stroke: var(--dim); stroke-width: 1; }
     .focal { fill: var(--accent); stroke: none; }
     .flag  { fill: var(--warn); }
+    .nib   { fill: var(--dim); }
 
     .h     { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
              font-size: 44px; font-weight: 700; letter-spacing: -0.5px; }
-    .lede  { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
-             font-size: 23px; font-weight: 600; }
+    .eye   { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 19px; font-weight: 600; letter-spacing: 1.4px; }
+    .eye-f { fill: var(--background); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 19px; font-weight: 600; letter-spacing: 1.4px; }
     .lab   { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
              font-size: 23px; font-weight: 600; }
-    .lab-f { fill: var(--background); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
-             font-size: 23px; font-weight: 600; }
+    .cap   { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 18px; font-weight: 600; }
+    .cap-f { fill: var(--background); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 18px; font-weight: 600; }
     .val   { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
              font-size: 40px; font-weight: 700; }
+    .val-s { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 26px; font-weight: 700; }
+    .unit  { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 24px; font-weight: 600; }
     .val-m { fill: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
              font-size: 30px; font-weight: 700; }
     .val-f { fill: var(--background); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
              font-size: 52px; font-weight: 700; }
 
-    /* motion — one status pulse visiting one cell at a time.
-       6s divides the 12s loop twice; negative delays add no time. */
+    /* motion — one idea. The grid never moves; a single status pulse visits the
+       three hash cells in turn. 6s divides 12s twice; negative delays add no time. */
     .dot { fill: var(--accent); animation: live 6s ease-in-out infinite; }
     .n1  { animation-delay: 0s; }
     .n2  { animation-delay: -2s; }
     .n3  { animation-delay: -4s; }
-    @keyframes live { 0%, 66%, 100% { opacity: .2 } 12%, 33% { opacity: 1 } }
+    @keyframes live { 0%, 66%, 100% { opacity: .22 } 12%, 33% { opacity: 1 } }
 
     @media (prefers-reduced-motion: reduce) {
       .dot { animation: none; opacity: 1; }
     }
   </style>
 
-  <rect class="bg" x="0" y="0" width="1200" height="520"/>
-
-  <!-- row 1 — col 0 span 3: the subject -->
-  <rect class="cell" x="40" y="40" width="550" height="140" rx="16" data-bg="surface"/>
-  <text class="h"    x="72" y="106" data-role="title" data-bg="surface">lazy re-author</text>
-  <text class="lede" x="72" y="146" data-bg="surface">one hash moves — one re-author</text>
-
-  <!-- row 1 — col 3 span 3: the focal cell, the verdict -->
-  <rect class="focal" x="610" y="40" width="550" height="140" rx="16" data-bg="accent-primary"/>
-  <text class="lab-f" x="642" y="86"  data-bg="accent-primary">All three still match</text>
-  <text class="val-f" x="642" y="152" data-bg="accent-primary">reuse</text>
-
-  <!-- row 2 — the three compared hashes -->
-  <rect class="cell" x="40" y="200" width="360" height="130" rx="16" data-bg="surface"/>
-  <text class="lab"   x="72" y="246" data-bg="surface">The facts it depicts</text>
-  <text class="val-m" x="72" y="300" data-bg="surface">facts_hash</text>
-  <circle class="dot n1" cx="368" cy="238" r="9"/>
-
-  <rect class="cell" x="420" y="200" width="360" height="130" rx="16" data-bg="surface"/>
-  <text class="lab"   x="452" y="246" data-bg="surface">The committed .svg</text>
-  <text class="val-m" x="452" y="300" data-bg="surface">src_hash</text>
-  <circle class="dot n2" cx="748" cy="238" r="9"/>
-
-  <rect class="cell" x="800" y="200" width="360" height="130" rx="16" data-bg="surface"/>
-  <text class="lab"   x="832" y="246" data-bg="surface">The design system</text>
-  <text class="val-m" x="832" y="300" data-bg="surface">design_hash</text>
-  <circle class="dot n3" cx="1128" cy="238" r="9"/>
-
-  <!-- row 3 — col 0 span 4: the moved-hash outcome, flagged in warn -->
-  <rect class="cell" x="40" y="350" width="740" height="130" rx="16" data-bg="surface"/>
-  <rect class="flag" x="732" y="382" width="16" height="16" rx="5"/>
-  <text class="lab" x="72" y="396" data-bg="surface">Any one of them moved</text>
-  <text class="val" x="72" y="450" data-bg="surface">re-author that one visual</text>
-
-  <!-- row 3 — col 4 span 2: the prose-only outcome -->
-  <rect class="cell" x="800" y="350" width="360" height="130" rx="16" data-bg="surface"/>
-  <text class="lab" x="832" y="396" data-bg="surface">A prose-only edit</text>
-  <text class="val" x="832" y="450" data-bg="surface">0 re-authors</text>
+  <rect class="bg" x="0" y="0" width="1200" height="690"/>
+  <rect class="cell" x="40" y="40" width="550" height="150" rx="16" data-bg="surface"/>
+  <text class="eye"  x="72" y="84"  data-bg="surface">RE-AUTHOR DECISION</text>
+  <text class="h"    x="72" y="136" data-role="title" data-bg="surface">lazy re-author</text>
+  <text class="lab"  x="72" y="172" data-bg="surface">one hash moves — one visual is rebuilt</text>
+  <rect class="focal" x="610" y="40" width="550" height="150" rx="16" data-bg="accent-primary"/>
+  <text class="eye-f" x="642" y="84"  data-bg="accent-primary">NONE OF THE SIX FIRED</text>
+  <text class="val-f" x="642" y="146" data-bg="accent-primary">reuse</text>
+  <text class="cap-f" x="642" y="176" data-role="metadata" data-bg="accent-primary">the embed may be rewritten; nothing is rendered</text>
+  <rect class="cell" x="40" y="210" width="360" height="190" rx="16" data-bg="surface"/>
+  <text class="eye"   x="72" y="248" data-bg="surface">FACTS IT DEPICTS</text>
+  <text class="val-m" x="72" y="294" data-bg="surface">facts_hash</text>
+  <rect class="nib" x="72" y="312" width="22" height="12"/>
+  <rect class="nib" x="102" y="312" width="22" height="12"/>
+  <rect class="nib" x="132" y="312" width="22" height="12"/>
+  <rect class="nib" x="162" y="312" width="22" height="12"/>
+  <rect class="nib" x="192" y="312" width="22" height="12"/>
+  <rect class="nib" x="222" y="312" width="22" height="12"/>
+  <rect class="nib" x="252" y="312" width="22" height="12"/>
+  <rect class="nib" x="282" y="312" width="22" height="12"/>
+  <rect class="nib" x="72" y="334" width="22" height="12"/>
+  <rect class="nib" x="102" y="334" width="22" height="12"/>
+  <rect class="nib" x="132" y="334" width="22" height="12"/>
+  <rect class="nib" x="162" y="334" width="22" height="12"/>
+  <rect class="nib" x="192" y="334" width="22" height="12"/>
+  <rect class="nib" x="222" y="334" width="22" height="12"/>
+  <rect class="nib" x="252" y="334" width="22" height="12"/>
+  <rect class="nib" x="282" y="334" width="22" height="12"/>
+  <text class="cap" x="72" y="372" data-bg="surface">moves when the evidence does</text>
+  <circle class="dot n1" cx="368" cy="242" r="8"/>
+  <rect class="cell" x="420" y="210" width="360" height="190" rx="16" data-bg="surface"/>
+  <text class="eye"   x="452" y="248" data-bg="surface">THE COMMITTED .SVG</text>
+  <text class="val-m" x="452" y="294" data-bg="surface">src_hash</text>
+  <rect class="nib" x="452" y="312" width="22" height="12"/>
+  <rect class="nib" x="482" y="312" width="22" height="12"/>
+  <rect class="nib" x="512" y="312" width="22" height="12"/>
+  <rect class="nib" x="542" y="312" width="22" height="12"/>
+  <rect class="nib" x="572" y="312" width="22" height="12"/>
+  <rect class="nib" x="602" y="312" width="22" height="12"/>
+  <rect class="nib" x="632" y="312" width="22" height="12"/>
+  <rect class="nib" x="662" y="312" width="22" height="12"/>
+  <rect class="nib" x="452" y="334" width="22" height="12"/>
+  <rect class="nib" x="482" y="334" width="22" height="12"/>
+  <rect class="nib" x="512" y="334" width="22" height="12"/>
+  <rect class="nib" x="542" y="334" width="22" height="12"/>
+  <rect class="nib" x="572" y="334" width="22" height="12"/>
+  <rect class="nib" x="602" y="334" width="22" height="12"/>
+  <rect class="nib" x="632" y="334" width="22" height="12"/>
+  <rect class="nib" x="662" y="334" width="22" height="12"/>
+  <text class="cap" x="452" y="372" data-bg="surface">a hand-edit shows up here</text>
+  <circle class="dot n2" cx="748" cy="242" r="8"/>
+  <rect class="cell" x="800" y="210" width="360" height="190" rx="16" data-bg="surface"/>
+  <text class="eye"   x="832" y="248" data-bg="surface">THE DESIGN SYSTEM</text>
+  <text class="val-m" x="832" y="294" data-bg="surface">design_hash</text>
+  <rect class="nib" x="832" y="312" width="22" height="12"/>
+  <rect class="nib" x="862" y="312" width="22" height="12"/>
+  <rect class="nib" x="892" y="312" width="22" height="12"/>
+  <rect class="nib" x="922" y="312" width="22" height="12"/>
+  <rect class="nib" x="952" y="312" width="22" height="12"/>
+  <rect class="nib" x="982" y="312" width="22" height="12"/>
+  <rect class="nib" x="1012" y="312" width="22" height="12"/>
+  <rect class="nib" x="1042" y="312" width="22" height="12"/>
+  <rect class="nib" x="832" y="334" width="22" height="12"/>
+  <rect class="nib" x="862" y="334" width="22" height="12"/>
+  <rect class="nib" x="892" y="334" width="22" height="12"/>
+  <rect class="nib" x="922" y="334" width="22" height="12"/>
+  <rect class="nib" x="952" y="334" width="22" height="12"/>
+  <rect class="nib" x="982" y="334" width="22" height="12"/>
+  <rect class="nib" x="1012" y="334" width="22" height="12"/>
+  <rect class="nib" x="1042" y="334" width="22" height="12"/>
+  <text class="cap" x="832" y="372" data-bg="surface">moves every visual at once</text>
+  <circle class="dot n3" cx="1128" cy="242" r="8"/>
+  <rect class="cell" x="40" y="420" width="360" height="110" rx="16" data-bg="surface"/>
+  <rect class="flag" x="72" y="446" width="6" height="52" rx="3"/>
+  <text class="eye"   x="92" y="466" data-bg="surface">ASSET MISSING</text>
+  <text class="val-s" x="92" y="504" data-bg="surface">no .svg at its path</text>
+  <rect class="cell" x="420" y="420" width="360" height="110" rx="16" data-bg="surface"/>
+  <rect class="flag" x="452" y="446" width="6" height="52" rx="3"/>
+  <text class="eye"   x="472" y="466" data-bg="surface">MARKER MISMATCH</text>
+  <text class="val-s" x="472" y="504" data-bg="surface">marker ≠ mpd.json</text>
+  <rect class="cell" x="800" y="420" width="360" height="110" rx="16" data-bg="surface"/>
+  <rect class="flag" x="832" y="446" width="6" height="52" rx="3"/>
+  <text class="eye"   x="852" y="466" data-bg="surface">FORCED</text>
+  <text class="val-s" x="852" y="504" data-bg="surface">--refresh-viz</text>
+  <rect class="cell" x="40" y="550" width="740" height="100" rx="16" data-bg="surface"/>
+  <text class="eye" x="72" y="580" data-bg="surface">ANY ONE OF THE SIX FIRED</text>
+  <text class="val" x="72" y="618" data-bg="surface">re-author that one visual</text>
+  <text class="cap" x="72" y="642" data-bg="surface">and commit fresh hashes — every other visual is left alone</text>
+  <rect class="cell" x="800" y="550" width="360" height="100" rx="16" data-bg="surface"/>
+  <text class="eye" x="832" y="580" data-bg="surface">A PROSE-ONLY EDIT</text>
+  <text class="val" x="832" y="618" data-bg="surface">0<tspan class="unit" dx="10">re-authors</tspan></text>
+  <text class="cap" x="832" y="642" data-bg="surface">no hash moved</text>
 </svg>

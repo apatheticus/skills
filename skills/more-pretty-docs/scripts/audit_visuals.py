@@ -47,7 +47,27 @@ BUDGETS = {
 FORBIDDEN = {"LICENSE", "NOTICE"}  # zero visuals, zero markers, ever
 
 BYTES_FAIL_DEFAULT = 153600  # 150 KB; a style may raise this to its declared floor
-STYLE_BYTE_FLOORS = {"maximalist": 256000, "glassmorphism": 204800}
+
+
+def load_byte_floors() -> tuple[int, dict[str, int]]:
+    """Read the byte caps out of styles.json rather than restating them here.
+
+    Two copies of the same numbers drift, and this script is the copy nobody
+    updates. styles.json is the checker's own half of the catalog, so it wins.
+    """
+    catalog_path = Path(__file__).resolve().parent / "styles.json"
+    try:
+        catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return BYTES_FAIL_DEFAULT, {}
+    default = int(catalog.get("defaults", {}).get("bytes_fail", BYTES_FAIL_DEFAULT))
+    floors = {slug: int(spec["relax"]["bytes_fail"])
+              for slug, spec in catalog.get("styles", {}).items()
+              if "bytes_fail" in spec.get("relax", {})}
+    return default, floors
+
+
+BYTES_FAIL_DEFAULT, STYLE_BYTE_FLOORS = load_byte_floors()
 
 
 def sha256_file(path: Path) -> str:

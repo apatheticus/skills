@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="12" data-bg="var(--ground)" data-specimen="true">
+<title>Oil impasto — Source, Transform, Store</title>
+<desc>Three thickly painted blocks in ultramarine, burnt sienna and ochre on a dark umber ground. Raised paint catches a low light from the upper left; a slow varnish gloss travels across the canvas.</desc>
+<defs>
+  <radialGradient id="oi-ground" cx=".46" cy=".40" r=".62">
+    <stop offset="0" stop-color="var(--ground)"/><stop offset="1" stop-color="var(--groundlo)"/>
+  </radialGradient>
+  <radialGradient id="oi-gloss" cx=".5" cy=".5">
+    <stop offset="0" stop-color="var(--leadwhite)" stop-opacity=".26"/>
+    <stop offset="1" stop-color="var(--leadwhite)" stop-opacity="0"/>
+  </radialGradient>
+  <!-- The relief IS the style: a turbulence height field drives both the paint
+       displacement and a distant light, so the surface shades directionally. -->
+  <filter id="oi-impasto" data-style="oil-impasto" x="-12%" y="-22%" width="124%" height="144%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.038 0.075" numOctaves="4" seed="23" result="bump"/>
+    <feDisplacementMap in="SourceGraphic" in2="bump" scale="17" xChannelSelector="R" yChannelSelector="G" result="paint"/>
+    <feDiffuseLighting in="bump" surfaceScale="4.4" diffuseConstant="1.05" lighting-color="var(--leadwhite)" result="lit">
+      <feDistantLight azimuth="235" elevation="56"/>
+    </feDiffuseLighting>
+    <feComposite in="lit" in2="paint" operator="in" result="litpaint"/>
+    <feBlend in="paint" in2="litpaint" mode="multiply"/>
+  </filter>
+  <filter id="oi-stroke" data-style="oil-impasto" x="-14%" y="-24%" width="128%" height="148%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.055 0.1" numOctaves="3" seed="47" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="14" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="oi-canvas" data-style="oil-impasto" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.62 0.62" numOctaves="2" seed="11"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope=".16"/></feComponentTransfer>
+  </filter>
+</defs>
+<style>
+svg { --ground:#4A3C2E; --groundlo:#140F08; --ink:#F8EEDA; --inksub:#F3E7CE; --blue:#2F4B8F; --bluehi:#7C96D8; --bluelo:#16264C; --sienna:#9C4A24; --siennahi:#DC8452; --siennalo:#4E210C; --ochre:#7A5514; --ochrehi:#C08A2E; --ochrelo:#462C08; --leadwhite:#FFF6E4; --knife:#D8C6A0; }
+  .oi-t   { font: 400 26px "Bookman Old Style", Georgia, serif; fill: var(--ink); letter-spacing: .5px; }
+  .oi-s   { font: italic 400 20px Georgia, serif; fill: var(--inksub); }
+  .oi-h   { font: italic 400 44px "Bookman Old Style", Georgia, serif; fill: var(--ink); }
+  .oi-m   { font: italic 400 18px Georgia, serif; fill: var(--inksub); }
+  .oi-sw  { animation: oi-sw 12s ease-in-out infinite; }
+  .oi-pk  { animation: oi-pk 3s ease-in-out infinite; }
+  .oi-pk2 { animation: oi-pk 3s ease-in-out infinite; animation-delay: -1.5s; }
+  @keyframes oi-sw { 0%,100% { transform: translateX(-120px) } 50% { transform: translateX(760px) } }
+  /* starts and ends off the band, so t=0 and t=3s are identical */
+  @keyframes oi-pk { 0% { transform: translateX(-14px); opacity: 0 }
+                     28% { opacity: 1 } 72% { opacity: 1 }
+                     100% { transform: translateX(84px); opacity: 0 } }
+  @media (prefers-reduced-motion: reduce) {
+    .oi-sw, .oi-pk, .oi-pk2 { animation: none }
+    .oi-pk, .oi-pk2 { opacity: 0 }
+    .oi-sw { transform: translateX(320px) }
+  }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="url(#oi-ground)"/>
+<text class="oi-h" x="80" y="96">Il flusso dei dati</text>
+<text class="oi-m" x="80" y="130">olio su tela — impasto, luce da 235°</text>
+<g filter="url(#oi-impasto)">
+  <rect x="80" y="180" width="300" height="150" fill="var(--blue)"/>
+  <rect x="450" y="180" width="300" height="150" fill="var(--sienna)"/>
+  <rect x="820" y="180" width="300" height="150" fill="var(--ochre)"/>
+</g>
+<g filter="url(#oi-stroke)" opacity=".62">
+  <rect x="94" y="190" width="272" height="11" fill="var(--bluehi)" opacity=".78"/>
+  <rect x="94" y="306" width="272" height="10" fill="var(--bluelo)" opacity=".8"/>
+  <rect x="106" y="222" width="210" height="7" fill="var(--bluehi)" opacity=".55"/>
+  <rect x="120" y="284" width="180" height="6" fill="var(--bluelo)" opacity=".7"/>
+  <ellipse cx="346" cy="210" rx="20" ry="11" fill="var(--bluehi)" opacity=".5"/>
+  <rect x="310" y="242" width="52" height="5" fill="var(--bluelo)" opacity=".6"/>
+  <rect x="464" y="190" width="272" height="11" fill="var(--siennahi)" opacity=".78"/>
+  <rect x="464" y="306" width="272" height="10" fill="var(--siennalo)" opacity=".8"/>
+  <rect x="476" y="222" width="210" height="7" fill="var(--siennahi)" opacity=".55"/>
+  <rect x="490" y="284" width="180" height="6" fill="var(--siennalo)" opacity=".7"/>
+  <ellipse cx="716" cy="210" rx="20" ry="11" fill="var(--siennahi)" opacity=".5"/>
+  <rect x="680" y="242" width="52" height="5" fill="var(--siennalo)" opacity=".6"/>
+  <rect x="834" y="190" width="272" height="11" fill="var(--ochrehi)" opacity=".78"/>
+  <rect x="834" y="306" width="272" height="10" fill="var(--ochrelo)" opacity=".8"/>
+  <rect x="846" y="222" width="210" height="7" fill="var(--ochrehi)" opacity=".55"/>
+  <rect x="860" y="284" width="180" height="6" fill="var(--ochrelo)" opacity=".7"/>
+  <ellipse cx="1086" cy="210" rx="20" ry="11" fill="var(--ochrehi)" opacity=".5"/>
+  <rect x="1050" y="242" width="52" height="5" fill="var(--ochrelo)" opacity=".6"/>
+</g>
+<g data-bg="var(--blue)">
+  <text class="oi-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="oi-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--sienna)">
+  <text class="oi-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="oi-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--ochre)">
+  <text class="oi-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="oi-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<g filter="url(#oi-stroke)">
+  <rect x="380" y="255" width="70" height="11" fill="var(--knife)"/>
+  <rect x="750" y="255" width="70" height="11" fill="var(--knife)"/>
+</g>
+<circle class="oi-pk" cx="388" cy="261" r="6" fill="var(--leadwhite)"/>
+<circle class="oi-pk2" cx="758" cy="261" r="6" fill="var(--leadwhite)"/>
+<text class="oi-m" x="80" y="386">tavolozza</text>
+<g filter="url(#oi-stroke)">
+  <rect x="190" y="368" width="78" height="26" fill="var(--bluelo)"/>
+  <rect x="284" y="368" width="78" height="26" fill="var(--blue)"/>
+  <rect x="378" y="368" width="78" height="26" fill="var(--bluehi)"/>
+  <rect x="472" y="368" width="78" height="26" fill="var(--siennalo)"/>
+  <rect x="566" y="368" width="78" height="26" fill="var(--sienna)"/>
+  <rect x="660" y="368" width="78" height="26" fill="var(--siennahi)"/>
+  <rect x="754" y="368" width="78" height="26" fill="var(--ochrelo)"/>
+  <rect x="848" y="368" width="78" height="26" fill="var(--ochre)"/>
+  <rect x="942" y="368" width="78" height="26" fill="var(--ochrehi)"/>
+  <rect x="1036" y="368" width="78" height="26" fill="var(--knife)"/>
+</g>
+<rect x="0" y="0" width="1200" height="460" filter="url(#oi-canvas)" style="mix-blend-mode:overlay"/>
+<ellipse class="oi-sw" cx="240" cy="230" rx="300" ry="210" fill="url(#oi-gloss)"/>
+</svg>
