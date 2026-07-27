@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460"
+     width="1200" height="460" role="img" data-loop-s="0" data-bg="background">
+  <title>How a re-render is decided — the hash triad and its six triggers</title>
+  <desc>A schematic of the re-render decision. Three stores feed the comparison: facts_hash over the facts the visual depicts, src_hash over the committed .svg, and design_hash over the project's prettydocs.md. Step 2 compares each against the value recorded in viz.json. Step 3 adds three non-hash conditions: the asset is missing, or the marker and the manifest disagree. The force flag joins the same trunk. Step 4 asks whether any of the six fired: if one did, the visual is re-drawn; if none did it is reused and nothing is written. A prose-only edit moves no hash, so it re-authors nothing, and moving design_hash invalidates every visual in the repo at once.</desc>
+  <style>
+    /* one custom property per prettydocs.md palette role */
+    svg { --background:#f7f7f5; --surface:#ffffff; --ink:#14181d; --dim:#5a616b;
+          --data:#1a5fd0; --control:#6639ba; --err:#cf222e; }
+
+    .bg    { fill: var(--background); }
+    .frame { stroke: var(--dim); stroke-width: 1.5; fill: none; }
+    .sym   { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+    .wire  { stroke: var(--data); stroke-width: 1.5; fill: none; }
+    .ctrl  { stroke: var(--control); stroke-width: 1.5; fill: none; }
+    .fail  { stroke: var(--err); stroke-width: 1.5; fill: none; }
+    .head  { fill: var(--data); }
+    .headc { fill: var(--control); }
+    .headf { fill: var(--err); }
+    .junc  { fill: var(--data); }
+    .plate { fill: var(--surface); }
+
+    .h     { fill: var(--ink); font: 700 40px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    .desig { fill: var(--ink); font: 600 19px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .role  { fill: var(--dim); font: 400 18px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    .netc  { fill: var(--control); font: 400 18px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .netf  { fill: var(--err);     font: 400 18px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .step  { fill: var(--ink); font: 600 18px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .meta  { fill: var(--dim); font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1200" height="460"/>
+
+  <rect class="frame" x="32" y="24" width="1136" height="412"/>
+  <path class="frame" d="M62 24 V58"/>
+  <path class="frame" d="M1138 24 V58"/>
+  <path class="frame" d="M62 402 V436"/>
+  <path class="frame" d="M1138 402 V436"/>
+
+  <text class="h" x="64" y="88" data-role="title">How a re-render is decided</text>
+
+  <!-- ============== 1  three hash stores: doubled left edge ============== -->
+
+  <rect class="sym" x="64" y="150" width="286" height="62"/>
+  <path class="sym" d="M75 150 V212"/>
+  <text class="desig" x="92" y="178" data-bg="surface">facts_hash</text>
+  <text class="role"  x="92" y="200" data-bg="surface">the facts it depicts</text>
+
+  <rect class="sym" x="64" y="228" width="286" height="62"/>
+  <path class="sym" d="M75 228 V290"/>
+  <text class="desig" x="92" y="256" data-bg="surface">src_hash</text>
+  <text class="role"  x="92" y="278" data-bg="surface">the committed .svg</text>
+
+  <rect class="sym" x="64" y="306" width="286" height="62"/>
+  <path class="sym" d="M75 306 V368"/>
+  <text class="desig" x="92" y="334" data-bg="surface">design_hash</text>
+  <text class="role"  x="92" y="356" data-bg="surface">prettydocs.md</text>
+
+  <text class="step" x="64" y="138">1</text>
+
+  <!-- ============== 2  the comparison ============== -->
+
+  <rect class="sym" x="470" y="192" width="196" height="112"/>
+  <text class="desig" x="488" y="228" data-bg="surface">COMPARE</text>
+  <text class="role"  x="488" y="256" data-bg="surface">stored vs</text>
+  <text class="role"  x="488" y="278" data-bg="surface">recomputed</text>
+  <text class="step" x="470" y="180">2</text>
+
+  <!-- three stores onto one trunk at x=410, then into COMPARE -->
+  <path class="wire" d="M350 181 H410 V248"/>
+  <path class="wire" d="M350 259 H454"/>
+  <path class="wire" d="M350 337 H410 V248"/>
+  <circle class="junc" cx="410" cy="248" r="4"/>
+  <polygon class="head" points="470,248 454,242 454,254"/>
+
+  <!-- ============== 3  the three non-hash triggers ============== -->
+
+  <rect class="sym" x="470" y="342" width="196" height="80"/>
+  <text class="desig" x="488" y="370" data-bg="surface">ALSO</text>
+  <text class="role"  x="488" y="392" data-bg="surface">asset missing ·</text>
+  <text class="role"  x="488" y="414" data-bg="surface">marker ≠ manifest</text>
+  <text class="step" x="470" y="330">3</text>
+
+  <!-- the force flag: it decides the outcome whatever every hash says -->
+  <rect class="sym" x="470" y="96" width="196" height="62"/>
+  <text class="desig" x="488" y="134" data-bg="surface">--refresh-viz</text>
+
+  <!-- ============== 4  the decision ============== -->
+
+  <path class="sym" d="M840 188 L908 248 L840 308 L772 248 Z"/>
+  <text class="desig" x="840" y="244" text-anchor="middle" data-bg="surface">ANY</text>
+  <text class="role"  x="840" y="270" text-anchor="middle" data-bg="surface">of 6</text>
+  <text class="step" x="772" y="178">4</text>
+
+  <!-- every input joins one trunk at x=714 and enters the diamond once -->
+  <path class="wire" d="M666 248 H756"/>
+  <path class="wire" d="M666 127 H714 V248"/>
+  <path class="wire" d="M666 382 H714 V248"/>
+  <circle class="junc" cx="714" cy="248" r="4"/>
+  <polygon class="head" points="772,248 756,242 756,254"/>
+
+  <!-- fired -> RE-DRAW -->
+  <path class="fail" d="M908 248 H984"/>
+  <polygon class="headf" points="1000,248 984,242 984,254"/>
+  <rect class="sym" x="1000" y="217" width="136" height="62"/>
+  <text class="desig" x="1018" y="254" data-bg="surface">RE-DRAW</text>
+  <rect class="plate" x="918" y="236" width="64" height="24"/>
+  <text class="netf" x="922" y="254" data-bg="surface">fired</text>
+
+  <!-- none fired -> REUSE, a terminal -->
+  <path class="ctrl" d="M840 308 V372 H984"/>
+  <polygon class="headc" points="1000,372 984,366 984,378"/>
+  <rect class="sym" x="1000" y="348" width="126" height="48" rx="24"/>
+  <text class="desig" x="1026" y="379" data-bg="surface">REUSE</text>
+  <rect class="plate" x="880" y="360" width="64" height="24"/>
+  <text class="netc" x="884" y="378" data-bg="surface">none</text>
+
+  <text class="meta" x="1120" y="120" text-anchor="end" data-role="metadata">prose-only edit moves no hash</text>
+  <text class="meta" x="1120" y="144" text-anchor="end" data-role="metadata">design_hash invalidates all</text>
+</svg>

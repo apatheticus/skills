@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Claymorphism — Source, Transform, Store</title>
+<desc>Three inflated pastel forms with very large radii, soft tinted ambient and contact shadows and clipped highlights. The middle form squashes on an overshooting curve.</desc>
+<defs>
+  <filter id="cl-soft" data-style="claymorphism" x="-30%" y="-30%" width="160%" height="180%">
+    <feDropShadow dx="0" dy="16" stdDeviation="14" flood-color="var(--castfar)" flood-opacity=".38"/>
+    <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="var(--castnear)" flood-opacity=".22"/>
+  </filter>
+</defs>
+<style>
+svg { --ground:#EDE7FB; --clay1:#B8A6E8; --clay2:#F0AFC4; --clay3:#A8D8C8; --ink:#2A2438; --muted:#332C48; --shadow:#C7BCE8; --hi:#FFFFFF; --castfar:#8E7CC3; --castnear:#6E5CA3; }
+  .cl-h { font: 800 42px "Nunito", "Trebuchet MS", sans-serif; fill: var(--ink); }
+  .cl-t { font: 800 26px "Nunito", "Trebuchet MS", sans-serif; fill: var(--ink); }
+  .cl-s { font: 600 19px "Nunito", "Trebuchet MS", sans-serif; fill: var(--muted); }
+  .cl-f { font: 600 18px "Nunito", "Trebuchet MS", sans-serif; fill: var(--muted); }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<text class="cl-h" x="80" y="94">Soft pipeline</text>
+<text class="cl-f" x="80" y="128">rounded, inflated, gently squashing</text>
+<g filter="url(#cl-soft)">
+  <rect x="80" y="180" width="300" height="150" rx="42" fill="var(--clay1)"/>
+</g>
+<ellipse cx="230" cy="210" rx="116" ry="15" fill="var(--hi)" opacity=".42"/>
+<rect x="108" y="290" width="244" height="16" rx="8" fill="var(--hi)" opacity=".3"/>
+<circle cx="114" cy="214" r="9" fill="var(--hi)" opacity=".55"/>
+<text class="cl-f" x="132" y="220">01</text>
+<g filter="url(#cl-soft)">
+  <rect x="450" y="180" width="300" height="150" rx="42" fill="var(--clay2)"/>
+</g>
+<ellipse cx="600" cy="210" rx="116" ry="15" fill="var(--hi)" opacity=".42"/>
+<rect x="478" y="290" width="244" height="16" rx="8" fill="var(--hi)" opacity=".3"/>
+<circle cx="484" cy="214" r="9" fill="var(--hi)" opacity=".55"/>
+<text class="cl-f" x="502" y="220">02</text>
+<g filter="url(#cl-soft)">
+  <rect x="820" y="180" width="300" height="150" rx="42" fill="var(--clay3)"/>
+</g>
+<ellipse cx="970" cy="210" rx="116" ry="15" fill="var(--hi)" opacity=".42"/>
+<rect x="848" y="290" width="244" height="16" rx="8" fill="var(--hi)" opacity=".3"/>
+<circle cx="854" cy="214" r="9" fill="var(--hi)" opacity=".55"/>
+<text class="cl-f" x="872" y="220">03</text>
+<g data-bg="var(--clay1)">
+  <text class="cl-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="cl-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--clay1)">
+  <text class="cl-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="cl-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--clay1)">
+  <text class="cl-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="cl-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<g filter="url(#cl-soft)"><rect x="380" y="251" width="70" height="24" rx="12" fill="var(--clay1)"/></g>
+<rect x="388" y="254" width="54" height="6" rx="3" fill="var(--hi)" opacity=".45"/>
+<g filter="url(#cl-soft)"><rect x="750" y="251" width="70" height="24" rx="12" fill="var(--clay1)"/></g>
+<rect x="758" y="254" width="54" height="6" rx="3" fill="var(--hi)" opacity=".45"/>
+<g filter="url(#cl-soft)"><rect x="80" y="372" width="1040" height="56" rx="28" fill="var(--clay3)"/></g>
+<rect x="110" y="386" width="980" height="12" rx="6" fill="var(--hi)" opacity=".35"/>
+<text class="cl-f" x="120" y="414">everything lands softly</text>
+<circle cx="860" cy="400" r="10" fill="var(--hi)" opacity="0.16"/>
+<circle cx="894" cy="400" r="10" fill="var(--hi)" opacity="0.22"/>
+<circle cx="928" cy="400" r="10" fill="var(--hi)" opacity="0.28"/>
+<circle cx="962" cy="400" r="10" fill="var(--hi)" opacity="0.34"/>
+<circle cx="996" cy="400" r="10" fill="var(--hi)" opacity="0.40"/>
+<circle cx="1030" cy="400" r="10" fill="var(--hi)" opacity="0.46"/>
+<circle cx="1064" cy="400" r="10" fill="var(--hi)" opacity="0.52"/>
+</svg>

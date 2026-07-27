@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Draughtsman notebook — Source, Transform, Store</title>
+<desc>Precise 2H pencil work on squared notebook stock: centre lines, dashed hidden edges, dimensioned witness lines and light section hatching, all faintly hand-wavering.</desc>
+<defs>
+  <filter id="dn-a" data-style="draughtsman-notebook" x="-10%" y="-18%" width="120%" height="136%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.016 0.022" numOctaves="3" seed="17" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="3.2" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="dn-g" data-style="draughtsman-notebook" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.7 0.7" numOctaves="2" seed="31"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope=".07"/></feComponentTransfer>
+  </filter>
+</defs>
+<style>
+svg { --ground:#EFEBE1; --ink:#26262A; --muted:#4C4C52; --graphite:#5A5A62; --faint:#A7A091; --accent:#6B4A2A; --panel:#F6F3EA; }
+  .dn-h { font: 400 36px "Times New Roman", Georgia, serif; fill: var(--ink); letter-spacing: 2px; }
+  .dn-t { font: 400 24px "Times New Roman", Georgia, serif; fill: var(--ink); letter-spacing: 1px; }
+  .dn-s { font: italic 400 19px "Times New Roman", Georgia, serif; fill: var(--muted); }
+  .dn-f { font: 400 16px "Times New Roman", Georgia, serif; fill: var(--muted); }
+  .dn-b { fill: none; stroke: var(--ink); stroke-width: 1.8; }
+  .dn-l { stroke: var(--graphite); stroke-width: 1.2; fill: none; }
+  .dn-c { stroke: var(--faint); stroke-width: 1; fill: none; }
+  .dn-hid { stroke: var(--graphite); stroke-width: 1.2; stroke-dasharray: 7 5; fill: none; }
+  .dn-p { fill: var(--accent); opacity: 0; }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<line class="dn-c" x1="60" y1="0" x2="60" y2="460"/>
+<line class="dn-c" x1="120" y1="0" x2="120" y2="460"/>
+<line class="dn-c" x1="180" y1="0" x2="180" y2="460"/>
+<line class="dn-c" x1="240" y1="0" x2="240" y2="460"/>
+<line class="dn-c" x1="300" y1="0" x2="300" y2="460"/>
+<line class="dn-c" x1="360" y1="0" x2="360" y2="460"/>
+<line class="dn-c" x1="420" y1="0" x2="420" y2="460"/>
+<line class="dn-c" x1="480" y1="0" x2="480" y2="460"/>
+<line class="dn-c" x1="540" y1="0" x2="540" y2="460"/>
+<line class="dn-c" x1="600" y1="0" x2="600" y2="460"/>
+<line class="dn-c" x1="660" y1="0" x2="660" y2="460"/>
+<line class="dn-c" x1="720" y1="0" x2="720" y2="460"/>
+<line class="dn-c" x1="780" y1="0" x2="780" y2="460"/>
+<line class="dn-c" x1="840" y1="0" x2="840" y2="460"/>
+<line class="dn-c" x1="900" y1="0" x2="900" y2="460"/>
+<line class="dn-c" x1="960" y1="0" x2="960" y2="460"/>
+<line class="dn-c" x1="1020" y1="0" x2="1020" y2="460"/>
+<line class="dn-c" x1="1080" y1="0" x2="1080" y2="460"/>
+<line class="dn-c" x1="1140" y1="0" x2="1140" y2="460"/>
+<line class="dn-c" x1="0" y1="60" x2="1200" y2="60"/>
+<line class="dn-c" x1="0" y1="120" x2="1200" y2="120"/>
+<line class="dn-c" x1="0" y1="180" x2="1200" y2="180"/>
+<line class="dn-c" x1="0" y1="240" x2="1200" y2="240"/>
+<line class="dn-c" x1="0" y1="300" x2="1200" y2="300"/>
+<line class="dn-c" x1="0" y1="360" x2="1200" y2="360"/>
+<line class="dn-c" x1="0" y1="420" x2="1200" y2="420"/>
+<text class="dn-h" x="80" y="84">Flow of Data</text>
+<line class="dn-b" x1="80" y1="98" x2="470" y2="98" filter="url(#dn-a)"/>
+<text class="dn-f" data-role="metadata" x="80" y="126">notebook 4 — page 31 — 2H pencil</text>
+<rect x="80" y="180" width="300" height="150" rx="4" fill="var(--panel)" filter="url(#dn-a)"/>
+<rect class="dn-b" x="80" y="180" width="300" height="150" rx="4" filter="url(#dn-a)"/>
+<line class="dn-l" x1="80" y1="222" x2="380" y2="222" filter="url(#dn-a)"/>
+<line class="dn-hid" x1="92" y1="314" x2="368" y2="314" filter="url(#dn-a)"/>
+<line class="dn-l" x1="230" y1="166" x2="230" y2="188" filter="url(#dn-a)"/>
+<line class="dn-l" x1="80" y1="350" x2="80" y2="364"/>
+<line class="dn-l" x1="380" y1="350" x2="380" y2="364"/>
+<line class="dn-l" x1="80" y1="358" x2="380" y2="358" filter="url(#dn-a)"/>
+<text class="dn-f" data-role="metadata" x="230" y="380" text-anchor="middle">300</text>
+<text class="dn-f" data-role="metadata" x="92" y="210">fig. 1</text>
+<line class="dn-c" x1="96" y1="328" x2="112" y2="308" filter="url(#dn-a)"/>
+<line class="dn-c" x1="112" y1="328" x2="128" y2="308" filter="url(#dn-a)"/>
+<line class="dn-c" x1="128" y1="328" x2="144" y2="308" filter="url(#dn-a)"/>
+<line class="dn-c" x1="144" y1="328" x2="160" y2="308" filter="url(#dn-a)"/>
+<rect x="450" y="180" width="300" height="150" rx="4" fill="var(--panel)" filter="url(#dn-a)"/>
+<rect class="dn-b" x="450" y="180" width="300" height="150" rx="4" filter="url(#dn-a)"/>
+<line class="dn-l" x1="450" y1="222" x2="750" y2="222" filter="url(#dn-a)"/>
+<line class="dn-hid" x1="462" y1="314" x2="738" y2="314" filter="url(#dn-a)"/>
+<line class="dn-l" x1="600" y1="166" x2="600" y2="188" filter="url(#dn-a)"/>
+<line class="dn-l" x1="450" y1="350" x2="450" y2="364"/>
+<line class="dn-l" x1="750" y1="350" x2="750" y2="364"/>
+<line class="dn-l" x1="450" y1="358" x2="750" y2="358" filter="url(#dn-a)"/>
+<text class="dn-f" data-role="metadata" x="600" y="380" text-anchor="middle">300</text>
+<text class="dn-f" data-role="metadata" x="462" y="210">fig. 2</text>
+<line class="dn-c" x1="466" y1="328" x2="482" y2="308" filter="url(#dn-a)"/>
+<line class="dn-c" x1="482" y1="328" x2="498" y2="308" filter="url(#dn-a)"/>
+<line class="dn-c" x1="498" y1="328" x2="514" y2="308" filter="url(#dn-a)"/>
+<line class="dn-c" x1="514" y1="328" x2="530" y2="308" filter="url(#dn-a)"/>
+<rect x="820" y="180" width="300" height="150" rx="4" fill="var(--panel)" filter="url(#dn-a)"/>
+<rect class="dn-b" x="820" y="180" width="300" height="150" rx="4" filter="url(#dn-a)"/>
+<line class="dn-l" x1="820" y1="222" x2="1120" y2="222" filter="url(#dn-a)"/>
+<line class="dn-hid" x1="832" y1="314" x2="1108" y2="314" filter="url(#dn-a)"/>
+<line class="dn-l" x1="970" y1="166" x2="970" y2="188" filter="url(#dn-a)"/>
+<line class="dn-l" x1="820" y1="350" x2="820" y2="364"/>
+<line class="dn-l" x1="1120" y1="350" x2="1120" y2="364"/>
+<line class="dn-l" x1="820" y1="358" x2="1120" y2="358" filter="url(#dn-a)"/>
+<text class="dn-f" data-role="metadata" x="970" y="380" text-anchor="middle">300</text>
+<text class="dn-f" data-role="metadata" x="832" y="210">fig. 3</text>
+<line class="dn-c" x1="836" y1="328" x2="852" y2="308" filter="url(#dn-a)"/>
+<line class="dn-c" x1="852" y1="328" x2="868" y2="308" filter="url(#dn-a)"/>
+<line class="dn-c" x1="868" y1="328" x2="884" y2="308" filter="url(#dn-a)"/>
+<line class="dn-c" x1="884" y1="328" x2="900" y2="308" filter="url(#dn-a)"/>
+<g data-bg="var(--panel)">
+  <text class="dn-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="dn-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--panel)">
+  <text class="dn-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="dn-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--panel)">
+  <text class="dn-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="dn-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<line class="dn-b" x1="380" y1="261" x2="450" y2="261" filter="url(#dn-a)"/>
+<path class="dn-b" d="M439 256 L450 261 L439 266" filter="url(#dn-a)"/>
+<line class="dn-b" x1="750" y1="261" x2="820" y2="261" filter="url(#dn-a)"/>
+<path class="dn-b" d="M809 256 L820 261 L809 266" filter="url(#dn-a)"/>
+<circle class="dn-p" cx="386" cy="261" r="5"/>
+<rect x="0" y="0" width="1200" height="460" filter="url(#dn-g)" style="mix-blend-mode:multiply"/>
+</svg>

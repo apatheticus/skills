@@ -1,0 +1,114 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"
+     width="1200" height="400" role="img" data-loop-s="0" data-bg="background">
+  <title>pretty-plain-docs — one run, drawn as a specification sheet</title>
+  <desc>A left-to-right schematic of one run. Step 1, the evidence pass, reads the repository and produces the facts. Step 2 writes the eight Tier-1 documents. Step 3 authors a static SVG for each visual that earns one. Step 4 is the gate: svg_check.py must report zero errors. On pass, step 5 commits the asset together with its viz.json manifest; on failure the net returns to step 3 to re-author. The verdict box reports loop_s 0 and zero errors. Nothing on the sheet moves.</desc>
+  <style>
+    /* one custom property per prettydocs.md palette role */
+    svg { --background:#f7f7f5; --surface:#ffffff; --ink:#14181d; --dim:#5a616b;
+          --data:#1a5fd0; --control:#6639ba; --err:#cf222e; }
+
+    .bg    { fill: var(--background); }
+    .frame { stroke: var(--dim); stroke-width: 1.5; fill: none; }
+    .sym   { fill: var(--surface); stroke: var(--ink); stroke-width: 2; }
+    .wire  { stroke: var(--data); stroke-width: 1.5; fill: none; }
+    .ctrl  { stroke: var(--control); stroke-width: 1.5; fill: none; }
+    .fail  { stroke: var(--err); stroke-width: 1.5; fill: none; }
+    .head  { fill: var(--data); }
+    .headc { fill: var(--control); }
+    .headf { fill: var(--err); }
+    .junc  { fill: var(--data); }
+    .plate { fill: var(--surface); }
+
+    .h     { fill: var(--ink); font: 700 52px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             letter-spacing: -0.5px; }
+    .sub   { fill: var(--dim); font: 400 20px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    .desig { fill: var(--ink); font: 600 19px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .role  { fill: var(--dim); font: 400 18px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; }
+    .netd  { fill: var(--data);    font: 400 18px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .netc  { fill: var(--control); font: 400 18px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .netf  { fill: var(--err);     font: 400 18px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .step  { fill: var(--ink); font: 600 18px ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .meta  { fill: var(--dim); font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1200" height="400"/>
+
+  <!-- sheet frame; corner ticks run vertically so nothing collides with content -->
+  <rect class="frame" x="32" y="24" width="1136" height="352"/>
+  <path class="frame" d="M62 24 V58"/>
+  <path class="frame" d="M1138 24 V58"/>
+  <path class="frame" d="M62 342 V376"/>
+  <path class="frame" d="M1138 342 V376"/>
+
+  <text class="h"   x="64" y="96" data-role="hero">pretty-plain-docs</text>
+  <text class="sub" x="64" y="128" data-role="essential">Repository documentation, drawn once and never moving.</text>
+
+  <!-- ================= five nodes, left to right, bodies y 196..292 ================= -->
+
+  <!-- 1  REPO — external boundary: clipped top-right corner -->
+  <path class="sym" d="M64 196 H196 L214 214 V292 H64 Z"/>
+  <text class="desig" x="82" y="234" data-bg="surface">REPO</text>
+  <text class="role"  x="82" y="262" data-bg="surface">evidence pass</text>
+  <text class="step"  x="64" y="184">1</text>
+
+  <!-- 2  DOCS — process rectangle -->
+  <rect class="sym" x="300" y="196" width="150" height="96"/>
+  <text class="desig" x="318" y="234" data-bg="surface">DOCS</text>
+  <text class="role"  x="318" y="262" data-bg="surface">8 Tier-1 files</text>
+  <text class="step"  x="300" y="184">2</text>
+
+  <!-- 3  VIZ — process rectangle -->
+  <rect class="sym" x="536" y="196" width="150" height="96"/>
+  <text class="desig" x="554" y="234" data-bg="surface">VIZ</text>
+  <text class="role"  x="554" y="262" data-bg="surface">static SVG</text>
+  <text class="step"  x="536" y="184">3</text>
+
+  <!-- 4  GATE — decision diamond -->
+  <path class="sym" d="M822 190 L872 244 L822 298 L772 244 Z"/>
+  <text class="desig" x="822" y="250" text-anchor="middle" data-bg="surface">GATE</text>
+  <text class="step"  x="772" y="184">4</text>
+
+  <!-- 5  STORE — doubled left edge -->
+  <rect class="sym" x="958" y="196" width="176" height="96"/>
+  <path class="sym" d="M969 196 V292"/>
+  <text class="desig" x="984" y="234" data-bg="surface">STORE</text>
+  <text class="role"  x="984" y="262" data-bg="surface">asset + manifest</text>
+  <text class="step"  x="958" y="184">5</text>
+
+  <!-- ================= orthogonal nets; every label sits ON its wire ================= -->
+
+  <!-- REPO -> DOCS -->
+  <path class="wire" d="M214 244 H284"/>
+  <polygon class="head" points="300,244 284,238 284,250"/>
+  <rect class="plate" x="226" y="232" width="58" height="24"/>
+  <text class="netd" x="230" y="250" data-bg="surface">facts</text>
+
+  <!-- DOCS -> VIZ -->
+  <path class="wire" d="M450 244 H520"/>
+  <polygon class="head" points="536,244 520,238 520,250"/>
+  <circle class="junc" cx="493" cy="244" r="4"/>
+
+  <!-- VIZ -> GATE -->
+  <path class="wire" d="M686 244 H756"/>
+  <polygon class="head" points="772,244 756,238 756,250"/>
+  <rect class="plate" x="706" y="232" width="46" height="24"/>
+  <text class="netd" x="710" y="250" data-bg="surface">svg</text>
+
+  <!-- GATE -> STORE: the pass branch -->
+  <path class="ctrl" d="M872 244 H942"/>
+  <polygon class="headc" points="958,244 942,238 942,250"/>
+  <rect class="plate" x="884" y="232" width="56" height="24"/>
+  <text class="netc" x="888" y="250" data-bg="surface">pass</text>
+
+  <!-- GATE -> VIZ: the failure branch, down and back -->
+  <path class="fail" d="M822 298 V338 H611 V292"/>
+  <polygon class="headf" points="611,292 605,308 617,308"/>
+  <rect class="plate" x="662" y="326" width="106" height="24"/>
+  <text class="netf" x="666" y="344" data-bg="surface">re-author</text>
+
+  <!-- ================= the verdict box: one terminal per board ================= -->
+  <rect class="sym" x="64" y="314" width="250" height="48" rx="24"/>
+  <text class="desig" x="88" y="345" data-bg="surface">loop_s 0 · 0 errors</text>
+
+  <text class="meta" x="1120" y="345" text-anchor="end" data-role="metadata">python3 only · no renderer</text>
+</svg>

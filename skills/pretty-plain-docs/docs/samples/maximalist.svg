@@ -1,0 +1,85 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Maximalist — Source, Transform, Store</title>
+<desc>Clashing dot, stripe and checker patterns on deep violet, with hot pink, cyan and gold panels. Every label sits on a white plate so the type survives the noise.</desc>
+<defs>
+  <pattern id="mx-dots" width="20" height="20" patternUnits="userSpaceOnUse">
+    <circle cx="5" cy="5" r="3.2" fill="var(--hot)"/>
+    <circle cx="15" cy="15" r="3.2" fill="var(--cyan)"/>
+  </pattern>
+  <pattern id="mx-stripe" width="24" height="24" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+    <rect width="12" height="24" fill="var(--acid)"/>
+    <rect x="12" width="12" height="24" fill="var(--violet)"/>
+  </pattern>
+  <pattern id="mx-check" width="32" height="32" patternUnits="userSpaceOnUse">
+    <rect width="16" height="16" fill="var(--gold)"/>
+    <rect x="16" y="16" width="16" height="16" fill="var(--hot)"/>
+  </pattern>
+</defs>
+<style>
+svg { --ground:#1A0B2E; --hot:#FF2E88; --acid:#C2FF3D; --cyan:#22D3EE; --violet:#8B5CF6; --gold:#FFC93C; --ink:#0B0616; --plate:#FFFFFF; --muted:#2A1B3D; }
+  .mx-h { font: 900 46px "Archivo Black", Impact, sans-serif; fill: var(--acid); letter-spacing: -1px; }
+  .mx-t { font: 900 26px "Archivo Black", Impact, sans-serif; fill: var(--ink); }
+  .mx-s { font: 700 19px "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
+  .mx-f { font: 700 18px "Helvetica Neue", Arial, sans-serif; fill: var(--acid); }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<g><rect x="-40" y="0" width="1280" height="460" fill="url(#mx-dots)" opacity=".22"/></g>
+<rect x="0" y="0" width="1200" height="64" fill="url(#mx-stripe)"/>
+<rect x="40" y="88" width="640" height="64" fill="var(--ink)"/>
+<g data-bg="var(--ink)"><text class="mx-h" x="60" y="136">MORE IS MORE</text></g>
+<g><polygon points="1080,44 1096,76 1080,116 1064,76" fill="var(--acid)"/></g>
+<g><rect x="700" y="96" width="380" height="48" fill="url(#mx-check)" opacity=".85"/></g>
+<rect x="74" y="174" width="312" height="162" fill="url(#mx-stripe)"/>
+<rect x="80" y="180" width="300" height="150" fill="var(--hot)"/>
+<rect x="90" y="190" width="280" height="130" fill="none" stroke="var(--ink)" stroke-width="4"/>
+<rect x="98" y="232" width="264" height="72" fill="var(--plate)"/>
+<g data-bg="var(--plate)">
+  <text class="mx-t" x="230" y="266" text-anchor="middle">Source</text>
+  <text class="mx-s" x="230" y="292" text-anchor="middle">event stream</text>
+</g>
+<circle cx="106" cy="310" r="8" fill="var(--ink)"/>
+<circle cx="134" cy="310" r="8" fill="var(--ink)"/>
+<circle cx="162" cy="310" r="8" fill="var(--ink)"/>
+<circle cx="190" cy="310" r="8" fill="var(--ink)"/>
+<rect x="444" y="174" width="312" height="162" fill="url(#mx-check)"/>
+<rect x="450" y="180" width="300" height="150" fill="var(--cyan)"/>
+<rect x="460" y="190" width="280" height="130" fill="none" stroke="var(--ink)" stroke-width="4"/>
+<rect x="468" y="232" width="264" height="72" fill="var(--plate)"/>
+<g data-bg="var(--plate)">
+  <text class="mx-t" x="600" y="266" text-anchor="middle">Transform</text>
+  <text class="mx-s" x="600" y="292" text-anchor="middle">map, filter</text>
+</g>
+<circle cx="476" cy="310" r="8" fill="var(--ink)"/>
+<circle cx="504" cy="310" r="8" fill="var(--ink)"/>
+<circle cx="532" cy="310" r="8" fill="var(--ink)"/>
+<circle cx="560" cy="310" r="8" fill="var(--ink)"/>
+<rect x="814" y="174" width="312" height="162" fill="url(#mx-dots)"/>
+<rect x="820" y="180" width="300" height="150" fill="var(--gold)"/>
+<rect x="830" y="190" width="280" height="130" fill="none" stroke="var(--ink)" stroke-width="4"/>
+<rect x="838" y="232" width="264" height="72" fill="var(--plate)"/>
+<g data-bg="var(--plate)">
+  <text class="mx-t" x="970" y="266" text-anchor="middle">Store</text>
+  <text class="mx-s" x="970" y="292" text-anchor="middle">warehouse</text>
+</g>
+<circle cx="846" cy="310" r="8" fill="var(--ink)"/>
+<circle cx="874" cy="310" r="8" fill="var(--ink)"/>
+<circle cx="902" cy="310" r="8" fill="var(--ink)"/>
+<circle cx="930" cy="310" r="8" fill="var(--ink)"/>
+<rect x="380" y="251" width="70" height="22" fill="var(--acid)"/>
+<rect x="380" y="259" width="70" height="6" fill="var(--ink)"/>
+<rect x="750" y="251" width="70" height="22" fill="var(--acid)"/>
+<rect x="750" y="259" width="70" height="6" fill="var(--ink)"/>
+<polygon points="110,336 120,358 144,358 126,372 134,394 110,380 86,394 94,372 76,358 100,358" fill="var(--gold)" opacity=".8"/>
+<polygon points="278,336 288,358 312,358 294,372 302,394 278,380 254,394 262,372 244,358 268,358" fill="var(--gold)" opacity=".8"/>
+<polygon points="446,336 456,358 480,358 462,372 470,394 446,380 422,394 430,372 412,358 436,358" fill="var(--gold)" opacity=".8"/>
+<polygon points="614,336 624,358 648,358 630,372 638,394 614,380 590,394 598,372 580,358 604,358" fill="var(--gold)" opacity=".8"/>
+<polygon points="782,336 792,358 816,358 798,372 806,394 782,380 758,394 766,372 748,358 772,358" fill="var(--gold)" opacity=".8"/>
+<polygon points="950,336 960,358 984,358 966,372 974,394 950,380 926,394 934,372 916,358 940,358" fill="var(--gold)" opacity=".8"/>
+<circle cx="40" cy="80" r="9" fill="var(--cyan)"/>
+<circle cx="64" cy="80" r="9" fill="var(--cyan)"/>
+<circle cx="88" cy="80" r="9" fill="var(--cyan)"/>
+<circle cx="112" cy="80" r="9" fill="var(--cyan)"/>
+<rect x="0" y="404" width="1200" height="56" fill="url(#mx-stripe)" opacity=".9"/>
+<rect x="300" y="414" width="600" height="36" fill="var(--ink)"/>
+<g data-bg="var(--ink)"><text class="mx-f" x="600" y="440" text-anchor="middle">LOUD ON PURPOSE — FOUR RATES, NO MORE</text></g>
+</svg>
