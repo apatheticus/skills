@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Blueprint — Source, Transform, Store</title>
+<desc>A cyanotype sheet: white line work on deep blue, a 40-unit grid, dimensioned witness lines under each item and a dashed amber flow line that travels between them.</desc>
+<defs>
+  <pattern id="bp-grid" width="40" height="40" patternUnits="userSpaceOnUse">
+    <path d="M40 0H0V40" fill="none" stroke="var(--faint)" stroke-width="1"/>
+  </pattern>
+</defs>
+<style>
+svg { --ground:#123A63; --ink:#EAF3FF; --line:#8FC0EA; --faint:#3E6E9E; --accent:#FFD166; --surface:#17456F; }
+  .bp-h { font: 400 42px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); letter-spacing: 4px; }
+  .bp-t { font: 400 24px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); letter-spacing: 2px; }
+  .bp-s { font: 400 19px "Courier New", monospace; fill: var(--line); }
+  .bp-f { font: 400 16px "Courier New", monospace; fill: var(--line); letter-spacing: 1px; }
+  .bp-b { fill: none; stroke: var(--line); stroke-width: 2; }
+  .bp-d { stroke: var(--line); stroke-width: 1; }
+  .bp-c {
+          stroke: var(--accent);
+          stroke-width: 1.5;
+          stroke-dasharray: 6 5;
+        }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<rect x="0" y="0" width="1200" height="460" fill="url(#bp-grid)"/>
+<rect x="40" y="26" width="1120" height="408" class="bp-b"/>
+<text class="bp-h" x="80" y="86">DATA FLOW</text>
+<line class="bp-d" x1="80" y1="102" x2="1120" y2="102" stroke="var(--line)"/>
+<text class="bp-f" data-role="metadata" x="80" y="128">SCALE 1:1 — SHEET 3 OF 7 — REV C</text>
+<rect x="80" y="180" width="300" height="150" fill="var(--surface)"/>
+<rect x="80" y="180" width="300" height="150" class="bp-b"/>
+<line class="bp-d" x1="80" y1="220" x2="380" y2="220"/>
+<text class="bp-f" data-role="metadata" x="92" y="208">ITEM 1</text>
+<line class="bp-d" x1="80" y1="352" x2="80" y2="370"/>
+<line class="bp-d" x1="380" y1="352" x2="380" y2="370"/>
+<line class="bp-d" x1="80" y1="362" x2="380" y2="362"/>
+<text class="bp-f" data-role="metadata" x="230" y="386" text-anchor="middle">300</text>
+<rect x="450" y="180" width="300" height="150" fill="var(--surface)"/>
+<rect x="450" y="180" width="300" height="150" class="bp-b"/>
+<line class="bp-d" x1="450" y1="220" x2="750" y2="220"/>
+<text class="bp-f" data-role="metadata" x="462" y="208">ITEM 2</text>
+<line class="bp-d" x1="450" y1="352" x2="450" y2="370"/>
+<line class="bp-d" x1="750" y1="352" x2="750" y2="370"/>
+<line class="bp-d" x1="450" y1="362" x2="750" y2="362"/>
+<text class="bp-f" data-role="metadata" x="600" y="386" text-anchor="middle">300</text>
+<rect x="820" y="180" width="300" height="150" fill="var(--surface)"/>
+<rect x="820" y="180" width="300" height="150" class="bp-b"/>
+<line class="bp-d" x1="820" y1="220" x2="1120" y2="220"/>
+<text class="bp-f" data-role="metadata" x="832" y="208">ITEM 3</text>
+<line class="bp-d" x1="820" y1="352" x2="820" y2="370"/>
+<line class="bp-d" x1="1120" y1="352" x2="1120" y2="370"/>
+<line class="bp-d" x1="820" y1="362" x2="1120" y2="362"/>
+<text class="bp-f" data-role="metadata" x="970" y="386" text-anchor="middle">300</text>
+<g data-bg="var(--surface)">
+  <text class="bp-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="bp-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--surface)">
+  <text class="bp-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="bp-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--surface)">
+  <text class="bp-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="bp-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<line class="bp-c" x1="380" y1="261" x2="450" y2="261"/>
+<circle cx="380" cy="261" r="4" fill="var(--accent)"/>
+<circle cx="450" cy="261" r="4" fill="var(--accent)"/>
+<line class="bp-c" x1="750" y1="261" x2="820" y2="261"/>
+<circle cx="750" cy="261" r="4" fill="var(--accent)"/>
+<circle cx="820" cy="261" r="4" fill="var(--accent)"/>
+<rect x="760" y="368" width="360" height="66" class="bp-b"/>
+<line class="bp-d" x1="760" y1="390" x2="1120" y2="390"/>
+<line class="bp-d" x1="760" y1="412" x2="1120" y2="412"/>
+<line class="bp-d" x1="880" y1="368" x2="880" y2="434"/>
+<line class="bp-d" x1="1000" y1="368" x2="1000" y2="434"/>
+<text class="bp-f" data-role="metadata" x="772" y="384">DRAWN</text>
+<text class="bp-f" data-role="metadata" x="892" y="384">CHECKED</text>
+<text class="bp-f" data-role="metadata" x="1012" y="384">REV</text>
+<text class="bp-f" data-role="metadata" x="772" y="406">HAND</text>
+<text class="bp-f" data-role="metadata" x="892" y="406">SVG_CHECK</text>
+<text class="bp-f" data-role="metadata" x="1012" y="406">C</text>
+<text class="bp-f" data-role="metadata" x="772" y="428">SHEET 3/7</text>
+<line class="bp-d" x1="60" y1="180" x2="60" y2="330"/>
+<polygon points="60,168 55,182 65,182" fill="var(--accent)"/>
+<polygon points="60,342 55,328 65,328" fill="var(--accent)"/>
+</svg>

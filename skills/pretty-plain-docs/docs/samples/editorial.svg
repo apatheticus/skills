@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Editorial — Source, Transform, Store</title>
+<desc>A three-column page in Times on warm paper: rules above and below, roman section marks, and a slow pulsing red mark on each section head.</desc>
+<defs>
+
+</defs>
+<style>
+svg { --ground:#FBF7EF; --ink:#1A1A18; --muted:#5C5750; --rule:#CFC7B8; --accent:#8C2F1D; --surface:#FFFFFF; }
+  .ed-k { font: italic 400 19px Georgia, serif; fill: var(--accent); letter-spacing: 1.6px; }
+  .ed-h { font: 400 54px "Times New Roman", Georgia, serif; fill: var(--ink); }
+  .ed-n { font: 400 20px Georgia, serif; fill: var(--muted); letter-spacing: 3px; }
+  .ed-t { font: 700 24px Georgia, serif; fill: var(--ink); }
+  .ed-s { font: italic 400 19px Georgia, serif; fill: var(--muted); }
+  .ed-f { font: 400 16px Georgia, serif; fill: var(--muted); letter-spacing: 1px; }
+  .ed-r { stroke: var(--rule); stroke-width: 1; }
+  .ed-rule { stroke: var(--ink); stroke-width: 2; }
+  .ed-link { stroke: var(--ink); stroke-width: 1.5; }
+  .ed-mark { fill: var(--accent); }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<text class="ed-k" x="80" y="52">De Fluxu Datorum</text>
+<line class="ed-rule" x1="80" y1="68" x2="1120" y2="68"/>
+<text class="ed-h" x="80" y="128">The Passage of Data</text>
+<line class="ed-r" x1="80" y1="150" x2="1120" y2="150"/>
+<line class="ed-r" x1="253" y1="150" x2="253" y2="392"/>
+<line class="ed-r" x1="426" y1="150" x2="426" y2="392"/>
+<line class="ed-r" x1="599" y1="150" x2="599" y2="392"/>
+<line class="ed-r" x1="772" y1="150" x2="772" y2="392"/>
+<line class="ed-r" x1="945" y1="150" x2="945" y2="392"/>
+<rect x="80" y="180" width="300" height="150" fill="var(--surface)"/>
+<line class="ed-rule" x1="80" y1="180" x2="380" y2="180"/>
+<line class="ed-r" x1="80" y1="330" x2="380" y2="330"/>
+<text class="ed-n" x="94" y="212">I</text>
+<circle class="ed-mark" cx="360" cy="204" r="6"/>
+<rect x="450" y="180" width="300" height="150" fill="var(--surface)"/>
+<line class="ed-rule" x1="450" y1="180" x2="750" y2="180"/>
+<line class="ed-r" x1="450" y1="330" x2="750" y2="330"/>
+<text class="ed-n" x="464" y="212">II</text>
+<circle class="ed-mark" cx="730" cy="204" r="6"/>
+<rect x="820" y="180" width="300" height="150" fill="var(--surface)"/>
+<line class="ed-rule" x1="820" y1="180" x2="1120" y2="180"/>
+<line class="ed-r" x1="820" y1="330" x2="1120" y2="330"/>
+<text class="ed-n" x="834" y="212">III</text>
+<circle class="ed-mark" cx="1100" cy="204" r="6"/>
+<g data-bg="var(--surface)">
+  <text class="ed-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="ed-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--surface)">
+  <text class="ed-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="ed-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--surface)">
+  <text class="ed-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="ed-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<line class="ed-link" x1="380" y1="261" x2="450" y2="261"/>
+<circle cx="415" cy="261" r="3.5" fill="var(--accent)"/>
+<line class="ed-link" x1="750" y1="261" x2="820" y2="261"/>
+<circle cx="785" cy="261" r="3.5" fill="var(--accent)"/>
+<line class="ed-rule" x1="80" y1="392" x2="1120" y2="392"/>
+<text class="ed-f" data-role="metadata" x="80" y="418">Set in Times — three columns</text>
+<text class="ed-f" data-role="metadata" x="1120" y="418" text-anchor="end">xxxvii</text>
+<line class="ed-r" x1="80" y1="392" x2="80" y2="404"/>
+<line class="ed-r" x1="288" y1="392" x2="288" y2="404"/>
+<line class="ed-r" x1="496" y1="392" x2="496" y2="404"/>
+<line class="ed-r" x1="704" y1="392" x2="704" y2="404"/>
+<line class="ed-r" x1="912" y1="392" x2="912" y2="404"/>
+<line class="ed-r" x1="1120" y1="392" x2="1120" y2="404"/>
+<line class="ed-r" x1="80" y1="36" x2="1120" y2="36"/>
+<text class="ed-f" data-role="metadata" x="1120" y="52" text-anchor="end">Chapter III</text>
+<rect x="80" y="404" width="34" height="3" fill="var(--accent)"/>
+<rect x="1086" y="404" width="34" height="3" fill="var(--accent)"/>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Whiteboard marker — Source, Transform, Store</title>
+<desc>Three boxes drawn in blue, red and green dry-erase marker on a white board, with a double-underlined heading and a wavy red squiggle. A red dot travels the first arrow.</desc>
+<defs>
+  <filter id="wb-a" data-style="whiteboard-marker" x="-10%" y="-18%" width="120%" height="136%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02 0.03" numOctaves="3" seed="3" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="9" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="wb-b" data-style="whiteboard-marker" x="-10%" y="-18%" width="120%" height="136%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.024 0.034" numOctaves="3" seed="19" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</defs>
+<style>
+svg { --ground:#FBFBF9; --ink:#1B1B1B; --blue:#17457F; --red:#9E2A2B; --green:#14532D; --muted:#4B5563; --shade:#EDEFF2; }
+  .wb-h { font: 400 44px "Comic Sans MS", "Marker Felt", cursive; fill: var(--blue); }
+  .wb-t { font: 400 26px "Comic Sans MS", "Marker Felt", cursive; fill: var(--ink); }
+  .wb-s { font: 400 19px "Comic Sans MS", "Marker Felt", cursive; fill: var(--muted); }
+  .wb-f { font: 400 17px "Comic Sans MS", "Marker Felt", cursive; fill: var(--muted); }
+  .wb-b { fill: none; stroke: var(--blue); stroke-width: 4; stroke-linecap: round; }
+  .wb-r { fill: none; stroke: var(--red); stroke-width: 3.4; stroke-linecap: round; }
+  .wb-g { fill: none; stroke: var(--green); stroke-width: 3.4; stroke-linecap: round; }
+  .wb-u { stroke: var(--red); stroke-width: 3; fill: none; }
+  .wb-dot { fill: var(--red); opacity: 0; }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<text class="wb-h" x="80" y="88">data flow!</text>
+<line class="wb-u" x1="80" y1="100" x2="330" y2="104" filter="url(#wb-a)"/>
+<line class="wb-u" x1="84" y1="110" x2="300" y2="112" filter="url(#wb-b)"/>
+<text class="wb-f" data-role="metadata" x="80" y="140">thinking out loud</text>
+<rect x="80" y="180" width="300" height="150" rx="8" fill="var(--shade)" filter="url(#wb-b)"/>
+<rect class="wb-b" x="80" y="180" width="300" height="150" rx="8" filter="url(#wb-a)"/>
+<line class="wb-b" x1="96" y1="224" x2="364" y2="226" filter="url(#wb-b)"/>
+<line class="wb-g" x1="100" y1="300" x2="340" y2="300" filter="url(#wb-b)" opacity=".5"/>
+<line class="wb-g" x1="100" y1="312" x2="340" y2="312" filter="url(#wb-b)" opacity=".5"/>
+<rect x="450" y="180" width="300" height="150" rx="8" fill="var(--shade)" filter="url(#wb-b)"/>
+<rect class="wb-r" x="450" y="180" width="300" height="150" rx="8" filter="url(#wb-a)"/>
+<line class="wb-r" x1="466" y1="224" x2="734" y2="226" filter="url(#wb-b)"/>
+<line class="wb-g" x1="470" y1="300" x2="710" y2="300" filter="url(#wb-b)" opacity=".5"/>
+<line class="wb-g" x1="470" y1="312" x2="710" y2="312" filter="url(#wb-b)" opacity=".5"/>
+<rect x="820" y="180" width="300" height="150" rx="8" fill="var(--shade)" filter="url(#wb-b)"/>
+<rect class="wb-g" x="820" y="180" width="300" height="150" rx="8" filter="url(#wb-a)"/>
+<line class="wb-g" x1="836" y1="224" x2="1104" y2="226" filter="url(#wb-b)"/>
+<line class="wb-g" x1="840" y1="300" x2="1080" y2="300" filter="url(#wb-b)" opacity=".5"/>
+<line class="wb-g" x1="840" y1="312" x2="1080" y2="312" filter="url(#wb-b)" opacity=".5"/>
+<g data-bg="var(--shade)">
+  <text class="wb-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="wb-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--shade)">
+  <text class="wb-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="wb-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--shade)">
+  <text class="wb-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="wb-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<line class="wb-b" x1="380" y1="261" x2="450" y2="261" filter="url(#wb-a)"/>
+<path class="wb-b" d="M436 253 L450 261 L436 269" filter="url(#wb-a)"/>
+<line class="wb-b" x1="750" y1="261" x2="820" y2="261" filter="url(#wb-a)"/>
+<path class="wb-b" d="M806 253 L820 261 L806 269" filter="url(#wb-a)"/>
+<circle class="wb-dot" cx="386" cy="261" r="8"/>
+<path class="wb-r" d="M80 396 q60 -14 120 0 t120 0" filter="url(#wb-b)"/>
+<text class="wb-f" data-role="metadata" x="420" y="404">(erase and try again)</text>
+</svg>

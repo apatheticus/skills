@@ -1,0 +1,256 @@
+{
+  "producer": "pretty-plain-docs",
+  "kind": "style-specimens",
+  "note": "One record per style specimen. Specimens are gated with --style <slug> so each gets its own filter floors, and they carry data-specimen=\"true\" so the min_elements density floor binds on them. Every specimen is static: loop_s is 0 throughout, and each was converted from the animated original by folding its reduced-motion resting values onto the base rules — no specimen was redrawn.",
+  "design_hash": "0147a082fb48e9fc451163e1c551395fde5b14ee7f8fbea77bce4f80599f08d7",
+  "specimens": {
+    "bento-grid": {
+      "style": "bento-grid",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 6987,
+      "src_hash": "44309c4cb933776c0017692bb375d32722ec12672892313211dc538cae261e6a"
+    },
+    "blueprint": {
+      "style": "blueprint",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 5129,
+      "src_hash": "c510d413548d6988c9bb6674159ceaddfb62d2429384e5675493fa673ea3d778"
+    },
+    "brushed-metal": {
+      "style": "brushed-metal",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 8488,
+      "src_hash": "405e3e5138cac07f193e9b6d955720dc0f3894ab975f0c383ed38e1fdbfe6014"
+    },
+    "claymorphism": {
+      "style": "claymorphism",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 4260,
+      "src_hash": "9ea225f9dfe9f219a98fb86613df8088f68187849a957ee927321adb85c8bf85"
+    },
+    "codex-leonardo": {
+      "style": "codex-leonardo",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 6508,
+      "src_hash": "6f4fb0a6c5ce431044fb23aa0b712777c06f96d7bb6551dda89e33eccbfaffe9"
+    },
+    "console-elbow": {
+      "style": "console-elbow",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 7353,
+      "src_hash": "790a7de75796b59194c22d2d7b5e47277e4a3d6473e664a32a35d8c7e096db39"
+    },
+    "digital-rain": {
+      "style": "digital-rain",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 21664,
+      "src_hash": "4ac84e27794c188417c3decf587d82626645cd9a69ecd03d2b919e731343d73a"
+    },
+    "draughtsman-notebook": {
+      "style": "draughtsman-notebook",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 7869,
+      "src_hash": "f2b05ccb893e2da8aa496acfac698d95dbb5c32400623a51a88b4730603a6e9c"
+    },
+    "editorial": {
+      "style": "editorial",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 4266,
+      "src_hash": "a90d124ac47d5c51e0c189d06d1e69e810ea455be4f62d2ebf1dfce23cc9c559"
+    },
+    "flat-material": {
+      "style": "flat-material",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 4516,
+      "src_hash": "3004638a7d16a5291822ea7e7db08dd8d9ec096122907eeb95b9e90a0d7009a1"
+    },
+    "glassmorphism": {
+      "style": "glassmorphism",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 4695,
+      "src_hash": "ce568d3f1db12287f8e4bf7a1434b49330d47b3aceb3db1f5dda924517b6b7d3"
+    },
+    "holographic-projection": {
+      "style": "holographic-projection",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 5510,
+      "src_hash": "6c9034d64c2f2234dc678f3ea962bf2b728dafa3e3020d30874cee5ca724d72e"
+    },
+    "hud": {
+      "style": "hud",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 10453,
+      "src_hash": "a149197118498036b370ef27300a5228405b60dc68712b3e935e13c674de8a9f"
+    },
+    "ide-dark": {
+      "style": "ide-dark",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 6137,
+      "src_hash": "1c0dbb7a35708f305838573a08f25d39214f9e55e95bceae6fb8170e07242f3d"
+    },
+    "isometric-3d": {
+      "style": "isometric-3d",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 8233,
+      "src_hash": "7bdcffc9389bd06a8387c9f6a46de026d40f64c781b7c26d884bf830a2d53d4d"
+    },
+    "lofi-wireframe": {
+      "style": "lofi-wireframe",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 5613,
+      "src_hash": "3acf49e20f02babed195649ad3de8038766ddca4a1498ab645adcd246c67bc1c"
+    },
+    "maximalist": {
+      "style": "maximalist",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 5747,
+      "src_hash": "9157203803c166037405c8c4d889cb3d768b9acd0a8f1f42ae06d0af4adbc5a8"
+    },
+    "neo-brutalist": {
+      "style": "neo-brutalist",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 4720,
+      "src_hash": "a21d7a054fdca226e1563d506957de1e4ed2616cd270efc4214e83a770f5f142"
+    },
+    "neumorphism": {
+      "style": "neumorphism",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 4020,
+      "src_hash": "72b1a8c5503a04c0fa90240b3f886e986fc58a367d2782f8855da1a9022f52d9"
+    },
+    "oil-impasto": {
+      "style": "oil-impasto",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 6897,
+      "src_hash": "cdd350f82690d8d10b1ca972a10b29b15a3fbd434a658befe3485d351310086b"
+    },
+    "patent-drawing": {
+      "style": "patent-drawing",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 6036,
+      "src_hash": "525b12c7d076a4d178f1289b015665dce17eda4ace046cdb12053de9f64e352c"
+    },
+    "pencil-lined-paper": {
+      "style": "pencil-lined-paper",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 5624,
+      "src_hash": "c1ade034986b5ba7a4ea7d50f3f5896ce94b18409e9aa161a2974ac498c97029"
+    },
+    "rough-sketch": {
+      "style": "rough-sketch",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 5287,
+      "src_hash": "7afe0d63ed6e4995cbe724dd56cda4c1f326e5c108a09a0a987cb426e1b8af43"
+    },
+    "schematic": {
+      "style": "schematic",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 6351,
+      "src_hash": "2aa85ecea2192413b075abc8013ea7ae082972f70879f7cc3a1535215ad9ad20"
+    },
+    "skeuomorphic": {
+      "style": "skeuomorphic",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 5708,
+      "src_hash": "539d9e1b97544b0c54acf4bb1c1d1869ab3be077d5a0090447eba860303db41b"
+    },
+    "swiss-minimal": {
+      "style": "swiss-minimal",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 4504,
+      "src_hash": "f46cc87802ee2f84b588944f8457b36809985e392ab50204f16ed05af7bb177e"
+    },
+    "terminal-minimalist": {
+      "style": "terminal-minimalist",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 5616,
+      "src_hash": "6672fd9d9134fe5ba9919ddde9df79754d98d4388b7dedce5bb35a8df3afb246"
+    },
+    "watercolor": {
+      "style": "watercolor",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 5473,
+      "src_hash": "f93c915dc22bd6d385362507f3ed72a04a5f511cdac67108451187249f9c0087"
+    },
+    "whiteboard-marker": {
+      "style": "whiteboard-marker",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 4638,
+      "src_hash": "4a490d75972aa7f5eb7783eb0ca255def9af8b177aa6701be8dd371e19a3cb2b"
+    },
+    "wood-grain": {
+      "style": "wood-grain",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 8415,
+      "src_hash": "22d824f2135f3e64bb61c9c6e40ed16b294018f4556315ed86857b5cc5e479a4"
+    },
+    "y2k-retrofuturist": {
+      "style": "y2k-retrofuturist",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 8117,
+      "src_hash": "e88b2e7b9faf28c34468b4fd7d54eea8e6d26f0025f764d0f2d598c70ff0893f"
+    }
+  }
+}

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Patent drawing — Source, Transform, Store</title>
+<desc>A formal disclosure figure: fine black line work on near-white, section hatching under each element, numbered lead lines and a sheet caption. A small dot indexes along the linkage.</desc>
+<defs>
+  <filter id="pd-a" data-style="patent-drawing" x="-10%" y="-18%" width="120%" height="136%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.014 0.02" numOctaves="2" seed="5" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="1.4" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="pd-b" data-style="patent-drawing" x="-10%" y="-18%" width="120%" height="136%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.018 0.024" numOctaves="2" seed="23" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="1.1" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+</defs>
+<style>
+svg { --ground:#FCFCFA; --ink:#141414; --muted:#3A3A3A; --hatch:#6E6E6E; }
+  .pd-h { font: 400 34px "Times New Roman", Georgia, serif; fill: var(--ink); letter-spacing: 3px; }
+  .pd-t { font: 400 23px "Times New Roman", Georgia, serif; fill: var(--ink); letter-spacing: 1px; }
+  .pd-s { font: italic 400 19px "Times New Roman", Georgia, serif; fill: var(--muted); }
+  .pd-n { font: 400 20px "Times New Roman", Georgia, serif; fill: var(--ink); }
+  .pd-f { font: 400 16px "Times New Roman", Georgia, serif; fill: var(--muted); letter-spacing: 1px; }
+  .pd-b { fill: none; stroke: var(--ink); stroke-width: 2; }
+  .pd-l { stroke: var(--ink); stroke-width: 1.4; fill: none; }
+  .pd-hatch { stroke: var(--hatch); stroke-width: 1; }
+  .pd-lead { stroke: var(--ink); stroke-width: 1; fill: none; }
+  .pd-p { fill: var(--ink); opacity: 0; }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<text class="pd-h" x="600" y="76" text-anchor="middle">FIG. 3</text>
+<line class="pd-l" x1="80" y1="96" x2="1120" y2="96" filter="url(#pd-b)"/>
+<rect class="pd-b" x="80" y="180" width="300" height="150" rx="2" filter="url(#pd-a)"/>
+<line class="pd-l" x1="80" y1="222" x2="380" y2="222" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="94" y1="330" x2="120" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="108" y1="330" x2="134" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="122" y1="330" x2="148" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="136" y1="330" x2="162" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="150" y1="330" x2="176" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="164" y1="330" x2="190" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="178" y1="330" x2="204" y2="304" filter="url(#pd-b)"/>
+<line class="pd-lead" x1="350" y1="180" x2="386" y2="150" filter="url(#pd-b)"/>
+<circle cx="350" cy="180" r="3" fill="var(--ink)"/>
+<text class="pd-n" x="390" y="146">10</text>
+<rect class="pd-b" x="450" y="180" width="300" height="150" rx="2" filter="url(#pd-a)"/>
+<line class="pd-l" x1="450" y1="222" x2="750" y2="222" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="464" y1="330" x2="490" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="478" y1="330" x2="504" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="492" y1="330" x2="518" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="506" y1="330" x2="532" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="520" y1="330" x2="546" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="534" y1="330" x2="560" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="548" y1="330" x2="574" y2="304" filter="url(#pd-b)"/>
+<line class="pd-lead" x1="720" y1="180" x2="756" y2="150" filter="url(#pd-b)"/>
+<circle cx="720" cy="180" r="3" fill="var(--ink)"/>
+<text class="pd-n" x="760" y="146">20</text>
+<rect class="pd-b" x="820" y="180" width="300" height="150" rx="2" filter="url(#pd-a)"/>
+<line class="pd-l" x1="820" y1="222" x2="1120" y2="222" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="834" y1="330" x2="860" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="848" y1="330" x2="874" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="862" y1="330" x2="888" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="876" y1="330" x2="902" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="890" y1="330" x2="916" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="904" y1="330" x2="930" y2="304" filter="url(#pd-b)"/>
+<line class="pd-hatch" x1="918" y1="330" x2="944" y2="304" filter="url(#pd-b)"/>
+<line class="pd-lead" x1="1090" y1="180" x2="1126" y2="150" filter="url(#pd-b)"/>
+<circle cx="1090" cy="180" r="3" fill="var(--ink)"/>
+<text class="pd-n" x="1130" y="146">30</text>
+<g data-bg="var(--ground)">
+  <text class="pd-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="pd-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--ground)">
+  <text class="pd-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="pd-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--ground)">
+  <text class="pd-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="pd-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<line class="pd-l" x1="380" y1="261" x2="450" y2="261" filter="url(#pd-a)"/>
+<path class="pd-b" d="M438 255 L450 261 L438 267" filter="url(#pd-a)"/>
+<line class="pd-l" x1="750" y1="261" x2="820" y2="261" filter="url(#pd-a)"/>
+<path class="pd-b" d="M808 255 L820 261 L808 267" filter="url(#pd-a)"/>
+<circle class="pd-p" cx="386" cy="261" r="5"/>
+<line class="pd-l" x1="80" y1="392" x2="1120" y2="392" filter="url(#pd-b)"/>
+<text class="pd-f" data-role="metadata" x="80" y="416">SHEET 3 OF 7 — APPARATUS FOR CONVEYING DATA</text>
+<text class="pd-f" data-role="metadata" x="1120" y="416" text-anchor="end">ATTY DKT. 031-A</text>
+</svg>

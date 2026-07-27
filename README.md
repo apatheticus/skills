@@ -125,6 +125,7 @@ removed skill stays visible until the next session.
 | --- | --- | --- |
 | [`human-voice`](./skills/human-voice) | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored. Picks a register first (editorial, professional, technical, or regulated) so a spec never gets an essay's voice. Yields to a compliance skill for federal work. | `npx skills add apatheticus/skills -s human-voice` |
 | [`pretty-hyper-docs`](./skills/pretty-hyper-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. | `npx skills add apatheticus/skills -s pretty-hyper-docs` |
+| [`pretty-plain-docs`](./skills/pretty-plain-docs) | The same docs engine again, with the diagrams as static SVG — nothing animates, so the output survives a print stylesheet, a PDF export, and a reviewer whose renderer rasterises SVG. Carries the same 31-style catalog, adds a Mermaid source under every structural diagram, and refuses to chart a number the repo cannot recompute. | `npx skills add apatheticus/skills -s pretty-plain-docs` |
 | [`pretty-svg-docs`](./skills/pretty-svg-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. Ships a 31-style catalog, from Swiss minimal to oil impasto, each with a gated full-width specimen, and a bundled checker that proves the loop is seam-exact before anything is committed. | `npx skills add apatheticus/skills -s pretty-svg-docs` |
 | [`security-audit-full-report`](./skills/security-audit-full-report) | Loop a security audit over a codebase until it stops finding anything new — each cycle hunts the ground the last one missed — then merge every run into one interactive HTML report. State lives on disk, so a run survives compaction and resumes where it stopped. Drives Cloudflare's `security-audit` skill; it does not re-implement the hunting. | `npx skills add apatheticus/skills -s security-audit-full-report` |
 | [`reflect`](./skills/reflect) | Mine your own Claude Code session transcripts for what keeps going wrong, what quietly works, and which setup changes would pay off most — then hand back one self-contained interactive HTML report. Every recommendation cites a session ID and a verbatim quote; a proposed skill needs three separate sessions behind it. Diagnosis only, and nothing leaves the machine. | `npx skills add apatheticus/skills -s reflect` |
@@ -160,7 +161,7 @@ rm -rf .claude/skills/make-pretty-docs .claude/skills/more-pretty-docs
 
 Existing visuals keep working. The marker and manifest names changed too — `mpd:viz` →
 `pd:viz`, `mpd.json` → `viz.json` — and the frozen design system moved from
-`docs/assets/src/DESIGN.md` to `.prettydocs/prettydocs.md`. Both skills still read every
+`docs/assets/src/DESIGN.md` to `.prettydocs/prettydocs.md`. All three skills still read every
 old form and rewrite it in place the next time they touch a doc, so nothing needs
 re-rendering.
 
@@ -209,7 +210,7 @@ docs/assets/
   src/<viz>/         # each diagram's composition and its viz.json manifest
 ```
 
-Every project root repeats the `docs/assets/` + `.prettydocs/` pair — this repo is six of
+Every project root repeats the `docs/assets/` + `.prettydocs/` pair — this repo is seven of
 them, the root plus each `skills/<name>/`.
 
 The plugin is sourced from the repo root and lists every skill under `skills/`. That

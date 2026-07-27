@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Console elbow — Source, Transform, Store</title>
+<desc>A rounded elbow frame in warm orange with rose, periwinkle and gold segment buttons, colour used to zone the panel rather than to decorate it.</desc>
+<defs>
+
+</defs>
+<style>
+svg { --ground:#08080C; --orange:#FF9C3F; --rose:#D98BB0; --peri:#9FA8FF; --gold:#FFCB6B; --ink:#0A0A0E; --panelink:#F2E7DA; --muted:#C8B9A8; --bar:#3A2A18; }
+  .ce-h { font: 700 34px "Helvetica Neue", Arial, sans-serif; fill: var(--orange); letter-spacing: 4px; }
+  .ce-t { font: 700 24px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); letter-spacing: 2px; }
+  .ce-s { font: 400 19px "Helvetica Neue", Arial, sans-serif; fill: var(--bar); }
+  .ce-f { font: 700 18px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); letter-spacing: 2px; }
+  .ce-n { font: 700 18px "Helvetica Neue", Arial, sans-serif; fill: var(--panelink); letter-spacing: 2px; }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<path d="M40 130 A90 90 0 0 1 130 40 L470 40 L470 96 L152 96 A56 56 0 0 0 96 152 L96 420 L40 420 Z" fill="var(--orange)"/>
+<g data-bg="var(--orange)"><text class="ce-f" x="180" y="76">FLOW CONTROL</text></g>
+<rect x="490" y="40" width="180" height="56" rx="24" fill="var(--rose)"/>
+<g data-bg="var(--rose)"><text class="ce-f" x="580" y="76" text-anchor="middle">03-A</text></g>
+<rect x="686" y="40" width="240" height="56" rx="24" fill="var(--peri)"/>
+<g data-bg="var(--peri)"><text class="ce-f" x="806" y="76" text-anchor="middle">NOMINAL</text></g>
+<rect x="942" y="40" width="178" height="56" rx="24" fill="var(--gold)"/>
+<g data-bg="var(--gold)"><text class="ce-f" x="1031" y="76" text-anchor="middle">ACTIVE</text></g>
+<rect x="40" y="140" width="44" height="36" rx="20" fill="var(--orange)"/>
+<rect x="40" y="140" width="44" height="36" rx="20" fill="none" stroke="var(--ground)" stroke-width="2"/>
+<rect x="40" y="186" width="44" height="36" rx="20" fill="var(--rose)"/>
+<rect x="40" y="186" width="44" height="36" rx="20" fill="none" stroke="var(--ground)" stroke-width="2"/>
+<rect x="40" y="232" width="44" height="36" rx="20" fill="var(--peri)"/>
+<rect x="40" y="232" width="44" height="36" rx="20" fill="none" stroke="var(--ground)" stroke-width="2"/>
+<rect x="40" y="278" width="44" height="36" rx="20" fill="var(--gold)"/>
+<rect x="40" y="278" width="44" height="36" rx="20" fill="none" stroke="var(--ground)" stroke-width="2"/>
+<rect x="40" y="324" width="44" height="36" rx="20" fill="var(--rose)"/>
+<rect x="40" y="324" width="44" height="36" rx="20" fill="none" stroke="var(--ground)" stroke-width="2"/>
+<rect x="40" y="370" width="44" height="36" rx="20" fill="var(--orange)"/>
+<rect x="40" y="370" width="44" height="36" rx="20" fill="none" stroke="var(--ground)" stroke-width="2"/>
+<rect x="140" y="180" width="240" height="150" rx="46" fill="var(--orange)"/>
+<rect x="156" y="196" width="208" height="118" rx="30" fill="var(--ground)"/>
+<rect x="156" y="196" width="208" height="118" rx="30" fill="var(--orange)" opacity=".14"/>
+<g data-bg="var(--orange)"><text class="ce-f" x="162" y="170">SEG 1</text></g>
+<rect x="174" y="288" width="26" height="14" rx="7" fill="var(--orange)" opacity=".75"/>
+<rect x="210" y="288" width="26" height="14" rx="7" fill="var(--orange)" opacity=".75"/>
+<rect x="246" y="288" width="26" height="14" rx="7" fill="var(--orange)" opacity=".75"/>
+<rect x="282" y="288" width="26" height="14" rx="7" fill="var(--orange)" opacity=".75"/>
+<rect x="318" y="288" width="26" height="14" rx="7" fill="var(--orange)" opacity=".75"/>
+<rect x="450" y="180" width="300" height="150" rx="46" fill="var(--rose)"/>
+<rect x="466" y="196" width="268" height="118" rx="30" fill="var(--ground)"/>
+<rect x="466" y="196" width="268" height="118" rx="30" fill="var(--rose)" opacity=".14"/>
+<g data-bg="var(--rose)"><text class="ce-f" x="472" y="170">SEG 2</text></g>
+<rect x="484" y="288" width="26" height="14" rx="7" fill="var(--rose)" opacity=".75"/>
+<rect x="520" y="288" width="26" height="14" rx="7" fill="var(--rose)" opacity=".75"/>
+<rect x="556" y="288" width="26" height="14" rx="7" fill="var(--rose)" opacity=".75"/>
+<rect x="592" y="288" width="26" height="14" rx="7" fill="var(--rose)" opacity=".75"/>
+<rect x="628" y="288" width="26" height="14" rx="7" fill="var(--rose)" opacity=".75"/>
+<rect x="820" y="180" width="300" height="150" rx="46" fill="var(--peri)"/>
+<rect x="836" y="196" width="268" height="118" rx="30" fill="var(--ground)"/>
+<rect x="836" y="196" width="268" height="118" rx="30" fill="var(--peri)" opacity=".14"/>
+<g data-bg="var(--peri)"><text class="ce-f" x="842" y="170">SEG 3</text></g>
+<rect x="854" y="288" width="26" height="14" rx="7" fill="var(--peri)" opacity=".75"/>
+<rect x="890" y="288" width="26" height="14" rx="7" fill="var(--peri)" opacity=".75"/>
+<rect x="926" y="288" width="26" height="14" rx="7" fill="var(--peri)" opacity=".75"/>
+<rect x="962" y="288" width="26" height="14" rx="7" fill="var(--peri)" opacity=".75"/>
+<rect x="998" y="288" width="26" height="14" rx="7" fill="var(--peri)" opacity=".75"/>
+<g data-bg="var(--ground)">
+  <text class="ce-n" x="230" y="252" text-anchor="middle" font-size="25">Source</text>
+  <text class="ce-n" x="230" y="282" text-anchor="middle" font-size="19" fill="var(--muted)">event stream</text>
+</g>
+<g data-bg="var(--ground)">
+  <text class="ce-n" x="600" y="252" text-anchor="middle" font-size="25">Transform</text>
+  <text class="ce-n" x="600" y="282" text-anchor="middle" font-size="19" fill="var(--muted)">map, filter</text>
+</g>
+<g data-bg="var(--ground)">
+  <text class="ce-n" x="970" y="252" text-anchor="middle" font-size="25">Store</text>
+  <text class="ce-n" x="970" y="282" text-anchor="middle" font-size="19" fill="var(--muted)">warehouse</text>
+</g>
+<rect x="380" y="253" width="70" height="20" rx="10" fill="var(--gold)"/>
+<rect x="750" y="253" width="70" height="20" rx="10" fill="var(--gold)"/>
+<path d="M96 340 L96 384 A56 56 0 0 0 152 440 L470 440 L470 396 L160 396 A28 28 0 0 1 132 368 L132 340 Z" fill="var(--orange)" opacity=".9"/>
+<rect x="500" y="396" width="46" height="44" rx="22" fill="var(--rose)"/>
+<rect x="558" y="396" width="46" height="44" rx="22" fill="var(--peri)"/>
+<rect x="616" y="396" width="46" height="44" rx="22" fill="var(--gold)"/>
+<rect x="130" y="392" width="990" height="42" rx="21" fill="var(--bar)"/>
+<g data-bg="var(--bar)"><text class="ce-n" x="160" y="420">SYSTEM READY — ALL SEGMENTS REPORTING</text></g>
+<rect x="760" y="402" width="34" height="22" rx="11" fill="var(--orange)" opacity="0.30"/>
+<rect x="804" y="402" width="34" height="22" rx="11" fill="var(--orange)" opacity="0.38"/>
+<rect x="848" y="402" width="34" height="22" rx="11" fill="var(--orange)" opacity="0.46"/>
+<rect x="892" y="402" width="34" height="22" rx="11" fill="var(--orange)" opacity="0.54"/>
+<rect x="936" y="402" width="34" height="22" rx="11" fill="var(--orange)" opacity="0.62"/>
+<rect x="980" y="402" width="34" height="22" rx="11" fill="var(--orange)" opacity="0.70"/>
+<rect x="1024" y="402" width="34" height="22" rx="11" fill="var(--orange)" opacity="0.78"/>
+<rect x="1068" y="402" width="34" height="22" rx="11" fill="var(--orange)" opacity="0.86"/>
+</svg>

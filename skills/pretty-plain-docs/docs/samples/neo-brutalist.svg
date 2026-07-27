@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Neo-brutalist — Source, Transform, Store</title>
+<desc>Heavy black rules, hard offset shadow blocks and flat yellow, cyan and red panels on bone white. A red block steps along the connector in five discrete jumps.</desc>
+<defs>
+
+</defs>
+<style>
+svg { --ground:#F2F0E6; --ink:#101010; --surface:#FFFFFF; --accent:#FFE500; --accent2:#00C2FF; --accent3:#FF4D3D; --shadow:#101010; }
+  .nb-h { font: 900 58px "Archivo Black", Impact, sans-serif; fill: var(--ink); letter-spacing: -1px; }
+  .nb-k { font: 700 19px "Courier New", monospace; fill: var(--ink); letter-spacing: 2px; }
+  .nb-t { font: 900 26px "Archivo Black", Impact, sans-serif; fill: var(--ink); }
+  .nb-s { font: 400 19px "Courier New", monospace; fill: var(--ink); }
+  .nb-f { font: 700 16px "Courier New", monospace; fill: var(--ink); letter-spacing: 1px; }
+  .nb-b { fill: none; stroke: var(--ink); stroke-width: 4; }
+  .nb-r { stroke: var(--ink); stroke-width: 3; }
+  .nb-pk { fill: var(--accent3); opacity: 0; }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<rect x="80" y="26" width="640" height="52" fill="var(--accent)"/>
+<rect x="80" y="26" width="640" height="52" class="nb-b"/>
+<text class="nb-h" x="96" y="70">DATA/FLOW</text>
+<rect x="740" y="26" width="380" height="52" fill="var(--accent2)"/>
+<rect x="740" y="26" width="380" height="52" class="nb-b"/>
+<text class="nb-k" x="756" y="59">NO GRADIENTS. NO MERCY.</text>
+<line class="nb-r" x1="80" y1="104" x2="1120" y2="104" stroke-width="6"/>
+<rect x="90" y="190" width="300" height="150" fill="var(--shadow)"/>
+<rect x="80" y="180" width="300" height="150" fill="var(--surface)"/>
+<rect x="80" y="180" width="300" height="150" class="nb-b"/>
+<rect x="80" y="180" width="300" height="34" fill="var(--accent)"/>
+<line class="nb-r" x1="80" y1="214" x2="380" y2="214"/>
+<text class="nb-f" data-role="metadata" x="92" y="204">STEP 01</text>
+<rect x="96" y="304" width="16" height="12" fill="var(--ink)"/>
+<rect x="122" y="304" width="16" height="12" fill="var(--ink)"/>
+<rect x="148" y="304" width="16" height="12" fill="var(--ink)"/>
+<rect x="174" y="304" width="16" height="12" fill="var(--ink)"/>
+<rect x="460" y="190" width="300" height="150" fill="var(--shadow)"/>
+<rect x="450" y="180" width="300" height="150" fill="var(--surface)"/>
+<rect x="450" y="180" width="300" height="150" class="nb-b"/>
+<rect x="450" y="180" width="300" height="34" fill="var(--accent2)"/>
+<line class="nb-r" x1="450" y1="214" x2="750" y2="214"/>
+<text class="nb-f" data-role="metadata" x="462" y="204">STEP 02</text>
+<rect x="466" y="304" width="16" height="12" fill="var(--ink)"/>
+<rect x="492" y="304" width="16" height="12" fill="var(--ink)"/>
+<rect x="518" y="304" width="16" height="12" fill="var(--ink)"/>
+<rect x="544" y="304" width="16" height="12" fill="var(--ink)"/>
+<rect x="830" y="190" width="300" height="150" fill="var(--shadow)"/>
+<rect x="820" y="180" width="300" height="150" fill="var(--surface)"/>
+<rect x="820" y="180" width="300" height="150" class="nb-b"/>
+<rect x="820" y="180" width="300" height="34" fill="var(--accent3)"/>
+<line class="nb-r" x1="820" y1="214" x2="1120" y2="214"/>
+<text class="nb-f" data-role="metadata" x="832" y="204">STEP 03</text>
+<rect x="836" y="304" width="16" height="12" fill="var(--ink)"/>
+<rect x="862" y="304" width="16" height="12" fill="var(--ink)"/>
+<rect x="888" y="304" width="16" height="12" fill="var(--ink)"/>
+<rect x="914" y="304" width="16" height="12" fill="var(--ink)"/>
+<g data-bg="var(--surface)">
+  <text class="nb-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="nb-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--surface)">
+  <text class="nb-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="nb-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--surface)">
+  <text class="nb-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="nb-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<line class="nb-r" x1="380" y1="261" x2="450" y2="261" stroke-width="6"/>
+<line class="nb-r" x1="750" y1="261" x2="820" y2="261" stroke-width="6"/>
+<rect class="nb-pk" x="384" y="249" width="16" height="16"/>
+<rect x="80" y="392" width="1040" height="44" fill="var(--ink)"/>
+<g data-bg="var(--ink)"><text class="nb-f" data-role="metadata" x="96" y="420" fill="var(--accent)">INGEST -> MAP -> PERSIST</text>
+<text class="nb-f" data-role="metadata" x="1104" y="420" text-anchor="end" fill="var(--accent)">R.01</text></g>
+</svg>

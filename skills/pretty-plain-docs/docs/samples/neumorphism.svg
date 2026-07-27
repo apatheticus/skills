@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Neumorphism — Source, Transform, Store</title>
+<desc>Forms extruded from a single soft ground by paired light and dark shadows, with the middle element pressed in rather than raised — the same pair at half the offset, blur and opacity.</desc>
+<defs>
+  <filter id="nm-raise" data-style="neumorphism" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="10" dy="10" stdDeviation="12" flood-color="var(--lo)" flood-opacity=".85"/>
+    <feDropShadow dx="-10" dy="-10" stdDeviation="12" flood-color="var(--hi)" flood-opacity=".9"/>
+  </filter>
+  <filter id="nm-press" data-style="neumorphism" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="5" dy="5" stdDeviation="6" flood-color="var(--lo)" flood-opacity=".42"/>
+    <feDropShadow dx="-5" dy="-5" stdDeviation="6" flood-color="var(--hi)" flood-opacity=".45"/>
+  </filter>
+</defs>
+<style>
+svg { --ground:#E4E8EF; --raise:#EDF1F7; --ink:#39414F; --muted:#5A6474; --hi:#FFFFFF; --lo:#B4BCC9; --accent:#5B7CFA; --groove:#D6DCE6; }
+  .nm-h { font: 600 40px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); }
+  .nm-t { font: 600 25px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); }
+  .nm-s { font: 400 19px "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
+  .nm-f { font: 400 18px "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<text class="nm-h" x="80" y="92">Soft relief</text>
+<text class="nm-f" x="80" y="126">raised and pressed, one light source</text>
+<g filter="url(#nm-raise)"><rect x="80" y="180" width="300" height="150" rx="28" fill="var(--raise)"/></g>
+<rect x="104" y="290" width="252" height="14" rx="7" fill="var(--groove)"/>
+<circle cx="114" cy="214" r="10" fill="var(--groove)"/>
+<text class="nm-f" x="136" y="220">01</text>
+<g filter="url(#nm-press)"><rect x="450" y="180" width="300" height="150" rx="28" fill="var(--raise)"/></g>
+<rect x="474" y="290" width="252" height="14" rx="7" fill="var(--groove)"/>
+<circle cx="484" cy="214" r="10" fill="var(--groove)"/>
+<text class="nm-f" x="506" y="220">02</text>
+<g filter="url(#nm-raise)"><rect x="820" y="180" width="300" height="150" rx="28" fill="var(--raise)"/></g>
+<rect x="844" y="290" width="252" height="14" rx="7" fill="var(--groove)"/>
+<circle cx="854" cy="214" r="10" fill="var(--groove)"/>
+<text class="nm-f" x="876" y="220">03</text>
+<g data-bg="var(--raise)">
+  <text class="nm-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="nm-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--raise)">
+  <text class="nm-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="nm-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--raise)">
+  <text class="nm-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="nm-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<g filter="url(#nm-press)"><rect x="380" y="255" width="70" height="14" rx="7" fill="var(--ground)"/></g>
+<rect x="384" y="259" width="62" height="6" rx="3" fill="var(--accent)"/>
+<g filter="url(#nm-press)"><rect x="750" y="255" width="70" height="14" rx="7" fill="var(--ground)"/></g>
+<rect x="754" y="259" width="62" height="6" rx="3" fill="var(--accent)"/>
+<g filter="url(#nm-raise)"><rect x="80" y="368" width="1040" height="60" rx="30" fill="var(--raise)"/></g>
+<rect x="110" y="390" width="300" height="16" rx="8" fill="var(--groove)"/>
+<text class="nm-f" x="440" y="404">one ambient source, upper left</text>
+<circle cx="1000" cy="398" r="7" fill="var(--groove)"/>
+<circle cx="1022" cy="398" r="7" fill="var(--groove)"/>
+<circle cx="1044" cy="398" r="7" fill="var(--groove)"/>
+<circle cx="1066" cy="398" r="7" fill="var(--groove)"/>
+<circle cx="1088" cy="398" r="7" fill="var(--groove)"/>
+</svg>

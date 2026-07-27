@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Swiss minimal — Source, Transform, Store</title>
+<desc>Three outlined boxes on a warm white grid with a red accent bar, uppercase kicker, large tight-set title and a measured baseline rule. A red dot runs the connector.</desc>
+<defs>
+
+</defs>
+<style>
+svg { --ground:#F4F4F2; --ink:#111111; --muted:#6E6E6E; --rule:#C9C9C6; --accent:#D62828; --surface:#FFFFFF; }
+  .sm-k { font: 500 18px Helvetica, Arial, sans-serif; fill: var(--muted); letter-spacing: 2.4px; text-transform: uppercase; }
+  .sm-h { font: 700 56px Helvetica, Arial, sans-serif; fill: var(--ink); letter-spacing: -1.4px; }
+  .sm-t { font: 700 24px Helvetica, Arial, sans-serif; fill: var(--ink); letter-spacing: .2px; }
+  .sm-s { font: 400 19px Helvetica, Arial, sans-serif; fill: var(--muted); }
+  .sm-f { font: 400 16px Helvetica, Arial, sans-serif; fill: var(--muted); letter-spacing: 1.2px; }
+  .sm-r { stroke: var(--rule); stroke-width: 1; }
+  .sm-link { stroke: var(--ink); stroke-width: 2; }
+  .sm-b { fill: none; stroke: var(--ink); stroke-width: 1; }
+  .sm-dot { fill: var(--accent); opacity: 0; }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<line class="sm-r" x1="80" y1="60" x2="1120" y2="60"/>
+<text class="sm-k" x="80" y="46">Catalogue — 03</text>
+<text class="sm-h" x="80" y="126">Datenfluss</text>
+<text class="sm-s" x="80" y="156">Quelle, Umformung, Speicher</text>
+<rect x="1046" y="26" width="74" height="26" fill="var(--accent)"/>
+<line class="sm-r" x1="80" y1="60" x2="80" y2="72"/>
+<line class="sm-r" x1="210" y1="60" x2="210" y2="72"/>
+<line class="sm-r" x1="340" y1="60" x2="340" y2="72"/>
+<line class="sm-r" x1="470" y1="60" x2="470" y2="72"/>
+<line class="sm-r" x1="600" y1="60" x2="600" y2="72"/>
+<line class="sm-r" x1="730" y1="60" x2="730" y2="72"/>
+<line class="sm-r" x1="860" y1="60" x2="860" y2="72"/>
+<line class="sm-r" x1="990" y1="60" x2="990" y2="72"/>
+<line class="sm-r" x1="1120" y1="60" x2="1120" y2="72"/>
+<rect class="sm-b" x="80" y="180" width="300" height="150"/>
+<line class="sm-r" x1="80" y1="220" x2="380" y2="220"/>
+<rect x="80" y="180" width="300" height="4" fill="var(--ink)"/>
+<text class="sm-f" data-role="metadata" x="92" y="208">01</text>
+<rect class="sm-b" x="450" y="180" width="300" height="150"/>
+<line class="sm-r" x1="450" y1="220" x2="750" y2="220"/>
+<rect x="450" y="180" width="300" height="4" fill="var(--ink)"/>
+<text class="sm-f" data-role="metadata" x="462" y="208">02</text>
+<rect class="sm-b" x="820" y="180" width="300" height="150"/>
+<line class="sm-r" x1="820" y1="220" x2="1120" y2="220"/>
+<rect x="820" y="180" width="300" height="4" fill="var(--ink)"/>
+<text class="sm-f" data-role="metadata" x="832" y="208">03</text>
+<g data-bg="var(--ground)">
+  <text class="sm-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="sm-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--ground)">
+  <text class="sm-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="sm-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--ground)">
+  <text class="sm-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="sm-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<line class="sm-link" x1="380" y1="261" x2="450" y2="261"/>
+<line class="sm-link" x1="750" y1="261" x2="820" y2="261"/>
+<circle class="sm-dot" cx="386" cy="261" r="7"/>
+<line class="sm-r" x1="80" y1="392" x2="1120" y2="392"/>
+<text class="sm-f" data-role="metadata" x="80" y="416">Raster 12 — Helvetica</text>
+<text class="sm-f" data-role="metadata" x="1120" y="416" text-anchor="end">Seite 3</text>
+<line class="sm-r" x1="80" y1="380" x2="80" y2="392"/>
+<line class="sm-r" x1="174" y1="380" x2="174" y2="392"/>
+<line class="sm-r" x1="268" y1="380" x2="268" y2="392"/>
+<line class="sm-r" x1="362" y1="380" x2="362" y2="392"/>
+<line class="sm-r" x1="456" y1="380" x2="456" y2="392"/>
+<line class="sm-r" x1="550" y1="380" x2="550" y2="392"/>
+<line class="sm-r" x1="644" y1="380" x2="644" y2="392"/>
+<line class="sm-r" x1="738" y1="380" x2="738" y2="392"/>
+<line class="sm-r" x1="832" y1="380" x2="832" y2="392"/>
+<line class="sm-r" x1="926" y1="380" x2="926" y2="392"/>
+<line class="sm-r" x1="1020" y1="380" x2="1020" y2="392"/>
+<line class="sm-r" x1="1114" y1="380" x2="1114" y2="392"/>
+</svg>

@@ -1,0 +1,622 @@
+{
+  "$note": "Machine half of the style catalog for pretty-svg-docs. Read by svg_check.py and audit_visuals.py. The prose half is reference/styles.md + reference/styles/<slug>.md; the two must agree slug-for-slug. Entries are alphabetical, matching the index.",
+  "defaults": {
+    "contrast_text": 4.5,
+    "contrast_ui": 3.0,
+    "bytes_warn": 61440,
+    "bytes_fail": 153600,
+    "filter_depth": 1
+  },
+  "styles": {
+    "bento-grid": {
+      "aliases": [
+        "bento",
+        "cards",
+        "dashboard"
+      ],
+      "relax": {},
+      "forbid": [],
+      "require": {
+        "min_rx": 12,
+        "min_elements": 76
+      }
+    },
+    "blueprint": {
+      "aliases": [
+        "cyanotype",
+        "drafting"
+      ],
+      "relax": {},
+      "forbid": [
+        "feGaussianBlur",
+        "feDropShadow",
+        "linearGradient",
+        "radialGradient"
+      ],
+      "require": {
+        "max_rx": 0,
+        "min_elements": 56
+      }
+    },
+    "brushed-metal": {
+      "aliases": [
+        "brushed-steel",
+        "machined-panel",
+        "nameplate"
+      ],
+      "relax": {
+        "filter_depth": 3
+      },
+      "forbid": [],
+      "require": {
+        "min_filter_depth": 3,
+        "require_filter_all": [
+          "feTurbulence",
+          "feColorMatrix",
+          "feComponentTransfer"
+        ],
+        "min_elements": 84
+      }
+    },
+    "catalog-sheet": {
+      "aliases": [
+        "contact-sheet",
+        "catalog",
+        "style-sheet"
+      ],
+      "relax": {
+        "filter_depth": 5,
+        "bytes_fail": 307200
+      },
+      "forbid": [],
+      "require": {
+        "min_elements": 620
+      }
+    },
+    "claymorphism": {
+      "aliases": [
+        "clay",
+        "3d-soft"
+      ],
+      "relax": {
+        "filter_depth": 2
+      },
+      "forbid": [],
+      "require": {
+        "min_rx": 24,
+        "min_filter_depth": 2,
+        "require_filter_all": [
+          "feDropShadow"
+        ],
+        "min_elements": 38
+      }
+    },
+    "codex-leonardo": {
+      "aliases": [
+        "codex",
+        "renaissance-study",
+        "iron-gall"
+      ],
+      "relax": {
+        "filter_depth": 2
+      },
+      "forbid": [
+        "feDropShadow"
+      ],
+      "require": {
+        "max_rx": 4,
+        "min_filter_depth": 2,
+        "require_filter_all": [
+          "feTurbulence",
+          "feDisplacementMap"
+        ],
+        "min_elements": 46
+      }
+    },
+    "console-elbow": {
+      "aliases": [
+        "lcars",
+        "okudagram",
+        "retro-console"
+      ],
+      "relax": {},
+      "forbid": [
+        "feGaussianBlur",
+        "feDropShadow",
+        "feTurbulence",
+        "radialGradient"
+      ],
+      "require": {
+        "min_rx": 20,
+        "min_elements": 70
+      }
+    },
+    "digital-rain": {
+      "aliases": [
+        "matrix-rain",
+        "phosphor-crt",
+        "falling-glyphs"
+      ],
+      "relax": {
+        "filter_depth": 2
+      },
+      "forbid": [
+        "feDropShadow"
+      ],
+      "require": {
+        "mono_only": true,
+        "max_rx": 0,
+        "min_filter_depth": 2,
+        "require_filter_all": [
+          "feGaussianBlur",
+          "feMerge"
+        ],
+        "min_elements": 40
+      }
+    },
+    "draughtsman-notebook": {
+      "aliases": [
+        "engineers-notebook",
+        "graphite-draft"
+      ],
+      "relax": {
+        "filter_depth": 3
+      },
+      "forbid": [
+        "feDropShadow",
+        "radialGradient"
+      ],
+      "require": {
+        "max_rx": 4,
+        "min_filter_depth": 3,
+        "require_filter_all": [
+          "feTurbulence",
+          "feDisplacementMap"
+        ],
+        "min_elements": 62
+      }
+    },
+    "editorial": {
+      "aliases": [
+        "magazine",
+        "print",
+        "typographic"
+      ],
+      "relax": {},
+      "forbid": [
+        "feGaussianBlur",
+        "feDropShadow",
+        "linearGradient",
+        "radialGradient"
+      ],
+      "require": {
+        "max_rx": 2,
+        "min_elements": 48
+      }
+    },
+    "flat-material": {
+      "aliases": [
+        "material",
+        "flat"
+      ],
+      "relax": {},
+      "forbid": [
+        "radialGradient"
+      ],
+      "require": {
+        "min_rx": 4,
+        "min_filter_depth": 1,
+        "require_filter_all": [
+          "feDropShadow"
+        ],
+        "min_elements": 34
+      }
+    },
+    "glassmorphism": {
+      "aliases": [
+        "glass",
+        "frosted",
+        "aero"
+      ],
+      "relax": {
+        "bytes_fail": 204800
+      },
+      "forbid": [],
+      "require": {
+        "min_filter_depth": 1,
+        "require_filter_all": [
+          "feGaussianBlur"
+        ],
+        "min_elements": 39
+      }
+    },
+    "holographic-projection": {
+      "aliases": [
+        "hologram",
+        "holo",
+        "projection"
+      ],
+      "relax": {
+        "filter_depth": 2
+      },
+      "forbid": [
+        "feDropShadow"
+      ],
+      "require": {
+        "min_filter_depth": 2,
+        "require_filter_all": [
+          "feGaussianBlur",
+          "feMerge"
+        ],
+        "min_elements": 38
+      }
+    },
+    "hud": {
+      "aliases": [
+        "heads-up-display",
+        "targeting-hud",
+        "telemetry"
+      ],
+      "relax": {
+        "filter_depth": 2
+      },
+      "forbid": [
+        "feDropShadow"
+      ],
+      "require": {
+        "max_rx": 2,
+        "min_elements": 78
+      }
+    },
+    "ide-dark": {
+      "aliases": [
+        "editor-dark",
+        "dev-tool",
+        "ide"
+      ],
+      "relax": {
+        "filter_depth": 2
+      },
+      "forbid": [],
+      "require": {
+        "min_rx": 6,
+        "min_elements": 60
+      }
+    },
+    "isometric-3d": {
+      "aliases": [
+        "isometric",
+        "iso",
+        "axonometric"
+      ],
+      "relax": {},
+      "forbid": [
+        "radialGradient"
+      ],
+      "require": {
+        "max_rx": 0,
+        "min_elements": 52
+      }
+    },
+    "lofi-wireframe": {
+      "aliases": [
+        "wireframe",
+        "greybox",
+        "lo-fi"
+      ],
+      "relax": {
+        "filter_depth": 2
+      },
+      "forbid": [
+        "feDropShadow",
+        "linearGradient",
+        "radialGradient"
+      ],
+      "require": {
+        "max_rx": 4,
+        "min_filter_depth": 2,
+        "require_filter_all": [
+          "feTurbulence",
+          "feDisplacementMap"
+        ],
+        "min_elements": 48
+      }
+    },
+    "maximalist": {
+      "aliases": [
+        "max",
+        "dense",
+        "more"
+      ],
+      "relax": {
+        "bytes_fail": 256000
+      },
+      "forbid": [],
+      "require": {
+        "min_elements": 60
+      }
+    },
+    "neo-brutalist": {
+      "aliases": [
+        "brutalist",
+        "neubrutalism"
+      ],
+      "relax": {},
+      "forbid": [
+        "feGaussianBlur",
+        "feDropShadow"
+      ],
+      "require": {
+        "max_rx": 0,
+        "min_stroke_width": 3,
+        "min_elements": 48
+      }
+    },
+    "neumorphism": {
+      "aliases": [
+        "soft-ui",
+        "soft"
+      ],
+      "relax": {
+        "contrast_text": 3.0,
+        "contrast_ui": 2.0,
+        "filter_depth": 2
+      },
+      "forbid": [],
+      "require": {
+        "min_rx": 16,
+        "min_filter_depth": 2,
+        "require_filter_all": [
+          "feDropShadow"
+        ],
+        "min_elements": 30
+      }
+    },
+    "oil-impasto": {
+      "aliases": [
+        "impasto",
+        "oil-paint",
+        "painterly"
+      ],
+      "relax": {
+        "filter_depth": 5
+      },
+      "forbid": [
+        "feDropShadow"
+      ],
+      "require": {
+        "min_filter_depth": 5,
+        "require_filter_all": [
+          "feTurbulence",
+          "feDisplacementMap",
+          "feDiffuseLighting",
+          "feComposite"
+        ],
+        "min_elements": 34
+      }
+    },
+    "patent-drawing": {
+      "aliases": [
+        "patent",
+        "uspto-figure",
+        "figure-drawing"
+      ],
+      "relax": {
+        "filter_depth": 2
+      },
+      "forbid": [
+        "feGaussianBlur",
+        "feDropShadow",
+        "linearGradient",
+        "radialGradient"
+      ],
+      "require": {
+        "max_rx": 2,
+        "min_filter_depth": 2,
+        "require_filter_all": [
+          "feTurbulence",
+          "feDisplacementMap"
+        ],
+        "min_elements": 52
+      }
+    },
+    "pencil-lined-paper": {
+      "aliases": [
+        "lined-paper",
+        "graphite-notes",
+        "legal-pad"
+      ],
+      "relax": {
+        "filter_depth": 3
+      },
+      "forbid": [
+        "feDropShadow",
+        "radialGradient"
+      ],
+      "require": {
+        "max_rx": 4,
+        "min_filter_depth": 3,
+        "require_filter_all": [
+          "feTurbulence",
+          "feDisplacementMap"
+        ],
+        "min_elements": 51
+      }
+    },
+    "rough-sketch": {
+      "aliases": [
+        "excalidraw",
+        "roughjs",
+        "rough"
+      ],
+      "relax": {
+        "filter_depth": 2
+      },
+      "forbid": [
+        "feDropShadow"
+      ],
+      "require": {
+        "max_rx": 6,
+        "min_filter_depth": 2,
+        "require_filter_all": [
+          "feTurbulence",
+          "feDisplacementMap"
+        ],
+        "min_elements": 42
+      }
+    },
+    "schematic": {
+      "aliases": [
+        "technical-drawing",
+        "circuit",
+        "netlist"
+      ],
+      "relax": {},
+      "forbid": [
+        "feGaussianBlur",
+        "feDropShadow",
+        "linearGradient",
+        "radialGradient"
+      ],
+      "require": {
+        "min_stroke_width": 1.5,
+        "min_elements": 56
+      }
+    },
+    "skeuomorphic": {
+      "aliases": [
+        "realist",
+        "textured"
+      ],
+      "relax": {
+        "filter_depth": 3
+      },
+      "forbid": [],
+      "require": {
+        "min_filter_depth": 3,
+        "require_filter_all": [
+          "feTurbulence",
+          "feColorMatrix",
+          "feComponentTransfer"
+        ],
+        "min_elements": 40
+      }
+    },
+    "swiss-minimal": {
+      "aliases": [
+        "swiss",
+        "international",
+        "grid"
+      ],
+      "relax": {},
+      "forbid": [
+        "feGaussianBlur",
+        "feDropShadow",
+        "linearGradient",
+        "radialGradient"
+      ],
+      "require": {
+        "max_rx": 2,
+        "min_elements": 46
+      }
+    },
+    "terminal-minimalist": {
+      "aliases": [
+        "tui",
+        "cli",
+        "terminal",
+        "ascii-adjacent"
+      ],
+      "relax": {},
+      "forbid": [
+        "feGaussianBlur",
+        "feDropShadow",
+        "linearGradient",
+        "radialGradient"
+      ],
+      "require": {
+        "mono_only": true,
+        "max_rx": 0,
+        "min_elements": 60
+      }
+    },
+    "watercolor": {
+      "aliases": [
+        "watercolour",
+        "wash",
+        "aquarelle"
+      ],
+      "relax": {
+        "filter_depth": 3
+      },
+      "forbid": [
+        "feDropShadow"
+      ],
+      "require": {
+        "min_filter_depth": 3,
+        "require_filter_all": [
+          "feTurbulence",
+          "feDisplacementMap"
+        ],
+        "min_elements": 40
+      }
+    },
+    "whiteboard-marker": {
+      "aliases": [
+        "whiteboard",
+        "napkin",
+        "dry-erase"
+      ],
+      "relax": {
+        "filter_depth": 2
+      },
+      "forbid": [
+        "feDropShadow",
+        "linearGradient",
+        "radialGradient"
+      ],
+      "require": {
+        "min_stroke_width": 3,
+        "min_filter_depth": 2,
+        "require_filter_all": [
+          "feTurbulence",
+          "feDisplacementMap"
+        ],
+        "min_elements": 32
+      }
+    },
+    "wood-grain": {
+      "aliases": [
+        "wood",
+        "timber",
+        "pyrography"
+      ],
+      "relax": {
+        "filter_depth": 3
+      },
+      "forbid": [],
+      "require": {
+        "min_filter_depth": 2,
+        "require_filter_all": [
+          "feTurbulence",
+          "feDisplacementMap"
+        ],
+        "min_elements": 76
+      }
+    },
+    "y2k-retrofuturist": {
+      "aliases": [
+        "y2k",
+        "retrofuture",
+        "chrome"
+      ],
+      "relax": {
+        "filter_depth": 2
+      },
+      "forbid": [],
+      "require": {
+        "min_elements": 56
+      }
+    }
+  }
+}

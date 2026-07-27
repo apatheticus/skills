@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Codex study — Source, Transform, Store</title>
+<desc>An invention study in iron-gall ink on vellum: cross-hatched boxes, a hand-ruled heading and mirrored marginalia at the right, marked decorative so it stays out of the meaning path.</desc>
+<defs>
+  <filter id="cx-a" data-style="codex-leonardo" x="-10%" y="-18%" width="120%" height="136%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.018 0.024" numOctaves="3" seed="15" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="4.0" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="cx-g" data-style="codex-leonardo" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.66 0.66" numOctaves="3" seed="37"/>
+    <feColorMatrix type="matrix" values="0 0 0 0 .42  0 0 0 0 .32  0 0 0 0 .18  0 0 0 .2 0"/>
+  </filter>
+</defs>
+<style>
+svg { --ground:#E8DCC0; --vellum:#DED0AE; --ink:#3B2A16; --muted:#5A452A; --sepia:#7A5C34; --red:#8C3A1E; --panel:#E2D5B6; }
+  .cx-h { font: italic 400 38px "Bookman Old Style", Georgia, serif; fill: var(--ink); }
+  .cx-t { font: 400 24px "Bookman Old Style", Georgia, serif; fill: var(--ink); }
+  .cx-s { font: italic 400 19px Georgia, serif; fill: var(--muted); }
+  .cx-f { font: italic 400 18px Georgia, serif; fill: var(--sepia); }
+  .cx-b { fill: none; stroke: var(--ink); stroke-width: 1.8; }
+  .cx-l { stroke: var(--sepia); stroke-width: 1.2; fill: none; }
+  .cx-p { fill: var(--red); opacity: 0; }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<text class="cx-h" x="80" y="84">De Motu Datorum</text>
+<line class="cx-l" x1="80" y1="98" x2="520" y2="98" filter="url(#cx-a)"/>
+<g transform="translate(1120,140) scale(-1,1)" aria-hidden="true">
+  <text class="cx-f" x="0" y="0">nota bene — il flusso non si ferma</text>
+  <text class="cx-f" x="0" y="26">ogni cosa scorre</text>
+</g>
+<rect x="80" y="180" width="300" height="150" rx="4" fill="var(--panel)" filter="url(#cx-a)"/>
+<rect class="cx-b" x="80" y="180" width="300" height="150" rx="4" filter="url(#cx-a)"/>
+<line class="cx-l" x1="92" y1="222" x2="368" y2="222" filter="url(#cx-a)"/>
+<line class="cx-l" x1="92" y1="324" x2="114" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="104" y1="324" x2="126" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="116" y1="324" x2="138" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="128" y1="324" x2="150" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="140" y1="324" x2="162" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="152" y1="324" x2="174" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="164" y1="324" x2="186" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="176" y1="324" x2="198" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="188" y1="324" x2="210" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<text class="cx-f" x="92" y="210">i</text>
+<rect x="450" y="180" width="300" height="150" rx="4" fill="var(--panel)" filter="url(#cx-a)"/>
+<rect class="cx-b" x="450" y="180" width="300" height="150" rx="4" filter="url(#cx-a)"/>
+<line class="cx-l" x1="462" y1="222" x2="738" y2="222" filter="url(#cx-a)"/>
+<line class="cx-l" x1="462" y1="324" x2="484" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="474" y1="324" x2="496" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="486" y1="324" x2="508" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="498" y1="324" x2="520" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="510" y1="324" x2="532" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="522" y1="324" x2="544" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="534" y1="324" x2="556" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="546" y1="324" x2="568" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="558" y1="324" x2="580" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<text class="cx-f" x="462" y="210">ii</text>
+<rect x="820" y="180" width="300" height="150" rx="4" fill="var(--panel)" filter="url(#cx-a)"/>
+<rect class="cx-b" x="820" y="180" width="300" height="150" rx="4" filter="url(#cx-a)"/>
+<line class="cx-l" x1="832" y1="222" x2="1108" y2="222" filter="url(#cx-a)"/>
+<line class="cx-l" x1="832" y1="324" x2="854" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="844" y1="324" x2="866" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="856" y1="324" x2="878" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="868" y1="324" x2="890" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="880" y1="324" x2="902" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="892" y1="324" x2="914" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="904" y1="324" x2="926" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="916" y1="324" x2="938" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<line class="cx-l" x1="928" y1="324" x2="950" y2="300" opacity=".55" filter="url(#cx-a)"/>
+<text class="cx-f" x="832" y="210">iii</text>
+<g data-bg="var(--panel)">
+  <text class="cx-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="cx-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--panel)">
+  <text class="cx-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="cx-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--panel)">
+  <text class="cx-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="cx-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<line class="cx-b" x1="380" y1="261" x2="450" y2="261" filter="url(#cx-a)"/>
+<path class="cx-b" d="M439 256 L450 261 L439 266" filter="url(#cx-a)"/>
+<line class="cx-b" x1="750" y1="261" x2="820" y2="261" filter="url(#cx-a)"/>
+<path class="cx-b" d="M809 256 L820 261 L809 266" filter="url(#cx-a)"/>
+<circle class="cx-p" cx="386" cy="261" r="5"/>
+<text class="cx-f" x="80" y="416">carta 31 recto — inchiostro ferrogallico</text>
+<rect x="0" y="0" width="1200" height="460" filter="url(#cx-g)" style="mix-blend-mode:multiply"/>
+</svg>

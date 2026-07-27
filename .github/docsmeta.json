@@ -1,5 +1,5 @@
 {
-  "$schema_note": "Config for the pretty-docs skills (pretty-hyper-docs, pretty-svg-docs, update-docs). Committed. No secrets.",
+  "$schema_note": "Config for the pretty-docs skills (pretty-hyper-docs, pretty-plain-docs, pretty-svg-docs, update-docs). Committed. No secrets.",
   "org": "Zerø Effort",
   "year_policy": "range",
   "first_year": 2026,

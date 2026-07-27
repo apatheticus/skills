@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Watercolour — Source, Transform, Store</title>
+<desc>Three translucent washes in cobalt, rose and ochre on cold-pressed paper, multiplying where they overlap, each with a darker dried edge. Labels sit on the paper, not the wash.</desc>
+<defs>
+  <filter id="wc-a" data-style="watercolor" x="-10%" y="-18%" width="120%" height="136%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.012 0.018" numOctaves="3" seed="12" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="7" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="wc-g" data-style="watercolor" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.72 0.72" numOctaves="2" seed="44"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope=".14"/></feComponentTransfer>
+  </filter>
+</defs>
+<style>
+svg { --ground:#FBF8F1; --ink:#2A3138; --muted:#4A525B; --blue:#5B86B5; --bluedk:#2E5C8A; --rose:#C08497; --rosedk:#96566B; --ochre:#C8A15A; --ochredk:#8A6A2E; --wash:#DCE7F0; }
+  .wc-h { font: 400 38px Georgia, "Palatino", serif; fill: var(--ink); }
+  .wc-t { font: 400 25px Georgia, "Palatino", serif; fill: var(--ink); }
+  .wc-s { font: italic 400 19px Georgia, serif; fill: var(--muted); }
+  .wc-f { font: italic 400 18px Georgia, serif; fill: var(--muted); }
+  .wc-e { fill: none; stroke-width: 3; opacity: .55; }
+  .wc-p { fill: var(--rosedk); opacity: 0; }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<text class="wc-h" x="80" y="88">A wash of data</text>
+<rect x="80" y="102" width="300" height="7" fill="var(--wash)" filter="url(#wc-a)"/>
+<text class="wc-f" x="80" y="136">wet on wet — edges left to dry</text>
+<rect x="80" y="180" width="300" height="150" fill="var(--blue)" opacity=".42" filter="url(#wc-a)" style="mix-blend-mode:multiply"/>
+<rect x="98" y="194" width="270" height="110" fill="var(--blue)" opacity=".34" filter="url(#wc-a)" style="mix-blend-mode:multiply"/>
+<rect class="wc-e" x="80" y="180" width="300" height="150" stroke="var(--bluedk)" filter="url(#wc-a)"/>
+<rect x="106" y="300" width="230" height="9" fill="var(--bluedk)" opacity=".3" filter="url(#wc-a)"/>
+<text class="wc-f" x="90" y="170">i</text>
+<rect x="450" y="180" width="300" height="150" fill="var(--rose)" opacity=".42" filter="url(#wc-a)" style="mix-blend-mode:multiply"/>
+<rect x="468" y="194" width="270" height="110" fill="var(--rose)" opacity=".34" filter="url(#wc-a)" style="mix-blend-mode:multiply"/>
+<rect class="wc-e" x="450" y="180" width="300" height="150" stroke="var(--rosedk)" filter="url(#wc-a)"/>
+<rect x="476" y="300" width="230" height="9" fill="var(--rosedk)" opacity=".3" filter="url(#wc-a)"/>
+<text class="wc-f" x="460" y="170">ii</text>
+<rect x="820" y="180" width="300" height="150" fill="var(--ochre)" opacity=".42" filter="url(#wc-a)" style="mix-blend-mode:multiply"/>
+<rect x="838" y="194" width="270" height="110" fill="var(--ochre)" opacity=".34" filter="url(#wc-a)" style="mix-blend-mode:multiply"/>
+<rect class="wc-e" x="820" y="180" width="300" height="150" stroke="var(--ochredk)" filter="url(#wc-a)"/>
+<rect x="846" y="300" width="230" height="9" fill="var(--ochredk)" opacity=".3" filter="url(#wc-a)"/>
+<text class="wc-f" x="830" y="170">iii</text>
+<g data-bg="var(--ground)">
+  <text class="wc-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="wc-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--ground)">
+  <text class="wc-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="wc-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--ground)">
+  <text class="wc-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="wc-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<rect x="380" y="257" width="70" height="9" fill="var(--bluedk)" opacity=".45" filter="url(#wc-a)"/>
+<rect x="750" y="257" width="70" height="9" fill="var(--bluedk)" opacity=".45" filter="url(#wc-a)"/>
+<circle class="wc-p" cx="386" cy="261" r="6"/>
+<rect x="80" y="376" width="1040" height="10" fill="var(--wash)" opacity=".8" filter="url(#wc-a)"/>
+<rect x="140" y="398" width="86" height="18" fill="var(--blue)" opacity=".5" filter="url(#wc-a)"/>
+<rect x="258" y="398" width="86" height="18" fill="var(--rose)" opacity=".5" filter="url(#wc-a)"/>
+<rect x="376" y="398" width="86" height="18" fill="var(--ochre)" opacity=".5" filter="url(#wc-a)"/>
+<rect x="494" y="398" width="86" height="18" fill="var(--blue)" opacity=".5" filter="url(#wc-a)"/>
+<rect x="612" y="398" width="86" height="18" fill="var(--rose)" opacity=".5" filter="url(#wc-a)"/>
+<rect x="730" y="398" width="86" height="18" fill="var(--ochre)" opacity=".5" filter="url(#wc-a)"/>
+<rect x="848" y="398" width="86" height="18" fill="var(--blue)" opacity=".5" filter="url(#wc-a)"/>
+<rect x="966" y="398" width="86" height="18" fill="var(--rose)" opacity=".5" filter="url(#wc-a)"/>
+<rect x="1010" y="392" width="110" height="26" fill="var(--bluedk)" opacity=".28" filter="url(#wc-a)"/>
+<rect x="1040" y="352" width="10" height="44" fill="var(--ochredk)" opacity=".55" filter="url(#wc-a)"/>
+<rect x="0" y="0" width="1200" height="460" filter="url(#wc-g)" style="mix-blend-mode:multiply"/>
+</svg>

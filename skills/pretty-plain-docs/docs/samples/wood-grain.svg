@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--timber)" data-specimen="true">
+<title>Wood grain — Source, Transform, Store</title>
+<desc>Three sanded oak plates set into a plank whose growth rings are displaced by a directional turbulence field, with pyrographed labels and brass pins.</desc>
+<defs>
+  <filter id="wg-a" data-style="wood-grain" x="-10%" y="-18%" width="120%" height="136%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.006 0.055" numOctaves="4" seed="8" result="n"/>
+    <feDisplacementMap in="SourceGraphic" in2="n" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="wg-g" data-style="wood-grain" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency="0.02 0.9" numOctaves="3" seed="26"/>
+    <feColorMatrix type="saturate" values="0"/>
+    <feComponentTransfer><feFuncA type="linear" slope=".22"/></feComponentTransfer>
+  </filter>
+</defs>
+<style>
+svg { --ground:#6B4423; --timber:#8A5C31; --timberdk:#4A2D15; --sanded:#C9A678; --ink:#2E1B0C; --muted:#4A2D15; --burn:#3A2110; --brass:#B98A3C; --reversed:#F4ECE0; }
+  .wg-h { font: 400 40px "Bookman Old Style", Georgia, serif; fill: var(--reversed); letter-spacing: 3px; }
+  .wg-t { font: 700 25px "Bookman Old Style", Georgia, serif; fill: var(--ink); letter-spacing: 1px; }
+  .wg-s { font: italic 400 19px Georgia, serif; fill: var(--muted); }
+  .wg-f { font: 400 18px Georgia, serif; fill: var(--reversed); }
+  .wg-r { stroke: var(--timberdk); stroke-width: 1.4; fill: none; opacity: .55; }
+  .wg-p { fill: var(--brass); opacity: 0; }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--timber)"/>
+<line class="wg-r" x1="0" y1="6" x2="1200" y2="6" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="24" x2="1200" y2="24" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="42" x2="1200" y2="42" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="60" x2="1200" y2="60" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="78" x2="1200" y2="78" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="96" x2="1200" y2="96" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="114" x2="1200" y2="114" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="132" x2="1200" y2="132" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="150" x2="1200" y2="150" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="168" x2="1200" y2="168" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="186" x2="1200" y2="186" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="204" x2="1200" y2="204" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="222" x2="1200" y2="222" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="240" x2="1200" y2="240" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="258" x2="1200" y2="258" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="276" x2="1200" y2="276" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="294" x2="1200" y2="294" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="312" x2="1200" y2="312" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="330" x2="1200" y2="330" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="348" x2="1200" y2="348" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="366" x2="1200" y2="366" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="384" x2="1200" y2="384" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="402" x2="1200" y2="402" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="420" x2="1200" y2="420" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="438" x2="1200" y2="438" filter="url(#wg-a)"/>
+<line class="wg-r" x1="0" y1="456" x2="1200" y2="456" filter="url(#wg-a)"/>
+<ellipse class="wg-r" cx="240" cy="230" rx="60" ry="190" filter="url(#wg-a)"/>
+<ellipse class="wg-r" cx="620" cy="230" rx="74" ry="200" filter="url(#wg-a)"/>
+<ellipse class="wg-r" cx="1000" cy="230" rx="88" ry="210" filter="url(#wg-a)"/>
+<text class="wg-h" x="80" y="86">GRAIN &amp; FLOW</text>
+<rect x="80" y="100" width="330" height="4" fill="var(--burn)" opacity=".7" filter="url(#wg-a)"/>
+<text class="wg-f" x="80" y="132">pyrography on sanded oak</text>
+<rect x="80" y="180" width="300" height="150" rx="6" fill="var(--timberdk)" opacity=".45" filter="url(#wg-a)"/>
+<rect x="88" y="188" width="284" height="134" rx="4" fill="var(--sanded)" filter="url(#wg-a)"/>
+<rect x="88" y="188" width="284" height="134" rx="4" fill="none" stroke="var(--burn)" stroke-width="2" filter="url(#wg-a)"/>
+<line x1="102" y1="228" x2="358" y2="228" stroke="var(--burn)" stroke-width="1.6" opacity=".7" filter="url(#wg-a)"/>
+<g data-bg="var(--sanded)"><text class="wg-s" x="102" y="218">no. 1</text></g>
+<line class="wg-r" x1="100" y1="290" x2="360" y2="290" filter="url(#wg-a)"/>
+<line class="wg-r" x1="100" y1="297" x2="360" y2="297" filter="url(#wg-a)"/>
+<line class="wg-r" x1="100" y1="304" x2="360" y2="304" filter="url(#wg-a)"/>
+<line class="wg-r" x1="100" y1="311" x2="360" y2="311" filter="url(#wg-a)"/>
+<line class="wg-r" x1="100" y1="318" x2="360" y2="318" filter="url(#wg-a)"/>
+<circle cx="350" cy="206" r="4" fill="var(--brass)" filter="url(#wg-a)"/>
+<circle cx="350" cy="216" r="4" fill="var(--brass)" filter="url(#wg-a)"/>
+<rect x="450" y="180" width="300" height="150" rx="6" fill="var(--timberdk)" opacity=".45" filter="url(#wg-a)"/>
+<rect x="458" y="188" width="284" height="134" rx="4" fill="var(--sanded)" filter="url(#wg-a)"/>
+<rect x="458" y="188" width="284" height="134" rx="4" fill="none" stroke="var(--burn)" stroke-width="2" filter="url(#wg-a)"/>
+<line x1="472" y1="228" x2="728" y2="228" stroke="var(--burn)" stroke-width="1.6" opacity=".7" filter="url(#wg-a)"/>
+<g data-bg="var(--sanded)"><text class="wg-s" x="472" y="218">no. 2</text></g>
+<line class="wg-r" x1="470" y1="290" x2="730" y2="290" filter="url(#wg-a)"/>
+<line class="wg-r" x1="470" y1="297" x2="730" y2="297" filter="url(#wg-a)"/>
+<line class="wg-r" x1="470" y1="304" x2="730" y2="304" filter="url(#wg-a)"/>
+<line class="wg-r" x1="470" y1="311" x2="730" y2="311" filter="url(#wg-a)"/>
+<line class="wg-r" x1="470" y1="318" x2="730" y2="318" filter="url(#wg-a)"/>
+<circle cx="720" cy="206" r="4" fill="var(--brass)" filter="url(#wg-a)"/>
+<circle cx="720" cy="216" r="4" fill="var(--brass)" filter="url(#wg-a)"/>
+<rect x="820" y="180" width="300" height="150" rx="6" fill="var(--timberdk)" opacity=".45" filter="url(#wg-a)"/>
+<rect x="828" y="188" width="284" height="134" rx="4" fill="var(--sanded)" filter="url(#wg-a)"/>
+<rect x="828" y="188" width="284" height="134" rx="4" fill="none" stroke="var(--burn)" stroke-width="2" filter="url(#wg-a)"/>
+<line x1="842" y1="228" x2="1098" y2="228" stroke="var(--burn)" stroke-width="1.6" opacity=".7" filter="url(#wg-a)"/>
+<g data-bg="var(--sanded)"><text class="wg-s" x="842" y="218">no. 3</text></g>
+<line class="wg-r" x1="840" y1="290" x2="1100" y2="290" filter="url(#wg-a)"/>
+<line class="wg-r" x1="840" y1="297" x2="1100" y2="297" filter="url(#wg-a)"/>
+<line class="wg-r" x1="840" y1="304" x2="1100" y2="304" filter="url(#wg-a)"/>
+<line class="wg-r" x1="840" y1="311" x2="1100" y2="311" filter="url(#wg-a)"/>
+<line class="wg-r" x1="840" y1="318" x2="1100" y2="318" filter="url(#wg-a)"/>
+<circle cx="1090" cy="206" r="4" fill="var(--brass)" filter="url(#wg-a)"/>
+<circle cx="1090" cy="216" r="4" fill="var(--brass)" filter="url(#wg-a)"/>
+<g data-bg="var(--sanded)">
+  <text class="wg-t" x="230" y="258" text-anchor="middle">Source</text>
+  <text class="wg-s" x="230" y="288" text-anchor="middle">event stream</text>
+</g>
+<g data-bg="var(--sanded)">
+  <text class="wg-t" x="600" y="258" text-anchor="middle">Transform</text>
+  <text class="wg-s" x="600" y="288" text-anchor="middle">map, filter</text>
+</g>
+<g data-bg="var(--sanded)">
+  <text class="wg-t" x="970" y="258" text-anchor="middle">Store</text>
+  <text class="wg-s" x="970" y="288" text-anchor="middle">warehouse</text>
+</g>
+<rect x="380" y="257" width="70" height="9" rx="4" fill="var(--brass)" filter="url(#wg-a)"/>
+<rect x="750" y="257" width="70" height="9" rx="4" fill="var(--brass)" filter="url(#wg-a)"/>
+<circle class="wg-p" cx="386" cy="261" r="6"/>
+<rect x="80" y="392" width="1040" height="3" fill="var(--burn)" opacity=".6" filter="url(#wg-a)"/>
+<text class="wg-f" x="80" y="420">burned in, not printed</text>
+<rect x="0" y="0" width="1200" height="460" filter="url(#wg-g)" style="mix-blend-mode:multiply"/>
+</svg>
