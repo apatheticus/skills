@@ -171,6 +171,7 @@ sequenceDiagram
 ## References
 
 - [DEVELOPMENT.md](DEVELOPMENT.md) — local setup and workflows.
+- [DEPLOYMENT.md](DEPLOYMENT.md) — deploying and rolling back.
 - [CONTRIBUTING.md](CONTRIBUTING.md) — contribution process.
 - [SECURITY.md](SECURITY.md) — security posture.
 

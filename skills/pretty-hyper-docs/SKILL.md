@@ -1,6 +1,6 @@
 ---
 name: pretty-hyper-docs
-description: Requires the HyperFrames toolchain, ffmpeg, and img2webp. Creates and maintains a repository's standard documentation — README, ARCHITECTURE, DEVELOPMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, plus on-demand LICENSE, NOTICE, issue/PR templates, and CODEOWNERS — and beautifies it with a per-repo design system and seamless-loop animated WebP visuals rendered from HTML compositions via HyperFrames. Use this only when the user specifically wants WebP visuals or names HyperFrames, or invokes /pretty-hyper-docs, or is maintaining a repo whose existing visuals were already produced this way. For a generic request for beautiful, illustrated, animated, or visually polished docs — and on any machine without the HyperFrames toolchain installed — the sibling pretty-svg-docs skill is the better fit — it authors animated SVG directly with zero external dependencies and offers a named-style picker. For plain text-only doc maintenance without visuals, the sibling update-docs skill fits better.
+description: Requires the HyperFrames toolchain, ffmpeg, and img2webp. Creates and maintains a repository's standard documentation — README, ARCHITECTURE, DEVELOPMENT, DEPLOYMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, plus on-demand LICENSE, NOTICE, issue/PR templates, and CODEOWNERS — and beautifies it with a per-repo design system and seamless-loop animated WebP visuals rendered from HTML compositions via HyperFrames. Use this only when the user specifically wants WebP visuals or names HyperFrames, or invokes /pretty-hyper-docs, or is maintaining a repo whose existing visuals were already produced this way. For a generic request for beautiful, illustrated, animated, or visually polished docs — and on any machine without the HyperFrames toolchain installed — the sibling pretty-svg-docs skill is the better fit — it authors animated SVG directly with zero external dependencies. For plain text-only doc maintenance without visuals, the sibling update-docs skill fits better.
 ---
 
 # pretty-hyper-docs
@@ -46,7 +46,13 @@ npx hyperframes skills check --json
 ## Documents in scope
 
 **Tier 1 — managed on every default run:**
-README · ARCHITECTURE · DEVELOPMENT · CONTRIBUTING · CODE_OF_CONDUCT · SECURITY · SUPPORT
+README · ARCHITECTURE · DEVELOPMENT · DEPLOYMENT · CONTRIBUTING · CODE_OF_CONDUCT · SECURITY · SUPPORT
+
+DEPLOYMENT is **signal-gated**: written only when the evidence pass finds a real
+deploy target (platform config, container/IaC artefacts, a deploying CI workflow,
+migrations plus a service). No signal → report it `N/A — no deploy target` and write
+nothing; publish/release mechanics stay in DEVELOPMENT and CONTRIBUTING. The signal
+list and the DEVELOPMENT boundary are in `reference/deployment.md`.
 
 **Tier 2 — only when explicitly named or a clear signal demands it:**
 LICENSE · NOTICE · `.github/ISSUE_TEMPLATE/*` · `PULL_REQUEST_TEMPLATE.md` · CODEOWNERS
@@ -67,7 +73,7 @@ existing convention rather than creating duplicates.
 | Invocation | Effect |
 | --- | --- |
 | `/pretty-hyper-docs` | Full pass over Tier 1: content + visuals |
-| `/pretty-hyper-docs <target> [<target>…]` | Only the named docs (`readme`, `security`, …; Tier 2 by explicit name) |
+| `/pretty-hyper-docs <target> [<target>…]` | Only the named docs (`readme`, `deployment`, `security`, …; Tier 2 by explicit name) |
 | `/pretty-hyper-docs check` | **Read-only audit** — content verdicts (`CREATE`/`UPDATE`/`OK`) *and* visual verdicts (`OK`/`MISSING`/`STALE`/`DRIFT`/`CONTRADICTS`/`BUDGET`). Writes nothing. |
 | `--refresh-viz` | Force re-render of every in-scope visual regardless of hashes |
 | `--no-viz` | Content-only run; leave every existing visual and marker untouched |
@@ -78,9 +84,10 @@ existing convention rather than creating duplicates.
 
 | Doc | Audience | Visual treatment |
 | --- | --- | --- |
-| README | Everyone; first visit | Animated hero + up to 3 animated diagrams; **rich alt text, no Mermaid fallback**. Purpose/solution/getting-started/usage only — repo-process detail links out to DEVELOPMENT/CONTRIBUTING. |
+| README | Everyone; first visit | Animated hero + up to 3 animated diagrams; **rich alt text, no Mermaid fallback**. Purpose/solution/getting-started/usage only — repo-process detail links out to DEVELOPMENT/DEPLOYMENT/CONTRIBUTING. |
 | ARCHITECTURE | Engineers | 1–2 flagship animated diagrams, each + collapsed `<details>` Mermaid source; rest static SVG or plain Mermaid |
 | DEVELOPMENT | Engineers | Same treatment as ARCHITECTURE |
+| DEPLOYMENT | Operators/engineers deploying it | Same treatment as ARCHITECTURE; created only when a deploy target exists |
 | CONTRIBUTING | Engineers/contributors | Same treatment as ARCHITECTURE |
 | SECURITY | Everyone; prescriptive | One attention banner: "report privately, never a public issue" |
 | CODE_OF_CONDUCT | Everyone; prescriptive | One attention banner: the core conduct expectation; covenant body untouched |
@@ -92,7 +99,7 @@ existing convention rather than creating duplicates.
 | Doc | Animated | Static SVG |
 | --- | --- | --- |
 | README | hero + ≤3 diagrams | as needed |
-| ARCHITECTURE / DEVELOPMENT / CONTRIBUTING | 1–2 flagship each | remaining diagrams |
+| ARCHITECTURE / DEVELOPMENT / DEPLOYMENT / CONTRIBUTING | 1–2 flagship each | remaining diagrams |
 | SECURITY / CODE_OF_CONDUCT | ≤1 (the banner; static also fine) | — |
 | SUPPORT | 0 | ≤1 header |
 | LICENSE / NOTICE / templates / CODEOWNERS | 0 — hard gate | 0 — hard gate |

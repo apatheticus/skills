@@ -31,12 +31,14 @@ No volatile facts).
 
 - **Intro.** State the support reality plainly. If support is best-effort and routed
   through the issue tracker, say that — don't imply a staffed help desk.
-- **How do I get help?** A `flowchart TD` decision tree mapping need → channel: setup
-  problem → DEVELOPMENT troubleshooting; bug → issue tracker; vulnerability → SECURITY;
+- **How do I get help?** A `flowchart TD` decision tree mapping need → channel: local
+  setup problem → DEVELOPMENT troubleshooting; deploy or environment problem →
+  DEPLOYMENT (only when that doc exists); bug → issue tracker; vulnerability → SECURITY;
   scope/behavior question → the spec then Issues/Discussions; commercial → the
   configured briefing contact. Adapt the channels to the detected forge.
-- **Documentation index.** Link the Tier 1 docs and any authoritative spec, each with a
-  half-line. Overlaps with README's Documentation section by design — this is the
+- **Documentation index.** Link the Tier 1 docs that exist (DEPLOYMENT only on a repo
+  that deploys) and any authoritative spec, each with a half-line. Overlaps with
+  README's Documentation section by design — this is the
   support-shaped entry point.
 - **Reporting a bug.** What a good report includes, tuned to the project (the relevant
   state to capture, the route/command, repro steps, expected vs actual, errors). Link
@@ -69,9 +71,11 @@ through the issue tracker)>.
 flowchart TD
     Start["What do you need?"]
     Start --> Setup["Setup or run problem?"]
+    Start --> Deploy["Deploy or environment problem?"]
     Start --> Bug["Found a bug?"]
     Start --> Vuln["Security vulnerability?"]
     Setup --> SetupA["See DEVELOPMENT.md troubleshooting"]
+    Deploy --> DeployA["See DEPLOYMENT.md"]
     Bug --> BugA["Open an issue on <tracker>"]
     Vuln --> VulnA["See SECURITY.md (private report)"]
 ```
@@ -79,7 +83,8 @@ flowchart TD
 ## Documentation index
 
 - [README.md](README.md) — what it is and how to run it.
-- [DEVELOPMENT.md](DEVELOPMENT.md) — setup and troubleshooting.
+- [DEVELOPMENT.md](DEVELOPMENT.md) — local setup and troubleshooting.
+- [DEPLOYMENT.md](DEPLOYMENT.md) — deploying and rolling back.
 - [CONTRIBUTING.md](CONTRIBUTING.md) — how to propose changes.
 
 ## Reporting a bug

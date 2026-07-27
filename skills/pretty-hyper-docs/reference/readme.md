@@ -12,7 +12,7 @@ learn what this project does, decide whether it's for them, and get it running.
 
 Everything else routes out. CI/CD detail, testing controls, and dev-procedure
 content do **not** get full sections here — they demote to a one-line link-out to
-`DEVELOPMENT.md` or `CONTRIBUTING.md`. The one exception: when that tooling **is**
+`DEPLOYMENT.md`, `DEVELOPMENT.md`, or `CONTRIBUTING.md`. The one exception: when that tooling **is**
 the product (the repo ships a test runner, a CI system, a linter), it's a feature and
 belongs in the body like any other feature.
 
@@ -37,7 +37,7 @@ project actually has the thing they describe.
 | API surface | conditional — when there's an API | route/handler layout |
 | Project structure | required | directory tree |
 | Getting started (prerequisites, install, run, usage) | required | manifest, configs |
-| Deployment | conditional — one-line link-out unless deployment is the product | configs, CI |
+| Deployment | conditional — one-line link-out to DEPLOYMENT.md when it exists, else DEVELOPMENT.md; fuller only when deployment is the product | configs, CI |
 | Testing | link-out — one line pointing to DEVELOPMENT.md, unless testing is the product | test setup |
 | Documentation (links every Tier 1 doc) | required | the doc set |
 | License | required | LICENSE, docsmeta |
@@ -64,8 +64,9 @@ project actually has the thing they describe.
   listing is the one allowed non-Mermaid, non-animated "diagram"), annotated with one
   short note per top-level entry. Generate it from the real tree; don't list folders
   that don't exist.
-- **Deployment / Testing.** One line each, pointing at `DEVELOPMENT.md` /
-  `CONTRIBUTING.md`, unless that tooling is the product. Don't reproduce the pipeline
+- **Deployment / Testing.** One line each. Deployment points at `DEPLOYMENT.md` when
+  that doc exists, otherwise `DEVELOPMENT.md`; Testing points at `DEVELOPMENT.md` or
+  `CONTRIBUTING.md`. Unless that tooling is the product, don't reproduce the pipeline
   or the test matrix in the README.
 - **Documentation.** Link every Tier 1 doc that exists, each with a half-line of what
   it covers. This is the hub of the cross-link web.
@@ -188,6 +189,7 @@ See [DEVELOPMENT.md](DEVELOPMENT.md#testing) for how tests are run.
 
 - [ARCHITECTURE.md](ARCHITECTURE.md) — system design and diagrams.
 - [DEVELOPMENT.md](DEVELOPMENT.md) — local setup and workflows.
+- [DEPLOYMENT.md](DEPLOYMENT.md) — deploying, promotion, and rollback. <when it exists>
 - [CONTRIBUTING.md](CONTRIBUTING.md) — how to propose changes.
 - [SECURITY.md](SECURITY.md) — reporting a vulnerability.
 - [SUPPORT.md](SUPPORT.md) — where to get help.
