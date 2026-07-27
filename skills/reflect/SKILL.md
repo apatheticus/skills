@@ -4,7 +4,7 @@ description: Generate a comprehensive, evidence-backed reflection report on how 
 argument-hint: "[window: 30d|90d|all] [focus: free text, e.g. a project or theme]"
 user-invocable: true
 license: MIT
-version: 1.0.0
+version: 1.1.0
 ---
 
 # reflect
@@ -113,9 +113,11 @@ Shape:
 ### Phase 4 — Report
 
 Read `reference/report-guide.md` for structure, interactivity, motion, and
-the self-containment rules, and `reference/design-system/` (DESIGN.md +
-colors_and_type.css + components.css — bundled copies of the Neumorphic
-Fresh design system) for tokens and components. Requirements in brief:
+the self-containment rules, and `reference/design-system/` — a bundled copy of
+the **SaaS Pro** design system: `DESIGN.md` and `MOTION.md` (the standards),
+`tokens/*.css` (four token files), `components.css` (the `sp-*` class layer),
+and `charts/` (chart geometry references, read-only — see its README).
+Requirements in brief:
 
 - Single self-contained HTML file at `REPORT`. No external requests: vendor
   GSAP inline (curl the minified build and embed); include three.js only if

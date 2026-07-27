@@ -1,397 +1,302 @@
 ---
-version: alpha
-name: Neumorphic Fresh
+version: "1.0"
+name: SaaS Pro
 description: >-
-  A motion-rich soft-UI (neumorphic) design system with a bright mint→teal→cyan
-  accent story and springy motion. Surfaces share one tonal base per theme and
-  are raised by paired light/dark shadows rather than borders or fill changes.
-  Ships in both light and dark themes. Token values below are the LIGHT theme
-  (canonical); dark-theme equivalents are suffixed `-dark`. See README.md for
-  full brand context and SKILL.md for the agent entry point.
+  A light, glass-and-gradient dashboard system built for reporting: numbers first,
+  soft physics, blue-tinted neutrals. Two card worlds on one page — white cards for
+  KPIs and prose, dark navy cards for dense data (every chart and every table).
+  There is no dark page theme and one must not be invented. Token values below are
+  transcribed from tokens/*.css, which is the runtime implementation.
+authority: >-
+  The CSS files in tokens/ are authoritative. This frontmatter mirrors them for
+  machine reads and is not a second source of truth — if the two ever disagree,
+  the CSS is correct and this block is stale. components.css is a hand-derived
+  CSS projection of the upstream React components and is authoritative for class
+  names; the prose in section 5 is authoritative for how to use them.
 colors:
-  # ---- Brand accent ramp (theme-independent hues) ----
-  primary: "#11d3a3"          # mint — the signature accent
-  primary-strong: "#0bb98d"   # mint pressed / active
-  primary-soft: "#6cf0cf"     # mint tint
-  secondary: "#12b5c9"        # teal
-  tertiary: "#28c8e8"         # cyan
-  lime: "#8fe06a"             # energy accent
-  # ---- Semantic ----
-  success: "#2fc97a"
-  warning: "#f5a623"
-  danger: "#fb6b6b"
-  info: "#3fb6f0"
-  # ---- Light theme surfaces (neumorphic: surface == background) ----
-  neutral: "#e6e9ef"          # the single tonal base / canvas
-  background: "#e6e9ef"
-  surface: "#e6e9ef"          # cards share the canvas color, raised by shadow
-  surface-2: "#edf0f5"        # subtly raised section
-  surface-inset: "#e1e5ec"    # pressed wells (inputs, tracks)
-  # ---- Light theme shadow stops (drive every elevation) ----
-  shadow-light: "#ffffff"     # top-left highlight
-  shadow-dark: "#c3cad6"      # bottom-right shadow
-  # ---- Light theme text ----
-  on-surface: "#2b303b"            # primary text (fg1)
-  on-surface-secondary: "#5b6472"  # secondary text (fg2)
-  on-surface-tertiary: "#8a93a4"   # tertiary / captions (fg3)
-  on-accent: "#06241d"             # deep teal-black for text on accent fills
-  # ---- Hairlines (used sparingly) ----
-  line: "#2b303b"             # apply at ~8% alpha — borders are nearly absent
-  # ---- Dark theme equivalents ----
-  background-dark: "#23262e"
-  surface-dark: "#23262e"
-  surface-2-dark: "#272b34"
-  surface-inset-dark: "#1f222a"
-  shadow-light-dark: "#2e333e"
-  shadow-dark-dark: "#15171d"
-  on-surface-dark: "#eef1f6"
-  on-surface-secondary-dark: "#aab3c2"
-  on-surface-tertiary-dark: "#717b8c"
-  on-accent-dark: "#042019"
+  # ---- Brand core (indigo) ----
+  brand-500: "#5B5FEF"          # the signature indigo
+  brand-600: "#4A4AE8"          # links, active text, pressed
+  brand-700: "#3B36D6"          # link hover
+  brand-400: "#7B7FF5"
+  brand-300: "#A3A7FA"
+  brand-100: "#E6E7FE"          # soft badge ground
+  brand-050: "#F3F4FF"          # secondary button ground
+  # ---- Blue secondary (gradient terminus, chart series) ----
+  blue-500: "#3B82F6"
+  blue-400: "#60A5FA"
+  blue-100: "#DBEAFE"
+  # ---- Accents: icon tiles, chart series, soft badge tints ONLY ----
+  accent-coral: "#FF7A8A"
+  accent-coral-soft: "#FFE4E8"
+  accent-green: "#2ECC9A"
+  accent-green-soft: "#D9F7EC"
+  accent-orange: "#F9A03F"
+  accent-orange-soft: "#FEF0DD"
+  accent-purple: "#8B5CF6"
+  accent-purple-soft: "#EDE7FD"
+  accent-teal: "#22C7C7"
+  accent-teal-soft: "#DAF6F6"
+  # ---- Semantic: status only. The raw hue is a FILL, not a text colour ----
+  success: "#22B07D"
+  success-soft: "#DCF6EC"
+  warning: "#F59E0B"
+  warning-soft: "#FEF3D9"
+  danger: "#EF4458"
+  danger-soft: "#FDE3E7"
+  info: "#3B82F6"
+  info-soft: "#DBEAFE"
+  # ---- Semantic TEXT ramp. Defined in components.css, not tokens/. Each raw
+  # hue scaled down in linear luminance until it clears 4.5:1 on its own soft
+  # ground: 5.26, 4.55, 4.90, 5.02. Use these for any semantic TEXT ----
+  success-strong: "#15714F"
+  warning-strong: "#B45309"     # upstream's own value, kept verbatim
+  danger-strong: "#B8303F"      # also the filled danger button's ground
+  info-strong: "#2B5FB8"
+  # ---- Neutral "ink" scale: cool, blue-tinted. Never pure gray, never pure black ----
+  ink-900: "#12142B"            # headings
+  ink-800: "#1E2142"            # table cell text
+  ink-700: "#333759"
+  ink-600: "#4C5273"            # body text
+  ink-500: "#6A7091"            # labels
+  ink-400: "#9297B3"            # muted / overlines / axis ticks
+  ink-300: "#BEC2D6"
+  ink-200: "#DDDFEB"
+  ink-100: "#EDEEF6"            # tracks, gridlines, neutral badge ground
+  ink-050: "#F6F7FC"            # sunken rows, hover ground
+  white: "#FFFFFF"
+  # ---- Dark data-card palette. A CARD surface, not a page theme ----
+  navy-900: "#23265E"
+  navy-800: "#2B2F76"
+  navy-700: "#383D8F"
+  navy-line: "rgba(255,255,255,0.12)"
+  navy-text: "rgba(255,255,255,0.92)"
+  navy-text-dim: "rgba(255,255,255,0.55)"
+  # ---- Gradients: identity, not decoration ----
+  grad-brand: "linear-gradient(135deg, #6A6FF7 0%, #4A4AE8 55%, #3B82F6 100%)"
+  grad-header: "linear-gradient(90deg, #5B5FEF 0%, #3B82F6 100%)"
+  grad-coral: "linear-gradient(150deg, #FF9AA7 0%, #FF7A8A 60%, #F9A03F 130%)"
+  grad-green: "linear-gradient(150deg, #4ADCB0 0%, #2ECC9A 100%)"
+  grad-orange: "linear-gradient(150deg, #FFB95C 0%, #F9A03F 100%)"
+  grad-purple: "linear-gradient(150deg, #A78BFA 0%, #8B5CF6 100%)"
+  grad-navy: "linear-gradient(165deg, #2E3277 0%, #23265E 100%)"
+  grad-page: "linear-gradient(180deg, #F2F4FF 0%, #FAFBFF 40%, #F4F6FE 100%)"
+  # ---- Semantic aliases: prefer these in markup ----
+  text-heading: ink-900
+  text-body: ink-600
+  text-muted: ink-400
+  text-on-brand: "#FFFFFF"
+  surface-page: "#F4F6FE"
+  surface-card: "#FFFFFF"
+  surface-raised: "#FFFFFF"
+  surface-sunken: ink-050
+  surface-glass: "rgba(255,255,255,0.65)"
+  surface-dark: navy-900
+  border-subtle: "rgba(28,32,84,0.08)"
+  border-default: "rgba(28,32,84,0.13)"
+  border-glass: "rgba(255,255,255,0.55)"
+  focus-ring: "0 0 0 3px rgba(91,95,239,0.30)"
 typography:
-  display:
-    fontFamily: Sora
-    fontSize: 72px
-    fontWeight: 800
-    lineHeight: 1.1
-    letterSpacing: -0.02em
-  headline-lg:                 # h1
-    fontFamily: Sora
-    fontSize: 52px
-    fontWeight: 700
-    lineHeight: 1.1
-    letterSpacing: -0.02em
-  headline-md:                 # h2
-    fontFamily: Sora
-    fontSize: 38px
-    fontWeight: 700
-    lineHeight: 1.28
-    letterSpacing: -0.02em
-  headline-sm:                 # h3
-    fontFamily: Sora
-    fontSize: 28px
-    fontWeight: 600
-    lineHeight: 1.28
-    letterSpacing: -0.01em
-  title:                       # h4
-    fontFamily: Sora
-    fontSize: 20px
-    fontWeight: 600
-    lineHeight: 1.28
-  body-lg:                     # lead
-    fontFamily: Plus Jakarta Sans
-    fontSize: 18px
-    fontWeight: 400
-    lineHeight: 1.7
-  body-md:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 16px
-    fontWeight: 400
-    lineHeight: 1.55
-  body-sm:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 14px
-    fontWeight: 400
-    lineHeight: 1.55
-  label-md:                    # buttons, UI labels (display family)
-    fontFamily: Sora
-    fontSize: 14px
-    fontWeight: 600
-    lineHeight: 1.28
-    letterSpacing: -0.01em
-  caption:
-    fontFamily: Plus Jakarta Sans
-    fontSize: 14px
-    fontWeight: 400
-    lineHeight: 1.55
-  overline:                    # tiny tracked caps eyebrow
-    fontFamily: Plus Jakarta Sans
-    fontSize: 12px
-    fontWeight: 700
-    lineHeight: 1
-    letterSpacing: 0.12em
-  mono:                        # code, data, timestamps
-    fontFamily: JetBrains Mono
-    fontSize: 14px
-    fontWeight: 400
-    lineHeight: 1.55
-rounded:
-  xs: 8px
-  sm: 12px
-  md: 18px
-  lg: 26px
-  xl: 34px
-  2xl: 44px
-  full: 999px
-spacing:
-  base: 16px
-  xs: 4px
-  sm: 8px
-  md: 12px
-  lg: 16px
-  xl: 24px
+  families:
+    sans: "'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif"
+    mono: "'JetBrains Mono', ui-monospace, 'SF Mono', monospace"
+  scale:                         # --text-*
+    2xs: 11px                    # the floor; never smaller
+    xs: 12px
+    sm: 13px
+    md: 14px
+    lg: 16px
+    xl: 20px
+    2xl: 26px
+    3xl: 34px
+    4xl: 44px
+  weights:                       # --weight-*
+    regular: 400
+    medium: 500
+    semibold: 600
+    bold: 700
+    extrabold: 800
+  leading:                       # --leading-*
+    tight: 1.15
+    snug: 1.35
+    normal: 1.55
+  tracking:                      # --tracking-*
+    tight: -0.02em
+    caps: 0.08em
+  roles:                         # derived from section 3; implemented by components.css
+    kpi:
+      fontSize: 30px             # 30–44px depending on prominence
+      fontWeight: 800
+      letterSpacing: -0.02em
+      fontVariantNumeric: tabular-nums
+    card-title:
+      fontSize: 14px
+      fontWeight: 700
+    label:
+      fontSize: 13px             # 12–13px
+      fontWeight: 600
+    body:
+      fontSize: 13px             # 13–14px
+      fontWeight: 400
+      lineHeight: 1.55
+    overline:
+      fontSize: 11px
+      fontWeight: 700
+      textTransform: uppercase
+      letterSpacing: 0.06em      # 0.06–0.08em
+      color: ink-400
+radius:                          # --radius-*
+  xs: 6px                        # badges
+  sm: 10px                       # buttons, inputs
+  md: 14px                       # alerts
+  lg: 18px                       # cards
+  xl: 24px                       # panels, glass
   2xl: 32px
-  3xl: 40px
-  4xl: 48px
-  5xl: 64px
-  6xl: 80px
-  7xl: 112px
-  content-max: 1200px
-components:
-  # ---- Default / secondary button: raised soft pill ----
-  button:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.full}"
-    padding: 11px 20px
-  button-hover:
-    textColor: "{colors.primary-strong}"
-  button-active:
-    textColor: "{colors.on-surface-secondary}"
-  # ---- Primary: fresh gradient fill with accent glow ----
-  button-primary:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-accent}"
-    typography: "{typography.label-md}"
-    rounded: "{rounded.full}"
-    padding: 11px 20px
-  button-primary-hover:
-    backgroundColor: "{colors.secondary}"
-    textColor: "{colors.on-accent}"
-  # ---- Ghost: pressed-in well ----
-  button-ghost:
-    backgroundColor: "{colors.surface-inset}"
-    textColor: "{colors.on-surface-secondary}"
-    rounded: "{rounded.full}"
-  # ---- Danger ----
-  button-danger:
-    backgroundColor: "{colors.danger}"
-    textColor: "#ffffff"
-    rounded: "{rounded.full}"
-  # ---- Card: same color as page, raised by shadow ----
-  card:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-    rounded: "{rounded.lg}"
-    padding: 24px
-  # ---- Input / textarea / select: pressed well ----
-  input:
-    backgroundColor: "{colors.surface-inset}"
-    textColor: "{colors.on-surface}"
-    typography: "{typography.body-md}"
-    rounded: "{rounded.md}"
-    padding: 14px 18px
-  input-placeholder:
-    textColor: "{colors.on-surface-tertiary}"
-  # ---- Badge / chip ----
-  badge:
-    backgroundColor: "#11d3a324"
-    textColor: "{colors.primary-strong}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.full}"
-    padding: 5px 13px
-  chip:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface-secondary}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.full}"
-    padding: 8px 15px
-  chip-active:
-    backgroundColor: "{colors.primary}"
-    textColor: "{colors.on-accent}"
-  # ---- Toggle switch ----
-  switch:
-    backgroundColor: "{colors.surface-inset}"
-    rounded: "{rounded.full}"
-    height: 30px
-    width: 54px
-  switch-active:
-    backgroundColor: "{colors.primary}"
-  # ---- Tooltip: small raised surface ----
-  tooltip:
-    backgroundColor: "{colors.surface}"
-    textColor: "{colors.on-surface}"
-    typography: "{typography.body-sm}"
-    rounded: "{rounded.sm}"
-    padding: 6px 11px
+  pill: 999px                    # pills, progress tracks, search
+spacing:
+  grid: 4px                      # base grid; every gap is a multiple
+  scale:                         # --space-*
+    1: 4px
+    2: 8px
+    3: 12px
+    4: 16px
+    5: 20px
+    6: 24px
+    8: 32px
+    10: 40px
+    12: 48px
+    16: 64px
+  cardPadding: 20px
+  cardGutter: 18px               # 16–18px
+shadows:                         # --shadow-*
+  xs: "0 1px 2px rgba(28,32,84,0.06)"
+  sm: "0 2px 8px rgba(28,32,84,0.08)"
+  md: "0 8px 24px rgba(28,32,84,0.10)"     # resting card
+  lg: "0 16px 48px rgba(28,32,84,0.14)"    # hover / overlay
+  glow-brand: "0 8px 24px rgba(91,95,239,0.35)"
+  glow-green: "0 8px 24px rgba(46,204,154,0.35)"
+  glow-coral: "0 8px 24px rgba(255,122,138,0.35)"
+  inner-glass: "inset 0 1px 0 rgba(255,255,255,0.7)"
+motion:                          # full standard in MOTION.md
+  durations:
+    instant: 100ms
+    fast: 180ms
+    base: 280ms
+    slow: 450ms
+    hero: 800ms
+  easings:
+    out: "cubic-bezier(0.16, 1, 0.3, 1)"
+    in-out: "cubic-bezier(0.65, 0, 0.35, 1)"
+    spring: "cubic-bezier(0.34, 1.56, 0.64, 1)"
+    linear: linear
+  keyframes:                     # defined in tokens/motion.css
+    - sp-fade-up
+    - sp-scale-in
+    - sp-spin
+    - sp-pulse
+    - sp-shimmer
+    - sp-float
+    - sp-bar-grow
+    - sp-draw
+    - sp-toast-in
+components:                      # class API in components.css; rules in section 5
+  page: "sp-page — the --grad-page ground; no upstream counterpart"
+  type: "sp-display, sp-h1, sp-h2, sp-h3, sp-h4, sp-lead, sp-p, sp-small, sp-overline, sp-kpi, sp-code"
+  card: "sp-card, --hover, --dark, __title — light by default, dark for every chart and table"
+  glass: "sp-glass — chrome only, never a data surface"
+  stat: "sp-stat, __label, __value, __delta — the KPI tile; direction via [data-trend]"
+  table: "sp-table, --dark, --compact, __mono — first column 600, statuses always a badge"
+  badge: "sp-badge, --neutral/--success/--warning/--danger/--info/--brand, --dot"
+  pill: "sp-pill — filter chips; selected state via [aria-pressed]"
+  alert: "sp-alert, --info/--success/--warning/--danger, __title, __body"
+  icontile: "sp-icontile, --coral/--green/--orange/--purple/--navy — the signature motif"
+  progress: "sp-progress, __label, __value, __track, __bar"
+  ring: "sp-ring, --turn, __arc, __readout — radial meter; --turn ONLY for dash-array rings, never a polar gauge"
+  segment: "sp-segment, __btn, .is-active — verdict/family filter"
+  search: "sp-search, __input — text search across clusters"
+  button: "sp-btn, --primary/--secondary/--ghost/--danger, --sm/--lg, --icon (base IS outline)"
+  tooltip: "sp-tip — hover label from [data-tip]; not an accessible name"
+  divider: "sp-divider"
+  empty: "sp-empty, __icon, __title, __message"
 ---
 
-# Neumorphic Fresh — DESIGN.md
+# SaaS Pro — DESIGN.md
 
-> **How this fits together.** This `DESIGN.md` is the machine-readable + prose
-> source of truth for the visual system. It pairs with two companion docs:
->
-> - **`README.md`** — full brand narrative: content voice, the five brand rules,
->   the file/asset index, and per-kit notes. Read it for *why* and *how to apply*.
-> - **`SKILL.md`** — the agent entry point (Agent-Skills compatible). Start there
->   when you want to *build* something with this system.
-> - **`colors_and_type.css`** + **`components.css`** — the live CSS tokens and
->   `nf-*` primitives. The tokens in this file's front matter mirror those CSS
->   custom properties; the CSS is the runtime implementation.
->
-> Token values in the front matter are the **light theme** (canonical). Dark-theme
-> values carry a `-dark` suffix. Prose uses descriptive color names (e.g. "mint")
-> that correspond to systematic token names (e.g. `primary`); the tokens are
-> normative, the prose explains application.
+The visual standard for all SaaS Pro surfaces. Derived from a glassmorphic dashboard
+inspiration image held upstream and not bundled here. Grounded in WCAG 2.2 contrast
+requirements and platform conventions (Material elevation logic, Apple HIG glass-material
+usage), adapted to the brand.
 
-## Overview
+## 1. Principles
+1. **Numbers first.** The data is the interface. Type hierarchy exists to make KPIs legible in under a second.
+2. **Two worlds, one page.** Light glass chrome + white KPI cards; dark navy cards for dense data (charts, tables). Never mix a third card style.
+3. **Color means something.** Gradients are identity (chrome, active states, icon chips). Semantic colors are status only. Neutrals do the reading work.
+4. **Soft physics.** Everything floats: wide blue-tinted shadows, generous radii, lift-on-hover. Nothing is flat, nothing is harsh.
 
-Neumorphic Fresh is a soft-UI system where every element appears **carved from or
-pressed into a single soft surface**. Depth comes almost entirely from a paired
-highlight (top-left) and shadow (bottom-right) derived from one tonal base — there
-are virtually no hard borders or contrasting card fills. "Fresh" counters the usual
-muted, grey neumorphism with a lively mint→teal→cyan accent, real semantic color,
-crisp focus rings and energetic spring motion.
+## 2. Color
+- Brand: indigo `--brand-500 #5B5FEF` → blue `--blue-500 #3B82F6`; gradients run 135–150°.
+- Neutral "ink" scale is blue-tinted; never use pure grays (#888) or pure black.
+- Dark surfaces: `--navy-900 #23265E` with white-alpha text (92% primary / 55% dim) and 12% white lines.
+- Accents (coral, green, orange, purple, teal) appear ONLY as: icon-tile fills, chart series, avatar fallbacks, soft-badge tints. Never page or card backgrounds.
+- Contrast: body text ≥ 4.5:1. **Three corrections to this rule, each computed
+  rather than assumed — see components.css's header for the numbers.** (a)
+  `ink-600` on white passes at 7.60:1, but `ink-400`/`--text-muted` is 2.88:1
+  and must not carry text; use `ink-500` (4.84:1). (b) "pure white ≥ 600 weight
+  at ≥ 12px" does **not** rescue small white text on `--grad-brand`: the outer
+  stops are 4.02:1 and 3.68:1, and WCAG large text needs ≥ 18.66px bold. Small
+  white text on a filled control uses solid `--brand-600` (6.11:1); gradients
+  carry white type only at display sizes, and otherwise live on non-text
+  surfaces where 3:1 applies. (c) A raw semantic hue is a fill, not a text
+  colour — `--success` on `--success-soft` is 2.43:1. Semantic text uses the
+  `--*-strong` ramp.
+- **This system is light-only.** There is no dark page theme, no `prefers-color-scheme`
+  block, and no `data-theme` switch. `--navy-*` is a card surface for dense data, not a
+  page ground. Do not promote it to one — the dark neutrals, lines and washes that would
+  need are not defined here, and inventing them is out of scope for a consumer.
 
-**Personality:** warm, calm, confident — a thoughtful product team that sweats the
-details. Approachable expertise, never cutesy. **Feel:** spacious, pillowy, tactile;
-things lift when you hover and sink when you press. **Audience:** product, SaaS,
-dashboards, marketing and portfolio surfaces that want to feel friendly and modern
-without sacrificing legibility. The system runs **balanced neumorphism**: soft
-surfaces, but with accent fills, AA text contrast and visible focus states so it
-stays usable rather than purely decorative. Copy is **sentence case** everywhere,
-short, and emoji-free in product chrome.
+## 3. Typography
+- Family: Plus Jakarta Sans (400/500/600/700/800); JetBrains Mono 400/600 for IDs, amounts, timestamps, code.
+- KPI numbers: 30–44px / 800 / -0.02em / tabular-nums.
+- Card titles: 14px/700. Labels: 12-13px/600. Body: 13-14px/400-500 at 1.55.
+- Overlines: 11px/700, uppercase, +0.06–0.08em, ink-400.
+- Minimum text size 11px. Never letterspace lowercase body text.
 
-## Colors
+## 4. Space, radius, elevation
+- 4px base grid. Card padding 20px; card gutters 16–18px (dashboard grid 18).
+- Radii: buttons/inputs 10px, cards 18px, panels/modals 24px, icon tiles ≈ 32% of size, pills 999px.
+- Shadows: `--shadow-md` resting card, `--shadow-lg` hover/overlay. Gradient elements may add colored glow (`--shadow-glow-*`) — max one glowing element per region.
+- Glass recipe (chrome only): rgba(255,255,255,0.55–0.72) + backdrop-blur(16–24px) + 1px rgba-white border + inset top highlight.
 
-The palette is one shared tonal base per theme, energized by a fresh accent ramp.
+## 5. Components (canonical rules)
+- **Button**: one `primary` per view; `glow` reserved for the hero CTA. Icons 15–16px leading.
+- **Card**: light by default; `dark` for any chart or table. Dark cards never nest in dark cards.
+- **IconTile**: the signature motif — gradient chip + white icon; use to give lists/statuses personality. One color family per list is fine; rainbow across a list is fine; random per-render color is not.
+- **Table**: first column 600 weight; IDs/amounts mono; statuses always Badge, single word.
+- **Badge**: soft bg + strong text; `dot` for live states.
+- **Modal**: scrim rgba(18,20,43,0.45) + blur(6px); spring-scale in.
+- **Toast**: glass, bottom-right stack, 8px gap; auto-dismiss 5s with countdown bar.
+- **Sidebar**: active route = gradient pill + glow. **Topbar**: always the brand gradient. **Dock**: floating glass, gradient tiles, spring hover.
 
-- **Primary — Mint (#11d3a3):** the signature accent. Drives primary actions
-  (typically as the mint→teal→cyan gradient), active states, focus glow and data
-  viz. Pair with `on-accent` deep teal-black for text on top.
-- **Secondary — Teal (#12b5c9)** and **Tertiary — Cyan (#28c8e8):** the rest of the
-  accent ramp. Together with mint they form the signature 120° gradient used on
-  primary buttons, toggles, progress fills and gradient text. **Lime (#8fe06a)**
-  adds occasional energy.
-- **Neutral / Surface (#e6e9ef light, #23262e dark):** the single canvas color that
-  *all* surfaces share. Cards are not a different color than the page — they are the
-  same color, raised by shadow. This is the core neumorphic rule.
-- **Shadow stops (`shadow-light` #ffffff / `shadow-dark` #c3cad6):** every raised or
-  inset element is built from this highlight + shadow pair, both derived from the
-  base. They are the engine of the whole system (see Elevation & Depth).
-- **Text:** three levels — `on-surface` (#2b303b primary), `on-surface-secondary`
-  (#5b6472), `on-surface-tertiary` (#8a93a4 captions). On accent fills use
-  `on-accent` (#06241d) for AA contrast.
-- **Semantic:** success #2fc97a, warning #f5a623, danger #fb6b6b, info #3fb6f0 —
-  each also used at low alpha as a soft "wash" background for badges and banners.
+Upstream ships React implementations of all of these. The copy bundled here is
+`components.css` — a hand-derived CSS projection covering the subset a static report
+uses. Modal, Toast, Sidebar, Topbar and Dock have **no** class in it; their rules above
+are retained because they document the system, not because a report renders them.
 
-Dark theme keeps the same hues on a #23262e base; accent swatches brighten slightly
-(see `*-dark` tokens). Both themes are switched via `data-theme` on `<html>`.
+## 6. Iconography
+Lucide-style 1.75–2px stroke, round caps, 16/20/24px. White inside gradient tiles,
+currentColor elsewhere. No emoji, no filled icon fonts. Upstream ships a stand-in icon
+set that is not bundled here — inline the handful of SVG paths you actually need.
 
-## Typography
-
-Three families carry the system, loaded from Google Fonts:
-
-- **Display — Sora:** geometric, slightly technical, friendly. All headings,
-  buttons, numbers and labels. Tight tracking (-0.02em) at large display sizes.
-- **Body — Plus Jakarta Sans:** humanist geometric, warm. Paragraphs, labels, UI
-  text. 16px body at 1.55 line-height for comfortable reading.
-- **Mono — JetBrains Mono:** code, data and timestamps.
-
-The scale runs fluidly from an 11–12px tracked-caps **overline** up to a 72px
-**display**. Front-matter `fontSize` values are the upper bound of each fluid step;
-in CSS these are implemented with `clamp()` (see `--fs-*` in `colors_and_type.css`).
-**Casing:** sentence case for headings and labels; ALL-CAPS reserved only for the
-`overline` eyebrow, set with wide 0.12em tracking.
-
-## Layout
-
-A **fluid grid** for small screens and a **fixed-max-width grid** (≈1200px,
-`content-max`) for marketing desktop; app surfaces are fluid. Spacing follows a **4px
-base scale** (`xs` 4 → `7xl` 112) so rhythm stays consistent.
-
-Because neumorphic shadows need breathing room, **padding skews generous and elements
-rarely touch** — cards use 24px internal padding, sections are airy. Fixed chrome (top
-bars, sidebars) sits on the base color and is separated from content by **elevation,
-not by lines**. Related items are grouped by containment inside raised cards rather
-than by dividers.
-
-## Elevation & Depth
-
-Depth is the heart of this system and is conveyed entirely through **paired soft
-shadows**, never flat drop-shadows or borders. Every raised element casts a dark
-offset toward the bottom-right (`shadow-dark`) and a light offset toward the
-top-left (`shadow-light`), both tinted from the tonal base:
-
-- **Raised levels (el-1 / el-2 / el-3):** increasing offset + blur (4/4/9 →
-  12/12/26px) for chips, buttons, cards and panels. A heavier `el-float` is used for
-  modals and popovers.
-- **Inset wells (inset-1 / inset-2):** the same shadows reversed *inward* to create
-  pressed wells — used for inputs, slider/progress tracks, ghost buttons and any
-  active/pressed state.
-- **Accent glow:** primary buttons, slider thumbs and progress fills add a colored
-  bloom (`0 6px 20px rgba(17,211,163,.45)`) under the element.
-
-**Motion maps to depth:** hover *raises* elevation (element lifts, often
-`translateY(-1…-3px)`); press *sinks* it into an inset and scales to ~0.98. Toggles
-and switches bounce into place with a spring ease. All motion respects
-`prefers-reduced-motion`. Exact shadow recipes live as `--el-*` / `--inset-*` /
-`--glow-accent` in `colors_and_type.css`.
-
-## Shapes
-
-The shape language is **soft and pillowy — no sharp corners anywhere**. Rounding is
-generous: `xs` 8px → `2xl` 44px, plus a `full` 999px pill.
-
-- Buttons, chips, badges, toggles and segmented controls are **full pills**.
-- Cards and panels use `lg` (26px); inputs and smaller surfaces use `md` (18px).
-- Larger feature surfaces and hero panels reach `xl`/`2xl`.
-
-Soft is the brand: when in doubt, round more rather than less.
-
-## Components
-
-All primitives are implemented as `nf-*` classes in `components.css`. Key atoms:
-
-- **Buttons** — raised soft pills. *Default/secondary* shares the surface color and
-  lifts on hover (text shifts to mint on hover, sinks into an inset on press).
-  *Primary* fills with the fresh gradient + accent glow and uses `on-accent` text.
-  *Ghost* is a pressed-in well; *danger* uses the danger hue with a red glow. Sizes
-  `sm`/`base`/`lg` and an icon-only circular variant.
-- **Input fields** — pressed wells (`surface-inset` + inset shadow), no border, 18px
-  radius. Focus deepens the inset and adds a 3px accent-wash ring. Same treatment for
-  textarea and select; labels in `label-md`, placeholder in `on-surface-tertiary`.
-- **Checkboxes & radios** — raised soft squares/circles that invert to a gradient
-  fill + inset when checked, with a spring transition.
-- **Toggle switch** — inset track; the thumb is a raised circle that springs across.
-  Checked track fills with the fresh gradient.
-- **Chips & badges** — pill chips toggle to a gradient fill when active; badges use a
-  low-alpha semantic wash with matching text color.
-- **Tooltips** — a small raised surface (`el-2`) appearing above the trigger with a
-  short spring fade-in.
-- **Sliders, progress, spinners, segmented controls, avatars, dividers, skeletons** —
-  all follow the same raised/inset + gradient-accent logic; see `components.css`.
-
-Component tokens (background, text, radius, padding) are defined in the front matter
-and reference the color/typography/rounded scales. Where a token shows a flat
-`primary` background, the live CSS upgrades it to the mint→teal→cyan **gradient** —
-gradients can't be expressed as a single Color token, so treat `primary` as the
-gradient's anchor.
-
-## Iconography
-
-**Lucide** is the house icon set (CDN: `https://unpkg.com/lucide@latest`), chosen
-because its rounded caps/joins and consistent 2px stroke match the soft geometry.
-Use outline icons at 1.75–2px stroke, 18–24px in UI; reserve filled glyphs for tiny
-status dots and active nav items. Icons inherit `currentColor`. Feature icons sit in
-a raised round chip tinted with the accent wash. **No emoji** in chrome. Drop custom
-SVGs into `assets/icons/` to override. Brand logo variants live in `assets/logo-*.svg`.
-
-## Do's and Don'ts
-
-- **Do** keep every surface the same tonal base color and raise it with paired
-  shadows. **Don't** give a card a different fill color than the page.
-- **Do** use the fresh mint→teal→cyan gradient for the single most important action
-  per screen. **Don't** scatter accent fills across many competing buttons.
-- **Do** round generously and keep spacing airy — shadows need room. **Don't**
-  introduce sharp corners or let neumorphic elements touch.
-- **Do** map motion to depth: lift on hover, sink on press, spring toggles into
-  place. **Don't** use flat drop-shadows, hard borders, or static states.
-- **Do** use `on-accent` (deep teal-black) for text on accent fills and maintain
-  WCAG AA contrast (4.5:1 for body text). **Don't** rely on color alone — keep focus
-  rings and clear pressed states.
-- **Do** write sentence-case, short, calm copy. **Don't** use emoji in product chrome
-  or marketing copy, or ALL-CAPS outside the tracked overline.
-- **Do** reserve glass/blur for overlays over imagery. **Don't** make transparency the
-  default surface.
+## 7. Accessibility
+- Text contrast ≥ 4.5:1, computed, not eyeballed. `components.css` already
+  satisfies it for every class it defines; the four overrides it makes to do so
+  are listed in its header. Hand-authored markup and hand-built SVG have to
+  clear the same floor — see the three corrections in section 2.
+- Chart furniture (gridlines, hairline borders, faint dividers) is exempt: it is
+  decoration, not meaningful non-text content, and forcing 3:1 on a gridline
+  would wreck the chart. Anything a reader must *distinguish* to read the data —
+  a series colour, a zone band, an icon carrying meaning — is not exempt.
+- Focus: always visible — `--focus-ring` 3px brand at 30%.
+- Hit targets ≥ 32px dense UI, ≥ 44px touch surfaces.
+- Motion respects `prefers-reduced-motion` (see MOTION.md §6).
+- Don't encode meaning in color alone — pair with icon, dot, or label.

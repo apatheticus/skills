@@ -1,0 +1,41 @@
+/* SaaS Pro — typography tokens */
+/* Upstream's Google Fonts @import was deleted at vendor time: the report must make zero
+   network requests (report-guide.md → Self-containment rules). Embed Plus Jakarta Sans and
+   JetBrains Mono as base64 @font-face if you can, otherwise rely on the stacks below.
+   Do not restore the @import. */
+
+:root {
+  --font-sans: 'Plus Jakarta Sans', 'Segoe UI', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, 'SF Mono', monospace;
+
+  --text-2xs: 11px;
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-md: 14px;
+  --text-lg: 16px;
+  --text-xl: 20px;
+  --text-2xl: 26px;
+  --text-3xl: 34px;
+  --text-4xl: 44px;
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.35;
+  --leading-normal: 1.55;
+
+  --tracking-tight: -0.02em;
+  --tracking-caps: 0.08em;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--text-body);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: var(--brand-600); text-decoration: none; }
+a:hover { color: var(--brand-700); text-decoration: underline; }
