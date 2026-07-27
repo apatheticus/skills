@@ -31,7 +31,8 @@ else:
 <!-- pd:viz end -->
 ```
 
-**Technical docs** (ARCHITECTURE, DEVELOPMENT, CONTRIBUTING) — the same centered
+**Technical docs** (ARCHITECTURE, DEVELOPMENT, DEPLOYMENT, CONTRIBUTING) — the same
+centered
 image, plus the collapsed Mermaid equivalent inside the pair and **outside** the
 centering wrapper:
 

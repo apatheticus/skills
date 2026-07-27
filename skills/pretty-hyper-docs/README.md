@@ -21,8 +21,10 @@
 ## What this is
 
 pretty-hyper-docs creates and maintains a repository's standard documentation —
-README, ARCHITECTURE, DEVELOPMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY,
-SUPPORT, plus tier-2 files on request — and makes it look designed. Each run
+README, ARCHITECTURE, DEVELOPMENT, DEPLOYMENT, CONTRIBUTING, CODE_OF_CONDUCT,
+SECURITY, SUPPORT, plus tier-2 files on request — and makes it look designed.
+DEPLOYMENT is signal-gated: it is written only when the repo actually deploys
+somewhere, so a library or a docs site correctly gets none. Each run
 derives a frozen per-repo design system, then renders the docs' key diagrams as
 animated WebPs from HTML compositions via
 [HyperFrames](https://github.com/heygen-com/hyperframes).

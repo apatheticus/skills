@@ -113,7 +113,7 @@ so there is no build step to go stale and no binary to inspect blind.
   in `SKILL.md`. Diagrams outside the budget are static SVG (same file format, same
   reference, minus the `<style>` animation block) or plain Mermaid.
 - **Every animated diagram in a technical doc (ARCHITECTURE, DEVELOPMENT,
-  CONTRIBUTING) is immediately followed by a collapsed `<details>` block holding
+  DEPLOYMENT, CONTRIBUTING) is immediately followed by a collapsed `<details>` block holding
   the equivalent Mermaid source.** That Mermaid is the machine-checkable statement
   of what the animation depicts; it must parse and must agree with the animation.
   README embeds carry rich alt text instead — no Mermaid fallback there.
@@ -221,7 +221,9 @@ The doc set is a web, not a pile. Maintain it:
 
 - The README links to every Tier 1 doc (a "Documentation" section and/or nav badges).
 - Each Tier 1 doc ends with a short **References** section linking the siblings it
-  relates to (ARCHITECTURE ↔ DEVELOPMENT ↔ CONTRIBUTING ↔ SECURITY, etc.).
+  relates to (ARCHITECTURE ↔ DEVELOPMENT ↔ DEPLOYMENT ↔ CONTRIBUTING ↔ SECURITY,
+  etc.). DEPLOYMENT joins the chain only on a repo that has one — never link a doc you
+  didn't write.
 - Link to specific files and headings with relative paths (`[lib/db.ts](lib/db.ts)`,
   `[Secret scanning](#secret-scanning)`), not bare prose references.
 - Every internal link you write must resolve — the link-integrity gate checks this.
@@ -271,7 +273,8 @@ the t=0 frame, which is why the loop is steady-state and readable stopped; the
 
 ## Project-type adaptation
 
-The adaptive docs (README, ARCHITECTURE, DEVELOPMENT) fit themselves to the detected
+The adaptive docs (README, ARCHITECTURE, DEVELOPMENT, DEPLOYMENT) fit themselves to the
+detected
 stack. Read the manifest to decide what the "getting started", "scripts", "stack",
 and "project structure" sections should actually say:
 

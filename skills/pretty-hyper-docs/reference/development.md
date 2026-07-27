@@ -12,6 +12,11 @@ linter, no formatter, no tests, no CI), the **tooling status** section says so
 plainly — the exemplar does exactly this, and that candor is the point. Don't
 document a `lint` script that isn't defined.
 
+**Scope boundary.** This doc is the *local* guide. Deploy-time configuration,
+environments, promotion, and rollback belong to DEPLOYMENT.md on a repo that deploys
+(see [deployment.md](deployment.md)) — link to it in one line rather than duplicating
+it here.
+
 ## Section order
 
 | Section | Required? | Drawn from |
@@ -129,6 +134,7 @@ cd <project>
 ## References
 
 - [ARCHITECTURE.md](ARCHITECTURE.md)
+- [DEPLOYMENT.md](DEPLOYMENT.md)
 - [CONTRIBUTING.md](CONTRIBUTING.md)
 - [SECURITY.md](SECURITY.md)
 

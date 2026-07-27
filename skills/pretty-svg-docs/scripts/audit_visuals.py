@@ -63,6 +63,7 @@ BUDGETS = {
     "README": 4,          # hero + up to 3 body diagrams
     "ARCHITECTURE": 2,
     "DEVELOPMENT": 2,
+    "DEPLOYMENT": 2,
     "CONTRIBUTING": 2,
     "SECURITY": 1,
     "CODE_OF_CONDUCT": 1,
@@ -245,6 +246,16 @@ def main() -> int:
         p = Path(d)
         if not p.exists():
             problems.append(f"{d}: file not found")
+            continue
+        # exists() is true for a directory, so the guard above does not catch
+        # `audit_visuals.py .` — the natural way to reach for "audit this project",
+        # since --root takes a directory. Without this the run dies on an
+        # IsADirectoryError traceback out of read_text() instead of saying what to do.
+        if p.is_dir():
+            problems.append(
+                f"{d}: is a directory — pass the doc files themselves, with the "
+                f"project root in --root (e.g. --root {d} {d}/README.md)"
+            )
             continue
         audit_doc(p, root, design_hash, rows, problems)
 
