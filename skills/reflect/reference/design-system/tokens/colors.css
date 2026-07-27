@@ -1,0 +1,85 @@
+/* SaaS Pro — color tokens */
+:root {
+  /* Brand core */
+  --brand-500: #5B5FEF;
+  --brand-600: #4A4AE8;
+  --brand-700: #3B36D6;
+  --brand-400: #7B7FF5;
+  --brand-300: #A3A7FA;
+  --brand-100: #E6E7FE;
+  --brand-050: #F3F4FF;
+
+  /* Blue secondary */
+  --blue-500: #3B82F6;
+  --blue-400: #60A5FA;
+  --blue-100: #DBEAFE;
+
+  /* Accents (chip colors from brand imagery) */
+  --accent-coral: #FF7A8A;
+  --accent-coral-soft: #FFE4E8;
+  --accent-green: #2ECC9A;
+  --accent-green-soft: #D9F7EC;
+  --accent-orange: #F9A03F;
+  --accent-orange-soft: #FEF0DD;
+  --accent-purple: #8B5CF6;
+  --accent-purple-soft: #EDE7FD;
+  --accent-teal: #22C7C7;
+  --accent-teal-soft: #DAF6F6;
+
+  /* Semantic */
+  --success: #22B07D;
+  --success-soft: #DCF6EC;
+  --warning: #F59E0B;
+  --warning-soft: #FEF3D9;
+  --danger: #EF4458;
+  --danger-soft: #FDE3E7;
+  --info: #3B82F6;
+  --info-soft: #DBEAFE;
+
+  /* Neutrals (cool, blue-tinted) */
+  --ink-900: #12142B;
+  --ink-800: #1E2142;
+  --ink-700: #333759;
+  --ink-600: #4C5273;
+  --ink-500: #6A7091;
+  --ink-400: #9297B3;
+  --ink-300: #BEC2D6;
+  --ink-200: #DDDFEB;
+  --ink-100: #EDEEF6;
+  --ink-050: #F6F7FC;
+  --white: #FFFFFF;
+
+  /* Dark data-card palette */
+  --navy-900: #23265E;
+  --navy-800: #2B2F76;
+  --navy-700: #383D8F;
+  --navy-line: rgba(255,255,255,0.12);
+  --navy-text: rgba(255,255,255,0.92);
+  --navy-text-dim: rgba(255,255,255,0.55);
+
+  /* Gradients */
+  --grad-brand: linear-gradient(135deg, #6A6FF7 0%, #4A4AE8 55%, #3B82F6 100%); /* @kind color */
+  --grad-header: linear-gradient(90deg, #5B5FEF 0%, #3B82F6 100%); /* @kind color */
+  --grad-coral: linear-gradient(150deg, #FF9AA7 0%, #FF7A8A 60%, #F9A03F 130%); /* @kind color */
+  --grad-green: linear-gradient(150deg, #4ADCB0 0%, #2ECC9A 100%); /* @kind color */
+  --grad-orange: linear-gradient(150deg, #FFB95C 0%, #F9A03F 100%); /* @kind color */
+  --grad-purple: linear-gradient(150deg, #A78BFA 0%, #8B5CF6 100%); /* @kind color */
+  --grad-navy: linear-gradient(165deg, #2E3277 0%, #23265E 100%); /* @kind color */
+  --grad-page: linear-gradient(180deg, #F2F4FF 0%, #FAFBFF 40%, #F4F6FE 100%); /* @kind color */
+
+  /* Semantic aliases */
+  --text-heading: var(--ink-900);
+  --text-body: var(--ink-600);
+  --text-muted: var(--ink-400);
+  --text-on-brand: #FFFFFF;
+  --surface-page: #F4F6FE;
+  --surface-card: #FFFFFF;
+  --surface-raised: #FFFFFF;
+  --surface-sunken: var(--ink-050);
+  --surface-glass: rgba(255,255,255,0.65);
+  --surface-dark: var(--navy-900);
+  --border-subtle: rgba(28,32,84,0.08);
+  --border-default: rgba(28,32,84,0.13);
+  --border-glass: rgba(255,255,255,0.55);
+  --focus-ring: 0 0 0 3px rgba(91,95,239,0.30);
+}

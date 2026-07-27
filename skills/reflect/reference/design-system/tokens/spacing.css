@@ -1,0 +1,30 @@
+/* SaaS Pro — spacing, radius, elevation */
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 32px;
+  --radius-pill: 999px;
+
+  --shadow-xs: 0 1px 2px rgba(28,32,84,0.06);
+  --shadow-sm: 0 2px 8px rgba(28,32,84,0.08);
+  --shadow-md: 0 8px 24px rgba(28,32,84,0.10);
+  --shadow-lg: 0 16px 48px rgba(28,32,84,0.14);
+  --shadow-glow-brand: 0 8px 24px rgba(91,95,239,0.35);
+  --shadow-glow-green: 0 8px 24px rgba(46,204,154,0.35);
+  --shadow-glow-coral: 0 8px 24px rgba(255,122,138,0.35);
+  --shadow-inner-glass: inset 0 1px 0 rgba(255,255,255,0.7);
+}

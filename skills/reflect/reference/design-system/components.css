@@ -1,201 +1,996 @@
-/* =====================================================================
-   NEUMORPHIC FRESH — Component Primitives
-   components.css  (depends on colors_and_type.css)
-   Reusable soft-UI building blocks: surfaces, buttons, fields, toggles,
-   sliders, badges, progress, spinners, etc. Class-prefixed `nf-`.
-   ===================================================================== */
+/* ============================================================================
+   SaaS Pro — components.css
+   ----------------------------------------------------------------------------
+   A hand-derived CSS projection of the SaaS Pro design system, scoped to what a
+   static offline HTML report renders.
 
-/* ---------------- SURFACES ---------------- */
-.nf-surface   { background: var(--surface); border-radius: var(--r-lg); box-shadow: var(--el-2); }
-.nf-surface-sm{ background: var(--surface); border-radius: var(--r-md); box-shadow: var(--el-1); }
-.nf-surface-lg{ background: var(--surface); border-radius: var(--r-xl); box-shadow: var(--el-3); }
-.nf-inset     { background: var(--surface-inset); border-radius: var(--r-md); box-shadow: var(--inset-1); }
-.nf-card {
-  background: var(--surface);
-  border-radius: var(--r-lg);
-  box-shadow: var(--el-2);
-  padding: var(--sp-5);
-  transition: box-shadow var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
-}
-.nf-card--hover:hover { box-shadow: var(--el-3); transform: translateY(-3px); }
-.nf-glass {
-  background: var(--glass);
-  border: 1px solid var(--glass-border);
-  border-radius: var(--r-lg);
-  backdrop-filter: blur(16px) saturate(140%);
-  -webkit-backdrop-filter: blur(16px) saturate(140%);
+   WHY THIS FILE IS HAND-WRITTEN. Upstream SaaS Pro ships its components as React
+   .jsx files whose styles are inline JavaScript objects — there are no class
+   names anywhere in it. There is no components.css to copy. Every rule below is
+   transcribed from the corresponding component's style object, constrained by
+   DESIGN.md section 5, and re-expressed as a class. Where a component's value has
+   no matching token (font-size 12.5px, letter-spacing 0.06em, padding 3px 10px)
+   the literal from the component is kept, because the component IS the spec.
+
+   FOUR PLACES WHERE THIS FILE OVERRIDES UPSTREAM FOR CONTRAST. Every pair was
+   computed, not assumed, and DESIGN.md section 7 sets a 4.5:1 floor:
+   1. Small text on --grad-brand fails. White on the gradient's outer stops is
+      4.02:1 (#6A6FF7) and 3.68:1 (#3B82F6). DESIGN.md section 2 permits white
+      at ">= 600 weight, >= 12px", which is not WCAG large text (that needs
+      >= 18.66px bold), so the rule does not save it. Filled controls carrying
+      small white text therefore use solid --brand-600 (6.11:1). Gradients stay
+      on non-text surfaces — icon tiles, chrome, hero backdrops — where the 3:1
+      floor applies, and on display type at >= 18.66px bold.
+   2. --ink-400 (--text-muted) is 2.88:1 on white and is used as real text by
+      four roles upstream. They use --ink-500 here (4.84:1).
+   3. Three of the five soft badge grounds fail: --success 2.43:1,
+      --danger 3.07:1, --info 3.01:1 on their own soft tints, at 11px/700.
+      Upstream already fixed exactly one case this way, hardcoding #B45309 for
+      warning text; the --*-strong ramp below extends that to all four rather
+      than leaving three broken. Each value is its semantic hue scaled down in
+      linear luminance until it clears 4.5:1, which is how #B45309 relates to
+      --warning; #B45309 is kept verbatim as --warning-strong.
+   4. .sp-btn--danger on solid --danger is 3.72:1 with white text, so it uses
+      --danger-strong (5.94:1) too.
+   The tokens/ files are NOT edited for this — they stay a literal subset of the
+   upstream download so a future refresh is a diff. The ramp lives here.
+
+   HOW TO USE IT. Inline this file and all four tokens/*.css files into a single
+   <style> block in the report. Never link them — the report makes zero network
+   requests. Load order: colors, typography, spacing, motion, then this file.
+
+   PREFIX. sp-* is upstream's own namespace (tokens/motion.css already defines
+   sp-fade-up, sp-draw, sp-bar-grow and six more keyframes). One vocabulary.
+
+   THEMING. This system is light-only. There is no dark page theme, no
+   data-theme attribute, no prefers-color-scheme block. --navy-* is a card
+   surface for dense data: put every chart and every table on .sp-card--dark.
+   See DESIGN.md section 2.
+
+   DELIBERATELY NOT PORTED, so a later reader does not read absence as an
+   oversight: Modal, Toast, Skeleton, Spinner, Avatar, Stepper, Breadcrumb,
+   Pagination, Sidebar, Topbar, Dock, FileUpload, Slider, Checkbox, Radio,
+   Select, Switch, Textarea, Input. A static offline report has no async state,
+   no routing and no forms. Their canonical rules survive in DESIGN.md section 5
+   as documentation of the system, not as something to build.
+
+   TWO INTENTIONAL DIVERGENCES from the upstream component set:
+   1. .sp-btn's base IS the outline variant, so a button with no modifier is
+      never unstyled and --primary must be asked for explicitly. That enforces
+      DESIGN.md's "one primary per view" better than a primary default.
+      Upstream's separate `outline` variant is therefore absent.
+   2. .sp-page exists with no upstream counterpart. The report needs the page
+      ground (--grad-page) and no vendored file supplies it.
+
+   State that is data, not decoration, rides on attributes rather than classes
+   so the class API stays closed: [aria-pressed] on pills, [data-trend] on stat
+   deltas, [data-align] on table cells, [data-tip] on tooltips.
+   ============================================================================ */
+
+/* ------------------------------------------- accessible semantic text ----- */
+/* The darkened end of each semantic hue, for text on that hue's soft ground.
+   Derived by scaling the hue's linear luminance down until it clears 4.5:1;
+   --warning-strong is upstream's own #B45309, which this method reproduces to
+   within 0.01. Measured on their soft grounds: 5.26, 4.55, 4.90, 5.02. */
+
+:root {
+  --success-strong: #15714F;
+  --warning-strong: #B45309;
+  --danger-strong: #B8303F;
+  --info-strong: #2B5FB8;
 }
 
-/* ---------------- BUTTONS ---------------- */
-.nf-btn {
-  --_pad-y: 0.7em; --_pad-x: 1.25em;
-  font-family: var(--font-display);
+/* ---------------------------------------------------------------- page ---- */
+
+.sp-page {
+  background: var(--grad-page);
+  background-attachment: fixed;
+  min-height: 100vh;
+  color: var(--text-body);
+  font-family: var(--font-sans);
+}
+
+/* ---------------------------------------------------- type (section 3) ---- */
+
+.sp-display {
+  font-size: var(--text-4xl);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  color: var(--text-heading);
+}
+
+.sp-h1 {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  color: var(--text-heading);
+}
+
+.sp-h2 {
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--tracking-tight);
+  line-height: var(--leading-tight);
+  color: var(--text-heading);
+}
+
+.sp-h3 {
+  font-size: var(--text-xl);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+  color: var(--text-heading);
+}
+
+/* The card-title role: 14px/700. Also .sp-card__title's type. */
+.sp-h4 {
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  line-height: var(--leading-snug);
+  color: var(--text-heading);
+}
+
+.sp-lead {
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-normal);
+  color: var(--text-body);
+}
+
+.sp-p {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-regular);
+  line-height: var(--leading-normal);
+  color: var(--text-body);
+}
+
+.sp-small {
+  font-size: var(--text-xs);
+  font-weight: var(--weight-medium);
+  line-height: var(--leading-snug);
+  color: var(--ink-500);
+}
+
+/* 11px is the floor. Never letterspace lowercase body text — caps only.
+   --ink-500, not --text-muted: --ink-400 is 2.88:1 on white. */
+.sp-overline {
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+  color: var(--ink-500);
+}
+
+/* The standalone KPI number. Inside a stat tile use .sp-stat__value. */
+.sp-kpi {
+  font-size: var(--text-3xl);
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-heading);
+}
+
+/* The copyable evidence block: exact prompt, skill description, settings line. */
+.sp-code {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  line-height: var(--leading-normal);
+  color: var(--ink-800);
+  background: var(--surface-sunken);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: var(--space-3) var(--space-4);
+  overflow-x: auto;
+  white-space: pre;
+  tab-size: 2;
+}
+
+.sp-card--dark .sp-code {
+  color: var(--navy-text);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: var(--navy-line);
+}
+
+/* Dark-card overrides for the type scale. These are not optional: every type
+   class above sets an explicit light-ground colour, which beats the colour
+   .sp-card--dark sets on the card, so without these a heading or a paragraph
+   inside a dark card renders dark-on-dark. And a dark card is not an edge case —
+   DESIGN.md section 5 puts every chart and every table on one, and those cards
+   carry titles, overlines and captions. Measured on --navy-900: --navy-text
+   11.99:1, --navy-text-dim 5.24:1; on the light end of --grad-navy, 9.95:1 and
+   4.64:1. */
+
+.sp-card--dark .sp-display,
+.sp-card--dark .sp-h1,
+.sp-card--dark .sp-h2,
+.sp-card--dark .sp-h3,
+.sp-card--dark .sp-h4,
+.sp-card--dark .sp-kpi,
+.sp-card--dark .sp-lead,
+.sp-card--dark .sp-p {
+  color: var(--navy-text);
+}
+
+.sp-card--dark .sp-small,
+.sp-card--dark .sp-overline {
+  color: var(--navy-text-dim);
+}
+
+/* typography.css styles bare <a> at --brand-600, which is 2.27:1 on --navy-900 —
+   effectively invisible. --brand-300 is 6.27:1 (5.15:1 on --grad-navy's light
+   end). For reference, the unfixed type classes rendered at 1.30:1 for a heading
+   and 1.83:1 for a paragraph. */
+.sp-card--dark a {
+  color: var(--brand-300);
+}
+
+/* ------------------------------------------------- card (Card.jsx) -------- */
+
+.sp-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-md);
+  color: var(--text-body);
+  font-family: var(--font-sans);
+  transition: transform var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.sp-card--hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Every chart and every table lives here. Dark cards never nest in dark cards. */
+.sp-card--dark {
+  background: var(--grad-navy);
+  border-color: var(--navy-line);
+  color: var(--navy-text);
+}
+
+.sp-card__title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin: 0 0 14px;
+  font-size: var(--text-md);
+  font-weight: var(--weight-bold);
+  color: var(--text-heading);
+}
+
+.sp-card--dark .sp-card__title {
+  color: var(--navy-text);
+}
+
+/* --------------------------------------------- glass (GlassPanel.jsx) ----- */
+/* Chrome only — sticky nav, hero shell. Never a data surface. */
+
+.sp-glass {
+  background: var(--surface-glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md), var(--shadow-inner-glass);
+  font-family: var(--font-sans);
+}
+
+/* ------------------------------------------- stat tile (StatCard.jsx) ----- */
+
+.sp-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+  box-shadow: var(--shadow-md);
+  font-family: var(--font-sans);
+}
+
+.sp-stat__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--text-sm);
   font-weight: var(--weight-semibold);
-  font-size: var(--fs-sm);
-  letter-spacing: var(--tracking-snug);
-  color: var(--fg1);
-  background: var(--surface);
-  border: none;
-  border-radius: var(--r-pill);
-  padding: var(--_pad-y) var(--_pad-x);
-  box-shadow: var(--el-1);
-  cursor: pointer;
-  display: inline-flex; align-items: center; gap: 0.5em;
-  transition: box-shadow var(--dur-fast) var(--ease-out),
-              transform var(--dur-fast) var(--ease-out),
-              color var(--dur-fast) var(--ease-out);
-  user-select: none;
-  white-space: nowrap;
-}
-.nf-btn:hover { box-shadow: var(--el-2); transform: translateY(-1px); color: var(--accent-press); }
-.nf-btn:active { box-shadow: var(--inset-1); transform: translateY(0) scale(0.985); color: var(--fg2); }
-.nf-btn:focus-visible { outline: none; box-shadow: var(--el-1), 0 0 0 3px var(--accent-wash); }
-
-/* primary — accent fill with soft glow */
-.nf-btn--primary {
-  color: var(--fg-on-accent);
-  background: var(--grad-fresh);
-  box-shadow: var(--el-1), var(--glow-accent);
-}
-.nf-btn--primary:hover { color: var(--fg-on-accent); transform: translateY(-2px); box-shadow: var(--el-2), var(--glow-accent); }
-.nf-btn--primary:active { box-shadow: var(--inset-1); transform: scale(0.98); }
-
-/* ghost / pressed-in pill */
-.nf-btn--ghost { box-shadow: var(--inset-1); color: var(--fg2); }
-.nf-btn--ghost:hover { color: var(--accent-press); box-shadow: var(--inset-1); transform: none; }
-
-/* danger */
-.nf-btn--danger { color: #fff; background: var(--danger); box-shadow: var(--el-1), var(--glow-danger); }
-.nf-btn--danger:hover { color:#fff; transform: translateY(-2px); }
-
-.nf-btn--lg { font-size: var(--fs-base); --_pad-y: 0.85em; --_pad-x: 1.6em; }
-.nf-btn--sm { font-size: var(--fs-xs); --_pad-y: 0.55em; --_pad-x: 0.95em; }
-.nf-btn--icon { --_pad-x: 0.7em; border-radius: var(--r-pill); aspect-ratio: 1; justify-content:center; }
-.nf-btn[disabled] { opacity: 0.5; cursor: not-allowed; box-shadow: var(--inset-1); transform:none; }
-
-/* ---------------- BADGES / CHIPS / STATUS ---------------- */
-.nf-badge {
-  display: inline-flex; align-items: center; gap: 0.4em;
-  font-family: var(--font-body); font-weight: var(--weight-semibold);
-  font-size: var(--fs-xs); letter-spacing: var(--tracking-snug);
-  padding: 0.35em 0.8em; border-radius: var(--r-pill);
-  background: var(--accent-wash); color: var(--accent-press);
-  white-space: nowrap;
-}
-.nf-badge--success { background: var(--success-wash); color: var(--success); }
-.nf-badge--warning { background: var(--warning-wash); color: var(--warning); }
-.nf-badge--danger  { background: var(--danger-wash);  color: var(--danger); }
-.nf-badge--info    { background: var(--info-wash);    color: var(--info); }
-.nf-badge--neutral { background: var(--surface-inset); color: var(--fg2); box-shadow: var(--inset-1); }
-
-.nf-chip {
-  display:inline-flex; align-items:center; gap:0.45em;
-  font-size: var(--fs-sm); font-weight: var(--weight-medium); color: var(--fg2);
-  padding: 0.5em 0.95em; border-radius: var(--r-pill);
-  background: var(--surface); box-shadow: var(--el-1); cursor:pointer;
-  transition: all var(--dur-fast) var(--ease-out);
-}
-.nf-chip[aria-pressed="true"], .nf-chip.is-active {
-  color: var(--fg-on-accent); background: var(--grad-fresh); box-shadow: var(--el-1), var(--glow-accent);
+  color: var(--ink-500);
 }
 
-.nf-dot { width:0.6em; height:0.6em; border-radius:50%; display:inline-block; }
-.nf-dot--live { background: var(--success); box-shadow: 0 0 0 0 rgba(47,201,122,0.6); animation: nf-pulse 1.8s var(--ease-out) infinite; }
-.nf-dot--warn { background: var(--warning); }
-.nf-dot--off  { background: var(--fg3); }
-@keyframes nf-pulse { 0%{box-shadow:0 0 0 0 rgba(47,201,122,0.55);} 70%{box-shadow:0 0 0 8px rgba(47,201,122,0);} 100%{box-shadow:0 0 0 0 rgba(47,201,122,0);} }
+.sp-stat__value {
+  font-size: 30px;
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-tight);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-heading);
+}
 
-/* ---------------- FORM FIELDS ---------------- */
-.nf-field { display:flex; flex-direction:column; gap:0.45em; }
-.nf-label { font-size: var(--fs-sm); font-weight: var(--weight-semibold); color: var(--fg2); }
-.nf-input, .nf-textarea, .nf-select {
-  font-family: var(--font-body); font-size: var(--fs-base); color: var(--fg1);
-  background: var(--surface-inset); border: none;
-  border-radius: var(--r-md); padding: 0.85em 1.1em;
-  box-shadow: var(--inset-1);
-  transition: box-shadow var(--dur-base) var(--ease-out);
+/* Direction is [data-trend], and the caret icon must carry it too — never
+   colour alone (DESIGN.md section 7). */
+.sp-stat__delta {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: var(--text-xs);
+  color: var(--ink-500);
+}
+
+.sp-stat__delta[data-trend="up"],
+.sp-stat__delta[data-trend="down"] {
+  font-weight: var(--weight-bold);
+}
+
+.sp-stat__delta[data-trend="up"] {
+  color: var(--success);
+}
+
+.sp-stat__delta[data-trend="down"] {
+  color: var(--danger);
+}
+
+/* ---------------------------------------------- table (Table.jsx) --------- */
+/* First column 600. IDs/counts mono. Statuses always a badge, single word. */
+
+.sp-table {
   width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-sans);
+  font-size: 12.5px;
 }
-.nf-input::placeholder, .nf-textarea::placeholder { color: var(--fg3); }
-.nf-input:focus, .nf-textarea:focus, .nf-select:focus {
-  outline: none; box-shadow: var(--inset-2), 0 0 0 3px var(--accent-wash);
+
+.sp-table th {
+  padding: 9px 12px;
+  text-align: left;
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  border-bottom: 1px solid var(--border-subtle);
 }
-.nf-textarea { resize: vertical; min-height: 5rem; line-height: var(--lh-normal); }
 
-/* checkbox & radio (soft) */
-.nf-check {
-  appearance:none; width:1.4em; height:1.4em; border-radius: var(--r-xs);
-  background: var(--surface); box-shadow: var(--el-1); cursor:pointer;
-  display:inline-grid; place-content:center; transition: all var(--dur-fast) var(--ease-spring);
+.sp-table td {
+  padding: 11px 12px;
+  text-align: left;
+  font-weight: var(--weight-medium);
+  color: var(--ink-800);
+  border-bottom: 1px solid var(--border-subtle);
 }
-.nf-check:checked { background: var(--grad-fresh); box-shadow: var(--inset-1); }
-.nf-check:checked::after { content:""; width:0.5em; height:0.85em; border:solid var(--fg-on-accent); border-width:0 0.18em 0.18em 0; transform: rotate(42deg) translateY(-1px); }
-.nf-radio { border-radius: 50%; }
-.nf-radio:checked::after { content:""; width:0.55em; height:0.55em; border-radius:50%; border:none; background: var(--fg-on-accent); transform:none; }
 
-/* ---------------- TOGGLE SWITCH ---------------- */
-.nf-switch { position:relative; width: 3.4em; height: 1.85em; display:inline-block; cursor:pointer; }
-.nf-switch input { position:absolute; opacity:0; }
-.nf-switch .track {
-  position:absolute; inset:0; border-radius: var(--r-pill);
-  background: var(--surface-inset); box-shadow: var(--inset-1);
-  transition: background var(--dur-base) var(--ease-out);
+.sp-table td:first-child {
+  font-weight: var(--weight-semibold);
 }
-.nf-switch .thumb {
-  position:absolute; top:50%; left: 0.22em; width: 1.4em; height:1.4em;
-  transform: translateY(-50%); border-radius:50%;
-  background: var(--surface); box-shadow: var(--el-1);
-  transition: left var(--dur-base) var(--ease-spring), background var(--dur-base) var(--ease-out);
+
+.sp-table tbody tr:last-child td {
+  border-bottom: none;
 }
-.nf-switch input:checked ~ .track { background: var(--grad-fresh); box-shadow: var(--inset-1); }
-.nf-switch input:checked ~ .thumb { left: calc(100% - 1.62em); }
 
-/* ---------------- SEGMENTED CONTROL ---------------- */
-.nf-segment { display:inline-flex; padding: 0.3em; gap:0.2em; border-radius: var(--r-pill); background: var(--surface-inset); box-shadow: var(--inset-1); }
-.nf-segment button {
-  border:none; background:transparent; cursor:pointer; font-family: var(--font-display);
-  font-weight: var(--weight-semibold); font-size: var(--fs-sm); color: var(--fg2);
-  padding: 0.5em 1.1em; border-radius: var(--r-pill); transition: all var(--dur-base) var(--ease-out);
+.sp-table tbody tr {
+  transition: background var(--dur-fast) var(--ease-out);
 }
-.nf-segment button.is-active { color: var(--fg1); background: var(--surface); box-shadow: var(--el-1); }
 
-/* ---------------- SLIDER (range) ---------------- */
-.nf-range { -webkit-appearance:none; appearance:none; width:100%; height: 1.1em; background:transparent; cursor:pointer; }
-.nf-range::-webkit-slider-runnable-track { height: 0.7em; border-radius: var(--r-pill); background: var(--surface-inset); box-shadow: var(--inset-1); }
-.nf-range::-moz-range-track { height: 0.7em; border-radius: var(--r-pill); background: var(--surface-inset); box-shadow: var(--inset-1); }
-.nf-range::-webkit-slider-thumb { -webkit-appearance:none; appearance:none; width:1.35em; height:1.35em; margin-top:-0.33em; border-radius:50%; background: var(--surface); box-shadow: var(--el-1), var(--glow-accent); border: 2px solid var(--mint); transition: transform var(--dur-fast) var(--ease-spring); }
-.nf-range::-webkit-slider-thumb:active { transform: scale(1.15); }
-.nf-range::-moz-range-thumb { width:1.35em; height:1.35em; border-radius:50%; background: var(--surface); box-shadow: var(--el-1); border: 2px solid var(--mint); }
+.sp-table tbody tr:hover {
+  background: var(--surface-sunken);
+}
 
-/* ---------------- PROGRESS ---------------- */
-.nf-progress { height: 0.7em; border-radius: var(--r-pill); background: var(--surface-inset); box-shadow: var(--inset-1); overflow:hidden; }
-.nf-progress > span { display:block; height:100%; border-radius: var(--r-pill); background: var(--grad-fresh); box-shadow: var(--glow-accent); transition: width var(--dur-slow) var(--ease-out); }
-.nf-progress--striped > span { background-image: var(--grad-fresh), repeating-linear-gradient(45deg, rgba(255,255,255,0.18) 0 8px, transparent 8px 16px); animation: nf-stripes 1s linear infinite; }
-@keyframes nf-stripes { to { background-position: 32px 0, 0 0; } }
+.sp-table th[data-align="right"],
+.sp-table td[data-align="right"] {
+  text-align: right;
+}
 
-/* ---------------- SPINNERS ---------------- */
-.nf-spinner { width: 2.4em; height:2.4em; border-radius:50%; background: conic-gradient(from 0deg, var(--mint), var(--cyan), transparent 75%); -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 0); mask: radial-gradient(farthest-side, transparent calc(100% - 5px), #000 0); animation: nf-spin 0.9s linear infinite; }
-@keyframes nf-spin { to { transform: rotate(360deg); } }
-.nf-dots { display:inline-flex; gap:0.4em; }
-.nf-dots i { width:0.6em; height:0.6em; border-radius:50%; background: var(--accent); display:inline-block; animation: nf-bounce 1s var(--ease-in-out) infinite; }
-.nf-dots i:nth-child(2){ animation-delay:0.15s; } .nf-dots i:nth-child(3){ animation-delay:0.3s; }
-@keyframes nf-bounce { 0%,80%,100%{ transform: translateY(0); opacity:0.5; } 40%{ transform: translateY(-0.55em); opacity:1; } }
+.sp-table th[data-align="center"],
+.sp-table td[data-align="center"] {
+  text-align: center;
+}
 
-/* skeleton shimmer */
-.nf-skeleton { background: var(--surface-inset); border-radius: var(--r-sm); position:relative; overflow:hidden; box-shadow: var(--inset-1); }
-.nf-skeleton::after { content:""; position:absolute; inset:0; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.35), transparent); transform: translateX(-100%); animation: nf-shimmer 1.4s infinite; }
-[data-theme="dark"] .nf-skeleton::after { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent); }
-@keyframes nf-shimmer { to { transform: translateX(100%); } }
+.sp-table__mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--ink-700);
+}
 
-/* ---------------- TOOLTIP ---------------- */
-.nf-tip { position:relative; }
-.nf-tip::after { content: attr(data-tip); position:absolute; bottom:calc(100% + 8px); left:50%; transform: translateX(-50%) translateY(4px); white-space:nowrap; font-size: var(--fs-xs); font-weight:var(--weight-medium); color: var(--fg1); background: var(--surface); box-shadow: var(--el-2); padding:0.4em 0.7em; border-radius: var(--r-sm); opacity:0; pointer-events:none; transition: all var(--dur-fast) var(--ease-out); }
-.nf-tip:hover::after { opacity:1; transform: translateX(-50%) translateY(0); }
+.sp-table--compact th {
+  padding: 6px 10px;
+}
 
-/* ---------------- AVATAR ---------------- */
-.nf-avatar { width:2.6em; height:2.6em; border-radius:50%; background: var(--surface); box-shadow: var(--el-1); display:grid; place-content:center; font-family:var(--font-display); font-weight:var(--weight-bold); color: var(--accent-press); overflow:hidden; }
-.nf-avatar img { width:100%; height:100%; object-fit:cover; }
+.sp-table--compact td {
+  padding: 7px 10px;
+}
 
-/* ---------------- DIVIDER ---------------- */
-.nf-divider { height:1px; background: var(--line); border:none; margin: var(--sp-4) 0; }
-.nf-divider--soft { height: 2px; border-radius: var(--r-pill); background: var(--surface); box-shadow: var(--inset-1); }
+.sp-table--dark th {
+  color: var(--navy-text-dim);
+  border-bottom-color: var(--navy-line);
+}
+
+.sp-table--dark td {
+  color: var(--navy-text);
+  border-bottom-color: var(--navy-line);
+}
+
+.sp-table--dark tbody tr:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sp-table--dark .sp-table__mono {
+  color: var(--navy-text);
+}
+
+/* --------------------------------------------- badge (Badge.jsx) ---------- */
+/* Soft ground, strong text. Base is the neutral variant. */
+
+.sp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 3px 10px;
+  border-radius: var(--radius-xs);
+  font-family: var(--font-sans);
+  font-size: var(--text-2xs);
+  font-weight: var(--weight-bold);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  background: var(--ink-100);
+  color: var(--ink-600);
+}
+
+.sp-badge--neutral {
+  background: var(--ink-100);
+  color: var(--ink-600);
+}
+
+/* Text is the --*-strong ramp, not the raw hue: three of the five raw pairs
+   fail 4.5:1 at 11px/700. See the header note. */
+.sp-badge--success {
+  background: var(--success-soft);
+  color: var(--success-strong);
+}
+
+.sp-badge--warning {
+  background: var(--warning-soft);
+  color: var(--warning-strong);
+}
+
+.sp-badge--danger {
+  background: var(--danger-soft);
+  color: var(--danger-strong);
+}
+
+.sp-badge--info {
+  background: var(--info-soft);
+  color: var(--info-strong);
+}
+
+.sp-badge--brand {
+  background: var(--brand-100);
+  color: var(--brand-600);
+}
+
+/* Live/streak states. The dot is decoration — the badge's text carries meaning. */
+.sp-badge--dot::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
+/* ----------------------------------------------- pill (Pill.jsx) ---------- */
+/* Filter chips. Selected state is [aria-pressed="true"], which is also what
+   assistive tech reads — do not swap it for a class. */
+
+.sp-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 14px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-pill);
+  background: var(--ink-050);
+  color: var(--ink-600);
+  font-family: var(--font-sans);
+  font-size: 12.5px;
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.sp-pill:hover {
+  background: var(--ink-100);
+}
+
+/* Solid --brand-600, not --grad-brand: 12.5px white on the gradient's outer
+   stops is 4.02:1 and 3.68:1. The glow keeps the gradient's identity. */
+.sp-pill[aria-pressed="true"] {
+  background: var(--brand-600);
+  color: var(--text-on-brand);
+  border-color: transparent;
+  box-shadow: var(--shadow-glow-brand);
+}
+
+.sp-pill:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* --------------------------------------------- alert (Alert.jsx) ---------- */
+/* Callouts and methodology caveats. Base is the info variant. */
+
+.sp-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  padding: 13px 16px;
+  border-radius: var(--radius-md);
+  background: var(--info-soft);
+  font-family: var(--font-sans);
+  animation: sp-fade-up var(--dur-base) var(--ease-out) both;
+}
+
+.sp-alert--info {
+  background: var(--info-soft);
+}
+
+.sp-alert--success {
+  background: var(--success-soft);
+}
+
+.sp-alert--warning {
+  background: var(--warning-soft);
+}
+
+.sp-alert--danger {
+  background: var(--danger-soft);
+}
+
+.sp-alert__title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-bold);
+  color: var(--text-heading);
+  margin: 0 0 3px;
+}
+
+.sp-alert__body {
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-600);
+}
+
+/* ------------------------------------------ icon tile (IconTile.jsx) ------ */
+/* The signature motif: gradient chip + white icon. One colour family per list;
+   rainbow across a list is fine; random per-render colour is not. */
+
+.sp-icontile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--grad-brand);
+  color: var(--text-on-brand);
+  box-shadow: var(--shadow-glow-brand), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.sp-icontile--coral {
+  background: var(--grad-coral);
+  box-shadow: var(--shadow-glow-coral), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.sp-icontile--green {
+  background: var(--grad-green);
+  box-shadow: var(--shadow-glow-green), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* Orange and purple have no --shadow-glow-* token; upstream inlines the accent
+   hue at 0.35, matching the pattern of the three that do. */
+.sp-icontile--orange {
+  background: var(--grad-orange);
+  box-shadow: 0 8px 24px rgba(249, 160, 63, 0.35),
+              inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.sp-icontile--purple {
+  background: var(--grad-purple);
+  box-shadow: 0 8px 24px rgba(139, 92, 246, 0.35),
+              inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.sp-icontile--navy {
+  background: var(--grad-navy);
+  box-shadow: var(--shadow-md), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+/* -------------------------------------- progress (ProgressBar.jsx) -------- */
+
+.sp-progress {
+  font-family: var(--font-sans);
+}
+
+.sp-progress__label {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 7px;
+  font-size: var(--text-xs);
+  font-weight: var(--weight-semibold);
+  color: var(--ink-600);
+}
+
+.sp-progress__value {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--weight-bold);
+  color: var(--ink-800);
+}
+
+.sp-progress__track {
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--ink-100);
+  overflow: hidden;
+}
+
+.sp-progress__bar {
+  height: 100%;
+  border-radius: var(--radius-pill);
+  background: var(--grad-brand);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  transition: width var(--dur-slow) var(--ease-out);
+}
+
+.sp-card--dark .sp-progress__track {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.sp-card--dark .sp-progress__label,
+.sp-card--dark .sp-progress__value {
+  color: var(--navy-text);
+}
+
+/* ------------------------------------ ring (ProgressRing.jsx, Gauge.jsx) -- */
+/* Radial coverage meter. The SVG is hand-built; these rules only place it. */
+
+.sp-ring {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-sans);
+}
+
+/* Rotate so a dash-array arc starts at twelve o'clock, as ProgressRing.jsx and
+   DonutChart.jsx do. This is OPT-IN and must stay that way: upstream puts the
+   rotation inline on those two components only, because a dial that computes its
+   own polar angles (Gauge.jsx, SegmentGauge.jsx — startAngle 225, sweep 270) is
+   already oriented and rotating it turns the gauge on its side. A blanket
+   `.sp-ring > svg` rule squashed a gauge's aspect ratio to 149x170 against a
+   170x149 viewBox and double-rotated a donut whose SVG already carried the
+   transform, moving its first segment to six o'clock. Add this class to a
+   ring/donut; never to a gauge. */
+.sp-ring--turn > svg {
+  transform: rotate(-90deg);
+}
+
+.sp-ring__arc {
+  transition: stroke-dashoffset var(--dur-hero) var(--ease-out);
+}
+
+.sp-ring__readout {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: var(--weight-extrabold);
+  letter-spacing: var(--tracking-tight);
+  font-variant-numeric: tabular-nums;
+  color: var(--text-heading);
+}
+
+.sp-card--dark .sp-ring__readout {
+  color: var(--navy-text);
+}
+
+/* ------------------------------------ segment (Tabs.jsx, pills variant) --- */
+/* Verdict / family filter. */
+
+.sp-segment {
+  display: inline-flex;
+  gap: var(--space-1);
+  padding: var(--space-1);
+  background: var(--ink-050);
+  border-radius: 12px;
+  font-family: var(--font-sans);
+}
+
+.sp-segment__btn {
+  height: 32px;
+  padding: 0 var(--space-4);
+  border: none;
+  border-radius: 9px;
+  background: transparent;
+  color: var(--ink-500);
+  font-family: inherit;
+  font-size: 12.5px;
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  transition: background var(--dur-fast) var(--ease-out),
+              color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.sp-segment__btn.is-active {
+  background: var(--surface-card);
+  color: var(--text-heading);
+  box-shadow: var(--shadow-sm);
+}
+
+.sp-segment__btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+/* ------------------------------------- search (SearchInput.jsx) ----------- */
+
+.sp-search {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  height: 38px;
+  min-width: 220px;
+  padding: 0 14px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-pill);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-xs);
+  transition: border-color var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.sp-search:focus-within {
+  border-color: var(--brand-500);
+  box-shadow: var(--focus-ring);
+}
+
+.sp-search__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--ink-800);
+}
+
+/* --------------------------- button (Button.jsx, IconButton.jsx) ---------- */
+/* Base is the outline variant, so an unmodified button is never unstyled and
+   --primary must be asked for. One primary per view; glow is the hero CTA only. */
+
+.sp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  height: 40px;
+  padding: 0 18px;
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  background: var(--surface-card);
+  color: var(--ink-700);
+  box-shadow: var(--shadow-xs);
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: transform var(--dur-instant) var(--ease-out),
+              filter var(--dur-fast) var(--ease-out),
+              box-shadow var(--dur-fast) var(--ease-out);
+}
+
+.sp-btn:hover {
+  filter: brightness(1.06);
+}
+
+.sp-btn:active {
+  transform: scale(0.97);
+}
+
+.sp-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+
+.sp-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  filter: none;
+  transform: none;
+}
+
+/* Solid --brand-600 for the same reason as the active pill. Add
+   var(--shadow-glow-brand) by hand for the one hero CTA. */
+.sp-btn--primary {
+  background: var(--brand-600);
+  color: var(--text-on-brand);
+  border-color: transparent;
+  box-shadow: var(--shadow-sm);
+}
+
+.sp-btn--secondary {
+  background: var(--brand-050);
+  color: var(--brand-600);
+  border-color: var(--brand-100);
+  box-shadow: none;
+}
+
+.sp-btn--ghost {
+  background: transparent;
+  color: var(--ink-600);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+/* --danger-strong, not --danger: white on --danger is 3.72:1 at 13px. */
+.sp-btn--danger {
+  background: var(--danger-strong);
+  color: var(--text-on-brand);
+  border-color: transparent;
+  box-shadow: var(--shadow-sm);
+}
+
+.sp-btn--sm {
+  height: 32px;
+  padding: 0 14px;
+  font-size: var(--text-xs);
+}
+
+.sp-btn--lg {
+  height: 48px;
+  padding: 0 var(--space-6);
+  font-size: var(--text-md);
+}
+
+/* Square icon-only button. 38px clears the ≥32px dense hit target. */
+.sp-btn--icon {
+  width: 38px;
+  height: 38px;
+  padding: 0;
+}
+
+.sp-btn--icon.sp-btn--sm {
+  width: 30px;
+  height: 30px;
+}
+
+.sp-btn--icon.sp-btn--lg {
+  width: 46px;
+  height: 46px;
+}
+
+/* -------------------------------------------- tooltip (Tooltip.jsx) ------- */
+/* Label comes from [data-tip]. This is a hover affordance, not an accessible
+   name: charts label themselves with <title> and aria-label. */
+
+.sp-tip {
+  position: relative;
+  display: inline-flex;
+}
+
+.sp-tip::after {
+  content: attr(data-tip);
+  position: absolute;
+  z-index: 50;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -7px);
+  padding: 6px 10px;
+  border-radius: 8px;
+  background: var(--ink-900);
+  color: var(--text-on-brand);
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  font-weight: var(--weight-semibold);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease-out);
+  box-shadow: var(--shadow-md);
+}
+
+.sp-tip:hover::after,
+.sp-tip:focus-within::after {
+  opacity: 1;
+}
+
+/* ------------------------------------------------------------ divider ---- */
+
+.sp-divider {
+  height: 1px;
+  border: 0;
+  margin: var(--space-8) 0;
+  background: var(--border-subtle);
+}
+
+.sp-card--dark .sp-divider {
+  background: var(--navy-line);
+}
+
+/* ------------------------------------- empty state (EmptyState.jsx) ------- */
+/* "Since last report" with no prior report; a filter matching nothing. */
+
+.sp-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 36px var(--space-6);
+  text-align: center;
+  font-family: var(--font-sans);
+}
+
+.sp-empty__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  background: var(--brand-050);
+  color: var(--brand-400);
+  animation: sp-float 3s var(--ease-in-out) infinite;
+}
+
+.sp-empty__title {
+  font-size: 15px;
+  font-weight: var(--weight-bold);
+  color: var(--ink-800);
+}
+
+.sp-empty__message {
+  max-width: 280px;
+  font-size: 12.5px;
+  line-height: 1.5;
+  color: var(--ink-500);
+}
+
+/* ------------------------------------ reduced motion (MOTION.md section 6) */
+/* Loops stop, entrances become opacity-only, meters render final state. */
+
+@media (prefers-reduced-motion: reduce) {
+  .sp-alert,
+  .sp-empty__icon {
+    animation: none;
+  }
+
+  .sp-card,
+  .sp-btn,
+  .sp-pill,
+  .sp-search,
+  .sp-segment__btn,
+  .sp-progress__bar,
+  .sp-ring__arc,
+  .sp-table tbody tr,
+  .sp-tip::after {
+    transition: none;
+  }
+
+  .sp-card--hover:hover,
+  .sp-btn:active {
+    transform: none;
+  }
+}

@@ -40,7 +40,7 @@ A single interactive HTML report at `<cwd>/Outputs/Reflections/cc-reflection-<da
 - An embedded machine-readable summary block, so the next run can diff against this one and show what you adopted, what still recurs, and what's new.
 - A dedicated section for your `focus`, when you pass one.
 
-The report is styled with the bundled **Neumorphic Fresh** design system (see [reference/design-system/](reference/design-system/)) and opens straight from `file://`.
+The report is styled with the bundled **SaaS Pro** design system (see [reference/design-system/](reference/design-system/)) and opens straight from `file://`.
 
 ## How it works
 
@@ -141,18 +141,20 @@ However it arrives, the skill is then available as `/reflect`.
 skills/reflect/
 ├── SKILL.md                         Pipeline definition and guardrails (the skill itself)
 ├── README.md                        This file
+├── .prettydocs/                     This README's own design system, and a manifest per visual
 ├── docs/
 │   └── assets/
 │       ├── hero.svg                 Sessions become signals, clusters, then verdicts
-│       ├── pipeline.svg             The six phases, 0 through 5
-│       └── src/                     Frozen design system, and a manifest per visual
+│       └── pipeline.svg             The six phases, 0 through 5
 └── reference/
     ├── extraction-guide.md          Signal taxonomy, extractor prompts, JSON schemas, batching
     ├── report-guide.md              Report structure, interactivity, self-containment rules
-    └── design-system/               Bundled "Neumorphic Fresh" tokens and components
-        ├── DESIGN.md
-        ├── colors_and_type.css
-        └── components.css
+    └── design-system/               Bundled "SaaS Pro" design system, for the report
+        ├── DESIGN.md                Colour, type, space, elevation, component rules
+        ├── MOTION.md                Durations, easings, patterns, reduced motion
+        ├── tokens/                  colors, typography, spacing, motion
+        ├── components.css           The sp-* class layer
+        └── charts/                  Chart geometry references (read-only)
 ```
 
 ## Privacy and guardrails
@@ -167,7 +169,7 @@ skills/reflect/
 - [SKILL.md](SKILL.md) — the full pipeline, arguments, and guardrails.
 - [reference/extraction-guide.md](reference/extraction-guide.md) — signal taxonomy, extractor prompt template, and JSON schemas.
 - [reference/report-guide.md](reference/report-guide.md) — report structure, motion, and the self-containment rules.
-- [reference/design-system/DESIGN.md](reference/design-system/DESIGN.md) — the Neumorphic Fresh design system used for the report.
+- [reference/design-system/DESIGN.md](reference/design-system/DESIGN.md) — the SaaS Pro design system used for the report.
 - [CONTRIBUTING.md](../../CONTRIBUTING.md) — how to propose a change to this collection.
 
 ## License
