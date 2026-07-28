@@ -3,7 +3,7 @@
   "doc": "README.md",
   "tier": "animated-flagship",
   "producer": "pretty-svg-docs",
-  "style": "neumorphism",
+  "style": "glassmorphism",
   "facts": [
     "The pipeline has six phases, numbered 0 through 5",
     "Phase 0 scopes the corpus and loads the most recent prior report for trend diffing",
@@ -14,14 +14,14 @@
     "Phase 5 delivers the report with the top recommendations and anything the run had to skip"
   ],
   "facts_hash": "8862876d778e86f3577ab83da43ae01334086acdd480d717ba6628520f14e7e3",
-  "src_hash": "726560b1c050707f5fa344f0d55d0473db39f32bb7e32aabb85b9d524b928819",
-  "design_hash": "9c880d313dd7da56b813ded7e7602c9ba7d60ab9a018746ae0ea88c9c96130a9",
+  "src_hash": "9e3ee86b3af6259a8cacaf8a31d749696beee21dc22b23da2588fd22550224fd",
+  "design_hash": "2e74977d08eae25bfa6048bb496561af9156071db393932c791776e55b7bfc26",
+  "design_source_path": "reference/design-system/tokens/colors.css",
+  "design_source_hash": "3fdb2e89e30e4855ff1192036211d3b541a28217110d22077fe4dd20823cf7d4",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 6208
+    "bytes": 9080
   },
-  "relaxed": [
-    "filter-depth@2"
-  ]
+  "relaxed": []
 }

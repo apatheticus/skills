@@ -21,8 +21,8 @@ svg { --ground:#1B2140; --blob1:#7C4DFF; --blob2:#00BFA5; --blob3:#FF4081; --ink
   .gl-s { font: 400 19px "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
   .gl-f { font: 400 18px "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
   .gl-e { fill: none; stroke: url(#gl-edge); stroke-width: 1.6; }
-  .gl-d { animation: gl-d 12s ease-in-out infinite alternate; }
-  @keyframes gl-d { 0% { transform: translate(0,0) } 100% { transform: translate(60px,-28px) } }
+  .gl-d { animation: gl-d 12s ease-in-out infinite; }
+  @keyframes gl-d { 0% { transform: translate(0,0) } 50% { transform: translate(60px,-28px) } 100% { transform: translate(0,0) } }
   @media (prefers-reduced-motion: reduce) { .gl-d { animation: none } }
 </style>
 <rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
