@@ -28,6 +28,26 @@ from pathlib import Path
 
 SVG_NS = "http://www.w3.org/2000/svg"
 
+
+def default_out(src: Path, name: Path | str) -> Path:
+    """Where the harness goes when --out is not given.
+
+    The asset lives at <project>/docs/assets/<name>.svg, so the project root is two
+    levels up and the harness belongs in <project>/.prettydocs/src/<name>/_qa — the
+    one path <project>/.prettydocs/.gitignore's `src/**/_qa/` rule covers. This used
+    to default to <project>/docs/assets/src/<name>/_qa, the pre-0.10.0 layout, which
+    no .gitignore anywhere matches: every run silently produced a 50 KB harness
+    staged for commit, in a directory the migration had already retired.
+
+    A project still carrying the old layout keeps it, so a run there stays gitignored
+    by whatever rule it already has.
+    """
+    project = src.parent.parent.parent
+    legacy = src.parent / "src"
+    if legacy.is_dir() and not (project / ".prettydocs").is_dir():
+        return legacy / name / "_qa"
+    return project / ".prettydocs" / "src" / name / "_qa"
+
 PAGE = """<!doctype html>
 <html lang="en">
 <head>
@@ -128,8 +148,7 @@ def main() -> int:
     else:
         phases = max(2, args.phases)
 
-    out_dir = Path(args.out) if args.out else \
-        src.parent / "src" / name / "_qa"
+    out_dir = Path(args.out) if args.out else default_out(src, name)
     out_dir.mkdir(parents=True, exist_ok=True)
 
     figures: list[str] = []
