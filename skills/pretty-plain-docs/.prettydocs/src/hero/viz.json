@@ -5,16 +5,16 @@
   "producer": "pretty-plain-docs",
   "style": "schematic",
   "facts": [
-    "python3 is the only requirement \u2014 no renderer, no CLI, no network dependency",
+    "python3 is the only requirement — no renderer, no CLI, no network dependency",
     "The committed .svg is both the asset and its own source; there is no render step between authoring and committing",
-    "The style catalog holds 31 named idioms, one resolved per repo",
+    "The style catalog holds 32 named idioms, one resolved per repo",
     "svg_check.py applies six check classes to every visual: structural, legibility, system, style, fidelity and size",
     "Zero svg_check.py errors is required before a visual may be embedded",
     "Every visual declares data-loop-s=\"0\" and nothing in this skill's output animates"
   ],
-  "facts_hash": "f62e4a3f664d1e9ce2546b9bc5f7dc06ea2e43ce3ef69143d91274457dc54c5d",
+  "facts_hash": "9101493f7b65ddf14a332a0b630dbb0e8fcce9c4e54ed1e04bb94bf0c688e11b",
   "src_hash": "383558ae88daf3cedebc2c3017dcb94e47e39378eb61fb9b34c41101e980464d",
-  "design_hash": "4198cfe88edff60dfb760b071150f0f126feefa3f79cad296227f0b9096b5574",
+  "design_hash": "245a03e9d07a4f50f6ad57772d31fde8f0b8bad9578ed467695c9c53b90d0f06",
   "svg": {
     "loop_s": 0,
     "width": 1200,

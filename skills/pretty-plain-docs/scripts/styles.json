@@ -505,6 +505,28 @@
         "min_elements": 40
       }
     },
+    "soft-vinyl": {
+      "aliases": [
+        "vinyl",
+        "soft-touch",
+        "collectible"
+      ],
+      "relax": {},
+      "forbid": [
+        "feTurbulence",
+        "feSpecularLighting",
+        "feDropShadow"
+      ],
+      "require": {
+        "gradient_units": "userSpaceOnUse",
+        "min_rx": 12,
+        "min_filter_depth": 1,
+        "require_filter_all": [
+          "feGaussianBlur"
+        ],
+        "min_elements": 68
+      }
+    },
     "swiss-minimal": {
       "aliases": [
         "swiss",

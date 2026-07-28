@@ -17,7 +17,7 @@ Two rules govern the whole layer:
 
 ## The catalog
 
-Thirty-one idioms, listed alphabetically.
+Thirty-two idioms, listed alphabetically.
 
 | Slug | Aliases | Primary axis | Intent in one line | Natural fit |
 | --- | --- | --- | --- | --- |
@@ -46,6 +46,7 @@ Thirty-one idioms, listed alphabetically.
 | `rough-sketch` | `excalidraw`, `roughjs`, `rough` | composition | Doubled strokes and hachure fills — the meeting diagram | Onboarding, contributor docs |
 | `schematic` | `technical-drawing`, `circuit`, `netlist` | composition | Symbol alphabet, net labels, no perspective | Hardware, compilers, pipelines |
 | `skeuomorphic` | `realist`, `textured` | material | Objects that look like objects — bevel, sheen, weight | Audio, hardware, creative tools |
+| `soft-vinyl` | `vinyl`, `soft-touch`, `collectible` | material | Moulded soft-touch forms, one light, warm translucent edges | Explanatory figures, chart series, small flows |
 | `swiss-minimal` | `swiss`, `international`, `grid` | composition | Strict grid, thin rules, type doing the work | Libraries, tooling, standards |
 | `terminal-minimalist` | `tui`, `cli`, `terminal`, `ascii-adjacent` | material | Mono type on a dark field; a TUI that isn't ASCII art | CLIs, infra, devops |
 | `watercolor` | `watercolour`, `wash`, `aquarelle` | material | Transparent washes that multiply, ink line laid last | Narrative, community, onboarding |
@@ -117,6 +118,16 @@ nothing raised → watercolor. Opaque, lit, relief following the strokes → oil
 
 **`skeuomorphic` vs `brushed-metal`.** A whole object — bezel, sheen, lamp, cable →
 skeuomorphic. One material applied flat across the board → brushed-metal.
+
+**`soft-vinyl` vs `claymorphism`.** Both are soft, warm, rounded volumes. Texture and
+register separate them: clay is matte-textured and pastel, with a wide diffuse shadow;
+vinyl is untextured, with a warm *translucent* shadow edge and one directional key. Grain
+on the form → clay. A shadow edge that glows peach → soft-vinyl.
+
+**`soft-vinyl` vs `neumorphism`.** The decisive test is figure/ground. Neumorphism gives
+element and background the *same* fill and defines shape by near-background shadows, so
+deleting the shadows deletes the form. Soft-vinyl keeps figure and ground distinct and
+carries volume in the fill, so stripping every shadow leaves the forms still solid.
 
 ## Resolution ladder
 
@@ -213,6 +224,7 @@ So each style also declares a minimum, in the same `scripts/styles.json` entry:
 | `require_filter_all` | Every named primitive must be present. `require_filter` (now `require_filter_any`) is a *menu* satisfied by one entry — right for "blur or drop-shadow", wrong for a material built from a specific chain, where one bare `feTurbulence` used to satisfy `wood-grain`. |
 | `min_filter_depth` | The deepest chain in the file must reach this. The mirror of the `filter_depth` ceiling, and the gate that actually kills a single-primitive imitation. |
 | `min_elements` | Minimum drawn geometry. **Binds only on specimens** — a root carrying `data-specimen="true"`. A README flow diagram with four boxes is correct at 23 elements, and padding it to hit a density number would be worse output. |
+| `gradient_units` | Every `<linearGradient>` / `<radialGradient>` must declare this value. Unreachable by `forbid`, which matches tag names, not attribute values — and because `objectBoundingBox` is the SVG *default*, an omitted attribute is a violation rather than a neutral absence. Also fails a file with no gradients at all, which would satisfy the rule vacuously. |
 
 The filter gates apply to **every** visual: if a repo's diagram claims `wood-grain`,
 it has to actually have wood grain. Only the density floor is specimen-scoped.
@@ -229,7 +241,7 @@ faithful than the catalog it indexes.
 
 ## Gate softening
 
-Twenty-one of the thirty-one styles relax something; the other ten run entirely on
+Twenty-one of the thirty-two styles relax something; the other eleven run entirely on
 the defaults. Almost every relaxation is filter depth, because texture and material
 are what cost primitives.
 
@@ -259,7 +271,8 @@ style gets that, including the three decorative ones — see *Three things a sty
 not fix* above.
 
 Relaxing **nothing at all**: `bento-grid`, `blueprint`, `console-elbow`, `editorial`,
-`flat-material`, `isometric-3d`, `neo-brutalist`, `schematic`, `swiss-minimal`,
+`flat-material`, `isometric-3d`, `neo-brutalist`, `schematic`, `soft-vinyl`,
+`swiss-minimal`,
 `terminal-minimalist`.
 
 The machine-readable half of these tables is `scripts/styles.json`, which

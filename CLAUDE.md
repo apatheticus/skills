@@ -61,11 +61,11 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 ## Current state
 
-Scaffolded 2026-07-24. **Six skills shipped** — `human-voice`, `pretty-hyper-docs`, `pretty-plain-docs`, `pretty-svg-docs`, `reflect`, `security-audit-full-report` — and the repo validates green at plugin version **0.13.0**. `pretty-svg-docs` ships a **31-style** catalog as of 2026-07-25 (14 → 31, folding in the `svg-style-exemplars` reference set), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
+Scaffolded 2026-07-24. **Six skills shipped** — `human-voice`, `pretty-hyper-docs`, `pretty-plain-docs`, `pretty-svg-docs`, `reflect`, `security-audit-full-report` — and the repo validates green at plugin version **0.13.1**. `pretty-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
 
 **`svg_check.py` gates fidelity, not just safety.** Every other check class is a ceiling (filter depth, bytes, radius) or a legibility floor (font size, contrast) — none of them asks whether a visual *looks like* the style it claims, so a flat, styleless render used to pass clean. Styles now declare their material in `scripts/styles.json` via `require_filter_all`, `min_filter_depth` and `min_elements`, and the checker prints a per-file `NOTE` reporting the chain depth, filter count and drawn-element count it actually found. `deepest chain 1` under a floor of 3 is the tell that a material was faked. Two attributes drive it: `data-specimen="true"` marks a catalog sample (**`min_elements` binds only on specimens** — a README diagram with four boxes is correct at 23 elements, and padding it would be worse output), and `data-style="<slug>"` on a `<filter>` measures that chain against the floor of the style it depicts rather than the file-wide one.
 
-The contact sheet `docs/assets/styles.svg` is **1200×4458** and is gated as its own declared `catalog-sheet` style (`filter_depth: 5`, `bytes_fail: 300 KB`, `min_elements: 620`). It used to be the one asset gated *without* `--style`, which silently gave it global `filter_depth: 1` and made `check_style` skip it entirely — so the single file depicting all 31 idioms was the only one exempt from every fidelity gate, and every material on it was faked. Each tile is now that style's own specimen scaled down rather than a redrawing, so the sheet cannot be less faithful than the catalog it indexes or drift from it. Read that skill's `.prettydocs/prettydocs.md` before editing it — the per-specimen token namespacing, `isolation: isolate` and per-tile `data-bg` are all load-bearing.
+The contact sheet `docs/assets/styles.svg` is **1200×4721** and is gated as its own declared `catalog-sheet` style (`filter_depth: 5`, `bytes_fail: 300 KB`, `min_elements: 620`). It used to be the one asset gated *without* `--style`, which silently gave it global `filter_depth: 1` and made `check_style` skip it entirely — so the single file depicting all 31 idioms was the only one exempt from every fidelity gate, and every material on it was faked. Each tile is now that style's own specimen scaled down rather than a redrawing, so the sheet cannot be less faithful than the catalog it indexes or drift from it. Read that skill's `.prettydocs/prettydocs.md` before editing it — the per-specimen token namespacing, `isolation: isolate` and per-tile `data-bg` are all load-bearing.
 
 Every skill's README visuals were authored by running `pretty-svg-docs` on itself, so they double as the worked example. One resolved style per skill: `human-voice` → `editorial`, `pretty-svg-docs` → `bento-grid`, `pretty-plain-docs` → `schematic`, `reflect` → `glassmorphism`, `security-audit-full-report` → `flat-material`. `editorial` and `bento-grid` **require no filter**, and `editorial` forbids blur, shadow and gradient outright, so for those two the fidelity floor is drawn density and typographic craft rather than a filter chain. Don't "fix" a zero-filter NOTE on either: `bento-grid` allows one soft shadow *or* a hairline and never both, and these boards use the hairline.
 
@@ -94,13 +94,103 @@ The same change had to land in `docs/assets/styles.svg`, because each tile is th
 
 **Two verification facts worth keeping.** The seam check no longer needs the Playwright scroll dance: `chrome-headless-shell` rendering the whole SVG paused at an injected `animation-delay` involves no scrolling at all, so `t=0` vs `t=12s` is directly comparable — and it still catches the `alternate` bug, because under `alternate` the pose at `t=D` is the far end rather than the origin. But **large rasters are not bit-deterministic across chrome invocations**: the 1200×4458 sheet showed 6–14 differing pixels at the seam against a *same-pose* floor of 10–16 and a known-different control of 244,000. Establish the same-pose noise floor before reporting a seam number on anything that big; the three smaller files returned exact 0.
 
+**`soft-vinyl` is the 32nd style and the first added since the catalog was assembled** —
+animated in `pretty-svg-docs`, static in `pretty-plain-docs`, ported from a user-supplied
+`SOFT-VINYL-SPEC.md` plus a reference primitive sheet. Soft-touch collectible material:
+one upper-left light vector for the whole figure, a shadow edge that *glows warm* toward a
+subsurface peach instead of going dark, and five primitives (sphere, capsule, cylinder,
+slab, contact shadow). **It relaxes nothing** — one `feGaussianBlur` per contact shadow at
+the default `filter_depth: 1` — which makes it the fidelity argument in miniature: volume
+lives in the fill, so a material this rich needs no filter chain at all. Both specimens are
+70 drawn elements, 33 gradients and 4 shared blur filters, and both gate 0/0/0 at
+`min_elements: 68`.
+
+**Its machine half is a new check class, `gradient_units`, and it exists because `forbid`
+cannot see attribute values.** The style's defining invariant is
+`gradientUnits="userSpaceOnUse"` on every gradient: the SVG default, `objectBoundingBox`,
+resamples the gradient into each element's own bounding box, so a wide capsule ends up lit
+as though the light had moved and no other attribute corrects it. `forbid` matches tag
+names, so the invariant was unreachable — the same shape of hole as pre-0.13.0
+glassmorphism. Two details make the check correct, both fixture-tested: because
+`objectBoundingBox` is the **default**, an *omitted* `gradientUnits` is a violation rather
+than a neutral absence; and a gradient that inherits via `href`/`xlink:href` is exempt,
+because it inherits its parent's units. It also carries a **vacuous-pass guard** — zero
+gradients in the file is an error, since "every gradient is `userSpaceOnUse`" is otherwise
+trivially true of the flat render the key exists to stop. That is the identical hole
+`mono_only` once had, and the checker's own comment says so. The key was provably inert
+before `soft-vinyl` declared it: all 64 pre-existing assets re-gated unchanged.
+
+**Two errors in the source spec, both found by measuring rather than reading, and the
+reference implementation fails one of them.** Its §10 test 6 states "peak luminance ≤ `LIT`
++ 4", but `LIT` `#F7EFE1` is **not the brightest value in its own palette**: §5.4's slab
+starts at `#FBF5EA` (relative luminance 91.75) and §5.3's cylinder cap at `#FDF8EE` (94.19)
+against a threshold of 90.94 — so `vinyl-primitives.svg` itself peaks at 92.66 and fails.
+Restated as **peak ≤ the brightest declared stop**, which is provable for a shading-only
+render because a gradient only interpolates between the stops you declared; a specular
+highlight is precisely what introduces a value brighter than all of them. Our specimen
+peaks 92.55, *below* the reference. Separately, §5.4's slab axis
+`(x+0.30w, y) → (x+0.45w, y+h)` is **aspect-dependent**: that `0.15w` horizontal run is
+subordinate to the height only while the slab is roughly as tall as it is wide, which every
+slab in the reference is. At 680×64 it dominates, the ramp completes inside the first sixth
+of the width and the rest clamps to `SHADE` — the form reads flat and dark. Clamped to
+`min(0.15w, 0.45h)`, which reduces to the published formula exactly when the slab is
+square-ish.
+
+**The contact sheets reflowed rather than simply gaining a tile, and 33 cells is odd.** 32
+style cells fill exactly 16 rows, so the summary cell no longer pairs with a style; it now
+spans **both columns on a row of its own** rather than leaving a visible hole beside it.
+Height went **4458 → 4721**. Inserting alphabetically between `skeuomorphic` and
+`swiss-minimal` flips the column of every later cell, and a cell's position is written in
+**four** places — the `clipPath` rect, the inner `<g transform="translate(…)">`, the border
+rect and the `sh-slug` text — which must move together; verified programmatically at 0
+mismatches across all 32 cells in both sheets. Both still gate to **0 errors, 27 warnings,
+34 softened**, identical to each other and to their pre-edit verdicts.
+
+**A seam control has to sit inside the window that actually moves.** The first control —
+`t=3s` of a `6s` settle — returned 0 differing pixels and read as a broken harness. It
+wasn't: the keyframes hold `scale(1,1)` from 0–58%, so `t=3s` *is* `t=0` by construction.
+Controls at 66 / 76 / 86% give 23,758 / 27,007 / 12,934 differing pixels, all bounded to
+the Transform slab's box, against a seam of exactly 0. A hold-then-event animation makes
+the usual "diff the midpoint" control worthless.
+
+**The static sibling does not raster-match the animated one at rest, and that is not a
+defect.** They differ by 41,607 pixels at a max channel delta of **7** — and it is *not*
+noise: the same-file floor is exactly 0 rendered twice, and the number reproduces exactly.
+Chrome composites the animated layer and that shifts gradient dithering document-wide,
+including over forms nowhere near the animated group. Every drawn element and every
+gradient/filter def is provably identical between the two files. The static skill's claim
+is "gates to the identical verdict", never "renders identically" — do not upgrade it to the
+stronger one on the strength of a pixel diff.
+
+**0.13.1 is the first use of the amended bump rule, and the rule decided it mechanically
+rather than by judgement.** A new style is purely additive: no existing style's gate moved,
+the new `require` key is inert for the other 32, and all 64 pre-existing assets gate
+identically — so **patch**. The per-skill `SKILL.md` field is ordinary semver and took a
+minor (`pretty-plain-docs` 0.2.0 → 0.3.0), which is consistent because the invalidation
+rule governs `plugin.json` alone and says so.
+
+**One count reference was deliberately left reading stale.** Both `prettydocs.md` files say
+a hairline grid "applied thirty-one times reads as one finding rather than thirty-one" —
+that is an illustration of `(xN)` aggregation and never tracked the catalog: no aggregated
+warning count equals 31, and the largest is 52. Editing it would move `design_hash`, which
+the skill's own facts call a trigger that invalidates every visual in the repo. The
+*genuine* count claims were fixed (`all 31 idioms`, `31 sets of --ground and --ink`, `the
+31 catalog styles`), which did move both `design_hash`es — and there the consequence split:
+`pretty-svg-docs`' hero **draws** "31 idioms" so it was really re-authored and re-gated,
+while `pretty-plain-docs`' hero draws no count at all, so its manifest was re-stamped with
+nothing to render. Same rule as 0.13.0, and the split is the useful part.
+
+**One pre-existing defect fixed in passing: `pretty-plain-docs`' `styles.md` said "The nine
+fields" over a table of eight.** `Motion character` was dropped when the static sibling was
+ported at 0.12.0 and the section heading was never renamed, in two places.
+
 **`design_hash` moved for two projects and two visuals were re-stamped without re-rendering — deliberately.** Correcting the softened count in `pretty-plain-docs`' `prettydocs.md` moves that project's `design_hash`, which the skill's own facts call a RE-RENDER trigger that "invalidates every visual in the repo at once". Its `hero` and `lazy-rerender` depend on nothing that changed, so their manifests were re-stamped and the assets left alone; regenerating them would produce the same bytes. `reflect`'s `design_hash` also moved and there **both** visuals were genuinely re-authored. The rule is right as a default and the exception is narrow: re-stamp without re-rendering only when the contract edit is a corrected measurement rather than a design decision, and say so where a later run will see it.
 
 **One pre-existing defect surfaced and was fixed in passing: `pretty-plain-docs` had three assets failing their own gate on a raw `#000000`.** Its `prettydocs.md` carries a 7-role palette where `pretty-svg-docs` carries 71 — the sibling's *Catalog swatches* section, which includes `sw-black`, was never ported at 0.12.0 — so the same `flood-color="#000000"` that passes in one skill errors in the other. It had been red since it shipped, and nothing caught it because CI runs `validate.mjs` (frontmatter and manifests) and never `svg_check.py`. It also made a documented claim false in three places: the static sheet was said to gate to *the same verdict as the animated original* while actually gating 1 error. Fixed by routing the hex through a declared token (`--sh-shadow` in both sheets, `--shadow` in `flat-material.svg`), which is the remedy the checker's own error message offers and needs no `design_hash` move. The palette asymmetry itself is left alone — it causes no failure now.
 
 **Verifying a seam in pixels needs a specific method, and the obvious one gives a wrong answer.** Playwright *element* screenshots of two filmstrip phases sit at different scroll positions, and the sub-pixel offset shifts the whole raster: `#p0` vs `#p6` reported the sheet's seam as 28–64% differing with a max channel delta over 200, *worse* than the mid-loop control, which is impossible. Two captures of the same element return 0 differing pixels, which is how you tell a positional shift from capture noise. What works: inject a style override re-posing **one** element's `animation-delay`, hold `window.scrollTo` fixed, take **viewport** screenshots, crop an integer box. That gives seam `0 / 494,860` px on the specimen and `0 / 2,290,800` px on the sheet, against controls of 60% and 47% at `t=6s`. Always diff a known-different pose — a seam result of 0 means nothing without it.
 
-**`alternate` appears nowhere else in the repo's SVGs**, confirmed against `HEAD` rather than the working tree; all 31 specimens carry `data-loop-s="12"` and the other 30 have no `alternate` in any form. The one other `git grep` hit, `skills/reflect/docs/assets/hero.svg:75`, is a *comment* explaining why that file avoids it. Separately, 13 `@keyframes` blocks across the catalog do not return to origin at `100%` — all are full `rotate(360deg)` sweeps (visually identical at both ends), tiled-pattern wraps like `digital-rain`'s 240px fall, or the travelling-pulse idiom (`swiss-minimal`'s `.sm-dot` runs `translateX(0 → 370px)` with no clip or fade, then resets). Rule 5 addresses *yoyo* motion specifically, so these are a different question, unadjudicated and deliberately untouched — "fixing" them would change six specimens' intent.
+**`alternate` appears nowhere else in the repo's SVGs**, confirmed against `HEAD` rather than the working tree; all 32 specimens carry `data-loop-s="12"` and the other 31 have no `alternate` in any form. The one other `git grep` hit, `skills/reflect/docs/assets/hero.svg:75`, is a *comment* explaining why that file avoids it. Separately, 13 `@keyframes` blocks across the catalog do not return to origin at `100%` — all are full `rotate(360deg)` sweeps (visually identical at both ends), tiled-pattern wraps like `digital-rain`'s 240px fall, or the travelling-pulse idiom (`swiss-minimal`'s `.sm-dot` runs `translateX(0 → 370px)` with no clip or fade, then resets). Rule 5 addresses *yoyo* motion specifically, so these are a different question, unadjudicated and deliberately untouched — "fixing" them would change six specimens' intent.
 
 **The SaaS Pro swap had to hand-write the component layer, because SaaS Pro ships no CSS.** All 43 of its components are React `.jsx` with inline JavaScript style objects and **zero class names** — `components/display/Table.jsx` is the proof. Neumorphic Fresh had given `reflect` a 58-class `nf-*` CSS API that got inlined verbatim; there was no equivalent to copy. So `design-system/components.css` is a **hand-derived CSS projection** of the subset a static report renders — **74 distinct classes across 28 families**, prefix `sp-*` because `tokens/motion.css` already owns it — transcribed from each component's style object. Recount with `grep -ohE '^[[:space:]]*\.sp-[a-z0-9_-]+' components.css | tr -d ' .' | sort -u | wc -l` rather than trusting this line. 19 components are deliberately **not** ported (Modal, Toast, Sidebar, forms, …) and the file says so in its header, so absence never reads as oversight. Two documented divergences: `.sp-btn`'s base *is* the outline variant so an unmodified button is never unstyled, and `.sp-page` has no upstream counterpart because nothing else supplies `--grad-page`.
 
@@ -145,7 +235,7 @@ Two traps around that checker. Its `<img>` matcher steps over quoted attribute v
 **`audit_visuals.py` takes doc *files*, not a project root** — the directory goes in `--root`, so the working form is `--root <dir> <doc>.md …`. Passing the directory as the doc (`audit_visuals.py .`) used to raise `IsADirectoryError` from a bare traceback in both copies, because `p.exists()` is true for a directory and the not-found guard never fired. All copies now carry an `is_dir()` guard that reports it as a `PROBLEM` with the corrected command and exits 1. Keep the three copies in step: this loop is identical in all of them and there is no shared module.
 
 **`pretty-plain-docs` is the static sibling, added at 0.12.0.** Same content engine, same
-eight Tier-1 docs, same `pd:` markers and hash triad, same 31-style catalog — the visuals
+eight Tier-1 docs, same `pd:` markers and hash triad, same 32-style catalog — the visuals
 are **static SVG** and nothing moves. Its own style is `schematic`, one of the ten that
 relax nothing, so its visuals prove the base gates rather than a softened set.
 
@@ -191,11 +281,11 @@ animated via CSS `@keyframes` only — **zero SMIL anywhere in the skill**, so `
 `@media (prefers-reduced-motion: reduce)` rule's resting values onto the base rule, then
 deletes the keyframes, the animation declarations and the reduce block. The reduce block is
 the *specification* for the resting state, not a hint. Fold, don't delete: **nine specimens
-sit at exactly `min_elements`**, so removing an element breaks the floor. Result: all 31
+sit at exactly `min_elements`**, so removing an element breaks the floor. Result: all 32
 pass at their own style and **not one drawn-element count changed**; the contact sheet gates
 to the identical verdict as the animated original (**0 errors, 27 warnings, 34 softened**
 as of 0.13.0, 31 before it),
-at 229 KB rather than 243 KB. That equivalence is the evidence nothing about a style's
+at 260 KB rather than 271 KB (229 / 243 KB before `soft-vinyl` landed). That equivalence is the evidence nothing about a style's
 fidelity depended on it moving.
 
 Two traps when de-animating a *spec* file rather than an asset. Dead-class detection must

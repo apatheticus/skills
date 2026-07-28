@@ -162,7 +162,7 @@ Two things follow from that:
 
 Token names are namespaced per specimen (`--oil-impasto-ground`). `var()` inside a
 `<defs>` filter resolves against the `<defs>` element, not the tile referencing it, so
-31 sets of `--ground` and `--ink` on one root would collide. Each tile group also
+32 sets of `--ground` and `--ink` on one root would collide. Each tile group also
 carries `isolation: isolate`, or a specimen's `mix-blend-mode` overlay composites
 against the whole sheet, and its own `data-bg`, or its captions are measured for
 contrast against the sheet's dark background instead of the surface they sit on.

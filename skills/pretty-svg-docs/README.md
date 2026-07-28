@@ -11,9 +11,9 @@
 [![Styles](https://img.shields.io/badge/style_catalog-31-12324f)](reference/styles.md)
 <!-- pd:badges end -->
 
-<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="e427d9ffd6fe932b10a704f334210d0ec7362a9c45e6ab2567ebeeda7fdf3746" src-hash="d115683ab5235fb3865e6753ec919fe27eaf9560264a7fd2f32537cfc86acdb7" -->
+<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="acecb5db99ec9ff0b574390915e19c813ef296ce54d9dcf865bc7b328df7f92f" src-hash="0d61bebe374cff58b07860083f0af4834e31aee7b50a826292b8cac6cf1fa6a2" -->
 <div align="center">
-<img src="docs/assets/hero.svg" alt="Animated board of eight cells. The widest names the skill and its claim — animated SVG, authored, not rendered. A runtime cell reads python3 and nothing else, and the single accent-filled cell reports zero dependencies. One cell nests the pipeline as a small diagram, author then gate then commit, with a status dot visiting each station in turn and no render station between them, because the committed asset is its own source. Two cells count what the skill carries: thirty-one catalog idioms, of which one is chosen per repo, and the eight classes the bundled checker applies to every visual, the eighth being fidelity. Along the bottom the verdict cell reads zero errors, required before any visual is embedded, beside a meter that fills and settles, and the last cell gives the loop as twelve seconds, seam-exact." width="820" />
+<img src="docs/assets/hero.svg" alt="Animated board of eight cells. The widest names the skill and its claim — animated SVG, authored, not rendered. A runtime cell reads python3 and nothing else, and the single accent-filled cell reports zero dependencies. One cell nests the pipeline as a small diagram, author then gate then commit, with a status dot visiting each station in turn and no render station between them, because the committed asset is its own source. Two cells count what the skill carries: thirty-two catalog idioms, of which one is chosen per repo, and the eight classes the bundled checker applies to every visual, the eighth being fidelity. Along the bottom the verdict cell reads zero errors, required before any visual is embedded, beside a meter that fills and settles, and the last cell gives the loop as twelve seconds, seam-exact." width="820" />
 </div>
 <!-- pd:viz end -->
 
@@ -39,7 +39,7 @@ engine, same honesty-over-polish doctrine. The difference is the visual layer:
 | Needs installing | HyperFrames CLI, ffmpeg, img2webp | nothing beyond `python3` |
 | Build step | HTML composition → MP4 → WebP | none; the `.svg` you write is the asset |
 | Failure mode | preflight STOP on a missing toolchain | warns, never aborts |
-| Visual style | derived from the product | 31-style catalog, or derived |
+| Visual style | derived from the product | 32-style catalog, or derived |
 | Asset budget | ≤ 2.5 MB | ≤ 150 KB |
 
 Use `pretty-hyper-docs` when you specifically want WebP. Use
@@ -68,9 +68,9 @@ A **style** is the look-and-feel idiom every visual in a repo is rendered in. Pa
 has. Style owns *form* — shape, material, type, composition, motion. The product's
 own brand tokens still own the *palette*.
 
-<!-- pd:viz name="styles" src=".prettydocs/src/styles/" facts-hash="33ebe05a0c9d07aebe81b14ad473b53cba1c9f2a06b373fbd52bc50b74da294a" src-hash="557b536783d0943696b8f3fcfb22a0c5903a385942f1f65f747693e9ae8cf5cd" -->
+<!-- pd:viz name="styles" src=".prettydocs/src/styles/" facts-hash="2ee9d8d1db960e28ecda51cfb370c7160538c2738bb01a8d3e284d8919da454e" src-hash="d2ef013a2933e59e4e0838989755e5eee3e5b703347ffd844229d77fa8432dcf" -->
 <div align="center">
-<img src="docs/assets/styles.svg" alt="A contact sheet of thirty-one animated style specimens in alphabetical order, two to a row: bento-grid, blueprint, brushed-metal, claymorphism, codex-leonardo, console-elbow, digital-rain, draughtsman-notebook, editorial, flat-material, glassmorphism, holographic-projection, hud, ide-dark, isometric-3d, lofi-wireframe, maximalist, neo-brutalist, neumorphism, oil-impasto, patent-drawing, pencil-lined-paper, rough-sketch, schematic, skeuomorphic, swiss-minimal, terminal-minimalist, watercolor, whiteboard-marker, wood-grain and y2k-retrofuturist. Every cell is that style’s own full-width specimen scaled down, so each carries its real filter chains, grain and lighting — lit impasto relief, displaced wood grain, anisotropic brushed metal, true backdrop blur — rather than a flattened imitation. Each also carries one motion characteristic of its style. The final accent-bordered cell reports that all thirty-one were built and gated at their declared filter floors." width="820" />
+<img src="docs/assets/styles.svg" alt="A contact sheet of thirty-two animated style specimens in alphabetical order, two to a row: bento-grid, blueprint, brushed-metal, claymorphism, codex-leonardo, console-elbow, digital-rain, draughtsman-notebook, editorial, flat-material, glassmorphism, holographic-projection, hud, ide-dark, isometric-3d, lofi-wireframe, maximalist, neo-brutalist, neumorphism, oil-impasto, patent-drawing, pencil-lined-paper, rough-sketch, schematic, skeuomorphic, soft-vinyl, swiss-minimal, terminal-minimalist, watercolor, whiteboard-marker, wood-grain and y2k-retrofuturist. Every cell is that style’s own full-width specimen scaled down, so each carries its real filter chains, grain and lighting — lit impasto relief, displaced wood grain, anisotropic brushed metal, true backdrop blur — rather than a flattened imitation. Each also carries one motion characteristic of its style. The final accent-bordered cell reports that all thirty-two were built and gated at their declared filter floors." width="820" />
 </div>
 <!-- pd:viz end -->
 

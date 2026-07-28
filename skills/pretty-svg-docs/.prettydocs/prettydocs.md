@@ -119,7 +119,7 @@ The sheet used to be the one asset gated **without** `--style`, on the argument 
 a plate showing skeuomorphic bevels and neo-brutalist zero-radius blocks cannot
 honour one radius and one material. That was true about *form* and disastrous about
 *fidelity*: with no style resolved, the sheet inherited the global `filter_depth: 1`
-and `check_style` skipped it entirely, so the one asset depicting all 31 idioms was
+and `check_style` skipped it entirely, so the one asset depicting all 32 idioms was
 the single file exempt from every fidelity gate. Every material on it was faked —
 grain through a mask, roughness wobbled into path coordinates by hand, impasto
 relief *suggested* with gradients. It gated at zero errors and looked it.
@@ -142,7 +142,7 @@ Two things follow from that:
 
 Token names are namespaced per specimen (`--oil-impasto-ground`). `var()` inside a
 `<defs>` filter resolves against the `<defs>` element, not the tile referencing it,
-so 31 sets of `--ground` and `--ink` on one root would collide. Each tile group also
+so 32 sets of `--ground` and `--ink` on one root would collide. Each tile group also
 carries `isolation: isolate`, or a specimen's `mix-blend-mode` overlay composites
 against the whole sheet, and its own `data-bg`, or its captions are measured for
 contrast against the sheet's dark background instead of the surface they sit on.
@@ -253,4 +253,4 @@ palette, namespaced per style.
 | --- | --- | --- | --- | --- |
 | hero | README.md | a hand-authored SVG passes the bundled checker and is committed as-is — no render step in the path | animated-hero | SKILL.md preflight + phase 6; reference/viz-production.md; scripts/svg_check.py |
 | lazy-rerender | README.md | the facts/src/design hash triad decides RE-RENDER vs REUSE; a prose edit re-authors nothing | animated-flagship | reference/embedding.md → Lazy re-render decision |
-| styles | README.md | the 31 catalog styles in alphabetical order, each rendered in its own idiom | animated-flagship | reference/styles.md; reference/styles/*.md; scripts/styles.json |
+| styles | README.md | the 32 catalog styles in alphabetical order, each rendered in its own idiom | animated-flagship | reference/styles.md; reference/styles/*.md; scripts/styles.json |

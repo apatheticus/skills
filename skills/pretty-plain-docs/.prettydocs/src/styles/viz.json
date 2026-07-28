@@ -5,19 +5,19 @@
   "producer": "pretty-plain-docs",
   "style": "catalog-sheet",
   "facts": [
-    "The catalog holds 31 styles, indexed alphabetically in reference/styles.md with one spec file each under reference/styles/",
-    "Every cell is that style's own full-width specimen from docs/samples/, scaled down \u2014 not a redrawing of it",
+    "The catalog holds 32 styles, indexed alphabetically in reference/styles.md with one spec file each under reference/styles/",
+    "Every cell is that style's own full-width specimen from docs/samples/, scaled down — not a redrawing of it",
     "The sheet is gated as the declared 'catalog-sheet' style, so each tile's filters are measured against the floor of the style they depict",
     "scripts/styles.json is the checker's machine-readable half of the same catalog",
     "The sheet was converted from the animated original and gates to the same verdict: 0 errors, 27 warnings, 34 softened"
   ],
-  "facts_hash": "74fd86e808a9a1de8129a92ea2d13ba730e6fab57a211c45838812ef5dcb33dd",
-  "src_hash": "783ceeee0d89424f4719409a828bf815e2b8f756b67b28c11179847641d6b868",
-  "design_hash": "4198cfe88edff60dfb760b071150f0f126feefa3f79cad296227f0b9096b5574",
+  "facts_hash": "3685f2b79d81eac1133f7b531ddbb6ab845e7d35a24406ef02796325706ca3ad",
+  "src_hash": "0dde81547a6a3b0abe3b5934952a4822d6a8d94b61ea577983d1e61d47ff7ca5",
+  "design_hash": "245a03e9d07a4f50f6ad57772d31fde8f0b8bad9578ed467695c9c53b90d0f06",
   "svg": {
     "loop_s": 0,
     "width": 1200,
-    "bytes": 242153
+    "bytes": 260362
   },
   "relaxed": [
     "bytes@300KB",

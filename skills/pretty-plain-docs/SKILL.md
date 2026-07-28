@@ -2,7 +2,7 @@
 name: pretty-plain-docs
 description: Create and maintain a repository's standard documentation — README, ARCHITECTURE, DEVELOPMENT, DEPLOYMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, plus on-demand LICENSE, NOTICE, issue/PR templates, and CODEOWNERS — and beautify it with a per-repo design system and hand-authored static SVG visuals, with zero external dependencies — nothing to install and nothing that moves. Use this whenever the user wants beautiful, illustrated, or visually polished project docs as still images; asks for no animation, or for docs that survive printing, PDF export, or a renderer that rasterises SVG; wants a static hero or static diagrams; wants doc visuals refreshed, restyled, or audited for staleness; wants a named visual style such as Swiss minimal, neo-brutalist, blueprint, or bento grid; or invokes /pretty-plain-docs. For animated SVG use the sibling pretty-svg-docs; for animated WebP or HyperFrames use pretty-hyper-docs; for plain text-only docs with no visuals, update-docs fits better.
 license: MIT
-version: 0.2.0
+version: 0.3.0
 ---
 
 # pretty-plain-docs
@@ -116,7 +116,7 @@ style here is defined by geometry, material, palette and type, which is exactly 
 part a still keeps. Every style ships a full-width **specimen** at
 `docs/samples/<slug>.svg`, embedded at the top of its spec file, showing the same
 Source → Transform → Store diagram so the idioms are directly comparable.
-`docs/assets/styles.svg` is the contact sheet of all thirty-one, composed from those
+`docs/assets/styles.svg` is the contact sheet of all thirty-two, composed from those
 specimens rather than redrawn.
 
 Each style also declares a **fidelity floor** — the primitives its material is built
