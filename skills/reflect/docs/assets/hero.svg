@@ -1,129 +1,174 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660"
      role="img" data-loop-s="12" data-bg="background">
   <title>reflect — sessions already on disk become signals, clusters, then verdicts</title>
-  <desc>A recessed well holds the raw material: the session transcripts already under
-~/.claude/projects that fall inside the window, with the currently running session excluded.
-Triage scores every one of them from cheap metadata before any agent runs, so effort goes
-where the friction is. Three cards lift out of that well in order. The first, extract, pulls
-signals in four families — friction and failure, repetition and missed automation, wins and
-effective patterns, environment gaps — each cited with a session ID and a verbatim quote.
-The second, cluster, merges and dedupes those signals across sessions. The third, decide,
-turns each cluster into one verdict, and it presses in and releases because a cluster only
-earns one if enough distinct sessions back it: three for a new skill, two for an automation
-or a fix.</desc>
+  <desc>Two frosted panes over a drifting field of brand-coloured blobs. The upper pane
+carries the wordmark and the promise; the lower one frames the in-window slice of the
+corpus — the transcripts already under ~/.claude/projects, with the running session
+excluded, every one scored by triage before an agent runs. Below, three cards in order:
+extract pulls signals in four families, cluster merges and dedupes them across sessions,
+and the third card is dark rather than light because it is the one that states numbers —
+a verdict needs three distinct sessions for a new skill, two for an automation or a
+fix.</desc>
+
+  <defs>
+    <filter id="field" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="34"/>
+    </filter>
+    <filter id="frost" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="lift" x="-20%" y="-25%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="var(--navy)" flood-opacity=".18"/>
+    </filter>
+    <!-- Blob cores sit UNDER the panes, so the frost has something to reveal; only the
+         skirts fall in the negative space between them. Two placements that look
+         reasonable and are not: a core in the outer margin reads as a saturated wall
+         down one edge, and a core parked in a gap between panes reads as a glowing bar
+         competing with the type beside it. -->
+    <g id="ground">
+      <circle cx="280" cy="160" r="185" fill="var(--brand)"/>
+      <circle cx="940" cy="345" r="180" fill="var(--blue)"/>
+      <circle cx="600" cy="640" r="175" fill="var(--brand-soft)"/>
+    </g>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"   stop-color="var(--glass)" stop-opacity=".95"/>
+      <stop offset="0.5" stop-color="var(--brand)" stop-opacity=".22"/>
+      <stop offset="1"   stop-color="var(--brand)" stop-opacity=".42"/>
+    </linearGradient>
+    <linearGradient id="ncard" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="var(--navy-raised)"/>
+      <stop offset="1" stop-color="var(--navy)"/>
+    </linearGradient>
+    <clipPath id="pa"><rect x="64" y="48"  width="1072" height="200" rx="24"/></clipPath>
+    <clipPath id="pb"><rect x="64" y="276" width="1072" height="140" rx="24"/></clipPath>
+  </defs>
 
   <style>
-    svg { --background:#E6E9EF; --surface:#E6E9EF; --surface-inset:#E1E5EC;
-          --ink:#2B303B; --muted:#5B6472; --accent-primary:#11D3A3;
-          --accent-cool:#12B5C9; --nm-light:#FFFFFF; --nm-dark:#C3CAD6; }
+    svg { --background:#F4F6FE; --glass:#FFFFFF; --pane:#DBDCFB; --ink:#12142B;
+          --body:#4C5273; --navy:#23265E; --navy-raised:#2E3277; --navy-ink:#F6F7FC;
+          --navy-dim:#BEC2D6; --brand:#5B5FEF; --brand-strong:#4A4AE8;
+          --brand-soft:#A3A7FA; --blue:#3B82F6; --success:#22B07D; --warning:#F59E0B;
+          --danger:#EF4458; }
 
-    .bg      { fill: var(--background); }
-    .raised  { fill: var(--surface); filter: url(#raise); }
-    .pressed { fill: var(--surface); filter: url(#press); }
-    .well    { fill: var(--surface-inset); filter: url(#press); }
+    .bg   { fill: var(--background); }
+    .gl   { fill: var(--glass); }
+    .ed   { fill: none; stroke: url(#edge); stroke-width: 1.6; }
+    .card { fill: var(--glass); filter: url(#lift); }
 
     .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
-    .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 
-    .kick { fill: var(--muted); font-size: 17px; font-weight: 600; letter-spacing: 2.4px; }
-    .h    { fill: var(--ink);   font-size: 52px; font-weight: 700; letter-spacing: -1.2px; }
-    .lede { fill: var(--muted); font-size: 22px; font-weight: 400; }
+    .kick { fill: var(--body); font-size: 17px; font-weight: 600; letter-spacing: 2.4px; }
+    .h    { fill: var(--ink);  font-size: 52px; font-weight: 700; letter-spacing: -1.2px; }
+    .lede { fill: var(--body); font-size: 22px; font-weight: 500; }
+    .path { fill: var(--body); font-size: 18px; font-weight: 600; }
+    .note { fill: var(--body); font-size: 17px; font-weight: 500; }
+    .ct   { fill: var(--ink);  font-size: 26px; font-weight: 600; }
+    .cs   { fill: var(--body); font-size: 18px; font-weight: 500; }
+    .nt   { fill: var(--navy-ink); font-size: 26px; font-weight: 600; }
+    .ns   { fill: var(--navy-dim); font-size: 18px; font-weight: 500; }
 
-    .path { fill: var(--muted); font-size: 18px; font-weight: 600; }
-    .note { fill: var(--muted); font-size: 17px; font-weight: 600; }
+    .cold { fill: var(--brand-soft); }
+    .hot  { fill: var(--brand); }
 
-    .lab  { fill: var(--muted); font-size: 18px; font-weight: 600; letter-spacing: 1.2px; }
-    .ct   { fill: var(--ink);   font-size: 24px; font-weight: 700; }
-    .cs   { fill: var(--muted); font-size: 17px; font-weight: 600; }
+    /* The field drifts; the panes never move. Symmetric keyframes, so the state at
+       t=12s is provably the state at t=0 — an `alternate` half-cycle would not be. */
+    .dr { animation: dr 12s cubic-bezier(0.65,0,0.35,1) infinite; }
+    @keyframes dr { 0%,100% { transform: translate(0,0) } 50% { transform: translate(34px,-20px) } }
 
-    .dot   { fill: var(--nm-dark); }
-    .hot   { fill: var(--accent-cool); }
-    .mark  { fill: var(--accent-primary); }
-
-    /* Each stage is lifted in turn — one 12s animation phase-shifted by 4s. */
-    .lift { opacity: 1; animation: lift 12s cubic-bezier(.4,0,.4,1) infinite; }
-    @keyframes lift { 0%,14% { opacity: .4 } 24%,34% { opacity: 1 } 44%,100% { opacity: .4 } }
-    .l1 { animation-delay: 0s }
-    .l2 { animation-delay: -8s }
-    .l3 { animation-delay: -4s }
-
-    /* The canonical neumorphic motion: a raised copy cross-fading over a pressed
-       one, so the decide card presses in and releases. 6s divides the 12s loop. */
-    .sink { animation: sink 6s cubic-bezier(.4,0,.4,1) infinite; }
-    @keyframes sink { 0%,100% { opacity: 1 } 50% { opacity: 0 } }
+    /* One ordered emphasis, left to right: a 6s pulse phase-shifted so the three
+       markers peak at t=3, 5, 7 and again 2s apart every cycle. */
+    .mk { animation: mk 6s cubic-bezier(0.65,0,0.35,1) infinite; }
+    .m2 { animation-delay: -4s; }
+    .m3 { animation-delay: -2s; }
+    @keyframes mk { 0%,100% { opacity: .2 } 50% { opacity: 1 } }
 
     @media (prefers-reduced-motion: reduce) {
-      .lift { animation: none; opacity: 1 }
-      .sink { animation: none; opacity: 1 }
+      .dr { animation: none; }
+      .mk { animation: none; opacity: 1; }
     }
   </style>
 
-  <defs>
-    <filter id="raise" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="7"  dy="7"  stdDeviation="9" flood-color="#C3CAD6" flood-opacity=".9"/>
-      <feDropShadow dx="-7" dy="-7" stdDeviation="9" flood-color="#FFFFFF" flood-opacity=".9"/>
-    </filter>
-    <filter id="press" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="3.5"  dy="3.5"  stdDeviation="4.5" flood-color="#C3CAD6" flood-opacity=".45"/>
-      <feDropShadow dx="-3.5" dy="-3.5" stdDeviation="4.5" flood-color="#FFFFFF" flood-opacity=".45"/>
-    </filter>
-  </defs>
-
   <rect class="bg" x="0" y="0" width="1200" height="660"/>
+  <g class="dr" filter="url(#field)"><use href="#ground"/></g>
 
-  <text class="sans kick" x="64" y="84" data-role="metadata">YOUR OWN SESSIONS, READ BACK</text>
-  <text class="sans h"    x="64" y="148" data-role="hero">reflect</text>
-  <text class="sans lede" x="64" y="196" data-role="essential">Mines the transcripts already on your disk and hands back a ranked diagnosis:</text>
-  <text class="sans lede" x="64" y="228" data-role="essential">what keeps going wrong, what quietly works, and which change would pay off most.</text>
+  <g clip-path="url(#pa)">
+    <g class="dr" filter="url(#frost)"><use href="#ground"/></g>
+    <rect class="gl" x="64" y="48" width="1072" height="200" rx="24" opacity=".60"/>
+    <rect class="gl" x="64" y="48" width="1072" height="200" rx="24" opacity=".45"/>
+  </g>
+  <rect class="ed" x="64" y="48" width="1072" height="200" rx="24"/>
+  <g data-bg="pane">
+    <text class="sans kick" x="88" y="96"  data-role="metadata">YOUR OWN SESSIONS, READ BACK</text>
+    <text class="sans h"    x="88" y="156" data-role="hero">reflect</text>
+    <text class="sans lede" x="88" y="196" data-role="essential">Mines the transcripts already on your disk and hands back a ranked diagnosis:</text>
+    <text class="sans lede" x="88" y="226" data-role="essential">what keeps going wrong, what quietly works, and which change would pay off most.</text>
+  </g>
 
-  <rect class="well" x="64" y="272" width="1072" height="140" rx="24"/>
-  <text class="mono path" x="88"   y="310" data-bg="surface-inset">~/.claude/projects/ · in-window transcripts</text>
-  <text class="sans note" x="1112" y="310" text-anchor="end" data-bg="surface-inset" data-role="metadata">triage scores every one before an agent runs</text>
-  <circle class="dot" cx="100"  cy="356" r="7"/>
-  <circle class="dot" cx="142"  cy="356" r="7"/>
-  <circle class="hot" cx="184"  cy="356" r="7"/>
-  <circle class="dot" cx="226"  cy="356" r="7"/>
-  <circle class="dot" cx="268"  cy="356" r="7"/>
-  <circle class="hot" cx="310"  cy="356" r="7"/>
-  <circle class="hot" cx="352"  cy="356" r="7"/>
-  <circle class="dot" cx="394"  cy="356" r="7"/>
-  <circle class="dot" cx="436"  cy="356" r="7"/>
-  <circle class="dot" cx="478"  cy="356" r="7"/>
-  <circle class="hot" cx="520"  cy="356" r="7"/>
-  <circle class="dot" cx="562"  cy="356" r="7"/>
-  <circle class="dot" cx="604"  cy="356" r="7"/>
-  <circle class="hot" cx="646"  cy="356" r="7"/>
-  <circle class="dot" cx="688"  cy="356" r="7"/>
-  <circle class="dot" cx="730"  cy="356" r="7"/>
-  <circle class="hot" cx="772"  cy="356" r="7"/>
-  <circle class="dot" cx="814"  cy="356" r="7"/>
-  <circle class="dot" cx="856"  cy="356" r="7"/>
-  <circle class="dot" cx="898"  cy="356" r="7"/>
-  <circle class="hot" cx="940"  cy="356" r="7"/>
-  <circle class="dot" cx="982"  cy="356" r="7"/>
-  <circle class="dot" cx="1024" cy="356" r="7"/>
-  <circle class="hot" cx="1066" cy="356" r="7"/>
-  <text class="sans note" x="88" y="394" data-bg="surface-inset" data-role="metadata">the session running this pass is excluded from its own corpus</text>
+  <g clip-path="url(#pb)">
+    <g class="dr" filter="url(#frost)"><use href="#ground"/></g>
+    <rect class="gl" x="64" y="276" width="1072" height="140" rx="24" opacity=".60"/>
+    <rect class="gl" x="64" y="276" width="1072" height="140" rx="24" opacity=".45"/>
+  </g>
+  <rect class="ed" x="64" y="276" width="1072" height="140" rx="24"/>
+  <g data-bg="pane">
+    <text class="mono path" x="88"   y="314">~/.claude/projects/ · in-window transcripts</text>
+    <text class="sans note" x="1112" y="314" text-anchor="end" data-role="metadata">triage scores every one before an agent runs</text>
+    <text class="sans note" x="88"   y="396" data-role="metadata">the session running this pass is excluded from its own corpus</text>
+  </g>
+  <circle class="cold" cx="100"  cy="358" r="7"/>
+  <circle class="cold" cx="142"  cy="358" r="7"/>
+  <circle class="hot"  cx="184"  cy="358" r="7"/>
+  <circle class="cold" cx="226"  cy="358" r="7"/>
+  <circle class="cold" cx="268"  cy="358" r="7"/>
+  <circle class="hot"  cx="310"  cy="358" r="7"/>
+  <circle class="hot"  cx="352"  cy="358" r="7"/>
+  <circle class="cold" cx="394"  cy="358" r="7"/>
+  <circle class="cold" cx="436"  cy="358" r="7"/>
+  <circle class="cold" cx="478"  cy="358" r="7"/>
+  <circle class="hot"  cx="520"  cy="358" r="7"/>
+  <circle class="cold" cx="562"  cy="358" r="7"/>
+  <circle class="cold" cx="604"  cy="358" r="7"/>
+  <circle class="hot"  cx="646"  cy="358" r="7"/>
+  <circle class="cold" cx="688"  cy="358" r="7"/>
+  <circle class="cold" cx="730"  cy="358" r="7"/>
+  <circle class="hot"  cx="772"  cy="358" r="7"/>
+  <circle class="cold" cx="814"  cy="358" r="7"/>
+  <circle class="cold" cx="856"  cy="358" r="7"/>
+  <circle class="cold" cx="898"  cy="358" r="7"/>
+  <circle class="hot"  cx="940"  cy="358" r="7"/>
+  <circle class="cold" cx="982"  cy="358" r="7"/>
+  <circle class="cold" cx="1024" cy="358" r="7"/>
+  <circle class="hot"  cx="1066" cy="358" r="7"/>
 
-  <rect class="raised" x="64" y="456" width="340" height="152" rx="24"/>
-  <circle class="mark lift l1" cx="106" cy="492" r="11"/>
-  <text class="mono lab" x="128" y="498" data-role="label">01 · extract</text>
-  <text class="sans ct"  x="92"  y="540">Signals</text>
-  <text class="sans cs"  x="92"  y="570" data-role="metadata">friction · repetition · wins ·</text>
-  <text class="sans cs"  x="92"  y="594" data-role="metadata">environment gaps</text>
+  <rect class="card" x="64" y="460" width="340" height="152" rx="18"/>
+  <rect class="mk" x="88" y="486" width="48" height="5" rx="2.5" fill="var(--brand)"/>
+  <g data-bg="glass">
+    <text class="mono cs" x="148" y="493">01 · extract</text>
+    <text class="sans ct" x="88"  y="540">Signals</text>
+    <text class="sans cs" x="88"  y="570">friction · repetition · wins ·</text>
+    <text class="sans cs" x="88"  y="594">environment gaps</text>
+  </g>
+  <rect x="248" y="514" width="26" height="26" rx="8" fill="var(--danger)"/>
+  <rect x="280" y="514" width="26" height="26" rx="8" fill="var(--warning)"/>
+  <rect x="312" y="514" width="26" height="26" rx="8" fill="var(--success)"/>
+  <rect x="344" y="514" width="26" height="26" rx="8" fill="var(--blue)"/>
 
-  <rect class="raised" x="430" y="456" width="340" height="152" rx="24"/>
-  <circle class="mark lift l2" cx="472" cy="492" r="11"/>
-  <text class="mono lab" x="494" y="498" data-role="label">02 · cluster</text>
-  <text class="sans ct"  x="458" y="540">Clusters</text>
-  <text class="sans cs"  x="458" y="570" data-role="metadata">merged and deduped across</text>
-  <text class="sans cs"  x="458" y="594" data-role="metadata">every session in the window</text>
+  <rect class="card" x="430" y="460" width="340" height="152" rx="18"/>
+  <rect class="mk m2" x="454" y="486" width="48" height="5" rx="2.5" fill="var(--brand)"/>
+  <g data-bg="glass">
+    <text class="mono cs" x="514" y="493">02 · cluster</text>
+    <text class="sans ct" x="454" y="540">Clusters</text>
+    <text class="sans cs" x="454" y="570">merged and deduped across</text>
+    <text class="sans cs" x="454" y="594">every session in the window</text>
+  </g>
 
-  <rect class="pressed"     x="796" y="456" width="340" height="152" rx="24"/>
-  <rect class="raised sink" x="796" y="456" width="340" height="152" rx="24"/>
-  <circle class="mark lift l3" cx="838" cy="492" r="11"/>
-  <text class="mono lab" x="860" y="498" data-role="label">03 · decide</text>
-  <text class="sans ct"  x="824" y="540">Verdicts</text>
-  <text class="sans cs"  x="824" y="570" data-role="metadata">new-skill needs 3 sessions</text>
-  <text class="sans cs"  x="824" y="594" data-role="metadata">automation and fix need 2</text>
+  <rect x="796" y="460" width="340" height="152" rx="18" fill="url(#ncard)" filter="url(#lift)"/>
+  <rect class="mk m3" x="820" y="486" width="48" height="5" rx="2.5" fill="var(--brand-soft)"/>
+  <g data-bg="navy-raised">
+    <text class="mono ns" x="880" y="493">03 · decide</text>
+    <text class="sans nt" x="820" y="540">Verdicts</text>
+    <text class="sans ns" x="820" y="570">new-skill needs 3 sessions</text>
+    <text class="sans ns" x="820" y="594">automation and fix need 2</text>
+  </g>
 </svg>

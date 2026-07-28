@@ -1,42 +1,82 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="1200" height="620"
      role="img" data-loop-s="12" data-bg="background">
   <title>reflect — the six phases, numbered 0 to 5</title>
-  <desc>Six raised cards, read left to right and top to bottom, each lit in turn. Phase 0
+  <desc>A frosted pane over a drifting field of brand-coloured blobs carries the heading;
+below it six cards, read left to right and top to bottom, each marked in turn. Phase 0
 scopes the corpus: enumerate the in-window transcripts and load the prior report so this run
 can be diffed against it. Phase 1 is the insights gate, and it gates on recency rather than
 coverage, because /insights samples a few hundred recent sessions instead of the whole
 corpus. Phase 2 triages, scoring every session from cheap metadata before any agent is
 spent. Phase 3 extracts: fan out over batched transcripts, cluster the signals, decide a
 verdict per cluster, then corroborate against the /insights data. Phase 4 renders one
-self-contained HTML file with inline SVG and no external requests. Phase 5 delivers that
-file with a summary of the top findings and anything the run had to skip. Nothing leaves the
-machine, and nothing is built — recommending the change is the deliverable.</desc>
+self-contained HTML file with inline SVG and no external requests, shown as a small dark
+thumbnail because the report states its own numbers on dark data cards. Phase 5 delivers
+that file with a summary of the top findings and anything the run had to skip. Nothing
+leaves the machine, and nothing is built — recommending the change is the
+deliverable.</desc>
+
+  <defs>
+    <filter id="field" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="34"/>
+    </filter>
+    <filter id="frost" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <filter id="lift" x="-20%" y="-25%" width="140%" height="150%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="var(--navy)" flood-opacity=".18"/>
+    </filter>
+    <!-- Only one pane here and the six cards are opaque, so unlike the hero the field
+         is seen mostly in the negative space: the brand core goes under the pane for
+         the frost, the other two skirt the bands between and below the card rows. A
+         core in the outer margin would read as a saturated wall down one edge. -->
+    <g id="ground">
+      <circle cx="300" cy="140" r="180" fill="var(--brand)"/>
+      <circle cx="920" cy="410" r="170" fill="var(--blue)"/>
+      <circle cx="560" cy="600" r="175" fill="var(--brand-soft)"/>
+    </g>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0"   stop-color="var(--glass)" stop-opacity=".95"/>
+      <stop offset="0.5" stop-color="var(--brand)" stop-opacity=".22"/>
+      <stop offset="1"   stop-color="var(--brand)" stop-opacity=".42"/>
+    </linearGradient>
+    <linearGradient id="ncard" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="var(--navy-raised)"/>
+      <stop offset="1" stop-color="var(--navy)"/>
+    </linearGradient>
+    <clipPath id="pa"><rect x="64" y="48" width="1072" height="148" rx="24"/></clipPath>
+  </defs>
 
   <style>
-    svg { --background:#E6E9EF; --surface:#E6E9EF;
-          --ink:#2B303B; --muted:#5B6472; --accent-primary:#11D3A3;
-          --nm-light:#FFFFFF; --nm-dark:#C3CAD6; }
+    svg { --background:#F4F6FE; --glass:#FFFFFF; --pane:#DBDCFB; --ink:#12142B;
+          --body:#4C5273; --navy:#23265E; --navy-raised:#2E3277; --navy-ink:#F6F7FC;
+          --navy-dim:#BEC2D6; --brand:#5B5FEF; --brand-strong:#4A4AE8;
+          --brand-soft:#A3A7FA; --blue:#3B82F6; --success:#22B07D; --warning:#F59E0B;
+          --danger:#EF4458; }
 
-    .bg     { fill: var(--background); }
-    .raised { fill: var(--surface); filter: url(#raise); }
+    .bg   { fill: var(--background); }
+    .gl   { fill: var(--glass); }
+    .ed   { fill: none; stroke: url(#edge); stroke-width: 1.6; }
+    .card { fill: var(--glass); filter: url(#lift); }
 
     .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
-    .mono { font-family: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
 
-    .kick { fill: var(--muted); font-size: 17px; font-weight: 600; letter-spacing: 2.4px; }
-    .h    { fill: var(--ink);   font-size: 40px; font-weight: 700; letter-spacing: -0.8px; }
-    .lede { fill: var(--muted); font-size: 22px; font-weight: 400; }
+    .kick { fill: var(--body); font-size: 17px; font-weight: 600; letter-spacing: 2.4px; }
+    .h    { fill: var(--ink);  font-size: 40px; font-weight: 700; letter-spacing: -0.8px; }
+    .lede { fill: var(--body); font-size: 22px; font-weight: 500; }
+    .ph   { fill: var(--body); font-size: 18px; font-weight: 600; letter-spacing: 1.2px; }
+    .ct   { fill: var(--ink);  font-size: 26px; font-weight: 600; }
+    .cs   { fill: var(--body); font-size: 18px; font-weight: 500; }
 
-    .ph   { fill: var(--muted); font-size: 18px; font-weight: 600; letter-spacing: 1.2px; }
-    .ct   { fill: var(--ink);   font-size: 24px; font-weight: 700; }
-    .cs   { fill: var(--muted); font-size: 17px; font-weight: 600; }
+    /* The field drifts; the pane never moves. Symmetric keyframes, so the state at
+       t=12s is provably the state at t=0. */
+    .dr { animation: dr 12s cubic-bezier(0.65,0,0.35,1) infinite; }
+    @keyframes dr { 0%,100% { transform: translate(0,0) } 50% { transform: translate(34px,-20px) } }
 
-    .mark { fill: var(--accent-primary); }
-
-    /* One marker lights at a time and the march wraps, so the pass reads as a pass
-       that repeats. One 12s animation, phase-shifted 2s per card. */
-    .lift { opacity: 1; animation: lift 12s cubic-bezier(.4,0,.4,1) infinite; }
-    @keyframes lift { 0%,18% { opacity: .4 } 24%,34% { opacity: 1 } 40%,100% { opacity: .4 } }
+    /* One marker at a time and the march wraps, so the pass reads as a pass that
+       repeats. One 12s animation, phase-shifted 2s per card. */
+    .mk { animation: mk 12s cubic-bezier(0.65,0,0.35,1) infinite; }
+    @keyframes mk { 0%,18% { opacity: .2 } 24%,34% { opacity: 1 } 40%,100% { opacity: .2 } }
     .p0 { animation-delay: 0s }
     .p1 { animation-delay: -10s }
     .p2 { animation-delay: -8s }
@@ -45,62 +85,81 @@ machine, and nothing is built — recommending the change is the deliverable.</d
     .p5 { animation-delay: -2s }
 
     @media (prefers-reduced-motion: reduce) {
-      .lift { animation: none; opacity: 1 }
+      .dr { animation: none; }
+      .mk { animation: none; opacity: 1; }
     }
   </style>
 
-  <defs>
-    <filter id="raise" x="-30%" y="-30%" width="160%" height="160%">
-      <feDropShadow dx="7"  dy="7"  stdDeviation="9" flood-color="#C3CAD6" flood-opacity=".9"/>
-      <feDropShadow dx="-7" dy="-7" stdDeviation="9" flood-color="#FFFFFF" flood-opacity=".9"/>
-    </filter>
-  </defs>
-
   <rect class="bg" x="0" y="0" width="1200" height="620"/>
+  <g class="dr" filter="url(#field)"><use href="#ground"/></g>
 
-  <text class="sans kick" x="64" y="76" data-role="metadata">PHASES 0 – 5 · ONE PASS</text>
-  <text class="sans h"    x="64" y="128" data-role="title">Six phases, one file out</text>
-  <text class="sans lede" x="64" y="170" data-role="essential">Nothing leaves the machine, and nothing is built — recommending is the deliverable.</text>
+  <g clip-path="url(#pa)">
+    <g class="dr" filter="url(#frost)"><use href="#ground"/></g>
+    <rect class="gl" x="64" y="48" width="1072" height="148" rx="24" opacity=".60"/>
+    <rect class="gl" x="64" y="48" width="1072" height="148" rx="24" opacity=".45"/>
+  </g>
+  <rect class="ed" x="64" y="48" width="1072" height="148" rx="24"/>
+  <g data-bg="pane">
+    <text class="sans kick" x="88" y="92"  data-role="metadata">PHASES 0 – 5 · ONE PASS</text>
+    <text class="sans h"    x="88" y="140" data-role="title">Six phases, one file out</text>
+    <text class="sans lede" x="88" y="176" data-role="essential">Nothing leaves the machine, and nothing is built — recommending is the deliverable.</text>
+  </g>
 
-  <rect class="raised" x="64" y="232" width="340" height="150" rx="24"/>
-  <circle class="mark lift p0" cx="374" cy="270" r="11"/>
-  <text class="mono ph" x="88" y="276" data-role="label">phase 0</text>
-  <text class="sans ct" x="88" y="314">Scope the corpus</text>
-  <text class="sans cs" x="88" y="344" data-role="metadata">enumerate in-window transcripts</text>
-  <text class="sans cs" x="88" y="368" data-role="metadata">load the prior report to trend</text>
+  <rect class="card" x="64" y="236" width="340" height="150" rx="18"/>
+  <rect class="mk p0" x="88" y="262" width="48" height="5" rx="2.5" fill="var(--brand)"/>
+  <g data-bg="glass">
+    <text class="mono ph" x="148" y="269">phase 0</text>
+    <text class="sans ct" x="88"  y="316">Scope the corpus</text>
+    <text class="sans cs" x="88"  y="346">enumerate in-window transcripts</text>
+    <text class="sans cs" x="88"  y="370">load the prior report to trend</text>
+  </g>
 
-  <rect class="raised" x="430" y="232" width="340" height="150" rx="24"/>
-  <circle class="mark lift p1" cx="740" cy="270" r="11"/>
-  <text class="mono ph" x="454" y="276" data-role="label">phase 1</text>
-  <text class="sans ct" x="454" y="314">Insights gate</text>
-  <text class="sans cs" x="454" y="344" data-role="metadata">gate on recency, not coverage</text>
-  <text class="sans cs" x="454" y="368" data-role="metadata">/insights samples the corpus</text>
+  <rect class="card" x="430" y="236" width="340" height="150" rx="18"/>
+  <rect class="mk p1" x="454" y="262" width="48" height="5" rx="2.5" fill="var(--brand)"/>
+  <g data-bg="glass">
+    <text class="mono ph" x="514" y="269">phase 1</text>
+    <text class="sans ct" x="454" y="316">Insights gate</text>
+    <text class="sans cs" x="454" y="346">gate on recency, not coverage</text>
+    <text class="sans cs" x="454" y="370">/insights samples the corpus</text>
+  </g>
 
-  <rect class="raised" x="796" y="232" width="340" height="150" rx="24"/>
-  <circle class="mark lift p2" cx="1106" cy="270" r="11"/>
-  <text class="mono ph" x="820" y="276" data-role="label">phase 2</text>
-  <text class="sans ct" x="820" y="314">Triage</text>
-  <text class="sans cs" x="820" y="344" data-role="metadata">score every session from cheap</text>
-  <text class="sans cs" x="820" y="368" data-role="metadata">metadata, before any agent runs</text>
+  <rect class="card" x="796" y="236" width="340" height="150" rx="18"/>
+  <rect class="mk p2" x="820" y="262" width="48" height="5" rx="2.5" fill="var(--brand)"/>
+  <g data-bg="glass">
+    <text class="mono ph" x="880" y="269">phase 2</text>
+    <text class="sans ct" x="820" y="316">Triage</text>
+    <text class="sans cs" x="820" y="346">score every session from cheap</text>
+    <text class="sans cs" x="820" y="370">metadata, before any agent runs</text>
+  </g>
 
-  <rect class="raised" x="64" y="418" width="340" height="150" rx="24"/>
-  <circle class="mark lift p3" cx="374" cy="456" r="11"/>
-  <text class="mono ph" x="88" y="462" data-role="label">phase 3</text>
-  <text class="sans ct" x="88" y="500">Extraction</text>
-  <text class="sans cs" x="88" y="530" data-role="metadata">fan out, cluster, decide, then</text>
-  <text class="sans cs" x="88" y="554" data-role="metadata">corroborate with /insights data</text>
+  <rect class="card" x="64" y="422" width="340" height="150" rx="18"/>
+  <rect class="mk p3" x="88" y="448" width="48" height="5" rx="2.5" fill="var(--brand)"/>
+  <g data-bg="glass">
+    <text class="mono ph" x="148" y="455">phase 3</text>
+    <text class="sans ct" x="88"  y="502">Extraction</text>
+    <text class="sans cs" x="88"  y="532">fan out, cluster, decide, then</text>
+    <text class="sans cs" x="88"  y="556">corroborate with /insights data</text>
+  </g>
 
-  <rect class="raised" x="430" y="418" width="340" height="150" rx="24"/>
-  <circle class="mark lift p4" cx="740" cy="456" r="11"/>
-  <text class="mono ph" x="454" y="462" data-role="label">phase 4</text>
-  <text class="sans ct" x="454" y="500">Report</text>
-  <text class="sans cs" x="454" y="530" data-role="metadata">one self-contained HTML file,</text>
-  <text class="sans cs" x="454" y="554" data-role="metadata">inline SVG, no external requests</text>
+  <rect class="card" x="430" y="422" width="340" height="150" rx="18"/>
+  <rect class="mk p4" x="454" y="448" width="48" height="5" rx="2.5" fill="var(--brand)"/>
+  <g data-bg="glass">
+    <text class="mono ph" x="514" y="455">phase 4</text>
+    <text class="sans ct" x="454" y="502">Report</text>
+    <text class="sans cs" x="454" y="532">one self-contained HTML file</text>
+    <text class="sans cs" x="454" y="556">inline SVG, no external requests</text>
+  </g>
+  <rect x="658" y="446" width="88" height="52" rx="10" fill="url(#ncard)" aria-hidden="true"/>
+  <rect x="670" y="458" width="42" height="5" rx="2.5" fill="var(--navy-dim)" aria-hidden="true"/>
+  <rect x="670" y="470" width="64" height="5" rx="2.5" fill="var(--navy-dim)" aria-hidden="true"/>
+  <rect x="670" y="482" width="28" height="5" rx="2.5" fill="var(--brand-soft)" aria-hidden="true"/>
 
-  <rect class="raised" x="796" y="418" width="340" height="150" rx="24"/>
-  <circle class="mark lift p5" cx="1106" cy="456" r="11"/>
-  <text class="mono ph" x="820" y="462" data-role="label">phase 5</text>
-  <text class="sans ct" x="820" y="500">Deliver</text>
-  <text class="sans cs" x="820" y="530" data-role="metadata">the file, a TL;DR of the top</text>
-  <text class="sans cs" x="820" y="554" data-role="metadata">findings, and anything skipped</text>
+  <rect class="card" x="796" y="422" width="340" height="150" rx="18"/>
+  <rect class="mk p5" x="820" y="448" width="48" height="5" rx="2.5" fill="var(--brand)"/>
+  <g data-bg="glass">
+    <text class="mono ph" x="880" y="455">phase 5</text>
+    <text class="sans ct" x="820" y="502">Deliver</text>
+    <text class="sans cs" x="820" y="532">the file, a TL;DR of the top</text>
+    <text class="sans cs" x="820" y="556">findings, and anything skipped</text>
+  </g>
 </svg>
