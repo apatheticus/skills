@@ -331,8 +331,8 @@ svg { --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --muted:#9FB0C0; --rule:#3
   .gl-s { font: 400 19px "Helvetica Neue", Arial, sans-serif; fill: var(--glassmorphism-muted); }
   .gl-f { font: 400 18px "Helvetica Neue", Arial, sans-serif; fill: var(--glassmorphism-muted); }
   .gl-e { fill: none; stroke: url(#gl-edge); stroke-width: 1.6; }
-  .gl-d { animation: gl-d 12s ease-in-out infinite alternate; }
-  @keyframes gl-d { 0% { transform: translate(0,0) } 100% { transform: translate(60px,-28px) } }
+  .gl-d { animation: gl-d 12s ease-in-out infinite; }
+  @keyframes gl-d { 0% { transform: translate(0,0) } 50% { transform: translate(60px,-28px) } 100% { transform: translate(0,0) } }
   @media (prefers-reduced-motion: reduce) { .gl-d { animation: none } }
   .hp-h { font: 400 36px "Helvetica Neue", Arial, sans-serif; fill: var(--holographic-projection-ink); letter-spacing: 5px; }
   .hp-t { font: 500 24px "Helvetica Neue", Arial, sans-serif; fill: var(--holographic-projection-ink); letter-spacing: 2px; }
