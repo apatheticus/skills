@@ -7,13 +7,13 @@
   "facts": [
     "RE-RENDER fires on any of six triggers: facts hash moved, src hash moved, design hash moved, the asset is missing, marker and manifest disagree, or the run was forced with --refresh-viz",
     "facts_hash covers the facts the visual depicts, src_hash the committed .svg, design_hash the project's prettydocs.md",
-    "When none of the six fired the visual is REUSED \u2014 the embed may be rewritten, but nothing is rendered",
+    "When none of the six fired the visual is REUSED — the embed may be rewritten, but nothing is rendered",
     "design_hash moving invalidates every visual in the repo at once",
     "A prose-only edit moves no hash and re-authors nothing"
   ],
   "facts_hash": "bf26d51f835b407ee1493bae83c0b3045b726b77381c32beecead0ee9649b828",
   "src_hash": "e6543fa10d251e551e8b41e7ef0ee90575b4406b7cec67844e93fcf6add794ef",
-  "design_hash": "c8b9c9df1384b8defdb8909ee7677c88400164ba43c80fdfca914f9159851860",
+  "design_hash": "dc1e24ddf883f36b89f7356390644f6157122e9d8d7a6c9458a28d14e5c55dba",
   "svg": {
     "loop_s": 12,
     "width": 1200,

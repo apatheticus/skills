@@ -6,7 +6,7 @@ authored — not rendered. A runtime cell reads python3 and nothing else; the si
 accent-filled cell reports zero dependencies. One cell nests the pipeline as a small
 diagram — author, gate, commit — with a status dot visiting each station in turn, and no
 render station between them, because the committed asset is its own source. Two cells
-count what the skill carries: thirty-one catalog idioms, of which one is chosen per repo,
+count what the skill carries: thirty-two catalog idioms, of which one is chosen per repo,
 and the eight classes the bundled checker applies to every visual, the eighth being
 fidelity. Along the bottom the verdict cell reads zero errors, required before any visual
 is embedded, beside a meter that fills and settles; the last cell gives the loop as twelve
@@ -106,7 +106,7 @@ seconds, seam-exact.</desc>
   <circle class="dot n3" cx="354" cy="292" r="7"/>
   <rect class="cell" x="420" y="220" width="360" height="160" rx="16" data-bg="surface"/>
   <text class="eye" x="452" y="258" data-bg="surface">STYLE CATALOG</text>
-  <text class="val" x="452" y="316" data-bg="surface">31<tspan class="unit" dx="10">idioms</tspan></text>
+  <text class="val" x="452" y="316" data-bg="surface">32<tspan class="unit" dx="10">idioms</tspan></text>
   <rect class="tally-on" x="452.0" y="340" width="5.5" height="16"/>
   <rect class="tally" x="461.6" y="340" width="5.5" height="16"/>
   <rect class="tally" x="471.1" y="340" width="5.5" height="16"/>

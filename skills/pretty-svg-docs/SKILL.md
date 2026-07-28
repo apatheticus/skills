@@ -103,7 +103,7 @@ product, exactly as before this option existed.
 Every style ships a full-width **specimen** at `docs/samples/<slug>.svg`, embedded at
 the top of its spec file, showing the same Source → Transform → Store diagram so the
 idioms are directly comparable. `docs/assets/styles.svg` is the contact sheet of all
-thirty-one, composed from those specimens rather than redrawn.
+thirty-two, composed from those specimens rather than redrawn.
 
 Each style also declares a **fidelity floor** — the primitives its material is built
 from, a minimum filter-chain depth, and a minimum drawn density. `svg_check.py`

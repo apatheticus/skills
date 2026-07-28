@@ -786,6 +786,39 @@ def check_style(root, by_tag, sheet: Stylesheet, style: dict, slug: str,
                 f.error(label, f"the '{slug}' style is monospace-only, found "
                                f"font-family: {fam}")
 
+    # `gradientUnits` is an attribute VALUE, so `forbid` — which matches tag names —
+    # cannot reach it. A style whose shading is computed from instance geometry has to
+    # have it enforced rather than described: `objectBoundingBox` resamples the
+    # gradient into each element's own box, so a wide capsule ends up lit as though
+    # the light had moved, and no other attribute corrects it. Note that
+    # `objectBoundingBox` is the SVG *default*, which makes an omitted attribute a
+    # violation rather than a neutral absence — hence checking for the wanted value
+    # instead of against the banned one.
+    wanted_units = require.get("gradient_units")
+    if wanted_units:
+        # Vacuous-pass guard, the same failure `mono_only` had: a file with no
+        # gradients at all satisfies "every gradient is userSpaceOnUse" trivially.
+        # A style declares this key because its volume lives in the fill, so zero
+        # gradients is not a clean pass — it is the flat render the key exists to stop.
+        if not (by_tag.get("linearGradient") or by_tag.get("radialGradient")):
+            f.error(label, f"the '{slug}' style models volume in the fill and has no "
+                           "gradients at all — the forms cannot be reading as solid")
+        for tag in ("linearGradient", "radialGradient"):
+            for el in by_tag.get(tag, []):
+                got = (el.get("gradientUnits") or "").strip()
+                # A gradient that references another inherits its attributes, so an
+                # absent gradientUnits on the referencing element is correct.
+                if not got and any(el.get(k) for k in
+                                   ("href", f"{{{XLINK_NS}}}href")):
+                    continue
+                if got != wanted_units:
+                    shown = got or "objectBoundingBox, by omission — it is the default"
+                    f.error(label,
+                            f'<{tag} id="{el.get("id") or "?"}"> has gradientUnits='
+                            f"{shown}; the '{slug}' style computes every gradient axis "
+                            f'from instance geometry and needs gradientUnits='
+                            f'"{wanted_units}" on all of them')
+
     # Each entry is (radius, shortest side of the shape or None when unknown).
     # SVG clamps rx to half the side, so a min_rx floor is unsatisfiable on a shape
     # narrower than 2*floor — those are skipped rather than failed. A status marker

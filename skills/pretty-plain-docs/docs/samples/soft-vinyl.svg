@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title>Soft vinyl — Source, Transform, Store</title>
+<desc>Five soft-touch vinyl primitives composing a pipeline figure. Three label-bearing slabs read Source on an event stream, Transform doing map and filter, and Store to a warehouse, joined left to right by two capsule connectors; a numbered sphere badge sits on each slab. Below, a five-cylinder series labelled Q1 through Q5 stands at relative heights 48, 72, 40, 80 and 60, so Q4 is tallest and Q3 shortest. Every form is lit from a single upper-left key, its shadow edge glowing warm rather than going dark, and each rests on a warm brown contact shadow offset along that light. Nothing moves: the figure is a single moulded take.</desc>
+<defs>
+  <filter id="sv-b1" data-style="soft-vinyl" x="-60%" y="-90%" width="220%" height="290%"><feGaussianBlur stdDeviation="4.46"/></filter>
+  <linearGradient id="sv-g1" gradientUnits="userSpaceOnUse" x1="170" y1="180" x2="215" y2="304"><stop offset="0%" stop-color="var(--slablit)"/><stop offset="70%" stop-color="var(--albedo)"/><stop offset="100%" stop-color="var(--shade)"/></linearGradient>
+  <linearGradient id="sv-g2" gradientUnits="userSpaceOnUse" x1="0" y1="291.4" x2="0" y2="304"><stop offset="0%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".55"/></linearGradient>
+  <filter id="sv-b2" x="-60%" y="-90%" width="220%" height="290%"><feGaussianBlur stdDeviation="1.45"/></filter>
+  <radialGradient id="sv-g3" gradientUnits="userSpaceOnUse" cx="111.52" cy="210.38" r="17.04"><stop offset="0%" stop-color="var(--lit)"/><stop offset="42%" stop-color="var(--albedo)"/><stop offset="76%" stop-color="var(--shade)"/><stop offset="100%" stop-color="var(--deep)"/></radialGradient>
+  <radialGradient id="sv-g4" gradientUnits="userSpaceOnUse" cx="112.11" cy="211.52" r="14.4"><stop offset="62%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="88%" stop-color="var(--sss)" stop-opacity=".30"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".85"/></radialGradient>
+  <linearGradient id="sv-g5" gradientUnits="userSpaceOnUse" x1="540" y1="180" x2="585" y2="304"><stop offset="0%" stop-color="var(--slablit)"/><stop offset="70%" stop-color="var(--albedo)"/><stop offset="100%" stop-color="var(--shade)"/></linearGradient>
+  <linearGradient id="sv-g6" gradientUnits="userSpaceOnUse" x1="0" y1="291.4" x2="0" y2="304"><stop offset="0%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".55"/></linearGradient>
+  <radialGradient id="sv-g7" gradientUnits="userSpaceOnUse" cx="481.52" cy="210.38" r="17.04"><stop offset="0%" stop-color="var(--lit)"/><stop offset="42%" stop-color="var(--albedo)"/><stop offset="76%" stop-color="var(--shade)"/><stop offset="100%" stop-color="var(--deep)"/></radialGradient>
+  <radialGradient id="sv-g8" gradientUnits="userSpaceOnUse" cx="482.11" cy="211.52" r="14.4"><stop offset="62%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="88%" stop-color="var(--sss)" stop-opacity=".30"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".85"/></radialGradient>
+  <linearGradient id="sv-g9" gradientUnits="userSpaceOnUse" x1="910" y1="180" x2="955" y2="304"><stop offset="0%" stop-color="var(--slablit)"/><stop offset="70%" stop-color="var(--albedo)"/><stop offset="100%" stop-color="var(--shade)"/></linearGradient>
+  <linearGradient id="sv-g10" gradientUnits="userSpaceOnUse" x1="0" y1="291.4" x2="0" y2="304"><stop offset="0%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".55"/></linearGradient>
+  <radialGradient id="sv-g11" gradientUnits="userSpaceOnUse" cx="851.52" cy="210.38" r="17.04"><stop offset="0%" stop-color="var(--lit)"/><stop offset="42%" stop-color="var(--albedo)"/><stop offset="76%" stop-color="var(--shade)"/><stop offset="100%" stop-color="var(--deep)"/></radialGradient>
+  <radialGradient id="sv-g12" gradientUnits="userSpaceOnUse" cx="852.11" cy="211.52" r="14.4"><stop offset="62%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="88%" stop-color="var(--sss)" stop-opacity=".30"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".85"/></radialGradient>
+  <filter id="sv-b3" x="-60%" y="-90%" width="220%" height="290%"><feGaussianBlur stdDeviation="1.98"/></filter>
+  <linearGradient id="sv-g13" gradientUnits="userSpaceOnUse" x1="407.32" y1="230" x2="419.8" y2="254"><stop offset="0%" stop-color="var(--lit)"/><stop offset="38%" stop-color="var(--albedo)"/><stop offset="80%" stop-color="var(--shade)"/><stop offset="100%" stop-color="var(--deep)"/></linearGradient>
+  <linearGradient id="sv-g14" gradientUnits="userSpaceOnUse" x1="407.32" y1="230" x2="419.8" y2="254"><stop offset="66%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".72"/></linearGradient>
+  <linearGradient id="sv-g15" gradientUnits="userSpaceOnUse" x1="777.32" y1="230" x2="789.8" y2="254"><stop offset="0%" stop-color="var(--lit)"/><stop offset="38%" stop-color="var(--albedo)"/><stop offset="80%" stop-color="var(--shade)"/><stop offset="100%" stop-color="var(--deep)"/></linearGradient>
+  <linearGradient id="sv-g16" gradientUnits="userSpaceOnUse" x1="777.32" y1="230" x2="789.8" y2="254"><stop offset="66%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".72"/></linearGradient>
+  <filter id="sv-b4" x="-60%" y="-90%" width="220%" height="290%"><feGaussianBlur stdDeviation="6.45"/></filter>
+  <linearGradient id="sv-g17" gradientUnits="userSpaceOnUse" x1="80" y1="0" x2="126" y2="0"><stop offset="0%" stop-color="var(--shade)"/><stop offset="22%" stop-color="var(--lit)"/><stop offset="58%" stop-color="var(--albedo)"/><stop offset="88%" stop-color="var(--shade)"/><stop offset="100%" stop-color="var(--deep)"/></linearGradient>
+  <linearGradient id="sv-g18" gradientUnits="userSpaceOnUse" x1="80" y1="0" x2="126" y2="0"><stop offset="70%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".68"/></linearGradient>
+  <linearGradient id="sv-g19" gradientUnits="userSpaceOnUse" x1="80" y1="354.18" x2="126" y2="369.82"><stop offset="0%" stop-color="var(--caplit)"/><stop offset="100%" stop-color="var(--albedo)"/></linearGradient>
+  <linearGradient id="sv-g20" gradientUnits="userSpaceOnUse" x1="146" y1="0" x2="192" y2="0"><stop offset="0%" stop-color="var(--shade)"/><stop offset="22%" stop-color="var(--lit)"/><stop offset="58%" stop-color="var(--albedo)"/><stop offset="88%" stop-color="var(--shade)"/><stop offset="100%" stop-color="var(--deep)"/></linearGradient>
+  <linearGradient id="sv-g21" gradientUnits="userSpaceOnUse" x1="146" y1="0" x2="192" y2="0"><stop offset="70%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".68"/></linearGradient>
+  <linearGradient id="sv-g22" gradientUnits="userSpaceOnUse" x1="146" y1="330.18" x2="192" y2="345.82"><stop offset="0%" stop-color="var(--caplit)"/><stop offset="100%" stop-color="var(--albedo)"/></linearGradient>
+  <linearGradient id="sv-g23" gradientUnits="userSpaceOnUse" x1="212" y1="0" x2="258" y2="0"><stop offset="0%" stop-color="var(--shade)"/><stop offset="22%" stop-color="var(--lit)"/><stop offset="58%" stop-color="var(--albedo)"/><stop offset="88%" stop-color="var(--shade)"/><stop offset="100%" stop-color="var(--deep)"/></linearGradient>
+  <linearGradient id="sv-g24" gradientUnits="userSpaceOnUse" x1="212" y1="0" x2="258" y2="0"><stop offset="70%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".68"/></linearGradient>
+  <linearGradient id="sv-g25" gradientUnits="userSpaceOnUse" x1="212" y1="362.18" x2="258" y2="377.82"><stop offset="0%" stop-color="var(--caplit)"/><stop offset="100%" stop-color="var(--albedo)"/></linearGradient>
+  <linearGradient id="sv-g26" gradientUnits="userSpaceOnUse" x1="278" y1="0" x2="324" y2="0"><stop offset="0%" stop-color="var(--shade)"/><stop offset="22%" stop-color="var(--lit)"/><stop offset="58%" stop-color="var(--albedo)"/><stop offset="88%" stop-color="var(--shade)"/><stop offset="100%" stop-color="var(--deep)"/></linearGradient>
+  <linearGradient id="sv-g27" gradientUnits="userSpaceOnUse" x1="278" y1="0" x2="324" y2="0"><stop offset="70%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".68"/></linearGradient>
+  <linearGradient id="sv-g28" gradientUnits="userSpaceOnUse" x1="278" y1="322.18" x2="324" y2="337.82"><stop offset="0%" stop-color="var(--caplit)"/><stop offset="100%" stop-color="var(--albedo)"/></linearGradient>
+  <linearGradient id="sv-g29" gradientUnits="userSpaceOnUse" x1="344" y1="0" x2="390" y2="0"><stop offset="0%" stop-color="var(--shade)"/><stop offset="22%" stop-color="var(--lit)"/><stop offset="58%" stop-color="var(--albedo)"/><stop offset="88%" stop-color="var(--shade)"/><stop offset="100%" stop-color="var(--deep)"/></linearGradient>
+  <linearGradient id="sv-g30" gradientUnits="userSpaceOnUse" x1="344" y1="0" x2="390" y2="0"><stop offset="70%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".68"/></linearGradient>
+  <linearGradient id="sv-g31" gradientUnits="userSpaceOnUse" x1="344" y1="342.18" x2="390" y2="357.82"><stop offset="0%" stop-color="var(--caplit)"/><stop offset="100%" stop-color="var(--albedo)"/></linearGradient>
+  <linearGradient id="sv-g32" gradientUnits="userSpaceOnUse" x1="644" y1="352" x2="672.8" y2="416"><stop offset="0%" stop-color="var(--slablit)"/><stop offset="70%" stop-color="var(--albedo)"/><stop offset="100%" stop-color="var(--shade)"/></linearGradient>
+  <linearGradient id="sv-g33" gradientUnits="userSpaceOnUse" x1="0" y1="403.4" x2="0" y2="416"><stop offset="0%" stop-color="var(--sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--sss)" stop-opacity=".55"/></linearGradient>
+</defs>
+<style>
+svg { --ground:#F7F2E9; --lit:#F7EFE1; --albedo:#E4D7C3; --shade:#CDB69A; --deep:#B0916A; --sss:#F2AE78; --occ:#9C7F5E; --slablit:#FBF5EA; --caplit:#FDF8EE; --ink:#4A3B2A; --inksoft:#7A6647; }
+  .sv-h { font: 800 42px "Nunito", "Trebuchet MS", sans-serif; fill: var(--ink); }
+  .sv-t { font: 800 26px "Nunito", "Trebuchet MS", sans-serif; fill: var(--ink); }
+  .sv-s { font: 600 19px "Nunito", "Trebuchet MS", sans-serif; fill: var(--ink); }
+  .sv-n { font: 700 18px "Nunito", "Trebuchet MS", sans-serif; fill: var(--ink); }
+  .sv-f { font: 600 18px "Nunito", "Trebuchet MS", sans-serif; fill: var(--inksoft); }
+  .sv-b { font: 600 18px "Nunito", "Trebuchet MS", sans-serif; fill: var(--ink); }
+  .sv-q { font: 600 16px "Nunito", "Trebuchet MS", sans-serif; fill: var(--inksoft); }
+</style>
+<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
+<text class="sv-h" x="80" y="94">Moulded pipeline</text>
+<text class="sv-f" x="80" y="128">one light vector, warm occlusion, translucent edges</text>
+<ellipse cx="243.69" cy="307.15" rx="141" ry="8.1" fill="var(--occ)" opacity="0.3" filter="url(#sv-b1)"/>
+<rect x="80" y="184.5" width="300" height="124" rx="18" fill="var(--deep)" opacity=".55"/>
+<rect x="80" y="180" width="300" height="124" rx="18" fill="url(#sv-g1)"/>
+<rect x="80" y="180" width="300" height="124" rx="18" fill="url(#sv-g2)"/>
+<ellipse cx="115.11" cy="226.07" rx="11.4" ry="2.64" fill="var(--occ)" opacity="0.3" filter="url(#sv-b2)"/>
+<circle cx="114" cy="214" r="12" fill="url(#sv-g3)"/>
+<circle cx="114" cy="214" r="12" fill="url(#sv-g4)"/>
+<g data-bg="var(--shade)">
+<text class="sv-n" x="136" y="221">01</text>
+<text class="sv-t" x="230" y="254" text-anchor="middle">Source</text>
+<text class="sv-s" x="230" y="284" text-anchor="middle">event stream</text>
+</g>
+<ellipse cx="613.69" cy="307.15" rx="141" ry="8.1" fill="var(--occ)" opacity="0.3" filter="url(#sv-b1)"/>
+<rect x="450" y="184.5" width="300" height="124" rx="18" fill="var(--deep)" opacity=".55"/>
+<rect x="450" y="180" width="300" height="124" rx="18" fill="url(#sv-g5)"/>
+<rect x="450" y="180" width="300" height="124" rx="18" fill="url(#sv-g6)"/>
+<ellipse cx="485.11" cy="226.07" rx="11.4" ry="2.64" fill="var(--occ)" opacity="0.3" filter="url(#sv-b2)"/>
+<circle cx="484" cy="214" r="12" fill="url(#sv-g7)"/>
+<circle cx="484" cy="214" r="12" fill="url(#sv-g8)"/>
+<g data-bg="var(--shade)">
+<text class="sv-n" x="506" y="221">02</text>
+<text class="sv-t" x="600" y="254" text-anchor="middle">Transform</text>
+<text class="sv-s" x="600" y="284" text-anchor="middle">map, filter</text>
+</g>
+<ellipse cx="983.69" cy="307.15" rx="141" ry="8.1" fill="var(--occ)" opacity="0.3" filter="url(#sv-b1)"/>
+<rect x="820" y="184.5" width="300" height="124" rx="18" fill="var(--deep)" opacity=".55"/>
+<rect x="820" y="180" width="300" height="124" rx="18" fill="url(#sv-g9)"/>
+<rect x="820" y="180" width="300" height="124" rx="18" fill="url(#sv-g10)"/>
+<ellipse cx="855.11" cy="226.07" rx="11.4" ry="2.64" fill="var(--occ)" opacity="0.3" filter="url(#sv-b2)"/>
+<circle cx="854" cy="214" r="12" fill="url(#sv-g11)"/>
+<circle cx="854" cy="214" r="12" fill="url(#sv-g12)"/>
+<g data-bg="var(--shade)">
+<text class="sv-n" x="876" y="221">03</text>
+<text class="sv-t" x="970" y="254" text-anchor="middle">Store</text>
+<text class="sv-s" x="970" y="284" text-anchor="middle">warehouse</text>
+</g>
+<ellipse cx="417.14" cy="254.92" rx="22.08" ry="3.6" fill="var(--occ)" opacity="0.3" filter="url(#sv-b3)"/>
+<rect x="391" y="230" width="48" height="24" rx="12" fill="url(#sv-g13)"/>
+<rect x="391" y="230" width="48" height="24" rx="12" fill="url(#sv-g14)"/>
+<ellipse cx="787.14" cy="254.92" rx="22.08" ry="3.6" fill="var(--occ)" opacity="0.3" filter="url(#sv-b3)"/>
+<rect x="761" y="230" width="48" height="24" rx="12" fill="url(#sv-g15)"/>
+<rect x="761" y="230" width="48" height="24" rx="12" fill="url(#sv-g16)"/>
+<ellipse cx="105.77" cy="414.56" rx="28.52" ry="11.73" fill="var(--occ)" opacity="0.3" filter="url(#sv-b4)"/>
+<path d="M80,362 L80,402.18 A23,7.82 0 0 0 126,402.18 L126,362 Z" fill="url(#sv-g17)"/>
+<path d="M80,362 L80,402.18 A23,7.82 0 0 0 126,402.18 L126,362 Z" fill="url(#sv-g18)"/>
+<ellipse cx="103" cy="362" rx="23" ry="7.82" fill="url(#sv-g19)"/>
+<text class="sv-q" data-role="metadata" x="103" y="452" text-anchor="middle">Q1</text>
+<ellipse cx="171.77" cy="414.56" rx="28.52" ry="11.73" fill="var(--occ)" opacity="0.3" filter="url(#sv-b4)"/>
+<path d="M146,338 L146,402.18 A23,7.82 0 0 0 192,402.18 L192,338 Z" fill="url(#sv-g20)"/>
+<path d="M146,338 L146,402.18 A23,7.82 0 0 0 192,402.18 L192,338 Z" fill="url(#sv-g21)"/>
+<ellipse cx="169" cy="338" rx="23" ry="7.82" fill="url(#sv-g22)"/>
+<text class="sv-q" data-role="metadata" x="169" y="452" text-anchor="middle">Q2</text>
+<ellipse cx="237.77" cy="414.56" rx="28.52" ry="11.73" fill="var(--occ)" opacity="0.3" filter="url(#sv-b4)"/>
+<path d="M212,370 L212,402.18 A23,7.82 0 0 0 258,402.18 L258,370 Z" fill="url(#sv-g23)"/>
+<path d="M212,370 L212,402.18 A23,7.82 0 0 0 258,402.18 L258,370 Z" fill="url(#sv-g24)"/>
+<ellipse cx="235" cy="370" rx="23" ry="7.82" fill="url(#sv-g25)"/>
+<text class="sv-q" data-role="metadata" x="235" y="452" text-anchor="middle">Q3</text>
+<ellipse cx="303.77" cy="414.56" rx="28.52" ry="11.73" fill="var(--occ)" opacity="0.3" filter="url(#sv-b4)"/>
+<path d="M278,330 L278,402.18 A23,7.82 0 0 0 324,402.18 L324,330 Z" fill="url(#sv-g26)"/>
+<path d="M278,330 L278,402.18 A23,7.82 0 0 0 324,402.18 L324,330 Z" fill="url(#sv-g27)"/>
+<ellipse cx="301" cy="330" rx="23" ry="7.82" fill="url(#sv-g28)"/>
+<text class="sv-q" data-role="metadata" x="301" y="452" text-anchor="middle">Q4</text>
+<ellipse cx="369.77" cy="414.56" rx="28.52" ry="11.73" fill="var(--occ)" opacity="0.3" filter="url(#sv-b4)"/>
+<path d="M344,350 L344,402.18 A23,7.82 0 0 0 390,402.18 L390,350 Z" fill="url(#sv-g29)"/>
+<path d="M344,350 L344,402.18 A23,7.82 0 0 0 390,402.18 L390,350 Z" fill="url(#sv-g30)"/>
+<ellipse cx="367" cy="350" rx="23" ry="7.82" fill="url(#sv-g31)"/>
+<text class="sv-q" data-role="metadata" x="367" y="452" text-anchor="middle">Q5</text>
+<ellipse cx="811.04" cy="419.15" rx="319.6" ry="8.1" fill="var(--occ)" opacity="0.3" filter="url(#sv-b1)"/>
+<rect x="440" y="356.5" width="680" height="64" rx="18" fill="var(--deep)" opacity=".55"/>
+<rect x="440" y="352" width="680" height="64" rx="18" fill="url(#sv-g32)"/>
+<rect x="440" y="352" width="680" height="64" rx="18" fill="url(#sv-g33)"/>
+<g data-bg="var(--shade)">
+<text class="sv-s" x="470" y="382">Labels sit on slabs, never on a shaded form</text>
+<text class="sv-b" x="470" y="406">volume lives in the fill — strip every filter and the forms still read solid</text>
+</g>
+</svg>

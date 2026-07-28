@@ -12,7 +12,7 @@
 [![Styles](https://img.shields.io/badge/style_catalog-31-14181d)](reference/styles.md)
 <!-- pd:badges end -->
 
-<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="f62e4a3f664d1e9ce2546b9bc5f7dc06ea2e43ce3ef69143d91274457dc54c5d" src-hash="383558ae88daf3cedebc2c3017dcb94e47e39378eb61fb9b34c41101e980464d" -->
+<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="9101493f7b65ddf14a332a0b630dbb0e8fcce9c4e54ed1e04bb94bf0c688e11b" src-hash="383558ae88daf3cedebc2c3017dcb94e47e39378eb61fb9b34c41101e980464d" -->
 <div align="center">
 <img src="docs/assets/hero.svg" alt="One run of the skill drawn as a specification sheet, left to right, with the five steps numbered. Step 1, a boundary symbol labelled REPO, is the evidence pass; the net leaving it is labelled facts. Step 2, DOCS, writes the eight Tier-1 files. Step 3, VIZ, authors the static SVG, and the net leaving it is labelled svg. Step 4 is a decision diamond labelled GATE. Its pass branch runs to step 5, STORE, a store symbol holding the asset and its manifest; its failure branch turns back on itself and returns to step 3, labelled re-author. There is no render step anywhere in the chain, because the committed file is its own source. A terminal at the bottom left carries the verdict: loop_s 0, zero errors. The sheet notes that python3 is the only requirement and that there is no renderer." width="820" />
 </div>
@@ -46,7 +46,7 @@ honesty-over-polish doctrine, and differ only in the visual layer:
 | Needs installing | HyperFrames CLI, ffmpeg, img2webp | nothing beyond `python3` | nothing beyond `python3` |
 | Build step | HTML composition → MP4 → WebP | none; the `.svg` you write is the asset | none; the `.svg` you write is the asset |
 | Failure mode | preflight STOP on a missing toolchain | warns, never aborts | warns, never aborts |
-| Visual style | derived from the product | 31-style catalog, or derived | the same 31-style catalog |
+| Visual style | derived from the product | 32-style catalog, or derived | the same 32-style catalog |
 | Asset budget | ≤ 2.5 MB | ≤ 150 KB | ≤ 150 KB |
 | Survives print / PDF / rasterising renderer | no | first frame only | **yes, in full** |
 | Mermaid source under a README diagram | no | no | **yes** |
@@ -107,13 +107,13 @@ A **style** is the look-and-feel idiom every visual in a repo is rendered in. Pa
 shape, material, type, composition. The product's own brand tokens still own the
 *palette*.
 
-The catalog is the same 31 idioms the siblings ship, minus their motion vocabulary:
+The catalog is the same 32 idioms the siblings ship, minus their motion vocabulary:
 every style here is defined by geometry, material, palette and type, which is exactly
 the part a still keeps.
 
-<!-- pd:viz name="styles" src=".prettydocs/src/styles/" facts-hash="74fd86e808a9a1de8129a92ea2d13ba730e6fab57a211c45838812ef5dcb33dd" src-hash="783ceeee0d89424f4719409a828bf815e2b8f756b67b28c11179847641d6b868" -->
+<!-- pd:viz name="styles" src=".prettydocs/src/styles/" facts-hash="3685f2b79d81eac1133f7b531ddbb6ab845e7d35a24406ef02796325706ca3ad" src-hash="0dde81547a6a3b0abe3b5934952a4822d6a8d94b61ea577983d1e61d47ff7ca5" -->
 <div align="center">
-<img src="docs/assets/styles.svg" alt="A contact sheet of thirty-one static style specimens in alphabetical order, two to a row: bento-grid, blueprint, brushed-metal, claymorphism, codex-leonardo, console-elbow, digital-rain, draughtsman-notebook, editorial, flat-material, glassmorphism, holographic-projection, hud, ide-dark, isometric-3d, lofi-wireframe, maximalist, neo-brutalist, neumorphism, oil-impasto, patent-drawing, pencil-lined-paper, rough-sketch, schematic, skeuomorphic, swiss-minimal, terminal-minimalist, watercolor, whiteboard-marker, wood-grain and y2k-retrofuturist. Every cell is that style's own full-width specimen scaled down, so each carries its real filter chains, grain and lighting — lit impasto relief, displaced wood grain, anisotropic brushed metal, true backdrop blur — rather than a flattened imitation. The final accent-bordered cell reports that all thirty-one were built and gated at their declared filter floors." width="820" />
+<img src="docs/assets/styles.svg" alt="A contact sheet of thirty-two static style specimens in alphabetical order, two to a row: bento-grid, blueprint, brushed-metal, claymorphism, codex-leonardo, console-elbow, digital-rain, draughtsman-notebook, editorial, flat-material, glassmorphism, holographic-projection, hud, ide-dark, isometric-3d, lofi-wireframe, maximalist, neo-brutalist, neumorphism, oil-impasto, patent-drawing, pencil-lined-paper, rough-sketch, schematic, skeuomorphic, soft-vinyl, swiss-minimal, terminal-minimalist, watercolor, whiteboard-marker, wood-grain and y2k-retrofuturist. Every cell is that style's own full-width specimen scaled down, so each carries its real filter chains, grain and lighting — lit impasto relief, displaced wood grain, anisotropic brushed metal, true backdrop blur — rather than a flattened imitation. The final accent-bordered cell reports that all thirty-two were built and gated at their declared filter floors." width="820" />
 </div>
 <!-- pd:viz end -->
 

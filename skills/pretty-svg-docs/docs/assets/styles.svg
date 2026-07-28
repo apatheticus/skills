@@ -1,6 +1,6 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 4458" width="1200" height="4458" role="img" data-loop-s="12" data-bg="var(--bg)" data-specimen="true">
-<title>The pretty-svg-docs style catalog — 31 idioms</title>
-<desc>A contact sheet of thirty-one animated style specimens in alphabetical order, two to a row. Every cell is that style’s own full specimen scaled down, so each carries its real filter chains, grain and lighting rather than a flattened imitation.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 4721" width="1200" height="4721" role="img" data-loop-s="12" data-bg="var(--bg)" data-specimen="true">
+<title>The pretty-svg-docs style catalog — 32 idioms</title>
+<desc>A contact sheet of thirty-two animated style specimens in alphabetical order, two to a row. Every cell is that style’s own full specimen scaled down, so each carries its real filter chains, grain and lighting rather than a flattened imitation.</desc>
 <defs>
 
   <pattern id="bp-grid" width="40" height="40" patternUnits="userSpaceOnUse">
@@ -278,9 +278,46 @@
     <stop offset="0.5" stop-color="var(--y2k-retrofuturist-cy)" stop-opacity=".2"/>
     <stop offset="1" stop-color="var(--y2k-retrofuturist-cy)" stop-opacity="0"/>
   </linearGradient>
+  <filter id="sv-b1" data-style="soft-vinyl" x="-60%" y="-90%" width="220%" height="290%"><feGaussianBlur stdDeviation="4.46"/></filter>
+  <linearGradient id="sv-g1" gradientUnits="userSpaceOnUse" x1="170" y1="180" x2="215" y2="304"><stop offset="0%" stop-color="var(--soft-vinyl-slablit)"/><stop offset="70%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="100%" stop-color="var(--soft-vinyl-shade)"/></linearGradient>
+  <linearGradient id="sv-g2" gradientUnits="userSpaceOnUse" x1="0" y1="291.4" x2="0" y2="304"><stop offset="0%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".55"/></linearGradient>
+  <filter id="sv-b2" x="-60%" y="-90%" width="220%" height="290%"><feGaussianBlur stdDeviation="1.45"/></filter>
+  <radialGradient id="sv-g3" gradientUnits="userSpaceOnUse" cx="111.52" cy="210.38" r="17.04"><stop offset="0%" stop-color="var(--soft-vinyl-lit)"/><stop offset="42%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="76%" stop-color="var(--soft-vinyl-shade)"/><stop offset="100%" stop-color="var(--soft-vinyl-deep)"/></radialGradient>
+  <radialGradient id="sv-g4" gradientUnits="userSpaceOnUse" cx="112.11" cy="211.52" r="14.4"><stop offset="62%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="88%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".30"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".85"/></radialGradient>
+  <linearGradient id="sv-g5" gradientUnits="userSpaceOnUse" x1="540" y1="180" x2="585" y2="304"><stop offset="0%" stop-color="var(--soft-vinyl-slablit)"/><stop offset="70%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="100%" stop-color="var(--soft-vinyl-shade)"/></linearGradient>
+  <linearGradient id="sv-g6" gradientUnits="userSpaceOnUse" x1="0" y1="291.4" x2="0" y2="304"><stop offset="0%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".55"/></linearGradient>
+  <radialGradient id="sv-g7" gradientUnits="userSpaceOnUse" cx="481.52" cy="210.38" r="17.04"><stop offset="0%" stop-color="var(--soft-vinyl-lit)"/><stop offset="42%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="76%" stop-color="var(--soft-vinyl-shade)"/><stop offset="100%" stop-color="var(--soft-vinyl-deep)"/></radialGradient>
+  <radialGradient id="sv-g8" gradientUnits="userSpaceOnUse" cx="482.11" cy="211.52" r="14.4"><stop offset="62%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="88%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".30"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".85"/></radialGradient>
+  <linearGradient id="sv-g9" gradientUnits="userSpaceOnUse" x1="910" y1="180" x2="955" y2="304"><stop offset="0%" stop-color="var(--soft-vinyl-slablit)"/><stop offset="70%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="100%" stop-color="var(--soft-vinyl-shade)"/></linearGradient>
+  <linearGradient id="sv-g10" gradientUnits="userSpaceOnUse" x1="0" y1="291.4" x2="0" y2="304"><stop offset="0%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".55"/></linearGradient>
+  <radialGradient id="sv-g11" gradientUnits="userSpaceOnUse" cx="851.52" cy="210.38" r="17.04"><stop offset="0%" stop-color="var(--soft-vinyl-lit)"/><stop offset="42%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="76%" stop-color="var(--soft-vinyl-shade)"/><stop offset="100%" stop-color="var(--soft-vinyl-deep)"/></radialGradient>
+  <radialGradient id="sv-g12" gradientUnits="userSpaceOnUse" cx="852.11" cy="211.52" r="14.4"><stop offset="62%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="88%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".30"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".85"/></radialGradient>
+  <filter id="sv-b3" x="-60%" y="-90%" width="220%" height="290%"><feGaussianBlur stdDeviation="1.98"/></filter>
+  <linearGradient id="sv-g13" gradientUnits="userSpaceOnUse" x1="407.32" y1="230" x2="419.8" y2="254"><stop offset="0%" stop-color="var(--soft-vinyl-lit)"/><stop offset="38%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="80%" stop-color="var(--soft-vinyl-shade)"/><stop offset="100%" stop-color="var(--soft-vinyl-deep)"/></linearGradient>
+  <linearGradient id="sv-g14" gradientUnits="userSpaceOnUse" x1="407.32" y1="230" x2="419.8" y2="254"><stop offset="66%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".72"/></linearGradient>
+  <linearGradient id="sv-g15" gradientUnits="userSpaceOnUse" x1="777.32" y1="230" x2="789.8" y2="254"><stop offset="0%" stop-color="var(--soft-vinyl-lit)"/><stop offset="38%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="80%" stop-color="var(--soft-vinyl-shade)"/><stop offset="100%" stop-color="var(--soft-vinyl-deep)"/></linearGradient>
+  <linearGradient id="sv-g16" gradientUnits="userSpaceOnUse" x1="777.32" y1="230" x2="789.8" y2="254"><stop offset="66%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".72"/></linearGradient>
+  <filter id="sv-b4" x="-60%" y="-90%" width="220%" height="290%"><feGaussianBlur stdDeviation="6.45"/></filter>
+  <linearGradient id="sv-g17" gradientUnits="userSpaceOnUse" x1="80" y1="0" x2="126" y2="0"><stop offset="0%" stop-color="var(--soft-vinyl-shade)"/><stop offset="22%" stop-color="var(--soft-vinyl-lit)"/><stop offset="58%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="88%" stop-color="var(--soft-vinyl-shade)"/><stop offset="100%" stop-color="var(--soft-vinyl-deep)"/></linearGradient>
+  <linearGradient id="sv-g18" gradientUnits="userSpaceOnUse" x1="80" y1="0" x2="126" y2="0"><stop offset="70%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".68"/></linearGradient>
+  <linearGradient id="sv-g19" gradientUnits="userSpaceOnUse" x1="80" y1="354.18" x2="126" y2="369.82"><stop offset="0%" stop-color="var(--soft-vinyl-caplit)"/><stop offset="100%" stop-color="var(--soft-vinyl-albedo)"/></linearGradient>
+  <linearGradient id="sv-g20" gradientUnits="userSpaceOnUse" x1="146" y1="0" x2="192" y2="0"><stop offset="0%" stop-color="var(--soft-vinyl-shade)"/><stop offset="22%" stop-color="var(--soft-vinyl-lit)"/><stop offset="58%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="88%" stop-color="var(--soft-vinyl-shade)"/><stop offset="100%" stop-color="var(--soft-vinyl-deep)"/></linearGradient>
+  <linearGradient id="sv-g21" gradientUnits="userSpaceOnUse" x1="146" y1="0" x2="192" y2="0"><stop offset="70%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".68"/></linearGradient>
+  <linearGradient id="sv-g22" gradientUnits="userSpaceOnUse" x1="146" y1="330.18" x2="192" y2="345.82"><stop offset="0%" stop-color="var(--soft-vinyl-caplit)"/><stop offset="100%" stop-color="var(--soft-vinyl-albedo)"/></linearGradient>
+  <linearGradient id="sv-g23" gradientUnits="userSpaceOnUse" x1="212" y1="0" x2="258" y2="0"><stop offset="0%" stop-color="var(--soft-vinyl-shade)"/><stop offset="22%" stop-color="var(--soft-vinyl-lit)"/><stop offset="58%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="88%" stop-color="var(--soft-vinyl-shade)"/><stop offset="100%" stop-color="var(--soft-vinyl-deep)"/></linearGradient>
+  <linearGradient id="sv-g24" gradientUnits="userSpaceOnUse" x1="212" y1="0" x2="258" y2="0"><stop offset="70%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".68"/></linearGradient>
+  <linearGradient id="sv-g25" gradientUnits="userSpaceOnUse" x1="212" y1="362.18" x2="258" y2="377.82"><stop offset="0%" stop-color="var(--soft-vinyl-caplit)"/><stop offset="100%" stop-color="var(--soft-vinyl-albedo)"/></linearGradient>
+  <linearGradient id="sv-g26" gradientUnits="userSpaceOnUse" x1="278" y1="0" x2="324" y2="0"><stop offset="0%" stop-color="var(--soft-vinyl-shade)"/><stop offset="22%" stop-color="var(--soft-vinyl-lit)"/><stop offset="58%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="88%" stop-color="var(--soft-vinyl-shade)"/><stop offset="100%" stop-color="var(--soft-vinyl-deep)"/></linearGradient>
+  <linearGradient id="sv-g27" gradientUnits="userSpaceOnUse" x1="278" y1="0" x2="324" y2="0"><stop offset="70%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".68"/></linearGradient>
+  <linearGradient id="sv-g28" gradientUnits="userSpaceOnUse" x1="278" y1="322.18" x2="324" y2="337.82"><stop offset="0%" stop-color="var(--soft-vinyl-caplit)"/><stop offset="100%" stop-color="var(--soft-vinyl-albedo)"/></linearGradient>
+  <linearGradient id="sv-g29" gradientUnits="userSpaceOnUse" x1="344" y1="0" x2="390" y2="0"><stop offset="0%" stop-color="var(--soft-vinyl-shade)"/><stop offset="22%" stop-color="var(--soft-vinyl-lit)"/><stop offset="58%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="88%" stop-color="var(--soft-vinyl-shade)"/><stop offset="100%" stop-color="var(--soft-vinyl-deep)"/></linearGradient>
+  <linearGradient id="sv-g30" gradientUnits="userSpaceOnUse" x1="344" y1="0" x2="390" y2="0"><stop offset="70%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".68"/></linearGradient>
+  <linearGradient id="sv-g31" gradientUnits="userSpaceOnUse" x1="344" y1="342.18" x2="390" y2="357.82"><stop offset="0%" stop-color="var(--soft-vinyl-caplit)"/><stop offset="100%" stop-color="var(--soft-vinyl-albedo)"/></linearGradient>
+  <linearGradient id="sv-g32" gradientUnits="userSpaceOnUse" x1="644" y1="352" x2="672.8" y2="416"><stop offset="0%" stop-color="var(--soft-vinyl-slablit)"/><stop offset="70%" stop-color="var(--soft-vinyl-albedo)"/><stop offset="100%" stop-color="var(--soft-vinyl-shade)"/></linearGradient>
+  <linearGradient id="sv-g33" gradientUnits="userSpaceOnUse" x1="0" y1="403.4" x2="0" y2="416"><stop offset="0%" stop-color="var(--soft-vinyl-sss)" stop-opacity="0"/><stop offset="100%" stop-color="var(--soft-vinyl-sss)" stop-opacity=".55"/></linearGradient>
 </defs>
 <style>
-svg { --sh-shadow:#000000; --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --muted:#9FB0C0; --rule:#30363D; --accent:#58A6FF; --bento-grid-ground:#F4F4F5; --bento-grid-tile:#FFFFFF; --bento-grid-ink:#18181B; --bento-grid-muted:#52525B; --bento-grid-eyebrow:#3F3F46; --bento-grid-rule:#E4E4E7; --bento-grid-indigo:#4338CA; --bento-grid-indigolt:#C7D2FE; --bento-grid-teal:#0F766E; --bento-grid-amber:#B45309; --blueprint-ground:#123A63; --blueprint-ink:#EAF3FF; --blueprint-line:#8FC0EA; --blueprint-faint:#3E6E9E; --blueprint-accent:#FFD166; --blueprint-surface:#17456F; --brushed-metal-ground:#2A2D31; --brushed-metal-steel:#9AA0A6; --brushed-metal-steeldk:#5E646A; --brushed-metal-steellt:#C9CED3; --brushed-metal-face:#8A9096; --brushed-metal-ink:#15181B; --brushed-metal-engrave:#15181B; --brushed-metal-brass:#C9A227; --brushed-metal-led:#4ADE80; --claymorphism-ground:#EDE7FB; --claymorphism-clay1:#B8A6E8; --claymorphism-clay2:#F0AFC4; --claymorphism-clay3:#A8D8C8; --claymorphism-ink:#2A2438; --claymorphism-muted:#332C48; --claymorphism-shadow:#C7BCE8; --claymorphism-hi:#FFFFFF; --claymorphism-castfar:#8E7CC3; --claymorphism-castnear:#6E5CA3; --codex-leonardo-ground:#E8DCC0; --codex-leonardo-vellum:#DED0AE; --codex-leonardo-ink:#3B2A16; --codex-leonardo-muted:#5A452A; --codex-leonardo-sepia:#7A5C34; --codex-leonardo-red:#8C3A1E; --codex-leonardo-panel:#E2D5B6; --console-elbow-ground:#08080C; --console-elbow-orange:#FF9C3F; --console-elbow-rose:#D98BB0; --console-elbow-peri:#9FA8FF; --console-elbow-gold:#FFCB6B; --console-elbow-ink:#0A0A0E; --console-elbow-panelink:#F2E7DA; --console-elbow-muted:#C8B9A8; --console-elbow-bar:#3A2A18; --digital-rain-ground:#04120A; --digital-rain-green:#22C55E; --digital-rain-greenlt:#86EFAC; --digital-rain-head:#ECFDF5; --digital-rain-dim:#14532D; --digital-rain-panel:#07200F; --digital-rain-ink:#BBF7D0; --digital-rain-muted:#86EFAC; --draughtsman-notebook-ground:#EFEBE1; --draughtsman-notebook-ink:#26262A; --draughtsman-notebook-muted:#4C4C52; --draughtsman-notebook-graphite:#5A5A62; --draughtsman-notebook-faint:#A7A091; --draughtsman-notebook-accent:#6B4A2A; --draughtsman-notebook-panel:#F6F3EA; --editorial-ground:#FBF7EF; --editorial-ink:#1A1A18; --editorial-muted:#5C5750; --editorial-rule:#CFC7B8; --editorial-accent:#8C2F1D; --editorial-surface:#FFFFFF; --flat-material-ground:#F5F5F5; --flat-material-surface:#FFFFFF; --flat-material-ink:#1C1C1C; --flat-material-muted:#4A4A4A; --flat-material-primary:#1565C0; --flat-material-primarydk:#0D47A1; --flat-material-amber:#8A6100; --flat-material-teal:#00695C; --flat-material-ripple:#90CAF9; --glassmorphism-ground:#251044; --glassmorphism-wash-a:#150A2C; --glassmorphism-wash-b:#2B0F4C; --glassmorphism-wash-c:#0A1032; --glassmorphism-blob1:#FF2D8A; --glassmorphism-blob2:#22D3EE; --glassmorphism-blob3:#FFB020; --glassmorphism-blob4:#7C5CFF; --glassmorphism-blob5:#34D399; --glassmorphism-scrim:#080514; --glassmorphism-scrim-a:.58; --glassmorphism-edge:#FFFFFF; --glassmorphism-ink:#FFFFFF; --glassmorphism-ink-dim:#E6EAFF; --glassmorphism-packet:#EAF4FF; --glassmorphism-panel:#685C82; --holographic-projection-ground:#040A16; --holographic-projection-cyan:#5EEAD4; --holographic-projection-cyanlt:#CFFAFE; --holographic-projection-blue:#60A5FA; --holographic-projection-violet:#A78BFA; --holographic-projection-ink:#E0FBFF; --holographic-projection-muted:#A5F3FC; --holographic-projection-panel:#082032; --holographic-projection-emit:#0EA5E9; --hud-ground:#04121A; --hud-cyan:#22D3EE; --hud-cyandk:#0E7490; --hud-amber:#FBBF24; --hud-ink:#CFFAFE; --hud-muted:#7DD3FC; --hud-grid:#0B2A38; --hud-panel:#07202C; --hud-red:#FB7185; --ide-dark-ground:#0D1117; --ide-dark-pane:#161B22; --ide-dark-gutter:#10151C; --ide-dark-ink:#C9D1D9; --ide-dark-muted:#8B949E; --ide-dark-blue:#58A6FF; --ide-dark-purple:#BC8CFF; --ide-dark-green:#7EE787; --ide-dark-orange:#FFA657; --ide-dark-sel:#1F2937; --isometric-3d-ground:#EEF1F6; --isometric-3d-ink:#1E2430; --isometric-3d-muted:#4A5464; --isometric-3d-onface:#2A303C; --isometric-3d-top:#7EA6E0; --isometric-3d-left:#4A73B0; --isometric-3d-right:#35547F; --isometric-3d-top2:#E8A87C; --isometric-3d-left2:#B87A52; --isometric-3d-right2:#8A5738; --isometric-3d-top3:#84C7A8; --isometric-3d-left3:#4E9575; --isometric-3d-right3:#376C55; --isometric-3d-shadow:#C9D2E0; --isometric-3d-accent:#C2410C; --lofi-wireframe-ground:#F1F1EF; --lofi-wireframe-ink:#2B2B2B; --lofi-wireframe-muted:#4F4F4F; --lofi-wireframe-box:#E0E0DC; --lofi-wireframe-box2:#D4D4CF; --lofi-wireframe-ghost:#BFBFB9; --lofi-wireframe-accent:#7A3E00; --maximalist-ground:#1A0B2E; --maximalist-hot:#FF2E88; --maximalist-acid:#C2FF3D; --maximalist-cyan:#22D3EE; --maximalist-violet:#8B5CF6; --maximalist-gold:#FFC93C; --maximalist-ink:#0B0616; --maximalist-plate:#FFFFFF; --maximalist-muted:#2A1B3D; --neo-brutalist-ground:#F2F0E6; --neo-brutalist-ink:#101010; --neo-brutalist-surface:#FFFFFF; --neo-brutalist-accent:#FFE500; --neo-brutalist-accent2:#00C2FF; --neo-brutalist-accent3:#FF4D3D; --neo-brutalist-shadow:#101010; --neumorphism-ground:#E4E8EF; --neumorphism-raise:#EDF1F7; --neumorphism-ink:#39414F; --neumorphism-muted:#5A6474; --neumorphism-hi:#FFFFFF; --neumorphism-lo:#B4BCC9; --neumorphism-accent:#5B7CFA; --neumorphism-groove:#D6DCE6; --oil-impasto-ground:#4A3C2E; --oil-impasto-groundlo:#140F08; --oil-impasto-ink:#F8EEDA; --oil-impasto-inksub:#F3E7CE; --oil-impasto-blue:#2F4B8F; --oil-impasto-bluehi:#7C96D8; --oil-impasto-bluelo:#16264C; --oil-impasto-sienna:#9C4A24; --oil-impasto-siennahi:#DC8452; --oil-impasto-siennalo:#4E210C; --oil-impasto-ochre:#7A5514; --oil-impasto-ochrehi:#C08A2E; --oil-impasto-ochrelo:#462C08; --oil-impasto-leadwhite:#FFF6E4; --oil-impasto-knife:#D8C6A0; --patent-drawing-ground:#FCFCFA; --patent-drawing-ink:#141414; --patent-drawing-muted:#3A3A3A; --patent-drawing-hatch:#6E6E6E; --pencil-lined-paper-ground:#FCFAF0; --pencil-lined-paper-ruled:#AFC4DC; --pencil-lined-paper-margin:#D98C9A; --pencil-lined-paper-ink:#3A3A40; --pencil-lined-paper-muted:#5C5C64; --pencil-lined-paper-graphite:#6A6A72; --pencil-lined-paper-panel:#F2EFE4; --rough-sketch-ground:#FDFCF8; --rough-sketch-ink:#1F2933; --rough-sketch-muted:#4A5568; --rough-sketch-fill1:#DCE9F7; --rough-sketch-fill2:#F7E4DC; --rough-sketch-fill3:#E2F0DE; --rough-sketch-accent:#C2410C; --schematic-ground:#FAFAF6; --schematic-ink:#16181C; --schematic-muted:#42464E; --schematic-wire:#16181C; --schematic-hot:#B03A2E; --schematic-cold:#1F618D; --schematic-panel:#F0F0EA; --schematic-rule:#B9BCC2; --skeuomorphic-ground:#3B3128; --skeuomorphic-felt:#4A3C2C; --skeuomorphic-panel:#D8CDBA; --skeuomorphic-paneldk:#A2947C; --skeuomorphic-panellt:#EFE7D6; --skeuomorphic-ink:#241C12; --skeuomorphic-muted:#4A3D2A; --skeuomorphic-brass:#B8892B; --skeuomorphic-lamp:#FFE9A8; --skeuomorphic-cable:#2C241A; --swiss-minimal-ground:#F4F4F2; --swiss-minimal-ink:#111111; --swiss-minimal-muted:#6E6E6E; --swiss-minimal-rule:#C9C9C6; --swiss-minimal-accent:#D62828; --swiss-minimal-surface:#FFFFFF; --terminal-minimalist-ground:#0B0E12; --terminal-minimalist-panel:#12161C; --terminal-minimalist-ink:#D7E0EA; --terminal-minimalist-muted:#93A1B0; --terminal-minimalist-green:#5FD787; --terminal-minimalist-amber:#E8B84B; --terminal-minimalist-red:#E06C75; --terminal-minimalist-rule:#232A33; --watercolor-ground:#FBF8F1; --watercolor-ink:#2A3138; --watercolor-muted:#4A525B; --watercolor-blue:#5B86B5; --watercolor-bluedk:#2E5C8A; --watercolor-rose:#C08497; --watercolor-rosedk:#96566B; --watercolor-ochre:#C8A15A; --watercolor-ochredk:#8A6A2E; --watercolor-wash:#DCE7F0; --whiteboard-marker-ground:#FBFBF9; --whiteboard-marker-ink:#1B1B1B; --whiteboard-marker-blue:#17457F; --whiteboard-marker-red:#9E2A2B; --whiteboard-marker-green:#14532D; --whiteboard-marker-muted:#4B5563; --whiteboard-marker-shade:#EDEFF2; --wood-grain-ground:#6B4423; --wood-grain-timber:#8A5C31; --wood-grain-timberdk:#4A2D15; --wood-grain-sanded:#C9A678; --wood-grain-ink:#2E1B0C; --wood-grain-muted:#4A2D15; --wood-grain-burn:#3A2110; --wood-grain-brass:#B98A3C; --wood-grain-reversed:#F4ECE0; --y2k-retrofuturist-ground:#070B18; --y2k-retrofuturist-ink:#EAF2FF; --y2k-retrofuturist-muted:#B9C7E8; --y2k-retrofuturist-chromelt:#DFE9F5; --y2k-retrofuturist-chromemid:#8FA6C4; --y2k-retrofuturist-chromehi:#FFFFFF; --y2k-retrofuturist-chromelo:#5B7196; --y2k-retrofuturist-chromedk:#2B3A52; --y2k-retrofuturist-hot:#FF3FB4; --y2k-retrofuturist-cy:#4BF0FF; --y2k-retrofuturist-violet:#7B2FFF; --y2k-retrofuturist-pill:#141B33; --y2k-retrofuturist-grid:#243156; }
+svg { --sh-shadow:#000000; --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --muted:#9FB0C0; --rule:#30363D; --accent:#58A6FF; --bento-grid-ground:#F4F4F5; --bento-grid-tile:#FFFFFF; --bento-grid-ink:#18181B; --bento-grid-muted:#52525B; --bento-grid-eyebrow:#3F3F46; --bento-grid-rule:#E4E4E7; --bento-grid-indigo:#4338CA; --bento-grid-indigolt:#C7D2FE; --bento-grid-teal:#0F766E; --bento-grid-amber:#B45309; --blueprint-ground:#123A63; --blueprint-ink:#EAF3FF; --blueprint-line:#8FC0EA; --blueprint-faint:#3E6E9E; --blueprint-accent:#FFD166; --blueprint-surface:#17456F; --brushed-metal-ground:#2A2D31; --brushed-metal-steel:#9AA0A6; --brushed-metal-steeldk:#5E646A; --brushed-metal-steellt:#C9CED3; --brushed-metal-face:#8A9096; --brushed-metal-ink:#15181B; --brushed-metal-engrave:#15181B; --brushed-metal-brass:#C9A227; --brushed-metal-led:#4ADE80; --claymorphism-ground:#EDE7FB; --claymorphism-clay1:#B8A6E8; --claymorphism-clay2:#F0AFC4; --claymorphism-clay3:#A8D8C8; --claymorphism-ink:#2A2438; --claymorphism-muted:#332C48; --claymorphism-shadow:#C7BCE8; --claymorphism-hi:#FFFFFF; --claymorphism-castfar:#8E7CC3; --claymorphism-castnear:#6E5CA3; --codex-leonardo-ground:#E8DCC0; --codex-leonardo-vellum:#DED0AE; --codex-leonardo-ink:#3B2A16; --codex-leonardo-muted:#5A452A; --codex-leonardo-sepia:#7A5C34; --codex-leonardo-red:#8C3A1E; --codex-leonardo-panel:#E2D5B6; --console-elbow-ground:#08080C; --console-elbow-orange:#FF9C3F; --console-elbow-rose:#D98BB0; --console-elbow-peri:#9FA8FF; --console-elbow-gold:#FFCB6B; --console-elbow-ink:#0A0A0E; --console-elbow-panelink:#F2E7DA; --console-elbow-muted:#C8B9A8; --console-elbow-bar:#3A2A18; --digital-rain-ground:#04120A; --digital-rain-green:#22C55E; --digital-rain-greenlt:#86EFAC; --digital-rain-head:#ECFDF5; --digital-rain-dim:#14532D; --digital-rain-panel:#07200F; --digital-rain-ink:#BBF7D0; --digital-rain-muted:#86EFAC; --draughtsman-notebook-ground:#EFEBE1; --draughtsman-notebook-ink:#26262A; --draughtsman-notebook-muted:#4C4C52; --draughtsman-notebook-graphite:#5A5A62; --draughtsman-notebook-faint:#A7A091; --draughtsman-notebook-accent:#6B4A2A; --draughtsman-notebook-panel:#F6F3EA; --editorial-ground:#FBF7EF; --editorial-ink:#1A1A18; --editorial-muted:#5C5750; --editorial-rule:#CFC7B8; --editorial-accent:#8C2F1D; --editorial-surface:#FFFFFF; --flat-material-ground:#F5F5F5; --flat-material-surface:#FFFFFF; --flat-material-ink:#1C1C1C; --flat-material-muted:#4A4A4A; --flat-material-primary:#1565C0; --flat-material-primarydk:#0D47A1; --flat-material-amber:#8A6100; --flat-material-teal:#00695C; --flat-material-ripple:#90CAF9; --glassmorphism-ground:#251044; --glassmorphism-wash-a:#150A2C; --glassmorphism-wash-b:#2B0F4C; --glassmorphism-wash-c:#0A1032; --glassmorphism-blob1:#FF2D8A; --glassmorphism-blob2:#22D3EE; --glassmorphism-blob3:#FFB020; --glassmorphism-blob4:#7C5CFF; --glassmorphism-blob5:#34D399; --glassmorphism-scrim:#080514; --glassmorphism-scrim-a:.58; --glassmorphism-edge:#FFFFFF; --glassmorphism-ink:#FFFFFF; --glassmorphism-ink-dim:#E6EAFF; --glassmorphism-packet:#EAF4FF; --glassmorphism-panel:#685C82; --holographic-projection-ground:#040A16; --holographic-projection-cyan:#5EEAD4; --holographic-projection-cyanlt:#CFFAFE; --holographic-projection-blue:#60A5FA; --holographic-projection-violet:#A78BFA; --holographic-projection-ink:#E0FBFF; --holographic-projection-muted:#A5F3FC; --holographic-projection-panel:#082032; --holographic-projection-emit:#0EA5E9; --hud-ground:#04121A; --hud-cyan:#22D3EE; --hud-cyandk:#0E7490; --hud-amber:#FBBF24; --hud-ink:#CFFAFE; --hud-muted:#7DD3FC; --hud-grid:#0B2A38; --hud-panel:#07202C; --hud-red:#FB7185; --ide-dark-ground:#0D1117; --ide-dark-pane:#161B22; --ide-dark-gutter:#10151C; --ide-dark-ink:#C9D1D9; --ide-dark-muted:#8B949E; --ide-dark-blue:#58A6FF; --ide-dark-purple:#BC8CFF; --ide-dark-green:#7EE787; --ide-dark-orange:#FFA657; --ide-dark-sel:#1F2937; --isometric-3d-ground:#EEF1F6; --isometric-3d-ink:#1E2430; --isometric-3d-muted:#4A5464; --isometric-3d-onface:#2A303C; --isometric-3d-top:#7EA6E0; --isometric-3d-left:#4A73B0; --isometric-3d-right:#35547F; --isometric-3d-top2:#E8A87C; --isometric-3d-left2:#B87A52; --isometric-3d-right2:#8A5738; --isometric-3d-top3:#84C7A8; --isometric-3d-left3:#4E9575; --isometric-3d-right3:#376C55; --isometric-3d-shadow:#C9D2E0; --isometric-3d-accent:#C2410C; --lofi-wireframe-ground:#F1F1EF; --lofi-wireframe-ink:#2B2B2B; --lofi-wireframe-muted:#4F4F4F; --lofi-wireframe-box:#E0E0DC; --lofi-wireframe-box2:#D4D4CF; --lofi-wireframe-ghost:#BFBFB9; --lofi-wireframe-accent:#7A3E00; --maximalist-ground:#1A0B2E; --maximalist-hot:#FF2E88; --maximalist-acid:#C2FF3D; --maximalist-cyan:#22D3EE; --maximalist-violet:#8B5CF6; --maximalist-gold:#FFC93C; --maximalist-ink:#0B0616; --maximalist-plate:#FFFFFF; --maximalist-muted:#2A1B3D; --neo-brutalist-ground:#F2F0E6; --neo-brutalist-ink:#101010; --neo-brutalist-surface:#FFFFFF; --neo-brutalist-accent:#FFE500; --neo-brutalist-accent2:#00C2FF; --neo-brutalist-accent3:#FF4D3D; --neo-brutalist-shadow:#101010; --neumorphism-ground:#E4E8EF; --neumorphism-raise:#EDF1F7; --neumorphism-ink:#39414F; --neumorphism-muted:#5A6474; --neumorphism-hi:#FFFFFF; --neumorphism-lo:#B4BCC9; --neumorphism-accent:#5B7CFA; --neumorphism-groove:#D6DCE6; --oil-impasto-ground:#4A3C2E; --oil-impasto-groundlo:#140F08; --oil-impasto-ink:#F8EEDA; --oil-impasto-inksub:#F3E7CE; --oil-impasto-blue:#2F4B8F; --oil-impasto-bluehi:#7C96D8; --oil-impasto-bluelo:#16264C; --oil-impasto-sienna:#9C4A24; --oil-impasto-siennahi:#DC8452; --oil-impasto-siennalo:#4E210C; --oil-impasto-ochre:#7A5514; --oil-impasto-ochrehi:#C08A2E; --oil-impasto-ochrelo:#462C08; --oil-impasto-leadwhite:#FFF6E4; --oil-impasto-knife:#D8C6A0; --patent-drawing-ground:#FCFCFA; --patent-drawing-ink:#141414; --patent-drawing-muted:#3A3A3A; --patent-drawing-hatch:#6E6E6E; --pencil-lined-paper-ground:#FCFAF0; --pencil-lined-paper-ruled:#AFC4DC; --pencil-lined-paper-margin:#D98C9A; --pencil-lined-paper-ink:#3A3A40; --pencil-lined-paper-muted:#5C5C64; --pencil-lined-paper-graphite:#6A6A72; --pencil-lined-paper-panel:#F2EFE4; --rough-sketch-ground:#FDFCF8; --rough-sketch-ink:#1F2933; --rough-sketch-muted:#4A5568; --rough-sketch-fill1:#DCE9F7; --rough-sketch-fill2:#F7E4DC; --rough-sketch-fill3:#E2F0DE; --rough-sketch-accent:#C2410C; --schematic-ground:#FAFAF6; --schematic-ink:#16181C; --schematic-muted:#42464E; --schematic-wire:#16181C; --schematic-hot:#B03A2E; --schematic-cold:#1F618D; --schematic-panel:#F0F0EA; --schematic-rule:#B9BCC2; --skeuomorphic-ground:#3B3128; --skeuomorphic-felt:#4A3C2C; --skeuomorphic-panel:#D8CDBA; --skeuomorphic-paneldk:#A2947C; --skeuomorphic-panellt:#EFE7D6; --skeuomorphic-ink:#241C12; --skeuomorphic-muted:#4A3D2A; --skeuomorphic-brass:#B8892B; --skeuomorphic-lamp:#FFE9A8; --skeuomorphic-cable:#2C241A; --soft-vinyl-ground:#F7F2E9; --soft-vinyl-lit:#F7EFE1; --soft-vinyl-albedo:#E4D7C3; --soft-vinyl-shade:#CDB69A; --soft-vinyl-deep:#B0916A; --soft-vinyl-sss:#F2AE78; --soft-vinyl-occ:#9C7F5E; --soft-vinyl-slablit:#FBF5EA; --soft-vinyl-caplit:#FDF8EE; --soft-vinyl-ink:#4A3B2A; --soft-vinyl-inksoft:#7A6647; --swiss-minimal-ground:#F4F4F2; --swiss-minimal-ink:#111111; --swiss-minimal-muted:#6E6E6E; --swiss-minimal-rule:#C9C9C6; --swiss-minimal-accent:#D62828; --swiss-minimal-surface:#FFFFFF; --terminal-minimalist-ground:#0B0E12; --terminal-minimalist-panel:#12161C; --terminal-minimalist-ink:#D7E0EA; --terminal-minimalist-muted:#93A1B0; --terminal-minimalist-green:#5FD787; --terminal-minimalist-amber:#E8B84B; --terminal-minimalist-red:#E06C75; --terminal-minimalist-rule:#232A33; --watercolor-ground:#FBF8F1; --watercolor-ink:#2A3138; --watercolor-muted:#4A525B; --watercolor-blue:#5B86B5; --watercolor-bluedk:#2E5C8A; --watercolor-rose:#C08497; --watercolor-rosedk:#96566B; --watercolor-ochre:#C8A15A; --watercolor-ochredk:#8A6A2E; --watercolor-wash:#DCE7F0; --whiteboard-marker-ground:#FBFBF9; --whiteboard-marker-ink:#1B1B1B; --whiteboard-marker-blue:#17457F; --whiteboard-marker-red:#9E2A2B; --whiteboard-marker-green:#14532D; --whiteboard-marker-muted:#4B5563; --whiteboard-marker-shade:#EDEFF2; --wood-grain-ground:#6B4423; --wood-grain-timber:#8A5C31; --wood-grain-timberdk:#4A2D15; --wood-grain-sanded:#C9A678; --wood-grain-ink:#2E1B0C; --wood-grain-muted:#4A2D15; --wood-grain-burn:#3A2110; --wood-grain-brass:#B98A3C; --wood-grain-reversed:#F4ECE0; --y2k-retrofuturist-ground:#070B18; --y2k-retrofuturist-ink:#EAF2FF; --y2k-retrofuturist-muted:#B9C7E8; --y2k-retrofuturist-chromelt:#DFE9F5; --y2k-retrofuturist-chromemid:#8FA6C4; --y2k-retrofuturist-chromehi:#FFFFFF; --y2k-retrofuturist-chromelo:#5B7196; --y2k-retrofuturist-chromedk:#2B3A52; --y2k-retrofuturist-hot:#FF3FB4; --y2k-retrofuturist-cy:#4BF0FF; --y2k-retrofuturist-violet:#7B2FFF; --y2k-retrofuturist-pill:#141B33; --y2k-retrofuturist-grid:#243156; }
   .sh-kicker { font: 600 20px "Helvetica Neue", Arial, sans-serif; fill: var(--muted); letter-spacing: 3px; }
   .sh-title  { font: 700 44px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); letter-spacing: -.5px; }
   .sh-body   { font: 400 19px "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
@@ -655,8 +692,24 @@ svg { --sh-shadow:#000000; --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --mut
   .y2-glint { animation: y2-glint 6s ease-in-out infinite; }
   @keyframes y2-glint { 0% { transform: translateX(-120px) } 100% { transform: translateX(420px) } }
   @media (prefers-reduced-motion: reduce) { .y2-band, .y2-glint { animation: none; opacity: 0 } }
+  .sv-h { font: 800 42px "Nunito", "Trebuchet MS", sans-serif; fill: var(--soft-vinyl-ink); }
+  .sv-t { font: 800 26px "Nunito", "Trebuchet MS", sans-serif; fill: var(--soft-vinyl-ink); }
+  .sv-s { font: 600 19px "Nunito", "Trebuchet MS", sans-serif; fill: var(--soft-vinyl-ink); }
+  .sv-n { font: 700 18px "Nunito", "Trebuchet MS", sans-serif; fill: var(--soft-vinyl-ink); }
+  .sv-f { font: 600 18px "Nunito", "Trebuchet MS", sans-serif; fill: var(--soft-vinyl-inksoft); }
+  .sv-b { font: 600 18px "Nunito", "Trebuchet MS", sans-serif; fill: var(--soft-vinyl-ink); }
+  .sv-q { font: 600 16px "Nunito", "Trebuchet MS", sans-serif; fill: var(--soft-vinyl-inksoft); }
+  .sv-settle { animation: sv-settle 6s ease-in-out infinite; }
+  @keyframes sv-settle {
+    0%, 58% { transform: scale(1,1) }
+    66% { transform: scale(1.035,.955) }
+    76% { transform: scale(.988,1.018) }
+    86% { transform: scale(1.006,.995) }
+    100% { transform: scale(1,1) }
+  }
+  @media (prefers-reduced-motion: reduce) { .sv-settle { animation: none } }
 </style>
-<rect x="0" y="0" width="1200" height="4458" fill="var(--bg)"/>
+<rect x="0" y="0" width="1200" height="4721" fill="var(--bg)"/>
 <text class="sh-kicker" x="40" y="52">PRETTY-SVG-DOCS</text>
 <text class="sh-title" x="40" y="112">The style catalog</text>
 <text class="sh-body" x="40" y="146">Source, Transform, Store — the same diagram in every idiom, alphabetically</text>
@@ -2847,9 +2900,94 @@ svg { --sh-shadow:#000000; --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --mut
 </g>
 <rect x="40" y="3328" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
 <text class="sh-slug" x="40" y="3562">skeuomorphic</text>
-<clipPath id="clip-swiss-minimal"><rect x="610" y="3328" width="550" height="211" rx="6"/></clipPath>
+<clipPath id="clip-soft-vinyl"><rect x="610" y="3328" width="550" height="211" rx="6"/></clipPath>
+<g clip-path="url(#clip-soft-vinyl)" style="isolation:isolate">
+  <g transform="translate(610,3328) scale(0.45833)" data-bg="var(--soft-vinyl-ground)">
+    <rect x="0" y="0" width="1200" height="460" fill="var(--soft-vinyl-ground)"/>
+    <text class="sv-h" x="80" y="94">Moulded pipeline</text>
+    <text class="sv-f" x="80" y="128">one light vector, warm occlusion, translucent edges</text>
+    <ellipse cx="243.69" cy="307.15" rx="141" ry="8.1" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b1)"/>
+    <rect x="80" y="184.5" width="300" height="124" rx="18" fill="var(--soft-vinyl-deep)" opacity=".55"/>
+    <rect x="80" y="180" width="300" height="124" rx="18" fill="url(#sv-g1)"/>
+    <rect x="80" y="180" width="300" height="124" rx="18" fill="url(#sv-g2)"/>
+    <ellipse cx="115.11" cy="226.07" rx="11.4" ry="2.64" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b2)"/>
+    <circle cx="114" cy="214" r="12" fill="url(#sv-g3)"/>
+    <circle cx="114" cy="214" r="12" fill="url(#sv-g4)"/>
+    <g data-bg="var(--soft-vinyl-shade)">
+    <text class="sv-n" x="136" y="221">01</text>
+    <text class="sv-t" x="230" y="254" text-anchor="middle">Source</text>
+    <text class="sv-s" x="230" y="284" text-anchor="middle">event stream</text>
+    </g>
+    <ellipse cx="613.69" cy="307.15" rx="141" ry="8.1" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b1)"/>
+    <g class="sv-settle" style="transform-origin:600px 304px"><rect x="450" y="184.5" width="300" height="124" rx="18" fill="var(--soft-vinyl-deep)" opacity=".55"/>
+    <rect x="450" y="180" width="300" height="124" rx="18" fill="url(#sv-g5)"/>
+    <rect x="450" y="180" width="300" height="124" rx="18" fill="url(#sv-g6)"/></g>
+    <ellipse cx="485.11" cy="226.07" rx="11.4" ry="2.64" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b2)"/>
+    <circle cx="484" cy="214" r="12" fill="url(#sv-g7)"/>
+    <circle cx="484" cy="214" r="12" fill="url(#sv-g8)"/>
+    <g data-bg="var(--soft-vinyl-shade)">
+    <text class="sv-n" x="506" y="221">02</text>
+    <text class="sv-t" x="600" y="254" text-anchor="middle">Transform</text>
+    <text class="sv-s" x="600" y="284" text-anchor="middle">map, filter</text>
+    </g>
+    <ellipse cx="983.69" cy="307.15" rx="141" ry="8.1" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b1)"/>
+    <rect x="820" y="184.5" width="300" height="124" rx="18" fill="var(--soft-vinyl-deep)" opacity=".55"/>
+    <rect x="820" y="180" width="300" height="124" rx="18" fill="url(#sv-g9)"/>
+    <rect x="820" y="180" width="300" height="124" rx="18" fill="url(#sv-g10)"/>
+    <ellipse cx="855.11" cy="226.07" rx="11.4" ry="2.64" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b2)"/>
+    <circle cx="854" cy="214" r="12" fill="url(#sv-g11)"/>
+    <circle cx="854" cy="214" r="12" fill="url(#sv-g12)"/>
+    <g data-bg="var(--soft-vinyl-shade)">
+    <text class="sv-n" x="876" y="221">03</text>
+    <text class="sv-t" x="970" y="254" text-anchor="middle">Store</text>
+    <text class="sv-s" x="970" y="284" text-anchor="middle">warehouse</text>
+    </g>
+    <ellipse cx="417.14" cy="254.92" rx="22.08" ry="3.6" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b3)"/>
+    <rect x="391" y="230" width="48" height="24" rx="12" fill="url(#sv-g13)"/>
+    <rect x="391" y="230" width="48" height="24" rx="12" fill="url(#sv-g14)"/>
+    <ellipse cx="787.14" cy="254.92" rx="22.08" ry="3.6" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b3)"/>
+    <rect x="761" y="230" width="48" height="24" rx="12" fill="url(#sv-g15)"/>
+    <rect x="761" y="230" width="48" height="24" rx="12" fill="url(#sv-g16)"/>
+    <ellipse cx="105.77" cy="414.56" rx="28.52" ry="11.73" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b4)"/>
+    <path d="M80,362 L80,402.18 A23,7.82 0 0 0 126,402.18 L126,362 Z" fill="url(#sv-g17)"/>
+    <path d="M80,362 L80,402.18 A23,7.82 0 0 0 126,402.18 L126,362 Z" fill="url(#sv-g18)"/>
+    <ellipse cx="103" cy="362" rx="23" ry="7.82" fill="url(#sv-g19)"/>
+    <text class="sv-q" data-role="metadata" x="103" y="452" text-anchor="middle">Q1</text>
+    <ellipse cx="171.77" cy="414.56" rx="28.52" ry="11.73" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b4)"/>
+    <path d="M146,338 L146,402.18 A23,7.82 0 0 0 192,402.18 L192,338 Z" fill="url(#sv-g20)"/>
+    <path d="M146,338 L146,402.18 A23,7.82 0 0 0 192,402.18 L192,338 Z" fill="url(#sv-g21)"/>
+    <ellipse cx="169" cy="338" rx="23" ry="7.82" fill="url(#sv-g22)"/>
+    <text class="sv-q" data-role="metadata" x="169" y="452" text-anchor="middle">Q2</text>
+    <ellipse cx="237.77" cy="414.56" rx="28.52" ry="11.73" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b4)"/>
+    <path d="M212,370 L212,402.18 A23,7.82 0 0 0 258,402.18 L258,370 Z" fill="url(#sv-g23)"/>
+    <path d="M212,370 L212,402.18 A23,7.82 0 0 0 258,402.18 L258,370 Z" fill="url(#sv-g24)"/>
+    <ellipse cx="235" cy="370" rx="23" ry="7.82" fill="url(#sv-g25)"/>
+    <text class="sv-q" data-role="metadata" x="235" y="452" text-anchor="middle">Q3</text>
+    <ellipse cx="303.77" cy="414.56" rx="28.52" ry="11.73" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b4)"/>
+    <path d="M278,330 L278,402.18 A23,7.82 0 0 0 324,402.18 L324,330 Z" fill="url(#sv-g26)"/>
+    <path d="M278,330 L278,402.18 A23,7.82 0 0 0 324,402.18 L324,330 Z" fill="url(#sv-g27)"/>
+    <ellipse cx="301" cy="330" rx="23" ry="7.82" fill="url(#sv-g28)"/>
+    <text class="sv-q" data-role="metadata" x="301" y="452" text-anchor="middle">Q4</text>
+    <ellipse cx="369.77" cy="414.56" rx="28.52" ry="11.73" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b4)"/>
+    <path d="M344,350 L344,402.18 A23,7.82 0 0 0 390,402.18 L390,350 Z" fill="url(#sv-g29)"/>
+    <path d="M344,350 L344,402.18 A23,7.82 0 0 0 390,402.18 L390,350 Z" fill="url(#sv-g30)"/>
+    <ellipse cx="367" cy="350" rx="23" ry="7.82" fill="url(#sv-g31)"/>
+    <text class="sv-q" data-role="metadata" x="367" y="452" text-anchor="middle">Q5</text>
+    <ellipse cx="811.04" cy="419.15" rx="319.6" ry="8.1" fill="var(--soft-vinyl-occ)" opacity="0.3" filter="url(#sv-b1)"/>
+    <rect x="440" y="356.5" width="680" height="64" rx="18" fill="var(--soft-vinyl-deep)" opacity=".55"/>
+    <rect x="440" y="352" width="680" height="64" rx="18" fill="url(#sv-g32)"/>
+    <rect x="440" y="352" width="680" height="64" rx="18" fill="url(#sv-g33)"/>
+    <g data-bg="var(--soft-vinyl-shade)">
+    <text class="sv-s" x="470" y="382">Labels sit on slabs, never on a shaded form</text>
+    <text class="sv-b" x="470" y="406">volume lives in the fill — strip every filter and the forms still read solid</text>
+    </g>
+  </g>
+</g>
+<rect x="610" y="3328" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
+<text class="sh-slug" x="610" y="3562">soft-vinyl</text>
+<clipPath id="clip-swiss-minimal"><rect x="40" y="3591" width="550" height="211" rx="6"/></clipPath>
 <g clip-path="url(#clip-swiss-minimal)" style="isolation:isolate">
-  <g transform="translate(610,3328) scale(0.45833)" data-bg="var(--swiss-minimal-ground)">
+  <g transform="translate(40,3591) scale(0.45833)" data-bg="var(--swiss-minimal-ground)">
     <rect x="0" y="0" width="1200" height="460" fill="var(--swiss-minimal-ground)"/>
     <line class="sm-r" x1="80" y1="60" x2="1120" y2="60"/>
     <text class="sm-k" x="80" y="46">Catalogue — 03</text>
@@ -2909,11 +3047,11 @@ svg { --sh-shadow:#000000; --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --mut
     <line class="sm-r" x1="1114" y1="380" x2="1114" y2="392"/>
   </g>
 </g>
-<rect x="610" y="3328" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
-<text class="sh-slug" x="610" y="3562">swiss-minimal</text>
-<clipPath id="clip-terminal-minimalist"><rect x="40" y="3591" width="550" height="211" rx="6"/></clipPath>
+<rect x="40" y="3591" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
+<text class="sh-slug" x="40" y="3825">swiss-minimal</text>
+<clipPath id="clip-terminal-minimalist"><rect x="610" y="3591" width="550" height="211" rx="6"/></clipPath>
 <g clip-path="url(#clip-terminal-minimalist)" style="isolation:isolate">
-  <g transform="translate(40,3591) scale(0.45833)" data-bg="var(--terminal-minimalist-ground)">
+  <g transform="translate(610,3591) scale(0.45833)" data-bg="var(--terminal-minimalist-ground)">
     <rect x="0" y="0" width="1200" height="460" fill="var(--terminal-minimalist-ground)"/>
     <text class="tm-h" x="80" y="72">$ pipeline --watch</text>
     <rect class="tm-cur" x="452" y="52" width="13" height="24"/>
@@ -2984,11 +3122,11 @@ svg { --sh-shadow:#000000; --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --mut
     <g data-bg="var(--terminal-minimalist-green)"><text class="tm-f" x="1060" y="405" text-anchor="middle" fill="#0B0E12">exit 0</text></g>
   </g>
 </g>
-<rect x="40" y="3591" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
-<text class="sh-slug" x="40" y="3825">terminal-minimalist</text>
-<clipPath id="clip-watercolor"><rect x="610" y="3591" width="550" height="211" rx="6"/></clipPath>
+<rect x="610" y="3591" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
+<text class="sh-slug" x="610" y="3825">terminal-minimalist</text>
+<clipPath id="clip-watercolor"><rect x="40" y="3854" width="550" height="211" rx="6"/></clipPath>
 <g clip-path="url(#clip-watercolor)" style="isolation:isolate">
-  <g transform="translate(610,3591) scale(0.45833)" data-bg="var(--watercolor-ground)">
+  <g transform="translate(40,3854) scale(0.45833)" data-bg="var(--watercolor-ground)">
     <rect x="0" y="0" width="1200" height="460" fill="var(--watercolor-ground)"/>
     <text class="wc-h" x="80" y="88">A wash of data</text>
     <rect x="80" y="102" width="300" height="7" fill="var(--watercolor-wash)" filter="url(#wc-a)"/>
@@ -3037,11 +3175,11 @@ svg { --sh-shadow:#000000; --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --mut
     <rect x="0" y="0" width="1200" height="460" filter="url(#wc-g)" style="mix-blend-mode:multiply"/>
   </g>
 </g>
-<rect x="610" y="3591" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
-<text class="sh-slug" x="610" y="3825">watercolor</text>
-<clipPath id="clip-whiteboard-marker"><rect x="40" y="3854" width="550" height="211" rx="6"/></clipPath>
+<rect x="40" y="3854" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
+<text class="sh-slug" x="40" y="4088">watercolor</text>
+<clipPath id="clip-whiteboard-marker"><rect x="610" y="3854" width="550" height="211" rx="6"/></clipPath>
 <g clip-path="url(#clip-whiteboard-marker)" style="isolation:isolate">
-  <g transform="translate(40,3854) scale(0.45833)" data-bg="var(--whiteboard-marker-ground)">
+  <g transform="translate(610,3854) scale(0.45833)" data-bg="var(--whiteboard-marker-ground)">
     <rect x="0" y="0" width="1200" height="460" fill="var(--whiteboard-marker-ground)"/>
     <text class="wb-h" x="80" y="88">data flow!</text>
     <line class="wb-u" x1="80" y1="100" x2="330" y2="104" filter="url(#wb-a)"/>
@@ -3083,11 +3221,11 @@ svg { --sh-shadow:#000000; --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --mut
     <text class="wb-f" data-role="metadata" x="420" y="404">(erase and try again)</text>
   </g>
 </g>
-<rect x="40" y="3854" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
-<text class="sh-slug" x="40" y="4088">whiteboard-marker</text>
-<clipPath id="clip-wood-grain"><rect x="610" y="3854" width="550" height="211" rx="6"/></clipPath>
+<rect x="610" y="3854" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
+<text class="sh-slug" x="610" y="4088">whiteboard-marker</text>
+<clipPath id="clip-wood-grain"><rect x="40" y="4117" width="550" height="211" rx="6"/></clipPath>
 <g clip-path="url(#clip-wood-grain)" style="isolation:isolate">
-  <g transform="translate(610,3854) scale(0.45833)" data-bg="var(--wood-grain-timber)">
+  <g transform="translate(40,4117) scale(0.45833)" data-bg="var(--wood-grain-timber)">
     <rect x="0" y="0" width="1200" height="460" fill="var(--wood-grain-timber)"/>
     <line class="wg-r" x1="0" y1="6" x2="1200" y2="6" filter="url(#wg-a)"/>
     <line class="wg-r" x1="0" y1="24" x2="1200" y2="24" filter="url(#wg-a)"/>
@@ -3177,11 +3315,11 @@ svg { --sh-shadow:#000000; --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --mut
     <rect x="0" y="0" width="1200" height="460" filter="url(#wg-g)" style="mix-blend-mode:multiply"/>
   </g>
 </g>
-<rect x="610" y="3854" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
-<text class="sh-slug" x="610" y="4088">wood-grain</text>
-<clipPath id="clip-y2k-retrofuturist"><rect x="40" y="4117" width="550" height="211" rx="6"/></clipPath>
+<rect x="40" y="4117" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
+<text class="sh-slug" x="40" y="4351">wood-grain</text>
+<clipPath id="clip-y2k-retrofuturist"><rect x="610" y="4117" width="550" height="211" rx="6"/></clipPath>
 <g clip-path="url(#clip-y2k-retrofuturist)" style="isolation:isolate">
-  <g transform="translate(40,4117) scale(0.45833)" data-bg="var(--y2k-retrofuturist-ground)">
+  <g transform="translate(610,4117) scale(0.45833)" data-bg="var(--y2k-retrofuturist-ground)">
     <rect x="0" y="0" width="1200" height="460" fill="var(--y2k-retrofuturist-ground)"/>
     <line class="y2-g" x1="6" y1="460" x2="600" y2="196" opacity=".5"/>
     <line class="y2-g" x1="72" y1="460" x2="600" y2="196" opacity=".5"/>
@@ -3269,14 +3407,14 @@ svg { --sh-shadow:#000000; --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --mut
     <rect class="y2-band" x="0" y="0" width="1200" height="140" fill="url(#y2-scan)"/>
   </g>
 </g>
-<rect x="40" y="4117" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
-<text class="sh-slug" x="40" y="4351">y2k-retrofuturist</text>
-<rect x="610" y="4117" width="550" height="211" rx="6" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
-<text class="sh-focal" x="636" y="4173">31 styles</text>
-<text class="sh-body" x="636" y="4209">every tile is the style’s own specimen,</text>
-<text class="sh-body" x="636" y="4235">scaled — not a redrawing of it</text>
-<text class="sh-body" x="636" y="4273">each gated at its declared filter floor</text>
-<rect x="636" y="4291" width="498" height="4" rx="2" fill="var(--accent)"/>
-<line x1="40" y1="4406" x2="1160" y2="4406" stroke="var(--rule)" stroke-width="1"/>
-<text class="sh-body" x="40" y="4436">Each specimen also ships full-width under docs/samples/</text>
+<rect x="610" y="4117" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>
+<text class="sh-slug" x="610" y="4351">y2k-retrofuturist</text>
+<rect x="40" y="4380" width="1120" height="211" rx="6" fill="var(--surface)" stroke="var(--accent)" stroke-width="2"/>
+<text class="sh-focal" x="66" y="4436">32 styles</text>
+<text class="sh-body" x="66" y="4472">every tile is the style’s own specimen,</text>
+<text class="sh-body" x="66" y="4498">scaled — not a redrawing of it</text>
+<text class="sh-body" x="66" y="4536">each gated at its declared filter floor</text>
+<rect x="66" y="4554" width="1068" height="4" rx="2" fill="var(--accent)"/>
+<line x1="40" y1="4669" x2="1160" y2="4669" stroke="var(--rule)" stroke-width="1"/>
+<text class="sh-body" x="40" y="4699">Each specimen also ships full-width under docs/samples/</text>
 </svg>
