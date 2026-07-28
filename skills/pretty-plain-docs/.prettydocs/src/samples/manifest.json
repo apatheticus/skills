@@ -1,8 +1,8 @@
 {
   "producer": "pretty-plain-docs",
   "kind": "style-specimens",
-  "note": "One record per style specimen. Specimens are gated with --style <slug> so each gets its own filter floors, and they carry data-specimen=\"true\" so the min_elements density floor binds on them. Every specimen is static: loop_s is 0 throughout, and each was converted from the animated original by folding its reduced-motion resting values onto the base rules — no specimen was redrawn.",
-  "design_hash": "0147a082fb48e9fc451163e1c551395fde5b14ee7f8fbea77bce4f80599f08d7",
+  "note": "One record per style specimen. Specimens are gated with --style <slug> so each gets its own filter floors, and they carry data-specimen=\"true\" so the min_elements density floor binds on them. Every specimen is static: loop_s is 0 throughout, and each was converted from the animated original by folding its reduced-motion resting values onto the base rules \u2014 no specimen was redrawn.",
+  "design_hash": "4198cfe88edff60dfb760b071150f0f126feefa3f79cad296227f0b9096b5574",
   "specimens": {
     "bento-grid": {
       "style": "bento-grid",
@@ -81,16 +81,16 @@
       "loop_s": 0,
       "width": 1200,
       "height": 460,
-      "bytes": 4516,
-      "src_hash": "3004638a7d16a5291822ea7e7db08dd8d9ec096122907eeb95b9e90a0d7009a1"
+      "bytes": 4546,
+      "src_hash": "ed245c9755c5925b2b821a26a6bf9dd468e426d4faa4361b285657be0a233a6a"
     },
     "glassmorphism": {
       "style": "glassmorphism",
       "loop_s": 0,
       "width": 1200,
       "height": 460,
-      "bytes": 4695,
-      "src_hash": "ce568d3f1db12287f8e4bf7a1434b49330d47b3aceb3db1f5dda924517b6b7d3"
+      "bytes": 13560,
+      "src_hash": "97dcefc6e60c33018f7886b0fc8c48c1b878a6ec230fbffa1023c4a825b7278a"
     },
     "holographic-projection": {
       "style": "holographic-projection",

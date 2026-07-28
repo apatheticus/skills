@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 4458" width="1200" height="4458" role="img" data-loop-s="12" data-bg="var(--bg)" data-specimen="true">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 4458" width="1200" height="4458" role="img" data-loop-s="12" data-bg="var(--bg)" data-specimen="true">
 <title>The pretty-svg-docs style catalog — 31 idioms</title>
 <desc>A contact sheet of thirty-one animated style specimens in alphabetical order, two to a row. Every cell is that style’s own full specimen scaled down, so each carries its real filter chains, grain and lighting rather than a flattened imitation.</desc>
 <defs>
@@ -50,22 +50,78 @@
   </filter>
 
   <filter id="fm-e1" data-style="flat-material" x="-30%" y="-30%" width="160%" height="160%">
-    <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity=".24"/>
+    <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="var(--sh-shadow)" flood-opacity=".24"/>
   </filter>
   <filter id="fm-e4" data-style="flat-material" x="-30%" y="-30%" width="160%" height="160%">
-    <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#000000" flood-opacity=".26"/>
+    <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="var(--sh-shadow)" flood-opacity=".26"/>
   </filter>
-  <filter id="gl-field" data-style="glassmorphism" x="-25%" y="-25%" width="150%" height="150%">
-    <feGaussianBlur stdDeviation="34"/>
+  <linearGradient id="gl-base" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="var(--glassmorphism-wash-a)"/>
+    <stop offset=".55" stop-color="var(--glassmorphism-wash-b)"/>
+    <stop offset="1" stop-color="var(--glassmorphism-wash-c)"/>
+  </linearGradient>
+  <radialGradient id="gl-oA"><stop offset="0" stop-color="var(--glassmorphism-blob1)" stop-opacity=".95"/><stop offset="1" stop-color="var(--glassmorphism-blob1)" stop-opacity="0"/></radialGradient>
+  <radialGradient id="gl-oB"><stop offset="0" stop-color="var(--glassmorphism-blob2)" stop-opacity=".9"/><stop offset="1" stop-color="var(--glassmorphism-blob2)" stop-opacity="0"/></radialGradient>
+  <radialGradient id="gl-oC"><stop offset="0" stop-color="var(--glassmorphism-blob3)" stop-opacity=".85"/><stop offset="1" stop-color="var(--glassmorphism-blob3)" stop-opacity="0"/></radialGradient>
+  <radialGradient id="gl-oD"><stop offset="0" stop-color="var(--glassmorphism-blob4)" stop-opacity=".72"/><stop offset="1" stop-color="var(--glassmorphism-blob4)" stop-opacity="0"/></radialGradient>
+  <radialGradient id="gl-oE"><stop offset="0" stop-color="var(--glassmorphism-blob5)" stop-opacity=".7"/><stop offset="1" stop-color="var(--glassmorphism-blob5)" stop-opacity="0"/></radialGradient>
+  <linearGradient id="gl-tint" x1="0" y1="0" x2=".35" y2="1">
+    <stop offset="0" stop-color="var(--glassmorphism-edge)" stop-opacity=".20"/>
+    <stop offset="1" stop-color="var(--glassmorphism-edge)" stop-opacity=".05"/>
+  </linearGradient>
+  <linearGradient id="gl-rim" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="var(--glassmorphism-edge)" stop-opacity=".90"/>
+    <stop offset=".38" stop-color="var(--glassmorphism-edge)" stop-opacity=".16"/>
+    <stop offset=".68" stop-color="var(--glassmorphism-edge)" stop-opacity=".06"/>
+    <stop offset="1" stop-color="var(--glassmorphism-edge)" stop-opacity=".48"/>
+  </linearGradient>
+  <radialGradient id="gl-sheen">
+    <stop offset="0" stop-color="var(--glassmorphism-edge)" stop-opacity=".20"/>
+    <stop offset=".22" stop-color="var(--glassmorphism-edge)" stop-opacity=".16"/>
+    <stop offset=".42" stop-color="var(--glassmorphism-edge)" stop-opacity=".10"/>
+    <stop offset=".62" stop-color="var(--glassmorphism-edge)" stop-opacity=".05"/>
+    <stop offset=".82" stop-color="var(--glassmorphism-edge)" stop-opacity=".015"/>
+    <stop offset="1" stop-color="var(--glassmorphism-edge)" stop-opacity="0"/>
+  </radialGradient>
+  <g id="gl-pool">
+    <ellipse cx="600" cy="222" rx="140" ry="230" fill="url(#gl-sheen)" transform="rotate(-20 600 222)"/>
+  </g>
+
+  <filter id="gl-oblur" data-style="glassmorphism" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="38"/>
   </filter>
-  <filter id="gl-frost" data-style="glassmorphism" x="-25%" y="-25%" width="150%" height="150%">
+  <filter id="gl-frost" data-style="glassmorphism" x="-40%" y="-40%" width="180%" height="180%">
     <feGaussianBlur stdDeviation="14"/>
   </filter>
-  <linearGradient id="gl-edge" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="var(--glassmorphism-edge)" stop-opacity=".85"/>
-    <stop offset="0.5" stop-color="var(--glassmorphism-edge)" stop-opacity=".18"/>
-    <stop offset="1" stop-color="var(--glassmorphism-edge)" stop-opacity=".6"/>
-  </linearGradient>
+  <!-- frost on flat panes, refract on the thin bars. Displacement over a large
+       flat area reads as a smear; on a small or curved surface it is what makes
+       the thing read as solid glass rather than a hole. -->
+  <filter id="gl-refract" data-style="glassmorphism" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="4" result="b"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="5" result="t"/>
+    <feDisplacementMap in="b" in2="t" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="gl-grain" data-style="glassmorphism" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <filter id="gl-ink" data-style="glassmorphism" x="-30%" y="-40%" width="160%" height="180%">
+    <feDropShadow dx="0" dy="1" stdDeviation="1.6" flood-color="var(--glassmorphism-wash-c)" flood-opacity=".8"/>
+  </filter>
+  <filter id="gl-cast" data-style="glassmorphism" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="16"/>
+  </filter>
+  <filter id="gl-glow" data-style="glassmorphism" x="-200%" y="-200%" width="500%" height="500%">
+    <feGaussianBlur stdDeviation="3" result="g"/>
+    <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+
+  <clipPath id="gl-n1"><rect x="80" y="180" width="300" height="150" rx="20"/></clipPath>
+  <clipPath id="gl-n2"><rect x="450" y="180" width="300" height="150" rx="20"/></clipPath>
+  <clipPath id="gl-n3"><rect x="820" y="180" width="300" height="150" rx="20"/></clipPath>
+  <clipPath id="gl-c1"><rect x="380" y="246" width="70" height="18" rx="9"/></clipPath>
+  <clipPath id="gl-c2"><rect x="750" y="246" width="70" height="18" rx="9"/></clipPath>
+  <clipPath id="gl-ft"><rect x="80" y="366" width="1040" height="62" rx="24"/></clipPath>
   <filter id="hp-glow" data-style="holographic-projection" x="-60%" y="-60%" width="220%" height="220%">
     <feGaussianBlur stdDeviation="6" result="g"/>
     <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
@@ -224,7 +280,7 @@
   </linearGradient>
 </defs>
 <style>
-svg { --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --muted:#9FB0C0; --rule:#30363D; --accent:#58A6FF; --bento-grid-ground:#F4F4F5; --bento-grid-tile:#FFFFFF; --bento-grid-ink:#18181B; --bento-grid-muted:#52525B; --bento-grid-eyebrow:#3F3F46; --bento-grid-rule:#E4E4E7; --bento-grid-indigo:#4338CA; --bento-grid-indigolt:#C7D2FE; --bento-grid-teal:#0F766E; --bento-grid-amber:#B45309; --blueprint-ground:#123A63; --blueprint-ink:#EAF3FF; --blueprint-line:#8FC0EA; --blueprint-faint:#3E6E9E; --blueprint-accent:#FFD166; --blueprint-surface:#17456F; --brushed-metal-ground:#2A2D31; --brushed-metal-steel:#9AA0A6; --brushed-metal-steeldk:#5E646A; --brushed-metal-steellt:#C9CED3; --brushed-metal-face:#8A9096; --brushed-metal-ink:#15181B; --brushed-metal-engrave:#15181B; --brushed-metal-brass:#C9A227; --brushed-metal-led:#4ADE80; --claymorphism-ground:#EDE7FB; --claymorphism-clay1:#B8A6E8; --claymorphism-clay2:#F0AFC4; --claymorphism-clay3:#A8D8C8; --claymorphism-ink:#2A2438; --claymorphism-muted:#332C48; --claymorphism-shadow:#C7BCE8; --claymorphism-hi:#FFFFFF; --claymorphism-castfar:#8E7CC3; --claymorphism-castnear:#6E5CA3; --codex-leonardo-ground:#E8DCC0; --codex-leonardo-vellum:#DED0AE; --codex-leonardo-ink:#3B2A16; --codex-leonardo-muted:#5A452A; --codex-leonardo-sepia:#7A5C34; --codex-leonardo-red:#8C3A1E; --codex-leonardo-panel:#E2D5B6; --console-elbow-ground:#08080C; --console-elbow-orange:#FF9C3F; --console-elbow-rose:#D98BB0; --console-elbow-peri:#9FA8FF; --console-elbow-gold:#FFCB6B; --console-elbow-ink:#0A0A0E; --console-elbow-panelink:#F2E7DA; --console-elbow-muted:#C8B9A8; --console-elbow-bar:#3A2A18; --digital-rain-ground:#04120A; --digital-rain-green:#22C55E; --digital-rain-greenlt:#86EFAC; --digital-rain-head:#ECFDF5; --digital-rain-dim:#14532D; --digital-rain-panel:#07200F; --digital-rain-ink:#BBF7D0; --digital-rain-muted:#86EFAC; --draughtsman-notebook-ground:#EFEBE1; --draughtsman-notebook-ink:#26262A; --draughtsman-notebook-muted:#4C4C52; --draughtsman-notebook-graphite:#5A5A62; --draughtsman-notebook-faint:#A7A091; --draughtsman-notebook-accent:#6B4A2A; --draughtsman-notebook-panel:#F6F3EA; --editorial-ground:#FBF7EF; --editorial-ink:#1A1A18; --editorial-muted:#5C5750; --editorial-rule:#CFC7B8; --editorial-accent:#8C2F1D; --editorial-surface:#FFFFFF; --flat-material-ground:#F5F5F5; --flat-material-surface:#FFFFFF; --flat-material-ink:#1C1C1C; --flat-material-muted:#4A4A4A; --flat-material-primary:#1565C0; --flat-material-primarydk:#0D47A1; --flat-material-amber:#8A6100; --flat-material-teal:#00695C; --flat-material-ripple:#90CAF9; --glassmorphism-ground:#1B2140; --glassmorphism-blob1:#7C4DFF; --glassmorphism-blob2:#00BFA5; --glassmorphism-blob3:#FF4081; --glassmorphism-ink:#FFFFFF; --glassmorphism-muted:#E6EAFF; --glassmorphism-edge:#FFFFFF; --glassmorphism-panel:#2A3160; --holographic-projection-ground:#040A16; --holographic-projection-cyan:#5EEAD4; --holographic-projection-cyanlt:#CFFAFE; --holographic-projection-blue:#60A5FA; --holographic-projection-violet:#A78BFA; --holographic-projection-ink:#E0FBFF; --holographic-projection-muted:#A5F3FC; --holographic-projection-panel:#082032; --holographic-projection-emit:#0EA5E9; --hud-ground:#04121A; --hud-cyan:#22D3EE; --hud-cyandk:#0E7490; --hud-amber:#FBBF24; --hud-ink:#CFFAFE; --hud-muted:#7DD3FC; --hud-grid:#0B2A38; --hud-panel:#07202C; --hud-red:#FB7185; --ide-dark-ground:#0D1117; --ide-dark-pane:#161B22; --ide-dark-gutter:#10151C; --ide-dark-ink:#C9D1D9; --ide-dark-muted:#8B949E; --ide-dark-blue:#58A6FF; --ide-dark-purple:#BC8CFF; --ide-dark-green:#7EE787; --ide-dark-orange:#FFA657; --ide-dark-sel:#1F2937; --isometric-3d-ground:#EEF1F6; --isometric-3d-ink:#1E2430; --isometric-3d-muted:#4A5464; --isometric-3d-onface:#2A303C; --isometric-3d-top:#7EA6E0; --isometric-3d-left:#4A73B0; --isometric-3d-right:#35547F; --isometric-3d-top2:#E8A87C; --isometric-3d-left2:#B87A52; --isometric-3d-right2:#8A5738; --isometric-3d-top3:#84C7A8; --isometric-3d-left3:#4E9575; --isometric-3d-right3:#376C55; --isometric-3d-shadow:#C9D2E0; --isometric-3d-accent:#C2410C; --lofi-wireframe-ground:#F1F1EF; --lofi-wireframe-ink:#2B2B2B; --lofi-wireframe-muted:#4F4F4F; --lofi-wireframe-box:#E0E0DC; --lofi-wireframe-box2:#D4D4CF; --lofi-wireframe-ghost:#BFBFB9; --lofi-wireframe-accent:#7A3E00; --maximalist-ground:#1A0B2E; --maximalist-hot:#FF2E88; --maximalist-acid:#C2FF3D; --maximalist-cyan:#22D3EE; --maximalist-violet:#8B5CF6; --maximalist-gold:#FFC93C; --maximalist-ink:#0B0616; --maximalist-plate:#FFFFFF; --maximalist-muted:#2A1B3D; --neo-brutalist-ground:#F2F0E6; --neo-brutalist-ink:#101010; --neo-brutalist-surface:#FFFFFF; --neo-brutalist-accent:#FFE500; --neo-brutalist-accent2:#00C2FF; --neo-brutalist-accent3:#FF4D3D; --neo-brutalist-shadow:#101010; --neumorphism-ground:#E4E8EF; --neumorphism-raise:#EDF1F7; --neumorphism-ink:#39414F; --neumorphism-muted:#5A6474; --neumorphism-hi:#FFFFFF; --neumorphism-lo:#B4BCC9; --neumorphism-accent:#5B7CFA; --neumorphism-groove:#D6DCE6; --oil-impasto-ground:#4A3C2E; --oil-impasto-groundlo:#140F08; --oil-impasto-ink:#F8EEDA; --oil-impasto-inksub:#F3E7CE; --oil-impasto-blue:#2F4B8F; --oil-impasto-bluehi:#7C96D8; --oil-impasto-bluelo:#16264C; --oil-impasto-sienna:#9C4A24; --oil-impasto-siennahi:#DC8452; --oil-impasto-siennalo:#4E210C; --oil-impasto-ochre:#7A5514; --oil-impasto-ochrehi:#C08A2E; --oil-impasto-ochrelo:#462C08; --oil-impasto-leadwhite:#FFF6E4; --oil-impasto-knife:#D8C6A0; --patent-drawing-ground:#FCFCFA; --patent-drawing-ink:#141414; --patent-drawing-muted:#3A3A3A; --patent-drawing-hatch:#6E6E6E; --pencil-lined-paper-ground:#FCFAF0; --pencil-lined-paper-ruled:#AFC4DC; --pencil-lined-paper-margin:#D98C9A; --pencil-lined-paper-ink:#3A3A40; --pencil-lined-paper-muted:#5C5C64; --pencil-lined-paper-graphite:#6A6A72; --pencil-lined-paper-panel:#F2EFE4; --rough-sketch-ground:#FDFCF8; --rough-sketch-ink:#1F2933; --rough-sketch-muted:#4A5568; --rough-sketch-fill1:#DCE9F7; --rough-sketch-fill2:#F7E4DC; --rough-sketch-fill3:#E2F0DE; --rough-sketch-accent:#C2410C; --schematic-ground:#FAFAF6; --schematic-ink:#16181C; --schematic-muted:#42464E; --schematic-wire:#16181C; --schematic-hot:#B03A2E; --schematic-cold:#1F618D; --schematic-panel:#F0F0EA; --schematic-rule:#B9BCC2; --skeuomorphic-ground:#3B3128; --skeuomorphic-felt:#4A3C2C; --skeuomorphic-panel:#D8CDBA; --skeuomorphic-paneldk:#A2947C; --skeuomorphic-panellt:#EFE7D6; --skeuomorphic-ink:#241C12; --skeuomorphic-muted:#4A3D2A; --skeuomorphic-brass:#B8892B; --skeuomorphic-lamp:#FFE9A8; --skeuomorphic-cable:#2C241A; --swiss-minimal-ground:#F4F4F2; --swiss-minimal-ink:#111111; --swiss-minimal-muted:#6E6E6E; --swiss-minimal-rule:#C9C9C6; --swiss-minimal-accent:#D62828; --swiss-minimal-surface:#FFFFFF; --terminal-minimalist-ground:#0B0E12; --terminal-minimalist-panel:#12161C; --terminal-minimalist-ink:#D7E0EA; --terminal-minimalist-muted:#93A1B0; --terminal-minimalist-green:#5FD787; --terminal-minimalist-amber:#E8B84B; --terminal-minimalist-red:#E06C75; --terminal-minimalist-rule:#232A33; --watercolor-ground:#FBF8F1; --watercolor-ink:#2A3138; --watercolor-muted:#4A525B; --watercolor-blue:#5B86B5; --watercolor-bluedk:#2E5C8A; --watercolor-rose:#C08497; --watercolor-rosedk:#96566B; --watercolor-ochre:#C8A15A; --watercolor-ochredk:#8A6A2E; --watercolor-wash:#DCE7F0; --whiteboard-marker-ground:#FBFBF9; --whiteboard-marker-ink:#1B1B1B; --whiteboard-marker-blue:#17457F; --whiteboard-marker-red:#9E2A2B; --whiteboard-marker-green:#14532D; --whiteboard-marker-muted:#4B5563; --whiteboard-marker-shade:#EDEFF2; --wood-grain-ground:#6B4423; --wood-grain-timber:#8A5C31; --wood-grain-timberdk:#4A2D15; --wood-grain-sanded:#C9A678; --wood-grain-ink:#2E1B0C; --wood-grain-muted:#4A2D15; --wood-grain-burn:#3A2110; --wood-grain-brass:#B98A3C; --wood-grain-reversed:#F4ECE0; --y2k-retrofuturist-ground:#070B18; --y2k-retrofuturist-ink:#EAF2FF; --y2k-retrofuturist-muted:#B9C7E8; --y2k-retrofuturist-chromelt:#DFE9F5; --y2k-retrofuturist-chromemid:#8FA6C4; --y2k-retrofuturist-chromehi:#FFFFFF; --y2k-retrofuturist-chromelo:#5B7196; --y2k-retrofuturist-chromedk:#2B3A52; --y2k-retrofuturist-hot:#FF3FB4; --y2k-retrofuturist-cy:#4BF0FF; --y2k-retrofuturist-violet:#7B2FFF; --y2k-retrofuturist-pill:#141B33; --y2k-retrofuturist-grid:#243156; }
+svg { --sh-shadow:#000000; --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --muted:#9FB0C0; --rule:#30363D; --accent:#58A6FF; --bento-grid-ground:#F4F4F5; --bento-grid-tile:#FFFFFF; --bento-grid-ink:#18181B; --bento-grid-muted:#52525B; --bento-grid-eyebrow:#3F3F46; --bento-grid-rule:#E4E4E7; --bento-grid-indigo:#4338CA; --bento-grid-indigolt:#C7D2FE; --bento-grid-teal:#0F766E; --bento-grid-amber:#B45309; --blueprint-ground:#123A63; --blueprint-ink:#EAF3FF; --blueprint-line:#8FC0EA; --blueprint-faint:#3E6E9E; --blueprint-accent:#FFD166; --blueprint-surface:#17456F; --brushed-metal-ground:#2A2D31; --brushed-metal-steel:#9AA0A6; --brushed-metal-steeldk:#5E646A; --brushed-metal-steellt:#C9CED3; --brushed-metal-face:#8A9096; --brushed-metal-ink:#15181B; --brushed-metal-engrave:#15181B; --brushed-metal-brass:#C9A227; --brushed-metal-led:#4ADE80; --claymorphism-ground:#EDE7FB; --claymorphism-clay1:#B8A6E8; --claymorphism-clay2:#F0AFC4; --claymorphism-clay3:#A8D8C8; --claymorphism-ink:#2A2438; --claymorphism-muted:#332C48; --claymorphism-shadow:#C7BCE8; --claymorphism-hi:#FFFFFF; --claymorphism-castfar:#8E7CC3; --claymorphism-castnear:#6E5CA3; --codex-leonardo-ground:#E8DCC0; --codex-leonardo-vellum:#DED0AE; --codex-leonardo-ink:#3B2A16; --codex-leonardo-muted:#5A452A; --codex-leonardo-sepia:#7A5C34; --codex-leonardo-red:#8C3A1E; --codex-leonardo-panel:#E2D5B6; --console-elbow-ground:#08080C; --console-elbow-orange:#FF9C3F; --console-elbow-rose:#D98BB0; --console-elbow-peri:#9FA8FF; --console-elbow-gold:#FFCB6B; --console-elbow-ink:#0A0A0E; --console-elbow-panelink:#F2E7DA; --console-elbow-muted:#C8B9A8; --console-elbow-bar:#3A2A18; --digital-rain-ground:#04120A; --digital-rain-green:#22C55E; --digital-rain-greenlt:#86EFAC; --digital-rain-head:#ECFDF5; --digital-rain-dim:#14532D; --digital-rain-panel:#07200F; --digital-rain-ink:#BBF7D0; --digital-rain-muted:#86EFAC; --draughtsman-notebook-ground:#EFEBE1; --draughtsman-notebook-ink:#26262A; --draughtsman-notebook-muted:#4C4C52; --draughtsman-notebook-graphite:#5A5A62; --draughtsman-notebook-faint:#A7A091; --draughtsman-notebook-accent:#6B4A2A; --draughtsman-notebook-panel:#F6F3EA; --editorial-ground:#FBF7EF; --editorial-ink:#1A1A18; --editorial-muted:#5C5750; --editorial-rule:#CFC7B8; --editorial-accent:#8C2F1D; --editorial-surface:#FFFFFF; --flat-material-ground:#F5F5F5; --flat-material-surface:#FFFFFF; --flat-material-ink:#1C1C1C; --flat-material-muted:#4A4A4A; --flat-material-primary:#1565C0; --flat-material-primarydk:#0D47A1; --flat-material-amber:#8A6100; --flat-material-teal:#00695C; --flat-material-ripple:#90CAF9; --glassmorphism-ground:#251044; --glassmorphism-wash-a:#150A2C; --glassmorphism-wash-b:#2B0F4C; --glassmorphism-wash-c:#0A1032; --glassmorphism-blob1:#FF2D8A; --glassmorphism-blob2:#22D3EE; --glassmorphism-blob3:#FFB020; --glassmorphism-blob4:#7C5CFF; --glassmorphism-blob5:#34D399; --glassmorphism-scrim:#080514; --glassmorphism-scrim-a:.58; --glassmorphism-edge:#FFFFFF; --glassmorphism-ink:#FFFFFF; --glassmorphism-ink-dim:#E6EAFF; --glassmorphism-packet:#EAF4FF; --glassmorphism-panel:#685C82; --holographic-projection-ground:#040A16; --holographic-projection-cyan:#5EEAD4; --holographic-projection-cyanlt:#CFFAFE; --holographic-projection-blue:#60A5FA; --holographic-projection-violet:#A78BFA; --holographic-projection-ink:#E0FBFF; --holographic-projection-muted:#A5F3FC; --holographic-projection-panel:#082032; --holographic-projection-emit:#0EA5E9; --hud-ground:#04121A; --hud-cyan:#22D3EE; --hud-cyandk:#0E7490; --hud-amber:#FBBF24; --hud-ink:#CFFAFE; --hud-muted:#7DD3FC; --hud-grid:#0B2A38; --hud-panel:#07202C; --hud-red:#FB7185; --ide-dark-ground:#0D1117; --ide-dark-pane:#161B22; --ide-dark-gutter:#10151C; --ide-dark-ink:#C9D1D9; --ide-dark-muted:#8B949E; --ide-dark-blue:#58A6FF; --ide-dark-purple:#BC8CFF; --ide-dark-green:#7EE787; --ide-dark-orange:#FFA657; --ide-dark-sel:#1F2937; --isometric-3d-ground:#EEF1F6; --isometric-3d-ink:#1E2430; --isometric-3d-muted:#4A5464; --isometric-3d-onface:#2A303C; --isometric-3d-top:#7EA6E0; --isometric-3d-left:#4A73B0; --isometric-3d-right:#35547F; --isometric-3d-top2:#E8A87C; --isometric-3d-left2:#B87A52; --isometric-3d-right2:#8A5738; --isometric-3d-top3:#84C7A8; --isometric-3d-left3:#4E9575; --isometric-3d-right3:#376C55; --isometric-3d-shadow:#C9D2E0; --isometric-3d-accent:#C2410C; --lofi-wireframe-ground:#F1F1EF; --lofi-wireframe-ink:#2B2B2B; --lofi-wireframe-muted:#4F4F4F; --lofi-wireframe-box:#E0E0DC; --lofi-wireframe-box2:#D4D4CF; --lofi-wireframe-ghost:#BFBFB9; --lofi-wireframe-accent:#7A3E00; --maximalist-ground:#1A0B2E; --maximalist-hot:#FF2E88; --maximalist-acid:#C2FF3D; --maximalist-cyan:#22D3EE; --maximalist-violet:#8B5CF6; --maximalist-gold:#FFC93C; --maximalist-ink:#0B0616; --maximalist-plate:#FFFFFF; --maximalist-muted:#2A1B3D; --neo-brutalist-ground:#F2F0E6; --neo-brutalist-ink:#101010; --neo-brutalist-surface:#FFFFFF; --neo-brutalist-accent:#FFE500; --neo-brutalist-accent2:#00C2FF; --neo-brutalist-accent3:#FF4D3D; --neo-brutalist-shadow:#101010; --neumorphism-ground:#E4E8EF; --neumorphism-raise:#EDF1F7; --neumorphism-ink:#39414F; --neumorphism-muted:#5A6474; --neumorphism-hi:#FFFFFF; --neumorphism-lo:#B4BCC9; --neumorphism-accent:#5B7CFA; --neumorphism-groove:#D6DCE6; --oil-impasto-ground:#4A3C2E; --oil-impasto-groundlo:#140F08; --oil-impasto-ink:#F8EEDA; --oil-impasto-inksub:#F3E7CE; --oil-impasto-blue:#2F4B8F; --oil-impasto-bluehi:#7C96D8; --oil-impasto-bluelo:#16264C; --oil-impasto-sienna:#9C4A24; --oil-impasto-siennahi:#DC8452; --oil-impasto-siennalo:#4E210C; --oil-impasto-ochre:#7A5514; --oil-impasto-ochrehi:#C08A2E; --oil-impasto-ochrelo:#462C08; --oil-impasto-leadwhite:#FFF6E4; --oil-impasto-knife:#D8C6A0; --patent-drawing-ground:#FCFCFA; --patent-drawing-ink:#141414; --patent-drawing-muted:#3A3A3A; --patent-drawing-hatch:#6E6E6E; --pencil-lined-paper-ground:#FCFAF0; --pencil-lined-paper-ruled:#AFC4DC; --pencil-lined-paper-margin:#D98C9A; --pencil-lined-paper-ink:#3A3A40; --pencil-lined-paper-muted:#5C5C64; --pencil-lined-paper-graphite:#6A6A72; --pencil-lined-paper-panel:#F2EFE4; --rough-sketch-ground:#FDFCF8; --rough-sketch-ink:#1F2933; --rough-sketch-muted:#4A5568; --rough-sketch-fill1:#DCE9F7; --rough-sketch-fill2:#F7E4DC; --rough-sketch-fill3:#E2F0DE; --rough-sketch-accent:#C2410C; --schematic-ground:#FAFAF6; --schematic-ink:#16181C; --schematic-muted:#42464E; --schematic-wire:#16181C; --schematic-hot:#B03A2E; --schematic-cold:#1F618D; --schematic-panel:#F0F0EA; --schematic-rule:#B9BCC2; --skeuomorphic-ground:#3B3128; --skeuomorphic-felt:#4A3C2C; --skeuomorphic-panel:#D8CDBA; --skeuomorphic-paneldk:#A2947C; --skeuomorphic-panellt:#EFE7D6; --skeuomorphic-ink:#241C12; --skeuomorphic-muted:#4A3D2A; --skeuomorphic-brass:#B8892B; --skeuomorphic-lamp:#FFE9A8; --skeuomorphic-cable:#2C241A; --swiss-minimal-ground:#F4F4F2; --swiss-minimal-ink:#111111; --swiss-minimal-muted:#6E6E6E; --swiss-minimal-rule:#C9C9C6; --swiss-minimal-accent:#D62828; --swiss-minimal-surface:#FFFFFF; --terminal-minimalist-ground:#0B0E12; --terminal-minimalist-panel:#12161C; --terminal-minimalist-ink:#D7E0EA; --terminal-minimalist-muted:#93A1B0; --terminal-minimalist-green:#5FD787; --terminal-minimalist-amber:#E8B84B; --terminal-minimalist-red:#E06C75; --terminal-minimalist-rule:#232A33; --watercolor-ground:#FBF8F1; --watercolor-ink:#2A3138; --watercolor-muted:#4A525B; --watercolor-blue:#5B86B5; --watercolor-bluedk:#2E5C8A; --watercolor-rose:#C08497; --watercolor-rosedk:#96566B; --watercolor-ochre:#C8A15A; --watercolor-ochredk:#8A6A2E; --watercolor-wash:#DCE7F0; --whiteboard-marker-ground:#FBFBF9; --whiteboard-marker-ink:#1B1B1B; --whiteboard-marker-blue:#17457F; --whiteboard-marker-red:#9E2A2B; --whiteboard-marker-green:#14532D; --whiteboard-marker-muted:#4B5563; --whiteboard-marker-shade:#EDEFF2; --wood-grain-ground:#6B4423; --wood-grain-timber:#8A5C31; --wood-grain-timberdk:#4A2D15; --wood-grain-sanded:#C9A678; --wood-grain-ink:#2E1B0C; --wood-grain-muted:#4A2D15; --wood-grain-burn:#3A2110; --wood-grain-brass:#B98A3C; --wood-grain-reversed:#F4ECE0; --y2k-retrofuturist-ground:#070B18; --y2k-retrofuturist-ink:#EAF2FF; --y2k-retrofuturist-muted:#B9C7E8; --y2k-retrofuturist-chromelt:#DFE9F5; --y2k-retrofuturist-chromemid:#8FA6C4; --y2k-retrofuturist-chromehi:#FFFFFF; --y2k-retrofuturist-chromelo:#5B7196; --y2k-retrofuturist-chromedk:#2B3A52; --y2k-retrofuturist-hot:#FF3FB4; --y2k-retrofuturist-cy:#4BF0FF; --y2k-retrofuturist-violet:#7B2FFF; --y2k-retrofuturist-pill:#141B33; --y2k-retrofuturist-grid:#243156; }
   .sh-kicker { font: 600 20px "Helvetica Neue", Arial, sans-serif; fill: var(--muted); letter-spacing: 3px; }
   .sh-title  { font: 700 44px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); letter-spacing: -.5px; }
   .sh-body   { font: 400 19px "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
@@ -326,14 +382,75 @@ svg { --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --muted:#9FB0C0; --rule:#3
             animation: fm-rip 4s ease-out infinite; }
   @keyframes fm-rip { 0% { transform: scale(0); opacity: .55 } 100% { transform: scale(1); opacity: 0 } }
   @media (prefers-reduced-motion: reduce) { .fm-rip { animation: none; opacity: 0 } }
-  .gl-h { font: 600 40px "Helvetica Neue", Arial, sans-serif; fill: var(--glassmorphism-ink); }
-  .gl-t { font: 600 25px "Helvetica Neue", Arial, sans-serif; fill: var(--glassmorphism-ink); }
-  .gl-s { font: 400 19px "Helvetica Neue", Arial, sans-serif; fill: var(--glassmorphism-muted); }
-  .gl-f { font: 400 18px "Helvetica Neue", Arial, sans-serif; fill: var(--glassmorphism-muted); }
-  .gl-e { fill: none; stroke: url(#gl-edge); stroke-width: 1.6; }
-  .gl-d { animation: gl-d 12s ease-in-out infinite; }
-  @keyframes gl-d { 0% { transform: translate(0,0) } 50% { transform: translate(60px,-28px) } 100% { transform: translate(0,0) } }
-  @media (prefers-reduced-motion: reduce) { .gl-d { animation: none } }
+  .gl-h  { font: 500 40px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; fill: var(--glassmorphism-ink); }
+  .gl-t  { font: 500 25px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; fill: var(--glassmorphism-ink); }
+  .gl-s  { font: 400 19px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; fill: var(--glassmorphism-ink-dim); }
+  .gl-f  { font: 400 18px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; fill: var(--glassmorphism-ink-dim); }
+  .gl-lbl { filter: url(#gl-ink); }
+
+  .gl-bd  { filter: url(#gl-frost); }
+  .gl-bdr { filter: url(#gl-refract); }
+  .gl-scrim { fill: var(--glassmorphism-scrim); opacity: var(--glassmorphism-scrim-a); }
+  .gl-tint  { fill: url(#gl-tint); }
+  .gl-grain { filter: url(#gl-grain); opacity: .14; mix-blend-mode: overlay; }
+  /* Asymmetric on purpose: hot where the key light strikes, cool on the
+     shaded edges, a weak bounce at the far corner. A uniform rim stroke is
+     the single most common tell of fake glass. */
+  .gl-rim  { fill: none; stroke: url(#gl-rim); stroke-width: 1.6; }
+  .gl-rim2 { fill: none; stroke: var(--glassmorphism-edge); stroke-width: .8; opacity: .11; }
+  .gl-bevel { fill: var(--glassmorphism-edge); opacity: .30; }
+  .gl-pk { fill: var(--glassmorphism-packet); }
+
+  /* The field drifts; the panels never move. Moving colour behind the glass
+     is the only way a viewer can tell the blur is a live backdrop sample
+     rather than a baked texture. Symmetric 0/50/100 keyframes, so the state
+     at t=12s is the state at t=0 by arithmetic rather than by parity. */
+  .gl-orbs { animation: gl-drift 12s ease-in-out infinite; }
+  @keyframes gl-drift {
+    0%, 100% { transform: translate(0,0) scale(1) }
+    50%      { transform: translate(-60px,24px) scale(1.1) }
+  }
+
+  .gl-sweep { animation: gl-sheen 12s linear infinite; }
+  @keyframes gl-sheen {
+    0%     { transform: translateX(-760px); opacity: 0 }
+    5.571% { transform: translateX(-741px) }
+    8%     { opacity: .30 }
+    11.14% { transform: translateX(-685px) }
+    16.71% { transform: translateX(-594px) }
+    22%    { opacity: 1 }
+    22.29% { transform: translateX(-474px) }
+    27.86% { transform: translateX(-330px) }
+    33.43% { transform: translateX(-169px) }
+    39%    { transform: translateX(0px) }
+    44.57% { transform: translateX(169px) }
+    50.14% { transform: translateX(330px) }
+    55.71% { transform: translateX(474px) }
+    56%    { opacity: 1 }
+    61.29% { transform: translateX(594px) }
+    66.86% { transform: translateX(685px) }
+    70%    { opacity: .30 }
+    72.43% { transform: translateX(741px) }
+    78%    { transform: translateX(760px); opacity: 0 }
+    100%   { transform: translateX(760px); opacity: 0 }
+  }
+
+  /* 3s divides the 12s loop four times. The pair is staggered by a negative
+     delay, so one hop is in flight per connector without adding loop time. */
+  .gl-p1 { animation: gl-run 3s cubic-bezier(.5,0,.5,1) infinite; }
+  .gl-p2 { animation: gl-run 3s cubic-bezier(.5,0,.5,1) infinite; animation-delay: -1.5s; }
+  @keyframes gl-run {
+    0%   { transform: translateX(0); opacity: 0 }
+    14%  { opacity: 1 }
+    82%  { opacity: 1 }
+    100% { transform: translateX(60px); opacity: 0 }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gl-orbs, .gl-p1, .gl-p2 { animation: none }
+    .gl-sweep { display: none }
+    .gl-pkg   { display: none }
+  }
   .hp-h { font: 400 36px "Helvetica Neue", Arial, sans-serif; fill: var(--holographic-projection-ink); letter-spacing: 5px; }
   .hp-t { font: 500 24px "Helvetica Neue", Arial, sans-serif; fill: var(--holographic-projection-ink); letter-spacing: 2px; }
   .hp-s { font: 400 19px ui-monospace, Menlo, monospace; fill: var(--holographic-projection-muted); }
@@ -1583,53 +1700,107 @@ svg { --bg:#0D1117; --surface:#161B22; --ink:#E6EDF3; --muted:#9FB0C0; --rule:#3
 <clipPath id="clip-glassmorphism"><rect x="40" y="1487" width="550" height="211" rx="6"/></clipPath>
 <g clip-path="url(#clip-glassmorphism)" style="isolation:isolate">
   <g transform="translate(40,1487) scale(0.45833)" data-bg="var(--glassmorphism-ground)">
-    <rect x="0" y="0" width="1200" height="460" fill="var(--glassmorphism-ground)"/>
-    <g filter="url(#gl-field)">
-      <circle class="gl-d" cx="260" cy="180" r="150" fill="var(--glassmorphism-blob1)"/>
-      <circle cx="640" cy="360" r="170" fill="var(--glassmorphism-blob2)"/>
-      <circle class="gl-d" cx="1010" cy="150" r="140" fill="var(--glassmorphism-blob3)"/>
+    <g id="gl-scene">
+      <rect x="0" y="0" width="1200" height="460" fill="url(#gl-base)"/>
+      <g class="gl-orbs" filter="url(#gl-oblur)" style="transform-origin:600px 230px">
+        <circle cx="200" cy="500" r="200" fill="url(#gl-oA)"/>
+        <circle cx="1020" cy="30" r="210" fill="url(#gl-oB)"/>
+        <circle cx="1180" cy="420" r="190" fill="url(#gl-oC)"/>
+        <circle cx="620" cy="286" r="168" fill="url(#gl-oD)"/>
+        <circle cx="860" cy="480" r="160" fill="url(#gl-oE)"/>
+      </g>
     </g>
-    <text class="gl-h" x="80" y="92">Frosted flow</text>
-    <text class="gl-f" x="80" y="126">panels tinted so the type still reads</text>
-    <rect x="80" y="180" width="300" height="150" rx="20" fill="var(--glassmorphism-panel)" opacity=".82" filter="url(#gl-frost)"/>
-    <rect x="80" y="180" width="300" height="150" rx="20" fill="var(--glassmorphism-panel)" opacity=".55"/>
-    <rect class="gl-e" x="80" y="180" width="300" height="150" rx="20"/>
-    <rect x="98" y="198" width="264" height="2" rx="1" fill="var(--glassmorphism-edge)" opacity=".3"/>
-    <text class="gl-f" x="100" y="224">01</text>
-    <rect x="100" y="296" width="260" height="10" rx="5" fill="var(--glassmorphism-edge)" opacity=".22"/>
-    <rect x="450" y="180" width="300" height="150" rx="20" fill="var(--glassmorphism-panel)" opacity=".82" filter="url(#gl-frost)"/>
-    <rect x="450" y="180" width="300" height="150" rx="20" fill="var(--glassmorphism-panel)" opacity=".55"/>
-    <rect class="gl-e" x="450" y="180" width="300" height="150" rx="20"/>
-    <rect x="468" y="198" width="264" height="2" rx="1" fill="var(--glassmorphism-edge)" opacity=".3"/>
-    <text class="gl-f" x="470" y="224">02</text>
-    <rect x="470" y="296" width="260" height="10" rx="5" fill="var(--glassmorphism-edge)" opacity=".22"/>
-    <rect x="820" y="180" width="300" height="150" rx="20" fill="var(--glassmorphism-panel)" opacity=".82" filter="url(#gl-frost)"/>
-    <rect x="820" y="180" width="300" height="150" rx="20" fill="var(--glassmorphism-panel)" opacity=".55"/>
-    <rect class="gl-e" x="820" y="180" width="300" height="150" rx="20"/>
-    <rect x="838" y="198" width="264" height="2" rx="1" fill="var(--glassmorphism-edge)" opacity=".3"/>
-    <text class="gl-f" x="840" y="224">03</text>
-    <rect x="840" y="296" width="260" height="10" rx="5" fill="var(--glassmorphism-edge)" opacity=".22"/>
-    <g data-bg="var(--glassmorphism-panel)">
-      <text class="gl-t" x="230" y="258" text-anchor="middle">Source</text>
-      <text class="gl-s" x="230" y="288" text-anchor="middle">event stream</text>
+
+    <!-- contact shadows, before any glass: without them the panels sit IN the
+         background rather than above it -->
+    <g fill="var(--glassmorphism-scrim)" opacity=".5" filter="url(#gl-cast)">
+      <rect x="94" y="206" width="272" height="134" rx="22"/>
+      <rect x="464" y="206" width="272" height="134" rx="22"/>
+      <rect x="834" y="206" width="272" height="134" rx="22"/>
+      <rect x="100" y="388" width="1000" height="52" rx="24"/>
     </g>
-    <g data-bg="var(--glassmorphism-panel)">
-      <text class="gl-t" x="600" y="258" text-anchor="middle">Transform</text>
-      <text class="gl-s" x="600" y="288" text-anchor="middle">map, filter</text>
+
+    <g clip-path="url(#gl-c1)">
+      <use class="gl-bdr" href="#gl-scene" xlink:href="#gl-scene"/>
+      <rect class="gl-scrim" x="380" y="246" width="70" height="18"/>
+      <rect class="gl-tint" x="380" y="246" width="70" height="18"/>
+      <use class="gl-sweep" href="#gl-pool" xlink:href="#gl-pool"/>
     </g>
-    <g data-bg="var(--glassmorphism-panel)">
-      <text class="gl-t" x="970" y="258" text-anchor="middle">Store</text>
-      <text class="gl-s" x="970" y="288" text-anchor="middle">warehouse</text>
+    <rect class="gl-rim" x="380" y="246" width="70" height="18" rx="9"/>
+    <g clip-path="url(#gl-c2)">
+      <use class="gl-bdr" href="#gl-scene" xlink:href="#gl-scene"/>
+      <rect class="gl-scrim" x="750" y="246" width="70" height="18"/>
+      <rect class="gl-tint" x="750" y="246" width="70" height="18"/>
+      <use class="gl-sweep" href="#gl-pool" xlink:href="#gl-pool"/>
     </g>
-    <rect x="380" y="257" width="70" height="10" rx="5" fill="var(--glassmorphism-edge)" opacity=".5"/>
-    <rect x="750" y="257" width="70" height="10" rx="5" fill="var(--glassmorphism-edge)" opacity=".5"/>
-    <rect x="80" y="366" width="1040" height="62" rx="24" fill="var(--glassmorphism-panel)" opacity=".55"/>
-    <rect class="gl-e" x="80" y="366" width="1040" height="62" rx="24"/>
-    <text class="gl-f" x="106" y="404">two blur tiers: field 34, frost 14</text>
-    <circle cx="1000" cy="397" r="8" fill="var(--glassmorphism-edge)" opacity="0.20"/>
-    <circle cx="1026" cy="397" r="8" fill="var(--glassmorphism-edge)" opacity="0.36"/>
-    <circle cx="1052" cy="397" r="8" fill="var(--glassmorphism-edge)" opacity="0.52"/>
-    <circle cx="1078" cy="397" r="8" fill="var(--glassmorphism-edge)" opacity="0.68"/>
+    <rect class="gl-rim" x="750" y="246" width="70" height="18" rx="9"/>
+
+    <g clip-path="url(#gl-n1)">
+      <use class="gl-bd" href="#gl-scene" xlink:href="#gl-scene"/>
+      <rect class="gl-scrim" x="80" y="180" width="300" height="150"/>
+      <rect class="gl-tint" x="80" y="180" width="300" height="150"/>
+      <use class="gl-sweep" href="#gl-pool" xlink:href="#gl-pool"/>
+      <rect class="gl-grain" x="80" y="180" width="300" height="150"/>
+      <rect class="gl-bevel" x="80" y="180" width="300" height="2.5"/>
+    </g>
+    <rect class="gl-rim" x="80" y="180" width="300" height="150" rx="20"/>
+    <rect class="gl-rim2" x="81.4" y="181.4" width="297.2" height="147.2" rx="18.6"/>
+
+    <g clip-path="url(#gl-n2)">
+      <use class="gl-bd" href="#gl-scene" xlink:href="#gl-scene"/>
+      <rect class="gl-scrim" x="450" y="180" width="300" height="150"/>
+      <rect class="gl-tint" x="450" y="180" width="300" height="150"/>
+      <use class="gl-sweep" href="#gl-pool" xlink:href="#gl-pool"/>
+      <rect class="gl-grain" x="450" y="180" width="300" height="150"/>
+      <rect class="gl-bevel" x="450" y="180" width="300" height="2.5"/>
+    </g>
+    <rect class="gl-rim" x="450" y="180" width="300" height="150" rx="20"/>
+    <rect class="gl-rim2" x="451.4" y="181.4" width="297.2" height="147.2" rx="18.6"/>
+
+    <g clip-path="url(#gl-n3)">
+      <use class="gl-bd" href="#gl-scene" xlink:href="#gl-scene"/>
+      <rect class="gl-scrim" x="820" y="180" width="300" height="150"/>
+      <rect class="gl-tint" x="820" y="180" width="300" height="150"/>
+      <use class="gl-sweep" href="#gl-pool" xlink:href="#gl-pool"/>
+      <rect class="gl-grain" x="820" y="180" width="300" height="150"/>
+      <rect class="gl-bevel" x="820" y="180" width="300" height="2.5"/>
+    </g>
+    <rect class="gl-rim" x="820" y="180" width="300" height="150" rx="20"/>
+    <rect class="gl-rim2" x="821.4" y="181.4" width="297.2" height="147.2" rx="18.6"/>
+
+    <g clip-path="url(#gl-ft)">
+      <use class="gl-bd" href="#gl-scene" xlink:href="#gl-scene"/>
+      <rect class="gl-scrim" x="80" y="366" width="1040" height="62"/>
+      <rect class="gl-tint" x="80" y="366" width="1040" height="62"/>
+      <use class="gl-sweep" href="#gl-pool" xlink:href="#gl-pool"/>
+      <rect class="gl-grain" x="80" y="366" width="1040" height="62"/>
+      <rect class="gl-bevel" x="80" y="366" width="1040" height="2.5"/>
+    </g>
+    <rect class="gl-rim" x="80" y="366" width="1040" height="62" rx="24"/>
+    <rect class="gl-rim2" x="81.4" y="367.4" width="1037.2" height="59.2" rx="22.6"/>
+
+    <g class="gl-lbl">
+      <text class="gl-h" x="80" y="92" data-bg="var(--glassmorphism-ground)">Frosted flow</text>
+      <text class="gl-f" x="80" y="126" data-bg="var(--glassmorphism-ground)">the glass samples what is actually behind it</text>
+    </g>
+
+    <g class="gl-lbl" data-bg="var(--glassmorphism-panel)">
+      <text class="gl-f" x="104" y="216">01</text>
+      <text class="gl-t" x="230" y="262" text-anchor="middle">Source</text>
+      <text class="gl-s" x="230" y="292" text-anchor="middle">event stream</text>
+      <text class="gl-f" x="474" y="216">02</text>
+      <text class="gl-t" x="600" y="262" text-anchor="middle">Transform</text>
+      <text class="gl-s" x="600" y="292" text-anchor="middle">map, filter</text>
+      <text class="gl-f" x="844" y="216">03</text>
+      <text class="gl-t" x="970" y="262" text-anchor="middle">Store</text>
+      <text class="gl-s" x="970" y="292" text-anchor="middle">warehouse</text>
+      <text class="gl-f" x="106" y="404">frost 14 · refract 18 · one light pool across all six surfaces</text>
+    </g>
+
+    <g class="gl-pkg" filter="url(#gl-glow)">
+      <circle class="gl-pk gl-p1" cx="385" cy="255" r="5"/>
+      <circle class="gl-pk gl-p2" cx="755" cy="255" r="5"/>
+    </g>
   </g>
 </g>
 <rect x="40" y="1487" width="550" height="211" rx="6" fill="none" stroke="var(--rule)" stroke-width="1"/>

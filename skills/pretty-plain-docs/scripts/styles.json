@@ -219,15 +219,18 @@
         "aero"
       ],
       "relax": {
-        "bytes_fail": 204800
+        "bytes_fail": 204800,
+        "filter_depth": 3
       },
       "forbid": [],
       "require": {
-        "min_filter_depth": 1,
+        "min_filter_depth": 3,
         "require_filter_all": [
-          "feGaussianBlur"
+          "feGaussianBlur",
+          "feTurbulence",
+          "feDisplacementMap"
         ],
-        "min_elements": 39
+        "min_elements": 71
       }
     },
     "holographic-projection": {

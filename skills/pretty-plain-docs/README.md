@@ -111,7 +111,7 @@ The catalog is the same 31 idioms the siblings ship, minus their motion vocabula
 every style here is defined by geometry, material, palette and type, which is exactly
 the part a still keeps.
 
-<!-- pd:viz name="styles" src=".prettydocs/src/styles/" facts-hash="8030ae33a93fc8fa825bf4aa8be3874f40c371db5298cee91e4f0eb8e2150e8e" src-hash="e5b3e0b15d6efda24fb6286025af1fc5a239fdda5b215401db3d930f43d93897" -->
+<!-- pd:viz name="styles" src=".prettydocs/src/styles/" facts-hash="74fd86e808a9a1de8129a92ea2d13ba730e6fab57a211c45838812ef5dcb33dd" src-hash="783ceeee0d89424f4719409a828bf815e2b8f756b67b28c11179847641d6b868" -->
 <div align="center">
 <img src="docs/assets/styles.svg" alt="A contact sheet of thirty-one static style specimens in alphabetical order, two to a row: bento-grid, blueprint, brushed-metal, claymorphism, codex-leonardo, console-elbow, digital-rain, draughtsman-notebook, editorial, flat-material, glassmorphism, holographic-projection, hud, ide-dark, isometric-3d, lofi-wireframe, maximalist, neo-brutalist, neumorphism, oil-impasto, patent-drawing, pencil-lined-paper, rough-sketch, schematic, skeuomorphic, swiss-minimal, terminal-minimalist, watercolor, whiteboard-marker, wood-grain and y2k-retrofuturist. Every cell is that style's own full-width specimen scaled down, so each carries its real filter chains, grain and lighting — lit impasto relief, displaced wood grain, anisotropic brushed metal, true backdrop blur — rather than a flattened imitation. The final accent-bordered cell reports that all thirty-one were built and gated at their declared filter floors." width="820" />
 </div>
@@ -135,7 +135,7 @@ prompts exactly one question.
 reduced-motion resting values folded onto the base rules, the keyframes and reduce
 blocks deleted, `data-loop-s` flipped to `0`. Geometry, filter chains, palettes and
 type are untouched, and every specimen gates to the same verdict it did while moving.
-The contact sheet does too: 0 errors, 27 warnings, 31 softened. That equivalence is
+The contact sheet does too: 0 errors, 27 warnings, 34 softened. That equivalence is
 the evidence that nothing about a style's fidelity ever depended on it moving.
 
 ### Every style, A to Z

@@ -177,7 +177,7 @@ sibling skill ships, with its motion folded away per `viz-production.md` → The
 animation ban: the reduced-motion resting values moved onto the base rules, the
 keyframes and reduce blocks deleted, `data-loop-s` flipped to `0`. Geometry, filter
 chains, palettes and type are untouched, and the sheet gates to **the same verdict as
-the animated original** — 0 errors, 27 warnings, 31 softened — which is the evidence
+the animated original** — 0 errors, 27 warnings, 34 softened — which is the evidence
 that nothing about a style's fidelity depended on it moving.
 
 **Accepted graphic-contrast warnings.** The sheet gates at **0 errors**, and prints

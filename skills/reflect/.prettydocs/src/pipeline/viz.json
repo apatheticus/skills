@@ -14,14 +14,14 @@
     "Phase 5 delivers the report with the top recommendations and anything the run had to skip"
   ],
   "facts_hash": "8862876d778e86f3577ab83da43ae01334086acdd480d717ba6628520f14e7e3",
-  "src_hash": "9e3ee86b3af6259a8cacaf8a31d749696beee21dc22b23da2588fd22550224fd",
-  "design_hash": "2e74977d08eae25bfa6048bb496561af9156071db393932c791776e55b7bfc26",
+  "src_hash": "e4fb539ecb169c18b1ae7853bc02f931010123d23e2ecc525c5f773dda13b77b",
+  "design_hash": "317d66ef1fa69bf59ee20c0a026c08680b48fa08bdc416a20728bc55ab1080d3",
   "design_source_path": "reference/design-system/tokens/colors.css",
   "design_source_hash": "3fdb2e89e30e4855ff1192036211d3b541a28217110d22077fe4dd20823cf7d4",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 9080
+    "bytes": 13589
   },
   "relaxed": []
 }

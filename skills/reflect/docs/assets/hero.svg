@@ -1,20 +1,39 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" width="1200" height="660"
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 1200 660" width="1200" height="660"
      role="img" data-loop-s="12" data-bg="background">
   <title>reflect — sessions already on disk become signals, clusters, then verdicts</title>
-  <desc>Two frosted panes over a drifting field of brand-coloured blobs. The upper pane
-carries the wordmark and the promise; the lower one frames the in-window slice of the
-corpus — the transcripts already under ~/.claude/projects, with the running session
-excluded, every one scored by triage before an agent runs. Below, three cards in order:
-extract pulls signals in four families, cluster merges and dedupes them across sessions,
-and the third card is dark rather than light because it is the one that states numbers —
-a verdict needs three distinct sessions for a new skill, two for an automation or a
-fix.</desc>
+  <desc>Two frosted panes over a drifting field of brand-coloured blobs. Each pane samples
+and blurs the real ground behind it, then layers a scrim, a tint ramp, a parked key light, a
+frost grain and an asymmetric rim, so it reads as a sheet of glass rather than a white
+rectangle. The upper pane carries the wordmark and the promise; the lower one frames the
+in-window slice of the corpus — the transcripts already under ~/.claude/projects, with the
+running session excluded, every one scored by triage before an agent runs. Those sessions sit
+on a thin glass rail that refracts rather than blurs, which is what makes it read as a solid
+lens laid over the pane. Below, three cards in order: extract pulls signals in four families,
+cluster merges and dedupes them across sessions, and the third card is dark rather than light
+because it is the one that states numbers — a verdict needs three distinct sessions for a new
+skill, two for an automation or a fix.</desc>
 
   <defs>
     <filter id="field" x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="34"/>
     </filter>
     <filter id="frost" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <!-- frost on the flat panes, refract on the thin rail. Displacement over a large
+         flat area reads as a smear; on a thin or curved surface it is the pass that
+         makes the thing read as solid glass rather than a hole in the pane. -->
+    <filter id="refract" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="5" result="t"/>
+      <feDisplacementMap in="b" in2="t" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="cast" x="-60%" y="-60%" width="220%" height="220%">
       <feGaussianBlur stdDeviation="14"/>
     </filter>
     <filter id="lift" x="-20%" y="-25%" width="140%" height="150%">
@@ -35,25 +54,50 @@ fix.</desc>
       <stop offset="0.5" stop-color="var(--brand)" stop-opacity=".22"/>
       <stop offset="1"   stop-color="var(--brand)" stop-opacity=".42"/>
     </linearGradient>
+    <linearGradient id="tint" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="var(--glass)" stop-opacity=".46"/>
+      <stop offset="1" stop-color="var(--glass)" stop-opacity=".22"/>
+    </linearGradient>
+    <!-- One key light for the whole board, parked rather than travelling: the catalog
+         style sweeps it, but this system's motion rule allows two ideas per visual and
+         the drift plus the marker pulse already spend both. -->
+    <radialGradient id="sheen">
+      <stop offset="0"   stop-color="var(--glass)" stop-opacity=".34"/>
+      <stop offset=".42" stop-color="var(--glass)" stop-opacity=".17"/>
+      <stop offset=".72" stop-color="var(--glass)" stop-opacity=".05"/>
+      <stop offset="1"   stop-color="var(--glass)" stop-opacity="0"/>
+    </radialGradient>
+    <g id="pool">
+      <ellipse cx="600" cy="222" rx="150" ry="240" fill="url(#sheen)" transform="rotate(-20 600 222)"/>
+    </g>
     <linearGradient id="ncard" x1="0" y1="0" x2="0.35" y2="1">
       <stop offset="0" stop-color="var(--navy-raised)"/>
       <stop offset="1" stop-color="var(--navy)"/>
     </linearGradient>
     <clipPath id="pa"><rect x="64" y="48"  width="1072" height="200" rx="24"/></clipPath>
     <clipPath id="pb"><rect x="64" y="276" width="1072" height="140" rx="24"/></clipPath>
+    <clipPath id="rail"><rect x="88" y="344" width="1024" height="28" rx="14"/></clipPath>
   </defs>
 
   <style>
-    svg { --background:#F4F6FE; --glass:#FFFFFF; --pane:#DBDCFB; --ink:#12142B;
+    svg { --background:#F4F6FE; --glass:#FFFFFF; --pane:#CDCEF8; --ink:#12142B;
           --body:#4C5273; --navy:#23265E; --navy-raised:#2E3277; --navy-ink:#F6F7FC;
           --navy-dim:#BEC2D6; --brand:#5B5FEF; --brand-strong:#4A4AE8;
           --brand-soft:#A3A7FA; --blue:#3B82F6; --success:#22B07D; --warning:#F59E0B;
           --danger:#EF4458; }
 
-    .bg   { fill: var(--background); }
-    .gl   { fill: var(--glass); }
-    .ed   { fill: none; stroke: url(#edge); stroke-width: 1.6; }
-    .card { fill: var(--glass); filter: url(#lift); }
+    .bg    { fill: var(--background); }
+    .gl    { fill: var(--glass); }
+    .tint  { fill: url(#tint); }
+    .grain { filter: url(#grain); opacity: .10; mix-blend-mode: overlay; }
+    .bevel { fill: var(--glass); opacity: .55; }
+    .ed    { fill: none; stroke: url(#edge); stroke-width: 1.6; }
+    /* The inner rim reads as glass wall thickness. The catalog draws it white; on a
+       near-white pane over a light page that is invisible, so it runs brand the same
+       way the outer edge ramp does. */
+    .ed2   { fill: none; stroke: var(--brand); stroke-width: .8; opacity: .16; }
+    .cast  { fill: var(--navy); opacity: .13; filter: url(#cast); }
+    .card  { fill: var(--glass); filter: url(#lift); }
 
     .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
     .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
@@ -90,14 +134,23 @@ fix.</desc>
   </style>
 
   <rect class="bg" x="0" y="0" width="1200" height="660"/>
-  <g class="dr" filter="url(#field)"><use href="#ground"/></g>
+  <g class="dr" filter="url(#field)"><use href="#ground" xlink:href="#ground"/></g>
+
+  <!-- contact shadows go down before any glass; without them the panes sit IN the
+       field rather than above it -->
+  <rect class="cast" x="80" y="70"  width="1040" height="186" rx="26"/>
+  <rect class="cast" x="80" y="298" width="1040" height="126" rx="26"/>
 
   <g clip-path="url(#pa)">
-    <g class="dr" filter="url(#frost)"><use href="#ground"/></g>
-    <rect class="gl" x="64" y="48" width="1072" height="200" rx="24" opacity=".60"/>
-    <rect class="gl" x="64" y="48" width="1072" height="200" rx="24" opacity=".45"/>
+    <g class="dr" filter="url(#frost)"><use href="#ground" xlink:href="#ground"/></g>
+    <rect class="gl"    x="64" y="48" width="1072" height="200" rx="24" opacity=".60"/>
+    <rect class="tint"  x="64" y="48" width="1072" height="200" rx="24"/>
+    <use href="#pool" xlink:href="#pool" transform="translate(-240,-90)"/>
+    <rect class="grain" x="64" y="48" width="1072" height="200" rx="24"/>
+    <rect class="bevel" x="64" y="48" width="1072" height="2.5"/>
   </g>
-  <rect class="ed" x="64" y="48" width="1072" height="200" rx="24"/>
+  <rect class="ed"  x="64"   y="48"   width="1072"   height="200"   rx="24"/>
+  <rect class="ed2" x="65.4" y="49.4" width="1069.2" height="197.2" rx="22.6"/>
   <g data-bg="pane">
     <text class="sans kick" x="88" y="96"  data-role="metadata">YOUR OWN SESSIONS, READ BACK</text>
     <text class="sans h"    x="88" y="156" data-role="hero">reflect</text>
@@ -106,16 +159,30 @@ fix.</desc>
   </g>
 
   <g clip-path="url(#pb)">
-    <g class="dr" filter="url(#frost)"><use href="#ground"/></g>
-    <rect class="gl" x="64" y="276" width="1072" height="140" rx="24" opacity=".60"/>
-    <rect class="gl" x="64" y="276" width="1072" height="140" rx="24" opacity=".45"/>
+    <g class="dr" filter="url(#frost)"><use href="#ground" xlink:href="#ground"/></g>
+    <rect class="gl"    x="64" y="276" width="1072" height="140" rx="24" opacity=".60"/>
+    <rect class="tint"  x="64" y="276" width="1072" height="140" rx="24"/>
+    <use href="#pool" xlink:href="#pool" transform="translate(-240,-90)"/>
+    <rect class="grain" x="64" y="276" width="1072" height="140" rx="24"/>
+    <rect class="bevel" x="64" y="276" width="1072" height="2.5"/>
   </g>
-  <rect class="ed" x="64" y="276" width="1072" height="140" rx="24"/>
+  <rect class="ed"  x="64"   y="276"   width="1072"   height="140"   rx="24"/>
+  <rect class="ed2" x="65.4" y="277.4" width="1069.2" height="137.2" rx="22.6"/>
   <g data-bg="pane">
     <text class="mono path" x="88"   y="314">~/.claude/projects/ · in-window transcripts</text>
     <text class="sans note" x="1112" y="314" text-anchor="end" data-role="metadata">triage scores every one before an agent runs</text>
     <text class="sans note" x="88"   y="396" data-role="metadata">the session running this pass is excluded from its own corpus</text>
   </g>
+
+  <!-- the corpus rail: a thicker piece of glass laid over the pane, so it refracts the
+       field rather than blurring it -->
+  <g clip-path="url(#rail)">
+    <g class="dr" filter="url(#refract)"><use href="#ground" xlink:href="#ground"/></g>
+    <rect class="gl"   x="88" y="344" width="1024" height="28" rx="14" opacity=".52"/>
+    <rect class="tint" x="88" y="344" width="1024" height="28" rx="14"/>
+    <use href="#pool" xlink:href="#pool" transform="translate(-240,-90)"/>
+  </g>
+  <rect class="ed" x="88" y="344" width="1024" height="28" rx="14"/>
   <circle class="cold" cx="100"  cy="358" r="7"/>
   <circle class="cold" cx="142"  cy="358" r="7"/>
   <circle class="hot"  cx="184"  cy="358" r="7"/>
