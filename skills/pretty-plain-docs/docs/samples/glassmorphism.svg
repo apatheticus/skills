@@ -1,72 +1,228 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 460" width="1200" height="460" role="img" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
-<title>Glassmorphism — Source, Transform, Store</title>
-<desc>Frosted panels over drifting colour blobs on deep navy. The field blurs at 34 and the frost at 14, and each panel carries a tint so the type keeps its contrast.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1200 460" width="1200" height="460" role="img" aria-labelledby="gl-ttl gl-desc" data-loop-s="0" data-bg="var(--ground)" data-specimen="true">
+<title id="gl-ttl">Glassmorphism — Source, Transform, Store</title>
+<desc id="gl-desc">Three frosted glass panels floating over a drifting field of coloured light on a deep desaturated wash. Each panel samples and blurs the real background behind it, darkens that sample with a scrim so the white labels stay legible, and carries a frost grain, an asymmetric rim light and a contact shadow. The thin connector bars refract rather than blur, behaving as lenses. One light pool lights every surface from the same direction at the same instant, and a chevron on each connector carries the direction of data flow.</desc>
+<style>
+/* <![CDATA[ */
+/* ======================= PARAMETER BLOCK =======================
+   Tunable surface. Everything else derives from these.
+
+     --scrim / --scrim-a   dark wash under the tint; this is what buys
+                           text contrast, and it goes down BEFORE the tint
+     --edge                rim and tint light colour
+     --ink / --ink-dim     label and sublabel colour
+     --panel               the MEASURED composite a label actually sits on
+                           (scrim over the blurred backdrop at its lightest
+                           point across the whole drift) — see the style spec
+     --ground              the measured lightest bare-field pixel under the
+                           header text, same method
+
+   Filter attributes are not CSS-settable. Edit them in the defs block:
+     gl-frost    feGaussianBlur stdDeviation   14     backdrop blur
+     gl-refract  feDisplacementMap scale       18     connector lens distortion
+     gl-refract  feTurbulence baseFrequency    .018   distortion wavelength
+     gl-grain    feTurbulence baseFrequency    .8     frost particle size
+
+   The sheen is ONE light pool referenced by every surface, so all six are
+   lit from the same direction at the same instant. It is a MATERIAL pass,
+   not a motion one — a glass surface with no specular highlight reads as
+   matte — so the static keeps it, parked off-centre by a transform
+   attribute on each use so the key light is asymmetric.
+   ============================================================ */
+svg { --ground:#230E41; --wash-a:#150A2C; --wash-b:#2B0F4C; --wash-c:#0A1032;
+      --blob1:#FF2D8A; --blob2:#22D3EE; --blob3:#FFB020; --blob4:#7C5CFF;
+      --blob5:#34D399; --scrim:#080514; --scrim-a:.58; --edge:#FFFFFF;
+      --ink:#FFFFFF; --ink-dim:#E6EAFF; --packet:#EAF4FF; --panel:#5D546F; }
+
+  .gl-h  { font: 500 40px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; fill: var(--ink); }
+  .gl-t  { font: 500 25px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; fill: var(--ink); }
+  .gl-s  { font: 400 19px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; fill: var(--ink-dim); }
+  .gl-f  { font: 400 18px system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", sans-serif; fill: var(--ink-dim); }
+  .gl-lbl { filter: url(#gl-ink); }
+
+  .gl-bd  { filter: url(#gl-frost); }
+  .gl-bdr { filter: url(#gl-refract); }
+  .gl-scrim { fill: var(--scrim); opacity: var(--scrim-a); }
+  .gl-tint  { fill: url(#gl-tint); }
+  .gl-grain { filter: url(#gl-grain); opacity: .14; mix-blend-mode: overlay; }
+  /* Asymmetric on purpose: hot where the key light strikes, cool on the
+     shaded edges, a weak bounce at the far corner. A uniform rim stroke is
+     the single most common tell of fake glass. */
+  .gl-rim  { fill: none; stroke: url(#gl-rim); stroke-width: 1.6; }
+  .gl-rim2 { fill: none; stroke: var(--edge); stroke-width: .8; opacity: .11; }
+  .gl-bevel { fill: var(--edge); opacity: .30; }
+  .gl-pk { fill: var(--packet); }
+
+/* ]]> */
+</style>
 <defs>
-  <filter id="gl-field" data-style="glassmorphism" x="-25%" y="-25%" width="150%" height="150%">
-    <feGaussianBlur stdDeviation="34"/>
+  <linearGradient id="gl-base" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="var(--wash-a)"/>
+    <stop offset=".55" stop-color="var(--wash-b)"/>
+    <stop offset="1" stop-color="var(--wash-c)"/>
+  </linearGradient>
+  <radialGradient id="gl-oA"><stop offset="0" stop-color="var(--blob1)" stop-opacity=".95"/><stop offset="1" stop-color="var(--blob1)" stop-opacity="0"/></radialGradient>
+  <radialGradient id="gl-oB"><stop offset="0" stop-color="var(--blob2)" stop-opacity=".9"/><stop offset="1" stop-color="var(--blob2)" stop-opacity="0"/></radialGradient>
+  <radialGradient id="gl-oC"><stop offset="0" stop-color="var(--blob3)" stop-opacity=".85"/><stop offset="1" stop-color="var(--blob3)" stop-opacity="0"/></radialGradient>
+  <radialGradient id="gl-oD"><stop offset="0" stop-color="var(--blob4)" stop-opacity=".72"/><stop offset="1" stop-color="var(--blob4)" stop-opacity="0"/></radialGradient>
+  <radialGradient id="gl-oE"><stop offset="0" stop-color="var(--blob5)" stop-opacity=".7"/><stop offset="1" stop-color="var(--blob5)" stop-opacity="0"/></radialGradient>
+  <linearGradient id="gl-tint" x1="0" y1="0" x2=".35" y2="1">
+    <stop offset="0" stop-color="var(--edge)" stop-opacity=".20"/>
+    <stop offset="1" stop-color="var(--edge)" stop-opacity=".05"/>
+  </linearGradient>
+  <linearGradient id="gl-rim" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="var(--edge)" stop-opacity=".90"/>
+    <stop offset=".38" stop-color="var(--edge)" stop-opacity=".16"/>
+    <stop offset=".68" stop-color="var(--edge)" stop-opacity=".06"/>
+    <stop offset="1" stop-color="var(--edge)" stop-opacity=".48"/>
+  </linearGradient>
+  <radialGradient id="gl-sheen">
+    <stop offset="0" stop-color="var(--edge)" stop-opacity=".20"/>
+    <stop offset=".22" stop-color="var(--edge)" stop-opacity=".16"/>
+    <stop offset=".42" stop-color="var(--edge)" stop-opacity=".10"/>
+    <stop offset=".62" stop-color="var(--edge)" stop-opacity=".05"/>
+    <stop offset=".82" stop-color="var(--edge)" stop-opacity=".015"/>
+    <stop offset="1" stop-color="var(--edge)" stop-opacity="0"/>
+  </radialGradient>
+  <g id="gl-pool">
+    <ellipse cx="600" cy="222" rx="140" ry="230" fill="url(#gl-sheen)" transform="rotate(-20 600 222)"/>
+  </g>
+
+  <filter id="gl-oblur" data-style="glassmorphism" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="38"/>
   </filter>
-  <filter id="gl-frost" data-style="glassmorphism" x="-25%" y="-25%" width="150%" height="150%">
+  <filter id="gl-frost" data-style="glassmorphism" x="-40%" y="-40%" width="180%" height="180%">
     <feGaussianBlur stdDeviation="14"/>
   </filter>
-  <linearGradient id="gl-edge" x1="0" y1="0" x2="1" y2="1">
-    <stop offset="0" stop-color="var(--edge)" stop-opacity=".85"/>
-    <stop offset="0.5" stop-color="var(--edge)" stop-opacity=".18"/>
-    <stop offset="1" stop-color="var(--edge)" stop-opacity=".6"/>
-  </linearGradient>
+  <!-- frost on flat panes, refract on the thin bars. Displacement over a large
+       flat area reads as a smear; on a small or curved surface it is what makes
+       the thing read as solid glass rather than a hole. -->
+  <filter id="gl-refract" data-style="glassmorphism" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="4" result="b"/>
+    <feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="5" result="t"/>
+    <feDisplacementMap in="b" in2="t" scale="18" xChannelSelector="R" yChannelSelector="G"/>
+  </filter>
+  <filter id="gl-grain" data-style="glassmorphism" x="0" y="0" width="100%" height="100%">
+    <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="4" stitchTiles="stitch"/>
+    <feColorMatrix type="saturate" values="0"/>
+  </filter>
+  <filter id="gl-ink" data-style="glassmorphism" x="-30%" y="-40%" width="160%" height="180%">
+    <feDropShadow dx="0" dy="1" stdDeviation="1.6" flood-color="var(--wash-c)" flood-opacity=".8"/>
+  </filter>
+  <filter id="gl-cast" data-style="glassmorphism" x="-60%" y="-60%" width="220%" height="220%">
+    <feGaussianBlur stdDeviation="16"/>
+  </filter>
+  <filter id="gl-glow" data-style="glassmorphism" x="-200%" y="-200%" width="500%" height="500%">
+    <feGaussianBlur stdDeviation="3" result="g"/>
+    <feMerge><feMergeNode in="g"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+
+  <clipPath id="gl-n1"><rect x="80" y="180" width="300" height="150" rx="20"/></clipPath>
+  <clipPath id="gl-n2"><rect x="450" y="180" width="300" height="150" rx="20"/></clipPath>
+  <clipPath id="gl-n3"><rect x="820" y="180" width="300" height="150" rx="20"/></clipPath>
+  <clipPath id="gl-c1"><rect x="380" y="246" width="70" height="18" rx="9"/></clipPath>
+  <clipPath id="gl-c2"><rect x="750" y="246" width="70" height="18" rx="9"/></clipPath>
+  <clipPath id="gl-ft"><rect x="80" y="366" width="1040" height="62" rx="24"/></clipPath>
 </defs>
-<style>
-svg { --ground:#1B2140; --blob1:#7C4DFF; --blob2:#00BFA5; --blob3:#FF4081; --ink:#FFFFFF; --muted:#E6EAFF; --edge:#FFFFFF; --panel:#2A3160; }
-  .gl-h { font: 600 40px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); }
-  .gl-t { font: 600 25px "Helvetica Neue", Arial, sans-serif; fill: var(--ink); }
-  .gl-s { font: 400 19px "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
-  .gl-f { font: 400 18px "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }
-  .gl-e { fill: none; stroke: url(#gl-edge); stroke-width: 1.6; }
-</style>
-<rect x="0" y="0" width="1200" height="460" fill="var(--ground)"/>
-<g filter="url(#gl-field)">
-  <circle class="gl-d" cx="260" cy="180" r="150" fill="var(--blob1)"/>
-  <circle cx="640" cy="360" r="170" fill="var(--blob2)"/>
-  <circle class="gl-d" cx="1010" cy="150" r="140" fill="var(--blob3)"/>
+
+<g id="gl-scene">
+  <rect x="0" y="0" width="1200" height="460" fill="url(#gl-base)"/>
+  <g filter="url(#gl-oblur)">
+    <circle cx="200" cy="500" r="200" fill="url(#gl-oA)"/>
+    <circle cx="1020" cy="30" r="210" fill="url(#gl-oB)"/>
+    <circle cx="1180" cy="420" r="190" fill="url(#gl-oC)"/>
+    <circle cx="620" cy="286" r="168" fill="url(#gl-oD)"/>
+    <circle cx="860" cy="480" r="160" fill="url(#gl-oE)"/>
+  </g>
 </g>
-<text class="gl-h" x="80" y="92">Frosted flow</text>
-<text class="gl-f" x="80" y="126">panels tinted so the type still reads</text>
-<rect x="80" y="180" width="300" height="150" rx="20" fill="var(--panel)" opacity=".82" filter="url(#gl-frost)"/>
-<rect x="80" y="180" width="300" height="150" rx="20" fill="var(--panel)" opacity=".55"/>
-<rect class="gl-e" x="80" y="180" width="300" height="150" rx="20"/>
-<rect x="98" y="198" width="264" height="2" rx="1" fill="var(--edge)" opacity=".3"/>
-<text class="gl-f" x="100" y="224">01</text>
-<rect x="100" y="296" width="260" height="10" rx="5" fill="var(--edge)" opacity=".22"/>
-<rect x="450" y="180" width="300" height="150" rx="20" fill="var(--panel)" opacity=".82" filter="url(#gl-frost)"/>
-<rect x="450" y="180" width="300" height="150" rx="20" fill="var(--panel)" opacity=".55"/>
-<rect class="gl-e" x="450" y="180" width="300" height="150" rx="20"/>
-<rect x="468" y="198" width="264" height="2" rx="1" fill="var(--edge)" opacity=".3"/>
-<text class="gl-f" x="470" y="224">02</text>
-<rect x="470" y="296" width="260" height="10" rx="5" fill="var(--edge)" opacity=".22"/>
-<rect x="820" y="180" width="300" height="150" rx="20" fill="var(--panel)" opacity=".82" filter="url(#gl-frost)"/>
-<rect x="820" y="180" width="300" height="150" rx="20" fill="var(--panel)" opacity=".55"/>
-<rect class="gl-e" x="820" y="180" width="300" height="150" rx="20"/>
-<rect x="838" y="198" width="264" height="2" rx="1" fill="var(--edge)" opacity=".3"/>
-<text class="gl-f" x="840" y="224">03</text>
-<rect x="840" y="296" width="260" height="10" rx="5" fill="var(--edge)" opacity=".22"/>
-<g data-bg="var(--panel)">
-  <text class="gl-t" x="230" y="258" text-anchor="middle">Source</text>
-  <text class="gl-s" x="230" y="288" text-anchor="middle">event stream</text>
+
+<!-- contact shadows, before any glass: without them the panels sit IN the
+     background rather than above it -->
+<g fill="var(--scrim)" opacity=".5" filter="url(#gl-cast)">
+  <rect x="94" y="206" width="272" height="134" rx="22"/>
+  <rect x="464" y="206" width="272" height="134" rx="22"/>
+  <rect x="834" y="206" width="272" height="134" rx="22"/>
+  <rect x="100" y="388" width="1000" height="52" rx="24"/>
 </g>
-<g data-bg="var(--panel)">
-  <text class="gl-t" x="600" y="258" text-anchor="middle">Transform</text>
-  <text class="gl-s" x="600" y="288" text-anchor="middle">map, filter</text>
+
+<g clip-path="url(#gl-c1)">
+  <use class="gl-bdr" href="#gl-scene" xlink:href="#gl-scene"/>
+  <rect class="gl-scrim" x="380" y="246" width="70" height="18"/>
+  <rect class="gl-tint" x="380" y="246" width="70" height="18"/>
+  <use href="#gl-pool" xlink:href="#gl-pool" transform="translate(-170,0)"/>
 </g>
-<g data-bg="var(--panel)">
-  <text class="gl-t" x="970" y="258" text-anchor="middle">Store</text>
-  <text class="gl-s" x="970" y="288" text-anchor="middle">warehouse</text>
+<rect class="gl-rim" x="380" y="246" width="70" height="18" rx="9"/>
+<g clip-path="url(#gl-c2)">
+  <use class="gl-bdr" href="#gl-scene" xlink:href="#gl-scene"/>
+  <rect class="gl-scrim" x="750" y="246" width="70" height="18"/>
+  <rect class="gl-tint" x="750" y="246" width="70" height="18"/>
+  <use href="#gl-pool" xlink:href="#gl-pool" transform="translate(-170,0)"/>
 </g>
-<rect x="380" y="257" width="70" height="10" rx="5" fill="var(--edge)" opacity=".5"/>
-<rect x="750" y="257" width="70" height="10" rx="5" fill="var(--edge)" opacity=".5"/>
-<rect x="80" y="366" width="1040" height="62" rx="24" fill="var(--panel)" opacity=".55"/>
-<rect class="gl-e" x="80" y="366" width="1040" height="62" rx="24"/>
-<text class="gl-f" x="106" y="404">two blur tiers: field 34, frost 14</text>
-<circle cx="1000" cy="397" r="8" fill="var(--edge)" opacity="0.20"/>
-<circle cx="1026" cy="397" r="8" fill="var(--edge)" opacity="0.36"/>
-<circle cx="1052" cy="397" r="8" fill="var(--edge)" opacity="0.52"/>
-<circle cx="1078" cy="397" r="8" fill="var(--edge)" opacity="0.68"/>
+<rect class="gl-rim" x="750" y="246" width="70" height="18" rx="9"/>
+
+<g clip-path="url(#gl-n1)">
+  <use class="gl-bd" href="#gl-scene" xlink:href="#gl-scene"/>
+  <rect class="gl-scrim" x="80" y="180" width="300" height="150"/>
+  <rect class="gl-tint" x="80" y="180" width="300" height="150"/>
+  <use href="#gl-pool" xlink:href="#gl-pool" transform="translate(-170,0)"/>
+  <rect class="gl-grain" x="80" y="180" width="300" height="150"/>
+  <rect class="gl-bevel" x="80" y="180" width="300" height="2.5"/>
+</g>
+<rect class="gl-rim" x="80" y="180" width="300" height="150" rx="20"/>
+<rect class="gl-rim2" x="81.4" y="181.4" width="297.2" height="147.2" rx="18.6"/>
+
+<g clip-path="url(#gl-n2)">
+  <use class="gl-bd" href="#gl-scene" xlink:href="#gl-scene"/>
+  <rect class="gl-scrim" x="450" y="180" width="300" height="150"/>
+  <rect class="gl-tint" x="450" y="180" width="300" height="150"/>
+  <use href="#gl-pool" xlink:href="#gl-pool" transform="translate(-170,0)"/>
+  <rect class="gl-grain" x="450" y="180" width="300" height="150"/>
+  <rect class="gl-bevel" x="450" y="180" width="300" height="2.5"/>
+</g>
+<rect class="gl-rim" x="450" y="180" width="300" height="150" rx="20"/>
+<rect class="gl-rim2" x="451.4" y="181.4" width="297.2" height="147.2" rx="18.6"/>
+
+<g clip-path="url(#gl-n3)">
+  <use class="gl-bd" href="#gl-scene" xlink:href="#gl-scene"/>
+  <rect class="gl-scrim" x="820" y="180" width="300" height="150"/>
+  <rect class="gl-tint" x="820" y="180" width="300" height="150"/>
+  <use href="#gl-pool" xlink:href="#gl-pool" transform="translate(-170,0)"/>
+  <rect class="gl-grain" x="820" y="180" width="300" height="150"/>
+  <rect class="gl-bevel" x="820" y="180" width="300" height="2.5"/>
+</g>
+<rect class="gl-rim" x="820" y="180" width="300" height="150" rx="20"/>
+<rect class="gl-rim2" x="821.4" y="181.4" width="297.2" height="147.2" rx="18.6"/>
+
+<g clip-path="url(#gl-ft)">
+  <use class="gl-bd" href="#gl-scene" xlink:href="#gl-scene"/>
+  <rect class="gl-scrim" x="80" y="366" width="1040" height="62"/>
+  <rect class="gl-tint" x="80" y="366" width="1040" height="62"/>
+  <use href="#gl-pool" xlink:href="#gl-pool" transform="translate(-170,0)"/>
+  <rect class="gl-grain" x="80" y="366" width="1040" height="62"/>
+  <rect class="gl-bevel" x="80" y="366" width="1040" height="2.5"/>
+</g>
+<rect class="gl-rim" x="80" y="366" width="1040" height="62" rx="24"/>
+<rect class="gl-rim2" x="81.4" y="367.4" width="1037.2" height="59.2" rx="22.6"/>
+
+<g class="gl-lbl">
+  <text class="gl-h" x="80" y="92" data-bg="var(--ground)">Frosted flow</text>
+  <text class="gl-f" x="80" y="126" data-bg="var(--ground)">the glass samples what is actually behind it</text>
+</g>
+
+<g class="gl-lbl" data-bg="var(--panel)">
+  <text class="gl-f" x="104" y="216">01</text>
+  <text class="gl-t" x="230" y="262" text-anchor="middle">Source</text>
+  <text class="gl-s" x="230" y="292" text-anchor="middle">event stream</text>
+  <text class="gl-f" x="474" y="216">02</text>
+  <text class="gl-t" x="600" y="262" text-anchor="middle">Transform</text>
+  <text class="gl-s" x="600" y="292" text-anchor="middle">map, filter</text>
+  <text class="gl-f" x="844" y="216">03</text>
+  <text class="gl-t" x="970" y="262" text-anchor="middle">Store</text>
+  <text class="gl-s" x="970" y="292" text-anchor="middle">warehouse</text>
+  <text class="gl-f" x="106" y="404">frost 14 · refract 18 · one light pool across all six surfaces</text>
+</g>
+
+<g filter="url(#gl-glow)">
+  <polygon class="gl-pk" points="410,248 421,255 410,262"/>
+  <polygon class="gl-pk" points="780,248 791,255 780,262"/>
+</g>
 </svg>

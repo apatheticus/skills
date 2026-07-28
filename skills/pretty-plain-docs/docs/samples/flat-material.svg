@@ -3,14 +3,14 @@
 <desc>Flat cards on a light ground at two elevations, a coloured app bar, per-card accent rules and progress tracks, with a ripple expanding from the middle of the flow.</desc>
 <defs>
   <filter id="fm-e1" data-style="flat-material" x="-30%" y="-30%" width="160%" height="160%">
-    <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="#000000" flood-opacity=".24"/>
+    <feDropShadow dx="0" dy="2" stdDeviation="2" flood-color="var(--shadow)" flood-opacity=".24"/>
   </filter>
   <filter id="fm-e4" data-style="flat-material" x="-30%" y="-30%" width="160%" height="160%">
-    <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="#000000" flood-opacity=".26"/>
+    <feDropShadow dx="0" dy="7" stdDeviation="7" flood-color="var(--shadow)" flood-opacity=".26"/>
   </filter>
 </defs>
 <style>
-svg { --ground:#F5F5F5; --surface:#FFFFFF; --ink:#1C1C1C; --muted:#4A4A4A; --primary:#1565C0; --primarydk:#0D47A1; --amber:#8A6100; --teal:#00695C; --ripple:#90CAF9; }
+svg { --shadow:#000000; --ground:#F5F5F5; --surface:#FFFFFF; --ink:#1C1C1C; --muted:#4A4A4A; --primary:#1565C0; --primarydk:#0D47A1; --amber:#8A6100; --teal:#00695C; --ripple:#90CAF9; }
   .fm-h { font: 500 38px Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--ink); }
   .fm-t { font: 500 25px Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--ink); }
   .fm-s { font: 400 19px Roboto, "Helvetica Neue", Arial, sans-serif; fill: var(--muted); }

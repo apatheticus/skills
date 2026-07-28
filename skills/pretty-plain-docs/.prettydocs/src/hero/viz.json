@@ -5,7 +5,7 @@
   "producer": "pretty-plain-docs",
   "style": "schematic",
   "facts": [
-    "python3 is the only requirement — no renderer, no CLI, no network dependency",
+    "python3 is the only requirement \u2014 no renderer, no CLI, no network dependency",
     "The committed .svg is both the asset and its own source; there is no render step between authoring and committing",
     "The style catalog holds 31 named idioms, one resolved per repo",
     "svg_check.py applies six check classes to every visual: structural, legibility, system, style, fidelity and size",
@@ -14,7 +14,7 @@
   ],
   "facts_hash": "f62e4a3f664d1e9ce2546b9bc5f7dc06ea2e43ce3ef69143d91274457dc54c5d",
   "src_hash": "383558ae88daf3cedebc2c3017dcb94e47e39378eb61fb9b34c41101e980464d",
-  "design_hash": "0147a082fb48e9fc451163e1c551395fde5b14ee7f8fbea77bce4f80599f08d7",
+  "design_hash": "4198cfe88edff60dfb760b071150f0f126feefa3f79cad296227f0b9096b5574",
   "svg": {
     "loop_s": 0,
     "width": 1200,

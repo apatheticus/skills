@@ -43,9 +43,9 @@ look like the report the skill hands back.
 | --- | --- | --- |
 | background   | `#F4F6FE` | the light page ground; this system has no dark page theme |
 | glass        | `#FFFFFF` | the frosted pane, and the base of every edge gradient |
-| pane         | `#DBDCFB` | **computed gap-fill** — the pane's worst-case rendered ground, see below |
+| pane         | `#CDCEF8` | **computed gap-fill** — the pane's worst-case rendered ground, see below |
 | ink          | `#12142B` | primary text; 18.09:1 on glass, 16.77:1 on background |
-| body         | `#4C5273` | secondary text and captions; 7.60:1 on glass, 6.85:1 on pane |
+| body         | `#4C5273` | secondary text and captions; 7.60:1 on glass, 4.99:1 on pane |
 | navy         | `#23265E` | the dense-data card — a card surface, never a page ground |
 | navy-raised  | `#2E3277` | the lighter stop of the navy card, and its contrast ground |
 | navy-ink     | `#F6F7FC` | text on navy; 10.67:1 against navy-raised |
@@ -64,7 +64,7 @@ The mapping, product token → doc role:
 | --- | --- | --- |
 | `--surface-page` | `#F4F6FE` | background |
 | `--surface-card` / `--border-glass` | `#FFFFFF` | glass |
-| — | `#DBDCFB` | pane — computed, not a token |
+| — | `#CDCEF8` | pane — computed, not a token |
 | `--ink-900` / `--text-heading` | `#12142B` | ink |
 | `--ink-600` / `--text-body` | `#4C5273` | body |
 | `--navy-900` | `#23265E` | navy |
@@ -81,16 +81,20 @@ The mapping, product token → doc role:
 
 Two gap-fills, both computed rather than chosen:
 
-- **`pane` `#DBDCFB` is a measurement, not a colour decision.** A glass pane is drawn
-  as two `glass` layers at `0.60` and `0.45`, which is `0.78` effective coverage, so
-  the ground a label actually sits on is `glass` composited over whichever blob is
-  behind it. `#DBDCFB` is that composite over the *deepest* blob (`brand`, the lowest
-  luminance of the three at `0.732` against `blue`'s `0.766` and `brand-soft`'s
-  `0.848`), which is the worst case at any phase of the drift. Text is measured
-  against it, never against pure white, because the pane is translucent and the field
-  moves: one measurement of one phase would pass a label that is unreadable four
-  seconds later. `0.78` rather than a heavier tint because at `0.92` coverage the
-  frost stops being visible and the pane is just a white rectangle.
+- **`pane` `#CDCEF8` is a measurement, not a colour decision.** A glass pane is a
+  six-pass stack — the blurred backdrop sample, a `glass` scrim at `0.60`, a `glass`
+  tint ramp from `0.46` to `0.22`, the parked key light, the frost grain, and the top
+  bevel — so the ground a label actually sits on is that whole composite over
+  whichever blob is behind it, and it is **not uniform across one pane**: the tint
+  ramp alone spans `0.24` of coverage from the key-light corner to the shaded one.
+  `#CDCEF8` is the darkest pixel measured under any label box on either board, at any
+  of eight sampled phases of the drift, with the label layer hidden. Text is measured
+  against it, never against pure white, because the pane is translucent, the ramp is
+  directional and the field moves: one measurement, of one phase, at one corner would
+  pass a label that is unreadable four seconds later and two hundred units to the
+  right. It moved from `#DBDCFB` when the flat second layer became a directional
+  ramp — the pane did not get lighter, its worst corner got darker, and the role
+  tracks the worst corner.
 - **`navy-ink` and `navy-dim` flatten the product's white-alpha text.** SaaS Pro states
   text on navy as `rgba(255,255,255,0.92)` and `0.55`; an SVG palette needs a hex, so
   each is the nearest real ink-ramp token to that flattened value.
@@ -100,14 +104,14 @@ Three contrast rules this palette inherits from the product and does not relax:
 - **`--ink-400` / `--text-muted` `#9297B3` is absent on purpose.** It measures 2.88:1
   on white, and the product's own DESIGN.md §2 says it must not carry text. `--ink-500`
   `#6A7091` is its documented replacement at 4.84:1 — but on *this* system it is also
-  absent, because it drops to **4.48:1** on the page ground and **3.60:1** on a pane
-  over the deepest blob. Secondary text is `body`, everywhere.
+  absent, because it drops to **4.48:1** on the page ground and **3.18:1** on a pane
+  at its worst corner. Secondary text is `body`, everywhere.
 - **Small white text lives on `brand-strong` only.** White on `brand` is 4.85:1 and on
   `blue` only 3.68:1, and the product's "white at ≥600 weight, ≥12px" rule does not
   rescue it — WCAG large text needs ≥18.66px bold.
 - **The signal hues are fills, never strokes or text.** `brand-soft` on glass is a
-  2.22:1 stroke and 1.65:1 on a pane, under the 3:1 graphic floor; even `brand` only
-  reaches 3.61:1 on a pane, so an accent stroke on glass is the softest this system
+  2.22:1 stroke and 1.46:1 on a pane, under the 3:1 graphic floor; even `brand` only
+  reaches 3.18:1 on a pane, so an accent stroke on glass is the softest this system
   allows and nothing lighter is permitted.
 
 ### Typography
@@ -131,14 +135,20 @@ chips `10`, pills `999`, icon tiles ≈ `32%` of their size. `4`-unit base grid.
 borders are the only strokes and always `1.6` at a gradient tint; content strokes are
 `2`–`2.5` in `brand`. Outer margin `64`; gutter `26`.
 
-**Two documented divergences from the catalog style, both forced by the light ground.**
+**Three documented divergences from the catalog style, all forced by the light ground.**
 The catalog draws glass on a dark field, where white does the work; here it cannot.
 (1) The pane edge is **not** a white ramp — a white border on a near-white pane over a
 light page is invisible. It runs `glass` at `0.95` into `brand` at `0.22` and `0.42`,
 so the pane catches light on the top-left edge and picks up a brand tint on the
 bottom-right. (2) The product's §4 glass recipe ends in an **inset top highlight**, and
 this system omits it: on a light pane there is no darker interior for a highlight to
-separate from, so it reads as a stray hairline. The edge ramp carries the pane alone.
+separate from, so it reads as a stray hairline. (3) The catalog's **inner rim** — the
+`0.8` hairline inset `1.4` that reads as glass wall thickness — is kept, but drawn in
+`brand` at `0.16` rather than white, for the same reason as (1). Note that (2) and (3)
+are different strokes and the distinction matters: (2) is a *horizontal* highlight
+inside the top edge only, which has nothing to separate from here; (3) traces the
+whole perimeter and is what gives the pane an edge with depth. Dropping both would
+leave a pane with one hairline and no thickness.
 
 ### Motif
 
@@ -175,6 +185,13 @@ opacity, never by a stroke.
   half-cycle and breaks the seam even though the arithmetic gate passes it.
 - One sequencing idea besides the drift: an ordered emphasis on the nodes, `6s` with
   negative delays. Nothing else moves.
+- **The key light is parked, not swept.** The catalog style animates one shared light
+  pool across every surface, which is its third motion idea; this system allows two,
+  and the drift plus the ordered emphasis spend both. The pool is therefore placed
+  with a `transform` attribute on each `<use>` rather than a class, upper-left so it
+  agrees with the edge ramp, the tint axis and the shadow direction. It stays a
+  *material* pass — a glass surface with no specular highlight reads as matte — it
+  simply does not move.
 - Nothing moves under text, and no element carrying text pulses below `0.35`.
 - Every animated visual carries a `prefers-reduced-motion` block that stops all motion
   and leaves a legible still — with the field parked at its base position, which is
@@ -198,39 +215,65 @@ opacity, never by a stroke.
   gradient border. Ink is near-solid; text is the one thing that is never translucent.
   Unlike the catalog's usual dark rendering this board is **light**, because the
   product is light-only and says so — which also puts dark ink on a near-white pane
-  and takes this style out of its most common failure mode.
-- **Shape language** — radius `24` on panes, `18` on cards. Large soft blobs behind,
-  crisp rectangles in front. Pane borders are the only strokes: always `1.6`, always a
-  diagonal ramp, and here `glass` into `brand` rather than white into white — see the
-  divergence note under Shape language above.
+  and takes this style out of its most common failure mode. **The scrim inverts with
+  the ground**: the catalog darkens its sample so white text can survive, this system
+  lightens it so dark text can, and everything else about the stack is unchanged.
+- **Shape language** — radius `24` on panes, `18` on cards, `12`–`14` on a rail. Large
+  soft blobs behind, crisp rectangles in front. Pane borders are the only strokes:
+  always `1.6`, always a diagonal ramp, and here `glass` into `brand` rather than
+  white into white, with a `0.8` `brand` inner rim inset `1.4` — see the three
+  divergence notes under Shape language above.
 - **Material / depth** — **SVG has no `backdrop-filter`.** A pane cannot blur what is
-  behind it, so the frost is built from two blur tiers: the field at `34`, the pane's
-  own blurred copy at `14`. The pane is always the **lower** number — blur the pane
-  harder than the field and it reads as fog with a hole in it rather than a sheet of
-  glass. Cards may add one `feDropShadow`; one primitive per filter, never a chain.
+  behind it, so the ground is declared once and `<use>`d again, filtered and clipped,
+  per surface. Two blur tiers: the field at `34`, the pane's own copy at `14`. The
+  pane is always the **lower** number — blur the pane harder than the field and it
+  reads as fog with a hole in it rather than a sheet of glass.
+
+  On top of that sample each pane carries the full stack, in this order: the `glass`
+  scrim, the `glass` tint ramp, the parked key light, the frost grain at `0.10` under
+  `mix-blend-mode: overlay`, the top bevel, then outside the clip the edge ramp and
+  the inner rim. Before any of it, a `navy` contact shadow at `0.13` blurred at `14`,
+  offset down and inset horizontally — without it the panes sit *in* the field rather
+  than above it.
+
+  **A thin surface refracts rather than frosts.** One rail per board — the corpus rail
+  on the hero, the phase rail on the pipeline — samples the same ground through
+  `feGaussianBlur` → `feTurbulence` → `feDisplacementMap` at scale `12`. That
+  displacement is what makes a thin element read as a solid lens laid over the page
+  instead of a slot cut into it, and it is the pass whose absence made these boards
+  read as flat frost. Large flat panes must **not** use it: displacement over a big
+  area reads as a smear. Solid cards still take one `feDropShadow` and nothing else.
 - **Type treatment** — system sans, `600` for labels and `500` for supporting lines.
   Never thin. The pane tint is chosen *after* the label's ratio is computed against
   the worst point the drift reaches, not before.
 - **Motion character** — slow drift. The ground blobs move; the panes stay put. The
   frost means pane content shimmers as the field passes behind it, which is the whole
-  payoff and needs no extra motion.
+  payoff and needs no extra motion. The key light does not sweep here — see the last
+  bullet under Motion rules.
 - **SVG recipes** — one `<filter>` per blur tier, each a single `feGaussianBlur`
-  (`34` field, `14` frost); the blob geometry declared once in `<defs>` as `#ground`
-  and `<use>`d by every copy, with the drift class on the wrapping `<g>` rather than
-  on the blobs, so the field and each frosted copy can never desynchronise; a diagonal
-  `<linearGradient>` per pane edge; a third single-primitive `feDropShadow` filter for
-  solid cards; and a two-stop `navy-raised` → `navy` gradient for the data card.
+  (`34` field, `14` frost), plus a three-primitive `refract` chain for rails, a
+  two-primitive `grain`, and single-primitive `cast` and `lift` drop shadows; the blob
+  geometry declared once in `<defs>` as `#ground` and `<use>`d by every copy, with the
+  drift class on the wrapping `<g>` rather than on the blobs, so the field and each
+  frosted and refracted copy can never desynchronise; a diagonal `<linearGradient>`
+  per pane edge and a second for the tint ramp; one `#pool` radial, declared once and
+  `<use>`d by every glass surface so all of them are lit by the same source; and a
+  two-stop `navy-raised` → `navy` gradient for the data card.
   **Blob cores go under the panes**, so the frost has something to reveal, and only
   their skirts fall in the negative space. Two placements that look reasonable and are
   not: a core in the outer margin reads as a saturated wall down one edge, and a core
   parked in a gap between panes reads as a glowing bar competing with the type beside
   it. Where a board has one pane and opaque cards, the skirts carry the field.
 - **Relaxations** — byte cap `150 KB` → **`200 KB`**, granted because the duplicated
-  blurred ground is load-bearing geometry. It is not a licence for more panes.
-  Contrast is **not** relaxed and neither is filter depth.
+  blurred ground is load-bearing geometry. It is not a licence for more panes. Filter
+  depth `1` → **`3`**, which exists for the `refract` chain specifically and for
+  nothing else: every other filter on these boards is still one primitive. Contrast is
+  **not** relaxed.
 - **Never** — more than three panes per board, translucent text, a `backdrop-filter`
-  (it does nothing), frosting the pane harder than the field, a flat edge stroke, a
-  pane tint that drops its label below 4.5:1 at any point in the drift, an odd number
+  (it does nothing), a plain blur standing in for refraction on a rail, refraction on
+  a large flat pane, frosting the pane harder than the field, a flat edge stroke, a
+  light pool per pane instead of one shared, a pane tint that drops its label below
+  4.5:1 at any point in the drift **or at any corner of the tint ramp**, an odd number
   of `alternate` half-cycles, panes that move while the field also moves, duplicating
   the blob geometry instead of `<use>`-ing it, an accent as a page or card ground, or
   promoting `navy` to a page theme.

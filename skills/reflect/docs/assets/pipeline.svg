@@ -1,8 +1,13 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 620" width="1200" height="620"
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     viewBox="0 0 1200 620" width="1200" height="620"
      role="img" data-loop-s="12" data-bg="background">
   <title>reflect — the six phases, numbered 0 to 5</title>
-  <desc>A frosted pane over a drifting field of brand-coloured blobs carries the heading;
-below it six cards, read left to right and top to bottom, each marked in turn. Phase 0
+  <desc>A frosted pane over a drifting field of brand-coloured blobs carries the heading. The
+pane samples and blurs the real ground behind it, then layers a scrim, a tint ramp, a parked
+key light, a frost grain and an asymmetric rim, so it reads as a sheet of glass rather than a
+white rectangle. Under it a thin glass rail refracts rather than blurs the same ground, and
+its six ticks mark the phases in step with the cards. Below, six cards, read left to right
+and top to bottom, each marked in turn. Phase 0
 scopes the corpus: enumerate the in-window transcripts and load the prior report so this run
 can be diffed against it. Phase 1 is the insights gate, and it gates on recency rather than
 coverage, because /insights samples a few hundred recent sessions instead of the whole
@@ -22,6 +27,21 @@ deliverable.</desc>
     <filter id="frost" x="-30%" y="-30%" width="160%" height="160%">
       <feGaussianBlur stdDeviation="14"/>
     </filter>
+    <!-- frost on the flat pane, refract on the thin rail. Displacement over a large
+         flat area reads as a smear; on a thin surface it is the pass that makes the
+         thing read as solid glass rather than a slot cut in the page. -->
+    <filter id="refract" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency=".018" numOctaves="2" seed="5" result="t"/>
+      <feDisplacementMap in="b" in2="t" scale="12" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="4" stitchTiles="stitch"/>
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
+    <filter id="cast" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
     <filter id="lift" x="-20%" y="-25%" width="140%" height="150%">
       <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="var(--navy)" flood-opacity=".18"/>
     </filter>
@@ -39,24 +59,49 @@ deliverable.</desc>
       <stop offset="0.5" stop-color="var(--brand)" stop-opacity=".22"/>
       <stop offset="1"   stop-color="var(--brand)" stop-opacity=".42"/>
     </linearGradient>
+    <linearGradient id="tint" x1="0" y1="0" x2="0.35" y2="1">
+      <stop offset="0" stop-color="var(--glass)" stop-opacity=".46"/>
+      <stop offset="1" stop-color="var(--glass)" stop-opacity=".22"/>
+    </linearGradient>
+    <!-- One key light for the whole board, parked rather than travelling: the catalog
+         style sweeps it, but this system's motion rule allows two ideas per visual and
+         the drift plus the marker march already spend both. -->
+    <radialGradient id="sheen">
+      <stop offset="0"   stop-color="var(--glass)" stop-opacity=".34"/>
+      <stop offset=".42" stop-color="var(--glass)" stop-opacity=".17"/>
+      <stop offset=".72" stop-color="var(--glass)" stop-opacity=".05"/>
+      <stop offset="1"   stop-color="var(--glass)" stop-opacity="0"/>
+    </radialGradient>
+    <g id="pool">
+      <ellipse cx="600" cy="222" rx="150" ry="240" fill="url(#sheen)" transform="rotate(-20 600 222)"/>
+    </g>
     <linearGradient id="ncard" x1="0" y1="0" x2="0.35" y2="1">
       <stop offset="0" stop-color="var(--navy-raised)"/>
       <stop offset="1" stop-color="var(--navy)"/>
     </linearGradient>
     <clipPath id="pa"><rect x="64" y="48" width="1072" height="148" rx="24"/></clipPath>
+    <clipPath id="rail"><rect x="64" y="204" width="1072" height="24" rx="12"/></clipPath>
   </defs>
 
   <style>
-    svg { --background:#F4F6FE; --glass:#FFFFFF; --pane:#DBDCFB; --ink:#12142B;
+    svg { --background:#F4F6FE; --glass:#FFFFFF; --pane:#CDCEF8; --ink:#12142B;
           --body:#4C5273; --navy:#23265E; --navy-raised:#2E3277; --navy-ink:#F6F7FC;
           --navy-dim:#BEC2D6; --brand:#5B5FEF; --brand-strong:#4A4AE8;
           --brand-soft:#A3A7FA; --blue:#3B82F6; --success:#22B07D; --warning:#F59E0B;
           --danger:#EF4458; }
 
     .bg   { fill: var(--background); }
-    .gl   { fill: var(--glass); }
-    .ed   { fill: none; stroke: url(#edge); stroke-width: 1.6; }
-    .card { fill: var(--glass); filter: url(#lift); }
+    .gl    { fill: var(--glass); }
+    .tint  { fill: url(#tint); }
+    .grain { filter: url(#grain); opacity: .10; mix-blend-mode: overlay; }
+    .bevel { fill: var(--glass); opacity: .55; }
+    .ed    { fill: none; stroke: url(#edge); stroke-width: 1.6; }
+    /* The inner rim reads as glass wall thickness. The catalog draws it white; on a
+       near-white pane over a light page that is invisible, so it runs brand the same
+       way the outer edge ramp does. */
+    .ed2   { fill: none; stroke: var(--brand); stroke-width: .8; opacity: .16; }
+    .cast  { fill: var(--navy); opacity: .13; filter: url(#cast); }
+    .card  { fill: var(--glass); filter: url(#lift); }
 
     .sans { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
     .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
@@ -91,19 +136,43 @@ deliverable.</desc>
   </style>
 
   <rect class="bg" x="0" y="0" width="1200" height="620"/>
-  <g class="dr" filter="url(#field)"><use href="#ground"/></g>
+  <g class="dr" filter="url(#field)"><use href="#ground" xlink:href="#ground"/></g>
+
+  <!-- the contact shadow goes down before any glass; without it the pane sits IN the
+       field rather than above it -->
+  <rect class="cast" x="80" y="70" width="1040" height="134" rx="26"/>
 
   <g clip-path="url(#pa)">
-    <g class="dr" filter="url(#frost)"><use href="#ground"/></g>
-    <rect class="gl" x="64" y="48" width="1072" height="148" rx="24" opacity=".60"/>
-    <rect class="gl" x="64" y="48" width="1072" height="148" rx="24" opacity=".45"/>
+    <g class="dr" filter="url(#frost)"><use href="#ground" xlink:href="#ground"/></g>
+    <rect class="gl"    x="64" y="48" width="1072" height="148" rx="24" opacity=".60"/>
+    <rect class="tint"  x="64" y="48" width="1072" height="148" rx="24"/>
+    <use href="#pool" xlink:href="#pool" transform="translate(-240,-102)"/>
+    <rect class="grain" x="64" y="48" width="1072" height="148" rx="24"/>
+    <rect class="bevel" x="64" y="48" width="1072" height="2.5"/>
   </g>
-  <rect class="ed" x="64" y="48" width="1072" height="148" rx="24"/>
+  <rect class="ed"  x="64"   y="48"   width="1072"   height="148"   rx="24"/>
+  <rect class="ed2" x="65.4" y="49.4" width="1069.2" height="145.2" rx="22.6"/>
   <g data-bg="pane">
     <text class="sans kick" x="88" y="92"  data-role="metadata">PHASES 0 – 5 · ONE PASS</text>
     <text class="sans h"    x="88" y="140" data-role="title">Six phases, one file out</text>
     <text class="sans lede" x="88" y="176" data-role="essential">Nothing leaves the machine, and nothing is built — recommending is the deliverable.</text>
   </g>
+
+  <!-- the phase rail: a thinner piece of glass, so it refracts the field rather than
+       blurring it, and its six ticks march in step with the cards -->
+  <g clip-path="url(#rail)">
+    <g class="dr" filter="url(#refract)"><use href="#ground" xlink:href="#ground"/></g>
+    <rect class="gl"   x="64" y="204" width="1072" height="24" rx="12" opacity=".52"/>
+    <rect class="tint" x="64" y="204" width="1072" height="24" rx="12"/>
+    <use href="#pool" xlink:href="#pool" transform="translate(-240,-102)"/>
+  </g>
+  <rect class="ed" x="64" y="204" width="1072" height="24" rx="12"/>
+  <rect class="mk p0" x="96"  y="213" width="40" height="6" rx="3" fill="var(--brand)"/>
+  <rect class="mk p1" x="290" y="213" width="40" height="6" rx="3" fill="var(--brand)"/>
+  <rect class="mk p2" x="483" y="213" width="40" height="6" rx="3" fill="var(--brand)"/>
+  <rect class="mk p3" x="677" y="213" width="40" height="6" rx="3" fill="var(--brand)"/>
+  <rect class="mk p4" x="870" y="213" width="40" height="6" rx="3" fill="var(--brand)"/>
+  <rect class="mk p5" x="1064" y="213" width="40" height="6" rx="3" fill="var(--brand)"/>
 
   <rect class="card" x="64" y="236" width="340" height="150" rx="18"/>
   <rect class="mk p0" x="88" y="262" width="48" height="5" rx="2.5" fill="var(--brand)"/>

@@ -68,7 +68,7 @@ A **style** is the look-and-feel idiom every visual in a repo is rendered in. Pa
 has. Style owns *form* — shape, material, type, composition, motion. The product's
 own brand tokens still own the *palette*.
 
-<!-- pd:viz name="styles" src=".prettydocs/src/styles/" facts-hash="33ebe05a0c9d07aebe81b14ad473b53cba1c9f2a06b373fbd52bc50b74da294a" src-hash="fb22c210ca132ec3dbb7ab756a1e0c5cdbb5233305815b18637bbf58fe7f7e19" -->
+<!-- pd:viz name="styles" src=".prettydocs/src/styles/" facts-hash="33ebe05a0c9d07aebe81b14ad473b53cba1c9f2a06b373fbd52bc50b74da294a" src-hash="557b536783d0943696b8f3fcfb22a0c5903a385942f1f65f747693e9ae8cf5cd" -->
 <div align="center">
 <img src="docs/assets/styles.svg" alt="A contact sheet of thirty-one animated style specimens in alphabetical order, two to a row: bento-grid, blueprint, brushed-metal, claymorphism, codex-leonardo, console-elbow, digital-rain, draughtsman-notebook, editorial, flat-material, glassmorphism, holographic-projection, hud, ide-dark, isometric-3d, lofi-wireframe, maximalist, neo-brutalist, neumorphism, oil-impasto, patent-drawing, pencil-lined-paper, rough-sketch, schematic, skeuomorphic, swiss-minimal, terminal-minimalist, watercolor, whiteboard-marker, wood-grain and y2k-retrofuturist. Every cell is that style’s own full-width specimen scaled down, so each carries its real filter chains, grain and lighting — lit impasto relief, displaced wood grain, anisotropic brushed metal, true backdrop blur — rather than a flattened imitation. Each also carries one motion characteristic of its style. The final accent-bordered cell reports that all thirty-one were built and gated at their declared filter floors." width="820" />
 </div>

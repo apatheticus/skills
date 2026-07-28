@@ -31,7 +31,7 @@ Thirty-one idioms, listed alphabetically.
 | `draughtsman-notebook` | `engineers-notebook`, `graphite-draft` | era | Graphite on gridded stock — precise, but drawn by a person | Design records, ADRs |
 | `editorial` | `magazine`, `print`, `typographic` | composition | Print hierarchy — a lede, a rule, generous margin | Essays, specs, research |
 | `flat-material` | `material`, `flat` | material | One elevation step, confident color fields | Apps, SDKs, design systems |
-| `glassmorphism` | `glass`, `frosted`, `aero` | material | Frosted panels over a colored ground | Media, overlays, showcase repos |
+| `glassmorphism` | `glass`, `frosted`, `aero` | material | Frosted panels that refract a lit ground | Media, overlays, showcase repos |
 | `holographic-projection` | `hologram`, `holo`, `projection` | material | Glowing wireframe in a projection cone, scanlines | Simulation, 3D, digital twins |
 | `hud` | `heads-up-display`, `targeting-hud`, `telemetry` | composition | Reticles, tick scales, brackets instead of boxes | Monitoring, tracing, profiling |
 | `ide-dark` | `editor-dark`, `dev-tool`, `ide` | material | Rounded dark panes, hairline dividers, syntax palette | Language tooling, extensions |
@@ -251,6 +251,7 @@ shape drawn twice through two one-primitive filters is still depth 1.
 | `neumorphism` | UI/graphic contrast | 3.0:1 → **2.0:1** |
 | `maximalist` | byte cap | 150 KB → **250 KB** |
 | `glassmorphism` | byte cap | 150 KB → **200 KB** |
+| `glassmorphism` | filter-chain depth | 1 → **3** |
 
 `neumorphism` is the **only** style in the catalog that relaxes contrast, and it does
 so because its shapes are literally defined by near-background shadows. No other
