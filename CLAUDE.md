@@ -61,11 +61,11 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 ## Current state
 
-Scaffolded 2026-07-24. **Six skills shipped** — `human-voice`, `pretty-hyper-docs`, `pretty-plain-docs`, `pretty-svg-docs`, `reflect`, `security-audit-full-report` — and the repo validates green at plugin version **0.13.1**. `pretty-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
+Scaffolded 2026-07-24. **Seven skills shipped** — `human-voice`, `pretty-hyper-docs`, `pretty-plain-docs`, `pretty-svg-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green at plugin version **0.14.0**. `pretty-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28, revised to its v2 spec on 2026-07-29), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
 
 **`svg_check.py` gates fidelity, not just safety.** Every other check class is a ceiling (filter depth, bytes, radius) or a legibility floor (font size, contrast) — none of them asks whether a visual *looks like* the style it claims, so a flat, styleless render used to pass clean. Styles now declare their material in `scripts/styles.json` via `require_filter_all`, `min_filter_depth` and `min_elements`, and the checker prints a per-file `NOTE` reporting the chain depth, filter count and drawn-element count it actually found. `deepest chain 1` under a floor of 3 is the tell that a material was faked. Two attributes drive it: `data-specimen="true"` marks a catalog sample (**`min_elements` binds only on specimens** — a README diagram with four boxes is correct at 23 elements, and padding it would be worse output), and `data-style="<slug>"` on a `<filter>` measures that chain against the floor of the style it depicts rather than the file-wide one.
 
-The contact sheet `docs/assets/styles.svg` is **1200×4721** and is gated as its own declared `catalog-sheet` style (`filter_depth: 5`, `bytes_fail: 300 KB`, `min_elements: 620`). It used to be the one asset gated *without* `--style`, which silently gave it global `filter_depth: 1` and made `check_style` skip it entirely — so the single file depicting all 31 idioms was the only one exempt from every fidelity gate, and every material on it was faked. Each tile is now that style's own specimen scaled down rather than a redrawing, so the sheet cannot be less faithful than the catalog it indexes or drift from it. Read that skill's `.prettydocs/prettydocs.md` before editing it — the per-specimen token namespacing, `isolation: isolate` and per-tile `data-bg` are all load-bearing.
+The contact sheet `docs/assets/styles.svg` is **1200×4721** and is gated as its own declared `catalog-sheet` style (`filter_depth: 5`, `bytes_fail: 400 KB` — raised from 300 KB at 0.14.0, where the animated sheet reached 97.9% of the old cap, `min_elements: 620`). It used to be the one asset gated *without* `--style`, which silently gave it global `filter_depth: 1` and made `check_style` skip it entirely — so the single file depicting all 31 idioms was the only one exempt from every fidelity gate, and every material on it was faked. Each tile is now that style's own specimen scaled down rather than a redrawing, so the sheet cannot be less faithful than the catalog it indexes or drift from it. Read that skill's `.prettydocs/prettydocs.md` before editing it — the per-specimen token namespacing, `isolation: isolate` and per-tile `data-bg` are all load-bearing.
 
 Every skill's README visuals were authored by running `pretty-svg-docs` on itself, so they double as the worked example. One resolved style per skill: `human-voice` → `editorial`, `pretty-svg-docs` → `bento-grid`, `pretty-plain-docs` → `schematic`, `reflect` → `glassmorphism`, `security-audit-full-report` → `flat-material`. `editorial` and `bento-grid` **require no filter**, and `editorial` forbids blur, shadow and gradient outright, so for those two the fidelity floor is drawn density and typographic craft rather than a filter chain. Don't "fix" a zero-filter NOTE on either: `bento-grid` allows one soft shadow *or* a hairline and never both, and these boards use the hairline.
 
@@ -101,9 +101,8 @@ one upper-left light vector for the whole figure, a shadow edge that *glows warm
 subsurface peach instead of going dark, and five primitives (sphere, capsule, cylinder,
 slab, contact shadow). **It relaxes nothing** — one `feGaussianBlur` per contact shadow at
 the default `filter_depth: 1` — which makes it the fidelity argument in miniature: volume
-lives in the fill, so a material this rich needs no filter chain at all. Both specimens are
-70 drawn elements, 33 gradients and 4 shared blur filters, and both gate 0/0/0 at
-`min_elements: 68`.
+lives in the fill, so a material this rich needs no filter chain at all. (The counts in
+this paragraph were superseded at 0.14.0; see the v2 entries below.)
 
 **Its machine half is a new check class, `gradient_units`, and it exists because `forbid`
 cannot see attribute values.** The style's defining invariant is
@@ -120,6 +119,94 @@ trivially true of the flat render the key exists to stop. That is the identical 
 `mono_only` once had, and the checker's own comment says so. The key was provably inert
 before `soft-vinyl` declared it: all 64 pre-existing assets re-gated unchanged.
 
+**`soft-vinyl` v2 landed at 0.14.0 and changed what the style *is*, not how it is gated
+only.** The user's target was the reference matrix's `terracotta · jitter 0.85 ·
+hand-formed` row, so two things moved together: the house ramp went bone → **terracotta**
+(`lit #F8D39F`, `albedo #E5B981`, `shade #D69350`, `deep #AD6E2C`, `sss #F2AE78`,
+`occ #8E5B2B`), and every form large enough to show it is now a **sampled, wobbled,
+re-splined silhouette** rather than a `<rect>` or `<circle>`. Bone survives as the second
+named ramp. Both specimens are now **124 drawn elements, 9 outline paths, 33 gradients and
+4 shared blur filters** at `min_elements: 120`, 45 KB each, and both gate 0/0/0. The
+palette lost two roles: `slablit` and `caplit` are gone, because a hex brighter than `lit`
+cannot be derived from a base hue and therefore cannot survive a recolour.
+
+**The machine half is a second new check class, `min_path_curves`, and it is the same hole
+one layer down.** `gradient_units` closed "the shading is fake"; nothing asked whether the
+*silhouette* was, and a clean render of this same figure — every form a `<rect>`,
+`<circle>` or arc-cornered path — passed every other gate. The key counts cubic and
+quadratic segments in path `d` data. Three design points, all fixture-tested (eight
+fixtures, including implicit coordinate repetition and exponent notation): **arcs
+deliberately do not count**, because `A` is precisely what a mathematically perfect rounded
+corner uses, so counting it would let the render the floor exists to reject satisfy the
+floor; the floor is on the **deepest single path**, not a file-wide total, which makes it
+scale-free so a four-form README diagram clears it exactly as a specimen does; and it
+inherits `min_filter_depth`'s limitation, that one conforming outline satisfies it. The
+previous release's committed specimen returns **0** on every path.
+
+**Verbatim transcription of the wobble recipe was impossible, and measuring first is what
+made that visible.** §5.5 fixes arc-length spacing at 3.5px, which puts 423 points on a
+680×64 slab and costs **72 KB for one form**; this figure comes to ~265 KB that way against
+a 150 KB ceiling, and jitter 0.0 is barely cheaper because the re-spline runs regardless —
+the cost is the resample, not the wobble. The spec's own "cost is not a concern, 21,472
+bytes raw" was measured on v1, which emitted no paths at all; the v2 reference matrix is
+261 KB for 16 forms and never says so. Three documented divergences bring it to 45 KB.
+**Cap the point count, not the spacing** — the wobble is indexed by `t = i/n` and is
+therefore identical at any n, so only corner fidelity degrades, which is invisible at embed
+width. **Emit each outline once and `<use>` it** for base, rim, clip and a slab's depth
+copy; this is *not* the `<use>` the generator-first rule forbids, which is about
+*instancing* a primitive at a new size and resampling its gradient — here geometry and
+coordinates are identical, and a depth copy is the same outline translated, which
+`<use y="…">` expresses exactly. And **below ~1px of displacement a form stays a
+primitive**: `amp = jitter × size × 0.045`, so at 0.85 a form needs a short dimension of
+~39px to reach 1.5px, and a 24px badge or connector gets 0.9px — invisible, at 5 KB. Those
+surviving rects are also what keeps `min_rx` reachable, since it collects radii from
+`<rect>` only and merely *warns* when nothing is rounded.
+
+**Two more errors in the source spec, and this pair matters more than the first.** (1) The
+v1 §6 recolour table had **the saturation direction inverted on every stop** — it saturated
+shadows, which reads as cheap plastic — and it was not merely wrong in direction but
+**self-inconsistent**: applied to bone's own albedo it cannot reproduce bone, predicting
+`lit #FDFCFC` (a desaturated near-white) against the actual `#F7EFE1`, and missing all four
+derived stops. The v2 table reproduces **both** named ramps at zero channel delta, which is
+the property to check after adding a ramp. (2) §6 supplies a recolouring procedure and §7.3
+states "`INK` on a slab face measures approximately 8:1", and **the two are never
+reconciled** — a recoloured ramp moves the label ground and the spec keeps the same global
+ink. On terracotta the neutral `#4A3B2A` measures **4.08:1** and fails. So `ink`/`inksoft`
+are now measurement-driven, not global: both are the ramp's own hue dropped in lightness
+until the sweep clears (`#392B18` / `#715533`, worst box 5.19:1, ground 12.29:1 / 6.18:1).
+
+**Contrast here must be measured as a sweep over rendered pixels, and the reason is mass
+undulation.** The four clipped ellipses that give a hand-shaped mass its broad tonal
+variation composite *over* the base ramp, so the ground under a label is a rendered pixel
+and not a declared colour: the worst label box measures **34.80** where the `shade` stop
+itself is 35.74. Method — hide the label layer, park the animation at several phases, take
+the **darkest** pixel per label box (darkest, because the ink is dark on a light ground;
+taking the lightest reports the ground and is the mistake glassmorphism's inverse case
+makes easy), then set `data-bg` to what you measured. One stop *position* moved to buy the
+margin: the slab's `albedo` stop 70% → **78%**, which the extension rules sanction because
+positions are adjustable and colours are not.
+
+**Bounding a seam diff to the cell that changed is what makes a contact-sheet number mean
+anything.** Whole-raster, the 1200×4721 animated sheet has a **same-pose noise floor of
+21–23k differing pixels** with max channel deltas over 160 — 32 animating tiles on 5.67M
+pixels — so a sheet-wide seam of 9–23k is indistinguishable from noise in both directions,
+and one of the two controls also lands inside the floor and reads as a pass. Cropped to the
+soft-vinyl cell (`610,3328 550×211`, from its own `clipPath` rect) the answer is exact:
+floor **0**, seam **0**, controls 5,107 px (4.40%) and 2,391 px (2.06%). The specimen alone
+is 0 / 0 against controls of 26,133 and 16,760.
+
+**One pre-existing defect fixed in passing, and it was an accessibility one.**
+`pretty-plain-docs`' contact sheet identified itself as the *animated* skill's in three
+places, all from the 0.12.0 port: `<title>The pretty-svg-docs style catalog`, the drawn
+`PRETTY-SVG-DOCS` kicker, and a `<desc>` reading "thirty-two **animated** style specimens"
+while the README alt text beside it said static. Two of the three are the asset's
+accessible name and description. Separately, **`soft-vinyl` was never added to either
+skill's `.prettydocs/src/samples/manifest.json`** at 0.13.1 — 31 records against 32
+specimens, in a file whose own note says "one record per style specimen". Nothing catches
+either: CI runs `validate.mjs`, which reads frontmatter and manifests, and never
+`svg_check.py` or these manifests. An integrity sweep over the other 31 records found no
+drift.
+
 **Two errors in the source spec, both found by measuring rather than reading, and the
 reference implementation fails one of them.** Its §10 test 6 states "peak luminance ≤ `LIT`
 + 4", but `LIT` `#F7EFE1` is **not the brightest value in its own palette**: §5.4's slab
@@ -128,7 +215,14 @@ against a threshold of 90.94 — so `vinyl-primitives.svg` itself peaks at 92.66
 Restated as **peak ≤ the brightest declared stop**, which is provable for a shading-only
 render because a gradient only interpolates between the stops you declared; a specular
 highlight is precisely what introduces a value brighter than all of them. Our specimen
-peaks 92.55, *below* the reference. Separately, §5.4's slab axis
+peaks 92.55, *below* the reference. **0.14.0 dissolved this rather than restating it**: the
+v2 recipe drops both hardcoded stops (neither is derivable from a base hue, so neither
+survives a recolour) and uses `LIT` in their place, which makes `LIT` the brightest value in
+the palette again and the original test correct by construction. Our specimen now peaks
+**69.05**, `LIT`'s luminance exactly and not one level over. Note the measurement trap that
+comes with it: the *ground* is lighter than every stop in either ramp, so a whole-canvas
+peak reports the ground and proves nothing — sample inside form interiors, and beware a
+probe box that clips ground above a short bar. Separately, §5.4's slab axis
 `(x+0.30w, y) → (x+0.45w, y+h)` is **aspect-dependent**: that `0.15w` horizontal run is
 subordinate to the height only while the slab is roughly as tall as it is wide, which every
 slab in the reference is. At 680×64 it dominates, the ramp completes inside the first sixth
@@ -168,6 +262,19 @@ the new `require` key is inert for the other 32, and all 64 pre-existing assets 
 identically — so **patch**. The per-skill `SKILL.md` field is ordinary semver and took a
 minor (`pretty-plain-docs` 0.2.0 → 0.3.0), which is consistent because the invalidation
 rule governs `plugin.json` alone and says so.
+
+**0.14.0 is the other half of that worked example, and together they are the clearest
+statement of the rule.** Same style, same skills, same *kind* of change — a style's material
+was revised and its two specimens re-authored — and it took a **minor** where 0.13.1 took a
+patch, for one reason: this one raises a gate. The test is mechanical, so run it rather than
+arguing it. Two verdict sweeps over all 76 committed assets, the first with the new checker
+against the *old* catalog and the second with both new: the checker patch alone moves
+**nothing** (76 files, 0 errors, 385 warnings, 138 softened, per-file diff empty), and the
+catalog change moves exactly the two previous-release soft-vinyl specimens from `0/0/0` to
+`2/0/0`. Reding the previous release's own conforming output is the definition of minor.
+The re-authored specimens then re-gate `0/0/0` and the full sweep returns to the identical
+baseline, which is the other half of the proof: the floor is met honestly, not by relaxing
+anything.
 
 **One count reference was deliberately left reading stale.** Both `prettydocs.md` files say
 a hairline grid "applied thirty-one times reads as one finding rather than thirty-one" —
@@ -285,7 +392,7 @@ sit at exactly `min_elements`**, so removing an element breaks the floor. Result
 pass at their own style and **not one drawn-element count changed**; the contact sheet gates
 to the identical verdict as the animated original (**0 errors, 27 warnings, 34 softened**
 as of 0.13.0, 31 before it),
-at 260 KB rather than 271 KB (229 / 243 KB before `soft-vinyl` landed). That equivalence is the evidence nothing about a style's
+at 283 KB rather than 294 KB (260 / 271 KB before soft-vinyl's v2 revision, 229 / 243 KB before `soft-vinyl` landed at all). That equivalence is the evidence nothing about a style's
 fidelity depended on it moving.
 
 Two traps when de-animating a *spec* file rather than an asset. Dead-class detection must

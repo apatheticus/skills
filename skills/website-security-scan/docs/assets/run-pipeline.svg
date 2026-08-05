@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420"
+     width="1200" height="420" role="img" data-loop-s="12" data-bg="background">
+  <title>One run, end to end</title>
+  <desc>A target profile supplies the scope, scan.py runs the check catalog, a
+  narrative and exploratory pass add judgment, and render_report.py writes the HTML
+  report with a delta against the previous run. Ticks standing on the baseline are
+  the checks; the hollow one did not run, so it is reported as not retested rather
+  than as resolved.</desc>
+
+  <style>
+    svg { --background:#F4F6FE; --surface:#FFFFFF; --ink:#12142B;
+          --muted:#4C5273; --rule:#6A7091; --accent:#4A4AE8; }
+
+    .bg    { fill: var(--background); }
+    .card  { fill: var(--surface); stroke: var(--rule); stroke-width: 1; }
+    .t     { fill: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .m     { fill: var(--muted); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    .mono  { fill: var(--muted); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .kick  { letter-spacing: 2.4px; }
+    .folio { text-anchor: end; }
+    .grid  { stroke: var(--rule); stroke-width: 1; fill: none; }
+    .tick  { fill: var(--rule); }
+    .tock  { fill: var(--background); stroke: var(--rule); stroke-width: 2; }
+
+    .flow  { stroke: var(--accent); stroke-width: 2.5; fill: none;
+             stroke-dasharray: 14 34; animation: march 3s linear infinite; }
+    .g2    { animation-delay: -1s; }
+    .g3    { animation-delay: -2s; }
+    @keyframes march { from { stroke-dashoffset: 48 } to { stroke-dashoffset: 0 } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .flow { animation: none; stroke-dasharray: none; }
+    }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1200" height="420"/>
+
+  <text class="m kick"  x="64"   y="70" font-size="18">EXTERNAL POSTURE SCAN</text>
+  <text class="t"       x="64"   y="130" font-size="48" font-weight="700"
+        data-role="hero" letter-spacing="-1">One run, end to end</text>
+  <text class="m folio" x="1136" y="130" font-size="18">read-only</text>
+
+  <!-- the flow sits behind the cards, so it is visible only in the gaps -->
+  <line class="flow"    x1="296" y1="243" x2="344"  y2="243"/>
+  <line class="flow g2" x1="576" y1="243" x2="624"  y2="243"/>
+  <line class="flow g3" x1="856" y1="243" x2="904"  y2="243"/>
+
+  <g data-bg="surface">
+    <rect class="card" x="64"  y="184" width="232" height="118"/>
+    <rect class="card" x="344" y="184" width="232" height="118"/>
+    <rect class="card" x="624" y="184" width="232" height="118"/>
+    <rect class="card" x="904" y="184" width="232" height="118"/>
+
+    <text class="mono" x="84"  y="214" font-size="18">01</text>
+    <text class="t"    x="84"  y="250" font-size="24" font-weight="700" data-role="essential">Profile</text>
+    <text class="mono" x="84"  y="280" font-size="18">targets/&lt;slug&gt;.md</text>
+
+    <text class="mono" x="364" y="214" font-size="18">02</text>
+    <text class="t"    x="364" y="250" font-size="24" font-weight="700" data-role="essential">Scan</text>
+    <text class="mono" x="364" y="280" font-size="18">scan.py</text>
+
+    <text class="mono" x="644" y="214" font-size="18">03</text>
+    <text class="t"    x="644" y="250" font-size="24" font-weight="700" data-role="essential">Narrative</text>
+    <text class="mono" x="644" y="280" font-size="18">exploratory pass</text>
+
+    <text class="mono" x="924" y="214" font-size="18">04</text>
+    <text class="t"    x="924" y="250" font-size="24" font-weight="700" data-role="essential">Report</text>
+    <text class="mono" x="924" y="280" font-size="18">render_report.py</text>
+  </g>
+
+  <!-- the check ledger: one tick per check, standing on the baseline -->
+  <line class="grid" x1="64" y1="338" x2="1136" y2="338"/>
+  <rect class="tick" x="344" y="310" width="6" height="28"/>
+  <rect class="tick" x="358" y="310" width="6" height="28"/>
+  <rect class="tick" x="372" y="310" width="6" height="28"/>
+  <rect class="tick" x="386" y="310" width="6" height="28"/>
+  <rect class="tick" x="400" y="310" width="6" height="28"/>
+  <rect class="tick" x="414" y="310" width="6" height="28"/>
+  <rect class="tick" x="428" y="310" width="6" height="28"/>
+  <rect class="tick" x="442" y="310" width="6" height="28"/>
+  <rect class="tick" x="456" y="310" width="6" height="28"/>
+  <rect class="tick" x="470" y="310" width="6" height="28"/>
+  <rect class="tock" x="485" y="311" width="14" height="26"/>
+  <rect class="tick" x="508" y="310" width="6" height="28"/>
+  <rect class="tick" x="522" y="310" width="6" height="28"/>
+  <rect class="tick" x="536" y="310" width="6" height="28"/>
+  <rect class="tick" x="550" y="310" width="6" height="28"/>
+  <rect class="tick" x="564" y="310" width="6" height="28"/>
+
+  <text class="m"    x="64"   y="366" font-size="18">scope asserted by the owner</text>
+  <text class="mono" x="492"  y="366" font-size="18" text-anchor="middle">did not run</text>
+  <text class="m folio" x="1136" y="366" font-size="18">delta against the previous run</text>
+</svg>

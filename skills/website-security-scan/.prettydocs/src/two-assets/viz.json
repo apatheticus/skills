@@ -1,0 +1,20 @@
+{
+  "name": "two-assets",
+  "doc": "README.md",
+  "tier": "static",
+  "producer": "pretty-svg-docs",
+  "style": "swiss-minimal",
+  "facts": [
+    "One domain name fronts a website and the DNS zone carrying corporate email authentication",
+    "Website findings cover headers, TLS, readable files and CMS version disclosure",
+    "DNS zone findings cover DMARC, SPF, DKIM and MTA-STS",
+    "Email-authentication findings outrank website findings and are reported first"
+  ],
+  "facts_hash": "c043ede778d7f41fefff303d121ea2f286e8b8830435ed7284074b03b311c74c",
+  "src_hash": "a18a81c3111c01c37d92475f001f94b413ad05cbcaf46c6b06adb01a3a9515d3",
+  "design_hash": "3d1ee110fbb46097b7219e89827ae2fbbee49bed8dd11a1e8291c5f627b8a755",
+  "design_source_path": "assets/report-template.html",
+  "design_source_hash": "0790078cdce00ddfa2cc8668f0cdd7c73a12f6442439bd6fd53197f6791e2b8f",
+  "svg": { "loop_s": 0, "width": 1200, "bytes": 3146 },
+  "relaxed": []
+}

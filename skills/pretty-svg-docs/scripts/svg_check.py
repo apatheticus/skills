@@ -91,6 +91,42 @@ def chain_depth(filt: ET.Element) -> int:
     return sum(1 for c in filt if local(c.tag) in FILTER_PRIMITIVES)
 
 
+# Cubic/quadratic curve commands. Arcs are deliberately absent: a rounded rect and a
+# cylinder cap are drawn with A, so counting them would let a mathematically perfect
+# render satisfy a floor that exists to prove the outline was re-splined.
+CURVE_CMDS = {"c": 6, "s": 4, "q": 4, "t": 2}
+_PATH_TOKEN = re.compile(r"([MmZzLlHhVvCcSsQqTtAa])|(-?(?:\d+\.?\d*|\.\d+)(?:[eE][-+]?\d+)?)")
+
+
+def curve_segments(d: str) -> int:
+    """Cubic/quadratic segments in one path's `d`, counting implicit repetition.
+
+    A curve command may carry several coordinate groups — `C a b c d e f g h i j k l`
+    is two segments, not one — so counting command letters undercounts a compactly
+    written path. Divide each command's argument run by its arity instead.
+    """
+    total, cmd, args = 0, None, 0
+
+    def flush() -> int:
+        if cmd in CURVE_CMDS and args:
+            return max(1, args // CURVE_CMDS[cmd])
+        return 0
+
+    for m in _PATH_TOKEN.finditer(d or ""):
+        if m.group(1):
+            total += flush()
+            cmd, args = m.group(1).lower(), 0
+        else:
+            args += 1
+    return total + flush()
+
+
+def deepest_curve(by_tag: dict) -> int:
+    """The most curved single path in the file."""
+    return max((curve_segments(el.get("d") or "") for el in by_tag.get("path", [])),
+               default=0)
+
+
 def primitives_in(filters: list[ET.Element]) -> set[str]:
     """Every filter primitive used anywhere in `filters`, by local tag name."""
     found = set()
@@ -560,7 +596,7 @@ def check_file(path: Path, catalog: dict, slug: str | None,
     drawn = sum(len(by_tag.get(t, [])) for t in DRAWN_TAGS)
     used = sorted(primitives_in(filts))
     f.note(label, f"fidelity: deepest chain {deepest}, {len(filts)} filter(s), "
-                  f"{drawn} drawn elements"
+                  f"{drawn} drawn elements, deepest curve {deepest_curve(by_tag)}"
                   + (f", primitives {', '.join(used)}" if used else ", no filters"))
 
 
@@ -814,6 +850,23 @@ def check_style(root, by_tag, sheet: Stylesheet, style: dict, slug: str,
                 f.note(label,
                        f"{drawn} drawn elements (the '{slug}' specimen floor is "
                        f"{floor_els}; not enforced outside specimens)")
+
+    # A silhouette is geometry, so no existing key reaches it. A style whose forms are
+    # hand-formed rather than mathematically perfect draws each outline as a sampled,
+    # re-splined path; a clean render of the *same figure* draws <rect> and <circle>,
+    # and passes every other gate — the flat-render hole `min_filter_depth` closed for
+    # filter-built materials, reopened one layer down. This closes it the same way, as
+    # a floor on the most curved single path rather than a file-wide total, so it is
+    # scale-free: a four-form README diagram clears it exactly as a specimen does.
+    floor_curves = require.get("min_path_curves")
+    if floor_curves:
+        curves = deepest_curve(by_tag)
+        if curves < int(floor_curves):
+            f.error(label,
+                    f"the most curved path carries {curves} cubic segment(s); the "
+                    f"'{slug}' style needs at least {floor_curves}. Its forms are "
+                    "re-splined silhouettes — a rect, a circle or an arc-cornered path "
+                    "is the mathematically perfect render the style exists to replace")
 
     if require.get("mono_only"):
         families = [sheet.resolve(v) for sel, d in sheet.rules

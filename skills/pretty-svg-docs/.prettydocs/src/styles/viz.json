@@ -6,20 +6,20 @@
   "style": "catalog-sheet",
   "facts": [
     "The catalog holds 32 styles, indexed alphabetically in reference/styles.md with one spec file each under reference/styles/",
-    "Every cell is that style's own full-width specimen from docs/samples/, scaled down — not a redrawing of it",
+    "Every cell is that style's own full-width specimen from docs/samples/, scaled down \u2014 not a redrawing of it",
     "The sheet is gated as the declared 'catalog-sheet' style, so each tile's filters are measured against the floor of the style they depict",
     "scripts/styles.json is the checker's machine-readable half of the same catalog"
   ],
   "facts_hash": "2ee9d8d1db960e28ecda51cfb370c7160538c2738bb01a8d3e284d8919da454e",
-  "src_hash": "d2ef013a2933e59e4e0838989755e5eee3e5b703347ffd844229d77fa8432dcf",
+  "src_hash": "532e25d6b8d4aeb0abb5534ad6dc667c5793ebf505e81527fc4ee5503677fd12",
   "design_hash": "dc1e24ddf883f36b89f7356390644f6157122e9d8d7a6c9458a28d14e5c55dba",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 271194
+    "bytes": 300664
   },
   "relaxed": [
-    "bytes@300KB",
+    "bytes@400KB",
     "filter-depth@2",
     "filter-depth@3",
     "filter-depth@5"
