@@ -1,0 +1,22 @@
+{
+  "name": "boundary",
+  "doc": "README.md",
+  "tier": "animated",
+  "producer": "pretty-svg-docs",
+  "style": "swiss-minimal",
+  "facts": [
+    "The scan sends DNS queries, HTTP GET and HEAD with a realistic User-Agent, and TLS handshakes",
+    "It GETs a fixed list of known-sensitive paths against the target's own vhost",
+    "It performs TCP connect and banner reads on a shared IP",
+    "It never sends credentials, payloads, injection, traversal, uploads or directory brute-forcing",
+    "It never probes other tenants on shared infrastructure",
+    "Coverage gaps are deliberate and named in the report methodology"
+  ],
+  "facts_hash": "21ec687a982113960f3c15b2888ea788c30a80ba034989667f7e0f40fee2c905",
+  "src_hash": "f1a0aa44bc8fc0cff0946ce1d8e5e77e938f4da461b833590451f1cf98649d42",
+  "design_hash": "3d1ee110fbb46097b7219e89827ae2fbbee49bed8dd11a1e8291c5f627b8a755",
+  "design_source_path": "assets/report-template.html",
+  "design_source_hash": "0790078cdce00ddfa2cc8668f0cdd7c73a12f6442439bd6fd53197f6791e2b8f",
+  "svg": { "loop_s": 12, "width": 1200, "bytes": 4234 },
+  "relaxed": []
+}

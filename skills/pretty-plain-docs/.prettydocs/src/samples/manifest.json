@@ -204,6 +204,14 @@
       "bytes": 5708,
       "src_hash": "539d9e1b97544b0c54acf4bb1c1d1869ab3be077d5a0090447eba860303db41b"
     },
+    "soft-vinyl": {
+      "style": "soft-vinyl",
+      "loop_s": 0,
+      "width": 1200,
+      "height": 460,
+      "bytes": 46071,
+      "src_hash": "058ea7787a59272a4d65ec9ddb24c172949e0932fbe3b919ef3bb5cae6ece7f3"
+    },
     "swiss-minimal": {
       "style": "swiss-minimal",
       "loop_s": 0,

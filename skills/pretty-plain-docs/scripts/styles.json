@@ -66,7 +66,7 @@
       ],
       "relax": {
         "filter_depth": 5,
-        "bytes_fail": 307200
+        "bytes_fail": 409600
       },
       "forbid": [],
       "require": {
@@ -521,10 +521,11 @@
         "gradient_units": "userSpaceOnUse",
         "min_rx": 12,
         "min_filter_depth": 1,
+        "min_path_curves": 40,
         "require_filter_all": [
           "feGaussianBlur"
         ],
-        "min_elements": 68
+        "min_elements": 120
       }
     },
     "swiss-minimal": {

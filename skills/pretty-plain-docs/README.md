@@ -111,7 +111,7 @@ The catalog is the same 32 idioms the siblings ship, minus their motion vocabula
 every style here is defined by geometry, material, palette and type, which is exactly
 the part a still keeps.
 
-<!-- pd:viz name="styles" src=".prettydocs/src/styles/" facts-hash="3685f2b79d81eac1133f7b531ddbb6ab845e7d35a24406ef02796325706ca3ad" src-hash="0dde81547a6a3b0abe3b5934952a4822d6a8d94b61ea577983d1e61d47ff7ca5" -->
+<!-- pd:viz name="styles" src=".prettydocs/src/styles/" facts-hash="3685f2b79d81eac1133f7b531ddbb6ab845e7d35a24406ef02796325706ca3ad" src-hash="f4d62ca4d03fc776e910f56d49cfe548884f2b8bfc5f66f155ebbcd95a1bd756" -->
 <div align="center">
 <img src="docs/assets/styles.svg" alt="A contact sheet of thirty-two static style specimens in alphabetical order, two to a row: bento-grid, blueprint, brushed-metal, claymorphism, codex-leonardo, console-elbow, digital-rain, draughtsman-notebook, editorial, flat-material, glassmorphism, holographic-projection, hud, ide-dark, isometric-3d, lofi-wireframe, maximalist, neo-brutalist, neumorphism, oil-impasto, patent-drawing, pencil-lined-paper, rough-sketch, schematic, skeuomorphic, soft-vinyl, swiss-minimal, terminal-minimalist, watercolor, whiteboard-marker, wood-grain and y2k-retrofuturist. Every cell is that style's own full-width specimen scaled down, so each carries its real filter chains, grain and lighting — lit impasto relief, displaced wood grain, anisotropic brushed metal, true backdrop blur — rather than a flattened imitation. The final accent-bordered cell reports that all thirty-two were built and gated at their declared filter floors." width="820" />
 </div>

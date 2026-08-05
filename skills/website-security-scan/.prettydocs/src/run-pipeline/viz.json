@@ -1,0 +1,21 @@
+{
+  "name": "run-pipeline",
+  "doc": "README.md",
+  "tier": "animated-hero",
+  "producer": "pretty-svg-docs",
+  "style": "swiss-minimal",
+  "facts": [
+    "A target profile at assets/targets/<slug>.md supplies the domains, the scope statement and the calibration rules",
+    "scripts/scan.py runs the check catalog and writes findings, per-check execution state and evidence to JSON",
+    "The model adds an exploratory pass and the narrative to that JSON before rendering",
+    "scripts/render_report.py turns the JSON into the HTML report",
+    "A check that did not run is reported as not-retested, never as resolved"
+  ],
+  "facts_hash": "d146afaeba00d3b86fa0f21b18ee846b25f9848acf1520fc2bf1d3d8447d324c",
+  "src_hash": "5e798d8a0e345b73c7e6837526b78c46f3c8be25c637a46c794f0463877ab004",
+  "design_hash": "3d1ee110fbb46097b7219e89827ae2fbbee49bed8dd11a1e8291c5f627b8a755",
+  "design_source_path": "assets/report-template.html",
+  "design_source_hash": "0790078cdce00ddfa2cc8668f0cdd7c73a12f6442439bd6fd53197f6791e2b8f",
+  "svg": { "loop_s": 12, "width": 1200, "bytes": 5098 },
+  "relaxed": []
+}
