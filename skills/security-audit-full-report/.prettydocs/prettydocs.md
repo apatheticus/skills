@@ -7,7 +7,7 @@ skill itself (SKILL.md, assets/template.html), never invented. Frozen for this r
 
 Audience:     engineers and security reviewers who want a codebase audited until it stops yielding, not audited once
 Value:        loops one security audit per cycle until findings converge, then merges every run into a single interactive HTML report
-Proof:        convergence is decided on disk — two consecutive cycles adding zero new medium-or-higher findings, deduped on root cause plus title
+Proof:        convergence is decided on disk — two consecutive cycles adding zero new medium-or-higher findings, deduped structurally on each finding's sink file and scope
 First action: `/security-audit-full-report ./services/api`
 Theme:        a sweep repeated until it comes back empty — each pass marks what it found, and only a pass that adds nothing advances the counter
 
@@ -135,5 +135,5 @@ of the edges. Numbers lead; labels explain them.
 
 | Asset | Doc | Depicts | Tier | Source facts |
 | --- | --- | --- | --- | --- |
-| hero | README.md | one cycle per run, deduped against the ledger, stopping at two consecutive zero-new cycles or `max_cycles`, then one merged report | animated-hero | SKILL.md → §4a–§4d, §5.2 |
-| two-mode | README.md | preflight is the only interactive mode; every `/loop` firing enters cycle mode and runs unattended | animated-flagship | SKILL.md → the two-mode contract, §1–§3, §4 |
+| hero | README.md | one cycle per run, deduped against the ledger, stopping at two consecutive zero-new cycles or `max_cycles`, then one merged report | animated-hero | SKILL.md → §4, §5 |
+| two-mode | README.md | preflight is the only interactive mode; every cycle after it runs unattended, each heavy step delegated to a cold agent | animated-flagship | SKILL.md → the two-mode contract, §1–§3, §4 |
