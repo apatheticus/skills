@@ -29,6 +29,11 @@
   --blue-500:#3B82F6;--blue-400:#60A5FA;--blue-100:#DBEAFE;
   --accent-coral:#FF7A8A;--accent-green:#2ECC9A;--accent-orange:#F9A03F;--accent-purple:#8B5CF6;--accent-teal:#22C7C7;
   --success:#22B07D;--success-soft:#DCF6EC;--warning:#F59E0B;--warning-soft:#FEF3D9;--danger:#EF4458;--danger-soft:#FDE3E7;--info:#3B82F6;--info-soft:#DBEAFE;
+  /* The other two tiers report-schema.json permits. Critical takes the purple
+     accent because it must read as beyond --danger, not as more of it; the
+     informational note takes the ink ramp, which is blue-tinted rather than
+     grey, because it is the one tier that is not a concern. */
+  --critical:#8B5CF6;--critical-soft:#EDE6FE;--note:#6A7091;--note-soft:#EDEEF6;
   --ink-900:#12142B;--ink-800:#1E2142;--ink-700:#333759;--ink-600:#4C5273;--ink-500:#6A7091;--ink-400:#9297B3;--ink-300:#BEC2D6;--ink-200:#DDDFEB;--ink-100:#EDEEF6;--ink-050:#F6F7FC;--white:#fff;
   --navy-900:#23265E;--navy-800:#2B2F76;--navy-700:#383D8F;--navy-line:rgba(255,255,255,0.12);--navy-text:rgba(255,255,255,0.92);--navy-text-dim:rgba(255,255,255,0.55);
   --grad-brand:linear-gradient(135deg,#6A6FF7 0%,#4A4AE8 55%,#3B82F6 100%);
@@ -68,7 +73,7 @@ h1,h2,h3,h4{margin:0;color:var(--ink-900);letter-spacing:-0.02em}
 .chip{display:inline-flex;align-items:center;gap:7px;padding:7px 13px;border-radius:var(--radius-pill);background:rgba(255,255,255,0.10);border:1px solid rgba(255,255,255,0.16);font-size:12px;font-weight:600;color:rgba(255,255,255,0.9)}
 .chip .mono{color:rgba(255,255,255,0.72);font-weight:400;font-size:11.5px}
 .chip svg{width:13px;height:13px}
-.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-bottom:22px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:16px;margin-bottom:22px}
 .kpi{background:#fff;border:1px solid var(--border-subtle);border-radius:var(--radius-lg);padding:20px;box-shadow:var(--shadow-md);position:relative;overflow:hidden}
 .kpi .lbl{font-size:12px;font-weight:600;color:var(--ink-500);display:flex;align-items:center;gap:8px}
 .kpi .num{font-size:38px;font-weight:800;letter-spacing:-0.02em;font-variant-numeric:tabular-nums;line-height:1.05;margin-top:10px;color:var(--ink-900)}
@@ -78,7 +83,9 @@ h1,h2,h3,h4{margin:0;color:var(--ink-900);letter-spacing:-0.02em}
 .tile svg{width:18px;height:18px;stroke:#fff}
 .t-brand{background:var(--grad-brand)}.t-danger{background:linear-gradient(150deg,#FF7A8A,#EF4458)}
 .t-warn{background:var(--grad-orange)}.t-info{background:linear-gradient(150deg,#60A5FA,#3B82F6)}.t-green{background:var(--grad-green)}
+.t-critical{background:var(--grad-purple)}.t-note{background:linear-gradient(150deg,#9297B3,#6A7091)}
 .rail.danger{background:var(--danger)}.rail.warn{background:var(--warning)}.rail.info{background:var(--info)}.rail.brand{background:var(--brand-500)}.rail.green{background:var(--success)}
+.rail.critical{background:var(--critical)}.rail.note{background:var(--note)}
 .grid2{display:grid;grid-template-columns:1.55fr 1fr;gap:16px;margin-bottom:22px}
 .card{background:#fff;border:1px solid var(--border-subtle);border-radius:var(--radius-lg);box-shadow:var(--shadow-md)}
 .card.pad{padding:24px 26px}
@@ -116,6 +123,8 @@ h1,h2,h3,h4{margin:0;color:var(--ink-900);letter-spacing:-0.02em}
 .fbtn.active.sev-high{background:linear-gradient(150deg,#FF7A8A,#EF4458);box-shadow:0 6px 18px rgba(239,68,88,0.35)}
 .fbtn.active.sev-medium{background:var(--grad-orange);box-shadow:0 6px 18px rgba(249,160,63,0.35)}
 .fbtn.active.sev-low{background:linear-gradient(150deg,#60A5FA,#3B82F6);box-shadow:0 6px 18px rgba(59,130,246,0.35)}
+.fbtn.active.sev-critical{background:var(--grad-purple);box-shadow:0 6px 18px rgba(139,92,246,0.35)}
+.fbtn.active.sev-informational{background:linear-gradient(150deg,#9297B3,#6A7091);box-shadow:0 6px 18px rgba(106,112,145,0.32)}
 .toolbar .count-live{margin-left:auto;font-size:12.5px;color:var(--ink-400);font-weight:600}
 .toolbar .count-live b{color:var(--ink-800);font-variant-numeric:tabular-nums}
 .findings{display:flex;flex-direction:column;gap:14px}
@@ -125,13 +134,15 @@ h1,h2,h3,h4{margin:0;color:var(--ink-900);letter-spacing:-0.02em}
 .f-head{display:flex;align-items:center;gap:16px;padding:18px 22px;cursor:pointer;user-select:none}
 .f-id{font-family:var(--font-mono);font-size:12px;font-weight:600;color:var(--ink-400);width:58px;flex:none}
 .f-sevbar{width:4px;align-self:stretch;border-radius:4px;flex:none}
-.f-sevbar.high{background:var(--danger)}.f-sevbar.medium{background:var(--warning)}.f-sevbar.low{background:var(--info)}
+.f-sevbar.critical{background:var(--critical)}.f-sevbar.high{background:var(--danger)}.f-sevbar.medium{background:var(--warning)}.f-sevbar.low{background:var(--info)}.f-sevbar.informational{background:var(--note)}
 .f-title{flex:1;font-size:14.5px;font-weight:700;color:var(--ink-900);line-height:1.4}
 .f-tags{display:flex;align-items:center;gap:8px;flex:none}
 .badge{display:inline-flex;align-items:center;gap:6px;padding:4px 11px;border-radius:var(--radius-pill);font-size:11px;font-weight:700;letter-spacing:0.02em;text-transform:uppercase;white-space:nowrap}
 .badge.high{background:var(--danger-soft);color:#C42638}
-.badge.medium{background:var(--warning-soft);color:#B5730A}
+.badge.medium{background:var(--warning-soft);color:#B45309}
 .badge.low{background:var(--info-soft);color:#1D5FC4}
+.badge.critical{background:var(--critical-soft);color:#6D28D9}
+.badge.informational{background:var(--note-soft);color:#333759}
 .badge .dot{width:6px;height:6px;border-radius:50%;background:currentColor}
 .run-tag{font-size:11px;font-weight:600;color:var(--ink-400);font-family:var(--font-mono);background:var(--ink-050);border:1px solid var(--border-subtle);border-radius:var(--radius-pill);padding:3px 10px;white-space:nowrap}
 .chev{width:20px;height:20px;flex:none;color:var(--ink-300);transition:transform var(--dur-base) var(--ease-out)}
@@ -195,15 +206,21 @@ h1,h2,h3,h4{margin:0;color:var(--ink-900);letter-spacing:-0.02em}
     <div class="kpi"><span class="rail brand"></span>
       <div class="lbl"><span class="tile t-brand"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2 4 6v6c0 5 3.5 8 8 10 4.5-2 8-5 8-10V6z"/></svg></span>Total findings</div>
       <div class="num" id="kpiTotal">—</div><div class="sub">{{KPI_TOTAL_SUB}}</div></div>
-    <div class="kpi"><span class="rail danger"></span>
+    <div class="kpi" data-sev="critical"><span class="rail critical"></span>
+      <div class="lbl"><span class="tile t-critical"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 2h8l6 6v8l-6 6H8l-6-6V8z"/><path d="M12 8v5"/><path d="M12 16.5h.01"/></svg></span>Critical</div>
+      <div class="num">—</div><div class="sub">{{KPI_CRITICAL_SUB}}</div></div>
+    <div class="kpi" data-sev="high"><span class="rail danger"></span>
       <div class="lbl"><span class="tile t-danger"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 9v4"/><path d="M12 17h.01"/><path d="M10.3 3.9 2 18a2 2 0 0 0 1.7 3h16.6a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/></svg></span>High</div>
-      <div class="num" id="kpiHigh">—</div><div class="sub">{{KPI_HIGH_SUB}}</div></div>
-    <div class="kpi"><span class="rail warn"></span>
+      <div class="num">—</div><div class="sub">{{KPI_HIGH_SUB}}</div></div>
+    <div class="kpi" data-sev="medium"><span class="rail warn"></span>
       <div class="lbl"><span class="tile t-warn"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v4"/><path d="M12 16h.01"/></svg></span>Medium</div>
-      <div class="num" id="kpiMedium">—</div><div class="sub">{{KPI_MEDIUM_SUB}}</div></div>
-    <div class="kpi"><span class="rail info"></span>
+      <div class="num">—</div><div class="sub">{{KPI_MEDIUM_SUB}}</div></div>
+    <div class="kpi" data-sev="low"><span class="rail info"></span>
       <div class="lbl"><span class="tile t-info"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5"/><path d="M12 8h.01"/></svg></span>Low</div>
-      <div class="num" id="kpiLow">—</div><div class="sub">{{KPI_LOW_SUB}}</div></div>
+      <div class="num">—</div><div class="sub">{{KPI_LOW_SUB}}</div></div>
+    <div class="kpi" data-sev="informational"><span class="rail note"></span>
+      <div class="lbl"><span class="tile t-note"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-5 4z"/><path d="M12 9v4"/><path d="M12 6.5h.01"/></svg></span>Informational</div>
+      <div class="num">—</div><div class="sub">{{KPI_INFORMATIONAL_SUB}}</div></div>
     <div class="kpi"><span class="rail green"></span>
       <div class="lbl"><span class="tile t-green"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>Verified clean</div>
       <div class="num">{{CLEAN_COUNT}}</div><div class="sub">{{KPI_CLEAN_SUB}}</div></div>
@@ -243,9 +260,11 @@ h1,h2,h3,h4{margin:0;color:var(--ink-900);letter-spacing:-0.02em}
   <div class="toolbar">
     <div class="grp" data-group="sev">
       <button class="fbtn active" data-sev="all">All</button>
+      <button class="fbtn sev-critical" data-sev="critical">Critical</button>
       <button class="fbtn sev-high" data-sev="high">High</button>
       <button class="fbtn sev-medium" data-sev="medium">Medium</button>
       <button class="fbtn sev-low" data-sev="low">Low</button>
+      <button class="fbtn sev-informational" data-sev="informational">Informational</button>
     </div>
     <!-- RUN FILTER: keep this group only when there is more than one run.
          Add/remove data-run buttons to match the runs present. -->
@@ -285,11 +304,14 @@ h1,h2,h3,h4{margin:0;color:var(--ink-900);letter-spacing:-0.02em}
 
 <script>
 /* ============================================================
-   F[] — one object per finding, ordered high→low then by run.
+   F[] — one object per finding, ordered critical→informational then by run.
    Populate faithfully from findings.json + REPORT.md. Fields:
      run      : run number/label the finding came from (number or string)
      id       : display id ("#1", "F3", etc.)
-     sev      : "high" | "medium" | "low"  (drives counts, donut, badge, filter)
+     sev      : "critical" | "high" | "medium" | "low" | "informational"
+                (all five tiers report-schema.json permits; drives the KPI tile,
+                 donut, legend, badge and filter. A tier with no findings hides
+                 its own tile and filter button — never delete them by hand)
      title    : short title (inline <code> ok)
      attacker : who/what the actor is
      boundary : the trust boundary or invariant broken
@@ -316,28 +338,44 @@ const F = [
    files:["src/other/file.ts"]},
 ];
 
+/* ---- the severity table: every tier the schema permits, in report order.
+   This list is the single source for counts, the KPI tiles, the donut, the
+   legend, the card badges and the filter bar. It exists because the template
+   used to hardcode three tiers across five surfaces, so an engagement that
+   found a fourth needed hand-surgery on all five — and a real report missed
+   the KPI row that way, publishing tiles that summed to 49 against a stated
+   total of 50. Extending a tier here reaches every surface at once. ---- */
+const SEV = [
+  ['critical',      'Critical',      'var(--critical)'],
+  ['high',          'High',          'var(--danger)'],
+  ['medium',        'Medium',        'var(--warning)'],
+  ['low',           'Low',           'var(--info)'],
+  ['informational', 'Informational', 'var(--note)'],
+];
+
 /* ---- derived counts ---- */
-const counts = {high:0,medium:0,low:0};
+const counts = Object.fromEntries(SEV.map(([k])=>[k,0]));
 F.forEach(f=>{counts[f.sev]=(counts[f.sev]||0)+1});
 const total = F.length;
 const runs = [...new Set(F.map(f=>String(f.run)))];
 
-/* ---- KPI + hero numbers ---- */
+/* ---- KPI + hero numbers. A tier with no findings hides its tile rather than
+   showing a zero, so the visible tiles always sum to the stated total. ---- */
 document.getElementById('kpiTotal').textContent = total;
-document.getElementById('kpiHigh').textContent = counts.high;
-document.getElementById('kpiMedium').textContent = counts.medium;
-document.getElementById('kpiLow').textContent = counts.low;
+document.querySelectorAll('.kpi[data-sev]').forEach(el=>{
+  const n = counts[el.dataset.sev] || 0;
+  el.querySelector('.num').textContent = n;
+  el.hidden = n === 0;
+});
 document.getElementById('donutTotal').textContent = total;
+const topTier = counts.critical ? counts.critical+' critical' : (counts.high ? counts.high+' high' : '0 critical/high');
 document.getElementById('heroSummaryChip').textContent =
-  `${runs.length} run${runs.length>1?'s':''} · ${total} findings · ${counts.high?counts.high+' high':'0 critical/high'}`;
+  `${runs.length} run${runs.length>1?'s':''} · ${total} findings · ${topTier}`;
 
 /* ---- donut (conic-gradient) + legend, computed from counts ---- */
 (function(){
-  const segs = [
-    ['High',   counts.high,   'var(--danger)'],
-    ['Medium', counts.medium, 'var(--warning)'],
-    ['Low',    counts.low,    'var(--info)'],
-  ].filter(s=>s[1]>0);
+  const segs = SEV.map(([k,label,colour])=>[label,counts[k],colour]).filter(s=>s[1]>0);
+  if(!total) return;
   let acc=0, stops=[];
   segs.forEach(([,n,c])=>{const start=acc/total*360, end=(acc+n)/total*360; stops.push(`${c} ${start}deg ${end}deg`); acc+=n;});
   document.getElementById('donut').style.background = `conic-gradient(${stops.join(',')})`;
@@ -348,10 +386,10 @@ document.getElementById('heroSummaryChip').textContent =
 })();
 
 /* ---- render finding cards ---- */
-const sevLabel = {high:"High",medium:"Medium",low:"Low"};
+const sevLabel = Object.fromEntries(SEV.map(([k,label])=>[k,label]));
 const multiRun = runs.length>1;
 document.getElementById('findings').innerHTML = F.map((f,i)=>`
-  <article class="finding" data-sev="${f.sev}" data-run="${f.run}" style="animation:fade var(--dur-base) var(--ease-out) ${i*0.02}s both">
+  <article class="finding" data-sev="${f.sev}" data-run="${f.run}" style="animation:fade var(--dur-base) var(--ease-out) ${Math.min(i*0.02,0.3)}s both">
     <div class="f-head" onclick="this.parentElement.classList.toggle('open')">
       <span class="f-sevbar ${f.sev}"></span>
       <span class="f-id">${f.id}</span>
@@ -386,6 +424,10 @@ function applyFilter(){
   });
   document.getElementById('visCount').textContent = vis;
 }
+/* A filter for a tier nobody found is a dead button; hide it the same way. */
+document.querySelectorAll('[data-group="sev"] .fbtn[data-sev]').forEach(b=>{
+  if(b.dataset.sev!=="all" && !counts[b.dataset.sev]) b.hidden=true;
+});
 document.querySelectorAll('[data-group="sev"] .fbtn').forEach(b=>{
   b.onclick=()=>{document.querySelectorAll('[data-group="sev"] .fbtn').forEach(x=>x.classList.remove('active'));b.classList.add('active');curSev=b.dataset.sev;applyFilter();};
 });

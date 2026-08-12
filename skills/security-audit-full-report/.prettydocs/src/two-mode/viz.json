@@ -7,18 +7,18 @@
   "facts": [
     "Every invocation picks its mode by reading ledger.md before doing anything else",
     "Preflight mode runs when no engagement ledger exists, and is the only mode allowed to ask a question",
-    "Preflight covers \u00a71 to \u00a73: check security-audit is installed, offer to gitignore .audit/, create the engagement and start the loop",
-    "Cycle mode runs on every /loop firing while status is running, and never asks a question",
-    "Cycle mode covers \u00a74a to \u00a74d: run one audit, count new medium-or-higher findings, update the counter, then continue or report",
+    "Preflight covers \u00a71 to \u00a73: check security-audit is installed, offer to gitignore .audit/, create the engagement and state the cycle budget",
+    "Cycle mode runs while status is running, never asks a question, and delegates every heavy step to a cold agent",
+    "Cycle mode covers \u00a74 and \u00a75: spawn an agent that runs one audit, commit the run, continue or stop, then build and verify the report",
     "The ledger's status moves from running to converged or max-cycles-reached, and then to done"
   ],
-  "facts_hash": "aa4928901408dd15be9081e523a1255b817450ff1a2fabba284a3f897bc89e94",
-  "src_hash": "7ec6291a918f718152d690f16808f46ce4cb24f7529c5f2bca56d26caa360cae",
-  "design_hash": "89eb004c92fa3a95fab4f829cbfa225aed66497cc3aa904d14f5013138359662",
+  "facts_hash": "52bc908ecea92b9cd870f686591323368d9ae6cf1d8373de4cd5cf4d2f6080e2",
+  "src_hash": "7c5695f5f664ef7821a6a1f184a9b8e2cf5ff4f0877b2245405c427be0bfe048",
+  "design_hash": "a1e98115a8c5c305603bb691d94622d2d030b80a3b8484185c3a6e22011bf61b",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 8102
+    "bytes": 8266
   },
   "relaxed": []
 }

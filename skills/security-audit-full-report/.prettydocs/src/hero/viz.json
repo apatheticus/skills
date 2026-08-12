@@ -6,15 +6,15 @@
   "style": "flat-material",
   "facts": [
     "Each cycle runs exactly one security-audit into run-N under the engagement directory",
-    "A finding counts as new only if its root_cause plus title key is not already in ledger.md's accumulated list",
-    "The convergence counter increments on a cycle that adds zero new medium-or-higher findings, and resets otherwise",
+    "A finding counts as new only if the entrypoint and sink file-and-scope key of its trace is not already in the engagement's findings index from an earlier run",
+    "A cycle that adjudicated its candidates increments the convergence counter when it adds zero new medium-or-higher findings and resets it otherwise, while a cycle that stopped before validating leaves the counter untouched",
     "The loop stops at two consecutive zero-new cycles, or when the run number reaches max_cycles",
     "The consolidated report is written once, at the stop, merging every run into one HTML file that stays filterable by run",
     "Every claim in the report traces to that run's findings.json, and the report is built from the bundled assets/template.html"
   ],
-  "facts_hash": "de21d7126585db4a9d5c830b93114aa40a4b07443b7cab873016b887eaf8deda",
+  "facts_hash": "06c60024da13fac9e6c9e181900ff9633cece6662580ed3051368e9d9d635ddb",
   "src_hash": "9a09abc21dcb1ee37a81ace7a53eb02896729f1d340db0fd112ec788f0e096b6",
-  "design_hash": "89eb004c92fa3a95fab4f829cbfa225aed66497cc3aa904d14f5013138359662",
+  "design_hash": "a1e98115a8c5c305603bb691d94622d2d030b80a3b8484185c3a6e22011bf61b",
   "svg": {
     "loop_s": 12,
     "width": 1200,

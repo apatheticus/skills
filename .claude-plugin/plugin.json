@@ -1,6 +1,6 @@
 {
   "name": "apatheticus-skills",
-  "version": "0.14.0",
+  "version": "0.18.1",
   "description": "Agent skills published by Zerø Effort. Install the whole bundle as a managed plugin that updates when the repo does.",
   "author": {
     "name": "Zerø Effort",
