@@ -24,10 +24,17 @@ the findings, the template, or the report. Everything else stays with you.
 | `ENGAGEMENT` | absolute path of `<target>/.audit/<YYYYMMDD>/` |
 | `SKILL_DIR` | absolute path of this skill, so you can find `assets/template.html` |
 | `DESIGN_SYSTEM` | a design-system dir, or the string `bundled SaaS Pro` |
-| `STOP_REASON` | `converged` or `max-cycles-reached` |
+| `STOP_REASON` | `converged`, `max-cycles-reached`, or `halted-by-operator` |
 
 Accuracy outranks polish throughout. A security reader must be able to trust every
 number and every path.
+
+**The report file is a deliverable, so write it.** A guard against agents writing
+unsolicited report/summary `.md`/`.html` files may sit in front of the copy in §4.
+It has a deliverable exception, and this page is the declared output contract of
+the skill that spawned you — not a write-up of your own work — so the exception
+applies. A cycle agent in one engagement read that guard as a wall and discarded
+its run report; do not repeat it here, where nothing else carries the output.
 
 ## 1. Inventory, then fan out
 
@@ -60,7 +67,7 @@ For each confirmed finding return:
 |---|---|
 | `run` | the run number |
 | `id` | preserve the original id where one exists |
-| `sev` | `severity.overall_severity`, lowercase — `critical` keeps its own tier only if present |
+| `sev` | `severity.overall_severity`, lowercase, verbatim — one of `critical`, `high`, `medium`, `low`, `informational`. Never fold a tier into a neighbour |
 | `title` | `title` |
 | `attacker` | `execution.attacker_perspective` |
 | `boundary` | the trust boundary or invariant broken — from `root_cause` / `intended_behavior` |
@@ -77,9 +84,44 @@ origin, and expose a run filter so a reader can still view one run alone. Never
 drop a run, and never emit one file per run.
 
 Cross-run duplicates are already resolved on disk: `findings-index.json` holds one
-record per distinct finding, keyed structurally by sink `file::scope`. Use it to
+record per distinct finding, keyed structurally by the entrypoint and sink
+`file::scope` pairs of its attack path. Use it to
 decide which findings are the *same* finding seen twice — show such a finding once,
 tagged with every run that found it, rather than as N separate cards.
+
+## 3a. Completeness — the report must not overstate its own coverage
+
+**`converged` is the only stop reason that is evidence of coverage.** Every other
+one means the engagement stopped for a reason unrelated to the codebase being
+clean, and a reader who misses that will read a floor as a ceiling.
+
+| `STOP_REASON` | What it means | What it is not |
+|---|---|---|
+| `converged` | two consecutive adjudicated cycles added no new medium-or-higher findings | still not a proof of absence |
+| `max-cycles-reached` | the cycle budget ran out, with the loop still finding new ground | not evidence the loop was finished |
+| `halted-by-operator` | a human stopped the engagement before either condition | says nothing at all about coverage |
+
+Then check the ledger yourself rather than trusting the value you were handed —
+`ENGAGEMENT/ledger.md` is short, and its per-cycle log is the primary record. Two
+things there make an engagement **incomplete** independently of why it stopped:
+
+- a log line beginning `run N: UNVALIDATED` — that cycle's hunters ran but nothing
+  adjudicated their candidates, so its findings are absent rather than zero;
+- a `run-N/` directory holding candidate files but no parsable `findings.json`.
+
+**Whenever the stop reason is not `converged`, or any run is incomplete, the page
+carries a completeness banner** — at the top of the executive summary, before any
+count, in the report's own voice and not a footnote:
+
+> This assessment stopped at N of M planned cycles because *&lt;reason&gt;*. Run K's
+> candidate findings were never validated. **The findings below are a floor, not a
+> total** — the assessment was still surfacing new medium-or-higher issues when it
+> stopped, and unexamined areas remain.
+
+Fill in the real numbers, drop the sentences that do not apply, and drop the
+"still surfacing" clause if the last adjudicated cycle genuinely added nothing.
+Never soften it to "the assessment is ongoing". Also add one entry to `caveats`
+per incomplete run, so the orchestrator can repeat it in the handoff.
 
 ## 4. Fill the template
 
@@ -91,17 +133,25 @@ keeps a multi-run report internally consistent.
 
 Populate:
 
-- **`F[]`** — one object per confirmed finding, ordered high→low then by run.
+- **`F[]`** — one object per confirmed finding, ordered critical→informational
+  then by run.
 - **`{{PLACEHOLDER}}` tokens** — project name, target slug, report date, scope
-  blurb, KPI sub-labels, `{{CLEAN_COUNT}}`, executive-summary HTML, theme cards,
+  blurb, the seven `{{KPI_*_SUB}}` sub-labels, `{{CLEAN_COUNT}}`,
+  executive-summary HTML, theme cards,
   run-filter buttons, verified-clean items, recommendations, footer.
 - **Run filter** — one `<button data-run="N">` per run, labelled by scope (e.g.
   "Run 1 · Web/API"). With only one run, delete the whole `data-group="run"`
   toolbar group; the template already hides per-card run tags in that case.
-- **Stop reason** — state in the executive summary whether the engagement
-  `converged` (two consecutive cycles added no new medium-or-higher findings) or
-  hit `max-cycles-reached`. These mean different things to a reader: the first is
-  evidence of coverage, the second explicitly is not.
+- **Severity tiers — touch nothing.** The template ships all five tiers
+  `report-schema.json` permits, wired through one `SEV` table that drives the KPI
+  tiles, the donut, the legend, the card badges and the filter bar together. A
+  tier with no findings hides its own tile and filter button, so the visible tiles
+  always sum to the stated total. **Do not add, delete or restyle a tier by hand**
+  — that is what this replaced. A real report was published with tiles summing to
+  49 against a stated 50 because a hand-added tier reached four of those five
+  surfaces and missed the KPI row.
+- **Stop reason** — state it in the executive summary, with §3a's completeness
+  banner above it whenever the reason is not `converged` or any run is incomplete.
 
 Delete the template-notes HTML comment and any example `F[]` entries.
 
