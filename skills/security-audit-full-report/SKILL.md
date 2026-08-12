@@ -4,7 +4,7 @@ description: Run an iterative, multi-cycle security vulnerability assessment aga
 argument-hint: "[target-dir] [max-cycles] [design-system-dir]"
 user-invocable: true
 license: MIT
-version: 3.2.1
+version: 3.2.2
 ---
 
 # security-audit-full-report
@@ -167,19 +167,35 @@ commit" therefore fires too often in one case and never in the other, and the
 second is the one that hangs the loop forever waiting for something that already
 happened.
 
-So establish it from the system instead, cheapest first:
+**Watch the disk, not the mailbox.** Across the cycles observed so far the
+notification has arrived four times for one completion and not at all for three
+others, so it has never once been the cheapest correct signal. The filesystem
+has been right every time, and it costs one `ls`. Measured on one engagement:
+the agent's output was complete on disk **an hour** before a notification-first
+orchestrator went looking for it.
 
-1. **Notified?** Go to 4b. If you were notified more than once, go anyway — `commit`
-   is idempotent, so extra notifications cost nothing.
-2. **Quiet?** Look at `run-N/` on disk. `security-audit` writes candidate files as
-   it works, so a newest-mtime that keeps moving means the cycle is alive and you
-   simply wait. Use `ls -lt` or `find run-N -newermt '-20 minutes'` — never read
-   what it finds.
-3. **Quiet and no new bytes for a long stretch** (~20 minutes is a reasonable
-   threshold; adjust for the repo's size): send `cycle-<N>` a one-line probe asking
-   only whether it is still working. A live agent answers; an agent that already
-   finished replies from its transcript and tells you so — then go to 4b. **Ask for
-   one line. Never ask it for its findings.**
+So establish completion from the system, in this order:
+
+1. **Look at `run-N/`.** This is the primary signal. `security-audit` writes
+   candidate files as it works, so a newest mtime that keeps moving means the
+   cycle is alive and you simply wait. Use `ls -lt run-N/` — never read what it
+   finds. Note that `find -newermt '-20 minutes'` is not portable; on macOS
+   `find` may be `bfs`, which needs an ISO-8601 timestamp and errors on a
+   relative one.
+2. **Take the notification if it happens to arrive.** It is free confirmation —
+   go to 4b, and go even if you were notified more than once, because `commit`
+   is idempotent. **Never wait on it.** Its absence tells you nothing.
+3. **Quiet, with no new bytes for a long stretch** (~20 minutes is a reasonable
+   threshold; adjust for the repo's size): send `cycle-<N>` a one-line probe
+   asking only whether it is still working. A live agent answers; an agent that
+   already finished replies from its transcript and tells you so — then go to
+   4b. **Ask for one line. Never ask it for its findings.**
+
+A `run-N/findings.json` that has appeared **and** stopped growing, with nothing
+else in the directory moving, is the strongest completion signal available short
+of the agent itself. Confirm it with the probe before you commit; do not treat
+it as proof on its own, because the brief rewrites that file during
+verification.
 
 Two things never to do here. **Do not spawn a second cycle agent for the same
 run** — two audits writing into one `run-N/` corrupt the artifact you are waiting
@@ -298,6 +314,12 @@ Two agents, in order. Neither one's working material touches your context.
 
 It fans out one extractor per run internally, so a five-run engagement does not
 serialise.
+
+**§4a′ applies here too — name it `report-1` and watch the engagement directory,
+not the mailbox.** The report agent runs on the same unreliable channel: in one
+engagement it finished, wrote its HTML, and never notified. Watch for the report
+file to appear and stop growing, then probe by name for the JSON return. Waiting
+on a notification stalls the handoff on a deliverable that is already complete.
 
 **Verifier** — one `general-purpose` agent, after the builder returns:
 
