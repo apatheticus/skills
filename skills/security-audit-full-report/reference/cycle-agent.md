@@ -62,6 +62,28 @@ say, was destroyed when the agent died. Nothing downstream reads those two files
 so that cycle survived it; the report agent's HTML sits behind the same guard and
 would not.
 
+**That agent reported the guard as a harness block, and it was not one.** The
+configuration was checked afterwards: every `Write`-matching hook on that machine
+was `PostToolUse`, which runs after the tool succeeds and cannot stop it, and no
+`deny` or `ask` permission rule touched `Write` or `.md` at all. Nothing blocked
+the write. The agent declined it, described its own reluctance as a denial, and
+then applied the one-strike rule for permission denials — which exists for real
+gates — to a gate that was never there. On a re-run under the identical
+configuration both files were written normally, which is what a self-imposed
+reluctance looks like and a hook never does.
+
+So distinguish the two cases, and say which one you hit:
+
+- **A real denial** names the rule and comes back from the tool as an error. One
+  strike applies: do not retry the same intent in a different shape. Report the
+  gate.
+- **Your own reluctance** has no error attached. It is not a gate, one strike
+  does not apply, and the deliverable exception above already answers it. Write
+  the file.
+
+If you report a blocked write, quote the exact error text the tool returned. No
+error text means it was the second case.
+
 ### Every agent below you reports by returning, never by messaging
 
 **This is a containment rule, and it is the one part of the design that has been

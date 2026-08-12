@@ -4,7 +4,7 @@ description: Run an iterative, multi-cycle security vulnerability assessment aga
 argument-hint: "[target-dir] [max-cycles] [design-system-dir]"
 user-invocable: true
 license: MIT
-version: 3.2.2
+version: 3.2.3
 ---
 
 # security-audit-full-report
