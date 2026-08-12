@@ -36,6 +36,14 @@ the skill that spawned you — not a write-up of your own work — so the except
 applies. A cycle agent in one engagement read that guard as a wall and discarded
 its run report; do not repeat it here, where nothing else carries the output.
 
+**That agent called it a harness block, and the configuration proved otherwise** —
+every `Write`-matching hook was `PostToolUse`, which cannot stop a write, and no
+permission rule touched `Write` at all. So separate the two cases before you
+report either. A real denial returns an error from the tool: quote it verbatim,
+do not retry the same intent in another shape, and report the gate. Reluctance
+with no error attached is not a gate, the one-strike rule does not apply to it,
+and the exception above already answers it — write the file.
+
 ## 1. Inventory, then fan out
 
 List `ENGAGEMENT` and every `run-N/`. Each run has `findings.json` (source of
