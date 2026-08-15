@@ -84,14 +84,14 @@ than creating duplicates.
 
 ### Styles
 
-Thirty-one named idioms, one chosen per repo, listed alphabetically:
+Thirty-two named idioms, one chosen per repo, listed alphabetically:
 
 `bento-grid` · `blueprint` · `brushed-metal` · `claymorphism` · `codex-leonardo` ·
 `console-elbow` · `digital-rain` · `draughtsman-notebook` · `editorial` ·
 `flat-material` · `glassmorphism` · `holographic-projection` · `hud` · `ide-dark` ·
 `isometric-3d` · `lofi-wireframe` · `maximalist` · `neo-brutalist` · `neumorphism` ·
 `oil-impasto` · `patent-drawing` · `pencil-lined-paper` · `rough-sketch` ·
-`schematic` · `skeuomorphic` · `swiss-minimal` · `terminal-minimalist` ·
+`schematic` · `skeuomorphic` · `soft-vinyl` · `swiss-minimal` · `terminal-minimalist` ·
 `watercolor` · `whiteboard-marker` · `wood-grain` · `y2k-retrofuturist`
 
 Common aliases resolve without asking (`brutalist`, `glass`, `soft-ui`, `swiss`,

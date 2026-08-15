@@ -62,7 +62,7 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 ## Current state
 
-Scaffolded 2026-07-24. **Seven skills shipped** — `human-voice`, `prettier-svg-docs`, `pretty-hyper-docs`, `pretty-plain-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green at plugin version **0.19.0**. `prettier-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28, revised to its v2 spec on 2026-07-29), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. Since 0.19.0 it also ships a **27-type diagram taxonomy** with a **specimen per type** at `docs/samples/types/<slug>.svg`, all authored in `flat-material`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
+Scaffolded 2026-07-24. **Seven skills shipped** — `human-voice`, `prettier-svg-docs`, `pretty-hyper-docs`, `pretty-plain-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green at plugin version **0.19.1**. `prettier-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28, revised to its v2 spec on 2026-07-29), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. Since 0.19.0 it also ships a **27-type diagram taxonomy** with a **specimen per type** at `docs/samples/types/<slug>.svg`, all authored in `flat-material`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
 
 **`svg_check.py` gates fidelity, not just safety.** Every other check class is a ceiling (filter depth, bytes, radius) or a legibility floor (font size, contrast) — none of them asks whether a visual *looks like* the style it claims, so a flat, styleless render used to pass clean. Styles now declare their material in `scripts/styles.json` via `require_filter_all`, `min_filter_depth` and `min_elements`, and the checker prints a per-file `NOTE` reporting the chain depth, filter count and drawn-element count it actually found. `deepest chain 1` under a floor of 3 is the tell that a material was faked. Two attributes drive it: `data-specimen="true"` marks a catalog sample (**`min_elements` binds only on specimens** — a README diagram with four boxes is correct at 23 elements, and padding it would be worse output), and `data-style="<slug>"` on a `<filter>` measures that chain against the floor of the style it depicts rather than the file-wide one.
 
@@ -214,6 +214,37 @@ the only animation is `6s`, so `t=6` equals `t=0` by arithmetic and would have r
 broken harness. Its `alt` text was silently false afterwards (it still described "ten
 cells"); nothing checks alt content, so that is a hand check belonging beside any
 re-author.
+
+**0.19.1 is the first end-to-end self-run of the merged skill — `prettier-svg-docs` over
+its own `README.md` — and the two findings worth keeping are both about a check that
+reads green while checking nothing.** (1) **`house-style.md`'s quality gate 6 prescribed a
+command that could not perform the two checks its own sentence named.** It said run
+`python3 scripts/svg_check.py <file.svg>` and promised "palette conformance, contrast" —
+but without `--design` the palette is empty, so every contrast test degrades to the
+`text has no data-bg ground in scope` WARN and the off-system-colour gate never fires,
+and without `--style` no style invariant or fidelity floor applies. **Both flags fail
+open, and the run still prints `0 error(s)`.** Measured on this repo's own hero: 29
+warnings without `--design`, `0/0/0` with it. The only signal is one `NOTE` on the *first*
+line of output, which `tail` eats — and `tail` is how anyone reads a checker that prints a
+line per finding. `viz-production.md:209` had the correct form all along and CI passes both
+flags, so the defect was confined to the gate list SKILL.md phase 7 actually sends you to.
+Gate 6 now carries the full command and states the fail-open behaviour outright. (2) **The
+alt/`<desc>` staleness above recurred immediately, on a different file.** `hero.svg`'s
+`<desc>` and its README `alt` both read "the **eight** classes … the eighth being fidelity"
+while the board itself draws `9` and "the ninth is diagram" — the drawing was updated at
+0.19.0 and its two accessible descriptions were not. `src_hash` covers the SVG's *bytes*,
+so editing the `<desc>` moves it and the audit correctly reported `STALE`; what nothing
+covers is whether the description still matches what is drawn. Two consecutive re-authors
+have now shipped a false accessible name, which retires "a hand check belonging beside any
+re-author" as a sufficient answer — the honest options are a machine check comparing drawn
+numerals against the alt text, or accepting it as a known unchecked surface and saying so.
+Seven further defects were text-only and are visible in the diff: a `31` style badge, a
+31-row A–Z table missing `soft-vinyl`, "21 of the 31", "two bundled scripts" three lines
+above a block listing three, two survivals of the pre-0.10.0 `DESIGN.md` name for the
+design contract, a Layout tree omitting the entire 0.19.0 addition, and SKILL.md's
+"Thirty-one named idioms" contradicted by "all thirty-two" twenty lines later. **Patch —
+no checker, style or catalog changed, so nothing previously produced stops conforming;
+`svg_check.py`, `styles.json` and `diagrams.json` are untouched.**
 
 **`viz.json` gained `diagram_type` and `budget_cuts[]`, and `diagram_type` has three
 states rather than two.** A slug means the visual is a diagram of that type; **absent**
