@@ -62,7 +62,7 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 ## Current state
 
-Scaffolded 2026-07-24. **Seven skills shipped** — `human-voice`, `prettier-svg-docs`, `pretty-hyper-docs`, `pretty-plain-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green at plugin version **0.21.0**. Read that number off
+Scaffolded 2026-07-24. **Eight skills shipped** — `gauntlet-builder`, `human-voice`, `prettier-svg-docs`, `pretty-hyper-docs`, `pretty-plain-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green at plugin version **0.22.1**. Read that number off
 `git show origin/main:.claude-plugin/plugin.json` rather than the working tree — an
 in-flight bump is not a shipped version, and this line went stale by a release because
 0.21.0 merged without it moving. `prettier-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28, revised to its v2 spec on 2026-07-29), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. Since 0.19.0 it also ships a **27-type diagram taxonomy** with a **specimen per type** at `docs/samples/types/<slug>.svg`, all authored in `flat-material`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
@@ -317,6 +317,53 @@ answered one. `budget_cuts[]` extends the mechanism `relaxed[]` already uses one
 a softened gate is recorded so the softening is auditable, and a cut is recorded so the
 omission is — otherwise content dropped to fit nine nodes and content nobody noticed are
 indistinguishable to the next run.
+
+**`gauntlet-builder` is the eighth skill (0.22.0), and 0.22.1 gave it the README that
+makes the repo's standing claim true** — every skill's visuals are authored by running
+`prettier-svg-docs` on it. Full release detail for the skill itself is in
+`.claude/state/stage.md`; what belongs here is what its **first `terminal-minimalist`
+run** found, because that style had never been used outside its own specimen.
+
+**The style collides with `diagram-grammar.md` in two places, and both resolve the same
+way — §6 gives radius to the style, so the style wins and the divergence gets recorded
+rather than silently split.** `styles.json` declares `max_rx: 0`, which makes
+`flowchart`'s stadium terminator (`rx=28`) and the grammar's default node box (`rx=8`)
+both errors; the terminator's *kind* is then carried by a solid semantic fill and a glyph,
+which is this style's own vocabulary doing the job shape was doing. And the grammar's
+mandatory rounded elbow (`r=10`) is on this style's `Never` list, so connectors turn hard.
+Orthogonality — the part `svg_check.py` actually measures — is unaffected either way, so
+neither divergence costs a check. Both are written into
+`skills/gauntlet-builder/.prettydocs/prettydocs.md`, which is where the next run will look.
+
+**The 4-unit grid check reads EVERY `<rect>` inside a `[data-node]` group, not just the
+node box** — `svg_check.py:931-941` iterates `n.iter()`. So the style's canonical **3-unit
+status rail is an error** the moment it appears on a diagram, and the fix is 4 rather than
+an exemption. Worth knowing before laying out any board whose style prescribes a
+sub-4-unit detail: a hairline, a 2-unit rule, a 3-unit rail are all fine as chrome and all
+illegal inside a node group.
+
+**Fidelity here is drawn density and mono discipline, not a filter chain.**
+`terminal-minimalist` declares no `min_filter_depth` and *forbids* all four of
+`feGaussianBlur`, `feDropShadow`, `linearGradient` and `radialGradient`, so both boards
+gate clean at `deepest chain 0, 0 filter(s)` — the same shape as `editorial` and
+`bento-grid`, and a zero-filter NOTE on any of the three is correct rather than a faked
+material. It is also genuinely the cheapest style measured here: **4.3 KB and 8.1 KB**
+against a 60 KB warn.
+
+**One defect only the render showed, and it is a new shape.** A marching-dash return path
+written `stroke-dasharray: 16 880` draws one dash and 864 units of nothing, so the *route*
+is invisible and only a tick appears to move through empty space. Every gate passed —
+seam arithmetic, orthogonality, contrast, the diagram class — because nothing is wrong
+with the file; what is wrong is that the resting state carries no information. `8 8` with
+a one-period offset march fixes it and keeps the dash semantic. The general form: **a gate
+can prove an animation is seam-exact without any of them asking whether the thing being
+animated is visible at rest**, which is exactly what the phase-4 pixel read is for.
+
+**Patch, and the mechanical test decides it**: no checker, style, catalog or contract file
+was touched, so every previously committed asset re-gates to a byte-identical verdict by
+construction, and a downstream repo conforming under 0.22.0 still conforms. Contrast
+0.13.1, which was also additive and also a patch, and 0.14.0, which looked identical in
+kind and took a minor because it raised a gate.
 
 
 **`reflect` carries TWO design systems and they are constantly confused. Read this before touching either.** System **A** is the *report* system at `skills/reflect/reference/design-system/`, which styles the HTML report the skill generates — as of 0.12.1 that is **SaaS Pro**, swapped in from Neumorphic Fresh. System **B** is `skills/reflect/.prettydocs/prettydocs.md`, which governs the skill's own README visuals (`docs/assets/hero.svg`, `pipeline.svg`) and is listed in the per-skill style table above. B is *mapped from* A's tokens via a 16-row table, so the 0.12.1 swap left it stale — the README pictures advertised a soft-UI look for a glass-and-gradient report — and **0.12.2 closed that gap**: B was re-derived from `reference/design-system/tokens/colors.css`, style `neumorphism` → **`glassmorphism`**, both visuals re-authored, and the five README badge hexes moved off the old mint/teal ramp onto `brand-600` / `ink-900` / `brand-700` / `success-strong`. There is no longer a stale-by-design debt here. B still records A only as `design_source_path` — `design_hash` covers `prettydocs.md` alone, so a future SaaS Pro refresh **warns** rather than forcing a re-render.

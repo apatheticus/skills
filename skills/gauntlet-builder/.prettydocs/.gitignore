@@ -1,0 +1,6 @@
+# Visual QA byproducts. The pattern contains a slash, so it anchors to this file's
+# own directory — .prettydocs/ is self-contained and needs no entry in the project's
+# root .gitignore. The committed artefacts are the .svg files in docs/assets/ plus
+# each visual's viz.json; the asset is its own source, so there is nothing else to
+# keep.
+src/**/_qa/

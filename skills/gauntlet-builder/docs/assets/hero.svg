@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 440"
+     width="1200" height="440" role="img" data-loop-s="12" data-bg="background">
+  <title>gauntlet-builder emits an answer key</title>
+  <desc>A terminal pane holding an answer key. Three numbered checks are each binary and each judged by one of exactly two forms, run it or A/B pick, with a reference only where an A/B pick needs one. Below a rule sits U1, an undecided item marked not gradeable rather than guessed. A status strip reports the bundled linter exiting 0 over 3 binary checks and 1 not gradeable.</desc>
+  <style>
+    svg { --background:#0d1117; --surface:#161b22; --ink:#c9d1d9; --muted:#8b949e;
+          --rule:#30363d; --ok:#3fb950; --warn:#d29922; --id:#58a6ff; }
+
+    .bg    { fill: var(--background); }
+    .pane  { fill: var(--surface); stroke: var(--rule); stroke-width: 1; }
+    .hair  { stroke: var(--rule); stroke-width: 1; fill: none; }
+    .rail  { fill: var(--muted); }
+    .strip { fill: var(--ok); }
+
+    .t     { font-family: 'JetBrains Mono', 'IBM Plex Mono', ui-monospace,
+                          SFMono-Regular, Menlo, Consolas, monospace; }
+    .ink   { fill: var(--ink); }
+    .mut   { fill: var(--muted); }
+    .ok    { fill: var(--ok); }
+    .warn  { fill: var(--warn); }
+    .id    { fill: var(--id); }
+    .ko    { fill: var(--background); }
+    .b     { font-weight: 700; }
+
+    .cursor { fill: var(--ink); animation: blink 2s steps(1, end) infinite; }
+    @keyframes blink { 0%, 49% { opacity: 1 } 50%, 100% { opacity: 0 } }
+
+    .scan { fill: var(--ok); animation: scan 6s steps(3, end) infinite; }
+    @keyframes scan {
+      from { transform: translateY(0) }
+      to   { transform: translateY(108px) }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .cursor { animation: none; opacity: 1 }
+      .scan   { animation: none; transform: translateY(0) }
+    }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1200" height="440"/>
+
+  <!-- command line -->
+  <text class="t ok b" x="80" y="88" font-size="40">&#10095;</text>
+  <text class="t ink b" x="120" y="88" font-size="40" data-role="title">gauntlet-builder</text>
+  <rect class="cursor" x="516" y="58" width="20" height="38"/>
+  <text class="t mut" x="1120" y="88" font-size="20" text-anchor="end"
+        data-role="metadata">.gauntlet/checkout/ANSWER-KEY.md</text>
+
+  <!-- the answer key pane -->
+  <g data-bg="surface">
+    <rect class="pane" x="80" y="128" width="1040" height="216"/>
+    <rect class="rail" x="80" y="128" width="4" height="216"/>
+    <rect class="scan" x="80" y="182" width="4" height="36"/>
+
+    <text class="t mut" x="112" y="164" font-size="16" data-role="metadata">#  CHECK</text>
+    <text class="t mut" x="772" y="164" font-size="16" data-role="metadata">JUDGED BY</text>
+    <text class="t mut" x="940" y="164" font-size="16" data-role="metadata">REFERENCE</text>
+
+    <text class="t ink" x="112" y="200" font-size="20">1  upgrading mid-month charges the prorated difference</text>
+    <text class="t id"  x="772" y="200" font-size="20">run it</text>
+    <text class="t mut" x="940" y="200" font-size="16" data-role="metadata">&#8212;</text>
+
+    <text class="t ink" x="112" y="236" font-size="20">2  the checkout reads as trustworthy at a glance</text>
+    <text class="t id"  x="772" y="236" font-size="20">A/B pick</text>
+    <text class="t mut" x="940" y="236" font-size="16" data-role="metadata">refs/stripe.png</text>
+
+    <text class="t ink" x="112" y="272" font-size="20">3  a failed card shows retry without leaving the page</text>
+    <text class="t id"  x="772" y="272" font-size="20">run it</text>
+    <text class="t mut" x="940" y="272" font-size="16" data-role="metadata">&#8212;</text>
+
+    <line class="hair" x1="112" y1="290" x2="1088" y2="290"/>
+
+    <text class="t warn" x="112" y="318" font-size="20">U1 whether shoppers trust the badge at all</text>
+    <text class="t warn" x="772" y="318" font-size="20">?</text>
+    <text class="t warn" x="940" y="318" font-size="16" data-role="metadata">not gradeable</text>
+  </g>
+
+  <!-- status strip -->
+  <rect class="strip" x="80" y="376" width="1040" height="32"/>
+  <text class="t ko b" x="96" y="398" font-size="20" data-bg="ok">exit 0  &#183;  check_answer_key.py  &#183;  3 binary  &#183;  1 not gradeable</text>
+</svg>
