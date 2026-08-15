@@ -1,0 +1,188 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 540" width="1200" height="540"
+     role="img" data-loop-s="12" data-diagram="it-state" data-bg="background">
+  <title>The apatheticus/skills landscape before a shared module exists</title>
+  <desc>The repository's seven skills grouped by what each one produces: three doc-visual
+skills emitting animated SVG, static SVG and animated WebP; three skills emitting an
+interactive HTML report; and one prose skill. The hand-offs between them are files copied by
+hand — styles.json, svg_check.py and audit_visuals.py across the visual skills, and one
+inlined SaaS Pro token set across the report skills. Nothing is imported; there is no shared
+module. The dashes march on a twelve-second seamless cycle to say those copies keep being
+made by hand.</desc>
+  <defs>
+    <g id="ic-file" fill="none" stroke="currentColor" stroke-width="1.5"
+       stroke-linecap="round" stroke-linejoin="round">
+      <path d="M14 3v4a1 1 0 0 0 1 1h4"/>
+      <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2"/>
+    </g>
+    <g id="ic-python" fill="currentColor">
+      <path d="M14.25.18l.9.2.73.26.59.3.45.32.34.34.25.34.16.33.1.3.04.26.02.2-.01.13V8.5l-.05.63-.13.55-.21.46-.26.38-.3.31-.33.25-.35.19-.35.14-.33.1-.3.07-.26.04-.21.02H8.77l-.69.05-.59.14-.5.22-.41.27-.33.32-.27.35-.2.36-.15.37-.1.35-.07.32-.04.27-.02.21v3.06H3.17l-.21-.03-.28-.07-.32-.12-.35-.18-.36-.26-.36-.36-.35-.46-.32-.59-.28-.73-.21-.88-.14-1.05-.05-1.23.06-1.22.16-1.04.24-.87.32-.71.36-.57.4-.44.42-.33.42-.24.4-.16.36-.1.32-.05.24-.01h.16l.06.01h8.16v-.83H6.18l-.01-2.75-.02-.37.05-.34.11-.31.17-.28.25-.26.31-.23.38-.2.44-.18.51-.15.58-.12.64-.1.71-.06.77-.04.84-.02 1.27.05zm-6.3 1.98l-.23.33-.08.41.08.41.23.34.33.22.41.09.41-.09.33-.22.23-.34.08-.41-.08-.41-.23-.33-.33-.22-.41-.09-.41.09zm13.09 3.95l.28.06.32.12.35.18.36.27.36.35.35.47.32.59.28.73.21.88.14 1.04.05 1.23-.06 1.23-.16 1.04-.24.86-.32.71-.36.57-.4.45-.42.33-.42.24-.4.16-.36.09-.32.05-.24.02-.16-.01h-8.22v.82h5.84l.01 2.76.02.36-.05.34-.11.31-.17.29-.25.25-.31.24-.38.2-.44.17-.51.15-.58.13-.64.09-.71.07-.77.04-.84.01-1.27-.04-1.07-.14-.9-.2-.73-.25-.59-.3-.45-.33-.34-.34-.25-.34-.16-.33-.1-.3-.04-.25-.02-.2.01-.13v-5.34l.05-.64.13-.54.21-.46.26-.38.3-.32.33-.24.35-.2.35-.14.33-.1.3-.06.26-.04.21-.02.13-.01h5.84l.69-.05.59-.14.5-.21.41-.28.33-.32.27-.35.2-.36.15-.36.1-.35.07-.32.04-.28.02-.21V6.07h2.09l.14.01zm-6.47 14.25l-.23.33-.08.41.08.41.23.33.33.23.41.08.41-.08.33-.23.23-.33.08-.41-.08-.41-.23-.33-.33-.23-.41-.08-.41.08z"/>
+    </g>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="var(--shadow)"
+                    flood-opacity="0.28"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--dim)"/>
+    </marker>
+  </defs>
+  <style>
+    svg {
+      --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8;
+      --accent:#e0a33e; --shadow:#000000;
+      font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+    }
+    .bg { fill:var(--background); }
+    .mask { fill:var(--background); }
+    .card { fill:var(--surface); stroke:var(--ink); stroke-width:1.25; filter:url(#e1); }
+    .focal { stroke:var(--accent); stroke-width:2.5; }
+    .icon { color:var(--dim); }
+    .name { fill:var(--ink); font-size:20px; font-weight:600;
+             font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .sub { fill:var(--dim); font-size:16px;
+            font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .zone { fill:var(--ink); fill-opacity:0.02; stroke:var(--dim); stroke-opacity:0.3;
+             stroke-width:1; }
+    .plate { fill:var(--background); }
+    .eyebrow { fill:var(--dim); font-size:16px; letter-spacing:1px; font-weight:600; }
+    .edgelabel { fill:var(--dim); font-size:16px; letter-spacing:0.5px; }
+    .legenditem { fill:var(--dim); font-size:16px; }
+    .rule { stroke:var(--dim); stroke-opacity:0.3; stroke-width:1; }
+    .sw-focal { fill:none; stroke:var(--accent); stroke-width:2.5; }
+    .sw-icon { fill:none; stroke:var(--dim); stroke-width:1.5; }
+    .sw-edge { stroke:var(--dim); stroke-width:1.5; stroke-dasharray:8 6; }
+    .kicker { fill:var(--dim); font-size:16px; letter-spacing:2px; font-weight:600; }
+    .edge { fill:none; stroke:var(--dim); stroke-width:1.5; stroke-dasharray:8 6;
+             marker-end:url(#arrow); animation:march 3s linear infinite; }
+    @keyframes march {
+      0%   { stroke-dashoffset:0; }
+      100% { stroke-dashoffset:-14; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .edge { animation:none; }
+    }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1200" height="540"/>
+  <text class="kicker" x="20" y="40" data-role="metadata" data-bg="background">IT CURRENT-STATE — APATHETICUS/SKILLS</text>
+
+  <g data-zone="">
+    <rect class="zone" x="20" y="64" width="380" height="380" rx="8"/>
+    <rect class="plate" x="36" y="54" width="128" height="20" rx="4"/>
+    <text class="eyebrow" x="48" y="69" data-role="metadata"
+          data-bg="background">DOC VISUALS</text>
+  </g>
+  <g data-zone="">
+    <rect class="zone" x="424" y="64" width="452" height="380" rx="8"/>
+    <rect class="plate" x="440" y="54" width="136" height="20" rx="4"/>
+    <text class="eyebrow" x="452" y="69" data-role="metadata"
+          data-bg="background">HTML REPORTS</text>
+  </g>
+  <g data-zone="">
+    <rect class="zone" x="900" y="64" width="280" height="380" rx="8"/>
+    <rect class="plate" x="916" y="54" width="76" height="20" rx="4"/>
+    <text class="eyebrow" x="928" y="69" data-role="metadata"
+          data-bg="background">PROSE</text>
+  </g>
+
+  <path data-edge="" class="edge" d="M 170,212 V 172"/>
+  <path data-edge="" class="edge" d="M 250,212 V 172"/>
+  <path data-edge="" class="edge" d="M 210,284 V 324"/>
+  <path data-edge="" class="edge" d="M 650,172 V 212"/>
+  <path data-edge="" class="edge" d="M 650,284 V 324"/>
+
+  <rect data-label="" class="plate" x="50" y="176" width="112" height="24" rx="4"/>
+  <text class="edgelabel" x="106" y="193" data-role="metadata"
+        data-bg="background" text-anchor="middle">STYLES.JSON</text>
+  <rect data-label="" class="plate" x="258" y="176" width="124" height="24" rx="4"/>
+  <text class="edgelabel" x="320" y="193" data-role="metadata"
+        data-bg="background" text-anchor="middle">SVG_CHECK.PY</text>
+  <rect data-label="" class="plate" x="218" y="288" width="132" height="24" rx="4"/>
+  <text class="edgelabel" x="284" y="305" data-role="metadata"
+        data-bg="background" text-anchor="middle">AUDIT_VISUALS</text>
+  <rect data-label="" class="plate" x="658" y="176" width="124" height="24" rx="4"/>
+  <text class="edgelabel" x="720" y="193" data-role="metadata"
+        data-bg="background" text-anchor="middle">SAAS PRO CSS</text>
+  <rect data-label="" class="plate" x="658" y="288" width="124" height="24" rx="4"/>
+  <text class="edgelabel" x="720" y="305" data-role="metadata"
+        data-bg="background" text-anchor="middle">SAAS PRO CSS</text>
+
+  <g data-node="">
+    <rect class="mask" x="44" y="100" width="332" height="72" rx="8"/>
+    <rect class="card" x="44" y="100" width="332" height="72" rx="8"/>
+    <use class="icon" href="#ic-python" transform="translate(60,120) scale(1.3333)"/>
+    <text class="name" x="100" y="132" data-role="label"
+          data-bg="surface">pretty-plain-docs</text>
+    <text class="sub" x="100" y="156" data-role="metadata"
+          data-bg="surface">static SVG</text>
+  </g>
+  <g data-node="" data-focal="">
+    <rect class="mask" x="44" y="212" width="332" height="72" rx="8"/>
+    <rect class="card focal" x="44" y="212" width="332" height="72" rx="8"/>
+    <use class="icon" href="#ic-python" transform="translate(60,232) scale(1.3333)"/>
+    <text class="name" x="100" y="244" data-role="label"
+          data-bg="surface">prettier-svg-docs</text>
+    <text class="sub" x="100" y="268" data-role="metadata"
+          data-bg="surface">animated SVG</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="44" y="324" width="332" height="72" rx="8"/>
+    <rect class="card" x="44" y="324" width="332" height="72" rx="8"/>
+    <use class="icon" href="#ic-python" transform="translate(60,344) scale(1.3333)"/>
+    <text class="name" x="100" y="356" data-role="label"
+          data-bg="surface">pretty-hyper-docs</text>
+    <text class="sub" x="100" y="380" data-role="metadata"
+          data-bg="surface">animated WebP</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="448" y="100" width="404" height="72" rx="8"/>
+    <rect class="card" x="448" y="100" width="404" height="72" rx="8"/>
+    <use class="icon" href="#ic-python" transform="translate(464,120) scale(1.3333)"/>
+    <text class="name" x="504" y="132" data-role="label"
+          data-bg="surface">security-audit-full-report</text>
+    <text class="sub" x="504" y="156" data-role="metadata"
+          data-bg="surface">assets/template.html</text>
+  </g>
+  <g data-node="" data-focal="">
+    <rect class="mask" x="448" y="212" width="404" height="72" rx="8"/>
+    <rect class="card focal" x="448" y="212" width="404" height="72" rx="8"/>
+    <use class="icon" href="#ic-file" transform="translate(464,232) scale(1.3333)"/>
+    <text class="name" x="504" y="244" data-role="label"
+          data-bg="surface">reflect</text>
+    <text class="sub" x="504" y="268" data-role="metadata"
+          data-bg="surface">reference/design-system/</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="448" y="324" width="404" height="72" rx="8"/>
+    <rect class="card" x="448" y="324" width="404" height="72" rx="8"/>
+    <use class="icon" href="#ic-python" transform="translate(464,344) scale(1.3333)"/>
+    <text class="name" x="504" y="356" data-role="label"
+          data-bg="surface">website-security-scan</text>
+    <text class="sub" x="504" y="380" data-role="metadata"
+          data-bg="surface">assets/report-template.html</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="924" y="100" width="232" height="72" rx="8"/>
+    <rect class="card" x="924" y="100" width="232" height="72" rx="8"/>
+    <use class="icon" href="#ic-file" transform="translate(940,120) scale(1.3333)"/>
+    <text class="name" x="980" y="132" data-role="label"
+          data-bg="surface">human-voice</text>
+    <text class="sub" x="980" y="156" data-role="metadata"
+          data-bg="surface">prose, no scripts</text>
+  </g>
+
+  <g data-legend="">
+    <line class="rule" x1="20" y1="476" x2="1180" y2="476"/>
+    <text class="eyebrow" x="20" y="502" data-role="metadata"
+          data-bg="background">LEGEND</text>
+    <rect class="sw-focal" x="120" y="490" width="16" height="16" rx="4"/>
+    <text class="legenditem" x="148" y="502" data-role="metadata"
+          data-bg="background">focal: the copy siblings re-derive by hand</text>
+    <use class="icon" href="#ic-python" transform="translate(580,490) scale(0.6667)"/>
+    <text class="legenditem" x="608" y="502" data-role="metadata"
+          data-bg="background">python mark: ships scripts/*.py — 5 of 7</text>
+    <line class="sw-edge" x1="980" y1="498" x2="1012" y2="498"/>
+    <text class="legenditem" x="1024" y="502" data-role="metadata"
+          data-bg="background">copied by hand</text>
+  </g>
+</svg>

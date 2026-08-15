@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900"
+     width="1200" height="900" role="img" aria-labelledby="ttl desc"
+     data-loop-s="12" data-diagram="quadrant" data-bg="background">
+  <title id="ttl">Quadrant specimen — the 32 catalog styles by bans against relaxations</title>
+  <desc id="desc">A two-axis quadrant. The horizontal axis counts the tags a style forbids, from none on the left to four on the right; the vertical axis counts the default gates it relaxes, from none at the bottom to three at the top. Each dot is one coordinate pair read from scripts/styles.json; a dot shared by several styles carries the count. Twelve pairs cover all thirty-two styles. The accented dot is the six styles that ban four tags and relax nothing.</desc>
+  <defs>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.28"
+                    flood-color="#12324f"/>
+    </filter>
+  </defs>
+  <style>
+svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8; --accent:#e0a33e; }
+
+  text { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+         fill: var(--ink); }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .ttl { font-size: 40px; font-weight: 700; }
+  .cap { font-size: 18px; fill: var(--dim); }
+  .eyebrow { font-size: 16px; fill: var(--dim); letter-spacing: 2px; }
+  .axword { font-size: 16px; fill: var(--dim); letter-spacing: 2px; }
+  .item { font-size: 18px; font-weight: 500; }
+  .val { font-size: 16px; fill: var(--dim); }
+  .leg { font-size: 16px; fill: var(--dim); }
+  .ground { fill: var(--background); }
+  .card { fill: var(--surface); filter: url(#e1); }
+  .rule { stroke: var(--dim); stroke-opacity: .28; stroke-width: 1; fill: none; }
+  .dot { fill: var(--dim); }
+  .dotf { fill: var(--accent); }
+  .halo { fill: var(--accent); fill-opacity: .14;
+          animation: breathe 6s ease-in-out infinite; }
+  .cross { stroke: var(--ink); stroke-width: 1; }
+  @keyframes breathe { 0%, 100% { fill-opacity: .10 } 50% { fill-opacity: .34 } }
+  @media (prefers-reduced-motion: reduce) { .halo { animation: none;
+          fill-opacity: .22 } }
+  </style>
+  <rect class="ground" x="0" y="0" width="1200" height="900"/>
+
+  <text class="ttl" x="40" y="76" data-role="title">Bans against relaxations</text>
+  <text class="cap" x="40" y="112" data-role="label">every style in scripts/styles.json, positioned by two counts it declares there</text>
+  <rect class="card" x="64" y="152" width="1072" height="616" rx="8"/>
+  <g data-bg="surface">
+    <line class="cross" x1="600" y1="460" x2="600" y2="196" marker-end="url(#ar)"/>
+    <line class="cross" x1="600" y1="460" x2="600" y2="724" marker-end="url(#ar)"/>
+    <line class="cross" x1="600" y1="460" x2="184" y2="460" marker-end="url(#ar)"/>
+    <line class="cross" x1="600" y1="460" x2="1016" y2="460" marker-end="url(#ar)"/>
+    <text class="axword" x="600" y="180" text-anchor="middle" data-role="metadata">RELAXES</text>
+    <text class="axword" x="600" y="748" text-anchor="middle" data-role="metadata">DEFAULTS</text>
+    <text class="axword" x="168" y="460" text-anchor="end" dominant-baseline="middle" data-role="metadata">PERMITS</text>
+    <text class="axword" x="1032" y="460" text-anchor="start" dominant-baseline="middle" data-role="metadata">BANS</text>
+    <g data-node="">
+      <circle class="dot" cx="200" cy="652" r="6"/>
+      <text class="item" x="200" y="690" text-anchor="middle" data-role="label" data-bg="surface">bento-grid</text>
+    </g>
+    <g data-node="">
+      <circle class="dot" cx="200" cy="524" r="6"/>
+      <text class="item" x="200" y="562" text-anchor="middle" data-role="label" data-bg="surface">7 styles</text>
+    </g>
+    <g data-node="">
+      <circle class="dot" cx="200" cy="396" r="6"/>
+      <text class="item" x="200" y="434" text-anchor="middle" data-role="label" data-bg="surface">glassmorphism</text>
+    </g>
+    <g data-node="">
+      <circle class="dot" cx="200" cy="268" r="6"/>
+      <text class="item" x="200" y="306" text-anchor="middle" data-role="label" data-bg="surface">neumorphism</text>
+    </g>
+    <g data-node="">
+      <circle class="dot" cx="360" cy="652" r="6"/>
+      <text class="item" x="360" y="690" text-anchor="middle" data-role="label" data-bg="surface">2 styles</text>
+    </g>
+    <g data-node="">
+      <circle class="dot" cx="360" cy="524" r="6"/>
+      <text class="item" x="360" y="562" text-anchor="middle" data-role="label" data-bg="surface">7 styles</text>
+    </g>
+    <g data-node="">
+      <circle class="dot" cx="520" cy="652" r="6"/>
+      <text class="item" x="520" y="690" text-anchor="middle" data-role="label" data-bg="surface">neo-brutalist</text>
+    </g>
+    <g data-node="">
+      <circle class="dot" cx="520" cy="524" r="6"/>
+      <text class="item" x="520" y="562" text-anchor="middle" data-role="label" data-bg="surface">2 styles</text>
+    </g>
+    <g data-node="">
+      <circle class="dot" cx="680" cy="652" r="6"/>
+      <text class="item" x="680" y="690" text-anchor="middle" data-role="label" data-bg="surface">soft-vinyl</text>
+    </g>
+    <g data-node="">
+      <circle class="dot" cx="680" cy="524" r="6"/>
+      <text class="item" x="680" y="562" text-anchor="middle" data-role="label" data-bg="surface">2 styles</text>
+    </g>
+    <g data-node="">
+      <circle class="dot" cx="840" cy="524" r="6"/>
+      <text class="item" x="840" y="562" text-anchor="middle" data-role="label" data-bg="surface">patent-drawing</text>
+    </g>
+    <g data-node="" data-focal="">
+      <circle class="halo" cx="840" cy="652" r="24"/>
+      <circle class="dotf" cx="840" cy="652" r="6"/>
+      <text class="item" x="840" y="690" text-anchor="middle" data-role="label" data-bg="surface">6 styles</text>
+    </g>
+  </g>
+  <g data-legend="">
+    <line class="rule" x1="40" y1="812" x2="1160" y2="812"/>
+    <text class="eyebrow" x="40" y="840" data-role="metadata">LEGEND</text>
+    <circle class="dot" cx="200" cy="834" r="6"/>
+    <text class="leg" x="220" y="840" data-role="metadata">one (bans, relaxes) pair</text>
+    <circle class="dotf" cx="520" cy="834" r="6"/>
+    <text class="leg" x="540" y="840" data-role="metadata">the strictest, unrelaxed corner</text>
+    <text class="leg" x="880" y="840" data-role="metadata">N styles = N share that pair</text>
+    <text class="leg mono" x="40" y="872" data-role="metadata">source: scripts/styles.json — 32 styles, 12 pairs, x = len(forbid), y = len(relax)</text>
+  </g>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7"
+            markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--ink)"/>
+    </marker>
+  </defs>
+</svg>

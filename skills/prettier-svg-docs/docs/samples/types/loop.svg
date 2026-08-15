@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 880" width="1200" height="880" role="img" data-loop-s="12" data-diagram="loop" data-bg="background">
+<title>The gate loop — six stations around one accumulated record</title>
+<desc>A reinforcing cycle of six stations drawn on one circle: Author, Gate, Read errors, Re-author, Filmstrip and Read pixels. Ring arcs carry the next pass clockwise; dashed spokes write back to a central hub, viz.json, which is written only when the gate is clean. Two spokes are labelled with what they record — budget cuts and relaxed gates. The Gate station carries the accent because a non-zero error count stops the pass. A token travels the ring once per loop and the write-back spokes march inward; nothing else moves.</desc>
+<defs>
+  <filter id="e1" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="var(--shadow)" flood-opacity=".45"/>
+  </filter>
+  <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="var(--dim)"/>
+  </marker>
+  <marker id="arrow-soft" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 z" fill="var(--dim)" fill-opacity=".55"/>
+  </marker>
+</defs>
+<style>
+  svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8;
+        --accent:#e0a33e; --shadow:#000000; }
+  .title { font: 700 40px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .eyebrow { font: 600 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--dim); letter-spacing: 1px; }
+  .name { font: 600 20px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .sub { font: 400 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--dim); }
+  .mono { font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .tag { font: 600 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--dim); }
+  .edgelabel { font: 600 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); letter-spacing: 1px; }
+  .fname { font: 700 20px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--background); }
+  .fsub { font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--background); }
+  .ftag { font: 600 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--background); }
+  .hubname { font: 700 24px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--background); }
+  .hubsub { font: 400 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--background); }
+  .leg { font: 400 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--dim); }
+  .arc { fill: none; stroke: var(--dim); stroke-width: 1.5; }
+  .spoke { fill: none; stroke: var(--dim); stroke-width: 1.25; stroke-opacity: .55;
+           stroke-dasharray: 6 4; animation: march 4s linear infinite; }
+  .token { fill: var(--accent); }
+  .spin { transform-box: view-box; transform-origin: 600px 440px;
+          animation: spin 12s linear infinite; }
+  @keyframes march { from { stroke-dashoffset: 10 } to { stroke-dashoffset: 0 } }
+  @keyframes spin { from { transform: rotate(0deg) } to { transform: rotate(360deg) } }
+  @media (prefers-reduced-motion: reduce) {
+    .spin, .spoke { animation: none; }
+  }
+</style>
+
+<rect x="0" y="0" width="1200" height="880" fill="var(--background)"/>
+
+<text class="eyebrow" x="40" y="48" data-role="metadata">LOOP</text>
+<text class="title" x="40" y="88" data-role="title">The gate loop</text>
+
+<path class="arc" data-edge="" d="M 706.29,159.46 A 300 300 0 0 1 739.06,174.18 A 300 300 0 0 1 769.84,192.71 A 300 300 0 0 1 798.19,214.79 A 300 300 0 0 1 823.69,240.09" marker-end="url(#arrow)"/>
+<path class="arc" data-edge="" d="M 881.00,334.94 A 300 300 0 0 1 891.45,368.88 A 300 300 0 0 1 897.81,403.81 A 300 300 0 0 1 900.00,439.25 A 300 300 0 0 1 897.99,474.70 A 300 300 0 0 1 891.80,509.67 A 300 300 0 0 1 881.52,543.66" marker-end="url(#arrow)"/>
+<path class="arc" data-edge="" d="M 824.69,638.79 A 300 300 0 0 1 799.31,664.22 A 300 300 0 0 1 771.08,686.44 A 300 300 0 0 1 740.39,705.12 A 300 300 0 0 1 707.69,720.01" marker-end="url(#arrow)"/>
+<path class="arc" data-edge="" d="M 493.71,720.54 A 300 300 0 0 1 460.94,705.82 A 300 300 0 0 1 430.16,687.29 A 300 300 0 0 1 401.81,665.21 A 300 300 0 0 1 376.31,639.91" marker-end="url(#arrow)"/>
+<path class="arc" data-edge="" d="M 319.00,545.06 A 300 300 0 0 1 308.55,511.12 A 300 300 0 0 1 302.19,476.19 A 300 300 0 0 1 300.00,440.75 A 300 300 0 0 1 302.01,405.30 A 300 300 0 0 1 308.20,370.33 A 300 300 0 0 1 318.48,336.34" marker-end="url(#arrow)"/>
+<path class="arc" data-edge="" d="M 375.31,241.21 A 300 300 0 0 1 400.69,215.78 A 300 300 0 0 1 428.92,193.56 A 300 300 0 0 1 459.61,174.88 A 300 300 0 0 1 492.31,159.99" marker-end="url(#arrow)"/>
+
+<path class="spoke" data-edge="" d="M 600,180 V 368" marker-end="url(#arrow-soft)"/>
+<path class="spoke" data-edge="" d="M 820,328 V 390 A 10 10 0 0 1 810,400 H 728" marker-end="url(#arrow-soft)"/>
+<path class="spoke" data-edge="" d="M 820,552 V 490 A 10 10 0 0 0 810,480 H 728" marker-end="url(#arrow-soft)"/>
+<path class="spoke" data-edge="" d="M 600,700 V 512" marker-end="url(#arrow-soft)"/>
+<path class="spoke" data-edge="" d="M 380,552 V 490 A 10 10 0 0 1 390,480 H 472" marker-end="url(#arrow-soft)"/>
+<path class="spoke" data-edge="" d="M 380,328 V 390 A 10 10 0 0 0 390,400 H 472" marker-end="url(#arrow-soft)"/>
+
+<g class="spin"><circle class="token" cx="900" cy="440" r="8"/></g>
+
+<rect data-label="" x="492" y="250" width="100" height="22" rx="4" fill="var(--background)"/>
+<text class="edgelabel" x="542" y="266" data-role="metadata" text-anchor="middle">BUDGET CUTS</text>
+<rect data-label="" x="728" y="370" width="80" height="22" rx="4" fill="var(--background)"/>
+<text class="edgelabel" x="768" y="386" data-role="metadata" text-anchor="middle">RELAXED</text>
+
+<g data-node="" data-bg="surface">
+  <rect x="500" y="100" width="200" height="80" rx="8" fill="var(--background)"/>
+  <rect x="500" y="100" width="200" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#e1)"/>
+  <rect x="512" y="108" width="36" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity=".5" stroke-width="1"/>
+  <text class="tag" x="530" y="123" data-role="metadata" text-anchor="middle">1</text>
+  <text class="name" x="600" y="146" data-role="label" text-anchor="middle">Author</text>
+  <text class="sub" x="600" y="168" data-role="metadata" text-anchor="middle">layout, then material</text>
+</g>
+
+<g data-node="" data-focal="" data-bg="accent-primary">
+  <rect x="760" y="248" width="200" height="80" rx="8" fill="var(--background)"/>
+  <rect x="760" y="248" width="200" height="80" rx="8" fill="var(--accent)" stroke="var(--accent)" stroke-width="1.25" filter="url(#e1)"/>
+  <rect x="772" y="256" width="36" height="20" rx="4" fill="none" stroke="var(--background)" stroke-opacity=".6" stroke-width="1"/>
+  <text class="ftag" x="790" y="271" data-role="metadata" text-anchor="middle">2</text>
+  <text class="fname" x="860" y="294" data-role="label" text-anchor="middle">Gate</text>
+  <text class="fsub" x="860" y="316" data-role="metadata" text-anchor="middle">svg_check.py</text>
+</g>
+
+<g data-node="" data-bg="surface">
+  <rect x="760" y="552" width="200" height="80" rx="8" fill="var(--background)"/>
+  <rect x="760" y="552" width="200" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#e1)"/>
+  <rect x="772" y="560" width="36" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity=".5" stroke-width="1"/>
+  <text class="tag" x="790" y="575" data-role="metadata" text-anchor="middle">3</text>
+  <text class="name" x="860" y="598" data-role="label" text-anchor="middle">Read errors</text>
+  <text class="sub" x="860" y="620" data-role="metadata" text-anchor="middle">and the NOTE lines</text>
+</g>
+
+<g data-node="" data-bg="surface">
+  <rect x="500" y="700" width="200" height="80" rx="8" fill="var(--background)"/>
+  <rect x="500" y="700" width="200" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#e1)"/>
+  <rect x="512" y="708" width="36" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity=".5" stroke-width="1"/>
+  <text class="tag" x="530" y="723" data-role="metadata" text-anchor="middle">4</text>
+  <text class="name" x="600" y="746" data-role="label" text-anchor="middle">Re-author</text>
+  <text class="sub" x="600" y="768" data-role="metadata" text-anchor="middle">never shrink a label</text>
+</g>
+
+<g data-node="" data-bg="surface">
+  <rect x="240" y="552" width="200" height="80" rx="8" fill="var(--background)"/>
+  <rect x="240" y="552" width="200" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#e1)"/>
+  <rect x="252" y="560" width="36" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity=".5" stroke-width="1"/>
+  <text class="tag" x="270" y="575" data-role="metadata" text-anchor="middle">5</text>
+  <text class="name" x="340" y="598" data-role="label" text-anchor="middle">Filmstrip</text>
+  <text class="mono" x="340" y="620" data-role="metadata" text-anchor="middle">--phases 6</text>
+</g>
+
+<g data-node="" data-bg="surface">
+  <rect x="240" y="248" width="200" height="80" rx="8" fill="var(--background)"/>
+  <rect x="240" y="248" width="200" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#e1)"/>
+  <rect x="252" y="256" width="36" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity=".5" stroke-width="1"/>
+  <text class="tag" x="270" y="271" data-role="metadata" text-anchor="middle">6</text>
+  <text class="name" x="340" y="294" data-role="label" text-anchor="middle">Read pixels</text>
+  <text class="sub" x="340" y="316" data-role="metadata" text-anchor="middle">seam and clipping</text>
+</g>
+
+<g data-node="" data-bg="ink">
+  <rect x="480" y="376" width="240" height="128" rx="8" fill="var(--background)"/>
+  <rect x="480" y="376" width="240" height="128" rx="8" fill="var(--ink)" stroke="var(--ink)" stroke-width="1.25" filter="url(#e1)"/>
+  <text class="hubname" x="600" y="432" data-role="label" text-anchor="middle">viz.json</text>
+  <text class="hubsub" x="600" y="462" data-role="metadata" text-anchor="middle">written only when clean</text>
+</g>
+
+<g data-legend="">
+  <line x1="40" y1="812" x2="1160" y2="812" stroke="var(--dim)" stroke-opacity=".35" stroke-width="1"/>
+  <text class="eyebrow" x="40" y="838" data-role="metadata">LEGEND</text>
+  <line x1="200" y1="833" x2="240" y2="833" stroke="var(--dim)" stroke-width="1.5"/>
+  <text class="leg" x="252" y="838" data-role="metadata">Ring arc — the next pass</text>
+  <line x1="560" y1="833" x2="600" y2="833" stroke="var(--dim)" stroke-width="1.25" stroke-opacity=".55" stroke-dasharray="6 4"/>
+  <text class="leg" x="612" y="838" data-role="metadata">Spoke — write-back to the hub</text>
+  <rect x="900" y="826" width="16" height="16" rx="4" fill="var(--accent)"/>
+  <text class="leg" x="928" y="838" data-role="metadata">Accent — the blocking gate</text>
+</g>
+</svg>

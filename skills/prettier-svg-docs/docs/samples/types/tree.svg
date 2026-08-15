@@ -1,0 +1,170 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 744" width="1200" height="744" role="img" data-loop-s="12" data-diagram="tree" data-bg="background">
+<title>Tree — the prettier-svg-docs reference tree</title>
+<desc>A depth-4 tree of this skill's own reference directory. The root is reference slash; it branches to diagrams.md, the router for the 27 diagram types, and to styles.md, the router for the 32 styles. Under diagrams.md sit the shared grammar, the shared patterns file and the types directory; under styles.md sits the styles directory. The two directories each terminate in one aggregated leaf — 27 type specs and 32 style specs. An emphasis walks root to leaf down the diagrams branch on a 12-second loop; nothing moves.</desc>
+<defs>
+  <filter id="e1" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.28"/>
+  </filter>
+  <marker id="arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+    <path d="M0,0 L8,4 L0,8 Z" fill="var(--dim)"/>
+  </marker>
+</defs>
+<style>
+svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8; --accent:#e0a33e;
+      --sans:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+      --mono:ui-monospace,SFMono-Regular,Menlo,monospace; }
+.ground { fill: var(--background); }
+.mask { fill: var(--background); }
+.box  { fill: var(--surface); stroke: var(--ink); stroke-width: 1.25; filter: url(#e1); }
+.boxl { fill: var(--surface); stroke: var(--dim); stroke-width: 1; filter: url(#e1); }
+.boxf { fill: var(--accent); stroke: var(--accent); stroke-width: 1.25; filter: url(#e1); }
+.chip { fill: none; stroke: var(--dim); stroke-width: 1; }
+.chipf { fill: none; stroke: var(--background); stroke-width: 1; }
+.tag  { font: 600 16px var(--mono); fill: var(--dim); }
+.tagf { font: 600 16px var(--mono); fill: var(--background); }
+.name { font: 600 20px var(--sans); fill: var(--ink); }
+.namef{ font: 600 20px var(--sans); fill: var(--background); }
+.sub  { font: 400 16px var(--mono); fill: var(--dim); }
+.subf { font: 400 16px var(--mono); fill: var(--background); }
+.edge { fill: none; stroke: var(--dim); stroke-width: 1.5; }
+.plate { fill: var(--background); }
+.elabel { font: 600 16px var(--mono); fill: var(--dim); }
+.kicker { font: 600 16px var(--mono); fill: var(--dim); letter-spacing: 1.5px; }
+.h1 { font: 700 40px var(--sans); fill: var(--ink); }
+.eyebrow { font: 600 16px var(--sans); fill: var(--dim); letter-spacing: 1px; }
+.legend { font: 400 16px var(--sans); fill: var(--dim); }
+.sep { stroke: var(--dim); stroke-width: 1; opacity: .45; }
+.swatch { fill: none; stroke: var(--accent); stroke-width: 2; }
+.swatch2 { fill: none; stroke: var(--dim); stroke-width: 1; }
+.step { fill: none; stroke: var(--ink); stroke-width: 2; opacity: .14;
+        animation: step 12s ease-in-out infinite; }
+.s2 { animation-delay: -3s; }
+.s3 { animation-delay: -6s; }
+.s4 { animation-delay: -9s; }
+@keyframes step { 0%, 100% { opacity: .14 } 6%, 18% { opacity: 1 } 26% { opacity: .14 } }
+@media (prefers-reduced-motion: reduce) { .step { animation: none } }
+</style>
+
+<rect class="ground" x="0" y="0" width="1200" height="744"/>
+
+<text class="kicker" data-role="metadata" data-bg="background" x="40" y="44">TYPE SPECIMEN · TREE · FLAT-MATERIAL</text>
+<text class="h1" data-role="title" data-bg="background" x="40" y="92">reference/ — one router, two catalogs</text>
+
+<!-- connectors: fanned attach points, quarter-arc elbows, no shared segment -->
+<g>
+  <path class="edge" data-edge="" d="M568,200 V222 Q568,232 558,232 H450 Q440,232 440,242 V264" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M632,200 V222 Q632,232 642,232 H1010 Q1020,232 1020,242 V264" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M390,344 V366 Q390,376 380,376 H170 Q160,376 160,386 V408" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M440,344 V408" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M490,344 V366 Q490,376 500,376 H710 Q720,376 720,386 V408" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M1020,344 V408" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M720,488 V552" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M1020,488 V552" marker-end="url(#arrow)"/>
+</g>
+
+<!-- connector labels: plate 8 units clear of the stroke, on open canvas -->
+<g>
+  <rect class="plate" data-label="" x="552" y="506" width="160" height="24" rx="4"/>
+  <text class="elabel" data-role="metadata" data-bg="background" x="632" y="523" text-anchor="middle">ONE PER TYPE</text>
+  <rect class="plate" data-label="" x="852" y="506" width="160" height="24" rx="4"/>
+  <text class="elabel" data-role="metadata" data-bg="background" x="932" y="523" text-anchor="middle">ONE PER STYLE</text>
+</g>
+
+<!-- tier 0 -->
+<g data-node="">
+  <rect class="mask" x="500" y="120" width="200" height="80" rx="8"/>
+  <rect class="box" x="500" y="120" width="200" height="80" rx="8"/>
+  <rect class="chip" x="516" y="132" width="44" height="20" rx="4"/>
+  <text class="tag" data-role="metadata" data-bg="surface" x="538" y="146" text-anchor="middle">DIR</text>
+  <text class="name" data-role="label" data-bg="surface" x="600" y="172" text-anchor="middle">reference/</text>
+  <text class="sub" data-role="metadata" data-bg="surface" x="600" y="190" text-anchor="middle">20 files · 3 dirs</text>
+</g>
+
+<!-- tier 1 -->
+<g data-node="" data-focal="">
+  <rect class="mask" x="340" y="264" width="200" height="80" rx="8"/>
+  <rect class="boxf" x="340" y="264" width="200" height="80" rx="8"/>
+  <rect class="chipf" x="356" y="276" width="72" height="20" rx="4"/>
+  <text class="tagf" data-role="metadata" data-bg="accent-primary" x="392" y="290" text-anchor="middle">ROUTER</text>
+  <text class="namef" data-role="label" data-bg="accent-primary" x="440" y="316" text-anchor="middle">diagrams.md</text>
+  <text class="subf" data-role="metadata" data-bg="accent-primary" x="440" y="334" text-anchor="middle">the 27 types</text>
+</g>
+<g data-node="">
+  <rect class="mask" x="920" y="264" width="200" height="80" rx="8"/>
+  <rect class="box" x="920" y="264" width="200" height="80" rx="8"/>
+  <rect class="chip" x="936" y="276" width="72" height="20" rx="4"/>
+  <text class="tag" data-role="metadata" data-bg="surface" x="972" y="290" text-anchor="middle">ROUTER</text>
+  <text class="name" data-role="label" data-bg="surface" x="1020" y="316" text-anchor="middle">styles.md</text>
+  <text class="sub" data-role="metadata" data-bg="surface" x="1020" y="334" text-anchor="middle">the 32 styles</text>
+</g>
+
+<!-- tier 2 -->
+<g data-node="">
+  <rect class="mask" x="40" y="408" width="240" height="80" rx="8"/>
+  <rect class="boxl" x="40" y="408" width="240" height="80" rx="8"/>
+  <rect class="chip" x="56" y="420" width="72" height="20" rx="4"/>
+  <text class="tag" data-role="metadata" data-bg="surface" x="92" y="434" text-anchor="middle">SHARED</text>
+  <text class="name" data-role="label" data-bg="surface" x="160" y="460" text-anchor="middle">Grammar</text>
+  <text class="sub" data-role="metadata" data-bg="surface" x="160" y="478" text-anchor="middle">diagram-grammar.md</text>
+</g>
+<g data-node="">
+  <rect class="mask" x="320" y="408" width="240" height="80" rx="8"/>
+  <rect class="boxl" x="320" y="408" width="240" height="80" rx="8"/>
+  <rect class="chip" x="336" y="420" width="72" height="20" rx="4"/>
+  <text class="tag" data-role="metadata" data-bg="surface" x="372" y="434" text-anchor="middle">SHARED</text>
+  <text class="name" data-role="label" data-bg="surface" x="440" y="460" text-anchor="middle">Patterns</text>
+  <text class="sub" data-role="metadata" data-bg="surface" x="440" y="478" text-anchor="middle">diagram-patterns.md</text>
+</g>
+<g data-node="">
+  <rect class="mask" x="600" y="408" width="240" height="80" rx="8"/>
+  <rect class="box" x="600" y="408" width="240" height="80" rx="8"/>
+  <rect class="chip" x="616" y="420" width="44" height="20" rx="4"/>
+  <text class="tag" data-role="metadata" data-bg="surface" x="638" y="434" text-anchor="middle">DIR</text>
+  <text class="name" data-role="label" data-bg="surface" x="720" y="460" text-anchor="middle">types/</text>
+  <text class="sub" data-role="metadata" data-bg="surface" x="720" y="478" text-anchor="middle">reference/types/</text>
+</g>
+<g data-node="">
+  <rect class="mask" x="900" y="408" width="240" height="80" rx="8"/>
+  <rect class="box" x="900" y="408" width="240" height="80" rx="8"/>
+  <rect class="chip" x="916" y="420" width="44" height="20" rx="4"/>
+  <text class="tag" data-role="metadata" data-bg="surface" x="938" y="434" text-anchor="middle">DIR</text>
+  <text class="name" data-role="label" data-bg="surface" x="1020" y="460" text-anchor="middle">styles/</text>
+  <text class="sub" data-role="metadata" data-bg="surface" x="1020" y="478" text-anchor="middle">reference/styles/</text>
+</g>
+
+<!-- tier 3 — aggregated leaves -->
+<g data-node="">
+  <rect class="mask" x="600" y="552" width="240" height="80" rx="8"/>
+  <rect class="boxl" x="600" y="552" width="240" height="80" rx="8"/>
+  <rect class="chip" x="616" y="564" width="52" height="20" rx="4"/>
+  <text class="tag" data-role="metadata" data-bg="surface" x="642" y="578" text-anchor="middle">SPEC</text>
+  <text class="name" data-role="label" data-bg="surface" x="720" y="604" text-anchor="middle">27 type specs</text>
+  <text class="sub" data-role="metadata" data-bg="surface" x="720" y="622" text-anchor="middle">layout · budget</text>
+</g>
+<g data-node="">
+  <rect class="mask" x="900" y="552" width="240" height="80" rx="8"/>
+  <rect class="boxl" x="900" y="552" width="240" height="80" rx="8"/>
+  <rect class="chip" x="916" y="564" width="52" height="20" rx="4"/>
+  <text class="tag" data-role="metadata" data-bg="surface" x="942" y="578" text-anchor="middle">SPEC</text>
+  <text class="name" data-role="label" data-bg="surface" x="1020" y="604" text-anchor="middle">32 style specs</text>
+  <text class="sub" data-role="metadata" data-bg="surface" x="1020" y="622" text-anchor="middle">palette · material</text>
+</g>
+
+<!-- resolution order, root to leaf: emphasis only, no geometry moves -->
+<g>
+  <rect class="step" x="500" y="120" width="200" height="80" rx="8"/>
+  <rect class="step s2" x="340" y="264" width="200" height="80" rx="8"/>
+  <rect class="step s3" x="600" y="408" width="240" height="80" rx="8"/>
+  <rect class="step s4" x="600" y="552" width="240" height="80" rx="8"/>
+</g>
+
+<g data-legend="">
+  <line class="sep" x1="40" y1="676" x2="1160" y2="676"/>
+  <text class="eyebrow" data-role="metadata" data-bg="background" x="40" y="700">LEGEND</text>
+  <rect class="swatch" x="180" y="688" width="24" height="16" rx="4"/>
+  <text class="legend" data-role="metadata" data-bg="background" x="216" y="700">accent — the one router</text>
+  <rect class="swatch2" x="560" y="688" width="24" height="16" rx="4"/>
+  <text class="legend" data-role="metadata" data-bg="background" x="596" y="700">lighter stroke — a leaf</text>
+  <text class="legend" data-role="metadata" data-bg="background" x="900" y="700">counts aggregated, not drawn</text>
+</g>
+</svg>

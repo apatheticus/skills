@@ -205,7 +205,7 @@ Committed at `<project>/.prettydocs/src/<name>/viz.json`:
 - `producer`: always `pretty-plain-docs` for a visual this skill authored, and that is
   the **only** owned value — this skill has never shipped under another name, so there
   is no legacy alias to accept. Any other value, and an absent field, means the visual
-  came from a different producer; the siblings' values are `pretty-svg-docs` /
+  came from a different producer; the siblings' values are `prettier-svg-docs` /
   `more-pretty-docs` (animated SVG) and absent (`pretty-hyper-docs`, animated WebP).
   See [Adopting visuals from another producer](#adopting-visuals-from-another-producer).
 - `style`: the resolved style slug the visual was authored in. Same for every
@@ -296,13 +296,13 @@ restructure. The `producer` field is how ownership is decided:
 | `producer` in `viz.json` | Verdict here | What it was |
 | --- | --- | --- |
 | `pretty-plain-docs` | owned | this skill |
-| `pretty-svg-docs` or `more-pretty-docs` | `FOREIGN` | animated SVG |
+| `prettier-svg-docs` or `more-pretty-docs` | `FOREIGN` | animated SVG |
 | absent | `FOREIGN` | `pretty-hyper-docs` — animated WebP via HyperFrames, which writes no `producer` |
 | anything else | `FOREIGN` | unknown producer; adopt only with the user's go-ahead |
 
 **The `FOREIGN` verdict is mutual by design, and that is the migration path.** This
 skill reports the siblings' visuals `FOREIGN` and offers to re-author them as statics;
-`pretty-svg-docs` reports this skill's visuals `FOREIGN` and offers to animate them.
+`prettier-svg-docs` reports this skill's visuals `FOREIGN` and offers to animate them.
 Neither silently claims the other's work, and a repo can move in either direction. So
 `FOREIGN` here means "authored by a sibling, convertible" — not "broken".
 

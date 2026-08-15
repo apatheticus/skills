@@ -40,7 +40,7 @@ register for the project.
 It is the third of three siblings that share one content engine and one
 honesty-over-polish doctrine, and differ only in the visual layer:
 
-|  | [`pretty-hyper-docs`](../pretty-hyper-docs) | [`pretty-svg-docs`](../pretty-svg-docs) | `pretty-plain-docs` |
+|  | [`pretty-hyper-docs`](../pretty-hyper-docs) | [`prettier-svg-docs`](../prettier-svg-docs) | `pretty-plain-docs` |
 | --- | --- | --- | --- |
 | Visual format | animated WebP | animated SVG | **static SVG** |
 | Needs installing | HyperFrames CLI, ffmpeg, img2webp | nothing beyond `python3` | nothing beyond `python3` |
@@ -52,13 +52,13 @@ honesty-over-polish doctrine, and differ only in the visual layer:
 | Mermaid source under a README diagram | no | no | **yes** |
 
 Use `pretty-hyper-docs` when you specifically want WebP or name HyperFrames. Use
-`pretty-svg-docs` when you want the diagrams to move. Use
+`prettier-svg-docs` when you want the diagrams to move. Use
 [`update-docs`](https://github.com/apatheticus/skills) for plain text-only docs.
 Otherwise use this one — and note that every visual on this page was authored and
 gated by the skill itself, in the `schematic` style.
 
 Running this skill on a repo whose visuals animate reports them `FOREIGN` and offers
-to re-author them as stills; running `pretty-svg-docs` on a repo this skill has
+to re-author them as stills; running `prettier-svg-docs` on a repo this skill has
 processed does the reverse. That is deliberate, it works in both directions, and
 neither skill ever silently claims the other's work — or deletes it.
 

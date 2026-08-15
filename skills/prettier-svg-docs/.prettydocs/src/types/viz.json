@@ -1,0 +1,27 @@
+{
+  "name": "types",
+  "doc": "README.md",
+  "tier": "animated-flagship",
+  "producer": "prettier-svg-docs",
+  "style": "catalog-sheet",
+  "diagram_type": null,
+  "facts": [
+    "The catalog holds 27 diagram types, indexed in reference/diagrams.md with one spec file each under reference/types/",
+    "Every cell is that type's own full-width specimen from docs/samples/types/, scaled down — not a redrawing of it",
+    "All 27 specimens are drawn in the flat-material style, so the variable across the sheet is the layout grammar and nothing else",
+    "scripts/diagrams.json is the checker's machine-readable half of the same catalog, and validate.mjs fails the build if a slug there is missing from the skill's frontmatter",
+    "The diagram check class fires only on a root carrying data-diagram, so a hero or a banner is never measured against a type budget"
+  ],
+  "facts_hash": "3efe496629bc90a1950a07d247abacf8b9e769e781552c900f6b30cd199c9224",
+  "src_hash": "60ce66013a7b1664281882c8f268c3ad40c7bc27c7adddc4995f571da1e501eb",
+  "design_hash": "a99906390738999c26cb86b409e5324f1f289520e6b8f4fa69647ebfae88f7ad",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 292517
+  },
+  "relaxed": [
+    "bytes@400KB"
+  ],
+  "budget_cuts": []
+}

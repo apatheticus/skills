@@ -8,7 +8,7 @@ Deterministic, python3 stdlib only. Checks, in order:
               contract: data-loop-s is 0 and the file does not animate. No
               @keyframes (even an unreferenced one), no animation: declaration
               (`animation: none` included), no SMIL. This skill produces still
-              images; a visual that needs motion belongs in pretty-svg-docs
+              images; a visual that needs motion belongs in prettier-svg-docs
   legibility  every font-size meets its role floor
   system      every colour traces to a prettydocs.md palette role or a declared
               custom property; text contrast >= 4.5:1 against its data-bg role
@@ -433,7 +433,7 @@ def check_file(path: Path, catalog: dict, slug: str | None,
     # Part of the structural class, not a class of its own — like the <script> ban,
     # it is a rule about what a committed file may contain. Replaces the seam and
     # motion-accessibility classes the animated sibling needs, which is why this
-    # checker has six classes where pretty-svg-docs' has eight.
+    # checker has six classes where prettier-svg-docs' has eight.
     #
     # `data-loop-s` is kept, and required, rather than dropped: it is the marker all
     # three pretty-docs skills already use to declare a visual's loop length, so a
@@ -443,7 +443,7 @@ def check_file(path: Path, catalog: dict, slug: str | None,
     loop_attr = root.get("data-loop-s")
     if loop_attr is None:
         f.error(label, "root <svg> has no data-loop-s — this skill's visuals declare "
-                       "data-loop-s=\"0\", the static marker shared with pretty-svg-docs")
+                       "data-loop-s=\"0\", the static marker shared with prettier-svg-docs")
     else:
         loop = parse_time(loop_attr)
         if loop is None:
@@ -452,7 +452,7 @@ def check_file(path: Path, catalog: dict, slug: str | None,
             f.error(label, f"data-loop-s='{loop_attr}' declares a {loop:g}s loop — "
                            "pretty-plain-docs produces still images only, so the only "
                            "permitted value is 0. A visual that needs motion belongs in "
-                           "the sibling pretty-svg-docs (animated SVG) or "
+                           "the sibling prettier-svg-docs (animated SVG) or "
                            "pretty-hyper-docs (animated WebP)")
 
     smil = [el for el in everything if local(el.tag) in SMIL_TAGS]

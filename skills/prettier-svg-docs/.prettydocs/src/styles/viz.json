@@ -1,0 +1,29 @@
+{
+  "name": "styles",
+  "doc": "README.md",
+  "tier": "animated-flagship",
+  "producer": "prettier-svg-docs",
+  "style": "catalog-sheet",
+  "diagram_type": null,
+  "facts": [
+    "The catalog holds 32 styles, indexed alphabetically in reference/styles.md with one spec file each under reference/styles/",
+    "Every cell is that style's own full-width specimen from docs/samples/, scaled down — not a redrawing of it",
+    "The sheet is gated as the declared 'catalog-sheet' style, so each tile's filters are measured against the floor of the style they depict",
+    "scripts/styles.json is the checker's machine-readable half of the same catalog"
+  ],
+  "facts_hash": "2ee9d8d1db960e28ecda51cfb370c7160538c2738bb01a8d3e284d8919da454e",
+  "src_hash": "06fd011d79ddccca84ae71f3ca76881c712e39ea90145d1bd8c10c3d5cba4ad3",
+  "design_hash": "a99906390738999c26cb86b409e5324f1f289520e6b8f4fa69647ebfae88f7ad",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 300666
+  },
+  "relaxed": [
+    "bytes@400KB",
+    "filter-depth@2",
+    "filter-depth@3",
+    "filter-depth@5"
+  ],
+  "budget_cuts": []
+}

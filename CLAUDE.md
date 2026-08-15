@@ -62,13 +62,170 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 ## Current state
 
-Scaffolded 2026-07-24. **Seven skills shipped** — `human-voice`, `pretty-hyper-docs`, `pretty-plain-docs`, `pretty-svg-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green at plugin version **0.15.0**. `pretty-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28, revised to its v2 spec on 2026-07-29), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
+Scaffolded 2026-07-24. **Seven skills shipped** — `human-voice`, `prettier-svg-docs`, `pretty-hyper-docs`, `pretty-plain-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green at plugin version **0.19.0**. `prettier-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28, revised to its v2 spec on 2026-07-29), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. Since 0.19.0 it also ships a **27-type diagram taxonomy** with a **specimen per type** at `docs/samples/types/<slug>.svg`, all authored in `flat-material`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
 
 **`svg_check.py` gates fidelity, not just safety.** Every other check class is a ceiling (filter depth, bytes, radius) or a legibility floor (font size, contrast) — none of them asks whether a visual *looks like* the style it claims, so a flat, styleless render used to pass clean. Styles now declare their material in `scripts/styles.json` via `require_filter_all`, `min_filter_depth` and `min_elements`, and the checker prints a per-file `NOTE` reporting the chain depth, filter count and drawn-element count it actually found. `deepest chain 1` under a floor of 3 is the tell that a material was faked. Two attributes drive it: `data-specimen="true"` marks a catalog sample (**`min_elements` binds only on specimens** — a README diagram with four boxes is correct at 23 elements, and padding it would be worse output), and `data-style="<slug>"` on a `<filter>` measures that chain against the floor of the style it depicts rather than the file-wide one.
 
 The contact sheet `docs/assets/styles.svg` is **1200×4721** and is gated as its own declared `catalog-sheet` style (`filter_depth: 5`, `bytes_fail: 400 KB` — raised from 300 KB at 0.14.0, where the animated sheet reached 97.9% of the old cap, `min_elements: 620`). It used to be the one asset gated *without* `--style`, which silently gave it global `filter_depth: 1` and made `check_style` skip it entirely — so the single file depicting all 31 idioms was the only one exempt from every fidelity gate, and every material on it was faked. Each tile is now that style's own specimen scaled down rather than a redrawing, so the sheet cannot be less faithful than the catalog it indexes or drift from it. Read that skill's `.prettydocs/prettydocs.md` before editing it — the per-specimen token namespacing, `isolation: isolate` and per-tile `data-bg` are all load-bearing.
 
 Every skill's README visuals were authored by running `pretty-svg-docs` on itself, so they double as the worked example. One resolved style per skill: `human-voice` → `editorial`, `pretty-svg-docs` → `bento-grid`, `pretty-plain-docs` → `schematic`, `reflect` → `glassmorphism`, `security-audit-full-report` → `flat-material`. `editorial` and `bento-grid` **require no filter**, and `editorial` forbids blur, shadow and gradient outright, so for those two the fidelity floor is drawn density and typographic craft rather than a filter chain. Don't "fix" a zero-filter NOTE on either: `bento-grid` allows one soft shadow *or* a hairline and never both, and these boards use the hairline.
+
+**`pretty-svg-docs` became `prettier-svg-docs` at 0.19.0, and the rename is honest: it
+gained a theory of the diagram it did not have.** The host was a strong documentation
+*pipeline* with a weak *drawing* layer — it knew which documents exist, where their
+visuals live, how a visual's state is tracked and invalidated, what material a style is
+made of and how a loop stays seam-exact, and it had **no** taxonomy, selection rule,
+connector grammar, layout grid, complexity budget, focal rule or geometry gate. What
+got drawn inside the frame was improvised per run. Merged in from
+[`cathrynlavery/diagram-design`](https://github.com/cathrynlavery/diagram-design) (MIT):
+a **27-type catalog** with per-type layout grammar and budgets, **7 semantic patterns**
+for when behaviour rather than structure carries the meaning, the six connector rules,
+the 4-unit grid, and **87 icons**. The merge is asymmetric on purpose — upstream emits
+self-contained HTML and forbids hand-authoring SVG, its motion model is static-first on
+a byte-pinned JS controller, and it links Google Fonts; the host wins on all three, and
+upstream's `references/animation.md` contributes exactly **one** rule (never animate
+layout coordinates, connector routes, `viewBox`, node dimensions or semantic text).
+`THIRD_PARTY.md` records the boundary.
+
+**The load-bearing design move is that the new `diagram` check class is opt-in by
+`data-diagram` on the root**, the same shape as the existing `data-specimen`. That is
+what made a 27-type gate a *minor* rather than a breaking change: re-gating every
+committed SVG against the new checker with the unchanged catalog returns a **byte-identical
+per-file verdict** — sorted diff against the pre-change baseline is empty. Beware the
+unsorted diff: the rename moves `pretty-plain-docs` past `prettier-svg-docs`
+alphabetically, so 70 lines look changed and none are.
+
+**The machine half is where the value is, and the prose half could not have carried
+it** — the same conclusion `glassmorphism` reached at 0.13.0. Nine checks fire only on a
+tagged root: the type resolves in `scripts/diagrams.json`; node/connector/focal/zone
+budgets; no diagonal connector; no label mask clipped by a node painted later or sitting
+inside the gap floor of any connector; node geometry on the 4-unit grid; no animation
+that moves geometry; the legend below every node; and a positive `NOTE` reporting what
+it counted (`0 diagonal, 0 off-grid, min label gap 8.0` is what says the grammar was
+*applied* rather than merely avoided). `scripts/test_diagram_check.py` is **37 fixtures,
+19 negative and 18 positive**, no fixture files on disk. **Semantic attributes make the
+ported checks exact rather than heuristic** — upstream's `verify-geometry.py` guesses
+that a node is a `<rect>` ≥60×40 and a label plate is 20–120 × 8–14, and its own ADR-0005
+concedes the thresholds need revisiting per type; `data-node` and `data-label` mean
+nothing is guessed. That is a strict improvement over the source and should be stated as
+one.
+
+**Building 27 specimens against the grammar found twelve defects in the grammar, and
+reading it would have produced none of them.** The three worst: (1) **every SVG snippet
+in `diagram-grammar.md` was not well-formed XML** — `<g data-node>` is an HTML-style
+valueless attribute, so copying the file's own examples fails with `not well-formed
+(invalid token)` at a line and column naming neither the attribute nor the cause; 36
+attributes across 14 files now carry `="true"`. (2) **The grammar's `radius 4/6/8` was an
+ERROR under two shipped styles** — `bento-grid` declares `min_rx: 12` and `swiss-minimal`
+`max_rx: 2`, in production and not only for specimens; radius is now style-owned and
+grid-exempt. (3) **`bento-grid`'s column grid is arithmetically incompatible with the
+4-unit node grid**, and there is no fix at the margin or gutter: a 4-divisible column
+needs `2m + 5g ≡ 0 (mod 6)`, and the frozen 20-unit gutter fixes `g = 5`, leaving
+`2m ≡ 5 (mod 6)` — unsatisfiable over the integers. The node grid wins for `[data-node]`
+geometry and only that. Also fixed: §6's own node-box snippet was off §10's grid
+(`height="18"`, `x="X+10"`) and specified `rx="3"` below `flat-material`'s floor; §8's
+zone numbers were mutually unsatisfiable (≥20 clearance *and* `−40` *and* an 18-tall
+plate at `Y+5` yields 17); §10's list read as an enumeration when the checker gates
+divisibility; the node-height list omitted 80, which is §6's own canonical box; and the
+`label` floor is 18, restated as 20 in three type references.
+
+**Two vacuous-pass holes were closed in the new class, both the shape this repo has
+documented twice before.** A file tagged `data-diagram` with `diagrams.json` missing
+gated clean with **zero** diagram checks applied and nothing said so — now a loud error.
+And `group_box` read only `<rect>`, so a `line`, `scatter` or `radar` node (a polyline, a
+circle, a polygon) produced no bounding box at all, the node dropped out, and the legend
+check **silently skipped** — a legend drawn inside the plot area would have passed. Both
+carry fixture pairs.
+
+**Two config keys were deleted rather than left looking enforced.** `label_gap_max` and
+`attach_gap_min` sat in `diagrams.json` and nothing read either. The gap check measures a
+label against *every* connector in the file, so it cannot honestly say a label is too far
+from the one it belongs to — and `diagrams.json`'s `$note` now records that every key in
+it is read. For the same reason `diagram-grammar.md` §4 says outright that **three of the
+six connector rules are checked and three are not**: rules 3, 4 and 5 each need an
+ownership link between a connector and a node that the drawing does not declare.
+
+**The five plotting types carry `plotted: true`, and the reason is a claim the spec made
+that the code did not honour.** §10 said plotted coordinates were exempt from the grid
+"because `svg_check.py` reads only `[data-node]` rect geometry" — but on a `bar` or a
+`gantt` the datum *is* the node rect's width, so the one number the exemption existed to
+protect was the one number being rounded onto a 4-unit lattice. Now declared per type
+rather than inferred from `max_edges == 0`, because `venn`, `pyramid` and `quadrant` also
+have no connectors and their geometry is a layout, not a measurement.
+
+**Three CI defects, all found by running the steps rather than writing them.**
+`audit_visuals.py` resolves each doc against `--root`, so a prefixed path from the repo
+root *doubles* and every doc reports `file not found`, while a *bare* `README.md` from
+the repo root silently audits the **repo's own** README against a skill's manifests and
+reports a visual that exists in neither. The working form is `( cd "$skill" && python3
+scripts/audit_visuals.py --root . *.md )`. Second: the SVG gate resolved a style from
+`p.parent.name == "samples"`, so all 27 type specimens — under `samples/types/` — fell
+through to a `viz.json` that does not exist and were gated **with no `--style` at all**,
+leaving every `flat-material` invariant unenforced; an unresolvable style is now a loud
+error rather than a silent skip. Third: the 87 icons are *assets*, not boards, and gating
+them as visuals reds the build on files that are correct.
+
+**The type specimens are drawn in `flat-material` and the choice was forced, not
+aesthetic.** `bento-grid` (`min_rx: 12`) and `swiss-minimal` (`max_rx: 2`) both collide
+with a node box at `rx="8"`; `flat-material` declares `min_rx: 4`, which the grammar's
+default set satisfies, and its required `feDropShadow` is the one case where the
+grammar's "borders, not shadows" defers to a style. One style across all 27 is also the
+point of the contact sheet: the variable is the layout grammar and nothing else.
+`docs/assets/types.svg` is built by `scripts/build_type_sheet.py` rather than hand-authored
+— each tile is that type's own specimen scaled 0.45833, so the sheet cannot drift from the
+catalog it indexes. The script namespaces every class, id, `url(#…)`, `href="#…"` and
+`@keyframes` name per tile (without it, tile 3's `.name` silently restyles tile 19),
+sizes each row to the taller of its pair, and **asserts** all 27 `:root` blocks are
+identical rather than assuming it — tokens are deliberately not namespaced, which is only
+safe because every specimen resolves to one style.
+
+**The icon set was restructured rather than copied, and the measurement is why.**
+Upstream ships 87 icons as one **107 KB** markdown file; as a `reference/` file it would
+load on every request touching an architecture diagram — five times the entire skill
+body. Split into one file per icon under `assets/` (never loaded), a 7 KB `INDEX.md` for
+lookup and a 5 KB `reference/icons.md` for the mechanism, drawing three icons costs
+**13 KB against 107 KB**, and drawing none costs 5 KB. Two upstream defects surfaced in
+the split: `dagster.svg` carried a hardcoded `fill="#fff"` in a `currentColor` set, and
+`hop.svg` shipped an Inkscape `<metadata>` block using `rdf:`/`cc:`/`inkscape:` prefixes
+its root never binds — invisibly malformed inside a markdown fence, and `unbound prefix`
+the moment it becomes a file.
+
+**The frontmatter was re-cut against the real mechanism, and the old cap was measuring
+the wrong thing.** `MAX_DESCRIPTION = 1024` in `scripts/validate.mjs` was self-imposed;
+Claude Code caps the **combined** `description` + `when_to_use` at **1,536** in the skill
+listing and truncates from the end, which is why the key trigger belongs at the front.
+The skill now runs 541 + 986 = **1,528**, names all 27 type slugs, and `validate.mjs`
+**fails the build** if a slug in `diagrams.json` is missing from that text — upstream's
+own rule, and the reason it matters is that the host previously named four styles of 32
+and zero diagram types, so 28 styles and every type were unreachable by name. Two traps
+worth keeping: the first draft carried `dependencies: no renderer`, a colon-space that
+real YAML parsers reject and installers skip **silently**; and the guidance document's
+"roughly 144 words" for upstream's description does not reproduce — it measures 579
+chars / 70 words at v2.4.
+
+**The skill's own `lazy-rerender.svg` was re-authored from a card grid into a real
+`flowchart`, and that is not decoration.** The repo's standing claim is that every
+skill's README visuals were authored by running the skill on itself; a release adding a
+diagram grammar and using it in none of its own visuals makes that claim false. It now
+gates `9 steps, 3 connectors, 1 focal, 1 zone, 0 diagonal, 0 off-grid, min label gap
+8.0`, with the seam proven in pixels at **0 differing pixels** for `t=0` vs `t=12s`
+against a same-pose floor of 0. **The control had to be `t=3s`, not the usual midpoint** —
+the only animation is `6s`, so `t=6` equals `t=0` by arithmetic and would have read as a
+broken harness. Its `alt` text was silently false afterwards (it still described "ten
+cells"); nothing checks alt content, so that is a hand check belonging beside any
+re-author.
+
+**`viz.json` gained `diagram_type` and `budget_cuts[]`, and `diagram_type` has three
+states rather than two.** A slug means the visual is a diagram of that type; **absent**
+means nobody asked, which on a structural visual in a technical doc is an `UNTYPED`
+finding; and explicit **`null`** means the question was asked and the honest answer is
+none — a hero, a banner, a contact sheet. Without the third state the audit nags forever
+about a visual that will never have a type, and an unasked question looks identical to an
+answered one. `budget_cuts[]` extends the mechanism `relaxed[]` already uses one layer up:
+a softened gate is recorded so the softening is auditable, and a cut is recorded so the
+omission is — otherwise content dropped to fit nine nodes and content nobody noticed are
+indistinguishable to the next run.
+
 
 **`reflect` carries TWO design systems and they are constantly confused. Read this before touching either.** System **A** is the *report* system at `skills/reflect/reference/design-system/`, which styles the HTML report the skill generates — as of 0.12.1 that is **SaaS Pro**, swapped in from Neumorphic Fresh. System **B** is `skills/reflect/.prettydocs/prettydocs.md`, which governs the skill's own README visuals (`docs/assets/hero.svg`, `pipeline.svg`) and is listed in the per-skill style table above. B is *mapped from* A's tokens via a 16-row table, so the 0.12.1 swap left it stale — the README pictures advertised a soft-UI look for a glass-and-gradient report — and **0.12.2 closed that gap**: B was re-derived from `reference/design-system/tokens/colors.css`, style `neumorphism` → **`glassmorphism`**, both visuals re-authored, and the five README badge hexes moved off the old mint/teal ramp onto `brand-600` / `ink-900` / `brand-700` / `success-strong`. There is no longer a stale-by-design debt here. B still records A only as `design_source_path` — `design_hash` covers `prettydocs.md` alone, so a future SaaS Pro refresh **warns** rather than forcing a re-render.
 

@@ -10,5 +10,5 @@ src/**/qa_*.png
 src/**/check.json
 src/**/node_modules/
 
-# Visual QA harness written by the sibling pretty-svg-docs skill
+# Visual QA harness written by the sibling prettier-svg-docs skill
 src/**/_qa/

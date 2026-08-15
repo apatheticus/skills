@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520" role="img" data-loop-s="12" data-diagram="layers" data-bg="background">
+<title>Layer stack — the three gate layers of prettier-svg-docs</title>
+<desc>Three stacked bands, narrowest scope at the top. STRUCTURE is the diagram class: it owns budgets, the 4-unit grid, elbows and label gaps, and it is opted into with data-diagram on the root; it is the accented band because it is what this release added. MATERIAL is the fidelity class, driven by scripts/styles.json and reached whenever a style resolves. MOTION is the seam class, driven by data-loop-s, and it runs on every animated file. A margin arrow says scope widens downward. An emphasis walks down the stack one band at a time on a 12-second loop; no band moves, resizes or reorders.</desc>
+<defs>
+  <filter id="e1" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.28"/>
+  </filter>
+  <marker id="arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+    <path d="M0,0 L8,4 L0,8 Z" fill="var(--dim)"/>
+  </marker>
+</defs>
+<style>
+svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8; --accent:#e0a33e;
+      --sans:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+      --mono:ui-monospace,SFMono-Regular,Menlo,monospace; }
+.ground { fill: var(--background); }
+.band  { fill: var(--surface); stroke: var(--dim); stroke-width: 1; filter: url(#e1); }
+.bandf { fill: var(--accent); stroke: var(--accent); stroke-width: 1; filter: url(#e1); }
+.sil { fill: none; stroke: var(--dim); stroke-width: 1; opacity: .5; }
+.tag  { font: 600 20px var(--mono); fill: var(--dim); letter-spacing: 1px; }
+.tagf { font: 600 20px var(--mono); fill: var(--background); letter-spacing: 1px; }
+.name { font: 700 24px var(--sans); fill: var(--ink); }
+.namef{ font: 700 24px var(--sans); fill: var(--background); }
+.note { font: 400 16px var(--sans); fill: var(--dim); }
+.notef{ font: 400 16px var(--sans); fill: var(--background); }
+.side { font: 400 16px var(--mono); fill: var(--dim); }
+.sidef{ font: 400 16px var(--mono); fill: var(--background); }
+.axis { fill: none; stroke: var(--dim); stroke-width: 1.5; }
+.margin { font: 600 16px var(--mono); fill: var(--dim); }
+.kicker { font: 600 16px var(--mono); fill: var(--dim); letter-spacing: 1.5px; }
+.h1 { font: 700 40px var(--sans); fill: var(--ink); }
+.eyebrow { font: 600 16px var(--sans); fill: var(--dim); letter-spacing: 1px; }
+.legend { font: 400 16px var(--sans); fill: var(--dim); }
+.sep { stroke: var(--dim); stroke-width: 1; opacity: .45; }
+.swatch { fill: none; stroke: var(--accent); stroke-width: 2; }
+.swatch2 { fill: none; stroke: var(--dim); stroke-width: 1; }
+.step { fill: none; stroke: var(--ink); stroke-width: 2; opacity: .14;
+        animation: step 12s ease-in-out infinite; }
+.s2 { animation-delay: -4s; }
+.s3 { animation-delay: -8s; }
+@keyframes step { 0%, 100% { opacity: .14 } 8%, 24% { opacity: 1 } 33% { opacity: .14 } }
+@media (prefers-reduced-motion: reduce) { .step { animation: none } }
+</style>
+
+<rect class="ground" x="0" y="0" width="1200" height="520"/>
+
+<text class="kicker" data-role="metadata" data-bg="background" x="40" y="44">TYPE SPECIMEN · LAYERS · FLAT-MATERIAL</text>
+<text class="h1" data-role="title" data-bg="background" x="40" y="92">Three gate layers, one checker</text>
+
+<!-- direction indicator: left margin, outside the stack -->
+<text class="margin" data-role="metadata" data-bg="background" x="72" y="128" text-anchor="middle">scope</text>
+<line class="axis" x1="72" y1="152" x2="72" y2="392" marker-end="url(#arrow)"/>
+<text class="margin" data-role="metadata" data-bg="background" x="72" y="424" text-anchor="middle">widens</text>
+
+<rect class="sil" x="116" y="136" width="1008" height="280" rx="12"/>
+
+<!-- narrowest scope: opt in per file -->
+<g data-node="" data-focal="">
+  <rect class="bandf" x="120" y="140" width="1000" height="88" rx="8"/>
+  <text class="tagf" data-role="metadata" data-bg="accent-primary" x="152" y="182">STRUCTURE</text>
+  <text class="namef" data-role="label" data-bg="accent-primary" x="340" y="180">The diagram class</text>
+  <text class="notef" data-role="metadata" data-bg="accent-primary" x="340" y="206">owns budgets, grid, elbows, label gaps · not material, not motion</text>
+  <text class="sidef" data-role="metadata" data-bg="accent-primary" x="1092" y="180" text-anchor="end">scripts/diagrams.json</text>
+  <text class="sidef" data-role="metadata" data-bg="accent-primary" x="1092" y="206" text-anchor="end">opt in with data-diagram</text>
+</g>
+
+<g data-node="">
+  <rect class="band" x="120" y="232" width="1000" height="88" rx="8"/>
+  <text class="tag" data-role="metadata" data-bg="surface" x="152" y="274">MATERIAL</text>
+  <text class="name" data-role="label" data-bg="surface" x="340" y="272">The fidelity class</text>
+  <text class="note" data-role="metadata" data-bg="surface" x="340" y="298">owns primitives, filter depth, radius · not the type, not the loop</text>
+  <text class="side" data-role="metadata" data-bg="surface" x="1092" y="272" text-anchor="end">scripts/styles.json</text>
+  <text class="side" data-role="metadata" data-bg="surface" x="1092" y="298" text-anchor="end">resolved by --style</text>
+</g>
+
+<g data-node="">
+  <rect class="band" x="120" y="324" width="1000" height="88" rx="8"/>
+  <text class="tag" data-role="metadata" data-bg="surface" x="152" y="366">MOTION</text>
+  <text class="name" data-role="label" data-bg="surface" x="340" y="364">The seam class</text>
+  <text class="note" data-role="metadata" data-bg="surface" x="340" y="390">owns durations and the reduce block · not what is drawn</text>
+  <text class="side" data-role="metadata" data-bg="surface" x="1092" y="364" text-anchor="end">data-loop-s</text>
+  <text class="side" data-role="metadata" data-bg="surface" x="1092" y="390" text-anchor="end">every animated file</text>
+</g>
+
+<!-- traversal, in the direction the margin points -->
+<g>
+  <rect class="step" x="120" y="140" width="1000" height="88" rx="8"/>
+  <rect class="step s2" x="120" y="232" width="1000" height="88" rx="8"/>
+  <rect class="step s3" x="120" y="324" width="1000" height="88" rx="8"/>
+</g>
+
+<g data-legend="">
+  <line class="sep" x1="40" y1="448" x2="1160" y2="448"/>
+  <text class="eyebrow" data-role="metadata" data-bg="background" x="40" y="472">LEGEND</text>
+  <rect class="swatch" x="180" y="460" width="24" height="16" rx="4"/>
+  <text class="legend" data-role="metadata" data-bg="background" x="216" y="472">accent — the layer this release added</text>
+  <rect class="swatch2" x="620" y="460" width="24" height="16" rx="4"/>
+  <text class="legend" data-role="metadata" data-bg="background" x="656" y="472">no arrows — adjacency is the relationship</text>
+</g>
+</svg>

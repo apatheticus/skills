@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 880" width="1200" height="880" role="img" data-loop-s="12" data-diagram="pyramid" data-bg="background">
+<title>The severity ladder svg_check.py reports</title>
+<desc>Five stacked levels read top to bottom: a parse abort at the apex, then ERROR, SOFTENED, WARN and NOTE at the base. The apex is accented because a DOCTYPE or a malformed file returns before any other check class runs. The two upper levels leave a non-zero exit code; the lower three pass. Width carries rank, not a count. Each level's hairline lifts in turn, top to bottom, once per loop; the stack itself never moves.</desc>
+<defs>
+  <filter id="e1" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="var(--shadow)" flood-opacity=".45"/>
+  </filter>
+  <marker id="up" viewBox="0 0 10 10" refX="5" refY="1" markerWidth="6" markerHeight="6" orient="auto">
+    <path d="M0,10 L5,0 L10,10 z" fill="var(--dim)" fill-opacity=".55"/>
+  </marker>
+</defs>
+<style>
+  svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8;
+        --accent:#e0a33e; --shadow:#000000; }
+  .title { font: 700 40px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .eyebrow { font: 600 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--dim); letter-spacing: 1px; }
+  .level { font: 600 20px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .sub { font: 400 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--dim); }
+  .mono { font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .flevel { font: 700 20px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--background); }
+  .fsub { font: 400 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--background); }
+  .leg { font: 400 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--dim); }
+  .lv { stroke: var(--dim); stroke-width: 1; stroke-opacity: .45;
+        animation: lift 12s ease-in-out infinite; }
+  .lvf { stroke: var(--background); stroke-opacity: .55; }
+  @keyframes lift { 0%, 20%, 100% { stroke-opacity: .45 } 10% { stroke-opacity: 1 } }
+  .l1 { animation-delay: 0s }
+  .l2 { animation-delay: -9.6s }
+  .l3 { animation-delay: -7.2s }
+  .l4 { animation-delay: -4.8s }
+  .l5 { animation-delay: -2.4s }
+  @media (prefers-reduced-motion: reduce) {
+    .lv { animation: none; stroke-opacity: .45; }
+  }
+</style>
+
+<rect x="0" y="0" width="1200" height="880" fill="var(--background)"/>
+
+<text class="eyebrow" x="40" y="48" data-role="metadata">PYRAMID</text>
+<text class="title" x="40" y="88" data-role="title">The severity ladder</text>
+
+<line x1="160" y1="720" x2="160" y2="324" stroke="var(--dim)" stroke-opacity=".35" stroke-width="1" marker-end="url(#up)"/>
+<text class="sub" x="160" y="300" data-role="metadata" text-anchor="middle">RARER</text>
+<text class="sub" x="160" y="752" data-role="metadata" text-anchor="middle">EVERY RUN</text>
+
+<line x1="1020" y1="320" x2="1020" y2="480" stroke="var(--dim)" stroke-opacity=".35" stroke-width="1"/>
+<text class="sub" x="1036" y="406" data-role="metadata" text-anchor="start">exit 1</text>
+<line x1="1020" y1="480" x2="1020" y2="720" stroke="var(--dim)" stroke-opacity=".35" stroke-width="1"/>
+<text class="sub" x="1036" y="606" data-role="metadata" text-anchor="start">exit 0</text>
+
+<g data-node="" data-focal="" data-bg="accent-primary">
+  <polygon class="lv lvf l1" points="560,320 640,320 712,400 488,400" fill="var(--accent)" filter="url(#e1)"/>
+  <text class="flevel" x="600" y="356" data-role="label" text-anchor="middle">Parse abort</text>
+  <text class="fsub" x="600" y="384" data-role="metadata" text-anchor="middle">an ERROR that returns</text>
+</g>
+
+<g data-node="" data-bg="surface">
+  <polygon class="lv l2" points="488,400 712,400 784,480 416,480" fill="var(--surface)" filter="url(#e1)"/>
+  <text class="level" x="600" y="436" data-role="label" text-anchor="middle">ERROR</text>
+  <text class="sub" x="600" y="460" data-role="metadata" text-anchor="middle">exit 1, nothing ships</text>
+</g>
+
+<g data-node="" data-bg="surface">
+  <polygon class="lv l3" points="416,480 784,480 856,560 344,560" fill="var(--surface)" filter="url(#e1)"/>
+  <text class="level" x="600" y="516" data-role="label" text-anchor="middle">SOFTENED</text>
+  <text class="mono" x="600" y="540" data-role="metadata" text-anchor="middle">recorded in relaxed[]</text>
+</g>
+
+<g data-node="" data-bg="surface">
+  <polygon class="lv l4" points="344,560 856,560 928,640 272,640" fill="var(--surface)" filter="url(#e1)"/>
+  <text class="level" x="600" y="596" data-role="label" text-anchor="middle">WARN</text>
+  <text class="sub" x="600" y="620" data-role="metadata" text-anchor="middle">advisory, aggregated (xN)</text>
+</g>
+
+<g data-node="" data-bg="surface">
+  <polygon class="lv l5" points="272,640 928,640 1000,720 200,720" fill="var(--surface)" filter="url(#e1)"/>
+  <text class="level" x="600" y="676" data-role="label" text-anchor="middle">NOTE</text>
+  <text class="sub" x="600" y="700" data-role="metadata" text-anchor="middle">what the file achieved</text>
+</g>
+
+<g data-legend="" data-bg="background">
+  <line x1="40" y1="800" x2="1160" y2="800" stroke="var(--dim)" stroke-opacity=".35" stroke-width="1"/>
+  <text class="eyebrow" x="40" y="824" data-role="metadata">LEGEND</text>
+  <rect x="200" y="812" width="16" height="16" rx="4" fill="var(--surface)" stroke="var(--dim)" stroke-opacity=".45" stroke-width="1"/>
+  <text class="leg" x="228" y="824" data-role="metadata">Level — one finding class</text>
+  <rect x="560" y="812" width="16" height="16" rx="4" fill="var(--accent)"/>
+  <text class="leg" x="588" y="824" data-role="metadata">Accent — the run stops here</text>
+  <text class="leg" x="900" y="824" data-role="metadata">Width — rank, not a count</text>
+</g>
+</svg>

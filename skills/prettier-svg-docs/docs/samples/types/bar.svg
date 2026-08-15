@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 680" width="1200" height="680" role="img" data-loop-s="12" data-diagram="bar" data-bg="background">
+  <title>Declared density floor, by style</title>
+  <desc>A horizontal bar chart of the eight highest min_elements floors declared in scripts/styles.json. soft-vinyl leads at 120 drawn elements, then brushed-metal 84, hud 78, bento-grid 76, wood-grain 76, glassmorphism 71, console-elbow 70 and draughtsman-notebook 62. The value axis starts at zero and is scaled at eight units per drawn element.</desc>
+  <defs>
+  <filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.28"/>
+  </filter>
+  </defs>
+  <style>
+  svg { --paper:#12324f; --surface:#17405f; --ink:#e8f2fb; --muted:#9fc4e8; --accent:#e0a33e; }
+  text { font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif; }
+  .mono { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+  .ttl { font-size:40px; font-weight:700; fill:var(--ink); }
+  .src { font-size:16px; font-weight:500; fill:var(--muted); }
+  .cat { font-size:18px; font-weight:600; fill:var(--ink); }
+  .catf { font-size:18px; font-weight:600; fill:var(--paper); }
+  .val { font-size:16px; font-weight:600; fill:var(--ink); }
+  .valf { font-size:16px; font-weight:700; fill:var(--accent); }
+  .tick { font-size:16px; font-weight:500; fill:var(--muted); }
+  .lgd { font-size:16px; font-weight:600; fill:var(--ink); }
+  .bar { animation: emph 12s ease-in-out infinite; }
+  .b2 { animation-delay:-1.5s } .b3 { animation-delay:-3s }
+  .b4 { animation-delay:-4.5s } .b5 { animation-delay:-6s }
+  .b6 { animation-delay:-7.5s } .b7 { animation-delay:-9s }
+  .b8 { animation-delay:-10.5s }
+  @keyframes emph { 0%,100% { stroke-width:1; stroke-opacity:.55 }
+    6% { stroke-width:3; stroke-opacity:1 }
+    18% { stroke-width:1; stroke-opacity:.55 } }
+  @media (prefers-reduced-motion: reduce) {
+    .bar { animation:none; stroke-width:1; stroke-opacity:.55 }
+  }
+  </style>
+  <rect x="0" y="0" width="1200" height="680" fill="var(--paper)"/>
+  <text x="40" y="64" class="ttl" data-role="title" data-bg="background">Declared density floor, by style</text>
+  <text x="40" y="96" class="src" data-role="metadata" data-bg="background">scripts/styles.json &#183; require.min_elements &#183; the eight highest of the 32 catalog styles</text>
+  <g data-bg="background">
+    <line x1="96" y1="120" x2="96" y2="576" stroke="var(--muted)" stroke-opacity="0.55" stroke-width="1"/>
+    <line x1="336" y1="120" x2="336" y2="576" stroke="var(--muted)" stroke-opacity="0.22" stroke-width="1"/>
+    <line x1="576" y1="120" x2="576" y2="576" stroke="var(--muted)" stroke-opacity="0.22" stroke-width="1"/>
+    <line x1="816" y1="120" x2="816" y2="576" stroke="var(--muted)" stroke-opacity="0.22" stroke-width="1"/>
+    <line x1="1056" y1="120" x2="1056" y2="576" stroke="var(--muted)" stroke-opacity="0.22" stroke-width="1"/>
+  </g>
+  <g data-node="" data-focal="">
+    <rect x="96" y="132" width="960" height="40" rx="4" class="bar" fill="var(--accent)" stroke="var(--accent)" stroke-width="1" stroke-opacity="0.55" filter="url(#e1)"/>
+    <text x="112" y="158" class="catf" data-role="label" data-bg="accent-primary">soft-vinyl</text>
+    <text x="1068" y="158" class="valf" data-role="metadata" data-bg="background">120</text>
+  </g>
+  <g data-node="">
+    <rect x="96" y="188" width="672" height="40" rx="4" class="bar b2" fill="var(--surface)" stroke="var(--muted)" stroke-width="1" stroke-opacity="0.55" filter="url(#e1)"/>
+    <text x="112" y="214" class="cat" data-role="label" data-bg="surface">brushed-metal</text>
+    <text x="780" y="214" class="val mono" data-role="metadata" data-bg="background">84</text>
+  </g>
+  <g data-node="">
+    <rect x="96" y="244" width="624" height="40" rx="4" class="bar b3" fill="var(--surface)" stroke="var(--muted)" stroke-width="1" stroke-opacity="0.55" filter="url(#e1)"/>
+    <text x="112" y="270" class="cat" data-role="label" data-bg="surface">hud</text>
+    <text x="732" y="270" class="val mono" data-role="metadata" data-bg="background">78</text>
+  </g>
+  <g data-node="">
+    <rect x="96" y="300" width="608" height="40" rx="4" class="bar b4" fill="var(--surface)" stroke="var(--muted)" stroke-width="1" stroke-opacity="0.55" filter="url(#e1)"/>
+    <text x="112" y="326" class="cat" data-role="label" data-bg="surface">bento-grid</text>
+    <text x="716" y="326" class="val mono" data-role="metadata" data-bg="background">76</text>
+  </g>
+  <g data-node="">
+    <rect x="96" y="356" width="608" height="40" rx="4" class="bar b5" fill="var(--surface)" stroke="var(--muted)" stroke-width="1" stroke-opacity="0.55" filter="url(#e1)"/>
+    <text x="112" y="382" class="cat" data-role="label" data-bg="surface">wood-grain</text>
+    <text x="716" y="382" class="val mono" data-role="metadata" data-bg="background">76</text>
+  </g>
+  <g data-node="">
+    <rect x="96" y="412" width="568" height="40" rx="4" class="bar b6" fill="var(--surface)" stroke="var(--muted)" stroke-width="1" stroke-opacity="0.55" filter="url(#e1)"/>
+    <text x="112" y="438" class="cat" data-role="label" data-bg="surface">glassmorphism</text>
+    <text x="676" y="438" class="val mono" data-role="metadata" data-bg="background">71</text>
+  </g>
+  <g data-node="">
+    <rect x="96" y="468" width="560" height="40" rx="4" class="bar b7" fill="var(--surface)" stroke="var(--muted)" stroke-width="1" stroke-opacity="0.55" filter="url(#e1)"/>
+    <text x="112" y="494" class="cat" data-role="label" data-bg="surface">console-elbow</text>
+    <text x="668" y="494" class="val mono" data-role="metadata" data-bg="background">70</text>
+  </g>
+  <g data-node="">
+    <rect x="96" y="524" width="496" height="40" rx="4" class="bar b8" fill="var(--surface)" stroke="var(--muted)" stroke-width="1" stroke-opacity="0.55" filter="url(#e1)"/>
+    <text x="112" y="550" class="cat" data-role="label" data-bg="surface">draughtsman-notebook</text>
+    <text x="604" y="550" class="val mono" data-role="metadata" data-bg="background">62</text>
+  </g>
+  <text x="96" y="602" class="tick mono" data-role="metadata" data-bg="background" text-anchor="middle">0</text>
+  <text x="336" y="602" class="tick mono" data-role="metadata" data-bg="background" text-anchor="middle">30</text>
+  <text x="576" y="602" class="tick mono" data-role="metadata" data-bg="background" text-anchor="middle">60</text>
+  <text x="816" y="602" class="tick mono" data-role="metadata" data-bg="background" text-anchor="middle">90</text>
+  <text x="1056" y="602" class="tick mono" data-role="metadata" data-bg="background" text-anchor="middle">120</text>
+  <text x="96" y="632" class="src" data-role="metadata" data-bg="background">drawn elements a specimen of that style must carry</text>
+  <text x="96" y="660" class="src" data-role="metadata" data-bg="background">selection: the eight highest floors, ties alphabetical; catalog-sheet is the contact sheet's own gate, not a style</text>
+</svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 960" width="1200" height="960" role="img" data-loop-s="12" data-diagram="venn" data-bg="background">
+<title>The three pretty-docs siblings and what they share</title>
+<desc>Three equal circles, one per skill: pretty-plain-docs on the left, prettier-svg-docs on the right, pretty-hyper-docs below. The left pair share the 32-style catalog and the bundled svg_check.py; the right pair share seamless 8 to 14 second animation; the pair that excludes the SVG sibling shares only the absence of a diagram type catalog. The centre, accented, is the docs engine all three run: the eight Tier-1 documents, the pd colon markers and the facts, source and design hash triad. The radii are equal because each set is one skill; the drawing compares properties, not size. Only the accented centre moves, breathing between two opacities.</desc>
+<defs>
+  <filter id="e1" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="var(--shadow)" flood-opacity=".45"/>
+  </filter>
+</defs>
+<style>
+  svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8;
+        --accent:#e0a33e; --shadow:#000000; }
+  .title { font: 700 40px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .eyebrow { font: 600 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--dim); letter-spacing: 1px; }
+  .setname { font: 600 20px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .region { font: 600 18px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .sub { font: 400 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--dim); }
+  .mono { font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .callout { font: 600 18px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .leg { font: 400 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--dim); }
+  .fregion { font: 700 18px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--background); }
+  .breathe { animation: breathe 6s ease-in-out infinite; }
+  @keyframes breathe { 0%, 100% { fill-opacity: .88 } 50% { fill-opacity: 1 } }
+  @media (prefers-reduced-motion: reduce) {
+    .breathe { animation: none; fill-opacity: 1; }
+  }
+</style>
+
+<rect x="0" y="0" width="1200" height="960" fill="var(--background)"/>
+
+<text class="eyebrow" x="40" y="48" data-role="metadata">VENN</text>
+<text class="title" x="40" y="88" data-role="title">Three siblings, one engine</text>
+
+<g data-node="" data-bg="background">
+  <circle cx="480" cy="400" r="200" fill="var(--ink)" fill-opacity=".04"
+          stroke="var(--ink)" stroke-opacity=".30" stroke-width="1"/>
+  <text class="setname" x="256" y="364" data-role="label" text-anchor="end">pretty-plain-docs</text>
+  <text class="sub" x="256" y="388" data-role="metadata" text-anchor="end">still images only</text>
+</g>
+
+<g data-node="" data-bg="background">
+  <circle cx="720" cy="400" r="200" fill="var(--dim)" fill-opacity=".05"
+          stroke="var(--ink)" stroke-opacity=".30" stroke-width="1"/>
+  <text class="setname" x="944" y="364" data-role="label" text-anchor="start">prettier-svg-docs</text>
+  <text class="sub" x="944" y="388" data-role="metadata" text-anchor="start">27 diagram types</text>
+</g>
+
+<g data-node="" data-bg="background">
+  <circle cx="600" cy="608" r="200" fill="var(--ink)" fill-opacity=".03"
+          stroke="var(--ink)" stroke-opacity=".30" stroke-width="1"/>
+  <text class="setname" x="600" y="844" data-role="label" text-anchor="middle">pretty-hyper-docs</text>
+  <text class="sub" x="600" y="868" data-role="metadata" text-anchor="middle">WebP via HyperFrames</text>
+</g>
+
+<g data-bg="surface">
+  <text class="region" x="600" y="336" data-role="label" text-anchor="middle">32 styles</text>
+  <text class="mono" x="600" y="358" data-role="metadata" text-anchor="middle">svg_check.py</text>
+  <text class="region" x="490" y="556" data-role="label" text-anchor="middle">No type catalog</text>
+  <text class="region" x="710" y="546" data-role="label" text-anchor="middle">Animated</text>
+  <text class="sub" x="710" y="568" data-role="metadata" text-anchor="middle">seamless 8–14s loop</text>
+</g>
+
+<path d="M 600,560 V 660 H 414" fill="none" stroke="var(--dim)" stroke-opacity=".45" stroke-width="1"/>
+<g data-bg="background">
+  <text class="callout" x="400" y="700" data-role="label" text-anchor="end">Shared by all three</text>
+  <text class="sub" x="400" y="726" data-role="metadata" text-anchor="end">8 Tier-1 docs</text>
+  <text class="mono" x="400" y="750" data-role="metadata" text-anchor="end">pd:viz · pd:badges · pd:footer</text>
+  <text class="sub" x="400" y="774" data-role="metadata" text-anchor="end">facts, src and design hashes</text>
+</g>
+
+<g data-focal="" data-bg="accent-primary">
+  <path class="breathe" filter="url(#e1)"
+        d="M 521.45,424.07 A 200 200 0 0 1 678.55,424.07 A 200 200 0 0 1 600,560 A 200 200 0 0 1 521.45,424.07 Z"
+        fill="var(--accent)" fill-opacity=".88"/>
+  <text class="fregion" x="600" y="468" data-role="label" text-anchor="middle">Shared</text>
+</g>
+
+<g data-legend="" data-bg="background">
+  <line x1="40" y1="900" x2="1160" y2="900" stroke="var(--dim)" stroke-opacity=".35" stroke-width="1"/>
+  <text class="eyebrow" x="40" y="924" data-role="metadata">LEGEND</text>
+  <rect x="200" y="912" width="16" height="16" rx="4" fill="var(--ink)" fill-opacity=".08" stroke="var(--dim)" stroke-opacity=".5" stroke-width="1"/>
+  <text class="leg" x="228" y="924" data-role="metadata">Tint — one skill's reach</text>
+  <rect x="560" y="912" width="16" height="16" rx="4" fill="var(--ink)" fill-opacity=".16" stroke="var(--dim)" stroke-opacity=".5" stroke-width="1"/>
+  <text class="leg" x="588" y="924" data-role="metadata">Overlap — a shared property</text>
+  <rect x="900" y="912" width="16" height="16" rx="4" fill="var(--accent)"/>
+  <text class="leg" x="928" y="924" data-role="metadata">Accent — shared by all three</text>
+</g>
+</svg>

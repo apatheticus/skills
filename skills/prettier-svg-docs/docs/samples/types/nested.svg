@@ -1,0 +1,120 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img" data-loop-s="12" data-diagram="nested" data-bg="background">
+<title>Where a visual's state lives, ring by ring</title>
+<desc>Nested containment specimen: five concentric scopes — the repository, the skill, the project's .prettydocs state, one visual's src directory, and the hash triad inside viz.json — with the two hashes that reach back out to the files whose bytes they cover.</desc>
+<defs>
+<filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+<feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.34"/>
+</filter>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 Z" fill="var(--dim)"/>
+</marker>
+</defs>
+<style>svg{--background:#12324f;--surface:#17405f;--ink:#e8f2fb;--dim:#9fc4e8;--accent:#e0a33e;--warn:#e2725b;--sans:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+.t{font-family:var(--sans)}
+.m{font-family:var(--mono)}
+.s40{font-size:40px;font-weight:700}
+.s20{font-size:20px;font-weight:600}
+.s18{font-size:18px;font-weight:600}
+.s16{font-size:16px;font-weight:500}
+.ink{fill:var(--ink)}
+.dim{fill:var(--dim)}
+.acc{fill:var(--accent)}
+
+[data-edge]{fill:none;stroke:var(--dim);stroke-width:1.5;marker-end:url(#arrow)}
+.rg{animation:ring 12s ease-in-out infinite}
+.rg0{animation-delay:0s}.rg1{animation-delay:-2.4s}.rg2{animation-delay:-4.8s}
+.rg3{animation-delay:-7.2s}.rg4{animation-delay:-9.6s}
+@keyframes ring{0%,100%{stroke-opacity:.45}10%{stroke-opacity:1}20%{stroke-opacity:.45}}
+@media (prefers-reduced-motion: reduce){
+.rg,.rg0,.rg1,.rg2,.rg3,.rg4{animation:none;stroke-opacity:.9}}
+</style>
+<rect x="0" y="0" width="1200" height="760" fill="var(--background)"/>
+
+<text x="40" y="44" class="t s16 dim" data-role="metadata" data-bg="background">NESTED CONTAINMENT</text>
+<text x="40" y="84" class="t s40 ink" data-role="title" data-bg="background">Where a visual's state lives</text>
+<text x="1160" y="84" class="m s16 dim" data-role="metadata" data-bg="background" text-anchor="end">5 rings  ·  8 nodes</text>
+<g data-zone="true">
+<rect class="rg rg0" x="40" y="120" width="1120" height="492" rx="10" fill="var(--ink)" fill-opacity="0.015" stroke="var(--dim)" stroke-opacity="0.30" stroke-width="1"/>
+<rect x="64" y="108" width="276" height="24" rx="4" fill="var(--background)"/>
+<text x="74" y="125" class="t s16 dim" data-role="metadata" data-bg="background">REPOSITORY  apatheticus/skills</text>
+</g>
+<g data-zone="true">
+<rect class="rg rg1" x="80" y="164" width="1040" height="404" rx="10" fill="var(--ink)" fill-opacity="0.02" stroke="var(--dim)" stroke-opacity="0.55" stroke-width="1.25"/>
+<rect x="104" y="152" width="292" height="24" rx="4" fill="var(--background)"/>
+<text x="114" y="169" class="t s16 dim" data-role="metadata" data-bg="background">SKILL  skills/prettier-svg-docs/</text>
+</g>
+<g data-zone="true">
+<rect class="rg rg2" x="120" y="208" width="960" height="316" rx="10" fill="var(--ink)" fill-opacity="0.025" stroke="var(--dim)" stroke-opacity="0.85" stroke-width="1.5"/>
+<rect x="144" y="196" width="252" height="24" rx="4" fill="var(--background)"/>
+<text x="154" y="213" class="t s16 dim" data-role="metadata" data-bg="background">PROJECT STATE  .prettydocs/</text>
+</g>
+<g data-zone="true">
+<rect class="rg rg3" x="160" y="252" width="880" height="228" rx="10" fill="var(--ink)" fill-opacity="0.03" stroke="var(--ink)" stroke-opacity="0.85" stroke-width="1.75"/>
+<rect x="184" y="240" width="180" height="24" rx="4" fill="var(--background)"/>
+<text x="194" y="257" class="t s16 dim" data-role="metadata" data-bg="background">VISUAL  src/&lt;name&gt;/</text>
+</g>
+<g data-zone="true" data-focal="true">
+<rect class="rg rg4" x="200" y="296" width="800" height="140" rx="10" fill="var(--accent)" fill-opacity="0.06" stroke="var(--accent)" stroke-opacity="1" stroke-width="2"/>
+<rect x="224" y="284" width="104" height="24" rx="4" fill="var(--background)"/>
+<text x="234" y="301" class="t s16 acc" data-role="metadata" data-bg="background">HASH TRIAD</text>
+</g>
+<path data-edge="true" d="M600,412 V490 Q600,500 590,500 H452"/>
+<path data-edge="true" d="M856,412 V528"/>
+<rect data-label="true" x="608" y="442" width="128" height="22" rx="4" fill="var(--background)"/>
+<text x="672" y="458" class="t s16 dim" data-role="metadata" data-bg="background" text-anchor="middle">DESIGN_HASH</text>
+<rect data-label="true" x="872" y="452" width="96" height="22" rx="4" fill="var(--background)"/>
+<text x="920" y="468" class="t s16 dim" data-role="metadata" data-bg="background" text-anchor="middle">SRC_HASH</text>
+<g data-node="true">
+<rect x="72" y="572" width="300" height="32" rx="4" fill="var(--background)"/>
+<rect x="72" y="572" width="300" height="32" rx="4" fill="var(--surface)" stroke="var(--dim)" stroke-opacity="0.55" stroke-width="1.25" filter="url(#e1)"/>
+<text x="84" y="593" class="m s16 ink" data-role="metadata" data-bg="surface">.claude-plugin/plugin.json</text>
+</g>
+<g data-node="true">
+<rect x="112" y="528" width="300" height="32" rx="4" fill="var(--background)"/>
+<rect x="112" y="528" width="300" height="32" rx="4" fill="var(--surface)" stroke="var(--dim)" stroke-opacity="0.55" stroke-width="1.25" filter="url(#e1)"/>
+<text x="124" y="549" class="m s16 ink" data-role="metadata" data-bg="surface">SKILL.md</text>
+</g>
+<g data-node="true">
+<rect x="736" y="528" width="300" height="32" rx="4" fill="var(--background)"/>
+<rect x="736" y="528" width="300" height="32" rx="4" fill="var(--surface)" stroke="var(--dim)" stroke-opacity="0.55" stroke-width="1.25" filter="url(#e1)"/>
+<text x="748" y="549" class="m s16 ink" data-role="metadata" data-bg="surface">docs/assets/&lt;name&gt;.svg</text>
+</g>
+<g data-node="true">
+<rect x="152" y="484" width="300" height="32" rx="4" fill="var(--background)"/>
+<rect x="152" y="484" width="300" height="32" rx="4" fill="var(--surface)" stroke="var(--dim)" stroke-opacity="0.55" stroke-width="1.25" filter="url(#e1)"/>
+<text x="164" y="505" class="m s16 ink" data-role="metadata" data-bg="surface">.prettydocs/prettydocs.md</text>
+</g>
+<g data-node="true">
+<rect x="192" y="440" width="300" height="32" rx="4" fill="var(--background)"/>
+<rect x="192" y="440" width="300" height="32" rx="4" fill="var(--surface)" stroke="var(--dim)" stroke-opacity="0.55" stroke-width="1.25" filter="url(#e1)"/>
+<text x="204" y="461" class="m s16 ink" data-role="metadata" data-bg="surface">src/&lt;name&gt;/viz.json</text>
+</g>
+<g data-node="true">
+<rect x="228" y="340" width="232" height="72" rx="8" fill="var(--background)"/>
+<rect x="228" y="340" width="232" height="72" rx="8" fill="var(--accent)" fill-opacity="0.06" stroke="var(--accent)" stroke-opacity="0.85" stroke-width="1.25" filter="url(#e1)"/>
+<text x="244" y="370" class="m s18 acc" data-role="label" data-bg="background">facts_hash</text>
+<text x="244" y="394" class="t s16 dim" data-role="metadata" data-bg="background">over facts[] + newline</text>
+</g>
+<g data-node="true">
+<rect x="484" y="340" width="232" height="72" rx="8" fill="var(--background)"/>
+<rect x="484" y="340" width="232" height="72" rx="8" fill="var(--accent)" fill-opacity="0.06" stroke="var(--accent)" stroke-opacity="0.85" stroke-width="1.25" filter="url(#e1)"/>
+<text x="500" y="370" class="m s18 acc" data-role="label" data-bg="background">design_hash</text>
+<text x="500" y="394" class="t s16 dim" data-role="metadata" data-bg="background">over prettydocs.md</text>
+</g>
+<g data-node="true">
+<rect x="740" y="340" width="232" height="72" rx="8" fill="var(--background)"/>
+<rect x="740" y="340" width="232" height="72" rx="8" fill="var(--accent)" fill-opacity="0.06" stroke="var(--accent)" stroke-opacity="0.85" stroke-width="1.25" filter="url(#e1)"/>
+<text x="756" y="370" class="m s18 acc" data-role="label" data-bg="background">src_hash</text>
+<text x="756" y="394" class="t s16 dim" data-role="metadata" data-bg="background">over the committed svg</text>
+</g>
+<text x="40" y="648" class="t s20 ink" data-role="essential" data-bg="background">Every hash is over bytes, so moving a file without editing it re-renders nothing.</text>
+<g data-legend="true">
+<line x1="40" y1="676" x2="1160" y2="676" stroke="var(--dim)" stroke-opacity="0.35" stroke-width="1"/>
+<text x="40" y="708" class="t s16 dim" data-role="metadata" data-bg="background">LEGEND</text>
+<rect x="140" y="692" width="24" height="20" rx="4" fill="var(--ink)" fill-opacity="0.03" stroke="var(--dim)" stroke-opacity="0.55" stroke-width="1"/>
+<text x="176" y="708" class="t s16 dim" data-role="metadata" data-bg="background">a scope that contains everything drawn inside it</text>
+<rect x="640" y="692" width="24" height="20" rx="4" fill="var(--accent)" fill-opacity="0.16" stroke="var(--accent)" stroke-width="1.25"/>
+<text x="676" y="708" class="t s16 dim" data-role="metadata" data-bg="background">the innermost scope, and the only accent</text>
+<text x="40" y="736" class="t s16 dim" data-role="metadata" data-bg="background">An arrow leaves a hash for the file whose bytes it covers; containment itself needs no connector.</text>
+</g>
+</svg>

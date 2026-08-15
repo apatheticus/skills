@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" role="img" data-loop-s="12" data-diagram="state" data-bg="background">
+<title>State — the lifecycle of one visual</title>
+<desc>A visual is PLANNED in phase 3, AUTHORED in phase 6, GATED by svg_check.py, and EMBEDDED once viz.json and the marker hashes are written. A gate error returns it to AUTHORED; a moved hash returns it from EMBEDDED to PLANNED; a run that changes nothing reuses the embedded visual in place. From PLANNED the run may instead defer it, which is where the machine stops.</desc>
+<defs>
+  <filter id="st-e1" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="var(--shadow)" flood-opacity="0.38"/>
+  </filter>
+  <marker id="st-ar" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 Z" fill="var(--dim)"/>
+  </marker>
+</defs>
+<style>
+svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8; --accent:#e0a33e; --warn:#e2725b; --shadow:#000000; }
+  .name { font: 700 18px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .onacc { font: 700 18px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--background); }
+  .subacc { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--background); }
+  .sub { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .eyebrow { font: 600 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--dim); letter-spacing: .5px; }
+  .key { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--accent); }
+  .item { font: 400 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .edgelabel { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--ink); }
+  .box { fill: var(--surface); stroke: var(--ink); stroke-width: 1.25; filter: url(#st-e1); }
+  .focalbox { fill: var(--accent); stroke: var(--accent); stroke-width: 1.25; filter: url(#st-e1); }
+  .pseudo { fill: var(--ink); }
+  .ring { fill: none; stroke: var(--ink); stroke-width: 1.5; }
+  .edge { fill: none; stroke: var(--dim); stroke-width: 1.5; }
+  .plate { fill: var(--background); }
+  .em { fill: none; stroke: var(--accent); stroke-width: 2; animation: st-em 12s ease-in-out infinite; }
+  .e2 { animation-delay: -3s; }
+  .e3 { animation-delay: -6s; }
+  .e4 { animation-delay: -9s; }
+  @keyframes st-em { 0%, 100% { opacity: .08 } 8% { opacity: .7 } 22% { opacity: .08 } }
+  @media (prefers-reduced-motion: reduce) {
+    .em { animation: none; opacity: .08 }
+  }
+</style>
+<rect x="0" y="0" width="1200" height="560" fill="var(--background)"/>
+<text class="eyebrow" x="40" y="28" data-role="metadata" data-bg="background">STATE — WHAT ONE VISUAL CAN BE, AND WHAT MOVES IT</text>
+
+<!-- transitions -->
+<line class="edge" data-edge="" x1="68" y1="220" x2="120" y2="220" marker-end="url(#st-ar)"/>
+<line class="edge" data-edge="" x1="272" y1="220" x2="400" y2="220" marker-end="url(#st-ar)"/>
+<line class="edge" data-edge="" x1="552" y1="220" x2="680" y2="220" marker-end="url(#st-ar)"/>
+<line class="edge" data-edge="" x1="832" y1="220" x2="960" y2="220" marker-end="url(#st-ar)"/>
+<line class="edge" data-edge="" x1="168" y1="260" x2="168" y2="340" marker-end="url(#st-ar)"/>
+<path class="edge" data-edge="" d="M756,260 V310 Q756,320 746,320 H486 Q476,320 476,310 V260" marker-end="url(#st-ar)"/>
+<path class="edge" data-edge="" d="M1036,260 V400 Q1036,410 1026,410 H234 Q224,410 224,400 V260" marker-end="url(#st-ar)"/>
+<path class="edge" data-edge="" d="M1012,180 C1012,124 1060,124 1060,180" marker-end="url(#st-ar)"/>
+
+<!-- transition labels -->
+<rect class="plate" data-label="" x="40" y="188" width="76" height="24" rx="4"/>
+<text class="edgelabel" x="78" y="206" text-anchor="middle" data-role="metadata" data-bg="background">PLAN</text>
+<rect class="plate" data-label="" x="292" y="188" width="88" height="24" rx="4"/>
+<text class="edgelabel" x="336" y="206" text-anchor="middle" data-role="metadata" data-bg="background">AUTHOR</text>
+<rect class="plate" data-label="" x="576" y="188" width="80" height="24" rx="4"/>
+<text class="edgelabel" x="616" y="206" text-anchor="middle" data-role="metadata" data-bg="background">GATE</text>
+<rect class="plate" data-label="" x="852" y="188" width="88" height="24" rx="4"/>
+<text class="edgelabel" x="896" y="206" text-anchor="middle" data-role="metadata" data-bg="background">0 ERRORS</text>
+<rect class="plate" data-label="" x="580" y="328" width="80" height="24" rx="4"/>
+<text class="edgelabel" x="620" y="346" text-anchor="middle" data-role="metadata" data-bg="background">ERROR</text>
+<rect class="plate" data-label="" x="576" y="418" width="128" height="24" rx="4"/>
+<text class="edgelabel" x="640" y="436" text-anchor="middle" data-role="metadata" data-bg="background">HASH MOVED</text>
+<rect class="plate" data-label="" x="40" y="280" width="120" height="24" rx="4"/>
+<text class="edgelabel" x="100" y="298" text-anchor="middle" data-role="metadata" data-bg="background">DEFERRED</text>
+<rect class="plate" data-label="" x="984" y="116" width="104" height="24" rx="4"/>
+<text class="edgelabel" x="1036" y="134" text-anchor="middle" data-role="metadata" data-bg="background">REUSE</text>
+
+<!-- ordered emphasis, one state at a time, resting frame fully drawn -->
+<rect class="em" x="112" y="172" width="168" height="96" rx="12" opacity=".08"/>
+<rect class="em e2" x="392" y="172" width="168" height="96" rx="12" opacity=".08"/>
+<rect class="em e3" x="672" y="172" width="168" height="96" rx="12" opacity=".08"/>
+<rect class="em e4" x="952" y="172" width="168" height="96" rx="12" opacity=".08"/>
+
+<!-- states, with the start dot and the terminal ring -->
+<g data-node="" data-bg="background">
+  <circle class="pseudo" cx="60" cy="220" r="8"/>
+</g>
+<g data-node="" data-bg="surface">
+  <rect class="box" x="120" y="180" width="152" height="80" rx="8"/>
+  <text class="name" x="196" y="216" text-anchor="middle" data-role="label" data-bg="surface">PLANNED</text>
+  <text class="sub" x="196" y="240" text-anchor="middle" data-role="metadata" data-bg="surface">phase 3</text>
+</g>
+<g data-node="" data-bg="surface">
+  <rect class="box" x="400" y="180" width="152" height="80" rx="8"/>
+  <text class="name" x="476" y="216" text-anchor="middle" data-role="label" data-bg="surface">AUTHORED</text>
+  <text class="sub" x="476" y="240" text-anchor="middle" data-role="metadata" data-bg="surface">phase 6</text>
+</g>
+<g data-node="" data-focal="" data-bg="accent-primary">
+  <rect class="focalbox" x="680" y="180" width="152" height="80" rx="8"/>
+  <text class="onacc" x="756" y="216" text-anchor="middle" data-role="label" data-bg="accent-primary">GATED</text>
+  <text class="subacc" x="756" y="240" text-anchor="middle" data-role="metadata" data-bg="accent-primary">svg_check.py</text>
+</g>
+<g data-node="" data-bg="surface">
+  <rect class="box" x="960" y="180" width="152" height="80" rx="8"/>
+  <text class="name" x="1036" y="216" text-anchor="middle" data-role="label" data-bg="surface">EMBEDDED</text>
+  <text class="sub" x="1036" y="240" text-anchor="middle" data-role="metadata" data-bg="surface">viz.json</text>
+</g>
+<g data-node="" data-bg="background">
+  <circle class="ring" cx="168" cy="352" r="12"/>
+  <circle class="pseudo" cx="168" cy="352" r="8"/>
+</g>
+
+<!-- legend: what each guard stands for -->
+<g data-legend="">
+  <line x1="40" y1="450" x2="1160" y2="450" stroke="var(--dim)" stroke-width="1" stroke-opacity=".4"/>
+  <text class="key" x="40" y="476" data-role="metadata" data-bg="background">0 ERRORS</text>
+  <text class="item" x="240" y="476" data-role="metadata" data-bg="background">svg_check.py reports none, and then viz.json and the marker hashes are written together</text>
+  <text class="key" x="40" y="504" data-role="metadata" data-bg="background">HASH MOVED</text>
+  <text class="item" x="240" y="504" data-role="metadata" data-bg="background">facts, src or design hash differs from viz.json, so phase 3 plans the visual again</text>
+  <text class="key" x="40" y="532" data-role="metadata" data-bg="background">DEFERRED</text>
+  <text class="item" x="240" y="532" data-role="metadata" data-bg="background">the run ends without authoring it, and phase 8 reports every visual it deferred</text>
+</g>
+</svg>

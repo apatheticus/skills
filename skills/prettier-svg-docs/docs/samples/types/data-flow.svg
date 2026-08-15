@@ -1,0 +1,286 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 476"
+     data-loop-s="12" data-diagram="data-flow" role="img" data-bg="background">
+  <title>Data flow — who does what at each step of a visual's life in this skill</title>
+  <desc>Three role lanes read left to right across six steps. The author authors the
+  SVG, reviews the rendered pixels, writes viz.json and embeds it; svg_check.py runs
+  the gate loop, the focal step; audit_visuals.py runs the final marker and hash audit.
+  Empty cells are the fact that a role does not participate in that step. A dashed
+  trigger carries the checker's softened lines into the manifest. Tokens travel the
+  handoffs in pipeline order.</desc>
+
+  <defs>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.28"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--dim)"/>
+    </marker>
+    <marker id="arrow-a" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+    </marker>
+  </defs>
+
+  <style>
+    svg {
+      --background: #12324f;
+      --surface: #17405f;
+      --ink: #e8f2fb;
+      --dim: #9fc4e8;
+      --accent: #e0a33e;
+      --sans: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .name { font-family: var(--sans); font-size: 18px; font-weight: 700; fill: var(--ink); }
+    .sub  { font-family: var(--sans); font-size: 16px; fill: var(--dim); }
+    .tag  { font-family: var(--mono); font-size: 16px; fill: var(--dim); }
+    .tagi { font-family: var(--mono); font-size: 16px; fill: var(--ink); }
+    .key  { font-family: var(--sans); font-size: 16px; font-weight: 600; fill: var(--dim);
+            letter-spacing: 0.5px; }
+    .keyi { font-family: var(--sans); font-size: 16px; font-weight: 700; fill: var(--ink);
+            letter-spacing: 0.5px; }
+    .edgelabel { font-family: var(--sans); font-size: 16px; font-weight: 600;
+                 fill: var(--ink); letter-spacing: 0.5px; }
+
+    .ground { fill: var(--background); }
+    .mask   { fill: var(--background); }
+    .plate  { fill: var(--background); }
+    .lane   { fill: var(--ink); fill-opacity: 0.02; stroke: var(--dim);
+              stroke-opacity: 0.30; stroke-width: 1; }
+    .cell   { fill: var(--surface); stroke: var(--ink); stroke-width: 1.25; }
+    .cell-f { fill: var(--accent); fill-opacity: 0.12; stroke: var(--accent); stroke-width: 1.5; }
+    .cell-s { fill: var(--ink); fill-opacity: 0.06; stroke: var(--dim); stroke-width: 1.25; }
+    .chip   { fill: none; stroke: var(--dim); stroke-opacity: 0.55; stroke-width: 1; }
+    .chip-f { fill: none; stroke: var(--accent); stroke-width: 1; }
+    .hair   { stroke: var(--dim); stroke-opacity: 0.35; stroke-width: 1; }
+    .wire   { fill: none; stroke: var(--dim); stroke-width: 1.5; }
+    .wire-a { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+    .wire-t { fill: none; stroke: var(--dim); stroke-width: 1.5; stroke-dasharray: 4 3; }
+
+    /* One motion idea: a token per handoff, fired in pipeline order. Nothing the
+       checker measures moves — the cells, the lanes and the wires hold still. */
+    .tok { animation: tokfade 12s linear infinite; }
+    .t2  { animation-delay: -2s; }
+    .t3  { animation-delay: -4s; }
+    .t4  { animation-delay: -6s; }
+    .t5  { animation-delay: -8s; }
+    @keyframes tokfade {
+      0%   { opacity: 0 }
+      3%   { opacity: 1 }
+      14%  { opacity: 1 }
+      17%  { opacity: 0 }
+      100% { opacity: 0 }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .tok { animation: none; display: none; }
+    }
+  </style>
+
+  <rect class="ground" x="0" y="0" width="1200" height="476"/>
+
+  <!-- lanes: the three roles this skill actually names -->
+  <g data-zone="" data-bg="background">
+    <rect class="lane" x="40" y="44" width="1120" height="120" rx="8"/>
+    <text class="key" x="40" y="110" data-role="metadata" data-bg="background">AUTHOR</text>
+  </g>
+  <g data-zone="" data-bg="background">
+    <rect class="lane" x="40" y="164" width="1120" height="120" rx="8"/>
+    <text class="key" x="40" y="230" data-role="metadata" data-bg="background">SVG_CHECK.PY</text>
+  </g>
+  <g data-zone="" data-bg="background">
+    <rect class="lane" x="40" y="284" width="1120" height="120" rx="8"/>
+    <text class="key" x="40" y="350" data-role="metadata" data-bg="background">AUDIT_VISUALS.PY</text>
+  </g>
+
+  <!-- header strip: one chip per step -->
+  <g data-bg="background">
+    <line class="hair" x1="216" y1="44" x2="216" y2="404"/>
+    <rect class="chip" x="240" y="8" width="36" height="20" rx="4"/>
+    <text class="tag" x="258" y="22" data-role="metadata" data-bg="background"
+          text-anchor="middle">01</text>
+    <text class="key" x="240" y="40" data-role="metadata" data-bg="background">AUTHOR</text>
+    <rect class="chip-f" x="396" y="8" width="36" height="20" rx="4"/>
+    <text class="tagi" x="414" y="22" data-role="metadata" data-bg="background"
+          text-anchor="middle">02</text>
+    <text class="keyi" x="396" y="40" data-role="metadata" data-bg="background">GATE</text>
+    <rect class="chip" x="552" y="8" width="36" height="20" rx="4"/>
+    <text class="tag" x="570" y="22" data-role="metadata" data-bg="background"
+          text-anchor="middle">03</text>
+    <text class="key" x="552" y="40" data-role="metadata" data-bg="background">PIXELS</text>
+    <rect class="chip" x="708" y="8" width="36" height="20" rx="4"/>
+    <text class="tag" x="726" y="22" data-role="metadata" data-bg="background"
+          text-anchor="middle">04</text>
+    <text class="key" x="708" y="40" data-role="metadata" data-bg="background">MANIFEST</text>
+    <rect class="chip" x="864" y="8" width="36" height="20" rx="4"/>
+    <text class="tag" x="882" y="22" data-role="metadata" data-bg="background"
+          text-anchor="middle">05</text>
+    <text class="key" x="864" y="40" data-role="metadata" data-bg="background">EMBED</text>
+    <rect class="chip" x="1020" y="8" width="36" height="20" rx="4"/>
+    <text class="tag" x="1038" y="22" data-role="metadata" data-bg="background"
+          text-anchor="middle">06</text>
+    <text class="key" x="1020" y="40" data-role="metadata" data-bg="background">AUDIT</text>
+    <line class="hair" x1="40" y1="44" x2="1160" y2="44"/>
+  </g>
+
+  <!-- connectors -->
+  <path id="f1" class="wire-a" data-edge="" marker-end="url(#arrow-a)"
+        d="M 296,152 V 154 Q 296,164 306,164 H 418 Q 428,164 428,174 V 176"/>
+  <path id="f2" class="wire" data-edge="" marker-end="url(#arrow)"
+        d="M 476,176 V 174 Q 476,164 486,164 H 598 Q 608,164 608,154 V 152"/>
+  <path id="f3" class="wire" data-edge="" marker-end="url(#arrow)" d="M 676,104 H 696"/>
+  <path id="f4" class="wire" data-edge="" marker-end="url(#arrow)" d="M 832,104 H 852"/>
+  <path id="f5" class="wire" data-edge="" marker-end="url(#arrow)"
+        d="M 920,152 V 274 Q 920,284 930,284 H 1066 Q 1076,284 1076,294 V 296"/>
+  <path id="f6" class="wire-t" data-edge=""
+        d="M 520,224 H 754 Q 764,224 764,214 V 152"/>
+
+  <circle class="tok t1" r="6" fill="var(--accent)">
+    <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#f1"/></animateMotion>
+  </circle>
+  <circle class="tok t2" r="6" fill="var(--dim)">
+    <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#f2"/></animateMotion>
+  </circle>
+  <circle class="tok t3" r="6" fill="var(--dim)">
+    <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#f3"/></animateMotion>
+  </circle>
+  <circle class="tok t4" r="6" fill="var(--dim)">
+    <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#f4"/></animateMotion>
+  </circle>
+  <circle class="tok t5" r="6" fill="var(--dim)">
+    <animateMotion dur="2s" repeatCount="indefinite"><mpath href="#f5"/></animateMotion>
+  </circle>
+
+  <!-- the one labelled connector: the focal cross-role handoff -->
+  <g data-bg="background">
+    <rect data-label="" class="plate" x="268" y="172" width="88" height="22" rx="4"/>
+    <text class="edgelabel" x="312" y="188" data-role="metadata" data-bg="background"
+          text-anchor="middle">CANDIDATE</text>
+  </g>
+
+  <!-- step 01, author lane -->
+  <g data-node="" data-bg="surface">
+    <rect class="mask" x="228" y="56" width="136" height="96" rx="8"/>
+    <rect class="cell" x="228" y="56" width="136" height="96" rx="8" filter="url(#e1)"/>
+    <rect class="chip" x="240" y="64" width="36" height="20" rx="4"/>
+    <text class="tag" x="258" y="78" data-role="metadata" data-bg="surface"
+          text-anchor="middle">AU</text>
+    <text class="name" x="296" y="100" data-role="label" data-bg="surface"
+          text-anchor="middle">Author</text>
+    <text class="sub" x="296" y="120" data-role="metadata" data-bg="surface"
+          text-anchor="middle">by hand</text>
+    <rect class="chip" x="240" y="128" width="36" height="20" rx="4"/>
+    <text class="tag" x="258" y="142" data-role="metadata" data-bg="surface"
+          text-anchor="middle">MD</text>
+    <rect class="chip" x="316" y="128" width="36" height="20" rx="4"/>
+    <text class="tag" x="334" y="142" data-role="metadata" data-bg="surface"
+          text-anchor="middle">SV</text>
+  </g>
+
+  <!-- step 02, the gate: the focal step -->
+  <g data-node="" data-focal="" data-bg="surface">
+    <rect class="mask" x="384" y="176" width="136" height="96" rx="8"/>
+    <rect class="cell-f" x="384" y="176" width="136" height="96" rx="8" filter="url(#e1)"/>
+    <rect class="chip-f" x="396" y="184" width="36" height="20" rx="4"/>
+    <text class="tagi" x="414" y="198" data-role="metadata" data-bg="surface"
+          text-anchor="middle">SC</text>
+    <text class="name" x="452" y="220" data-role="label" data-bg="surface"
+          text-anchor="middle">Gate loop</text>
+    <text class="sub" x="452" y="240" data-role="metadata" data-bg="surface"
+          text-anchor="middle">to 0 errors</text>
+    <rect class="chip-f" x="396" y="248" width="36" height="20" rx="4"/>
+    <text class="tagi" x="414" y="262" data-role="metadata" data-bg="surface"
+          text-anchor="middle">SV</text>
+    <rect class="chip-f" x="472" y="248" width="36" height="20" rx="4"/>
+    <text class="tagi" x="490" y="262" data-role="metadata" data-bg="surface"
+          text-anchor="middle">OK</text>
+  </g>
+
+  <!-- step 03, author lane -->
+  <g data-node="" data-bg="surface">
+    <rect class="mask" x="540" y="56" width="136" height="96" rx="8"/>
+    <rect class="cell" x="540" y="56" width="136" height="96" rx="8" filter="url(#e1)"/>
+    <rect class="chip" x="552" y="64" width="36" height="20" rx="4"/>
+    <text class="tag" x="570" y="78" data-role="metadata" data-bg="surface"
+          text-anchor="middle">AU</text>
+    <text class="name" x="608" y="100" data-role="label" data-bg="surface"
+          text-anchor="middle">Filmstrip</text>
+    <text class="sub" x="608" y="120" data-role="metadata" data-bg="surface"
+          text-anchor="middle">pixel review</text>
+    <rect class="chip" x="552" y="128" width="36" height="20" rx="4"/>
+    <text class="tag" x="570" y="142" data-role="metadata" data-bg="surface"
+          text-anchor="middle">SV</text>
+    <rect class="chip" x="628" y="128" width="36" height="20" rx="4"/>
+    <text class="tag" x="646" y="142" data-role="metadata" data-bg="surface"
+          text-anchor="middle">PX</text>
+  </g>
+
+  <!-- step 04, author lane -->
+  <g data-node="" data-bg="surface">
+    <rect class="mask" x="696" y="56" width="136" height="96" rx="8"/>
+    <rect class="cell" x="696" y="56" width="136" height="96" rx="8" filter="url(#e1)"/>
+    <rect class="chip" x="708" y="64" width="36" height="20" rx="4"/>
+    <text class="tag" x="726" y="78" data-role="metadata" data-bg="surface"
+          text-anchor="middle">AU</text>
+    <text class="name" x="764" y="100" data-role="label" data-bg="surface"
+          text-anchor="middle">Manifest</text>
+    <text class="sub" x="764" y="120" data-role="metadata" data-bg="surface"
+          text-anchor="middle">hash triad</text>
+    <rect class="chip" x="708" y="128" width="36" height="20" rx="4"/>
+    <text class="tag" x="726" y="142" data-role="metadata" data-bg="surface"
+          text-anchor="middle">PX</text>
+    <rect class="chip" x="784" y="128" width="36" height="20" rx="4"/>
+    <text class="tag" x="802" y="142" data-role="metadata" data-bg="surface"
+          text-anchor="middle">VJ</text>
+  </g>
+
+  <!-- step 05, author lane -->
+  <g data-node="" data-bg="surface">
+    <rect class="mask" x="852" y="56" width="136" height="96" rx="8"/>
+    <rect class="cell" x="852" y="56" width="136" height="96" rx="8" filter="url(#e1)"/>
+    <rect class="chip" x="864" y="64" width="36" height="20" rx="4"/>
+    <text class="tag" x="882" y="78" data-role="metadata" data-bg="surface"
+          text-anchor="middle">AU</text>
+    <text class="name" x="920" y="100" data-role="label" data-bg="surface"
+          text-anchor="middle">Embed</text>
+    <text class="sub" x="920" y="120" data-role="metadata" data-bg="surface"
+          text-anchor="middle">pd:viz pair</text>
+    <rect class="chip" x="864" y="128" width="36" height="20" rx="4"/>
+    <text class="tag" x="882" y="142" data-role="metadata" data-bg="surface"
+          text-anchor="middle">VJ</text>
+    <rect class="chip" x="940" y="128" width="36" height="20" rx="4"/>
+    <text class="tag" x="958" y="142" data-role="metadata" data-bg="surface"
+          text-anchor="middle">MD</text>
+  </g>
+
+  <!-- step 06, audit lane -->
+  <g data-node="" data-bg="surface">
+    <rect class="mask" x="1008" y="296" width="136" height="96" rx="8"/>
+    <rect class="cell-s" x="1008" y="296" width="136" height="96" rx="8" filter="url(#e1)"/>
+    <rect class="chip" x="1020" y="304" width="36" height="20" rx="4"/>
+    <text class="tag" x="1038" y="318" data-role="metadata" data-bg="surface"
+          text-anchor="middle">AV</text>
+    <text class="name" x="1076" y="340" data-role="label" data-bg="surface"
+          text-anchor="middle">Audit</text>
+    <text class="sub" x="1076" y="360" data-role="metadata" data-bg="surface"
+          text-anchor="middle">marker + hash</text>
+    <rect class="chip" x="1020" y="368" width="36" height="20" rx="4"/>
+    <text class="tag" x="1038" y="382" data-role="metadata" data-bg="surface"
+          text-anchor="middle">MD</text>
+    <rect class="chip" x="1096" y="368" width="36" height="20" rx="4"/>
+    <text class="tag" x="1114" y="382" data-role="metadata" data-bg="surface"
+          text-anchor="middle">OK</text>
+  </g>
+
+  <!-- legend -->
+  <g data-legend="" data-bg="background">
+    <line class="hair" x1="40" y1="412" x2="1160" y2="412"/>
+    <text class="key" x="40" y="436" data-role="metadata" data-bg="background">LEGEND</text>
+    <text class="key" x="168" y="436" data-role="metadata" data-bg="background">MD = A DOC</text>
+    <text class="key" x="368" y="436" data-role="metadata" data-bg="background">SV = THE .SVG</text>
+    <text class="key" x="568" y="436" data-role="metadata" data-bg="background">PX = PIXELS</text>
+    <text class="key" x="768" y="436" data-role="metadata" data-bg="background">VJ = VIZ.JSON</text>
+    <text class="key" x="968" y="436" data-role="metadata" data-bg="background">OK = VERDICT</text>
+    <text class="key" x="40" y="460" data-role="metadata" data-bg="background">LEFT CHIP = INPUT · RIGHT CHIP = OUTPUT · DASHED = SOFTENED LINES RECORDED · EMPTY CELL = ROLE DOES NOT ACT</text>
+  </g>
+</svg>

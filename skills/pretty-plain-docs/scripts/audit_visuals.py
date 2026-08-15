@@ -56,7 +56,7 @@ PRODUCER = "pretty-plain-docs"
 # it has no prior work to own. The siblings' producers are therefore FOREIGN here, and
 # that is the intended migration path in both directions — running this skill on a
 # repo whose visuals animate offers to re-author them as statics, and running
-# pretty-svg-docs on a repo this skill has processed offers to animate them. Neither
+# prettier-svg-docs on a repo this skill has processed offers to animate them. Neither
 # silently claims the other's work.
 PRODUCER_OWNED = {PRODUCER}
 
