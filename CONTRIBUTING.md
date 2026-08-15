@@ -13,9 +13,14 @@ git clone https://github.com/apatheticus/skills.git
 cd skills
 mkdir -p skills/<your-skill>
 cp templates/SKILL.template.md skills/<your-skill>/SKILL.md
-npm run sync        # registers it in .claude-plugin/plugin.json
+# then add "./skills/<your-skill>" to exactly one plugin's skills[] in
+# .claude-plugin/marketplace.json — apatheticus-skills or apatheticus-security
+npm run sync        # sorts each plugin's skills[]
 npm run validate    # must exit 0
 ```
+
+Which plugin a skill belongs in is a judgement call, so `sync` will not guess it —
+`validate` errors if a skill on disk is listed by no plugin, or by both.
 
 Node 18+ is the only prerequisite. There are no dependencies to install:
 `scripts/validate.mjs` is plain ESM and runs on the standard library.
@@ -113,7 +118,7 @@ gitGraph
   branch stage
   checkout stage
   commit id: "feat: add a skill"
-  commit id: "chore: sync plugin.json"
+  commit id: "chore: sync marketplace.json"
   checkout main
   merge stage tag: "check green, admin accepted"
   checkout stage
@@ -199,11 +204,14 @@ Before opening the pull request:
 - [ ] `npm run sync && npm run validate` passes locally
 - [ ] Skill was run end to end against a real target, and what broke was folded back in
 - [ ] `description` says what it does **and** the literal phrases that should trigger it
-- [ ] Row added to the Skills table in [README.md](./README.md), all three columns.
-      `validate` enforces the link and the `-s <name>` install command; the middle
-      column is yours to write — a short human-facing summary, not the frontmatter
-- [ ] `version` bumped in `.claude-plugin/plugin.json` — minor for a new skill, patch
-      for a fix to an existing one. Plugin installs update on version change.
+- [ ] Skill listed in exactly one plugin's `skills[]` in `.claude-plugin/marketplace.json`
+- [ ] Row added to the Skills table in [README.md](./README.md), all four columns.
+      `validate` enforces the link, the plugin name and the `-s <name>` install command;
+      the description column is yours to write — a short human-facing summary, not the
+      frontmatter
+- [ ] `version` bumped on the affected plugin entry in `.claude-plugin/marketplace.json`
+      — minor for a new skill, patch for a fix to an existing one. Each plugin carries
+      its own version and installs update on version change.
 - [ ] No secrets, tokens, machine-specific absolute paths, or ungated destructive commands
 
 <br/>
