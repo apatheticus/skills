@@ -142,20 +142,42 @@ fighting them.
 
 ## Verification
 
-Grep the draft before delivering. Tier 1 and Tier 3 are mechanical:
+Scan the draft before delivering:
 
 ```bash
-# Tier 1 — every hit is a defect
-grep -inE 'delve|tapestry|testament|multifaceted|myriad|synergy|cognizant|garner|utilize|commence|facilitate|endeavor|elucidate|pivotal|paramount|crucial|invaluable|indispensable|groundbreaking|revolutionary|transformative|cutting-edge|seamless|compelling|foster|enduring|vibrant|breathtaking|nestled|renowned|profound|interplay|intriguing|remarkable|noteworthy|valuable|underscore|showcase|furthermore|moreover|whilst' <file>
-
-# Tier 2 — every hit needs a sense judgment, not a replacement
-grep -inE 'harness|realm|leverage|robust|navigate|sentinel|align|unlock|unleash|enhance|illuminate|intricate|landscape|actually|scalable' <file>
-
-# §14 em/en dashes — all registers except Regulated
-grep -nE '—|–' <file>
+python3 scripts/voice_check.py <file> --register E|P|T|R
 ```
 
-A Tier 1 hit is a defect. A **Tier 2 hit is a question**, never an automatic
-replacement: apply the carve-out rule and the delete-and-reread test before
-touching it. Running the Tier 2 grep as a find-and-replace will break technical
-documents, which is the specific failure this tier exists to prevent.
+The checker carries all three tiers plus the register table, and it masks out
+fenced blocks, inline code spans, link targets, blockquotes and quoted material
+before scanning — so it applies the carve-out rule below by construction rather
+than by remembering to. A plain grep does not, which is why one is no longer
+printed here: the greps this section used to carry reported every banned word a
+document was *quoting*, and the reader had to filter those by eye every time.
+
+Without Python, do the scan by reading and say so in the delivery.
+
+A Tier 1 or Tier 3 hit is a defect and the checker exits non-zero on it. A
+**Tier 2 hit is a question** — it comes back as `QUERY`, never as a replacement.
+Apply the carve-out rule and the delete-and-reread test before touching one.
+Treating that tier as a find-and-replace list will break technical documents,
+which is the specific failure it exists to prevent, and it is why the checker has
+no fix mode at all.
+
+Everything else the checker prints is advisory. The sentence-length and
+burstiness numbers in `SKILL.md` are targets rather than gates, and enforcing
+them would fight both §24 calibrated uncertainty and Regulated's plain-language
+brevity.
+
+**Read the first line of the output.** It reports what was counted, including how
+many characters the carve-outs masked. A `PROBLEM nothing-to-check` there means
+almost nothing survived masking and the run proved nothing — a clean `0 error(s)`
+underneath it would otherwise read as a pass.
+
+**One limit worth knowing before you trust a count.** The carve-outs cover mention
+that markdown marks as mention — code, links, blockquotes, quotation. They cannot
+cover an unmarked exemplar, because a sentence quoted as an example of bad prose
+and a sentence of bad prose are the same characters on the page. A document whose
+*subject* is this word list therefore reports itself: `patterns-core.md` returns 23
+Tier 1 errors and is correct as written. On ordinary prose the rate is what you
+would expect — this skill's own README returns one, and that one is a real defect.

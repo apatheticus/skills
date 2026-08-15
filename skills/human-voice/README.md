@@ -8,7 +8,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-8c2f1f.svg)](../../LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-skill-1a1a18)](SKILL.md)
 [![Registers](https://img.shields.io/badge/registers-4-1a1a18)](reference/registers.md)
-[![Patterns](https://img.shields.io/badge/patterns-36-1a1a18)](reference/patterns.md)
+[![Patterns](https://img.shields.io/badge/patterns-36-1a1a18)](reference/patterns-core.md)
 <!-- pd:badges end -->
 
 <!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="b26beb7f8d33557cc8587b7fd9b8e115ff8d8b75f0d876065917fd9d5328996b" src-hash="c8211a124b09c94319705a147a645ed0a049d9566ea33426054e90e8ad3e379b" -->
@@ -78,17 +78,20 @@ backwards is expensive:
   style is a tell in an essay and a correctness bug in a spec, where a component gets
   the same name every time. There, repetition is the fix rather than the problem.
 
-All 36 patterns, each with a before and after plus its register tags, are in
-[`reference/patterns.md`](reference/patterns.md), alongside the false-positive list —
-a clean human writer trips several of these with no model involved.
+The catalog is split by whether a register can switch a pattern off. The 21 that
+never switch off are in [`reference/patterns-core.md`](reference/patterns-core.md),
+alongside the false-positive list — a clean human writer trips several of these with
+no model involved. The 15 that change or switch off, plus the gate table, are in
+[`reference/patterns-gated.md`](reference/patterns-gated.md). Only the first loads on
+every run, so a Regulated pass never pays for the editorial tells it cannot use.
 
 ## Technology stack
 
 | Area | Choice |
 | --- | --- |
 | Format | Claude Code skill — Markdown with YAML frontmatter |
-| Runtime | none; there is nothing to build, install, or execute |
-| Tools used | `Read`, `Write`, `Edit`, `Grep`, `Glob`, `AskUserQuestion` |
+| Runtime | none required; an optional Python 3 checker is bundled for the countable checks |
+| Tools used | `Read`, `Write`, `Edit`, `Grep`, `Glob`, `Bash`, `AskUserQuestion` |
 | License | MIT, with attribution obligations — see [License](#license) |
 
 ## Project structure
@@ -98,10 +101,14 @@ human-voice/
 ├── SKILL.md                    the skill: register selection, the gates, self-check, delivery
 ├── reference/
 │   ├── registers.md            the four register profiles, plus the plain-language floor
-│   ├── patterns.md             all 36 patterns with before/after and register tags
+│   ├── patterns-core.md        the 21 always-on patterns, plus false positives
+│   ├── patterns-gated.md       the 15 register-gated patterns, plus the gate table
 │   ├── vocabulary.md           global and register-scoped word lists, with carve-outs
 │   ├── examples.md             one full worked rewrite per register
 │   └── attribution.md          provenance and license terms of the derived material
+├── scripts/
+│   ├── voice_check.py          optional checker for the countable half of the self-check
+│   └── test_voice_check.py     its fixtures, run in CI
 └── docs/assets/                this README's visuals, and the design system they derive from
 ```
 
@@ -109,7 +116,9 @@ human-voice/
 
 ### Prerequisites
 
-None. No runtime, no dependencies, no network access.
+None. No runtime, no dependencies, no network access — the skill runs end to end by
+reading. Python 3 is optional and only unlocks the bundled checker described under
+[Testing](#testing); nothing else changes without it.
 
 ### Install
 
@@ -159,16 +168,39 @@ instead of a person.
 
 ## Testing
 
-There is no automated test suite — the output is prose, judged by reading it. The
-repository's `npm run validate` checks this skill's frontmatter and its entries in
-both distribution manifests. See
+The output is prose and the final judgment is reading it, but the countable part is
+not left to judgment. `scripts/voice_check.py` counts what can be counted — the
+vocabulary tiers, sentence-length distribution against the register's targets,
+repeated sentence openers, dash and curly-quote and emoji counts, boldface density,
+heading case:
+
+```bash
+python3 scripts/voice_check.py docs/announcement.md --register P
+```
+
+It reports and never rewrites. Tier 1 and Tier 3 vocabulary hits are defects and exit
+non-zero; a Tier 2 hit comes back as a query, because those words are terms of art as
+often as they are tells and running that tier as a find-and-replace is what breaks
+technical documents. Before scanning it masks out fenced blocks, inline code spans,
+link targets, blockquotes and quoted material, so a banned word the document is
+*quoting* is never reported.
+
+The checker has its own fixtures, which the repository's CI runs:
+
+```bash
+python3 scripts/test_voice_check.py
+```
+
+`npm run validate` at the repository root checks this skill's frontmatter and its
+entries in both distribution manifests. See
 [CONTRIBUTING.md](../../CONTRIBUTING.md) for how changes are proposed and reviewed.
 
 ## Documentation
 
 - [`SKILL.md`](SKILL.md) — the skill itself: the steps, the gates, the rules.
 - [`reference/registers.md`](reference/registers.md) — the four registers in full.
-- [`reference/patterns.md`](reference/patterns.md) — the 36 patterns, with false positives.
+- [`reference/patterns-core.md`](reference/patterns-core.md) — the 21 always-on patterns, with false positives.
+- [`reference/patterns-gated.md`](reference/patterns-gated.md) — the 15 register-gated patterns and the gate table.
 - [`reference/vocabulary.md`](reference/vocabulary.md) — the word and phrase lists.
 - [`reference/examples.md`](reference/examples.md) — a worked rewrite per register.
 - [`reference/attribution.md`](reference/attribution.md) — provenance of the derived material.

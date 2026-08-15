@@ -124,4 +124,4 @@ in an 820 px embed).
 | Asset | Doc | Depicts | Tier | Source facts |
 | --- | --- | --- | --- | --- |
 | hero | README.md | the register is selected before any pattern is read, and Professional is the default when the genre is unclear | animated-hero | SKILL.md → Step 1; reference/registers.md |
-| pattern-gates | README.md | the 36-pattern catalog splits into 21 that apply in every register and 15 that change or switch off | animated-flagship | SKILL.md → Step 3; reference/patterns.md |
+| pattern-gates | README.md | the 36-pattern catalog splits into 21 that apply in every register and 15 that change or switch off | animated-flagship | SKILL.md → Step 3; reference/patterns-core.md, reference/patterns-gated.md |

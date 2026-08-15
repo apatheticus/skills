@@ -43,6 +43,12 @@ jobs:
       - name: Description-parity fixtures
         run: python3 skills/prettier-svg-docs/scripts/test_alt_parity.py
 
+      # human-voice's checker is optional for a user but not for CI: its carve-outs
+      # are the only thing stopping it reporting a banned word that a document is
+      # quoting rather than writing, and that failure is silent in a real run.
+      - name: Voice-check fixtures
+        run: python3 skills/human-voice/scripts/test_voice_check.py
+
       - name: Fail if the two audit_visuals.py copies have drifted
         run: |
           python3 - <<'PY'
