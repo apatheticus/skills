@@ -37,6 +37,33 @@ jobs:
       - name: Diagram check-class fixtures
         run: python3 skills/prettier-svg-docs/scripts/test_diagram_check.py
 
+      # The check itself lives in two copies (prettier- and pretty-plain-docs) and the
+      # fixtures drive one of them. The copies are diffed below rather than tested
+      # twice, which is what actually catches drift between them.
+      - name: Description-parity fixtures
+        run: python3 skills/prettier-svg-docs/scripts/test_alt_parity.py
+
+      - name: Fail if the two audit_visuals.py copies have drifted
+        run: |
+          python3 - <<'PY'
+          import pathlib, sys
+          # These two scripts have no shared module, so the only thing keeping them in
+          # step is a check that says so. Their documented differences are the PRODUCER
+          # block and the diagram-type feature, which pretty-plain-docs does not carry;
+          # everything else must match. Compare the shared function bodies, not the
+          # whole file.
+          SHARED = ("# --- Description parity", "def sha256_file")
+          a, b = (pathlib.Path(f"skills/{s}/scripts/audit_visuals.py").read_text()
+                  for s in ("prettier-svg-docs", "pretty-plain-docs"))
+          cut = lambda t: t[t.index(SHARED[0]):t.index(SHARED[1])]
+          if cut(a) != cut(b):
+              print("::error::the description-parity block has drifted between the "
+                    "two audit_visuals.py copies — they have no shared module, so "
+                    "a fix applied to one must be applied to both")
+              sys.exit(1)
+          print("audit_visuals.py: description-parity block identical in both copies")
+          PY
+
       - name: Gate every committed SVG
         run: |
           python3 - <<'PY'

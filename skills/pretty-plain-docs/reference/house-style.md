@@ -427,7 +427,11 @@ human content. Gates 1–5 are textual; gates 6–10 are visual and detailed in
    parses and agrees with the SVG** (README body diagrams included); the README header
    image carries its meaning in rich `alt` text; banners are reinforced by adjacent
    text. A chart falls back to its Mermaid chart type or to a table, never a stub
-   (`charts.md` → The Mermaid fallback).
+   (`charts.md` → The Mermaid fallback). `audit_visuals.py` owns the mechanical half —
+   it reports **`MISDESCRIBED`** when a number on the board is missing from the
+   description, or an ordinal in the description is missing from the board. That covers
+   the drift that has actually shipped in the animated sibling; it does **not** tell you
+   whether the alt describes the right subject, which is still the question above.
 10. **Budget + placement.** No doc exceeds its visual budget; **LICENSE and NOTICE
     contain zero visuals, badges, or markers** — any visual there is a hard
     violation. **Every embed is centered** — an `<img>` inside a

@@ -433,6 +433,11 @@ human content. Gates 1–5 are textual; gates 6–10 are visual and detailed in
 9. **Works without images.** With every image stripped, each doc still makes its
    point: README alt text carries the meaning; technical-doc animations have their
    `<details>` Mermaid equivalent; banners are reinforced by adjacent text.
+   `audit_visuals.py` owns the mechanical half — it reports **`MISDESCRIBED`** when a
+   number on the board is missing from the description, or an ordinal in the
+   description is missing from the board. That covers the drift that has actually
+   shipped twice here; it does **not** tell you whether the alt describes the right
+   subject, which is still the question above.
 10. **Budget + placement.** No doc exceeds its visual budget; **LICENSE and NOTICE
     contain zero visuals, badges, or markers** — any visual there is a hard
     violation. **Every embed is centered** — an `<img>` inside a

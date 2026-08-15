@@ -341,8 +341,9 @@ Run the ten quality gates in house-style over what you changed this run: five te
 leak/guardrail + volatile-facts grep) and five visual (`svg_check.py` clean, asset
 presence + ≤150 KB, marker/manifest integrity via `scripts/audit_visuals.py`,
 works-without-images — every structural visual's Mermaid parses and agrees with its
-SVG — and budget + centered embeds + LICENSE/NOTICE placement). Fix and re-check what
-you can; surface the rest.
+SVG, and `audit_visuals.py` reports `MISDESCRIBED` where a description no longer
+matches what the visual draws — and budget + centered embeds + LICENSE/NOTICE
+placement). Fix and re-check what you can; surface the rest.
 
 In `check` mode: run the same gates read-only over the existing docs, plus
 `scripts/audit_visuals.py`, and judge `CONTRADICTS` for each visual's stored facts
