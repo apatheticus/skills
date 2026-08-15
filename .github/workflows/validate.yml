@@ -49,6 +49,14 @@ jobs:
       - name: Voice-check fixtures
         run: python3 skills/human-voice/scripts/test_voice_check.py
 
+      # Two of this checker's rules guard failures that are SILENT in a real run -- a
+      # `from decision` anchor that no longer resolves, and an `A/B pick` reference
+      # that is not a real file. Both leave a document that still reads correctly, so
+      # nothing but the checker catches them, and nothing but this step catches the
+      # checker.
+      - name: Answer-key linter fixtures
+        run: python3 skills/gauntlet-builder/scripts/test_check_answer_key.py
+
       - name: Fail if the two audit_visuals.py copies have drifted
         run: |
           python3 - <<'PY'
