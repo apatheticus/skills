@@ -63,7 +63,7 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `m
 
 ## Current state
 
-Scaffolded 2026-07-24. **Eight skills shipped** — `gauntlet-builder`, `human-voice`, `prettier-svg-docs`, `pretty-hyper-docs`, `pretty-plain-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green at plugin version **0.23.0**, which is now carried by **two** entries rather than one — `apatheticus-skills` and `apatheticus-security`, both seeded there by the 0.23.0 split and independent from here on. Read those numbers off
+Scaffolded 2026-07-24. **Eight skills shipped** — `gauntlet-builder`, `human-voice`, `prettier-svg-docs`, `pretty-hyper-docs`, `pretty-plain-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green across **two** plugin entries rather than one. They were seeded level at `0.23.0` by the split and have since diverged as designed — `apatheticus-skills` at **0.23.1**, `apatheticus-security` at **0.23.0** — so there is no longer a single "the plugin version" to quote. Read those numbers off
 `git show origin/main:.claude-plugin/marketplace.json` rather than the working tree — an
 in-flight bump is not a shipped version, and this line went stale by a release because
 0.21.0 merged without it moving. `prettier-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28, revised to its v2 spec on 2026-07-29), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. Since 0.19.0 it also ships a **27-type diagram taxonomy** with a **specimen per type** at `docs/samples/types/<slug>.svg`, all authored in `flat-material`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
@@ -92,6 +92,45 @@ handled the `{url}` shape, so this cost one line. And `validate.mjs` lost its
 `description` / `version` / `skills[]` checks, gained the `strict: false` requirement for
 an entry whose source has no `plugin.json`, and gained the exactly-one-plugin membership
 invariant described under Rules.
+
+**0.23.1 fixes a verification step that could certify content the composition no longer
+draws, and it was found by a `--refresh-viz` run over this repo's own README rather than
+by reading the spec.** `pretty-hyper-docs`' phase-6 "verify real pixels" said to extract
+stills with `ffmpeg -i render.mp4 -vf fps=1/5 qa_%03d.png` and Read them. **`qa_*.png` is
+gitignored and the `%03d` pattern overwrites only as many files as *this* run produces** —
+a 12s loop at `fps=1/5` writes two — so higher-numbered stills from an earlier run survive
+indefinitely. A re-render read a **three-week-old `qa_003.png` showing the pre-split hero**
+("A managed bundle", two command lines) while the render on disk was correct. Nothing about
+the file says it is stale; it sits in the same directory with the same name shape. The fix
+is `rm -f qa_*.png &&` before the extract, with the reason stated so a later run does not
+read it as tidiness and drop it.
+
+**The same run got the seam control wrong first, and the correction is the reusable half.**
+The wrap is one frame interval **and** a cycle reset, so comparing the last frame to frame 0
+against an *adjacent* frame pair is systematically stricter and reports a clean seam as a
+defect: measured **41 dB at the seam against 53 dB adjacent**, which reads as a failure. The
+honest control is an **interior cycle boundary** — `f29→f30` and `f59→f60` measure 36.5/37.8
+dB on the hero and 44.7/41.1 dB on `skill-anatomy`, so the seam lands inside the range every
+other cycle reset already occupies. §6 now names the control and requires the seam figure to
+be reported beside the boundary it was judged against. Note this is a **different** failure
+from the one `prettier-svg-docs` documents at 0.12.3 — there the animation genuinely did not
+return to origin; here the loop was correct and the *measurement* was wrong.
+
+**Two facts worth keeping from the run itself.** The preflight gate did its job — the
+HyperFrames core set was stale (`coreMissing: 1`, 13 outdated including `hyperframes-core`)
+and the skill stopped before rendering, which is the designed behaviour and not a bug to
+route around. And **the render pipeline is bit-deterministic**: after the update, both
+visuals re-rendered **byte-identical** to the committed assets (399,336 and 238,518 bytes,
+`git status` empty), so a forced re-render moved no hash, no marker and nothing to commit.
+That is the cheapest possible regression test for this pipeline and worth repeating before
+trusting a future render diff.
+
+**Patch, and the mechanical test decides it.** Only `reference/viz-production.md` §6 changed
+— no checker, style, catalog or contract file — so every previously produced visual still
+conforms and every committed asset re-gates identically. The changed text tightens a
+*verification method*, not an output gate, which is the distinction 0.14.0 turned on.
+`apatheticus-skills` alone bumps; `apatheticus-security` stays at `0.23.0`, which is the two
+lines diverging exactly as the split predicted.
 
 **`svg_check.py` gates fidelity, not just safety.** Every other check class is a ceiling (filter depth, bytes, radius) or a legibility floor (font size, contrast) — none of them asks whether a visual *looks like* the style it claims, so a flat, styleless render used to pass clean. Styles now declare their material in `scripts/styles.json` via `require_filter_all`, `min_filter_depth` and `min_elements`, and the checker prints a per-file `NOTE` reporting the chain depth, filter count and drawn-element count it actually found. `deepest chain 1` under a floor of 3 is the tell that a material was faked. Two attributes drive it: `data-specimen="true"` marks a catalog sample (**`min_elements` binds only on specimens** — a README diagram with four boxes is correct at 23 elements, and padding it would be worse output), and `data-style="<slug>"` on a `<filter>` measures that chain against the floor of the style it depicts rather than the file-wide one.
 
