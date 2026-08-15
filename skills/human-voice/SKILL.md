@@ -1,9 +1,10 @@
 ---
 name: human-voice
 description: Remove signs of AI-generated writing and rewrite prose so it reads as human-authored, adapting to the document's register (editorial, professional, technical, regulated). Use whenever the user wants to humanize, de-AI, or de-slop text; make writing sound natural, human, or less like ChatGPT; strip AI tells, em dashes, or AI words; pass or avoid AI detection (GPTZero, Originality.ai, Turnitin, Copyleaks); or asks "does this sound AI-generated?" Also use when editing, polishing, or reviewing drafted prose for voice, tone, and readability, including blog posts, articles, thought leadership, marketing copy, memos, policies, reports, specs, technical docs, and proposals. For anything a U.S. federal agency, evaluator, or auditor will read, invoke the federal-technical-writing skill first for compliance, then apply this skill's regulated register inside those constraints.
+when_to_use: Also use it as a detector rather than an editor — audit, scan, or flag a draft for AI tells without rewriting it. Trigger on a request naming one specific tell — hedging, passive voice, filler, fluff, buzzwords, corporate speak, jargon, sycophancy, boldface overuse, emojis, curly quotes, title-case headings, signposting, rule of three, negative parallelism ("not just X, but Y"), self-answered rhetorical questions, aphorisms, manufactured kickers, synonym cycling, or promotional language. Genres also include cover letters, email, LinkedIn and social posts, grant narratives, executive summaries, runbooks, ADRs, and release notes.
 license: MIT
-version: 1.1.0
-allowed-tools: Read, Write, Edit, Grep, Glob, AskUserQuestion
+version: 1.2.0
+allowed-tools: Read, Write, Edit, Grep, Glob, Bash, AskUserQuestion
 ---
 
 # human-voice
@@ -32,7 +33,9 @@ compete.
 
 **Do this before reading a single pattern.** Every downstream decision depends on
 it. If the genre is genuinely ambiguous, ask with AskUserQuestion rather than
-guessing; guessing wrong is worse than one question.
+guessing. The bad outcome this one question prevents: a spec or a policy handed
+back with an essayist's voice injected into it, which the person who asked will
+not notice and cannot easily undo.
 
 | Register | Genres | Personality | Specificity currency | Stance |
 | --- | --- | --- | --- | --- |
@@ -59,6 +62,13 @@ are both Editorial, and every opening and closing rule differs between them.
 
 Ask only what the draft leaves open, in the same `AskUserQuestion` call as the
 register question. A draft with a named audience and an obvious ask needs neither.
+
+**Ask once per document set, not once per file.** When a register has already been
+established for this body of work — the user named it, an earlier file in the same
+pass settled it, or the surrounding documents obviously share a genre — reuse it
+and say which one you are reusing in the delivery. Re-asking on every file of a
+docs directory trains the user to answer without reading, which is the one time
+the question would have mattered.
 
 ## Step 1b — Detect, or edit?
 
@@ -107,9 +117,21 @@ style and authority, not by an individual voice.
 
 ## Step 3 — Apply the patterns
 
-The full catalog of 36 patterns, each with a before/after and its register tags,
-lives in `reference/patterns.md`. Read it on every run. Vocabulary lists live
-separately in `reference/vocabulary.md` because they are register-scoped.
+The catalog is 36 patterns, split across two files by whether the register can
+switch them off. Load the one the register asks for:
+
+| File | Contents | Read it |
+| --- | --- | --- |
+| `reference/patterns-core.md` | The 21 always-on patterns, plus the false-positive list and the signs-of-human-writing list | Every run |
+| `reference/patterns-gated.md` | The 15 register-gated patterns, plus personality injection and the gate table | Only when the register turns at least one on |
+
+Every register turns on something in the gated file, so in practice both load for
+Editorial and Professional work. Technical and Regulated turn on a handful — §11,
+§24 and §30 for Technical, §11, §18, §24 and §30 for Regulated — so read the gate
+table and those sections rather than the whole file.
+
+Vocabulary lists live separately in `reference/vocabulary.md` because they are
+register-scoped, and Step 4 explains when to open them.
 
 **Always on, every register.** These 21 never conflict with any house style, and
 several of them actively reinforce plain-language requirements:
@@ -126,32 +148,13 @@ several of them actively reinforce plain-language requirements:
 Always on means the pattern never switches off. Four of them change *severity* by
 register, marked above; §21 changes enough to get its own note below.
 
-**Register-gated.** These change or switch off. Applying them blind is how this
-skill breaks documents:
+**Register-gated.** The 15 that change or switch off, plus personality injection,
+are tabled with their reasons in `reference/patterns-gated.md`. Applying one blind
+is how this skill breaks documents, so read that table before touching any of
+them.
 
-| Pattern | E | P | T | R | Why it varies |
-| --- | :-: | :-: | :-: | :-: | --- |
-| §11 elegant variation | ● | ● | ◑ | ◑ | **Inverts** in Technical and Regulated — one name per thing; cutting repetition is a correctness bug |
-| §14 em dash budget | ● | ● | ● | ○ | House style governs in Regulated (GPO, agency guides) |
-| §16 inline-header lists | ● | ● | ○ | ○ | Runbooks and compliance docs are legitimately list-shaped |
-| §17 title-case headings | ● | ● | ○ | ○ | Project or agency style guide wins |
-| §18 emojis | ◐ | ● | ● | ● | Sparingly allowed in Editorial, banned elsewhere |
-| §24 excessive hedging | ● | ● | ◐ | ◐ | Calibrated uncertainty is content, not hedging — see below |
-| §26 hyphenated pairs | ● | ● | ○ | ○ | Hyphenation is often spec- or style-defined |
-| §28 signposting | ● | ● | ● | ○ | Regulated templates mandate structural signposting |
-| §30 diff-anchored writing | ● | ● | ◑ | ● | **Elevate** in Technical — the most common failure there |
-| §31 manufactured punchlines | ● | ○ | ○ | ○ | An editorial tell; absent elsewhere |
-| §32 aphorism formulas | ● | ● | ○ | ○ | Rare in Technical and Regulated |
-| §33 rhetorical openers | ● | ● | ○ | ○ | "Let me be clear" and "I'll be honest" are memo staples, not just essay hooks |
-| §34 colon reveals | ● | ● | ○ | ○ | The labelled colon is the house pattern in T and R; the dramatic one is rare |
-| §35 faux-insight setups | ● | ○ | ○ | ○ | An editorial tell; absent elsewhere |
-| §36 rhetorical setups | ● | ○ | ○ | ○ | An editorial tell; absent elsewhere |
-| PERSONALITY (voice injection) | ● | ○ | ○ | ○ | Neutral and plain **is** the human voice for P, T, R |
-
-● on · ◐ limited · ◑ elevated or inverted · ○ off
-
-Three gates deserve spelling out, because getting them backwards is the most
-expensive mistake available here:
+Three gates deserve calling out here, because getting them backwards is the most
+expensive mistake available and the fix runs opposite to the obvious one:
 
 **§11 in Technical and Regulated — the fix direction reverses.** Everywhere else,
 cycling synonyms is a repetition-penalty artifact to remove. In a spec or a
@@ -204,9 +207,27 @@ minimal plain-language floor for this case; it is a floor, not a substitute.
 Run every step. This is mandatory, not advisory. Thresholds are register-scoped
 because burstiness and plain-language brevity genuinely want opposite things.
 
-1. **Vocabulary scan.** Grep the draft against the tiers in
-   `reference/vocabulary.md` for the selected register. Replace hits with plainer,
-   more specific alternatives.
+**Steps 1 through 3 are countable, so count them rather than eyeballing them.**
+`scripts/voice_check.py` does the arithmetic — vocabulary tiers, sentence-length
+distribution, opener repetition, dash and quote and emoji counts, boldface
+density, heading case — and skips code spans, fenced blocks, link targets and
+quoted material so a banned word inside a `code span` is never reported:
+
+```bash
+python3 scripts/voice_check.py <file> --register E|P|T|R
+```
+
+The checker is optional. It is an accelerator for the three mechanical steps
+below, not a gate on the skill: without Python, do those steps by reading, and say
+in the delivery that you counted by hand. What it cannot do is judge — every
+Tier-2 hit comes back as a `QUERY`, never a replacement, for the reason
+`reference/vocabulary.md` gives.
+
+1. **Vocabulary scan.** Tier 1 and Tier 3 are mechanical and every hit is a
+   defect; replace with plainer, more specific alternatives. Open
+   `reference/vocabulary.md` when the checker returns a `QUERY` (Tier 2 — apply
+   the carve-out rule and the delete-and-reread test) or a Tier 2b hit, where the
+   same sense is legal in one register and not another.
 2. **Sentence length audit.** Check against the register's targets:
 
    | | Editorial | Professional | Technical | Regulated |
@@ -260,7 +281,7 @@ underperforms.
   most common failure of the first draft.
 - **Cluster, do not snipe.** A single em dash means nothing. One `however` means
   nothing. Flag a pattern only when tells co-occur. Read the false-positive list
-  in `reference/patterns.md` before flagging anything — a clean human writer
+  in `reference/patterns-core.md` before flagging anything — a clean human writer
   trips several of these patterns with no AI involved.
 - **Never rewrite inside quotations, titles, proper names, code identifiers,
   file paths, error strings, or citations.** A banned word inside a `code span`
@@ -278,12 +299,16 @@ underperforms.
 
 - `reference/registers.md` — the four register profiles in full, plus the
   plain-language floor for Regulated when no compliance skill is installed
-- `reference/patterns.md` — all 36 patterns with before/after and register tags,
-  plus the false-positive and signs-of-human-writing lists
+- `reference/patterns-core.md` — the 21 always-on patterns with before/after,
+  plus the false-positive and signs-of-human-writing lists. Read every run
+- `reference/patterns-gated.md` — the 15 register-gated patterns, personality
+  injection, and the gate table. Read when the register turns one on
 - `reference/vocabulary.md` — global and register-scoped word and phrase lists,
   with the technical-term carve-outs
 - `reference/examples.md` — one full worked rewrite per register
 - `reference/attribution.md` — provenance of the derived material
+- `scripts/voice_check.py` — optional checker for the countable half of Step 4;
+  `scripts/test_voice_check.py` is its test suite
 
 ## Attribution
 
