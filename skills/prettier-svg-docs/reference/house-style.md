@@ -407,10 +407,22 @@ human content. Gates 1–5 are textual; gates 6–10 are visual and detailed in
    names, palette, jargon); no personal name as copyright holder; no asserted
    tests/CI/tooling the repo doesn't have; no volatile facts (grep managed sections
    and visual fact lists for `\bv?\d+\.\d+\.\d+\b` and date-like strings).
-6. **SVG validity.** Every visual authored this run passes
-   `python3 scripts/svg_check.py <file.svg>` with **0 errors** — structure, seam
-   arithmetic, reduced-motion coverage, legibility floors, palette conformance,
-   contrast. Zero errors, not "only warnings". A `SOFTENED` line is a pass with a
+6. **SVG validity.** Every visual authored this run passes, with **0 errors**:
+
+   ```bash
+   python3 scripts/svg_check.py --design <project>/.prettydocs/prettydocs.md \
+                                --style <slug> <file.svg>
+   ```
+
+   — structure, seam arithmetic, reduced-motion coverage, legibility floors, palette
+   conformance, contrast, style invariants and fidelity floors. **Both flags are
+   load-bearing and omitting either fails open, not closed.** Without `--design` the
+   palette is empty, so every contrast test degrades to
+   `text has no data-bg ground in scope — contrast unchecked` and the off-system-colour
+   gate never fires; without `--style` no style invariant or fidelity floor is applied.
+   Either way the run still prints `0 error(s)` and reads green. The only signal is a
+   single `NOTE` on the first line, which scrolls off the moment you pipe the output
+   through `tail`. Zero errors, not "only warnings". A `SOFTENED` line is a pass with a
    declared style relaxation and must appear in the report (see `styles.md`).
 7. **Asset presence + size.** Every embedded `.svg` exists at its referenced path
    and is **≤ 150 KB** (warn from 60 KB; a style may raise the ceiling only to its

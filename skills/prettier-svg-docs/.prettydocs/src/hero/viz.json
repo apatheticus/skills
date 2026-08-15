@@ -14,12 +14,12 @@
     "Animated visuals loop seam-exact at the declared data-loop-s"
   ],
   "facts_hash": "786dfce162bfd113006a3fa0b4a84dedf2a1083a9592489c5dfd512e950bd218",
-  "src_hash": "9c0ec5e81e3f6a092e3ac9d4043e24bf054de4119707baa1e8a0aebc8d61b74c",
+  "src_hash": "5b18d697211ac4f94e5e7b92d33c3d7e40612b4639852a8d42e2cfaf90518279",
   "design_hash": "a99906390738999c26cb86b409e5324f1f289520e6b8f4fa69647ebfae88f7ad",
   "svg": {
     "loop_s": 12,
     "width": 1200,
-    "bytes": 10801
+    "bytes": 10798
   },
   "relaxed": [],
   "budget_cuts": []

@@ -8,12 +8,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-e0a33e.svg)](../../LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-skill-12324f)](SKILL.md)
 [![Dependencies](https://img.shields.io/badge/dependencies-python3_only-12324f)](#install)
-[![Styles](https://img.shields.io/badge/style_catalog-31-12324f)](reference/styles.md)
+[![Styles](https://img.shields.io/badge/style_catalog-32-12324f)](reference/styles.md)
+[![Diagram types](https://img.shields.io/badge/diagram_types-27-12324f)](reference/diagrams.md)
 <!-- pd:badges end -->
 
-<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="786dfce162bfd113006a3fa0b4a84dedf2a1083a9592489c5dfd512e950bd218" src-hash="9c0ec5e81e3f6a092e3ac9d4043e24bf054de4119707baa1e8a0aebc8d61b74c" -->
+<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="786dfce162bfd113006a3fa0b4a84dedf2a1083a9592489c5dfd512e950bd218" src-hash="5b18d697211ac4f94e5e7b92d33c3d7e40612b4639852a8d42e2cfaf90518279" -->
 <div align="center">
-<img src="docs/assets/hero.svg" alt="Animated board of eight cells. The widest names the skill and its claim — animated SVG, authored, not rendered. A runtime cell reads python3 and nothing else, and the single accent-filled cell reports zero dependencies. One cell nests the pipeline as a small diagram, author then gate then commit, with a status dot visiting each station in turn and no render station between them, because the committed asset is its own source. Two cells count what the skill carries: thirty-two catalog idioms, of which one is chosen per repo, and the eight classes the bundled checker applies to every visual, the eighth being fidelity. Along the bottom the verdict cell reads zero errors, required before any visual is embedded, beside a meter that fills and settles, and the last cell gives the loop as twelve seconds, seam-exact." width="820" />
+<img src="docs/assets/hero.svg" alt="Animated board of eight cells. The widest names the skill and its claim — animated SVG, authored, not rendered. A runtime cell reads python3 and nothing else, and the single accent-filled cell reports zero dependencies. One cell nests the pipeline as a small diagram, author then gate then commit, with a status dot visiting each station in turn and no render station between them, because the committed asset is its own source. Two cells count what the skill carries: thirty-two catalog idioms, of which one is chosen per repo, and the nine classes the bundled checker applies to every visual, the ninth being diagram. Along the bottom the verdict cell reads zero errors, required before any visual is embedded, beside a meter that fills and settles, and the last cell gives the loop as twelve seconds, seam-exact." width="820" />
 </div>
 <!-- pd:viz end -->
 
@@ -82,7 +83,7 @@ that style's real filter floors: `oil-impasto` keeps its five-primitive lit reli
 style could not be produced clean, its catalog entry was wrong and got fixed. Aliases resolve
 without asking (`brutalist`, `glass`, `soft-ui`, `tui`, `bento`, `excalidraw`,
 `hologram`, `patent`, `whiteboard`, …), a recognisable free-form idiom is synthesized
-into a full spec and frozen into the repo's `DESIGN.md`, and anything unresolvable
+into a full spec and frozen into the repo's `.prettydocs/prettydocs.md`, and anything unresolvable
 prompts exactly one question.
 
 ### Every style, A to Z
@@ -116,6 +117,7 @@ Each slug links to its full nine-field spec.
 | [`rough-sketch`](reference/styles/rough-sketch.md) | composition | Doubled strokes and hachure fills — the meeting diagram |
 | [`schematic`](reference/styles/schematic.md) | composition | Symbol alphabet, net labels, no perspective |
 | [`skeuomorphic`](reference/styles/skeuomorphic.md) | material | Objects that look like objects — bevel, sheen, weight |
+| [`soft-vinyl`](reference/styles/soft-vinyl.md) | material | Soft-touch collectible — one key light, warm shadow edge, hand-formed silhouettes |
 | [`swiss-minimal`](reference/styles/swiss-minimal.md) | composition | Strict grid, thin rules, type doing the work |
 | [`terminal-minimalist`](reference/styles/terminal-minimalist.md) | material | Mono type on a dark field; a TUI that isn't ASCII art |
 | [`watercolor`](reference/styles/watercolor.md) | material | Transparent washes that multiply, ink line laid last |
@@ -139,7 +141,7 @@ alphabets on request rather than treating them as a customisation option.
 Full rules and the resolution ladder: [`reference/styles.md`](reference/styles.md).
 
 Where a style's look genuinely fights a soft gate, the style wins and the gate
-softens to a **declared floor, never off** — 21 of the 31 relax something, almost
+softens to a **declared floor, never off** — 21 of the 32 relax something, almost
 always filter depth, and every relaxation is printed, recorded in `viz.json`, and
 named in the run report. `neumorphism` is the only style that relaxes *contrast*.
 Structural and truth gates never soften.
@@ -184,7 +186,7 @@ asset is missing, or `--refresh-viz` forces it:
 </div>
 <!-- pd:viz end -->
 
-Because the style spec lives inside `DESIGN.md`, changing the style moves
+Because the style spec lives inside `.prettydocs/prettydocs.md`, changing the style moves
 `design_hash` and re-authors every visual in the repo. The plan phase says so, with
 a count, before touching anything.
 
@@ -207,7 +209,7 @@ Or copy the folder straight into a repo's skill directory:
 cp -R skills/prettier-svg-docs /path/to/repo/.claude/skills/prettier-svg-docs
 ```
 
-The skill is self-contained. At run time it needs `python3` for its two bundled
+The skill is self-contained. At run time it needs `python3` for its three bundled
 scripts and nothing else — no renderer, no `ffmpeg`, no CLI, no network. A browser
 tool is optional: it is used to look at the rendered pixels, and when none is
 available the run says the pixel review was skipped rather than implying it passed.
@@ -230,15 +232,24 @@ prettier-svg-docs/
 ├── SKILL.md              entry point: preflight, workflow, budgets, audience matrix
 ├── reference/            house style, per-doc specs, design-system / viz-production /
 │   │                     svg-animation / embedding doctrine
-│   ├── styles.md         the catalog index — read once per run to choose
+│   ├── styles.md         the style index — read once per run to choose
 │   ├── styles/           one full spec per style, read one per run
+│   ├── diagrams.md       the type index, starting with whether to draw at all
+│   ├── types/            one layout grammar per diagram type, read one per diagram
+│   ├── diagram-grammar.md  connectors, node box, grid, paint order — read once per run
+│   ├── diagram-patterns.md when behaviour rather than structure carries the meaning
+│   ├── charts.md         provenance rule for any plotted number
+│   ├── icons.md / annotation.md  read only when a diagram earns one
 │   └── tier2/            LICENSE, NOTICE, templates, CODEOWNERS specs
 ├── scripts/
 │   ├── svg_check.py      the gate: structure, seam arithmetic, reduced motion,
-│   │                     legibility, palette, contrast, style invariants, bytes
+│   │                     legibility, palette, contrast, style, fidelity, diagram, bytes
 │   ├── svg_filmstrip.py  poses N phases of a loop in one page, for the pixel read
-│   ├── styles.json       the checker's machine-readable half of the catalog
-│   └── audit_visuals.py  mechanical half of the visual staleness audit
+│   ├── audit_visuals.py  mechanical half of the visual staleness audit
+│   ├── styles.json       the checker's machine-readable half of the style catalog
+│   ├── diagrams.json     the same, for the type catalog — budgets and aliases
+│   └── test_diagram_check.py  both-polarity fixtures for the diagram check class
+├── assets/icons/         87 single-shape icons, one file each — never read wholesale
 └── docs/assets/          this README's own visuals, produced by the skill itself
 ```
 
