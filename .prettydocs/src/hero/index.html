@@ -189,13 +189,22 @@
         left: 760px;
         top: 380px;
         width: 1070px;
-        height: 265px;
+        height: 250px;
       }
+      /* Channel 02 carries a third command line — one marketplace, two plugins —
+         so it is the taller card. Its gap is tightened to keep the stack inside
+         the padding box; the card still clears the ruler by 40px. */
       #ch2-card {
         left: 760px;
-        top: 675px;
+        top: 660px;
         width: 1070px;
-        height: 265px;
+        height: 300px;
+      }
+      #ch2-card .cmd {
+        font-size: 30px;
+      }
+      #ch2-card .stack {
+        gap: 16px;
       }
       .stack {
         display: flex;
@@ -228,10 +237,10 @@
         background: var(--hairline);
       }
       #wire1 {
-        top: 512px;
+        top: 505px;
       }
       #wire2 {
-        top: 807px;
+        top: 810px;
       }
       .dot {
         position: absolute;
@@ -242,10 +251,10 @@
         background: var(--accent);
       }
       #dot1 {
-        top: 506px;
+        top: 499px;
       }
       #dot2 {
-        top: 801px;
+        top: 804px;
       }
       .tail {
         position: absolute;
@@ -256,10 +265,10 @@
         background: linear-gradient(to right, rgba(226, 230, 251, 0), rgba(226, 230, 251, 0.75));
       }
       #tail1 {
-        top: 512px;
+        top: 505px;
       }
       #tail2 {
-        top: 807px;
+        top: 810px;
       }
 
       /* ── tick ruler ─────────────────────────────────────────────── */
@@ -364,8 +373,9 @@
           <div class="stack">
             <div class="label">Channel 02 &mdash; Claude Code plugin</div>
             <div class="cmd">/plugin marketplace add apatheticus/skills
-/plugin install apatheticus-skills@apatheticus</div>
-            <div class="body">A managed bundle that updates when the repo does.</div>
+/plugin install apatheticus-skills@apatheticus
+/plugin install apatheticus-security@apatheticus</div>
+            <div class="body">Two managed sets that update when the repo does.</div>
           </div>
         </div>
 

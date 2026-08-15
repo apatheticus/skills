@@ -20,12 +20,12 @@ jobs:
       - name: Validate skills and plugin manifests
         run: node scripts/validate.mjs
 
-      - name: Fail if plugin.json is out of sync with skills/
+      - name: Fail if marketplace.json is out of sync with skills/
         run: |
           node scripts/validate.mjs --sync
-          if ! git diff --quiet -- .claude-plugin/plugin.json; then
-            echo "::error::.claude-plugin/plugin.json is stale. Run 'npm run sync' and commit the result."
-            git --no-pager diff -- .claude-plugin/plugin.json
+          if ! git diff --quiet -- .claude-plugin/marketplace.json; then
+            echo "::error::.claude-plugin/marketplace.json is stale. Run 'npm run sync' and commit the result."
+            git --no-pager diff -- .claude-plugin/marketplace.json
             exit 1
           fi
 

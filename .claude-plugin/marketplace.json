@@ -10,20 +10,56 @@
     {
       "name": "apatheticus-skills",
       "source": "./",
-      "description": "Agent skills published by Zerø Effort. Install the whole bundle as a managed plugin that updates when the repo does.",
+      "strict": false,
+      "version": "0.23.0",
+      "description": "Documentation, writing, and self-review skills published by Zerø Effort — animated and static SVG docs, animated WebP docs, voice editing, evaluation gauntlets, and session reflection.",
       "category": "productivity",
       "keywords": [
         "skills",
         "agent-skills",
         "productivity",
-        "workflow"
+        "workflow",
+        "documentation"
       ],
       "author": {
         "name": "Zerø Effort",
         "url": "https://github.com/apatheticus"
       },
       "homepage": "https://github.com/apatheticus/skills",
-      "license": "MIT"
+      "license": "MIT",
+      "skills": [
+        "./skills/gauntlet-builder",
+        "./skills/human-voice",
+        "./skills/prettier-svg-docs",
+        "./skills/pretty-hyper-docs",
+        "./skills/pretty-plain-docs",
+        "./skills/reflect"
+      ]
+    },
+    {
+      "name": "apatheticus-security",
+      "source": "./",
+      "strict": false,
+      "version": "0.23.0",
+      "description": "Security review skills published by Zerø Effort — a converging multi-cycle source audit that reports to HTML, and a live website security scan. Note that security-audit-full-report orchestrates the separately published security-audit skill and does not bundle it.",
+      "category": "security",
+      "keywords": [
+        "skills",
+        "agent-skills",
+        "security",
+        "audit",
+        "appsec"
+      ],
+      "author": {
+        "name": "Zerø Effort",
+        "url": "https://github.com/apatheticus"
+      },
+      "homepage": "https://github.com/apatheticus/skills",
+      "license": "MIT",
+      "skills": [
+        "./skills/security-audit-full-report",
+        "./skills/website-security-scan"
+      ]
     }
   ]
 }

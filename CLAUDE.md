@@ -7,20 +7,21 @@ Public repository publishing agent skills, installable two ways from one source 
 - GitHub: `apatheticus/skills` (personal account). This tree is under `/Volumes/Data/dev/`, so as of 2026-07-27 git auth pins to the `id_personal` SSH key by directory, via `core.sshCommand` in `~/.gitconfig-personal`. The stored `origin` is still `https://github.com/apatheticus/skills.git` and needs no change — `url."git@github.com:".insteadOf` rewrites it onto SSH transparently, so `git remote get-url` reports the SSH form while `git config remote.origin.url` reports the stored HTTPS one. The old `github-personal:` host alias is no longer how this repo authenticates.
 - License: MIT. Public repo — nothing secret, no machine-specific absolute paths.
 - Distribution 1 — skills.sh: `npx skills add apatheticus/skills`. Discovers `skills/*/SKILL.md` directly from GitHub. **No npm publish involved**; `package.json` is `private: true` and exists only to hold the validation scripts.
-- Distribution 2 — Claude Code plugin: `/plugin marketplace add apatheticus/skills` then `/plugin install apatheticus-skills@apatheticus`.
-- Marketplace name is `apatheticus`; plugin name is `apatheticus-skills`. The plugin sources from the repo root (`"source": "./"`), so both channels read the same `skills/` directory with no duplication.
+- Distribution 2 — Claude Code plugin: `/plugin marketplace add apatheticus/skills` then `/plugin install apatheticus-skills@apatheticus` and/or `/plugin install apatheticus-security@apatheticus`.
+- Marketplace name is `apatheticus`. It publishes **two** plugins as of 0.23.0: `apatheticus-skills` (six utility skills) and `apatheticus-security` (`security-audit-full-report`, `website-security-scan`). Both source the repo root (`"source": "./"`), so both channels read the same `skills/` directory with no duplication.
+- **There is no `.claude-plugin/plugin.json`, and adding one back would break the split.** A single root manifest cannot express two disjoint subsets of one root. Two entries share `source: "./"` instead, each carrying `"strict": false` and its own inline `skills[]` — the shape Anthropic's own `anthropic-agent-skills` marketplace uses for three plugins from one root. Verified by local install at 0.23.0: `apatheticus-security` resolves to exactly its two skills, `apatheticus-skills` to exactly its six, with no `plugin.json` anywhere.
+- The `npx skills` channel has **no concept of sets** — it discovers `skills/*/SKILL.md` flat — so it is unaffected by the split and still offers all eight skills individually. Two sets is a plugin-channel fact only.
 
 ## Layout
 
 ```
-.claude-plugin/marketplace.json   # marketplace: one plugin, source "./"
-.claude-plugin/plugin.json        # plugin: skills[] lists every ./skills/<name>
+.claude-plugin/marketplace.json   # marketplace AND both plugins; each entry has its own skills[]
 skills/<name>/SKILL.md            # the skills themselves (+ optional reference/, scripts/, assets/)
 templates/SKILL.template.md       # starting point for a new skill
 scripts/validate.mjs              # validator, no dependencies, also runs in CI
 ```
 
-Doc-visual state is **per project**, and this repo is seven projects: the root plus each
+Doc-visual state is **per project**, and this repo is nine projects: the root plus each
 `skills/<name>/`. Every one carries the same block:
 
 ```
@@ -33,11 +34,11 @@ Doc-visual state is **per project**, and this repo is seven projects: the root p
 ## Commands
 
 ```bash
-npm run validate   # frontmatter + both manifests; exits 1 on error
-npm run sync       # rewrite plugin.json skills[] from disk (do this after adding a skill)
+npm run validate   # frontmatter + marketplace + README table; exits 1 on error
+npm run sync       # sort each plugin entry's skills[] (it will NOT assign a set)
 ```
 
-CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `plugin.json` has drifted from `skills/`.
+CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `marketplace.json` has drifted from `skills/`.
 
 ## Branches
 
@@ -53,19 +54,44 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 ## Rules
 
-- Never hand-edit `plugin.json`'s `skills[]` — run `npm run sync`.
-- **Never rewrite `plugin.json` with a JSON serializer, not even to bump `version`.** Python's `json.dumps` defaults to `ensure_ascii=True` and turns the `ø` in `Zerø Effort` into `ø` in two places. `npm run validate` still passes — it parses the file, it does not compare bytes — so this reaches CI green-looking and reds there, because the workflow runs `validate.mjs --sync` and then `git diff --quiet` on the result. Bump the version with an `Edit` on the one line, or run `npm run sync` afterwards to restore the file. To reproduce the CI check locally you must **commit first**: `node scripts/validate.mjs --sync && git diff --quiet -- .claude-plugin/plugin.json` compares against `HEAD`, so it fails on any uncommitted change to that file and tells you nothing.
-- Adding a skill: `skills/<name>/SKILL.md` where the frontmatter `name` equals the directory name, then sync, validate, add a README table row, and bump `plugin.json` `version` per the rule below.
-- **Versioning `plugin.json`: the test is whether the change invalidates work a skill has already produced, not how large the diff is.** Bump **minor** for a new skill, a renamed slug, or any change that stops a skill's *previously-conforming output* from conforming — a tightened gate, a raised floor, a withdrawn relaxation, a newly required marker, manifest field or doc section. Bump **patch** for everything else: a bug fix, a corrected measurement, a loosened or purely additive change (a new style, a new pattern), a re-authored asset that meets the same contract. Where a checker exists the test is mechanical rather than a judgment call — run the new `svg_check.py` / `audit_visuals.py` against the *previous* release's committed assets; anything that goes red means minor. **0.13.0 is the worked example, and it is the case the old wording got wrong:** the glassmorphism rebuild read as a "fix" by every ordinary measure, but it reded `reflect`'s two boards inside this repo and would red any downstream repo the skill had already processed, so it took the minor. Note the asymmetry that makes the old phrasing dangerous — a fix that *loosens* a gate is a patch, a fix that *tightens* one is not.
-- Per-skill `SKILL.md` `version` is optional (`pretty-hyper-docs` and `pretty-svg-docs` carry none) and independent of the plugin version. Bump the ones that exist alongside a change to that skill; `plugin.json` is the only version a user installs against, so it is the one the rule above governs.
+- **Set membership in `marketplace.json` IS hand-written — this inverts the old `plugin.json` rule.** Which plugin a new skill belongs to is a judgement call, so `npm run sync` only sorts each entry's `skills[]` and never assigns one. `validate.mjs` enforces the invariant instead: a skill on disk listed by **no** plugin is an error naming both entries, and a skill listed by **two** is an error. That check replaced "run `npm run sync`" as the guard against a new skill shipping invisible.
+- **Never rewrite `marketplace.json` with a JSON serializer, not even to bump `version`.** Python's `json.dumps` defaults to `ensure_ascii=True` and turns the `ø` in `Zerø Effort` into `ø` in two places. `npm run validate` still passes — it parses the file, it does not compare bytes — so this reaches CI green-looking and reds there, because the workflow runs `validate.mjs --sync` and then `git diff --quiet` on the result. Bump the version with an `Edit` on the one line, or run `npm run sync` afterwards to restore the file. To reproduce the CI check locally you must **commit first**: `node scripts/validate.mjs --sync && git diff --quiet -- .claude-plugin/marketplace.json` compares against `HEAD`, so it fails on any uncommitted change to that file and tells you nothing.
+- Adding a skill: `skills/<name>/SKILL.md` where the frontmatter `name` equals the directory name, then list it in exactly one plugin's `skills[]`, sync, validate, add a README table row (**four** columns — the second is the plugin name and is machine-checked against the manifest), and bump that plugin's `version` per the rule below.
+- **Versioning the two `marketplace.json` entries: the test is whether the change invalidates work a skill has already produced, not how large the diff is.** Bump **minor** for a new skill, a renamed slug, or any change that stops a skill's *previously-conforming output* from conforming — a tightened gate, a raised floor, a withdrawn relaxation, a newly required marker, manifest field or doc section. Bump **patch** for everything else: a bug fix, a corrected measurement, a loosened or purely additive change (a new style, a new pattern), a re-authored asset that meets the same contract. Where a checker exists the test is mechanical rather than a judgment call — run the new `svg_check.py` / `audit_visuals.py` against the *previous* release's committed assets; anything that goes red means minor. **0.13.0 is the worked example, and it is the case the old wording got wrong:** the glassmorphism rebuild read as a "fix" by every ordinary measure, but it reded `reflect`'s two boards inside this repo and would red any downstream repo the skill had already processed, so it took the minor. Note the asymmetry that makes the old phrasing dangerous — a fix that *loosens* a gate is a patch, a fix that *tightens* one is not.
+- Per-skill `SKILL.md` `version` is optional (`pretty-hyper-docs` and `pretty-svg-docs` carry none) and independent of the plugin version. Bump the ones that exist alongside a change to that skill; the two `marketplace.json` entry versions are the only ones a user installs against, so they are what the rule above governs. Bump the entry that owns the changed skill; a change to `validate.mjs`, CI or the root README that affects both bumps both.
 - Start a new skill from `templates/SKILL.template.md`; `templates/frontmatter.md` documents every supported field and `CONTRIBUTING.md` holds the authoring rules.
 
 ## Current state
 
-Scaffolded 2026-07-24. **Eight skills shipped** — `gauntlet-builder`, `human-voice`, `prettier-svg-docs`, `pretty-hyper-docs`, `pretty-plain-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green at plugin version **0.22.1**. Read that number off
-`git show origin/main:.claude-plugin/plugin.json` rather than the working tree — an
+Scaffolded 2026-07-24. **Eight skills shipped** — `gauntlet-builder`, `human-voice`, `prettier-svg-docs`, `pretty-hyper-docs`, `pretty-plain-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green at plugin version **0.23.0**, which is now carried by **two** entries rather than one — `apatheticus-skills` and `apatheticus-security`, both seeded there by the 0.23.0 split and independent from here on. Read those numbers off
+`git show origin/main:.claude-plugin/marketplace.json` rather than the working tree — an
 in-flight bump is not a shipped version, and this line went stale by a release because
 0.21.0 merged without it moving. `prettier-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28, revised to its v2 spec on 2026-07-29), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. Since 0.19.0 it also ships a **27-type diagram taxonomy** with a **specimen per type** at `docs/samples/types/<slug>.svg`, all authored in `flat-material`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
+
+**0.23.0 splits one plugin into two, and the load-bearing fact is that the mechanism was
+proved by install before anything in the working tree moved.** A scratch copy of the repo
+with the two-entry manifest and no `plugin.json` was registered as a separate marketplace
+(`apatheticus-probe`, so the real one was never removed) and both plugins installed:
+`claude plugin details` reported exactly 2 skills and exactly 6, at version `0.23.0` read
+off the marketplace entry. `claude plugin validate --strict` also passes on a manifest
+whose entries have no `plugin.json` at their source. Do that probe again before changing
+this shape — the entry-key set is not documented anywhere this repo controls.
+
+**Minor, and the rule decides it mechanically rather than by judgement.** No checker,
+style or catalog moved, so every committed asset re-gates identically — but half the
+skills' install address changed from `apatheticus-skills@apatheticus` to
+`apatheticus-security@apatheticus`, which is the renamed-slug case the versioning rule
+names outright. Both entries were seeded at `0.23.0` rather than one continuing from
+`0.22.1`, so the two lines start level and diverge from here.
+
+**Two follow-on consequences worth knowing before touching either file.** The README
+slug now comes from `package.json`'s `repository.url` — `plugin.json` was its only other
+source and it is gone; `package.json` already carried the same URL and `repoSlug` already
+handled the `{url}` shape, so this cost one line. And `validate.mjs` lost its
+`plugin.json` block entirely: the marketplace block absorbed the per-entry `name` /
+`description` / `version` / `skills[]` checks, gained the `strict: false` requirement for
+an entry whose source has no `plugin.json`, and gained the exactly-one-plugin membership
+invariant described under Rules.
 
 **`svg_check.py` gates fidelity, not just safety.** Every other check class is a ceiling (filter depth, bytes, radius) or a legibility floor (font size, contrast) — none of them asks whether a visual *looks like* the style it claims, so a flat, styleless render used to pass clean. Styles now declare their material in `scripts/styles.json` via `require_filter_all`, `min_filter_depth` and `min_elements`, and the checker prints a per-file `NOTE` reporting the chain depth, filter count and drawn-element count it actually found. `deepest chain 1` under a floor of 3 is the tell that a material was faked. Two attributes drive it: `data-specimen="true"` marks a catalog sample (**`min_elements` binds only on specimens** — a README diagram with four boxes is correct at 23 elements, and padding it would be worse output), and `data-style="<slug>"` on a `<filter>` measures that chain against the floor of the style it depicts rather than the file-wide one.
 
@@ -558,7 +584,8 @@ rather than by judgement.** A new style is purely additive: no existing style's 
 the new `require` key is inert for the other 32, and all 64 pre-existing assets gate
 identically — so **patch**. The per-skill `SKILL.md` field is ordinary semver and took a
 minor (`pretty-plain-docs` 0.2.0 → 0.3.0), which is consistent because the invalidation
-rule governs `plugin.json` alone and says so.
+rule governs the installable plugin version alone and says so — that was `plugin.json`
+at the time and is the two `marketplace.json` entry versions as of 0.23.0.
 
 **0.14.0 is the other half of that worked example, and together they are the clearest
 statement of the rule.** Same style, same skills, same *kind* of change — a style's material
@@ -600,7 +627,7 @@ ported at 0.12.0 and the section heading was never renamed, in two places.
 
 **The report lost its light/dark toggle in that swap, deliberately.** SaaS Pro's tokens are light-only — no dark block, no `prefers-color-scheme`. `--navy-*` is a *card surface for dense data* (its DESIGN.md §2 "Two worlds, one page"), not a page theme, and promoting it to page level would mean inventing dark neutrals, lines and washes the system does not define. So `data-theme` and the OS-preference default are gone, and `report-guide.md` now says outright that one must not be invented. What replaced it: light page, and **`sp-card--dark` under every chart and every table**. A chart still has to hold up on *both card grounds*, which is what the chart references' own `dark` prop models — that is not the same claim as "both themes".
 
-**Nothing machine-checks any of this, which is why the real-run step is the gate.** `scripts/validate.mjs` checks frontmatter, `plugin.json` sync and the root README table; the one workflow runs only that. No CSS lint, no HTML lint, no contrast check. A dangling `sp-*` reference or an unresolved `var()` leaves CI green and renders silently unstyled. Two `comm` diffs cover it — the class list in `report-guide.md` against the classes defined in `components.css`, both directions, and every `var(--*)` in `components.css` against the tokens actually defined — and **the sp-* one must union in `tokens/motion.css`'s nine `@keyframes` names**, or the nine legitimate `sp-fade-up`/`sp-draw`-style references in the prose read as dangling classes. The class list in `report-guide.md` is enumerated **completely, with no trailing "…"**: the old open-ended `nf-*` list is exactly what let a reference dangle unnoticed.
+**Nothing machine-checks any of this, which is why the real-run step is the gate.** `scripts/validate.mjs` checks frontmatter, `marketplace.json` sync and the root README table; the one workflow runs only that. No CSS lint, no HTML lint, no contrast check. A dangling `sp-*` reference or an unresolved `var()` leaves CI green and renders silently unstyled. Two `comm` diffs cover it — the class list in `report-guide.md` against the classes defined in `components.css`, both directions, and every `var(--*)` in `components.css` against the tokens actually defined — and **the sp-* one must union in `tokens/motion.css`'s nine `@keyframes` names**, or the nine legitimate `sp-fade-up`/`sp-draw`-style references in the prose read as dangling classes. The class list in `report-guide.md` is enumerated **completely, with no trailing "…"**: the old open-ended `nf-*` list is exactly what let a reference dangle unnoticed.
 
 **Generating a real report found five defects that reading the CSS could not, and all five were in the hand-derived layer.** (1) **Every type class set an explicit light-ground colour with no dark-card override**, so a heading inside the dark card DESIGN.md *mandates* for every chart and table rendered at **1.30:1** and a paragraph at **1.83:1** — invisible. `.sp-card--dark` sets `color`, but a child `.sp-h4` with its own `color` beats inheritance. (2) A blanket `.sp-ring > svg { transform: rotate(-90deg) }` broke two charts at once: it squashed a polar gauge to 149×170 against a 170×149 viewBox *and* double-rotated a donut whose SVG already carried the transform, moving its first segment to six o'clock. The rotation belongs to dash-array rings only (`ProgressRing`, `DonutChart` set it inline upstream; `Gauge`/`SegmentGauge` compute `startAngle 225` themselves), so it is now opt-in as **`sp-ring--turn`**. (3) Small white text on `--grad-brand` fails — 4.02:1 and 3.68:1 at the outer stops — and DESIGN.md's own "white at ≥600 weight, ≥12px" does **not** rescue it, because WCAG large text needs ≥18.66px bold. (4) `--ink-400`/`--text-muted` is **2.88:1** on white and four roles used it as text. (5) Three of five soft badge grounds fail at 11px/700 (`--success` 2.43:1, `--danger` 3.07:1, `--info` 3.01:1); upstream had already fixed exactly one by hardcoding `#B45309` for warning text, so the fix extends that into a **`--*-strong` ramp** defined in `components.css` — the `tokens/` files stay a literal subset of the download so a refresh is a diff.
 
@@ -759,4 +786,4 @@ Validator constraints worth knowing before authoring, all enforced by `scripts/v
 
 - `parseFrontmatter` reads flat scalar keys only and treats indented continuation lines as `''`, so a multi-line `description: |` block fails the required-key check. Keep `description` on one line (≤1024 chars).
 - An unquoted `description` cannot contain a colon followed by a space. Real YAML parsers throw `Nested mappings are not allowed in compact mappings` and installers **skip the file silently**, so the skill goes invisible instead of failing loudly — this shipped undetected in `pretty-hyper-docs` until a live `npx skills add` run exposed it. Use an em dash, or quote the whole value.
-- The README Skills table is machine-checked: one row per `skills/<name>`, a link to the skill directory, a non-empty human-written description, and column 3 exactly `npx skills add <slug> -s <name>` (slug derived from `plugin.json`'s `repository`). The table is delimited by `<!-- skills:table start/end -->`; row order is not checked.
+- The README Skills table is machine-checked and has **four** columns as of 0.23.0: one row per `skills/<name>`, a link to the skill directory, column 2 exactly the backticked name of the plugin whose `skills[]` lists it, a non-empty human-written description, and column 4 exactly `npx skills add <slug> -s <name>`. The slug now comes from `package.json`'s `repository.url`, because `plugin.json` — its old source — no longer exists. The table is delimited by `<!-- skills:table start/end -->`; row order is not checked.

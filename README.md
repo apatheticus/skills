@@ -8,9 +8,9 @@
 [![install: npx skills](https://img.shields.io/badge/install-npx%20skills-E2E6FB)](https://skills.sh) [![validate](https://github.com/apatheticus/skills/actions/workflows/validate.yml/badge.svg)](https://github.com/apatheticus/skills/actions/workflows/validate.yml) [![license: MIT](https://img.shields.io/badge/license-MIT-E2E6FB)](./LICENSE) [![contributing](https://img.shields.io/badge/contributing-guidelines-0B0F1A)](./CONTRIBUTING.md)
 <!-- pd:badges end -->
 
-<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="e80dc438d0637e7a65b534b879dc1fda6ebe72ee145886a7496cff6b72fb3185" src-hash="3df42bbf22933406f74a4f54ed46c893ab3699f186aa38837952cfe9950317a6" -->
+<!-- pd:viz name="hero" src=".prettydocs/src/hero/" facts-hash="1657ddd21af4b7f25bce1d59752bc05786645bec2ba1916776d275044949c94c" src-hash="fad6a0ba3cb6cc3a8cdf1777dd039d93f8aa2740d94853898d8bc07b251ea209" -->
 <div align="center">
-<img src="docs/assets/hero.webp" width="860" alt="One source tree feeding two install channels. On the left, a skill directory: skills/&lt;name&gt;/ holding SKILL.md plus optional reference/, scripts/, and assets/ folders. Two paths lead right from it. The first is skills.sh — running npx skills add apatheticus/skills writes editable copies into your own project. The second is the Claude Code plugin — adding the marketplace and installing apatheticus-skills@apatheticus gives you a managed bundle that updates when the repo does. Both channels read the same skills/ directory." />
+<img src="docs/assets/hero.webp" width="860" alt="One source tree feeding two install channels. On the left, a skill directory: skills/&lt;name&gt;/ holding SKILL.md plus optional reference/, scripts/, and assets/ folders. Two paths lead right from it. The first is skills.sh — running npx skills add apatheticus/skills writes editable copies into your own project. The second is the Claude Code plugin — adding the marketplace once, then installing apatheticus-skills@apatheticus and apatheticus-security@apatheticus, gives you two managed sets that update when the repo does. Both channels read the same skills/ directory." />
 </div>
 <!-- pd:viz end -->
 
@@ -28,9 +28,10 @@ read them directly.
 Everything ships from one `skills/` directory, and there are two managed ways to get it,
 plus a manual copy. `npx skills` takes one skill or all of them, writes editable files
 into your project, and leaves you to pull updates yourself. The Claude Code plugin
-installs the whole set as managed files that update when this repo does. Take the first
-if you want to pick and choose or expect to edit what you get, the second if you would
-rather not think about it.
+channel publishes the same directory as two plugins — a utility set and a security set —
+installed as managed files that update when this repo does. Take the first if you want to
+pick and choose or expect to edit what you get, the second if you would rather not think
+about it.
 
 Nothing here is published to npm. `package.json` is `private` and exists only to hold the
 validation scripts.
@@ -71,13 +72,16 @@ npx skills update <skill-name>                    # pull later changes
 
 <br/>
 
-### Claude Code plugin — managed bundle, updates when this repo does
+### Claude Code plugin — managed sets, updated when this repo does
+
+One marketplace, two plugins. Add the marketplace once, then install either set or both.
 
 From inside Claude Code:
 
 ```
 /plugin marketplace add apatheticus/skills
-/plugin install apatheticus-skills@apatheticus
+/plugin install apatheticus-skills@apatheticus     # the six utility skills
+/plugin install apatheticus-security@apatheticus   # the two security skills
 ```
 
 Or from a shell:
@@ -85,12 +89,18 @@ Or from a shell:
 ```bash
 claude plugin marketplace add apatheticus/skills
 claude plugin install apatheticus-skills@apatheticus
+claude plugin install apatheticus-security@apatheticus
 ```
 
-This channel is the whole set or none of it: the marketplace lists one plugin sourced from
-the repo root, so every skill under `skills/` arrives together under one version. Unused
-skills cost a session only their `description` line, not their body — but if you want a
-subset, use `npx skills` above.
+| Plugin | Holds |
+| --- | --- |
+| `apatheticus-skills` | `gauntlet-builder`, `human-voice`, `prettier-svg-docs`, `pretty-hyper-docs`, `pretty-plain-docs`, `reflect` |
+| `apatheticus-security` | `security-audit-full-report`, `website-security-scan` |
+
+Each plugin is all-or-nothing and carries its own version, so a security review machine
+never has to carry the documentation set and vice versa. Unused skills cost a session only
+their `description` line, not their body — but for a subset finer than these two, use
+`npx skills` above. The [Skills](#skills) table names which plugin each skill belongs to.
 
 <br/>
 
@@ -106,10 +116,12 @@ cp -R skills/<skill-name> ~/.claude/skills/<skill-name>
 ### Removing
 
 `npx skills` and manual copies are yours to delete: remove the skill directory
-the install wrote. The plugin comes out through Claude Code:
+the install wrote. The plugins come out through Claude Code — uninstall whichever you
+have, then drop the marketplace once both are gone:
 
 ```bash
 claude plugin uninstall apatheticus-skills@apatheticus
+claude plugin uninstall apatheticus-security@apatheticus
 claude plugin marketplace remove apatheticus
 ```
 
@@ -121,23 +133,24 @@ removed skill stays visible until the next session.
 ## Skills
 
 <!-- skills:table start -->
-| Skill | What it does | Install just this one |
-| --- | --- | --- |
-| [`gauntlet-builder`](./skills/gauntlet-builder) | Interview yourself into knowing what you are actually building, one question at a time, and turn every answer into a binary check — then emit a Gauntlet Loop prompt that builds against those checks with a fresh blind critic every round. The output is an answer key, not a plan: it says how you would know the work came out wrong, and lists what nobody has decided as explicitly ungradeable so a critic reports "cannot judge" instead of guessing. A bundled linter proves the bar is checkable before anything runs against it. | `npx skills add apatheticus/skills -s gauntlet-builder` |
-| [`human-voice`](./skills/human-voice) | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored. Picks a register first (editorial, professional, technical, or regulated) so a spec never gets an essay's voice. Yields to a compliance skill for federal work. | `npx skills add apatheticus/skills -s human-voice` |
-| [`pretty-hyper-docs`](./skills/pretty-hyper-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. | `npx skills add apatheticus/skills -s pretty-hyper-docs` |
-| [`pretty-plain-docs`](./skills/pretty-plain-docs) | The same docs engine again, with the diagrams as static SVG — nothing animates, so the output survives a print stylesheet, a PDF export, and a reviewer whose renderer rasterises SVG. Carries the same 32-style catalog, adds a Mermaid source under every structural diagram, and refuses to chart a number the repo cannot recompute. | `npx skills add apatheticus/skills -s pretty-plain-docs` |
-| [`prettier-svg-docs`](./skills/prettier-svg-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. A 32-style catalog decides what a board is made of and a 27-type diagram taxonomy decides what it is shaped like, each with a gated full-width specimen. The bundled checker proves the loop is seam-exact and that the drawing obeys its own grammar — no diagonal connectors, no label clipped by a node, nothing off the grid — before anything is committed. | `npx skills add apatheticus/skills -s prettier-svg-docs` |
-| [`security-audit-full-report`](./skills/security-audit-full-report) | Loop a security audit over a codebase until it stops finding anything new — each cycle hunts the ground the last one missed — then merge every run into one interactive HTML report. State lives on disk, so a run survives compaction and resumes where it stopped. Drives Cloudflare's `security-audit` skill; it does not re-implement the hunting. | `npx skills add apatheticus/skills -s security-audit-full-report` |
-| [`reflect`](./skills/reflect) | Mine your own Claude Code session transcripts for what keeps going wrong, what quietly works, and which setup changes would pay off most — then hand back one self-contained interactive HTML report. Every recommendation cites a session ID and a verbatim quote; a proposed skill needs three separate sessions behind it. Diagnosis only, and nothing leaves the machine. | `npx skills add apatheticus/skills -s reflect` |
-| [`website-security-scan`](./skills/website-security-scan) | Scan a live site and the email domains sharing its name from the outside — headers, DNS and mail authentication, TLS, exposed files, open ports — and render the result as an interactive HTML report that diffs itself against the previous run. Severity is scored against a written target profile rather than CVSS, which is also what makes it useful for checking whether a vendor's scorecard is telling the truth. | `npx skills add apatheticus/skills -s website-security-scan` |
+| Skill | Plugin | What it does | Install just this one |
+| --- | --- | --- | --- |
+| [`gauntlet-builder`](./skills/gauntlet-builder) | `apatheticus-skills` | Interview yourself into knowing what you are actually building, one question at a time, and turn every answer into a binary check — then emit a Gauntlet Loop prompt that builds against those checks with a fresh blind critic every round. The output is an answer key, not a plan: it says how you would know the work came out wrong, and lists what nobody has decided as explicitly ungradeable so a critic reports "cannot judge" instead of guessing. A bundled linter proves the bar is checkable before anything runs against it. | `npx skills add apatheticus/skills -s gauntlet-builder` |
+| [`human-voice`](./skills/human-voice) | `apatheticus-skills` | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored. Picks a register first (editorial, professional, technical, or regulated) so a spec never gets an essay's voice. Yields to a compliance skill for federal work. | `npx skills add apatheticus/skills -s human-voice` |
+| [`pretty-hyper-docs`](./skills/pretty-hyper-docs) | `apatheticus-skills` | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. | `npx skills add apatheticus/skills -s pretty-hyper-docs` |
+| [`pretty-plain-docs`](./skills/pretty-plain-docs) | `apatheticus-skills` | The same docs engine again, with the diagrams as static SVG — nothing animates, so the output survives a print stylesheet, a PDF export, and a reviewer whose renderer rasterises SVG. Carries the same 32-style catalog, adds a Mermaid source under every structural diagram, and refuses to chart a number the repo cannot recompute. | `npx skills add apatheticus/skills -s pretty-plain-docs` |
+| [`prettier-svg-docs`](./skills/prettier-svg-docs) | `apatheticus-skills` | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. A 32-style catalog decides what a board is made of and a 27-type diagram taxonomy decides what it is shaped like, each with a gated full-width specimen. The bundled checker proves the loop is seam-exact and that the drawing obeys its own grammar — no diagonal connectors, no label clipped by a node, nothing off the grid — before anything is committed. | `npx skills add apatheticus/skills -s prettier-svg-docs` |
+| [`security-audit-full-report`](./skills/security-audit-full-report) | `apatheticus-security` | Loop a security audit over a codebase until it stops finding anything new — each cycle hunts the ground the last one missed — then merge every run into one interactive HTML report. State lives on disk, so a run survives compaction and resumes where it stopped. Drives Cloudflare's `security-audit` skill; it does not re-implement the hunting. | `npx skills add apatheticus/skills -s security-audit-full-report` |
+| [`reflect`](./skills/reflect) | `apatheticus-skills` | Mine your own Claude Code session transcripts for what keeps going wrong, what quietly works, and which setup changes would pay off most — then hand back one self-contained interactive HTML report. Every recommendation cites a session ID and a verbatim quote; a proposed skill needs three separate sessions behind it. Diagnosis only, and nothing leaves the machine. | `npx skills add apatheticus/skills -s reflect` |
+| [`website-security-scan`](./skills/website-security-scan) | `apatheticus-security` | Scan a live site and the email domains sharing its name from the outside — headers, DNS and mail authentication, TLS, exposed files, open ports — and render the result as an interactive HTML report that diffs itself against the previous run. Severity is scored against a written target profile rather than CVSS, which is also what makes it useful for checking whether a vendor's scorecard is telling the truth. | `npx skills add apatheticus/skills -s website-security-scan` |
 <!-- skills:table end -->
 
 Add `-g` to any of those to install globally instead of into the current project. Stack
 `-s` flags to take several at once.
 
 <!-- `npm run validate` enforces this table: one row per skills/<name>, a link to the skill
-     directory, a non-empty description you write yourself, and the exact install command.
+     directory, the name of the plugin that lists it in .claude-plugin/marketplace.json, a
+     non-empty description you write yourself, and the exact install command.
      Row order is not checked, so curate it. -->
 
 ### Renamed
@@ -200,8 +213,7 @@ optional field.
 
 ```
 .claude-plugin/
-  marketplace.json   # makes the repo a Claude Code plugin marketplace
-  plugin.json        # the bundle itself; lists every ./skills/<name>
+  marketplace.json   # the marketplace AND both plugins; each lists its own ./skills/<name>
 skills/
   <name>/
     SKILL.md         # required — frontmatter + instructions
@@ -220,12 +232,15 @@ docs/assets/
   src/<viz>/         # each diagram's composition and its viz.json manifest
 ```
 
-Every project root repeats the `docs/assets/` + `.prettydocs/` pair — this repo is seven of
+Every project root repeats the `docs/assets/` + `.prettydocs/` pair — this repo is nine of
 them, the root plus each `skills/<name>/`.
 
-The plugin is sourced from the repo root and lists every skill under `skills/`. That
-satisfies both installers with no duplicated files: `npx skills` discovers
-`skills/*/SKILL.md` directly, and the plugin manifest points at the same directories.
+Both plugins are sourced from the repo root and each lists its own subset of `skills/`.
+That satisfies both installers with no duplicated files: `npx skills` discovers
+`skills/*/SKILL.md` directly, and the marketplace entries point at the same directories.
+Because several entries share one source directory, that directory carries no
+`plugin.json` — each entry declares `"strict": false` and its own `skills[]` instead,
+and `scripts/validate.mjs` enforces that every skill on disk lands in exactly one of them.
 
 <br/>
 

@@ -2,11 +2,19 @@
 /**
  * Validates the repository against both distribution conventions:
  *   - `npx skills add <owner>/<repo>`  -> skills/<name>/SKILL.md
- *   - `/plugin marketplace add <owner>/<repo>` -> .claude-plugin/{marketplace,plugin}.json
+ *   - `/plugin marketplace add <owner>/<repo>` -> .claude-plugin/marketplace.json
+ *
+ * The marketplace is the only plugin manifest. Each entry shares `source: "./"` and
+ * declares its own `skills[]` under `strict: false`, which is how one repository root
+ * publishes several disjoint plugins without a `plugin.json` at that root.
  *
  * Usage:
  *   node scripts/validate.mjs          check only, exit 1 on error
- *   node scripts/validate.mjs --sync   rewrite plugin.json skills[] from disk, then check
+ *   node scripts/validate.mjs --sync   sort each entry's skills[], then check
+ *
+ * `--sync` never assigns a skill to a plugin — which set a new skill belongs in is a
+ * judgement call, so it is hand-written and the membership invariant below enforces
+ * that every skill lands in exactly one entry.
  *
  * No dependencies. Node >= 18.
  */
@@ -17,8 +25,8 @@ import { fileURLToPath } from 'node:url';
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const SKILLS_DIR = join(ROOT, 'skills');
-const PLUGIN_MANIFEST = join(ROOT, '.claude-plugin', 'plugin.json');
 const MARKETPLACE_MANIFEST = join(ROOT, '.claude-plugin', 'marketplace.json');
+const PACKAGE_MANIFEST = join(ROOT, 'package.json');
 
 const SYNC = process.argv.includes('--sync');
 
@@ -217,58 +225,29 @@ for (const dir of skillDirs) {
   if (body.length > 500) warn(label, `body is ${body.length} lines — move detail into reference/`);
 }
 
-// ------------------------------------------------------------ plugin.json
-
-const expectedSkills = skillDirs.map((d) => `./${rel(d)}`).sort();
-
-if (SYNC && existsSync(PLUGIN_MANIFEST)) {
-  const raw = readJson(PLUGIN_MANIFEST);
-  if (raw) {
-    raw.skills = expectedSkills;
-    writeFileSync(PLUGIN_MANIFEST, `${JSON.stringify(raw, null, 2)}\n`);
-    console.log(`synced ${rel(PLUGIN_MANIFEST)} -> ${expectedSkills.length} skill(s)`);
-  }
-}
-
-const plugin = readJson(PLUGIN_MANIFEST);
-if (plugin) {
-  const label = rel(PLUGIN_MANIFEST);
-  for (const key of ['name', 'description', 'version']) {
-    if (!plugin[key]) err(label, `missing required key \`${key}\``);
-  }
-  if (plugin.name && !NAME_RE.test(plugin.name)) {
-    err(label, `plugin name \`${plugin.name}\` must be lowercase kebab-case`);
-  }
-  if (plugin.version && !/^\d+\.\d+\.\d+/.test(plugin.version)) {
-    err(label, `version \`${plugin.version}\` is not semver`);
-  }
-
-  const listed = Array.isArray(plugin.skills) ? plugin.skills : [];
-  if (!Array.isArray(plugin.skills)) {
-    err(label, '`skills` must be an array of paths');
-  }
-  for (const entry of listed) {
-    const target = resolve(ROOT, entry);
-    if (!existsSync(join(target, 'SKILL.md'))) {
-      err(label, `listed skill \`${entry}\` has no SKILL.md on disk`);
-    }
-  }
-  const listedSet = new Set(listed.map((e) => `./${rel(resolve(ROOT, e))}`));
-  for (const expected of expectedSkills) {
-    if (!listedSet.has(expected)) {
-      err(label, `skill \`${expected}\` exists on disk but is not listed — run \`npm run sync\``);
-    }
-  }
-
-  for (const dirKey of ['commands', 'agents', 'hooks', 'mcpServers']) {
-    const value = plugin[dirKey];
-    if (typeof value === 'string' && !existsSync(resolve(ROOT, value))) {
-      err(label, `\`${dirKey}\` points at \`${value}\`, which does not exist`);
-    }
-  }
-}
-
 // ------------------------------------------------------- marketplace.json
+
+const diskSkills = skillDirs.map((d) => `./${rel(d)}`).sort();
+const SEMVER_RE = /^\d+\.\d+\.\d+/;
+
+/** `./skills/<name>` -> the one plugin entry that lists it. */
+const membership = new Map();
+/** skill name -> plugin name, for the README table's Plugin column. */
+const pluginOfSkill = new Map();
+
+if (SYNC && existsSync(MARKETPLACE_MANIFEST)) {
+  const raw = readJson(MARKETPLACE_MANIFEST);
+  if (raw && Array.isArray(raw.plugins)) {
+    for (const entry of raw.plugins) {
+      if (Array.isArray(entry.skills)) entry.skills = [...entry.skills].sort();
+    }
+    // Node's JSON.stringify leaves non-ASCII alone, so the `ø` in `Zerø Effort` survives.
+    // Never round-trip this file through a serializer that escapes it (Python's json.dumps
+    // defaults to ensure_ascii=True and mangles it in a way this validator cannot see).
+    writeFileSync(MARKETPLACE_MANIFEST, `${JSON.stringify(raw, null, 2)}\n`);
+    console.log(`synced ${rel(MARKETPLACE_MANIFEST)} -> ${raw.plugins.length} plugin(s)`);
+  }
+}
 
 const marketplace = readJson(MARKETPLACE_MANIFEST);
 if (marketplace) {
@@ -283,24 +262,96 @@ if (marketplace) {
   if (!Array.isArray(plugins) || plugins.length === 0) {
     err(label, '`plugins` must be a non-empty array');
   } else {
+    const pluginNames = [];
     for (const [i, entry] of plugins.entries()) {
-      const at = `plugins[${i}]`;
-      if (!entry.name) err(label, `${at} is missing \`name\``);
+      const at = entry.name ? `plugins[${i}] \`${entry.name}\`` : `plugins[${i}]`;
+
+      if (!entry.name) {
+        err(label, `${at} is missing \`name\``);
+      } else {
+        if (!NAME_RE.test(entry.name)) {
+          err(label, `${at} plugin name must be lowercase kebab-case`);
+        }
+        if (pluginNames.includes(entry.name)) err(label, `${at} is declared twice`);
+        pluginNames.push(entry.name);
+      }
       if (!entry.description) err(label, `${at} is missing \`description\``);
+      if (!entry.version) err(label, `${at} is missing \`version\``);
+      else if (!SEMVER_RE.test(entry.version)) {
+        err(label, `${at} version \`${entry.version}\` is not semver`);
+      }
+
+      let sourceDir = null;
       if (!entry.source) {
         err(label, `${at} is missing \`source\``);
       } else if (typeof entry.source === 'string') {
         const target = resolve(ROOT, entry.source);
         if (!existsSync(target) || !statSync(target).isDirectory()) {
           err(label, `${at} source \`${entry.source}\` is not a directory in this repo`);
-        } else if (!existsSync(join(target, '.claude-plugin', 'plugin.json'))) {
-          err(label, `${at} source \`${entry.source}\` has no .claude-plugin/plugin.json`);
+        } else {
+          sourceDir = target;
         }
       }
-      if (entry.source === './' && plugin && entry.name !== plugin.name) {
+
+      // Several entries share one source directory, so that directory carries no
+      // plugin.json and each entry must instead declare its own skills[] under
+      // `strict: false`. An entry that is neither will not resolve at install time.
+      if (sourceDir && !existsSync(join(sourceDir, '.claude-plugin', 'plugin.json'))) {
+        if (entry.strict !== false) {
+          err(
+            label,
+            `${at} source \`${entry.source}\` has no .claude-plugin/plugin.json, so the ` +
+              'entry must set `"strict": false`',
+          );
+        }
+        if (!Array.isArray(entry.skills) || entry.skills.length === 0) {
+          err(
+            label,
+            `${at} source \`${entry.source}\` has no .claude-plugin/plugin.json, so the ` +
+              'entry must list its own `skills[]`',
+          );
+        }
+      }
+
+      for (const listed of Array.isArray(entry.skills) ? entry.skills : []) {
+        const target = resolve(ROOT, listed);
+        if (!existsSync(join(target, 'SKILL.md'))) {
+          err(label, `${at} lists \`${listed}\`, which has no SKILL.md on disk`);
+          continue;
+        }
+        const key = `./${rel(target)}`;
+        const owner = membership.get(key);
+        if (owner) {
+          err(
+            label,
+            owner === entry.name
+              ? `${at} lists \`${key}\` twice`
+              : `skill \`${key}\` is listed by both \`${owner}\` and \`${entry.name}\` — ` +
+                'a skill belongs to exactly one plugin',
+          );
+          continue;
+        }
+        membership.set(key, entry.name);
+        pluginOfSkill.set(key.split('/').pop(), entry.name);
+      }
+
+      for (const dirKey of ['commands', 'agents', 'hooks', 'mcpServers']) {
+        const value = entry[dirKey];
+        if (typeof value === 'string' && !existsSync(resolve(ROOT, value))) {
+          err(label, `${at} \`${dirKey}\` points at \`${value}\`, which does not exist`);
+        }
+      }
+    }
+
+    // Set membership is a judgement call, so `--sync` will not guess it. A skill that
+    // no plugin lists ships invisible on the plugin channel, which is why this errors
+    // rather than warns.
+    for (const onDisk of diskSkills) {
+      if (!membership.has(onDisk)) {
         err(
           label,
-          `${at} name \`${entry.name}\` must match plugin.json name \`${plugin.name}\``,
+          `skill \`${onDisk}\` exists on disk but no plugin lists it — add it to exactly ` +
+            `one of: ${pluginNames.join(', ') || '(no named plugins)'}`,
         );
       }
     }
@@ -311,8 +362,8 @@ if (marketplace) {
 
 /**
  * The Skills table is the only place a human learns a skill exists, so a new skill that
- * never gets a row ships invisible. Columns 1 and 3 are derivable and checked exactly;
- * column 2 is prose written at a human — the frontmatter `description` is written at an
+ * never gets a row ships invisible. Columns 1, 2 and 4 are derivable and checked exactly;
+ * column 3 is prose written at a human — the frontmatter `description` is written at an
  * agent and runs 4-6x longer, so it is deliberately NOT reused here. Presence only.
  */
 const README = join(ROOT, 'README.md');
@@ -340,13 +391,13 @@ if (!existsSync(README)) {
   const source = readFileSync(README, 'utf8');
   const start = source.indexOf(TABLE_START);
   const end = source.indexOf(TABLE_END);
-  const slug = repoSlug(plugin?.repository);
+  const slug = repoSlug(readJson(PACKAGE_MANIFEST)?.repository);
 
   if (start === -1 || end === -1 || end < start) {
     err(label, `the Skills table must be wrapped in \`${TABLE_START}\` and \`${TABLE_END}\``);
   } else if (!slug) {
     err(
-      rel(PLUGIN_MANIFEST),
+      rel(PACKAGE_MANIFEST),
       '`repository` is not a github.com URL, so the install command cannot be derived',
     );
   } else {
@@ -357,18 +408,21 @@ if (!existsSync(README)) {
       .filter((l) => l.startsWith('|') && !/^\|[\s|:-]+\|$/.test(l));
 
     const [header, ...rows] = lines;
-    if (!header || cellsOf(header).length !== 3) {
-      err(label, 'the Skills table needs exactly 3 columns: skill, description, install command');
+    if (!header || cellsOf(header).length !== 4) {
+      err(
+        label,
+        'the Skills table needs exactly 4 columns: skill, plugin, description, install command',
+      );
     }
 
     const rowNames = new Map();
     for (const row of rows) {
       const cells = cellsOf(row);
-      if (cells.length !== 3) {
-        err(label, `Skills table row has ${cells.length} columns, expected 3 -> ${row.slice(0, 60)}`);
+      if (cells.length !== 4) {
+        err(label, `Skills table row has ${cells.length} columns, expected 4 -> ${row.slice(0, 60)}`);
         continue;
       }
-      const [first, description, command] = cells;
+      const [first, pluginCell, description, command] = cells;
       const link = first.match(/^\[`([^`]+)`\]\(\.\/(.+?)\/?\)$/);
       if (!link) {
         err(label, `Skills table column 1 must be \`[\`name\`](./skills/name)\` -> ${first}`);
@@ -387,6 +441,15 @@ if (!existsSync(README)) {
       if (path !== dir) err(label, `row \`${name}\` links to \`./${path}\`, but the skill is at \`./${dir}\``);
       if (!description) err(label, `row \`${name}\` has an empty description — write one, do not paste the frontmatter`);
 
+      const owner = pluginOfSkill.get(name);
+      const expectedPlugin = owner ? `\`${owner}\`` : null;
+      if (expectedPlugin && pluginCell !== expectedPlugin) {
+        err(
+          label,
+          `row \`${name}\` column 2 should be ${expectedPlugin}, got ${pluginCell || '(empty)'}`,
+        );
+      }
+
       const expected = `\`npx skills add ${slug} -s ${name}\``;
       if (command !== expected) {
         err(label, `row \`${name}\` column 3 should be ${expected}, got ${command || '(empty)'}`);
@@ -395,7 +458,7 @@ if (!existsSync(README)) {
 
     for (const name of seenNames.keys()) {
       if (!rowNames.has(name)) {
-        err(label, `skill \`${name}\` has no row in the Skills table — add one, all three columns`);
+        err(label, `skill \`${name}\` has no row in the Skills table — add one, all four columns`);
       }
     }
   }
