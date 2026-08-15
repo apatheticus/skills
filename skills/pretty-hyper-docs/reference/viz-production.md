@@ -158,16 +158,33 @@ Remedies, in order:
 
 Never hand off unverified. Check the actual output, not the source:
 
-- **Extract stills from the final render and Read them:**
+- **Delete the old stills first, then extract:**
   ```bash
-  ffmpeg -i render.mp4 -vf fps=1/5 qa_%03d.png
+  rm -f qa_*.png && ffmpeg -i render.mp4 -vf fps=1/5 qa_%03d.png
   ```
-  Read `qa_*.png` — scan for blank/black frames, misaligned overlays, text
-  overflow, fallback fonts, and a visible seam at the loop boundary.
+  The `rm` is load-bearing, not tidiness. `qa_*.png` is gitignored, and the
+  `qa_%03d.png` pattern overwrites only as many files as *this* run produces — a
+  12s loop at `fps=1/5` writes two. Higher-numbered stills from an earlier run
+  survive, and reading one certifies content the composition no longer draws.
+  Observed: a re-render read a three-week-old `qa_003.png` showing a card the
+  current source had replaced, while the actual render was correct. If you skip
+  the `rm`, check mtimes before trusting a frame.
+- **Read `qa_*.png`** — scan for blank/black frames, misaligned overlays, text
+  overflow, and fallback fonts.
+- **Measure the seam against an interior cycle boundary**, never against an
+  adjacent frame pair. Extract the last frame, frame 0, and both frames either
+  side of an interior boundary (a 12s/15fps loop with a 2s cycle: frames 179, 0,
+  29, 30), then compare with `ffmpeg -i a.png -i b.png -lavfi psnr -f null -`.
+  The wrap is one frame interval *and* a cycle reset, so an adjacent-frame
+  control is systematically stricter and reports a clean seam as a defect —
+  measured 41 dB at the seam against 53 dB adjacent, which reads as a failure,
+  versus 36–38 dB at the interior boundaries, which is the honest comparison.
+  The seam passes when it lands inside the range the interior boundaries set.
 - **View a doc with embeds over HTTP**, never a `file://` URL (browser tools block
   it): `python3 -m http.server` in the doc's dir, then open `http://localhost:<port>/`.
 
-State which frames/timestamps you inspected and that seams/overlays/fonts passed.
+State which frames/timestamps you inspected, the seam figure and the interior
+boundary it was judged against, and that overlays and fonts passed.
 
 ## 7. Byproduct hygiene
 
