@@ -1,0 +1,211 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1088" width="1200" height="1088" role="img" data-loop-s="12" data-diagram="er" data-bg="background">
+<title>prettier-svg-docs — what a run persists</title>
+<desc>ER specimen: seven persisted entities of the prettier-svg-docs skill — docsmeta.json, prettydocs.md, styles.json, viz.json, the pd:viz marker, the committed SVG asset and diagrams.json — with their real fields and the cardinality of the relationships between them. viz.json is the focal entity.</desc>
+<defs>
+<filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+<feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.34"/>
+</filter>
+<marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+<path d="M0,0 L10,5 L0,10 Z" fill="var(--dim)"/>
+</marker>
+</defs>
+<style>svg{--background:#12324f;--surface:#17405f;--ink:#e8f2fb;--dim:#9fc4e8;--accent:#e0a33e;--warn:#e2725b;--sans:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;--mono:ui-monospace,SFMono-Regular,Menlo,monospace}
+.t{font-family:var(--sans)}
+.m{font-family:var(--mono)}
+.s40{font-size:40px;font-weight:700}
+.s20{font-size:20px;font-weight:600}
+.s18{font-size:18px;font-weight:600}
+.s16{font-size:16px;font-weight:500}
+.ink{fill:var(--ink)}
+.dim{fill:var(--dim)}
+.acc{fill:var(--accent)}
+
+[data-edge]{fill:none;stroke:var(--dim);stroke-width:1.5;marker-end:url(#arrow)}
+.e0,.e1,.e2,.e3,.e4,.e5,.e6{animation:walk 12s ease-in-out infinite}
+.e0{animation-delay:0s}.e1{animation-delay:-1.5s}.e2{animation-delay:-3s}
+.e3{animation-delay:-4.5s}.e4{animation-delay:-6s}.e5{animation-delay:-7.5s}
+.e6{animation-delay:-9s}
+@keyframes walk{0%,100%{stroke-opacity:.55}6%{stroke-opacity:1}14%{stroke-opacity:.55}}
+@media (prefers-reduced-motion: reduce){
+.e0,.e1,.e2,.e3,.e4,.e5,.e6{animation:none;stroke-opacity:.8}}
+</style>
+<rect x="0" y="0" width="1200" height="1088" fill="var(--background)"/>
+
+<text x="40" y="44" class="t s16 dim" data-role="metadata" data-bg="background">ER / DATA MODEL</text>
+<text x="40" y="84" class="t s40 ink" data-role="title" data-bg="background">What a run persists</text>
+<text x="1160" y="84" class="m s16 dim" data-role="metadata" data-bg="background" text-anchor="end">7 entities  ·  7 relationships</text>
+<path data-edge="true" class="e0" d="M160,368 V428"/>
+<path data-edge="true" class="e1" d="M280,556 H430 Q440,556 440,546 V490 Q440,480 450,480 H480"/>
+<path data-edge="true" class="e2" d="M280,856 H430 Q440,856 440,846 V710 Q440,700 450,700 H480"/>
+<path data-edge="true" class="e3" d="M920,856 H770 Q760,856 760,846 V750 Q760,740 750,740 H720"/>
+<path data-edge="true" class="e4" d="M720,560 H830 Q840,560 840,550 V510 Q840,500 850,500 H920"/>
+<path data-edge="true" class="e5" d="M720,420 H850 Q860,420 860,410 V270 Q860,260 870,260 H920"/>
+<path data-edge="true" class="e6" d="M1040,340 V400"/>
+<text x="172" y="392" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="start">1</text>
+<text x="172" y="420" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="start">0..N</text>
+<rect data-label="true" x="286" y="526" width="128" height="22" rx="4" fill="var(--background)"/>
+<text x="350" y="542" class="t s16 dim" data-role="metadata" data-bg="background" text-anchor="middle">DESIGN_HASH</text>
+<text x="292" y="580" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="start">1</text>
+<text x="468" y="470" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="end">N</text>
+<rect data-label="true" x="290" y="826" width="72" height="22" rx="4" fill="var(--background)"/>
+<text x="326" y="842" class="t s16 dim" data-role="metadata" data-bg="background" text-anchor="middle">STYLE</text>
+<text x="292" y="880" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="start">1</text>
+<text x="468" y="690" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="end">N</text>
+<rect data-label="true" x="776" y="826" width="136" height="22" rx="4" fill="var(--background)"/>
+<text x="844" y="842" class="t s16 dim" data-role="metadata" data-bg="background" text-anchor="middle">DIAGRAM_TYPE</text>
+<text x="908" y="880" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="end">1</text>
+<text x="732" y="730" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="start">N</text>
+<rect data-label="true" x="728" y="530" width="96" height="22" rx="4" fill="var(--background)"/>
+<text x="776" y="546" class="t s16 dim" data-role="metadata" data-bg="background" text-anchor="middle">SRC_HASH</text>
+<text x="732" y="588" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="start">1</text>
+<text x="908" y="490" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="end">1</text>
+<rect data-label="true" x="728" y="390" width="104" height="22" rx="4" fill="var(--background)"/>
+<text x="780" y="406" class="t s16 dim" data-role="metadata" data-bg="background" text-anchor="middle">HASH COPY</text>
+<text x="732" y="448" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="start">1</text>
+<text x="908" y="250" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="end">1</text>
+<rect data-label="true" x="1056" y="348" width="80" height="22" rx="4" fill="var(--background)"/>
+<text x="1096" y="364" class="t s16 dim" data-role="metadata" data-bg="background" text-anchor="middle">EMBEDS</text>
+<text x="1028" y="360" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="end">1</text>
+<text x="1028" y="396" class="m s16 ink" data-role="metadata" data-bg="background" text-anchor="end">1</text>
+<g data-node="true">
+<rect x="40" y="140" width="240" height="228" rx="8" fill="var(--background)"/>
+<rect x="40" y="140" width="240" height="228" rx="8" fill="var(--surface)" fill-opacity="1" stroke="var(--ink)" stroke-width="1.25" filter="url(#e1)"/>
+<rect x="40" y="140" width="240" height="48" rx="8" fill="var(--ink)" fill-opacity="0.06"/>
+<rect x="40" y="180" width="240" height="8" fill="var(--ink)" fill-opacity="0.06"/>
+<line x1="40" y1="188" x2="280" y2="188" stroke="var(--dim)" stroke-opacity="0.35" stroke-width="1"/>
+<rect x="204" y="152" width="64" height="24" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.7" stroke-width="1"/>
+<text x="236" y="169" class="t s16 dim" data-role="metadata" data-bg="surface" text-anchor="middle">JSON</text>
+<text x="52" y="170" class="t s18 ink" data-role="label" data-bg="surface">docsmeta.json</text>
+<text x="60" y="208" class="m s16 dim" data-role="metadata" data-bg="surface">.github/</text>
+<line x1="52" y1="216" x2="268" y2="216" stroke="var(--dim)" stroke-opacity="0.22" stroke-width="1"/>
+<text x="60" y="235" class="m s16 dim" data-role="metadata" data-bg="surface">  org</text>
+<text x="60" y="263" class="m s16 dim" data-role="metadata" data-bg="surface">  license</text>
+<text x="60" y="291" class="m s16 dim" data-role="metadata" data-bg="surface">  repo_url</text>
+<text x="60" y="319" class="m s16 ink" data-role="metadata" data-bg="surface">→ viz.style</text>
+<text x="60" y="347" class="m s16 dim" data-role="metadata" data-bg="surface">  support{}</text>
+</g>
+<g data-node="true">
+<rect x="40" y="428" width="240" height="256" rx="8" fill="var(--background)"/>
+<rect x="40" y="428" width="240" height="256" rx="8" fill="var(--surface)" fill-opacity="1" stroke="var(--ink)" stroke-width="1.25" filter="url(#e1)"/>
+<rect x="40" y="428" width="240" height="48" rx="8" fill="var(--ink)" fill-opacity="0.06"/>
+<rect x="40" y="468" width="240" height="8" fill="var(--ink)" fill-opacity="0.06"/>
+<line x1="40" y1="476" x2="280" y2="476" stroke="var(--dim)" stroke-opacity="0.35" stroke-width="1"/>
+<rect x="224" y="440" width="44" height="24" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.7" stroke-width="1"/>
+<text x="246" y="457" class="t s16 dim" data-role="metadata" data-bg="surface" text-anchor="middle">MD</text>
+<text x="52" y="458" class="t s18 ink" data-role="label" data-bg="surface">prettydocs.md</text>
+<text x="60" y="496" class="m s16 dim" data-role="metadata" data-bg="surface">.prettydocs/</text>
+<line x1="52" y1="504" x2="268" y2="504" stroke="var(--dim)" stroke-opacity="0.22" stroke-width="1"/>
+<text x="60" y="523" class="m s16 ink" data-role="metadata" data-bg="surface"># project dir</text>
+<text x="60" y="551" class="m s16 dim" data-role="metadata" data-bg="surface">  Palette</text>
+<text x="60" y="579" class="m s16 dim" data-role="metadata" data-bg="surface">  Typography</text>
+<text x="60" y="607" class="m s16 dim" data-role="metadata" data-bg="surface">  Shape language</text>
+<text x="60" y="635" class="m s16 dim" data-role="metadata" data-bg="surface">  Motion rules</text>
+<text x="60" y="663" class="m s16 ink" data-role="metadata" data-bg="surface">→ Style</text>
+</g>
+<g data-node="true">
+<rect x="40" y="744" width="240" height="228" rx="8" fill="var(--background)"/>
+<rect x="40" y="744" width="240" height="228" rx="8" fill="var(--surface)" fill-opacity="1" stroke="var(--ink)" stroke-width="1.25" filter="url(#e1)"/>
+<rect x="40" y="744" width="240" height="48" rx="8" fill="var(--ink)" fill-opacity="0.06"/>
+<rect x="40" y="784" width="240" height="8" fill="var(--ink)" fill-opacity="0.06"/>
+<line x1="40" y1="792" x2="280" y2="792" stroke="var(--dim)" stroke-opacity="0.35" stroke-width="1"/>
+<rect x="204" y="756" width="64" height="24" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.7" stroke-width="1"/>
+<text x="236" y="773" class="t s16 dim" data-role="metadata" data-bg="surface" text-anchor="middle">JSON</text>
+<text x="52" y="774" class="t s18 ink" data-role="label" data-bg="surface">styles.json</text>
+<text x="60" y="812" class="m s16 dim" data-role="metadata" data-bg="surface">scripts/</text>
+<line x1="52" y1="820" x2="268" y2="820" stroke="var(--dim)" stroke-opacity="0.22" stroke-width="1"/>
+<text x="60" y="839" class="m s16 ink" data-role="metadata" data-bg="surface"># slug</text>
+<text x="60" y="867" class="m s16 dim" data-role="metadata" data-bg="surface">  aliases[]</text>
+<text x="60" y="895" class="m s16 dim" data-role="metadata" data-bg="surface">  relax{}</text>
+<text x="60" y="923" class="m s16 dim" data-role="metadata" data-bg="surface">  forbid[]</text>
+<text x="60" y="951" class="m s16 dim" data-role="metadata" data-bg="surface">  require{}</text>
+</g>
+<g data-node="true" data-focal="true">
+<rect x="480" y="332" width="240" height="452" rx="8" fill="var(--background)"/>
+<rect x="480" y="332" width="240" height="452" rx="8" fill="var(--accent)" fill-opacity="0.06" stroke="var(--accent)" stroke-width="1.25" filter="url(#e1)"/>
+<rect x="480" y="332" width="240" height="48" rx="8" fill="var(--accent)" fill-opacity="0.10"/>
+<rect x="480" y="372" width="240" height="8" fill="var(--accent)" fill-opacity="0.10"/>
+<line x1="480" y1="380" x2="720" y2="380" stroke="var(--dim)" stroke-opacity="0.35" stroke-width="1"/>
+<rect x="644" y="344" width="64" height="24" rx="4" fill="none" stroke="var(--accent)" stroke-opacity="0.7" stroke-width="1"/>
+<text x="676" y="361" class="t s16 dim" data-role="metadata" data-bg="background" text-anchor="middle">JSON</text>
+<text x="492" y="362" class="t s18 ink" data-role="label" data-bg="background">viz.json</text>
+<text x="500" y="400" class="m s16 dim" data-role="metadata" data-bg="background">src/&lt;name&gt;/</text>
+<line x1="492" y1="408" x2="708" y2="408" stroke="var(--dim)" stroke-opacity="0.22" stroke-width="1"/>
+<text x="500" y="427" class="m s16 ink" data-role="metadata" data-bg="background"># name</text>
+<text x="500" y="455" class="m s16 dim" data-role="metadata" data-bg="background">  doc</text>
+<text x="500" y="483" class="m s16 dim" data-role="metadata" data-bg="background">  tier</text>
+<text x="500" y="511" class="m s16 dim" data-role="metadata" data-bg="background">  producer</text>
+<text x="500" y="539" class="m s16 ink" data-role="metadata" data-bg="background">→ style</text>
+<text x="500" y="567" class="m s16 ink" data-role="metadata" data-bg="background">→ diagram_type</text>
+<text x="500" y="595" class="m s16 dim" data-role="metadata" data-bg="background">  facts[]</text>
+<text x="500" y="623" class="m s16 dim" data-role="metadata" data-bg="background">  facts_hash</text>
+<text x="500" y="651" class="m s16 dim" data-role="metadata" data-bg="background">  src_hash</text>
+<text x="500" y="679" class="m s16 dim" data-role="metadata" data-bg="background">  design_hash</text>
+<text x="500" y="707" class="m s16 dim" data-role="metadata" data-bg="background">  svg{}</text>
+<text x="500" y="735" class="m s16 dim" data-role="metadata" data-bg="background">  relaxed[]</text>
+<text x="500" y="763" class="m s16 dim" data-role="metadata" data-bg="background">  budget_cuts[]</text>
+</g>
+<g data-node="true">
+<rect x="920" y="140" width="240" height="200" rx="8" fill="var(--background)"/>
+<rect x="920" y="140" width="240" height="200" rx="8" fill="var(--surface)" fill-opacity="1" stroke="var(--ink)" stroke-width="1.25" filter="url(#e1)"/>
+<rect x="920" y="140" width="240" height="48" rx="8" fill="var(--ink)" fill-opacity="0.06"/>
+<rect x="920" y="180" width="240" height="8" fill="var(--ink)" fill-opacity="0.06"/>
+<line x1="920" y1="188" x2="1160" y2="188" stroke="var(--dim)" stroke-opacity="0.35" stroke-width="1"/>
+<rect x="1084" y="152" width="64" height="24" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.7" stroke-width="1"/>
+<text x="1116" y="169" class="t s16 dim" data-role="metadata" data-bg="surface" text-anchor="middle">HTML</text>
+<text x="932" y="170" class="t s18 ink" data-role="label" data-bg="surface">pd:viz marker</text>
+<text x="940" y="208" class="m s16 dim" data-role="metadata" data-bg="surface">README.md</text>
+<line x1="932" y1="216" x2="1148" y2="216" stroke="var(--dim)" stroke-opacity="0.22" stroke-width="1"/>
+<text x="940" y="235" class="m s16 ink" data-role="metadata" data-bg="surface"># name</text>
+<text x="940" y="263" class="m s16 ink" data-role="metadata" data-bg="surface">→ src</text>
+<text x="940" y="291" class="m s16 dim" data-role="metadata" data-bg="surface">  facts-hash</text>
+<text x="940" y="319" class="m s16 dim" data-role="metadata" data-bg="surface">  src-hash</text>
+</g>
+<g data-node="true">
+<rect x="920" y="400" width="240" height="228" rx="8" fill="var(--background)"/>
+<rect x="920" y="400" width="240" height="228" rx="8" fill="var(--surface)" fill-opacity="1" stroke="var(--ink)" stroke-width="1.25" filter="url(#e1)"/>
+<rect x="920" y="400" width="240" height="48" rx="8" fill="var(--ink)" fill-opacity="0.06"/>
+<rect x="920" y="440" width="240" height="8" fill="var(--ink)" fill-opacity="0.06"/>
+<line x1="920" y1="448" x2="1160" y2="448" stroke="var(--dim)" stroke-opacity="0.35" stroke-width="1"/>
+<rect x="1096" y="412" width="52" height="24" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.7" stroke-width="1"/>
+<text x="1122" y="429" class="t s16 dim" data-role="metadata" data-bg="surface" text-anchor="middle">SVG</text>
+<text x="932" y="430" class="t s18 ink" data-role="label" data-bg="surface">&lt;name&gt;.svg</text>
+<text x="940" y="468" class="m s16 dim" data-role="metadata" data-bg="surface">docs/assets/</text>
+<line x1="932" y1="476" x2="1148" y2="476" stroke="var(--dim)" stroke-opacity="0.22" stroke-width="1"/>
+<text x="940" y="495" class="m s16 dim" data-role="metadata" data-bg="surface">  viewBox</text>
+<text x="940" y="523" class="m s16 dim" data-role="metadata" data-bg="surface">  data-loop-s</text>
+<text x="940" y="551" class="m s16 dim" data-role="metadata" data-bg="surface">  data-diagram</text>
+<text x="940" y="579" class="m s16 dim" data-role="metadata" data-bg="surface">  data-bg</text>
+<text x="940" y="607" class="m s16 dim" data-role="metadata" data-bg="surface">  bytes</text>
+</g>
+<g data-node="true">
+<rect x="920" y="688" width="240" height="284" rx="8" fill="var(--background)"/>
+<rect x="920" y="688" width="240" height="284" rx="8" fill="var(--surface)" fill-opacity="1" stroke="var(--ink)" stroke-width="1.25" filter="url(#e1)"/>
+<rect x="920" y="688" width="240" height="48" rx="8" fill="var(--ink)" fill-opacity="0.06"/>
+<rect x="920" y="728" width="240" height="8" fill="var(--ink)" fill-opacity="0.06"/>
+<line x1="920" y1="736" x2="1160" y2="736" stroke="var(--dim)" stroke-opacity="0.35" stroke-width="1"/>
+<rect x="1084" y="700" width="64" height="24" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.7" stroke-width="1"/>
+<text x="1116" y="717" class="t s16 dim" data-role="metadata" data-bg="surface" text-anchor="middle">JSON</text>
+<text x="932" y="718" class="t s18 ink" data-role="label" data-bg="surface">diagrams.json</text>
+<text x="940" y="756" class="m s16 dim" data-role="metadata" data-bg="surface">scripts/</text>
+<line x1="932" y1="764" x2="1148" y2="764" stroke="var(--dim)" stroke-opacity="0.22" stroke-width="1"/>
+<text x="940" y="783" class="m s16 ink" data-role="metadata" data-bg="surface"># slug</text>
+<text x="940" y="811" class="m s16 dim" data-role="metadata" data-bg="surface">  aliases[]</text>
+<text x="940" y="839" class="m s16 dim" data-role="metadata" data-bg="surface">  unit</text>
+<text x="940" y="867" class="m s16 dim" data-role="metadata" data-bg="surface">  max_nodes</text>
+<text x="940" y="895" class="m s16 dim" data-role="metadata" data-bg="surface">  max_edges</text>
+<text x="940" y="923" class="m s16 dim" data-role="metadata" data-bg="surface">  max_focal</text>
+<text x="940" y="951" class="m s16 dim" data-role="metadata" data-bg="surface">  max_zones</text>
+</g>
+<g data-legend="true">
+<line x1="40" y1="1012" x2="1160" y2="1012" stroke="var(--dim)" stroke-opacity="0.35" stroke-width="1"/>
+<text x="40" y="1044" class="t s16 dim" data-role="metadata" data-bg="background">LEGEND</text>
+<text x="180" y="1044" class="m s16 ink" data-role="metadata" data-bg="background">#</text>
+<text x="244" y="1044" class="t s16 dim" data-role="metadata" data-bg="background">primary key</text>
+<text x="420" y="1044" class="m s16 ink" data-role="metadata" data-bg="background">→</text>
+<text x="484" y="1044" class="t s16 dim" data-role="metadata" data-bg="background">points at another file</text>
+<text x="760" y="1044" class="m s16 ink" data-role="metadata" data-bg="background">1 : N</text>
+<text x="824" y="1044" class="t s16 dim" data-role="metadata" data-bg="background">read at each end</text>
+<rect x="1040" y="1028" width="24" height="20" rx="4" fill="var(--accent)" fill-opacity="0.35" stroke="var(--accent)" stroke-width="1.25"/>
+<text x="1076" y="1044" class="t s16 dim" data-role="metadata" data-bg="background">focal entity</text>
+</g>
+</svg>

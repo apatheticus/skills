@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 552" width="1200" height="552" role="img" data-loop-s="12" data-diagram="swimlane" data-bg="background">
+<title>Swimlane — the same gate run, seen as handoffs between owners</title>
+<desc>Three lanes: author, checker and auditor. Five steps run left to right — draw the board, gate it with svg_check.py, re-author what the checker reported, re-gate to zero errors, then hand off to audit_visuals.py in phase 7. Each connector that crosses a lane is a handoff; the accented one is the error going back to the author. Steps light in process order.</desc>
+<defs>
+  <filter id="sw-e1" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="var(--background)" flood-opacity="0.55"/>
+  </filter>
+  <marker id="sw-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,1 L9,5 L0,9 Z" fill="var(--dim)"/>
+  </marker>
+  <marker id="sw-aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,1 L9,5 L0,9 Z" fill="var(--accent-primary)"/>
+  </marker>
+</defs>
+<style>
+svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8; --accent-primary:#e0a33e; --warn:#e2725b; }
+  .kick { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); letter-spacing: 1.5px; }
+  .hd   { font: 700 28px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .nm   { font: 600 20px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .sb   { font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .tg   { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .el   { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--ink); }
+  .eyeb { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); letter-spacing: 1.2px; }
+  .lg   { font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .st   { fill: none; stroke: var(--accent-primary); stroke-width: 2; opacity: 0;
+          animation: sw-lit 12s ease-in-out infinite; }
+  .p1 { animation-delay: 0s }    .p2 { animation-delay: -2.4s }
+  .p3 { animation-delay: -4.8s } .p4 { animation-delay: -7.2s }
+  .p5 { animation-delay: -9.6s }
+  .flow { fill: none; stroke: var(--ink); stroke-width: 3; stroke-dasharray: 12 140;
+          animation: sw-march 4s linear infinite; }
+  @keyframes sw-lit {
+    0%   { opacity: 0 }
+    5%   { opacity: 1 }
+    18%  { opacity: 0 }
+    100% { opacity: 0 }
+  }
+  @keyframes sw-march {
+    from { stroke-dashoffset: 152 }
+    to   { stroke-dashoffset: 0 }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .st   { animation: none; opacity: 0 }
+    .flow { animation: none; display: none }
+  }
+</style>
+
+<rect x="0" y="0" width="1200" height="552" fill="var(--background)"/>
+<text class="kick" data-role="metadata" x="40" y="40">PRETTIER-SVG-DOCS · SWIMLANE</text>
+<text class="hd" data-role="essential" x="40" y="76">The same run, by owner</text>
+
+<!-- lanes: zones, not nodes -->
+<g data-zone="">
+  <rect x="200" y="96" width="960" height="128" fill="var(--ink)" fill-opacity="0.02"/>
+  <line x1="40" y1="96" x2="1160" y2="96" stroke="var(--dim)" stroke-opacity="0.45" stroke-width="1"/>
+  <text class="eyeb" data-role="metadata" x="184" y="164" text-anchor="end">AUTHOR</text>
+</g>
+<g data-zone="">
+  <rect x="200" y="224" width="960" height="128" fill="var(--ink)" fill-opacity="0.04"/>
+  <line x1="40" y1="224" x2="1160" y2="224" stroke="var(--dim)" stroke-opacity="0.45" stroke-width="1"/>
+  <text class="eyeb" data-role="metadata" x="184" y="292" text-anchor="end">CHECKER</text>
+</g>
+<g data-zone="">
+  <rect x="200" y="352" width="960" height="128" fill="var(--ink)" fill-opacity="0.02"/>
+  <line x1="40" y1="352" x2="1160" y2="352" stroke="var(--dim)" stroke-opacity="0.45" stroke-width="1"/>
+  <line x1="40" y1="480" x2="1160" y2="480" stroke="var(--dim)" stroke-opacity="0.45" stroke-width="1"/>
+  <text class="eyeb" data-role="metadata" x="184" y="420" text-anchor="end">AUDITOR</text>
+</g>
+
+<!-- handoffs: every one of these crosses a lane -->
+<path data-edge="" d="M300,200 V208 Q300,216 308,216 H484 Q492,216 492,224 V248" fill="none" stroke="var(--dim)" stroke-width="1.5" marker-end="url(#sw-a)"/>
+<path data-edge="" data-focal="" id="sw-h2" d="M532,248 V240 Q532,232 540,232 H644 Q652,232 652,224 V200" fill="none" stroke="var(--accent-primary)" stroke-width="2" marker-end="url(#sw-aa)"/>
+<use href="#sw-h2" class="flow"/>
+<path data-edge="" d="M720,200 V208 Q720,216 728,216 H832 Q840,216 840,224 V248" fill="none" stroke="var(--dim)" stroke-width="1.5" marker-end="url(#sw-a)"/>
+<path data-edge="" d="M876,328 V336 Q876,344 884,344 H1024 Q1032,344 1032,352 V376" fill="none" stroke="var(--dim)" stroke-width="1.5" marker-end="url(#sw-a)"/>
+
+<!-- handoff labels -->
+<rect data-label="" x="348" y="224" width="96" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="396" y="240" text-anchor="middle">RUN GATE</text>
+<rect data-label="" x="548" y="202" width="88" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="592" y="218" text-anchor="middle">ERROR</text>
+<rect data-label="" x="732" y="224" width="96" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="780" y="240" text-anchor="middle">RE-RUN</text>
+<rect data-label="" x="908" y="352" width="88" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="952" y="368" text-anchor="middle">CLEAN</text>
+
+<!-- steps: one owner each, never straddling a lane -->
+<g data-node="" data-bg="surface">
+  <rect x="224" y="120" width="152" height="80" rx="8" fill="var(--background)"/>
+  <rect x="224" y="120" width="152" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#sw-e1)"/>
+  <rect x="236" y="128" width="40" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.5" stroke-width="1"/>
+  <text class="tg" data-role="metadata" x="256" y="143" text-anchor="middle">P6</text>
+  <text class="nm" data-role="label" x="300" y="170" text-anchor="middle">Author board</text>
+  <text class="sb" data-role="metadata" x="300" y="190" text-anchor="middle">types/*.svg</text>
+  <rect class="st p1" x="224" y="120" width="152" height="80" rx="8"/>
+</g>
+<g data-node="" data-bg="surface">
+  <rect x="416" y="248" width="152" height="80" rx="8" fill="var(--background)"/>
+  <rect x="416" y="248" width="152" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#sw-e1)"/>
+  <rect x="428" y="256" width="40" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.5" stroke-width="1"/>
+  <text class="tg" data-role="metadata" x="448" y="271" text-anchor="middle">P6</text>
+  <text class="nm" data-role="label" x="492" y="298" text-anchor="middle">svg_check.py</text>
+  <text class="sb" data-role="metadata" x="492" y="318" text-anchor="middle">diagram class</text>
+  <rect class="st p2" x="416" y="248" width="152" height="80" rx="8"/>
+</g>
+<g data-node="" data-bg="surface">
+  <rect x="608" y="120" width="152" height="80" rx="8" fill="var(--background)"/>
+  <rect x="608" y="120" width="152" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#sw-e1)"/>
+  <rect x="620" y="128" width="40" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.5" stroke-width="1"/>
+  <text class="tg" data-role="metadata" x="640" y="143" text-anchor="middle">P6</text>
+  <text class="nm" data-role="label" x="684" y="170" text-anchor="middle">Re-author</text>
+  <text class="sb" data-role="metadata" x="684" y="190" text-anchor="middle">fix + re-run</text>
+  <rect class="st p3" x="608" y="120" width="152" height="80" rx="8"/>
+</g>
+<g data-node="" data-bg="surface">
+  <rect x="800" y="248" width="152" height="80" rx="8" fill="var(--background)"/>
+  <rect x="800" y="248" width="152" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#sw-e1)"/>
+  <rect x="812" y="256" width="40" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.5" stroke-width="1"/>
+  <text class="tg" data-role="metadata" x="832" y="271" text-anchor="middle">P6</text>
+  <text class="nm" data-role="label" x="876" y="298" text-anchor="middle">Re-gate</text>
+  <text class="sb" data-role="metadata" x="876" y="318" text-anchor="middle">0 errors</text>
+  <rect class="st p4" x="800" y="248" width="152" height="80" rx="8"/>
+</g>
+<g data-node="" data-bg="surface">
+  <rect x="992" y="376" width="152" height="80" rx="8" fill="var(--background)"/>
+  <rect x="992" y="376" width="152" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#sw-e1)"/>
+  <rect x="1004" y="384" width="40" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.5" stroke-width="1"/>
+  <text class="tg" data-role="metadata" x="1024" y="399" text-anchor="middle">P7</text>
+  <text class="nm" data-role="label" x="1068" y="426" text-anchor="middle">Audit visuals</text>
+  <text class="sb" data-role="metadata" x="1068" y="446" text-anchor="middle">hashes + embeds</text>
+  <rect class="st p5" x="992" y="376" width="152" height="80" rx="8"/>
+</g>
+
+<!-- legend -->
+<g data-legend="">
+  <line x1="40" y1="504" x2="1160" y2="504" stroke="var(--dim)" stroke-opacity="0.45" stroke-width="1"/>
+  <text class="lg" data-role="metadata" x="40" y="532">LEGEND</text>
+  <text class="lg" data-role="metadata" x="160" y="532">P6 gate loop = scripts/svg_check.py</text>
+  <text class="lg" data-role="metadata" x="560" y="532">P7 = scripts/audit_visuals.py</text>
+  <line x1="880" y1="527" x2="920" y2="527" stroke="var(--accent-primary)" stroke-width="2"/>
+  <text class="lg" data-role="metadata" x="932" y="532">the costly handoff</text>
+</g>
+</svg>

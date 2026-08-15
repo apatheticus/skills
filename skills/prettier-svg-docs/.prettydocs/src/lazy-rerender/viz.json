@@ -1,0 +1,27 @@
+{
+  "name": "lazy-rerender",
+  "doc": "README.md",
+  "tier": "animated-flagship",
+  "producer": "prettier-svg-docs",
+  "style": "bento-grid",
+  "diagram_type": "flowchart",
+  "facts": [
+    "RE-RENDER fires on any of six triggers: facts hash moved, src hash moved, design hash moved, the asset is missing, marker and manifest disagree, or the run was forced with --refresh-viz",
+    "facts_hash covers the facts the visual depicts, src_hash the committed .svg, design_hash the project's prettydocs.md",
+    "When none of the six fired the visual is REUSED — the embed may be rewritten, but nothing is rendered",
+    "design_hash moving invalidates every visual in the repo at once",
+    "A prose-only edit moves no hash and re-authors nothing"
+  ],
+  "facts_hash": "bf26d51f835b407ee1493bae83c0b3045b726b77381c32beecead0ee9649b828",
+  "src_hash": "0011e1f24b1613586d6d4430734afc6005dabf94fb534ab4d930dd9e53bb98d4",
+  "design_hash": "a99906390738999c26cb86b409e5324f1f289520e6b8f4fa69647ebfae88f7ad",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 10798
+  },
+  "relaxed": [],
+  "budget_cuts": [
+    "Six triggers plus the decision and two outcomes is exactly the flowchart node budget of 9, so the merge dots that would let each trigger carry its own connector into the decision (2 more steps, 11 total) were cut. The six share one connector out of the zone that groups them instead."
+  ]
+}

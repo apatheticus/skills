@@ -28,3 +28,75 @@ jobs:
             git --no-pager diff -- .claude-plugin/plugin.json
             exit 1
           fi
+
+      # The steps below stay INSIDE this job deliberately. The job's `name:` is the
+      # status-check context branch protection requires — renaming it, or splitting
+      # these into a job of their own, makes the old context never report and leaves
+      # every PR waiting on a check that will not arrive.
+
+      - name: Diagram check-class fixtures
+        run: python3 skills/prettier-svg-docs/scripts/test_diagram_check.py
+
+      - name: Gate every committed SVG
+        run: |
+          python3 - <<'PY'
+          import json, pathlib, subprocess, sys
+          root = pathlib.Path(".")
+          files = subprocess.run(["git", "ls-files", "*.svg"],
+                                 capture_output=True, text=True, check=True).stdout.split()
+          rc = 0
+          # assets/ holds the icon set: source shapes inlined into a board, not
+          # boards themselves. They carry no style, no manifest and no palette,
+          # so gating them as visuals reds the build on files that are correct.
+          files = [f for f in files if "/assets/icons/" not in f]
+          for rel in sorted(files):
+              p = pathlib.Path(rel)
+              parts = p.parts
+              project = root / parts[0] / parts[1] if parts[0] == "skills" else root
+              checker = project / "scripts/svg_check.py"
+              if not checker.exists():
+                  checker = root / "skills/prettier-svg-docs/scripts/svg_check.py"
+              design = project / ".prettydocs/prettydocs.md"
+              # Style resolution is path-shaped, and getting it wrong is SILENT:
+              # a file that falls through to a viz.json that does not exist is
+              # gated with --design and NO --style, so every one of that style's
+              # invariants goes unenforced and the run still reads green.
+              if p.parent.name == "types" and p.parent.parent.name == "samples":
+                  style = "flat-material"   # every type specimen, by contract
+              elif p.parent.name == "samples":
+                  style = p.stem            # a style specimen is named for its style
+              else:
+                  viz = project / ".prettydocs/src" / p.stem / "viz.json"
+                  style = json.loads(viz.read_text())["style"] if viz.exists() else None
+              if style is None:
+                  rc = 1
+                  print(f"::error file={rel}::no style resolves for this asset, so it "
+                        "would gate with every style invariant unenforced. Give it a "
+                        "viz.json with a `style`, or teach this step its path shape.")
+                  continue
+              cmd = [sys.executable, str(checker), "--style", style]
+              if design.exists():
+                  cmd += ["--design", str(design)]
+              out = subprocess.run(cmd + [rel], capture_output=True, text=True)
+              if out.returncode:
+                  rc = 1
+                  print(f"::error file={rel}::svg_check.py failed")
+                  print(out.stdout[-4000:])
+          print(f"gated {len(files)} committed SVG(s)")
+          sys.exit(rc)
+          PY
+
+      # audit_visuals.py takes doc FILES and resolves each one against --root, so the
+      # two must not both carry the skill prefix or the path doubles and every doc
+      # reports "file not found". Run it from inside the project with --root . and
+      # bare filenames. Getting this wrong is quiet in both directions: prefixed docs
+      # from the repo root audit the REPO's README against a skill's manifests and
+      # report a visual that does not exist.
+      - name: Audit visual manifests and embeds
+        run: |
+          fail=0
+          for skill in skills/*/; do
+            [ -f "$skill/scripts/audit_visuals.py" ] || continue
+            ( cd "$skill" && python3 scripts/audit_visuals.py --root . *.md ) || fail=1
+          done
+          exit $fail

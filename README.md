@@ -53,7 +53,7 @@ project. Nothing here is all-or-nothing — to skip the prompt and name what you
 
 ```bash
 npx skills add apatheticus/skills -s human-voice                       # one skill
-npx skills add apatheticus/skills -s human-voice -s pretty-svg-docs   # two
+npx skills add apatheticus/skills -s human-voice -s prettier-svg-docs   # two
 npx skills add apatheticus/skills --all                                # every skill, every agent
 ```
 
@@ -126,7 +126,7 @@ removed skill stays visible until the next session.
 | [`human-voice`](./skills/human-voice) | Strip signs of AI-generated writing and rewrite prose so it reads as human-authored. Picks a register first (editorial, professional, technical, or regulated) so a spec never gets an essay's voice. Yields to a compliance skill for federal work. | `npx skills add apatheticus/skills -s human-voice` |
 | [`pretty-hyper-docs`](./skills/pretty-hyper-docs) | Write a repo's standard docs against the truth of the code, then render their key diagrams as seamless-loop animated WebPs via HyperFrames. Re-renders only what changed. | `npx skills add apatheticus/skills -s pretty-hyper-docs` |
 | [`pretty-plain-docs`](./skills/pretty-plain-docs) | The same docs engine again, with the diagrams as static SVG — nothing animates, so the output survives a print stylesheet, a PDF export, and a reviewer whose renderer rasterises SVG. Carries the same 32-style catalog, adds a Mermaid source under every structural diagram, and refuses to chart a number the repo cannot recompute. | `npx skills add apatheticus/skills -s pretty-plain-docs` |
-| [`pretty-svg-docs`](./skills/pretty-svg-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. Ships a 32-style catalog, from Swiss minimal to oil impasto, each with a gated full-width specimen, and a bundled checker that proves the loop is seam-exact before anything is committed. | `npx skills add apatheticus/skills -s pretty-svg-docs` |
+| [`prettier-svg-docs`](./skills/prettier-svg-docs) | The same docs engine, but the diagrams are seamless-loop animated SVG written directly — no renderer, no ffmpeg, nothing to install. A 32-style catalog decides what a board is made of and a 27-type diagram taxonomy decides what it is shaped like, each with a gated full-width specimen. The bundled checker proves the loop is seam-exact and that the drawing obeys its own grammar — no diagonal connectors, no label clipped by a node, nothing off the grid — before anything is committed. | `npx skills add apatheticus/skills -s prettier-svg-docs` |
 | [`security-audit-full-report`](./skills/security-audit-full-report) | Loop a security audit over a codebase until it stops finding anything new — each cycle hunts the ground the last one missed — then merge every run into one interactive HTML report. State lives on disk, so a run survives compaction and resumes where it stopped. Drives Cloudflare's `security-audit` skill; it does not re-implement the hunting. | `npx skills add apatheticus/skills -s security-audit-full-report` |
 | [`reflect`](./skills/reflect) | Mine your own Claude Code session transcripts for what keeps going wrong, what quietly works, and which setup changes would pay off most — then hand back one self-contained interactive HTML report. Every recommendation cites a session ID and a verbatim quote; a proposed skill needs three separate sessions behind it. Diagnosis only, and nothing leaves the machine. | `npx skills add apatheticus/skills -s reflect` |
 | [`website-security-scan`](./skills/website-security-scan) | Scan a live site and the email domains sharing its name from the outside — headers, DNS and mail authentication, TLS, exposed files, open ports — and render the result as an interactive HTML report that diffs itself against the previous run. Severity is scored against a written target profile rather than CVSS, which is also what makes it useful for checking whether a vendor's scorecard is telling the truth. | `npx skills add apatheticus/skills -s website-security-scan` |
@@ -139,14 +139,21 @@ Add `-g` to any of those to install globally instead of into the current project
      directory, a non-empty description you write yourself, and the exact install command.
      Row order is not checked, so curate it. -->
 
-### Renamed in 0.10.0
+### Renamed
 
-Two skills were renamed so the name says which renderer you get:
+`0.10.0` renamed two skills so the name says which renderer you get.
+`0.19.0` renamed one again, because it stopped being the same skill: it gained a
+27-type diagram taxonomy, a connector grammar and a geometry gate, so the diagrams are
+now designed rather than improvised.
 
 | Was | Now |
 | --- | --- |
 | `make-pretty-docs` | [`pretty-hyper-docs`](./skills/pretty-hyper-docs) — HyperFrames → animated WebP |
-| `more-pretty-docs` | [`pretty-svg-docs`](./skills/pretty-svg-docs) — animated SVG, nothing to install |
+| `more-pretty-docs` → `pretty-svg-docs` | [`prettier-svg-docs`](./skills/prettier-svg-docs) — animated SVG, nothing to install |
+
+Visuals produced under either old name are still recognised as this skill's own work
+and are never reported as foreign, so a repo processed before the rename needs no
+migration.
 
 How you get the new names depends on the channel you installed through:
 
@@ -157,7 +164,8 @@ How you get the new names depends on the channel you installed through:
   overlapping descriptions will both compete to trigger. Delete the old copies once:
 
 ```bash
-rm -rf .claude/skills/make-pretty-docs .claude/skills/more-pretty-docs
+rm -rf .claude/skills/make-pretty-docs .claude/skills/more-pretty-docs \
+       .claude/skills/pretty-svg-docs
 ```
 
 Existing visuals keep working. The marker and manifest names changed too — `mpd:viz` →

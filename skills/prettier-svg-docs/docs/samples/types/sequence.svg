@@ -1,0 +1,158 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 820" width="1200" height="820" role="img" data-loop-s="12" data-diagram="sequence" data-bg="background">
+<title>Sequence — one gate run of svg_check.py</title>
+<desc>Five lifelines: the author, svg_check.py, prettydocs.md, styles.json and diagrams.json. The author runs the checker, which loads the palette, resolves the style and reads the type budget, then a loop fragment carries the report-and-re-author exchange until the run returns zero errors. A highlight travels down the messages in reading order.</desc>
+<defs>
+  <filter id="sq-e1" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="var(--background)" flood-opacity="0.55"/>
+  </filter>
+  <marker id="sq-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,1 L9,5 L0,9 Z" fill="var(--dim)"/>
+  </marker>
+  <marker id="sq-aa" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,1 L9,5 L0,9 Z" fill="var(--accent-primary)"/>
+  </marker>
+</defs>
+<style>
+svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8; --accent-primary:#e0a33e; --warn:#e2725b; }
+  .kick { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); letter-spacing: 1.5px; }
+  .hd   { font: 700 28px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .nm   { font: 600 20px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .sb   { font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .tg   { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .el   { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--ink); }
+  .gd   { font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .lg   { font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .life { stroke: var(--ink); stroke-opacity: 0.24; stroke-width: 1; stroke-dasharray: 4,4; }
+  .bar  { fill: var(--ink); fill-opacity: 0.08; stroke: var(--dim); stroke-opacity: 0.55; stroke-width: 0.8; }
+  .msg  { animation: sq-step 12s linear infinite; }
+  .d1 { animation-delay: 0s }    .d2 { animation-delay: -1.2s }
+  .d3 { animation-delay: -2.4s } .d4 { animation-delay: -3.6s }
+  .d5 { animation-delay: -4.8s } .d6 { animation-delay: -6s }
+  .d7 { animation-delay: -7.2s } .d8 { animation-delay: -8.4s }
+  .d9 { animation-delay: -9.6s } .d10 { animation-delay: -10.8s }
+  @keyframes sq-step {
+    0%   { opacity: .55 }
+    6%   { opacity: 1 }
+    15%  { opacity: .55 }
+    100% { opacity: .55 }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .msg { animation: none; opacity: 1 }
+  }
+</style>
+
+<rect x="0" y="0" width="1200" height="820" fill="var(--background)"/>
+<text class="kick" data-role="metadata" x="40" y="44">PRETTIER-SVG-DOCS · SEQUENCE</text>
+<text class="hd" data-role="essential" x="40" y="82">One gate run, message by message</text>
+
+<!-- zones first: the re-author loop -->
+<g data-zone="">
+  <rect x="104" y="528" width="272" height="156" rx="4" fill="var(--ink)" fill-opacity="0.02" stroke="var(--dim)" stroke-opacity="0.45" stroke-width="1"/>
+  <rect x="104" y="528" width="56" height="20" rx="4" fill="var(--background)" stroke="var(--dim)" stroke-opacity="0.45" stroke-width="1"/>
+  <text class="tg" data-role="metadata" x="132" y="543" text-anchor="middle">LOOP</text>
+  <text class="gd" data-role="metadata" x="120" y="572">[until 0 errors]</text>
+</g>
+
+<!-- lifelines and activation bars sit behind the messages -->
+<g>
+  <line class="life" x1="120" y1="192" x2="120" y2="748"/>
+  <line class="life" x1="360" y1="192" x2="360" y2="748"/>
+  <line class="life" x1="600" y1="192" x2="600" y2="748"/>
+  <line class="life" x1="840" y1="192" x2="840" y2="748"/>
+  <line class="life" x1="1080" y1="192" x2="1080" y2="748"/>
+  <rect class="bar" x="352" y="240" width="16" height="476"/>
+  <rect class="bar" x="592" y="284" width="16" height="44"/>
+  <rect class="bar" x="832" y="372" width="16" height="44"/>
+  <rect class="bar" x="1072" y="460" width="16" height="44"/>
+  <rect class="bar" x="112" y="652" width="16" height="64"/>
+</g>
+
+<!-- connectors: ten messages, all horizontal, time runs downward -->
+<line data-edge="" class="msg d1" x1="120" y1="240" x2="352" y2="240" stroke="var(--dim)" stroke-width="1.5" marker-end="url(#sq-a)"/>
+<line data-edge="" class="msg d2" x1="368" y1="284" x2="592" y2="284" stroke="var(--dim)" stroke-width="1.5" marker-end="url(#sq-a)"/>
+<line data-edge="" class="msg d3" x1="592" y1="328" x2="368" y2="328" stroke="var(--dim)" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#sq-a)"/>
+<line data-edge="" class="msg d4" x1="368" y1="372" x2="832" y2="372" stroke="var(--dim)" stroke-width="1.5" marker-end="url(#sq-a)"/>
+<line data-edge="" class="msg d5" x1="832" y1="416" x2="368" y2="416" stroke="var(--dim)" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#sq-a)"/>
+<line data-edge="" class="msg d6" x1="368" y1="460" x2="1072" y2="460" stroke="var(--dim)" stroke-width="1.5" marker-end="url(#sq-a)"/>
+<line data-edge="" class="msg d7" x1="1072" y1="504" x2="368" y2="504" stroke="var(--dim)" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#sq-a)"/>
+<line data-edge="" class="msg d8" x1="352" y1="608" x2="120" y2="608" stroke="var(--dim)" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#sq-a)"/>
+<line data-edge="" class="msg d9" x1="120" y1="652" x2="352" y2="652" stroke="var(--dim)" stroke-width="1.5" marker-end="url(#sq-a)"/>
+<line data-edge="" data-focal="" class="msg d10" x1="352" y1="716" x2="120" y2="716" stroke="var(--accent-primary)" stroke-width="2" marker-end="url(#sq-aa)"/>
+
+<!-- connector labels: plate 8 units clear of its own stroke -->
+<rect data-label="" x="176" y="210" width="120" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="236" y="226" text-anchor="middle">RUN GATE</text>
+<rect data-label="" x="416" y="254" width="128" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="480" y="270" text-anchor="middle">LOAD PALETTE</text>
+<rect data-label="" x="408" y="298" width="144" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="480" y="314" text-anchor="middle">71 ROLE HEXES</text>
+<rect data-label="" x="632" y="342" width="144" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="704" y="358" text-anchor="middle">RESOLVE STYLE</text>
+<rect data-label="" x="652" y="386" width="104" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="704" y="402" text-anchor="middle">MIN_RX 4</text>
+<rect data-label="" x="896" y="430" width="128" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="960" y="446" text-anchor="middle">TYPE BUDGET</text>
+<rect data-label="" x="896" y="474" width="128" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="960" y="490" text-anchor="middle">5 LIFELINES</text>
+<rect data-label="" x="160" y="578" width="152" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="236" y="594" text-anchor="middle">ERROR, EXIT 1</text>
+<rect data-label="" x="180" y="622" width="112" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="236" y="638" text-anchor="middle">RE-AUTHOR</text>
+<rect data-label="" x="184" y="686" width="104" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="236" y="702" text-anchor="middle">0 ERRORS</text>
+
+<!-- actors -->
+<g data-node="" data-bg="surface">
+  <rect x="44" y="112" width="152" height="80" rx="8" fill="var(--background)"/>
+  <rect x="44" y="112" width="152" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#sq-e1)"/>
+  <rect x="56" y="120" width="56" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.5" stroke-width="1"/>
+  <text class="tg" data-role="metadata" x="84" y="135" text-anchor="middle">YOU</text>
+  <text class="nm" data-role="label" x="120" y="162" text-anchor="middle">Author</text>
+  <text class="sb" data-role="metadata" x="120" y="182" text-anchor="middle">types/*.svg</text>
+</g>
+<g data-node="" data-focal="" data-bg="background">
+  <rect x="284" y="112" width="152" height="80" rx="8" fill="var(--background)"/>
+  <rect x="284" y="112" width="152" height="80" rx="8" fill="var(--accent-primary)" fill-opacity="0.16" stroke="var(--accent-primary)" stroke-width="1.5" filter="url(#sq-e1)"/>
+  <rect x="296" y="120" width="56" height="20" rx="4" fill="none" stroke="var(--accent-primary)" stroke-opacity="0.7" stroke-width="1"/>
+  <text class="tg" data-role="metadata" x="324" y="135" text-anchor="middle">PY</text>
+  <text class="nm" data-role="label" x="360" y="162" text-anchor="middle">svg_check.py</text>
+  <text class="sb" data-role="metadata" x="360" y="182" text-anchor="middle">exit 1 = error</text>
+</g>
+<g data-node="" data-bg="surface">
+  <rect x="524" y="112" width="152" height="80" rx="8" fill="var(--background)"/>
+  <rect x="524" y="112" width="152" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#sq-e1)"/>
+  <rect x="536" y="120" width="56" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.5" stroke-width="1"/>
+  <text class="tg" data-role="metadata" x="564" y="135" text-anchor="middle">MD</text>
+  <text class="nm" data-role="label" x="600" y="162" text-anchor="middle">prettydocs.md</text>
+  <text class="sb" data-role="metadata" x="600" y="182" text-anchor="middle">6 + 65 hexes</text>
+</g>
+<g data-node="" data-bg="surface">
+  <rect x="764" y="112" width="152" height="80" rx="8" fill="var(--background)"/>
+  <rect x="764" y="112" width="152" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#sq-e1)"/>
+  <rect x="776" y="120" width="56" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.5" stroke-width="1"/>
+  <text class="tg" data-role="metadata" x="804" y="135" text-anchor="middle">JSON</text>
+  <text class="nm" data-role="label" x="840" y="162" text-anchor="middle">styles.json</text>
+  <text class="sb" data-role="metadata" x="840" y="182" text-anchor="middle">min_rx 4</text>
+</g>
+<g data-node="" data-bg="surface">
+  <rect x="1004" y="112" width="152" height="80" rx="8" fill="var(--background)"/>
+  <rect x="1004" y="112" width="152" height="80" rx="8" fill="var(--surface)" stroke="var(--dim)" stroke-width="1.25" filter="url(#sq-e1)"/>
+  <rect x="1016" y="120" width="56" height="20" rx="4" fill="none" stroke="var(--dim)" stroke-opacity="0.5" stroke-width="1"/>
+  <text class="tg" data-role="metadata" x="1044" y="135" text-anchor="middle">JSON</text>
+  <text class="nm" data-role="label" x="1080" y="162" text-anchor="middle">diagrams.json</text>
+  <text class="sb" data-role="metadata" x="1080" y="182" text-anchor="middle">5 lifelines</text>
+</g>
+
+<!-- legend -->
+<g data-legend="">
+  <line x1="40" y1="764" x2="1160" y2="764" stroke="var(--dim)" stroke-opacity="0.45" stroke-width="1"/>
+  <text class="lg" data-role="metadata" x="40" y="796">LEGEND</text>
+  <line x1="160" y1="791" x2="200" y2="791" stroke="var(--dim)" stroke-width="1.5"/>
+  <text class="lg" data-role="metadata" x="212" y="796">call</text>
+  <line x1="300" y1="791" x2="340" y2="791" stroke="var(--dim)" stroke-width="1.5" stroke-dasharray="4,4"/>
+  <text class="lg" data-role="metadata" x="352" y="796">return</text>
+  <line x1="480" y1="791" x2="520" y2="791" stroke="var(--accent-primary)" stroke-width="2"/>
+  <text class="lg" data-role="metadata" x="532" y="796">the pass that ends the loop</text>
+  <text class="lg" data-role="metadata" x="880" y="796">bars = who holds control</text>
+</g>
+</svg>

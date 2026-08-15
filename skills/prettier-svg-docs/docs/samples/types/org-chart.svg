@@ -1,0 +1,173 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760" role="img" data-loop-s="12" data-diagram="org-chart" data-bg="background">
+<title>Org chart — who owns which gate in prettier-svg-docs</title>
+<desc>An ownership chart for this skill's gates. The front door is the repository's one CI job, named skills plus manifests, which runs on every push and pull request. It routes to three checkers — validate.mjs for frontmatter and the manifests, svg_check.py for its nine check classes, and audit_visuals.py for embeds and visual manifests. A fourth owner, the author, hangs off a dashed connector because no CI step invokes them: they own the seven questions in SKILL.md that no script can check. Under svg_check.py sit the three files that tell it what to enforce — styles.json, diagrams.json and prettydocs.md — and under each, what that file actually carries. A routing trace steps the front door to svg_check.py to the type catalog to the 27 type budgets on a 12-second loop; no box moves.</desc>
+<defs>
+  <filter id="e1" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.28"/>
+  </filter>
+  <marker id="arrow" viewBox="0 0 8 8" refX="8" refY="4" markerWidth="6" markerHeight="6" orient="auto">
+    <path d="M0,0 L8,4 L0,8 Z" fill="var(--dim)"/>
+  </marker>
+</defs>
+<style>
+svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8; --accent:#e0a33e;
+      --sans:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+      --mono:ui-monospace,SFMono-Regular,Menlo,monospace; }
+.ground { fill: var(--background); }
+.mask { fill: var(--background); }
+.box  { fill: var(--surface); stroke: var(--ink); stroke-width: 1.25; filter: url(#e1); }
+.boxf { fill: var(--accent); stroke: var(--accent); stroke-width: 1.25; filter: url(#e1); }
+.boxs { fill: var(--ink); fill-opacity: .05; stroke: var(--dim); stroke-width: 1.25; }
+.boxl { fill: var(--ink); fill-opacity: .05; stroke: var(--dim); stroke-width: 1; }
+.boxo { fill: var(--ink); fill-opacity: .02; stroke: var(--dim); stroke-width: 1;
+        stroke-dasharray: 4 3; }
+.name { font: 600 18px var(--sans); fill: var(--ink); }
+.namef{ font: 600 18px var(--sans); fill: var(--background); }
+.inv  { font: 400 16px var(--mono); fill: var(--dim); }
+.invf { font: 400 16px var(--mono); fill: var(--background); }
+.scope{ font: 400 16px var(--sans); fill: var(--dim); }
+.scopef{ font: 400 16px var(--sans); fill: var(--background); }
+.edge { fill: none; stroke: var(--dim); stroke-width: 1.5; }
+.edged { fill: none; stroke: var(--dim); stroke-width: 1.5; stroke-dasharray: 4 3; }
+.plate { fill: var(--background); }
+.elabel { font: 600 16px var(--mono); fill: var(--dim); }
+.kicker { font: 600 16px var(--mono); fill: var(--dim); letter-spacing: 1.5px; }
+.h1 { font: 700 40px var(--sans); fill: var(--ink); }
+.eyebrow { font: 600 16px var(--sans); fill: var(--dim); letter-spacing: 1px; }
+.legend { font: 400 16px var(--sans); fill: var(--dim); }
+.sep { stroke: var(--dim); stroke-width: 1; opacity: .45; }
+.swatch { fill: none; stroke: var(--accent); stroke-width: 2; }
+.swatch2 { fill: none; stroke: var(--dim); stroke-width: 1; stroke-dasharray: 4 3; }
+.step { fill: none; stroke: var(--ink); stroke-width: 2; opacity: .14;
+        animation: step 12s ease-in-out infinite; }
+.s2 { animation-delay: -3s; }
+.s3 { animation-delay: -6s; }
+.s4 { animation-delay: -9s; }
+@keyframes step { 0%, 100% { opacity: .14 } 6%, 18% { opacity: 1 } 26% { opacity: .14 } }
+@media (prefers-reduced-motion: reduce) { .step { animation: none } }
+</style>
+
+<rect class="ground" x="0" y="0" width="1200" height="760"/>
+
+<text class="kicker" data-role="metadata" data-bg="background" x="40" y="44">TYPE SPECIMEN · ORG-CHART · FLAT-MATERIAL</text>
+<text class="h1" data-role="title" data-bg="background" x="40" y="92">Who owns which gate</text>
+
+<!-- connectors: fanned attach points, one horizontal level per pair, no crossings -->
+<g>
+  <path class="edge" data-edge="" d="M544,216 V222 Q544,232 534,232 H150 Q140,232 140,242 V280" marker-end="url(#arrow)"/>
+  <path class="edged" data-edge="" d="M664,216 V222 Q664,232 674,232 H1054 Q1064,232 1064,242 V280" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M584,216 V242 Q584,252 574,252 H458 Q448,252 448,262 V280" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M624,216 V242 Q624,252 634,252 H746 Q756,252 756,262 V280" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M398,376 V398 Q398,408 388,408 H218 Q208,408 208,418 V440" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M448,376 V440" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M498,376 V398 Q498,408 508,408 H678 Q688,408 688,418 V440" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M208,512 V576" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M448,512 V576" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="" d="M688,512 V576" marker-end="url(#arrow)"/>
+</g>
+
+<!-- connector labels -->
+<g>
+  <rect class="plate" data-label="" x="784" y="200" width="160" height="24" rx="4"/>
+  <text class="elabel" data-role="metadata" data-bg="background" x="864" y="217" text-anchor="middle">NO CI STEP</text>
+  <rect class="plate" data-label="" x="280" y="532" width="160" height="24" rx="4"/>
+  <text class="elabel" data-role="metadata" data-bg="background" x="360" y="549" text-anchor="middle">ONE PER SLUG</text>
+</g>
+
+<!-- the front door -->
+<g data-node="" data-focal="">
+  <rect class="mask" x="504" y="120" width="200" height="96" rx="8"/>
+  <rect class="boxf" x="504" y="120" width="200" height="96" rx="8"/>
+  <text class="namef" data-role="label" data-bg="accent-primary" x="604" y="158" text-anchor="middle">The validate job</text>
+  <text class="invf" data-role="metadata" data-bg="accent-primary" x="604" y="182" text-anchor="middle">skills + manifests</text>
+  <text class="scopef" data-role="metadata" data-bg="accent-primary" x="604" y="204" text-anchor="middle">main, stage and PRs</text>
+</g>
+
+<!-- tier 1: the owners it routes to, plus the one it cannot -->
+<g data-node="">
+  <rect class="mask" x="40" y="280" width="200" height="96" rx="8"/>
+  <rect class="box" x="40" y="280" width="200" height="96" rx="8"/>
+  <text class="name" data-role="label" data-bg="surface" x="140" y="318" text-anchor="middle">validate.mjs</text>
+  <text class="inv" data-role="metadata" data-bg="surface" x="140" y="342" text-anchor="middle">npm run validate</text>
+  <text class="scope" data-role="metadata" data-bg="surface" x="140" y="364" text-anchor="middle">frontmatter, manifests</text>
+</g>
+<g data-node="">
+  <rect class="mask" x="348" y="280" width="200" height="96" rx="8"/>
+  <rect class="box" x="348" y="280" width="200" height="96" rx="8"/>
+  <text class="name" data-role="label" data-bg="surface" x="448" y="318" text-anchor="middle">svg_check.py</text>
+  <text class="inv" data-role="metadata" data-bg="surface" x="448" y="342" text-anchor="middle">--design --style</text>
+  <text class="scope" data-role="metadata" data-bg="surface" x="448" y="364" text-anchor="middle">nine check classes</text>
+</g>
+<g data-node="">
+  <rect class="mask" x="656" y="280" width="200" height="96" rx="8"/>
+  <rect class="box" x="656" y="280" width="200" height="96" rx="8"/>
+  <text class="name" data-role="label" data-bg="surface" x="756" y="318" text-anchor="middle">audit_visuals.py</text>
+  <text class="inv" data-role="metadata" data-bg="surface" x="756" y="342" text-anchor="middle">--root . *.md</text>
+  <text class="scope" data-role="metadata" data-bg="surface" x="756" y="364" text-anchor="middle">embeds, manifests</text>
+</g>
+<g data-node="">
+  <rect class="mask" x="964" y="280" width="200" height="96" rx="8"/>
+  <rect class="boxo" x="964" y="280" width="200" height="96" rx="8"/>
+  <text class="name" data-role="label" data-bg="background" x="1064" y="318" text-anchor="middle">The author</text>
+  <text class="inv" data-role="metadata" data-bg="background" x="1064" y="342" text-anchor="middle">no entry point</text>
+  <text class="scope" data-role="metadata" data-bg="background" x="1064" y="364" text-anchor="middle">seven questions</text>
+</g>
+
+<!-- tier 2: what tells svg_check.py what to enforce -->
+<g data-node="">
+  <rect class="mask" x="108" y="440" width="200" height="72" rx="8"/>
+  <rect class="boxs" x="108" y="440" width="200" height="72" rx="8"/>
+  <text class="name" data-role="label" data-bg="background" x="208" y="474" text-anchor="middle">Style catalog</text>
+  <text class="inv" data-role="metadata" data-bg="background" x="208" y="496" text-anchor="middle">styles.json</text>
+</g>
+<g data-node="">
+  <rect class="mask" x="348" y="440" width="200" height="72" rx="8"/>
+  <rect class="boxs" x="348" y="440" width="200" height="72" rx="8"/>
+  <text class="name" data-role="label" data-bg="background" x="448" y="474" text-anchor="middle">Type catalog</text>
+  <text class="inv" data-role="metadata" data-bg="background" x="448" y="496" text-anchor="middle">diagrams.json</text>
+</g>
+<g data-node="">
+  <rect class="mask" x="588" y="440" width="200" height="72" rx="8"/>
+  <rect class="boxs" x="588" y="440" width="200" height="72" rx="8"/>
+  <text class="name" data-role="label" data-bg="background" x="688" y="474" text-anchor="middle">Design system</text>
+  <text class="inv" data-role="metadata" data-bg="background" x="688" y="496" text-anchor="middle">prettydocs.md</text>
+</g>
+
+<!-- tier 3: what each of those actually carries -->
+<g data-node="">
+  <rect class="mask" x="108" y="576" width="200" height="72" rx="8"/>
+  <rect class="boxl" x="108" y="576" width="200" height="72" rx="8"/>
+  <text class="name" data-role="label" data-bg="background" x="208" y="610" text-anchor="middle">33 style entries</text>
+  <text class="inv" data-role="metadata" data-bg="background" x="208" y="632" text-anchor="middle">32 + catalog-sheet</text>
+</g>
+<g data-node="">
+  <rect class="mask" x="348" y="576" width="200" height="72" rx="8"/>
+  <rect class="boxl" x="348" y="576" width="200" height="72" rx="8"/>
+  <text class="name" data-role="label" data-bg="background" x="448" y="610" text-anchor="middle">27 type budgets</text>
+  <text class="inv" data-role="metadata" data-bg="background" x="448" y="632" text-anchor="middle">budgets + aliases</text>
+</g>
+<g data-node="">
+  <rect class="mask" x="588" y="576" width="200" height="72" rx="8"/>
+  <rect class="boxl" x="588" y="576" width="200" height="72" rx="8"/>
+  <text class="name" data-role="label" data-bg="background" x="688" y="610" text-anchor="middle">6 palette roles</text>
+  <text class="inv" data-role="metadata" data-bg="background" x="688" y="632" text-anchor="middle">+ 65 swatches</text>
+</g>
+
+<!-- one escalation path, emphasised in order -->
+<g>
+  <rect class="step" x="504" y="120" width="200" height="96" rx="8"/>
+  <rect class="step s2" x="348" y="280" width="200" height="96" rx="8"/>
+  <rect class="step s3" x="348" y="440" width="200" height="72" rx="8"/>
+  <rect class="step s4" x="348" y="576" width="200" height="72" rx="8"/>
+</g>
+
+<g data-legend="">
+  <line class="sep" x1="40" y1="692" x2="1160" y2="692"/>
+  <text class="eyebrow" data-role="metadata" data-bg="background" x="40" y="716">LEGEND</text>
+  <rect class="swatch" x="180" y="704" width="24" height="16" rx="4"/>
+  <text class="legend" data-role="metadata" data-bg="background" x="216" y="716">accent — the front door</text>
+  <rect class="swatch2" x="560" y="704" width="24" height="16" rx="4"/>
+  <text class="legend" data-role="metadata" data-bg="background" x="596" y="716">dashed — nothing invokes it</text>
+  <text class="legend" data-role="metadata" data-bg="background" x="920" y="716">the trace is one route</text>
+</g>
+</svg>

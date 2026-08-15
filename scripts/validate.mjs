@@ -24,11 +24,17 @@ const SYNC = process.argv.includes('--sync');
 
 const NAME_RE = /^[a-z0-9]+(-[a-z0-9]+)*$/;
 const MAX_NAME = 64;
-const MAX_DESCRIPTION = 1024;
+// Claude Code renders `description` and `when_to_use` as one string in the skill
+// listing and truncates the pair at 1,536 characters (`skillListingMaxDescChars`).
+// The budget is therefore on the SUM, not on either field, and truncation is from
+// the end -- so the key trigger belongs at the front of `description`.
+// See https://code.claude.com/docs/en/skills.
+const MAX_LISTING = 1536;
 
 const KNOWN_KEYS = new Set([
   'name',
   'description',
+  'when_to_use',
   'allowed-tools',
   'disable-model-invocation',
   'user-invocable',
@@ -165,14 +171,38 @@ for (const dir of skillDirs) {
   }
 
   const description = fm.description;
+  const whenToUse = fm.when_to_use ?? '';
   if (!description) {
     err(label, 'frontmatter is missing required key `description`');
   } else {
-    if (description.length > MAX_DESCRIPTION) {
-      err(label, `description is ${description.length} chars, max ${MAX_DESCRIPTION}`);
+    const listing = description.length + whenToUse.length;
+    if (listing > MAX_LISTING) {
+      err(
+        label,
+        `description (${description.length}) + when_to_use (${whenToUse.length}) ` +
+          `is ${listing} chars, max ${MAX_LISTING} — cut whichever half is less load-bearing`,
+      );
     }
     if (description.length < 40) {
       warn(label, 'description is very short — say what it does AND when to trigger it');
+    }
+  }
+
+  // A capability nobody can name is a capability nobody reaches. Every diagram type
+  // this skill can draw must appear in the text the model sees before deciding to
+  // load the skill, so adding a type to diagrams.json costs trigger surface by
+  // construction rather than by discipline.
+  const diagramCatalog = join(dir, 'scripts', 'diagrams.json');
+  if (existsSync(diagramCatalog)) {
+    const catalog = readJson(diagramCatalog);
+    const listing = `${description ?? ''}\n${whenToUse}`;
+    const missing = Object.keys(catalog?.types ?? {}).filter((slug) => !listing.includes(slug));
+    if (missing.length) {
+      err(
+        label,
+        `${missing.length} diagram type(s) in scripts/diagrams.json never appear in ` +
+          `description or when_to_use: ${missing.join(', ')}`,
+      );
     }
   }
 

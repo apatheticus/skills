@@ -1,0 +1,220 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" width="1200" height="760"
+     role="img" data-loop-s="12" data-diagram="architecture" data-bg="background">
+  <title>prettier-svg-docs architecture: one committed SVG through three check classes</title>
+  <desc>A committed .svg is read by scripts/svg_check.py, which loads scripts/styles.json,
+scripts/diagrams.json and the root's data-loop-s attribute and runs three check classes over
+them — check_style for material, check_diagram for structure, and the seam block for motion.
+Only at zero errors does the asset reach a README embed inside a pd:viz marker pair. A token
+marches the gate loop on a twelve-second seamless cycle.</desc>
+  <defs>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="var(--shadow)"
+                    flood-opacity="0.28"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--dim)"/>
+    </marker>
+  </defs>
+  <style>
+    svg {
+      --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8;
+      --accent:#e0a33e; --shadow:#000000;
+      font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+    }
+    .bg { fill:var(--background); }
+    .mask { fill:var(--background); }
+    .card { fill:var(--surface); stroke:var(--ink); stroke-width:1.25; filter:url(#e1); }
+    .focal { stroke:var(--accent); stroke-width:2.5; }
+    .tagbox { fill:none; stroke:var(--dim); stroke-width:1; }
+    .tag { fill:var(--dim); font-size:16px; letter-spacing:0.5px; }
+    .name { fill:var(--ink); font-size:20px; font-weight:600; }
+    .mono { font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .sub { fill:var(--dim); font-size:16px;
+            font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .zone { fill:var(--ink); fill-opacity:0.02; stroke:var(--dim); stroke-opacity:0.3;
+             stroke-width:1; }
+    .plate { fill:var(--background); }
+    .eyebrow { fill:var(--dim); font-size:16px; letter-spacing:1px; font-weight:600; }
+    .edge { fill:none; stroke:var(--dim); stroke-width:1.5; marker-end:url(#arrow); }
+    .edgelabel { fill:var(--dim); font-size:16px; letter-spacing:0.5px; }
+    .legenditem { fill:var(--dim); font-size:16px; }
+    .rule { stroke:var(--dim); stroke-opacity:0.3; stroke-width:1; }
+    .sw-focal { fill:none; stroke:var(--accent); stroke-width:2.5; }
+    .sw-zone { fill:var(--ink); fill-opacity:0.02; stroke:var(--dim); stroke-opacity:0.3;
+                stroke-width:1; }
+    .sw-flow { stroke:var(--accent); stroke-width:3; stroke-dasharray:12 8; }
+    .kicker { fill:var(--dim); font-size:16px; letter-spacing:2px; font-weight:600; }
+    .flow { fill:none; stroke:var(--accent); stroke-width:3; stroke-linecap:round;
+             stroke-dasharray:12 188; animation:march 4s linear infinite; }
+    @keyframes march {
+      0%   { stroke-dashoffset:0; }
+      100% { stroke-dashoffset:-200; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .flow { animation:none; }
+    }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1200" height="760"/>
+  <text class="kicker" x="36" y="40" data-role="metadata" data-bg="background">ARCHITECTURE — PRETTIER-SVG-DOCS</text>
+
+  <g data-zone="">
+    <rect class="zone" x="36" y="324" width="360" height="252" rx="8"/>
+    <rect class="plate" x="52" y="328" width="108" height="20" rx="4"/>
+    <text class="eyebrow" x="64" y="343" data-role="metadata"
+          data-bg="background">MATERIAL</text>
+  </g>
+  <g data-zone="">
+    <rect class="zone" x="420" y="324" width="360" height="252" rx="8"/>
+    <rect class="plate" x="436" y="328" width="116" height="20" rx="4"/>
+    <text class="eyebrow" x="448" y="343" data-role="metadata"
+          data-bg="background">STRUCTURE</text>
+  </g>
+  <g data-zone="">
+    <rect class="zone" x="804" y="324" width="360" height="252" rx="8"/>
+    <rect class="plate" x="820" y="328" width="92" height="20" rx="4"/>
+    <text class="eyebrow" x="832" y="343" data-role="metadata"
+          data-bg="background">MOTION</text>
+  </g>
+
+  <path data-edge="" class="edge" d="M 600,144 V 208"/>
+  <path data-edge="" class="edge" d="M 550,288 V 296 Q 550,306 540,306 H 226 Q 216,306 216,316 V 368"/>
+  <path data-edge="" class="edge" d="M 600,288 V 368"/>
+  <path data-edge="" class="edge" d="M 650,288 V 296 Q 650,306 660,306 H 974 Q 984,306 984,316 V 368"/>
+  <path data-edge="" class="edge" d="M 216,448 V 472"/>
+  <path data-edge="" class="edge" d="M 600,448 V 472"/>
+  <path data-edge="" class="edge" d="M 984,448 V 472"/>
+  <path data-edge="" class="edge" d="M 216,552 V 574 Q 216,584 226,584 H 540 Q 550,584 550,594 V 616"/>
+  <path data-edge="" class="edge" d="M 600,552 V 616"/>
+  <path data-edge="" class="edge" d="M 984,552 V 574 Q 984,584 974,584 H 660 Q 650,584 650,594 V 616"/>
+  <path class="flow" d="M 600,144 V 208 M 600,208 V 368 M 600,368 V 472 M 600,472 V 616"/>
+
+  <rect data-label="" class="plate" x="608" y="108" width="88" height="24" rx="4"/>
+  <text class="edgelabel" x="652" y="125" data-role="metadata" data-bg="background"
+        text-anchor="middle">GATE LOOP</text>
+  <rect data-label="" class="plate" x="608" y="316" width="72" height="24" rx="4"/>
+  <text class="edgelabel" x="644" y="333" data-role="metadata" data-bg="background"
+        text-anchor="middle">READS</text>
+  <rect data-label="" class="plate" x="608" y="450" width="76" height="20" rx="4"/>
+  <text class="edgelabel" x="646" y="463" data-role="metadata" data-bg="background"
+        text-anchor="middle">BUDGET</text>
+  <rect data-label="" class="plate" x="504" y="552" width="88" height="24" rx="4"/>
+  <text class="edgelabel" x="548" y="569" data-role="metadata" data-bg="background"
+        text-anchor="middle">0 ERRORS</text>
+
+  <g data-node="" data-focal="">
+    <rect class="mask" x="500" y="64" width="200" height="80" rx="8"/>
+    <rect class="card focal" x="500" y="64" width="200" height="80" rx="8"/>
+    <rect class="tagbox" x="512" y="72" width="52" height="20" rx="4"/>
+    <text class="tag" x="538" y="87" data-role="metadata" data-bg="surface"
+          text-anchor="middle">SVG</text>
+    <text class="name mono" x="600" y="116" data-role="label" data-bg="surface"
+          text-anchor="middle">hero.svg</text>
+    <text class="sub" x="600" y="136" data-role="metadata" data-bg="surface"
+          text-anchor="middle">artifact + source</text>
+  </g>
+  <g data-node="" data-focal="">
+    <rect class="mask" x="500" y="208" width="200" height="80" rx="8"/>
+    <rect class="card focal" x="500" y="208" width="200" height="80" rx="8"/>
+    <rect class="tagbox" x="512" y="216" width="52" height="20" rx="4"/>
+    <text class="tag" x="538" y="231" data-role="metadata" data-bg="surface"
+          text-anchor="middle">GATE</text>
+    <text class="name mono" x="600" y="260" data-role="label" data-bg="surface"
+          text-anchor="middle">svg_check.py</text>
+    <text class="sub" x="600" y="280" data-role="metadata" data-bg="surface"
+          text-anchor="middle">0 errors to embed</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="116" y="368" width="200" height="80" rx="8"/>
+    <rect class="card" x="116" y="368" width="200" height="80" rx="8"/>
+    <rect class="tagbox" x="128" y="376" width="52" height="20" rx="4"/>
+    <text class="tag" x="154" y="391" data-role="metadata" data-bg="surface"
+          text-anchor="middle">JSON</text>
+    <text class="name mono" x="216" y="420" data-role="label" data-bg="surface"
+          text-anchor="middle">styles.json</text>
+    <text class="sub" x="216" y="440" data-role="metadata" data-bg="surface"
+          text-anchor="middle">33 style entries</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="500" y="368" width="200" height="80" rx="8"/>
+    <rect class="card" x="500" y="368" width="200" height="80" rx="8"/>
+    <rect class="tagbox" x="512" y="376" width="52" height="20" rx="4"/>
+    <text class="tag" x="538" y="391" data-role="metadata" data-bg="surface"
+          text-anchor="middle">JSON</text>
+    <text class="name mono" x="600" y="420" data-role="label" data-bg="surface"
+          text-anchor="middle">diagrams.json</text>
+    <text class="sub" x="600" y="440" data-role="metadata" data-bg="surface"
+          text-anchor="middle">27 diagram types</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="884" y="368" width="200" height="80" rx="8"/>
+    <rect class="card" x="884" y="368" width="200" height="80" rx="8"/>
+    <rect class="tagbox" x="896" y="376" width="52" height="20" rx="4"/>
+    <text class="tag" x="922" y="391" data-role="metadata" data-bg="surface"
+          text-anchor="middle">ATTR</text>
+    <text class="name mono" x="984" y="420" data-role="label" data-bg="surface"
+          text-anchor="middle">data-loop-s</text>
+    <text class="sub" x="984" y="440" data-role="metadata" data-bg="surface"
+          text-anchor="middle">12s, on the root</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="116" y="472" width="200" height="80" rx="8"/>
+    <rect class="card" x="116" y="472" width="200" height="80" rx="8"/>
+    <rect class="tagbox" x="128" y="480" width="52" height="20" rx="4"/>
+    <text class="tag" x="154" y="495" data-role="metadata" data-bg="surface"
+          text-anchor="middle">FN</text>
+    <text class="name mono" x="216" y="524" data-role="label" data-bg="surface"
+          text-anchor="middle">check_style()</text>
+    <text class="sub" x="216" y="544" data-role="metadata" data-bg="surface"
+          text-anchor="middle">material floors</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="500" y="472" width="200" height="80" rx="8"/>
+    <rect class="card" x="500" y="472" width="200" height="80" rx="8"/>
+    <rect class="tagbox" x="512" y="480" width="52" height="20" rx="4"/>
+    <text class="tag" x="538" y="495" data-role="metadata" data-bg="surface"
+          text-anchor="middle">FN</text>
+    <text class="name mono" x="600" y="524" data-role="label" data-bg="surface"
+          text-anchor="middle">check_diagram()</text>
+    <text class="sub" x="600" y="544" data-role="metadata" data-bg="surface"
+          text-anchor="middle">budget, grid, gap</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="884" y="472" width="200" height="80" rx="8"/>
+    <rect class="card" x="884" y="472" width="200" height="80" rx="8"/>
+    <rect class="tagbox" x="896" y="480" width="52" height="20" rx="4"/>
+    <text class="tag" x="922" y="495" data-role="metadata" data-bg="surface"
+          text-anchor="middle">FN</text>
+    <text class="name mono" x="984" y="524" data-role="label" data-bg="surface"
+          text-anchor="middle">seam block</text>
+    <text class="sub" x="984" y="544" data-role="metadata" data-bg="surface"
+          text-anchor="middle">durations divide 12</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="500" y="616" width="200" height="80" rx="8"/>
+    <rect class="card" x="500" y="616" width="200" height="80" rx="8"/>
+    <rect class="tagbox" x="512" y="624" width="52" height="20" rx="4"/>
+    <text class="tag" x="538" y="639" data-role="metadata" data-bg="surface"
+          text-anchor="middle">MD</text>
+    <text class="name" x="600" y="668" data-role="label" data-bg="surface"
+          text-anchor="middle">README embed</text>
+    <text class="sub" x="600" y="688" data-role="metadata" data-bg="surface"
+          text-anchor="middle">pd:viz marker pair</text>
+  </g>
+
+  <g data-legend="">
+    <line class="rule" x1="36" y1="724" x2="1164" y2="724"/>
+    <text class="eyebrow" x="36" y="750" data-role="metadata"
+          data-bg="background">LEGEND</text>
+    <rect class="sw-focal" x="140" y="738" width="16" height="16" rx="4"/>
+    <text class="legenditem" x="168" y="750" data-role="metadata"
+          data-bg="background">focal: the artifact and its gate</text>
+    <rect class="sw-zone" x="480" y="738" width="16" height="16" rx="4"/>
+    <text class="legenditem" x="508" y="750" data-role="metadata"
+          data-bg="background">zone: one check class in svg_check.py</text>
+    <line class="sw-flow" x1="880" y1="746" x2="912" y2="746"/>
+    <text class="legenditem" x="924" y="750" data-role="metadata"
+          data-bg="background">the gate loop, 12s seam-exact</text>
+  </g>
+</svg>

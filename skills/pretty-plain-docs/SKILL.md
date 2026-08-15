@@ -1,6 +1,6 @@
 ---
 name: pretty-plain-docs
-description: Create and maintain a repository's standard documentation — README, ARCHITECTURE, DEVELOPMENT, DEPLOYMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, plus on-demand LICENSE, NOTICE, issue/PR templates, and CODEOWNERS — and beautify it with a per-repo design system and hand-authored static SVG visuals, with zero external dependencies — nothing to install and nothing that moves. Use this whenever the user wants beautiful, illustrated, or visually polished project docs as still images; asks for no animation, or for docs that survive printing, PDF export, or a renderer that rasterises SVG; wants a static hero or static diagrams; wants doc visuals refreshed, restyled, or audited for staleness; wants a named visual style such as Swiss minimal, neo-brutalist, blueprint, or bento grid; or invokes /pretty-plain-docs. For animated SVG use the sibling pretty-svg-docs; for animated WebP or HyperFrames use pretty-hyper-docs; for plain text-only docs with no visuals, update-docs fits better.
+description: Create and maintain a repository's standard documentation — README, ARCHITECTURE, DEVELOPMENT, DEPLOYMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, plus on-demand LICENSE, NOTICE, issue/PR templates, and CODEOWNERS — and beautify it with a per-repo design system and hand-authored static SVG visuals, with zero external dependencies — nothing to install and nothing that moves. Use this whenever the user wants beautiful, illustrated, or visually polished project docs as still images; asks for no animation, or for docs that survive printing, PDF export, or a renderer that rasterises SVG; wants a static hero or static diagrams; wants doc visuals refreshed, restyled, or audited for staleness; wants a named visual style such as Swiss minimal, neo-brutalist, blueprint, or bento grid; or invokes /pretty-plain-docs. For animated SVG use the sibling prettier-svg-docs; for animated WebP or HyperFrames use pretty-hyper-docs; for plain text-only docs with no visuals, update-docs fits better.
 license: MIT
 version: 0.4.0
 ---
@@ -158,7 +158,7 @@ the resolution ladder: `reference/styles.md`.
 | LICENSE / NOTICE | Legal | **None. Ever.** Verbatim legal text; no markers, badges, or formatting. |
 
 **Every structural visual carries a Mermaid source, README body diagrams included.**
-That is a deliberate divergence from `pretty-svg-docs` and `pretty-hyper-docs`, where
+That is a deliberate divergence from `prettier-svg-docs` and `pretty-hyper-docs`, where
 a README embed gets rich alt text and no `<details>` block. An animated visual carries
 part of its meaning in motion, which no Mermaid graph can express; a static diagram
 has no such surplus — everything it says is structure, which is exactly what Mermaid
@@ -238,7 +238,7 @@ system.
 
 Also detect **foreign visuals** — any `viz.json` whose `producer` is not
 `pretty-plain-docs`, or an embed pointing at `.webp`. A sibling's visuals are foreign
-here by design: `pretty-svg-docs` / `more-pretty-docs` means animated SVG, and an
+here by design: `prettier-svg-docs` / `more-pretty-docs` means animated SVG, and an
 absent `producer` means `pretty-hyper-docs` animated WebP. Both are adoption
 candidates (`embedding.md` → Adopting visuals from another producer), and adoption is
 **never automatic** — a repo whose visuals animate chose animation, so confirm the

@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720"
+     width="1200" height="720" role="img" aria-labelledby="ttl desc"
+     data-loop-s="12" data-diagram="gantt" data-bg="background">
+  <title id="ttl">Gantt specimen — the eight workflow phases by their extent in SKILL.md</title>
+  <desc id="desc">A gantt whose axis is document position, not time. Each bar is one of the eight numbered workflow phases in SKILL.md, starting at its own heading line and ending at the next heading, so the bars are contiguous and their widths are the number of lines the spec gives each phase. Four units of the board is one line. The accented bar is phase 6, apply visuals, the phase that authors every asset in this catalog and the second shortest section in the spec.</desc>
+  <defs>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.28"
+                    flood-color="#12324f"/>
+    </filter>
+  </defs>
+  <style>
+svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8; --accent:#e0a33e; }
+
+  text { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+         fill: var(--ink); }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .ttl { font-size: 40px; font-weight: 700; }
+  .cap { font-size: 18px; fill: var(--dim); }
+  .eyebrow { font-size: 16px; fill: var(--dim); letter-spacing: 2px; }
+  .axword { font-size: 16px; fill: var(--dim); letter-spacing: 2px; }
+  .item { font-size: 18px; font-weight: 500; }
+  .val { font-size: 16px; fill: var(--dim); }
+  .leg { font-size: 16px; fill: var(--dim); }
+  .ground { fill: var(--background); }
+  .card { fill: var(--surface); filter: url(#e1); }
+  .rule { stroke: var(--dim); stroke-opacity: .28; stroke-width: 1; fill: none; }
+  .bar { fill: var(--dim); fill-opacity: .15; stroke: var(--dim);
+         stroke-width: 1; animation: emph 12s ease-in-out infinite; }
+  .fbar { fill: var(--accent); fill-opacity: .12; stroke: var(--accent);
+          stroke-width: 1; animation: emphf 12s ease-in-out infinite; }
+  .b2 { animation-delay: -1.5s } .b3 { animation-delay: -3s }
+  .b4 { animation-delay: -4.5s } .b5 { animation-delay: -6s }
+  .b6 { animation-delay: -7.5s } .b7 { animation-delay: -9s }
+  .b8 { animation-delay: -10.5s }
+  .grid { stroke: var(--dim); stroke-opacity: .14; stroke-width: 1; }
+  .rowline { stroke: var(--dim); stroke-opacity: .10; stroke-width: 1; }
+  .facc { fill: var(--accent); }
+  @keyframes emph { 0%, 100% { fill-opacity: .15 } 6% { fill-opacity: .34 }
+                    13% { fill-opacity: .15 } }
+  @keyframes emphf { 0%, 100% { fill-opacity: .12 } 6% { fill-opacity: .30 }
+                     13% { fill-opacity: .12 } }
+  @media (prefers-reduced-motion: reduce) {
+    .bar { animation: none } .fbar { animation: none }
+  }
+  </style>
+  <rect class="ground" x="0" y="0" width="1200" height="720"/>
+
+  <text class="ttl" x="40" y="64" data-role="title">Eight phases, by how much spec each gets</text>
+  <text class="cap" x="40" y="100" data-role="label">the axis is the SKILL.md line number, not time — bars are contiguous because each phase ends where the next begins</text>
+  <text class="val mono" x="368" y="136" text-anchor="middle" data-role="metadata">200</text>
+  <text class="val mono" x="448" y="136" text-anchor="middle" data-role="metadata">220</text>
+  <text class="val mono" x="528" y="136" text-anchor="middle" data-role="metadata">240</text>
+  <text class="val mono" x="608" y="136" text-anchor="middle" data-role="metadata">260</text>
+  <text class="val mono" x="688" y="136" text-anchor="middle" data-role="metadata">280</text>
+  <text class="val mono" x="768" y="136" text-anchor="middle" data-role="metadata">300</text>
+  <text class="val mono" x="848" y="136" text-anchor="middle" data-role="metadata">320</text>
+  <text class="val mono" x="928" y="136" text-anchor="middle" data-role="metadata">340</text>
+  <line class="rule" x1="40" y1="148" x2="1160" y2="148"/>
+  <rect class="card" x="40" y="156" width="1064" height="448" rx="8"/>
+  <g data-bg="surface">
+    <line class="grid" x1="368" y1="160" x2="368" y2="600"/>
+    <line class="grid" x1="448" y1="160" x2="448" y2="600"/>
+    <line class="grid" x1="528" y1="160" x2="528" y2="600"/>
+    <line class="grid" x1="608" y1="160" x2="608" y2="600"/>
+    <line class="grid" x1="688" y1="160" x2="688" y2="600"/>
+    <line class="grid" x1="768" y1="160" x2="768" y2="600"/>
+    <line class="grid" x1="848" y1="160" x2="848" y2="600"/>
+    <line class="grid" x1="928" y1="160" x2="928" y2="600"/>
+    <line class="rowline" x1="40" y1="212" x2="1104" y2="212"/>
+    <line class="rowline" x1="40" y1="268" x2="1104" y2="268"/>
+    <line class="rowline" x1="40" y1="324" x2="1104" y2="324"/>
+    <line class="rowline" x1="40" y1="380" x2="1104" y2="380"/>
+    <line class="rowline" x1="40" y1="436" x2="1104" y2="436"/>
+    <line class="rowline" x1="40" y1="492" x2="1104" y2="492"/>
+    <line class="rowline" x1="40" y1="548" x2="1104" y2="548"/>
+    <g data-node="">
+      <rect class="bar" x="368" y="168" width="88" height="32" rx="6"/>
+      <text class="item" x="40" y="190" data-role="label" data-bg="surface">1 · Evidence pass</text>
+      <text class="val mono" x="468" y="190" data-role="metadata" data-bg="surface">22 lines</text>
+    </g>
+    <g data-node="">
+      <rect class="bar b2" x="456" y="224" width="108" height="32" rx="6"/>
+      <text class="item" x="40" y="246" data-role="label" data-bg="surface">2 · Design system and style</text>
+      <text class="val mono" x="576" y="246" data-role="metadata" data-bg="surface">27 lines</text>
+    </g>
+    <g data-node="">
+      <rect class="bar b3" x="564" y="280" width="120" height="32" rx="6"/>
+      <text class="item" x="40" y="302" data-role="label" data-bg="surface">3 · Plan</text>
+      <text class="val mono" x="696" y="302" data-role="metadata" data-bg="surface">30 lines</text>
+    </g>
+    <g data-node="">
+      <rect class="bar b4" x="684" y="336" width="64" height="32" rx="6"/>
+      <text class="item" x="40" y="358" data-role="label" data-bg="surface">4 · Questions (batched, once, up front)</text>
+      <text class="val mono" x="760" y="358" data-role="metadata" data-bg="surface">16 lines</text>
+    </g>
+    <g data-node="">
+      <rect class="bar b5" x="748" y="392" width="32" height="32" rx="6"/>
+      <text class="item" x="40" y="414" data-role="label" data-bg="surface">5 · Apply — docs</text>
+      <text class="val mono" x="792" y="414" data-role="metadata" data-bg="surface">8 lines</text>
+    </g>
+    <g data-node="" data-focal="">
+      <rect class="fbar b6" x="780" y="448" width="44" height="32" rx="6"/>
+      <text class="item facc" x="40" y="470" data-role="label" data-bg="surface">6 · Apply — visuals</text>
+      <text class="val mono" x="836" y="470" data-role="metadata" data-bg="surface">11 lines</text>
+    </g>
+    <g data-node="">
+      <rect class="bar b7" x="824" y="504" width="52" height="32" rx="6"/>
+      <text class="item" x="40" y="526" data-role="label" data-bg="surface">7 · Verify</text>
+      <text class="val mono" x="888" y="526" data-role="metadata" data-bg="surface">13 lines</text>
+    </g>
+    <g data-node="">
+      <rect class="bar b8" x="876" y="560" width="76" height="32" rx="6"/>
+      <text class="item" x="40" y="582" data-role="label" data-bg="surface">8 · Report</text>
+      <text class="val mono" x="964" y="582" data-role="metadata" data-bg="surface">19 lines</text>
+    </g>
+  </g>
+  <g data-legend="">
+    <line class="rule" x1="40" y1="628" x2="1160" y2="628"/>
+    <text class="eyebrow" x="40" y="656" data-role="metadata">LEGEND</text>
+    <rect x="200" y="646" width="20" height="12" rx="4" fill="var(--dim)" fill-opacity=".15" stroke="var(--dim)" stroke-width="1"/>
+    <text class="leg" x="228" y="656" data-role="metadata">one phase section</text>
+    <rect x="480" y="646" width="20" height="12" rx="4" fill="var(--accent)" fill-opacity=".12" stroke="var(--accent)" stroke-width="1"/>
+    <text class="leg" x="508" y="656" data-role="metadata">phase 6 — apply, visuals</text>
+    <text class="leg" x="820" y="656" data-role="metadata">4 board units = 1 line</text>
+    <text class="leg mono" x="40" y="688" data-role="metadata">source: SKILL.md lines 200-346 — bar = heading line to next heading line</text>
+  </g>
+</svg>

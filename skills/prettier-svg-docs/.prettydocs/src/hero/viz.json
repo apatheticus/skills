@@ -1,0 +1,26 @@
+{
+  "name": "hero",
+  "doc": "README.md",
+  "tier": "animated-hero",
+  "producer": "prettier-svg-docs",
+  "style": "bento-grid",
+  "diagram_type": null,
+  "facts": [
+    "python3 is the only requirement — no renderer, no CLI, no network dependency",
+    "The committed .svg is both the asset and its own source; there is no render step between authoring and committing",
+    "The style catalog holds 32 named idioms, one resolved per repo",
+    "svg_check.py applies nine check classes to every visual: structural, seam, motion a11y, legibility, system, style, fidelity, size and diagram",
+    "Zero svg_check.py errors is required before a visual may be embedded",
+    "Animated visuals loop seam-exact at the declared data-loop-s"
+  ],
+  "facts_hash": "786dfce162bfd113006a3fa0b4a84dedf2a1083a9592489c5dfd512e950bd218",
+  "src_hash": "9c0ec5e81e3f6a092e3ac9d4043e24bf054de4119707baa1e8a0aebc8d61b74c",
+  "design_hash": "a99906390738999c26cb86b409e5324f1f289520e6b8f4fa69647ebfae88f7ad",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 10801
+  },
+  "relaxed": [],
+  "budget_cuts": []
+}

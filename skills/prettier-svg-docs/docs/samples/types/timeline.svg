@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520" role="img" data-loop-s="12" data-diagram="timeline" data-bg="background">
+<title>Timeline — this repository's release history</title>
+<desc>Seven dated events on one axis at 96 units per day, all in 2026: the repo scaffold on 24 July, the checker's fidelity floor on 25 July, the pd namespace rename on 26 July, the static sibling on 27 July, the thirty-second catalog style on 28 July, then after a marked fifteen-day break the current HEAD on 12 August and the diagram grammar on 14 August. The two accented milestones are the two gates that were made opt-in, joined by a connector below the axis. A read head sweeps the axis once per loop.</desc>
+<defs>
+  <filter id="tl-e1" x="-40%" y="-40%" width="180%" height="180%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="var(--background)" flood-opacity="0.55"/>
+  </filter>
+  <marker id="tl-a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+    <path d="M0,1 L9,5 L0,9 Z" fill="var(--accent-primary)"/>
+  </marker>
+</defs>
+<style>
+svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8; --accent-primary:#e0a33e; --warn:#e2725b; }
+  .kick { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); letter-spacing: 1.5px; }
+  .hd   { font: 700 28px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .nm   { font: 600 20px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .sb   { font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .dt   { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); letter-spacing: 1px; }
+  .el   { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--ink); }
+  .lg   { font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .rule { stroke: var(--dim); stroke-opacity: 0.45; stroke-width: 1; }
+  .lead { stroke: var(--dim); stroke-opacity: 0.55; stroke-width: 1; }
+  .head { fill: var(--accent-primary); animation: tl-sweep 12s linear infinite; }
+  .halo { fill: none; stroke: var(--accent-primary); stroke-width: 2; opacity: 0;
+          animation: tl-halo 6s ease-in-out infinite; }
+  .h2   { animation-delay: -3s }
+  @keyframes tl-sweep {
+    0%   { transform: translateX(0px); opacity: 0 }
+    8%   { opacity: .85 }
+    92%  { opacity: .85 }
+    100% { transform: translateX(1080px); opacity: 0 }
+  }
+  @keyframes tl-halo {
+    0%   { opacity: 0 }
+    50%  { opacity: .55 }
+    100% { opacity: 0 }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .head { animation: none; opacity: 0 }
+    .halo { animation: none; opacity: .35 }
+  }
+</style>
+
+<rect x="0" y="0" width="1200" height="520" fill="var(--background)"/>
+<text class="kick" data-role="metadata" x="40" y="40">PRETTIER-SVG-DOCS · TIMELINE</text>
+<text class="hd" data-role="essential" x="40" y="76">What this repository did, and when</text>
+
+<!-- the axis: two true-scale segments with the elided span marked between them -->
+<line class="rule" x1="80" y1="260" x2="568" y2="260"/>
+<line class="rule" x1="808" y1="260" x2="1160" y2="260"/>
+<line class="rule" x1="568" y1="244" x2="568" y2="276"/>
+<line class="rule" x1="808" y1="244" x2="808" y2="276"/>
+<text class="dt" data-role="metadata" x="688" y="292" text-anchor="middle">15 DAYS ELIDED</text>
+<rect class="head" x="80" y="240" width="4" height="40"/>
+
+<!-- the one connector: both milestones made their gate opt-in the same way -->
+<path data-edge="" d="M216,276 V404 Q216,412 224,412 H1056 Q1064,412 1064,404 V272" fill="none" stroke="var(--accent-primary)" stroke-width="1.5" stroke-dasharray="4,4" marker-end="url(#tl-a)"/>
+<rect data-label="" x="640" y="382" width="120" height="22" rx="4" fill="var(--background)"/>
+<text class="el" data-role="metadata" x="700" y="398" text-anchor="middle">SAME OPT-IN</text>
+
+<!-- ticks and dates -->
+<line class="rule" x1="120" y1="252" x2="120" y2="268"/>
+<text class="dt" data-role="metadata" x="120" y="292" text-anchor="middle">JUL 24</text>
+<line class="rule" x1="216" y1="252" x2="216" y2="268"/>
+<rect x="180" y="276" width="72" height="20" fill="var(--background)"/>
+<text class="dt" data-role="metadata" x="216" y="292" text-anchor="middle">JUL 25</text>
+<line class="rule" x1="312" y1="252" x2="312" y2="268"/>
+<text class="dt" data-role="metadata" x="312" y="292" text-anchor="middle">JUL 26</text>
+<line class="rule" x1="408" y1="252" x2="408" y2="268"/>
+<text class="dt" data-role="metadata" x="408" y="292" text-anchor="middle">JUL 27</text>
+<line class="rule" x1="504" y1="252" x2="504" y2="268"/>
+<text class="dt" data-role="metadata" x="504" y="292" text-anchor="middle">JUL 28</text>
+<line class="rule" x1="872" y1="252" x2="872" y2="268"/>
+<text class="dt" data-role="metadata" x="872" y="292" text-anchor="middle">AUG 12</text>
+<line class="rule" x1="1064" y1="252" x2="1064" y2="268"/>
+<rect x="1028" y="276" width="72" height="20" fill="var(--background)"/>
+<text class="dt" data-role="metadata" x="1064" y="292" text-anchor="middle">AUG 14</text>
+
+<!-- events -->
+<g data-node="" data-bg="background">
+  <line class="lead" x1="120" y1="268" x2="120" y2="348"/>
+  <circle cx="120" cy="260" r="6" fill="var(--dim)" filter="url(#tl-e1)"/>
+  <text class="nm" data-role="label" x="120" y="364" text-anchor="middle">Repo scaffold</text>
+  <text class="sb" data-role="metadata" x="120" y="384" text-anchor="middle">3f6ce90</text>
+</g>
+<g data-node="" data-focal="" data-bg="background">
+  <line class="lead" x1="216" y1="252" x2="216" y2="180"/>
+  <circle class="halo" cx="216" cy="260" r="16"/>
+  <circle cx="216" cy="260" r="8" fill="var(--accent-primary)" filter="url(#tl-e1)"/>
+  <text class="nm" data-role="label" x="216" y="148" text-anchor="middle">Fidelity floor</text>
+  <text class="sb" data-role="metadata" x="216" y="168" text-anchor="middle">data-specimen</text>
+</g>
+<g data-node="" data-bg="background">
+  <line class="lead" x1="312" y1="268" x2="312" y2="348"/>
+  <circle cx="312" cy="260" r="6" fill="var(--dim)" filter="url(#tl-e1)"/>
+  <text class="nm" data-role="label" x="312" y="364" text-anchor="middle">pd: namespace</text>
+  <text class="sb" data-role="metadata" x="312" y="384" text-anchor="middle">mpd: retired</text>
+</g>
+<g data-node="" data-bg="background">
+  <line class="lead" x1="408" y1="252" x2="408" y2="180"/>
+  <circle cx="408" cy="260" r="6" fill="var(--dim)" filter="url(#tl-e1)"/>
+  <text class="nm" data-role="label" x="408" y="148" text-anchor="middle">Static sibling</text>
+  <text class="sb" data-role="metadata" x="408" y="168" text-anchor="middle">pretty-plain-docs</text>
+</g>
+<g data-node="" data-bg="background">
+  <line class="lead" x1="504" y1="268" x2="504" y2="348"/>
+  <circle cx="504" cy="260" r="6" fill="var(--dim)" filter="url(#tl-e1)"/>
+  <text class="nm" data-role="label" x="504" y="364" text-anchor="middle">32nd style</text>
+  <text class="sb" data-role="metadata" x="504" y="384" text-anchor="middle">soft-vinyl</text>
+</g>
+<g data-node="" data-bg="background">
+  <line class="lead" x1="872" y1="268" x2="872" y2="348"/>
+  <circle cx="872" cy="260" r="6" fill="var(--dim)" filter="url(#tl-e1)"/>
+  <text class="nm" data-role="label" x="872" y="364" text-anchor="middle">HEAD on stage</text>
+  <text class="sb" data-role="metadata" x="872" y="384" text-anchor="middle">5b6c78f</text>
+</g>
+<g data-node="" data-focal="" data-bg="background">
+  <line class="lead" x1="1064" y1="252" x2="1064" y2="180"/>
+  <circle class="halo h2" cx="1064" cy="260" r="16"/>
+  <circle cx="1064" cy="260" r="8" fill="var(--accent-primary)" filter="url(#tl-e1)"/>
+  <text class="nm" data-role="label" x="1064" y="148" text-anchor="middle">Diagram grammar</text>
+  <text class="sb" data-role="metadata" x="1064" y="168" text-anchor="middle">27 types, staged</text>
+</g>
+
+<!-- legend -->
+<g data-legend="">
+  <line class="rule" x1="40" y1="448" x2="1160" y2="448"/>
+  <text class="lg" data-role="metadata" x="40" y="476">LEGEND</text>
+  <circle cx="168" cy="471" r="6" fill="var(--dim)"/>
+  <text class="lg" data-role="metadata" x="184" y="476">commit</text>
+  <circle cx="304" cy="471" r="8" fill="var(--accent-primary)"/>
+  <text class="lg" data-role="metadata" x="322" y="476">milestone</text>
+  <text class="lg" data-role="metadata" x="480" y="476">1 day = 96 units, every date 2026</text>
+  <text class="lg" data-role="metadata" x="880" y="476">spacing is the claim</text>
+</g>
+</svg>

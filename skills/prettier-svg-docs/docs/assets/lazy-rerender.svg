@@ -1,0 +1,184 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 780" width="1200" height="780"
+     role="img" data-loop-s="12" data-bg="background" data-diagram="flowchart">
+  <title>How a re-author is decided</title>
+  <desc>A flowchart. A zone at the top holds the six triggers, any one of which fires:
+three hash comparisons — facts_hash, the facts the visual depicts; src_hash, the committed
+svg; and design_hash, the project's prettydocs.md, which moves every visual at once — and
+three states that are not hashes at all: the asset missing from its path, a marker
+disagreeing with viz.json, and a run forced with refresh-viz. A status dot visits the six
+in turn. One connector leaves the zone for the decision, a diamond reading "any fired?".
+Its YES exit runs right to re-author, which rebuilds that one visual and commits fresh
+hashes. Its NO exit elbows down and left to the accent-filled verdict: reuse — the embed
+may be rewritten, but nothing is rendered. A prose-only edit moves no hash, re-authors
+nothing, and lands there.</desc>
+
+  <style>
+    svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb;
+          --dim:#9fc4e8; --accent:#e0a33e; }
+
+    .bg    { fill: var(--background); }
+    .cell  { fill: var(--surface); stroke: var(--dim); stroke-width: 1; }
+    .focal { fill: var(--accent); stroke: none; }
+    .zone  { fill: var(--ink); fill-opacity: 0.03;
+             stroke: var(--dim); stroke-opacity: 0.35; stroke-width: 1; }
+    .mask  { fill: var(--background); }
+    .tag   { fill: none; stroke: var(--dim); stroke-width: 1; }
+    .edge  { fill: none; stroke: var(--dim); stroke-width: 1.5; }
+
+    .h     { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 44px; font-weight: 700; letter-spacing: -0.5px; }
+    .lab   { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 23px; font-weight: 600; }
+    .eye   { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 18px; font-weight: 600; letter-spacing: 1.4px; }
+    .tag-t { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 16px; font-weight: 600; letter-spacing: 1.4px; }
+    .elab  { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 18px; font-weight: 700; letter-spacing: 1.4px; }
+    .name  { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 26px; font-weight: 700; }
+    .name-m{ fill: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 26px; font-weight: 700; }
+    .sub   { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 18px; font-weight: 600; }
+    .dia   { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 26px; font-weight: 700; }
+    .term  { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 30px; font-weight: 700; }
+    .verd  { fill: var(--background); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 40px; font-weight: 700; }
+    .verd-s{ fill: var(--background); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 18px; font-weight: 600; }
+    .cap   { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 20px; font-weight: 600; }
+
+    /* motion — one idea, and it moves no geometry. A status pulse visits the six
+       triggers in turn: opacity only, on a marker that carries no text. 6s divides
+       12s twice; the negative delays stagger the six without adding time. */
+    .dot { fill: var(--dim); animation: live 6s ease-in-out infinite; }
+    .n1 { animation-delay: 0s; }
+    .n2 { animation-delay: -1s; }
+    .n3 { animation-delay: -2s; }
+    .n4 { animation-delay: -3s; }
+    .n5 { animation-delay: -4s; }
+    .n6 { animation-delay: -5s; }
+    @keyframes live { 0%, 22%, 100% { opacity: .22 } 6%, 14% { opacity: 1 } }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dot { animation: none; opacity: 1; }
+    }
+  </style>
+
+  <defs>
+    <marker id="arrow" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="10"
+            refX="12" refY="5" orient="auto">
+      <path d="M0,0 L12,5 L0,10 Z" fill="var(--dim)"/>
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="780"/>
+
+  <text class="eye" x="40" y="60">RE-AUTHOR DECISION</text>
+  <text class="h"   x="40" y="108" data-role="title">lazy re-author</text>
+  <text class="lab" x="1160" y="100" text-anchor="end">one trigger rebuilds one visual</text>
+
+  <!-- zone: the six triggers, drawn before connectors and nodes -->
+  <g data-zone="true">
+    <rect class="zone" x="24" y="136" width="1152" height="284" rx="16"/>
+    <rect class="mask" x="40" y="144" width="404" height="20" rx="6"/>
+    <text class="eye" x="52" y="159" data-role="metadata">THE SIX TRIGGERS — ANY ONE FIRES</text>
+  </g>
+
+  <!-- connectors -->
+  <path class="edge" data-edge="true" d="M600,424 V456" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="true" d="M694,520 H756" marker-end="url(#arrow)"/>
+  <path class="edge" data-edge="true" d="M600,584 V602 Q600,612 590,612 H330 Q320,612 320,622 V636"
+        marker-end="url(#arrow)"/>
+
+  <!-- connector labels: masked plates, 8 units clear of every stroke -->
+  <rect class="mask" data-label="true" x="697" y="490" width="56" height="22" rx="6"/>
+  <text class="elab" x="725" y="506" data-role="metadata" text-anchor="middle">YES</text>
+  <rect class="mask" data-label="true" x="428" y="582" width="64" height="22" rx="6"/>
+  <text class="elab" x="460" y="598" data-role="metadata" text-anchor="middle">NO</text>
+
+  <!-- trigger nodes, row 1: the three hashes -->
+  <g data-node="true" data-bg="surface">
+    <rect class="mask" x="40" y="184" width="360" height="96" rx="16"/>
+    <rect class="cell" x="40" y="184" width="360" height="96" rx="16"/>
+    <rect class="tag"  x="60" y="200" width="84" height="20" rx="6"/>
+    <text class="tag-t" x="102" y="215" data-role="metadata" text-anchor="middle">HASH</text>
+    <text class="name-m" x="60" y="246">facts_hash</text>
+    <text class="sub"    x="60" y="270" data-role="metadata">moved — the facts it depicts</text>
+    <circle class="dot n1" cx="370" cy="208" r="8"/>
+  </g>
+  <g data-node="true" data-bg="surface">
+    <rect class="mask" x="420" y="184" width="360" height="96" rx="16"/>
+    <rect class="cell" x="420" y="184" width="360" height="96" rx="16"/>
+    <rect class="tag"  x="440" y="200" width="84" height="20" rx="6"/>
+    <text class="tag-t" x="482" y="215" data-role="metadata" text-anchor="middle">HASH</text>
+    <text class="name-m" x="440" y="246">src_hash</text>
+    <text class="sub"    x="440" y="270" data-role="metadata">moved — the committed .svg</text>
+    <circle class="dot n2" cx="750" cy="208" r="8"/>
+  </g>
+  <g data-node="true" data-bg="surface">
+    <rect class="mask" x="800" y="184" width="360" height="96" rx="16"/>
+    <rect class="cell" x="800" y="184" width="360" height="96" rx="16"/>
+    <rect class="tag"  x="820" y="200" width="84" height="20" rx="6"/>
+    <text class="tag-t" x="862" y="215" data-role="metadata" text-anchor="middle">HASH</text>
+    <text class="name-m" x="820" y="246">design_hash</text>
+    <text class="sub"    x="820" y="270" data-role="metadata">prettydocs.md — every visual at once</text>
+    <circle class="dot n3" cx="1130" cy="208" r="8"/>
+  </g>
+
+  <!-- trigger nodes, row 2: the three that are not hashes -->
+  <g data-node="true" data-bg="surface">
+    <rect class="mask" x="40" y="300" width="360" height="96" rx="16"/>
+    <rect class="cell" x="40" y="300" width="360" height="96" rx="16"/>
+    <rect class="tag"  x="60" y="316" width="84" height="20" rx="6"/>
+    <text class="tag-t" x="102" y="331" data-role="metadata" text-anchor="middle">STATE</text>
+    <text class="name"  x="60" y="362">asset missing</text>
+    <text class="sub"   x="60" y="386" data-role="metadata">no .svg at its path</text>
+    <circle class="dot n4" cx="370" cy="324" r="8"/>
+  </g>
+  <g data-node="true" data-bg="surface">
+    <rect class="mask" x="420" y="300" width="360" height="96" rx="16"/>
+    <rect class="cell" x="420" y="300" width="360" height="96" rx="16"/>
+    <rect class="tag"  x="440" y="316" width="84" height="20" rx="6"/>
+    <text class="tag-t" x="482" y="331" data-role="metadata" text-anchor="middle">STATE</text>
+    <text class="name-m" x="440" y="362">marker ≠ viz.json</text>
+    <text class="sub"    x="440" y="386" data-role="metadata">the two disagree</text>
+    <circle class="dot n5" cx="750" cy="324" r="8"/>
+  </g>
+  <g data-node="true" data-bg="surface">
+    <rect class="mask" x="800" y="300" width="360" height="96" rx="16"/>
+    <rect class="cell" x="800" y="300" width="360" height="96" rx="16"/>
+    <rect class="tag"  x="820" y="316" width="84" height="20" rx="6"/>
+    <text class="tag-t" x="862" y="331" data-role="metadata" text-anchor="middle">FORCED</text>
+    <text class="name-m" x="820" y="362">--refresh-viz</text>
+    <text class="sub"    x="820" y="386" data-role="metadata">the run was forced</text>
+    <circle class="dot n6" cx="1130" cy="324" r="8"/>
+  </g>
+
+  <!-- the decision -->
+  <g data-node="true" data-bg="surface">
+    <path class="cell" d="M600,460 L690,520 L600,580 L510,520 Z"/>
+    <text class="dia" x="600" y="528" text-anchor="middle">any fired?</text>
+  </g>
+
+  <!-- outcomes -->
+  <g data-node="true" data-bg="surface">
+    <rect class="mask" x="760" y="472" width="400" height="96" rx="48"/>
+    <rect class="cell" x="760" y="472" width="400" height="96" rx="48"/>
+    <text class="term" x="960" y="518" text-anchor="middle">re-author</text>
+    <text class="sub"  x="960" y="546" data-role="metadata" text-anchor="middle">that one visual — fresh hashes</text>
+  </g>
+  <g data-node="true" data-focal="true" data-bg="accent-primary">
+    <rect class="mask"  x="40" y="640" width="560" height="96" rx="48"/>
+    <rect class="focal" x="40" y="640" width="560" height="96" rx="48"/>
+    <text class="verd"   x="320" y="686" text-anchor="middle">reuse</text>
+    <text class="verd-s" x="320" y="714" data-role="metadata" text-anchor="middle">the embed may be rewritten; nothing is rendered</text>
+  </g>
+
+  <text class="cap" x="656" y="684" data-role="essential">a prose-only edit moves no hash —</text>
+  <text class="cap" x="656" y="712" data-role="essential">it re-authors nothing, and lands here</text>
+</svg>

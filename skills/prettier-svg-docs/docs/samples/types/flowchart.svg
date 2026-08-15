@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 776" width="1200" height="776" role="img" data-loop-s="12" data-diagram="flowchart" data-bg="background">
+<title>Flowchart — the RE-RENDER decision</title>
+<desc>Each visual enters the plan phase and falls through three questions in order: has any hash moved, does the disk differ from the manifest, was the run forced. A yes on any of them routes right and down to RE-AUTHOR; only a no on all three reaches REUSE. The legend numbers the six triggers the three questions cover.</desc>
+<defs>
+  <filter id="fc-e1" x="-30%" y="-30%" width="160%" height="160%">
+    <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="var(--shadow)" flood-opacity="0.38"/>
+  </filter>
+  <marker id="fc-ar" viewBox="0 0 10 10" refX="9.5" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+    <path d="M0,0 L10,5 L0,10 Z" fill="var(--dim)"/>
+  </marker>
+</defs>
+<style>
+svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8; --accent:#e0a33e; --warn:#e2725b; --shadow:#000000; }
+  .name { font: 700 18px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--ink); }
+  .onacc { font: 700 18px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--background); }
+  .sub { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--dim); }
+  .eyebrow { font: 600 16px -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif; fill: var(--dim); letter-spacing: .5px; }
+  .item { font: 400 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--ink); }
+  .edgelabel { font: 600 16px ui-monospace, SFMono-Regular, Menlo, monospace; fill: var(--ink); }
+  .box { fill: var(--surface); stroke: var(--ink); stroke-width: 1.25; filter: url(#fc-e1); }
+  .focalbox { fill: var(--accent); stroke: var(--accent); stroke-width: 1.25; filter: url(#fc-e1); }
+  .edge { fill: none; stroke: var(--dim); stroke-width: 1.5; }
+  .plate { fill: var(--background); }
+  .flow { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round;
+          stroke-dasharray: 18 1000; animation: fc-march 6s linear infinite; }
+  .f2 { animation-delay: -2s; }
+  .f3 { animation-delay: -4s; }
+  .vp { animation: fc-vp 6s ease-in-out infinite; }
+  @keyframes fc-march { from { stroke-dashoffset: 1018 } to { stroke-dashoffset: 0 } }
+  @keyframes fc-vp { 0%, 100% { opacity: .12 } 50% { opacity: .5 } }
+  @media (prefers-reduced-motion: reduce) {
+    .flow { animation: none; opacity: 0 }
+    .vp { animation: none; opacity: .12 }
+  }
+</style>
+<rect x="0" y="0" width="1200" height="776" fill="var(--background)"/>
+<text class="eyebrow" x="40" y="28" data-role="metadata" data-bg="background">FLOWCHART — WHEN A VISUAL IS RE-AUTHORED</text>
+
+<!-- connectors: the no spine down the left, the yes branches right -->
+<line class="edge" data-edge="" x1="300" y1="96" x2="300" y2="128" marker-end="url(#fc-ar)"/>
+<line class="edge" data-edge="" x1="300" y1="248" x2="300" y2="288" marker-end="url(#fc-ar)"/>
+<line class="edge" data-edge="" x1="300" y1="408" x2="300" y2="448" marker-end="url(#fc-ar)"/>
+<line class="edge" data-edge="" x1="300" y1="568" x2="300" y2="616" marker-end="url(#fc-ar)"/>
+<path class="edge" data-edge="" d="M390,188 H964 Q974,188 974,198 V616" marker-end="url(#fc-ar)"/>
+<path class="edge" data-edge="" d="M390,348 H926 Q936,348 936,358 V616" marker-end="url(#fc-ar)"/>
+<path class="edge" data-edge="" d="M390,508 H888 Q898,508 898,518 V616" marker-end="url(#fc-ar)"/>
+
+<path class="flow" d="M390,188 H964 Q974,188 974,198 V616"/>
+<path class="flow f2" d="M390,348 H926 Q936,348 936,358 V616"/>
+<path class="flow f3" d="M390,508 H888 Q898,508 898,518 V616"/>
+
+<!-- connector labels: every branch out of a diamond is named -->
+<rect class="plate" data-label="" x="460" y="156" width="64" height="24" rx="4"/>
+<text class="edgelabel" x="492" y="174" text-anchor="middle" data-role="metadata" data-bg="background">YES</text>
+<rect class="plate" data-label="" x="460" y="316" width="64" height="24" rx="4"/>
+<text class="edgelabel" x="492" y="334" text-anchor="middle" data-role="metadata" data-bg="background">YES</text>
+<rect class="plate" data-label="" x="460" y="476" width="64" height="24" rx="4"/>
+<text class="edgelabel" x="492" y="494" text-anchor="middle" data-role="metadata" data-bg="background">YES</text>
+<rect class="plate" data-label="" x="308" y="256" width="64" height="24" rx="4"/>
+<text class="edgelabel" x="340" y="274" text-anchor="middle" data-role="metadata" data-bg="background">NO</text>
+<rect class="plate" data-label="" x="308" y="416" width="64" height="24" rx="4"/>
+<text class="edgelabel" x="340" y="434" text-anchor="middle" data-role="metadata" data-bg="background">NO</text>
+<rect class="plate" data-label="" x="308" y="576" width="64" height="24" rx="4"/>
+<text class="edgelabel" x="340" y="594" text-anchor="middle" data-role="metadata" data-bg="background">NO</text>
+
+<!-- nodes -->
+<g data-node="" data-bg="surface">
+  <rect class="box" x="224" y="40" width="152" height="56" rx="28"/>
+  <text class="name" x="300" y="74" text-anchor="middle" data-role="label" data-bg="surface">Each visual</text>
+</g>
+<g data-node="" data-bg="surface">
+  <path class="box" d="M300,128 L390,188 L300,248 L210,188 Z"/>
+  <text class="name" x="300" y="182" text-anchor="middle" data-role="label" data-bg="surface">Hash moved?</text>
+  <text class="sub" x="300" y="206" text-anchor="middle" data-role="metadata" data-bg="surface">1 · 2 · 3</text>
+</g>
+<g data-node="" data-bg="surface">
+  <path class="box" d="M300,288 L390,348 L300,408 L210,348 Z"/>
+  <text class="name" x="300" y="342" text-anchor="middle" data-role="label" data-bg="surface">Disk differs?</text>
+  <text class="sub" x="300" y="366" text-anchor="middle" data-role="metadata" data-bg="surface">4 · 5</text>
+</g>
+<g data-node="" data-bg="surface">
+  <path class="box" d="M300,448 L390,508 L300,568 L210,508 Z"/>
+  <text class="name" x="300" y="502" text-anchor="middle" data-role="label" data-bg="surface">Forced?</text>
+  <text class="sub" x="300" y="526" text-anchor="middle" data-role="metadata" data-bg="surface">6</text>
+</g>
+<g data-node="" data-bg="surface">
+  <rect class="box" x="224" y="616" width="152" height="56" rx="28"/>
+  <text class="name" x="300" y="650" text-anchor="middle" data-role="label" data-bg="surface">REUSE</text>
+</g>
+<rect class="vp" x="852" y="608" width="168" height="72" rx="36" fill="none" stroke="var(--accent)" stroke-width="2" opacity=".12"/>
+<g data-node="" data-focal="" data-bg="accent-primary">
+  <rect class="focalbox" x="860" y="616" width="152" height="56" rx="28"/>
+  <text class="onacc" x="936" y="650" text-anchor="middle" data-role="label" data-bg="accent-primary">RE-AUTHOR</text>
+</g>
+
+<!-- legend: the six triggers the three questions stand for -->
+<g data-legend="">
+  <line x1="40" y1="696" x2="1160" y2="696" stroke="var(--dim)" stroke-width="1" stroke-opacity=".4"/>
+  <text class="eyebrow" x="40" y="722" data-role="metadata" data-bg="background">RE-RENDER</text>
+  <text class="eyebrow" x="40" y="750" data-role="metadata" data-bg="background">TRIGGERS</text>
+  <text class="item" x="280" y="722" data-role="metadata" data-bg="background">1 facts_hash</text>
+  <text class="item" x="560" y="722" data-role="metadata" data-bg="background">2 src_hash</text>
+  <text class="item" x="840" y="722" data-role="metadata" data-bg="background">3 design_hash</text>
+  <text class="item" x="280" y="750" data-role="metadata" data-bg="background">4 asset missing</text>
+  <text class="item" x="560" y="750" data-role="metadata" data-bg="background">5 marker ≠ manifest</text>
+  <text class="item" x="840" y="750" data-role="metadata" data-bg="background">6 --refresh-viz</text>
+</g>
+</svg>

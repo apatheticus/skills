@@ -1,0 +1,240 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 504" width="1200" height="504"
+     role="img" data-loop-s="12" data-diagram="high-level" data-bg="background">
+  <title>One prettier-svg-docs run, phase by phase, on a single cluster</title>
+  <desc>The repository sits outside a dashed boundary on the left. Inside the run, an
+orchestration bar spans the top and drops schedule triggers into the phases it starts. The
+phases run left to right under a chevron banner — evidence, design system, plan, then apply
+(docs, then visuals), then verify and report. A band below the run carries
+.github/docsmeta.json, the answers persisted once per repo. The banner walks phase by phase
+on a twelve-second seamless cycle; nothing on the board moves.</desc>
+  <defs>
+    <g id="ic-github" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" /></g>
+    <g id="ic-search" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" /> <path d="M21 21l-6 -6" /></g>
+    <g id="ic-file" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2" /></g>
+    <g id="ic-pipeline" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 18a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M5 6a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M15 12a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" /> <path d="M7 8l0 8" /> <path d="M7 8a4 4 0 0 0 4 4h4" /></g>
+    <g id="ic-txt" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M14 3v4a1 1 0 0 0 1 1h4" /> <path d="M16.5 15h3" /> <path d="M5 12v-7a2 2 0 0 1 2 -2h7l5 5v4" /> <path d="M4.5 15h3" /> <path d="M6 15v6" /> <path d="M18 15v6" /> <path d="M10 15l4 6" /> <path d="M10 21l4 -6" /></g>
+    <g id="ic-node" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 18a2 2 0 1 0 -4 0a2 2 0 0 0 4 0" /> <path d="M20 6a2 2 0 1 0 -4 0a2 2 0 0 0 4 0" /> <path d="M8 6a2 2 0 1 0 -4 0a2 2 0 0 0 4 0" /> <path d="M20 18a2 2 0 1 0 -4 0a2 2 0 0 0 4 0" /> <path d="M14 12a2 2 0 1 0 -4 0a2 2 0 0 0 4 0" /> <path d="M7.5 7.5l3 3" /> <path d="M7.5 16.5l3 -3" /> <path d="M13.5 13.5l3 3" /> <path d="M16.5 7.5l-3 3" /></g>
+    <g id="ic-test" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 8.04l-12.122 12.124a2.857 2.857 0 1 1 -4.041 -4.04l12.122 -12.124" /> <path d="M7 13h8" /> <path d="M19 15l1.5 1.6a2 2 0 1 1 -3 0l1.5 -1.6" /> <path d="M15 3l6 6" /></g>
+    <g id="ic-terminal" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7l5 5l-5 5" /> <path d="M12 19l7 0" /></g>
+    <g id="ic-sync" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8.1 8.1 0 0 0 -15.5 -2m-.5 -4v4h4" /> <path d="M4 13a8.1 8.1 0 0 0 15.5 2m.5 4v-4h-4" /></g>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="var(--shadow)"
+                    flood-opacity="0.28"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6"
+            orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="var(--dim)"/>
+    </marker>
+  </defs>
+  <style>
+    svg {
+      --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8;
+      --accent:#e0a33e; --shadow:#000000;
+      font-family:-apple-system,'Segoe UI',Helvetica,Arial,sans-serif;
+    }
+    .bg { fill:var(--background); }
+    .mask { fill:var(--background); }
+    .card { fill:var(--surface); stroke:var(--ink); stroke-width:1.25; filter:url(#e1); }
+    .focal { stroke:var(--accent); stroke-width:2.5; }
+    .icon { color:var(--dim); }
+    .name { fill:var(--ink); font-size:20px; font-weight:600; }
+    .sub { fill:var(--dim); font-size:16px;
+            font-family:ui-monospace,SFMono-Regular,Menlo,monospace; }
+    .zone { fill:var(--ink); fill-opacity:0.02; stroke:var(--dim); stroke-opacity:0.3;
+             stroke-width:1; }
+    .srczone { fill:var(--ink); fill-opacity:0.02; stroke:var(--dim); stroke-opacity:0.5;
+                stroke-width:1; stroke-dasharray:4 4; }
+    .plate { fill:var(--background); }
+    .eyebrow { fill:var(--dim); font-size:16px; letter-spacing:1px; font-weight:600; }
+    .banditem { fill:var(--dim); font-size:16px; }
+    .edgelabel { fill:var(--dim); font-size:16px; letter-spacing:0.5px; }
+    .legenditem { fill:var(--dim); font-size:16px; }
+    .rule { stroke:var(--dim); stroke-opacity:0.3; stroke-width:1; }
+    .sw-focal { fill:none; stroke:var(--accent); stroke-width:2.5; }
+    .sw-chev { fill:var(--surface); stroke:var(--dim); stroke-width:1; }
+    .sw-drop { stroke:var(--dim); stroke-width:1.5; stroke-dasharray:4 4; }
+    .edge { fill:none; stroke:var(--dim); stroke-width:1.5; marker-end:url(#arrow); }
+    .drop { stroke-dasharray:4 4; }
+    .chlabel { fill:var(--ink); font-size:16px; letter-spacing:1px; font-weight:600; }
+    .chev { fill:var(--surface); stroke:var(--dim); stroke-opacity:0.4; stroke-width:1;
+             animation:phase 12s ease-in-out infinite; }
+    .ch1 { animation-delay:-2s; }
+    .ch2 { animation-delay:-4s; }
+    .ch3 { animation-delay:-6s; }
+    .ch4 { animation-delay:-8s; }
+    .ch5 { animation-delay:-10s; }
+    @keyframes phase {
+      0%   { opacity:0.62; }
+      6%   { opacity:1; }
+      14%  { opacity:0.62; }
+      100% { opacity:0.62; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .chev { animation:none; opacity:0.62; }
+    }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1200" height="504"/>
+
+  <polygon class="chev ch0" points="32,8 200,8 216,24 200,40 32,40"/>
+  <text class="chlabel" x="124" y="30" data-role="metadata" data-bg="surface"
+        text-anchor="middle">SOURCE</text>
+  <polygon class="chev ch1" points="216,8 384,8 400,24 384,40 216,40 232,24" fill-opacity="0.72"/>
+  <text class="chlabel" x="308" y="30" data-role="metadata" data-bg="surface"
+        text-anchor="middle">EVIDENCE</text>
+  <polygon class="chev ch2" points="400,8 568,8 584,24 568,40 400,40 416,24"/>
+  <text class="chlabel" x="492" y="30" data-role="metadata" data-bg="surface"
+        text-anchor="middle">DESIGN</text>
+  <polygon class="chev ch3" points="584,8 752,8 768,24 752,40 584,40 600,24" fill-opacity="0.72"/>
+  <text class="chlabel" x="676" y="30" data-role="metadata" data-bg="surface"
+        text-anchor="middle">PLAN</text>
+  <polygon class="chev ch4" points="768,8 936,8 952,24 936,40 768,40 784,24"/>
+  <text class="chlabel" x="860" y="30" data-role="metadata" data-bg="surface"
+        text-anchor="middle">APPLY</text>
+  <polygon class="chev ch5" points="952,8 1136,8 1136,40 952,40 968,24" fill-opacity="0.72"/>
+  <text class="chlabel" x="1044" y="30" data-role="metadata" data-bg="surface"
+        text-anchor="middle">VERIFY · REPORT</text>
+
+  <g data-zone="">
+    <rect class="srczone" x="32" y="64" width="176" height="296" rx="8"/>
+    <rect class="plate" x="48" y="54" width="112" height="20" rx="4"/>
+    <text class="eyebrow" x="60" y="69" data-role="metadata"
+          data-bg="background">OUTSIDE</text>
+  </g>
+  <g data-zone="">
+    <rect class="zone" x="216" y="64" width="920" height="296" rx="8"/>
+    <rect class="plate" x="232" y="54" width="152" height="20" rx="4"/>
+    <text class="eyebrow" x="244" y="69" data-role="metadata"
+          data-bg="background">THE SKILL RUN</text>
+  </g>
+  <g data-zone="">
+    <rect class="zone" x="32" y="380" width="1104" height="48" rx="8"/>
+    <rect class="plate" x="48" y="370" width="212" height="20" rx="4"/>
+    <text class="eyebrow" x="60" y="385" data-role="metadata"
+          data-bg="background">.GITHUB/DOCSMETA.JSON</text>
+    <rect class="plate" x="48" y="394" width="576" height="24" rx="4"/>
+    <text class="banditem" x="60" y="411" data-role="metadata"
+          data-bg="background">holder, license, style — asked once, then every run is unattended</text>
+  </g>
+
+  <polygon class="chev" points="1152,64 1188,64 1188,140 1170,156 1152,140"/>
+  <text class="chlabel" x="1170" y="110" data-role="metadata"
+        data-bg="surface" text-anchor="middle"
+        transform="rotate(-90 1170 110)">SCHEDULE</text>
+  <polygon class="chev" fill-opacity="0.72" points="1152,380 1188,380 1188,412 1170,428 1152,412"/>
+  <text class="chlabel" x="1170" y="406" data-role="metadata"
+        data-bg="surface" text-anchor="middle"
+        transform="rotate(-90 1170 406)">STATE</text>
+
+  <path data-edge="" class="edge" d="M 200,200 H 232"/>
+  <path data-edge="" class="edge" d="M 384,200 H 416"/>
+  <path data-edge="" class="edge" d="M 568,200 H 600"/>
+  <path data-edge="" class="edge" d="M 752,200 H 784"/>
+  <path data-edge="" class="edge" d="M 860,240 V 260"/>
+  <path data-edge="" class="edge" d="M 936,300 H 944 Q 952,300 952,292 V 208 Q 952,200 960,200 H 968"/>
+  <path data-edge="" class="edge" d="M 1044,240 V 260"/>
+  <path data-edge="" class="edge drop" d="M 308,132 V 160"/>
+  <path data-edge="" class="edge drop" d="M 860,132 V 160"/>
+  <path data-edge="" class="edge drop" d="M 1044,132 V 160"/>
+
+  <rect data-label="" class="plate" x="316" y="134" width="108" height="24" rx="4"/>
+  <text class="edgelabel" x="370" y="151" data-role="metadata" data-bg="background"
+        text-anchor="middle">SCHEDULES</text>
+
+  <g data-node="">
+    <rect class="mask" x="48" y="160" width="152" height="80" rx="8"/>
+    <rect class="card" x="48" y="160" width="152" height="80" rx="8"/>
+    <use class="icon" href="#ic-github" transform="translate(60,172)"/>
+    <text class="name" x="124" y="212" data-role="label" data-bg="surface"
+          text-anchor="middle">Repository</text>
+    <text class="sub" x="124" y="232" data-role="metadata" data-bg="surface"
+          text-anchor="middle">docs, CI, git</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="232" y="80" width="888" height="52" rx="8"/>
+    <rect class="card" x="232" y="80" width="888" height="52" rx="8"/>
+    <use class="icon" href="#ic-sync" transform="translate(248,94)"/>
+    <text class="name" x="288" y="114" data-role="label"
+          data-bg="surface">prettier-svg-docs run</text>
+    <text class="sub" x="1104" y="114" data-role="metadata"
+          data-bg="surface" text-anchor="end">8 phases, in order</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="232" y="160" width="152" height="80" rx="8"/>
+    <rect class="card" x="232" y="160" width="152" height="80" rx="8"/>
+    <use class="icon" href="#ic-search" transform="translate(244,172)"/>
+    <text class="name" x="308" y="212" data-role="label" data-bg="surface"
+          text-anchor="middle">Evidence</text>
+    <text class="sub" x="308" y="232" data-role="metadata" data-bg="surface"
+          text-anchor="middle">facts in order</text>
+  </g>
+  <g data-node="" data-focal="">
+    <rect class="mask" x="416" y="160" width="152" height="80" rx="8"/>
+    <rect class="card focal" x="416" y="160" width="152" height="80" rx="8"/>
+    <use class="icon" href="#ic-file" transform="translate(428,172)"/>
+    <text class="name" x="492" y="212" data-role="label" data-bg="surface"
+          text-anchor="middle">Design</text>
+    <text class="sub" x="492" y="232" data-role="metadata" data-bg="surface"
+          text-anchor="middle">prettydocs.md</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="600" y="160" width="152" height="80" rx="8"/>
+    <rect class="card" x="600" y="160" width="152" height="80" rx="8"/>
+    <use class="icon" href="#ic-pipeline" transform="translate(612,172)"/>
+    <text class="name" x="676" y="212" data-role="label" data-bg="surface"
+          text-anchor="middle">Plan</text>
+    <text class="sub" x="676" y="232" data-role="metadata" data-bg="surface"
+          text-anchor="middle">RENDER / REUSE</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="784" y="160" width="152" height="80" rx="8"/>
+    <rect class="card" x="784" y="160" width="152" height="80" rx="8"/>
+    <use class="icon" href="#ic-txt" transform="translate(796,172)"/>
+    <text class="name" x="860" y="212" data-role="label" data-bg="surface"
+          text-anchor="middle">Docs</text>
+    <text class="sub" x="860" y="232" data-role="metadata" data-bg="surface"
+          text-anchor="middle">8 tier-1 docs</text>
+  </g>
+  <g data-node="" data-focal="">
+    <rect class="mask" x="784" y="260" width="152" height="80" rx="8"/>
+    <rect class="card focal" x="784" y="260" width="152" height="80" rx="8"/>
+    <use class="icon" href="#ic-node" transform="translate(796,272)"/>
+    <text class="name" x="860" y="312" data-role="label" data-bg="surface"
+          text-anchor="middle">Visuals</text>
+    <text class="sub" x="860" y="332" data-role="metadata" data-bg="surface"
+          text-anchor="middle">gate loop</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="968" y="160" width="152" height="80" rx="8"/>
+    <rect class="card" x="968" y="160" width="152" height="80" rx="8"/>
+    <use class="icon" href="#ic-test" transform="translate(980,172)"/>
+    <text class="name" x="1044" y="212" data-role="label" data-bg="surface"
+          text-anchor="middle">Verify</text>
+    <text class="sub" x="1044" y="232" data-role="metadata" data-bg="surface"
+          text-anchor="middle">10 gates</text>
+  </g>
+  <g data-node="">
+    <rect class="mask" x="968" y="260" width="152" height="80" rx="8"/>
+    <rect class="card" x="968" y="260" width="152" height="80" rx="8"/>
+    <use class="icon" href="#ic-terminal" transform="translate(980,272)"/>
+    <text class="name" x="1044" y="312" data-role="label" data-bg="surface"
+          text-anchor="middle">Report</text>
+    <text class="sub" x="1044" y="332" data-role="metadata" data-bg="surface"
+          text-anchor="middle">in-chat only</text>
+  </g>
+
+  <g data-legend="">
+    <line class="rule" x1="32" y1="456" x2="1136" y2="456"/>
+    <text class="eyebrow" x="32" y="482" data-role="metadata"
+          data-bg="background">LEGEND</text>
+    <rect class="sw-focal" x="140" y="470" width="16" height="16" rx="4"/>
+    <text class="legenditem" x="168" y="482" data-role="metadata"
+          data-bg="background">focal: frozen contract, gate loop</text>
+    <line class="sw-drop" x1="500" y1="478" x2="532" y2="478"/>
+    <text class="legenditem" x="544" y="482" data-role="metadata"
+          data-bg="background">dashed: a schedule trigger</text>
+    <rect class="sw-chev" x="800" y="470" width="16" height="16" rx="4"/>
+    <text class="legenditem" x="828" y="482" data-role="metadata"
+          data-bg="background">banner: the phase each column serves</text>
+  </g>
+</svg>

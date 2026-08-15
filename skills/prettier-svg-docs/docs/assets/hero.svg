@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520"
+     role="img" data-loop-s="12" data-bg="background">
+  <title>prettier-svg-docs — animated SVG, authored not rendered</title>
+  <desc>A board of eight cells. The widest names the skill and its claim: animated SVG,
+authored — not rendered. A runtime cell reads python3 and nothing else; the single
+accent-filled cell reports zero dependencies. One cell nests the pipeline as a small
+diagram — author, gate, commit — with a status dot visiting each station in turn, and no
+render station between them, because the committed asset is its own source. Two cells
+count what the skill carries: thirty-two catalog idioms, of which one is chosen per repo,
+and the eight classes the bundled checker applies to every visual, the eighth being
+fidelity. Along the bottom the verdict cell reads zero errors, required before any visual
+is embedded, beside a meter that fills and settles; the last cell gives the loop as twelve
+seconds, seam-exact.</desc>
+
+  <style>
+    svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb;
+          --dim:#9fc4e8; --accent:#e0a33e; }
+
+    .bg    { fill: var(--background); }
+    .cell  { fill: var(--surface); stroke: var(--dim); stroke-width: 1; }
+    .mini  { fill: var(--background); stroke: var(--dim); stroke-width: 1; }
+    .focal { fill: var(--accent); stroke: none; }
+    .link  { stroke: var(--dim); stroke-width: 2; fill: none; }
+    .track { fill: var(--background); }
+    .tally    { fill: var(--dim); }
+    .tally-on { fill: var(--accent); }
+
+    /* display stack for structure, mono for literals — prettydocs.md typography */
+    .hero  { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 48px; font-weight: 700; letter-spacing: -0.5px; }
+    .eye   { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 19px; font-weight: 600; letter-spacing: 1.4px; }
+    .eye-f { fill: var(--background); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 19px; font-weight: 600; letter-spacing: 1.4px; }
+    .lab   { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 23px; font-weight: 600; }
+    .cap   { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 18px; font-weight: 600; }
+    .val   { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 46px; font-weight: 700; }
+    .unit  { fill: var(--dim); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 24px; font-weight: 600; }
+    .val-m { fill: var(--ink); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 38px; font-weight: 700; }
+    .val-f { fill: var(--background); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 64px; font-weight: 700; }
+    .num   { fill: var(--dim); font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+             font-size: 20px; font-weight: 700; letter-spacing: 1px; }
+    .stepw { fill: var(--ink); font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+             font-size: 20px; font-weight: 600; }
+
+    /* motion — two ideas only. The grid never moves; one cell nests the travelling
+       status dot, and the verdict meter fills once per half-loop. 6s divides 12s
+       exactly, and the negative delays stagger the dots without adding time. */
+    .dot { fill: var(--accent); animation: live 6s ease-in-out infinite; }
+    .n1  { animation-delay: 0s; }
+    .n2  { animation-delay: -2s; }
+    .n3  { animation-delay: -4s; }
+    @keyframes live { 0%, 66%, 100% { opacity: .22 } 12%, 33% { opacity: 1 } }
+
+    /* grow, hold, then fade out while still full: t=0 and t=6s are both "meter
+       invisible", so the reset is unseen. Anchored in user units, not fill-box,
+       so it grows from the gridline it is measured against. */
+    .meter { fill: var(--accent); transform-box: view-box; transform-origin: 430px 0;
+             animation: meter 6s cubic-bezier(.4,0,.2,1) infinite; }
+    @keyframes meter {
+      0%       { transform: scaleX(0); opacity: 0 }
+      10%      { opacity: 1 }
+      45%, 82% { transform: scaleX(1); opacity: 1 }
+      100%     { transform: scaleX(1); opacity: 0 }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .dot   { animation: none; opacity: 1; }
+      .meter { animation: none; transform: scaleX(1); opacity: 1; }
+    }
+  </style>
+
+  <rect class="bg" x="0" y="0" width="1200" height="520"/>
+  <rect class="cell" x="40" y="40" width="550" height="160" rx="16" data-bg="surface"/>
+  <text class="eye"  x="72" y="84"  data-bg="surface">SKILL</text>
+  <text class="hero" x="72" y="140" data-role="hero" data-bg="surface">prettier-svg-docs</text>
+  <text class="lab"  x="72" y="176" data-bg="surface">animated SVG, authored — not rendered</text>
+  <rect class="cell" x="610" y="40" width="360" height="160" rx="16" data-bg="surface"/>
+  <text class="eye"   x="642" y="84"  data-bg="surface">REQUIRES</text>
+  <text class="val-m" x="642" y="140" data-bg="surface">python3</text>
+  <text class="lab"   x="642" y="176" data-bg="surface">and nothing else</text>
+  <rect class="focal" x="990" y="40" width="170" height="160" rx="16" data-bg="accent-primary"/>
+  <text class="eye-f" x="1022" y="84"  data-bg="accent-primary">DEPS</text>
+  <text class="val-f" x="1022" y="164" data-bg="accent-primary">0</text>
+  <rect class="cell" x="40" y="220" width="360" height="160" rx="16" data-bg="surface"/>
+  <text class="eye" x="72" y="258" data-bg="surface">PIPELINE</text>
+  <rect class="mini" x="72" y="278" width="86" height="52" rx="12" data-bg="surface"/>
+  <text class="num" x="84" y="311" data-bg="surface">01</text>
+  <text class="stepw" x="72" y="356" data-bg="surface">author</text>
+  <circle class="dot n1" cx="144" cy="292" r="7"/>
+  <path class="link" d="M162 304 H173"/>
+  <rect class="mini" x="177" y="278" width="86" height="52" rx="12" data-bg="surface"/>
+  <text class="num" x="189" y="311" data-bg="surface">02</text>
+  <text class="stepw" x="177" y="356" data-bg="surface">gate</text>
+  <circle class="dot n2" cx="249" cy="292" r="7"/>
+  <path class="link" d="M267 304 H278"/>
+  <rect class="mini" x="282" y="278" width="86" height="52" rx="12" data-bg="surface"/>
+  <text class="num" x="294" y="311" data-bg="surface">03</text>
+  <text class="stepw" x="282" y="356" data-bg="surface">commit</text>
+  <circle class="dot n3" cx="354" cy="292" r="7"/>
+  <rect class="cell" x="420" y="220" width="360" height="160" rx="16" data-bg="surface"/>
+  <text class="eye" x="452" y="258" data-bg="surface">STYLE CATALOG</text>
+  <text class="val" x="452" y="316" data-bg="surface">32<tspan class="unit" dx="10">idioms</tspan></text>
+  <rect class="tally-on" x="452.0" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="461.6" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="471.1" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="480.6" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="490.2" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="499.8" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="509.3" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="518.9" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="528.4" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="538.0" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="547.5" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="557.0" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="566.6" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="576.1" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="585.7" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="595.2" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="604.8" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="614.4" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="623.9" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="633.5" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="643.0" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="652.5" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="662.1" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="671.6" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="681.2" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="690.8" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="700.3" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="709.9" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="719.4" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="729.0" y="340" width="5.5" height="16"/>
+  <rect class="tally" x="738.5" y="340" width="5.5" height="16"/>
+  <text class="cap" x="452" y="374" data-role="metadata" data-bg="surface">one is chosen per repo</text>
+  <rect class="cell" x="800" y="220" width="360" height="160" rx="16" data-bg="surface"/>
+  <text class="eye" x="832" y="258" data-bg="surface">GATE CLASSES</text>
+  <text class="val" x="832" y="316" data-bg="surface">9<tspan class="unit" dx="10">per visual</tspan></text>
+  <rect class="tally" x="832" y="340" width="26" height="16"/>
+  <rect class="tally" x="866" y="340" width="26" height="16"/>
+  <rect class="tally" x="900" y="340" width="26" height="16"/>
+  <rect class="tally" x="934" y="340" width="26" height="16"/>
+  <rect class="tally" x="968" y="340" width="26" height="16"/>
+  <rect class="tally" x="1002" y="340" width="26" height="16"/>
+  <rect class="tally" x="1036" y="340" width="26" height="16"/>
+  <rect class="tally-on" x="1070" y="340" width="26" height="16"/>
+  <text class="cap" x="832" y="374" data-role="metadata" data-bg="surface">the ninth is diagram</text>
+  <rect class="cell" x="40" y="400" width="740" height="80" rx="16" data-bg="surface"/>
+  <text class="eye" x="72" y="428" data-bg="surface">CHECKER VERDICT</text>
+  <text class="val" x="72" y="466" data-bg="surface">0 errors</text>
+  <text class="cap" x="430" y="432" data-role="metadata" data-bg="surface">required before a visual is embedded</text>
+  <rect class="track" x="430" y="450" width="318" height="10" rx="5"/>
+  <rect class="meter" x="430" y="450" width="318" height="10" rx="5"/>
+  <rect class="cell" x="800" y="400" width="360" height="80" rx="16" data-bg="surface"/>
+  <text class="eye" x="832" y="428" data-bg="surface">LOOP</text>
+  <text class="val" x="832" y="466" data-bg="surface">12<tspan class="unit" dx="8">s seam-exact</tspan></text>
+</svg>

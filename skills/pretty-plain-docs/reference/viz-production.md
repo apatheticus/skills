@@ -9,7 +9,7 @@ run's resolved style (`styles.md`), and embedded per `embedding.md`.
 **Nothing animates.** A single `@keyframes` block, one `animation:` declaration or
 one SMIL tag is a gate failure, not a style choice — see *The animation ban* below.
 A visual that needs motion to make its point belongs in the sibling
-`pretty-svg-docs` (animated SVG) or `pretty-hyper-docs` (animated WebP).
+`prettier-svg-docs` (animated SVG) or `pretty-hyper-docs` (animated WebP).
 
 Data charts have their own narrow, provenance-gated path: [charts.md](charts.md).
 Read it before plotting any value; most "charts" should be structural diagrams.
@@ -75,7 +75,7 @@ checker requires `viewBox`, `data-loop-s`, `<title>` and `<desc>`.
 
 `data-loop-s="0"` is the static declaration. It is required, it must be `0`, and it
 is what makes this skill's output legible to the sibling skills' tooling — a
-`pretty-svg-docs` checker reading one of these files sees a declared static and
+`prettier-svg-docs` checker reading one of these files sees a declared static and
 holds it to exactly the same rule.
 
 `data-bg="background"` on the root names the palette role the checker measures text
@@ -118,7 +118,7 @@ a static already honours that preference. The relevant accessibility work here i
 the `<title>`, the `<desc>`, the embed's `alt`, and — for every structural visual —
 the `<details>` Mermaid source. See `house-style.md` → quality gates.
 
-**Converting an animated visual.** A file arriving from `pretty-svg-docs` is
+**Converting an animated visual.** A file arriving from `prettier-svg-docs` is
 adopted by folding each `@media (prefers-reduced-motion: reduce)` rule's resting
 declarations onto the base rule, then deleting the keyframes, the animation
 declarations and the reduce block, and flipping `data-loop-s` to `0`. The reduce
@@ -263,7 +263,7 @@ What it checks, in order:
 | **Fidelity** | the style's **minimum**: `require_filter_all` primitives present, deepest chain ≥ `min_filter_depth`, drawn geometry ≥ `min_elements` (specimens only) |
 | Size | warn at 60 KB, fail over 150 KB |
 
-Six classes, where `pretty-svg-docs`' checker has eight: the animation ban replaces
+Six classes, where `prettier-svg-docs`' checker has eight: the animation ban replaces
 its seam and motion-accessibility classes, and lives inside the structural class
 because it is a rule about what a committed file may contain.
 

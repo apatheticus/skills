@@ -1,0 +1,118 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 908"
+     width="1200" height="908" role="img" aria-labelledby="ttl desc"
+     data-loop-s="12" data-diagram="radar" data-bg="background">
+  <title id="ttl">Radar specimen — five catalog styles scored on five gate dimensions</title>
+  <desc id="desc">A five-axis radar. Each axis is one number the style catalog declares, normalised against the largest value any of the 32 styles carries, so the axes share one 0-to-1 scale; the maximum is printed beside each axis word. Five styles are plotted as polygons. soft-vinyl carries the accent: it reaches the outer ring on drawn elements and on committed bytes while sitting at the innermost ring for filter depth, which is the argument that a material can live entirely in the fill.</desc>
+  <defs>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.28"
+                    flood-color="#12324f"/>
+    </filter>
+  </defs>
+  <style>
+svg { --background:#12324f; --surface:#17405f; --ink:#e8f2fb; --dim:#9fc4e8; --accent:#e0a33e; }
+
+  text { font-family: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+         fill: var(--ink); }
+  .mono { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  .ttl { font-size: 40px; font-weight: 700; }
+  .cap { font-size: 18px; fill: var(--dim); }
+  .eyebrow { font-size: 16px; fill: var(--dim); letter-spacing: 2px; }
+  .axword { font-size: 16px; fill: var(--dim); letter-spacing: 2px; }
+  .item { font-size: 18px; font-weight: 500; }
+  .val { font-size: 16px; fill: var(--dim); }
+  .leg { font-size: 16px; fill: var(--dim); }
+  .ground { fill: var(--background); }
+  .card { fill: var(--surface); filter: url(#e1); }
+  .rule { stroke: var(--dim); stroke-opacity: .28; stroke-width: 1; fill: none; }
+  .ring { fill: none; stroke: var(--dim); stroke-opacity: .10;
+          stroke-width: 1; }
+  .ringo { stroke-opacity: .22; }
+  .plate { fill: var(--surface); }
+  .spoke { stroke: var(--dim); stroke-opacity: .22; stroke-width: 1; }
+  .ser { animation: emph 12s ease-in-out infinite; }
+  .serf { animation: emphf 12s ease-in-out infinite; }
+  .d2 { animation-delay: -2.4s } .d3 { animation-delay: -4.8s }
+  .d4 { animation-delay: -7.2s } .d5 { animation-delay: -9.6s }
+  @keyframes emph { 0%, 100% { fill-opacity: .08 } 8% { fill-opacity: .22 }
+                    20% { fill-opacity: .08 } }
+  @keyframes emphf { 0%, 100% { fill-opacity: .18 } 8% { fill-opacity: .32 }
+                     20% { fill-opacity: .18 } }
+  @media (prefers-reduced-motion: reduce) {
+    .ser { animation: none } .serf { animation: none }
+  }
+  </style>
+  <rect class="ground" x="0" y="0" width="1200" height="908"/>
+
+  <text class="ttl" x="40" y="76" data-role="title">Five styles, five gates</text>
+  <text class="cap" x="40" y="112" data-role="label">each axis normalised against the largest value in the 32-style catalog — the maximum is printed beside the axis</text>
+  <rect class="card" x="176" y="152" width="848" height="576" rx="8"/>
+  <g data-bg="surface">
+    <polygon class="ring" points="600.00,412.00 645.65,445.17 628.21,498.83 571.79,498.83 554.35,445.17"/>
+    <polygon class="ring" points="600.00,364.00 691.30,430.33 656.43,537.67 543.57,537.67 508.70,430.33"/>
+    <polygon class="ring" points="600.00,316.00 736.95,415.50 684.64,576.50 515.36,576.50 463.05,415.50"/>
+    <polygon class="ring" points="600.00,268.00 782.60,400.67 712.85,615.33 487.15,615.33 417.40,400.67"/>
+    <polygon class="ring ringo" points="600.00,220.00 828.25,385.84 741.07,654.16 458.93,654.16 371.75,385.84"/>
+    <line class="spoke" x1="600" y1="460" x2="600.00" y2="220.00"/>
+    <line class="spoke" x1="600" y1="460" x2="828.25" y2="385.84"/>
+    <line class="spoke" x1="600" y1="460" x2="741.07" y2="654.16"/>
+    <line class="spoke" x1="600" y1="460" x2="458.93" y2="654.16"/>
+    <line class="spoke" x1="600" y1="460" x2="371.75" y2="385.84"/>
+    <text class="axword" x="600" y="176" text-anchor="middle" data-role="metadata">ELEMENTS</text>
+    <text class="val mono" x="600" y="198" text-anchor="middle" data-role="metadata">max 120</text>
+    <text class="axword" x="848" y="378" text-anchor="start" data-role="metadata">DEPTH</text>
+    <text class="val mono" x="848" y="400" text-anchor="start" data-role="metadata">max 5</text>
+    <text class="axword" x="761" y="670" text-anchor="start" data-role="metadata">PRIMITIVES</text>
+    <text class="val mono" x="761" y="692" text-anchor="start" data-role="metadata">max 4</text>
+    <text class="axword" x="439" y="670" text-anchor="end" data-role="metadata">BANS</text>
+    <text class="val mono" x="439" y="692" text-anchor="end" data-role="metadata">max 4</text>
+    <text class="axword" x="352" y="378" text-anchor="end" data-role="metadata">BYTES</text>
+    <text class="val mono" x="352" y="400" text-anchor="end" data-role="metadata">max 46492 B</text>
+    <g data-node="">
+      <polygon class="ser" points="600.00,392.00 828.25,385.84 741.07,654.16 564.73,508.54 562.98,447.97" fill="var(--ink)" fill-opacity="0.08" stroke="var(--ink)" stroke-width="2"/>
+    </g>
+    <g data-node="">
+      <polygon class="ser d2" points="600.00,318.00 736.95,415.50 705.80,605.62 600.00,460.00 523.15,435.03" fill="var(--ink)" fill-opacity="0.08" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="10 5"/>
+    </g>
+    <g data-node="">
+      <polygon class="ser d3" points="600.00,368.00 645.65,445.17 600.00,460.00 458.93,654.16 576.87,452.49" fill="var(--ink)" fill-opacity="0.08" stroke="var(--dim)" stroke-width="1.5"/>
+    </g>
+    <g data-node="">
+      <polygon class="ser d4" points="600.00,392.00 645.65,445.17 635.27,508.54 564.73,508.54 576.91,452.50" fill="var(--ink)" fill-opacity="0.08" stroke="var(--dim)" stroke-width="1.5" stroke-dasharray="3 4"/>
+    </g>
+    <g data-node="" data-focal="">
+      <polygon class="serf d5" points="600.00,220.00 645.65,445.17 635.27,508.54 494.20,605.62 371.75,385.84" fill="var(--accent)" fill-opacity="0.18" stroke="var(--accent)" stroke-width="1.8"/>
+      <circle cx="600.00" cy="220.00" r="6" fill="var(--accent)"/>
+      <circle cx="645.65" cy="445.17" r="6" fill="var(--accent)"/>
+      <circle cx="635.27" cy="508.54" r="6" fill="var(--accent)"/>
+      <circle cx="494.20" cy="605.62" r="6" fill="var(--accent)"/>
+      <circle cx="371.75" cy="385.84" r="6" fill="var(--accent)"/>
+    </g>
+    <rect class="plate" x="548" y="401" width="44" height="22" rx="4"/>
+    <text class="val mono" x="592" y="417" text-anchor="end" data-role="metadata">0.2</text>
+    <rect class="plate" x="548" y="353" width="44" height="22" rx="4"/>
+    <text class="val mono" x="592" y="369" text-anchor="end" data-role="metadata">0.4</text>
+    <rect class="plate" x="548" y="305" width="44" height="22" rx="4"/>
+    <text class="val mono" x="592" y="321" text-anchor="end" data-role="metadata">0.6</text>
+    <rect class="plate" x="548" y="257" width="44" height="22" rx="4"/>
+    <text class="val mono" x="592" y="273" text-anchor="end" data-role="metadata">0.8</text>
+    <rect class="plate" x="548" y="209" width="44" height="22" rx="4"/>
+    <text class="val mono" x="592" y="225" text-anchor="end" data-role="metadata">1.0</text>
+  </g>
+  <g data-legend="">
+    <line class="rule" x1="40" y1="756" x2="1160" y2="756"/>
+    <text class="eyebrow" x="40" y="784" data-role="metadata">SERIES</text>
+    <rect x="40" y="812" width="20" height="12" rx="4" fill="var(--accent)" fill-opacity="0.18" stroke="var(--accent)" stroke-width="1.8"/>
+    <text class="leg" x="68" y="822" data-role="metadata">soft-vinyl</text>
+    <rect x="264" y="812" width="20" height="12" rx="4" fill="var(--ink)" fill-opacity="0.08" stroke="var(--ink)" stroke-width="2"/>
+    <text class="leg" x="292" y="822" data-role="metadata">oil-impasto</text>
+    <rect x="488" y="812" width="20" height="12" rx="4" fill="var(--ink)" fill-opacity="0.08" stroke="var(--ink)" stroke-width="1.5" stroke-dasharray="10 5"/>
+    <text class="leg" x="516" y="822" data-role="metadata">glassmorphism</text>
+    <rect x="712" y="812" width="20" height="12" rx="4" fill="var(--ink)" fill-opacity="0.08" stroke="var(--dim)" stroke-width="1.5"/>
+    <text class="leg" x="740" y="822" data-role="metadata">swiss-minimal</text>
+    <rect x="936" y="812" width="20" height="12" rx="4" fill="var(--ink)" fill-opacity="0.08" stroke="var(--dim)" stroke-width="1.5" stroke-dasharray="3 4"/>
+    <text class="leg" x="964" y="822" data-role="metadata">flat-material</text>
+    <text class="leg mono" x="40" y="856" data-role="metadata">source: scripts/styles.json + docs/samples/&lt;slug&gt;.svg</text>
+    <text class="leg mono" x="40" y="880" data-role="metadata">axes clockwise from top: min_elements · relax.filter_depth · require_filter_all · forbid · file bytes</text>
+  </g>
+</svg>

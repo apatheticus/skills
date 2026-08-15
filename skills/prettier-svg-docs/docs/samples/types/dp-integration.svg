@@ -1,0 +1,230 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520"
+     data-loop-s="12" data-diagram="dp-integration" role="img" data-bg="background">
+  <title>DP integration — what this skill reads, what it exposes, and over what wire</title>
+  <desc>Three sources on the left plug into the skill: the repository's source tree,
+  its CI workflow, and its existing brand tokens. Inside one platform zone the evidence
+  pass feeds the frozen design system, which feeds the gate. Three consumer surfaces on
+  the right: the eight Tier 1 documents, the in-chat run report, and the committed SVG
+  assets. Every wire carries the format it speaks. A dashed read-back runs from the
+  committed assets back into the audit, hopping the serve wire it crosses.</desc>
+
+  <defs>
+    <filter id="e1" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-opacity="0.28"/>
+    </filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--dim)"/>
+    </marker>
+    <marker id="arrow-a" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--accent)"/>
+    </marker>
+  </defs>
+
+  <style>
+    svg {
+      --background: #12324f;
+      --surface: #17405f;
+      --ink: #e8f2fb;
+      --dim: #9fc4e8;
+      --accent: #e0a33e;
+      --sans: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .name  { font-family: var(--sans); font-size: 18px; font-weight: 700; fill: var(--ink); }
+    .core  { font-family: var(--sans); font-size: 20px; font-weight: 700; fill: var(--ink); }
+    .sub   { font-family: var(--mono); font-size: 16px; fill: var(--dim); }
+    .subi  { font-family: var(--mono); font-size: 16px; fill: var(--ink); }
+    .tag   { font-family: var(--mono); font-size: 16px; fill: var(--dim); }
+    .tagi  { font-family: var(--mono); font-size: 16px; fill: var(--ink); }
+    .key   { font-family: var(--sans); font-size: 16px; font-weight: 600; fill: var(--dim);
+             letter-spacing: 0.5px; }
+    .edgelabel { font-family: var(--sans); font-size: 16px; font-weight: 600;
+                 fill: var(--ink); letter-spacing: 0.5px; }
+
+    .ground { fill: var(--background); }
+    .mask   { fill: var(--background); }
+    .plate  { fill: var(--background); }
+    .zone   { fill: var(--ink); fill-opacity: 0.02; stroke: var(--dim);
+              stroke-opacity: 0.30; stroke-width: 1; }
+    .src    { fill: var(--dim); fill-opacity: 0.10; stroke: var(--dim); stroke-width: 1.25; }
+    .svc    { fill: var(--surface); stroke: var(--ink); stroke-width: 1.25; }
+    .store  { fill: var(--ink); fill-opacity: 0.06; stroke: var(--dim); stroke-width: 1.25; }
+    .focal  { fill: var(--accent); fill-opacity: 0.12; stroke: var(--accent); stroke-width: 1.5; }
+    .chip   { fill: none; stroke: var(--dim); stroke-opacity: 0.55; stroke-width: 1; }
+    .chip-f { fill: none; stroke: var(--accent); stroke-width: 1; }
+    .hair   { stroke: var(--dim); stroke-opacity: 0.35; stroke-width: 1; }
+    .wire   { fill: none; stroke: var(--dim); stroke-width: 1.5; }
+    .wire-a { fill: none; stroke: var(--accent); stroke-width: 1.5; }
+    .wire-r { fill: none; stroke: var(--dim); stroke-width: 1.5; stroke-dasharray: 4 3; }
+
+    /* One motion idea: the dash offset marches the read-back, so the query going out
+       and the answer coming back read at every frame. Nothing else moves. */
+    .wire-r { animation: march 6s linear infinite; }
+    @keyframes march { from { stroke-dashoffset: 42 } to { stroke-dashoffset: 0 } }
+    @media (prefers-reduced-motion: reduce) {
+      .wire-r { animation: none; }
+    }
+  </style>
+
+  <rect class="ground" x="0" y="0" width="1200" height="520"/>
+
+  <!-- the platform zone -->
+  <g data-zone="" data-bg="background">
+    <rect class="zone" x="260" y="72" width="696" height="336" rx="8"/>
+    <rect class="plate" x="276" y="76" width="180" height="20" rx="4"/>
+    <text class="key" x="284" y="90" data-role="metadata" data-bg="background">PRETTIER-SVG-DOCS</text>
+  </g>
+
+  <!-- connectors -->
+  <path id="w1" class="wire" data-edge="" marker-end="url(#arrow)"
+        d="M 200,132 H 330 Q 340,132 340,142 V 160"/>
+  <path id="w2" class="wire" data-edge="" marker-end="url(#arrow)"
+        d="M 200,236 H 276"/>
+  <path id="w3" class="wire" data-edge="" marker-end="url(#arrow)"
+        d="M 200,340 H 210 Q 220,340 220,350 V 354 Q 220,364 230,364 H 598 Q 608,364 608,354 V 320"/>
+  <path id="w4" class="wire" data-edge="" marker-end="url(#arrow)"
+        d="M 476,240 H 508"/>
+  <path id="w5" class="wire" data-edge="" marker-end="url(#arrow)"
+        d="M 708,240 H 740"/>
+  <path id="w6" class="wire-a" data-edge="" marker-end="url(#arrow-a)"
+        d="M 560,160 V 142 Q 560,132 570,132 H 1000"/>
+  <path id="w7" class="wire-a" data-edge="" marker-end="url(#arrow-a)"
+        d="M 676,320 V 330 Q 676,340 686,340 H 1000"/>
+  <path id="w8" class="wire-a" data-edge="" marker-end="url(#arrow-a)"
+        d="M 940,236 H 1000"/>
+  <path id="w9" class="wire-r" data-edge="" marker-end="url(#arrow)"
+        d="M 1080,380 V 394 Q 1080,404 1070,404 H 850 Q 840,404 840,394 V 350 a 10,10 0 0,0 0,-20 V 320"/>
+
+  <!-- connector labels: the wire's format, 8 units clear of the stroke -->
+  <g data-bg="background">
+    <rect data-label="" class="plate" x="232" y="102" width="52" height="22" rx="4"/>
+    <text class="edgelabel" x="258" y="118" data-role="metadata" data-bg="background"
+          text-anchor="middle">FILES</text>
+    <rect data-label="" class="plate" x="204" y="206" width="64" height="22" rx="4"/>
+    <text class="edgelabel" x="236" y="222" data-role="metadata" data-bg="background"
+          text-anchor="middle">YAML</text>
+    <rect data-label="" class="plate" x="300" y="372" width="88" height="22" rx="4"/>
+    <text class="edgelabel" x="344" y="388" data-role="metadata" data-bg="background"
+          text-anchor="middle">TOKENS</text>
+    <rect data-label="" class="plate" x="700" y="102" width="104" height="22" rx="4"/>
+    <text class="edgelabel" x="752" y="118" data-role="metadata" data-bg="background"
+          text-anchor="middle">MARKDOWN</text>
+    <rect data-label="" class="plate" x="704" y="348" width="60" height="22" rx="4"/>
+    <text class="edgelabel" x="734" y="364" data-role="metadata" data-bg="background"
+          text-anchor="middle">SVG</text>
+    <rect data-label="" class="plate" x="944" y="206" width="52" height="22" rx="4"/>
+    <text class="edgelabel" x="970" y="222" data-role="metadata" data-bg="background"
+          text-anchor="middle">CHAT</text>
+    <rect data-label="" class="plate" x="900" y="374" width="72" height="22" rx="4"/>
+    <text class="edgelabel" x="936" y="390" data-role="metadata" data-bg="background"
+          text-anchor="middle">AUDIT</text>
+  </g>
+
+  <!-- sources -->
+  <g data-node="" data-bg="surface">
+    <rect class="mask" x="40" y="92" width="160" height="80" rx="8"/>
+    <rect class="src" x="40" y="92" width="160" height="80" rx="8" filter="url(#e1)"/>
+    <text class="name" x="120" y="126" data-role="label" data-bg="surface"
+          text-anchor="middle">Source tree</text>
+    <text class="sub" x="120" y="150" data-role="metadata" data-bg="surface"
+          text-anchor="middle">skills/**</text>
+  </g>
+  <g data-node="" data-bg="surface">
+    <rect class="mask" x="40" y="196" width="160" height="80" rx="8"/>
+    <rect class="src" x="40" y="196" width="160" height="80" rx="8" filter="url(#e1)"/>
+    <text class="name" x="120" y="230" data-role="label" data-bg="surface"
+          text-anchor="middle">CI workflow</text>
+    <text class="sub" x="120" y="254" data-role="metadata" data-bg="surface"
+          text-anchor="middle">validate.yml</text>
+  </g>
+  <g data-node="" data-bg="surface">
+    <rect class="mask" x="40" y="300" width="160" height="80" rx="8"/>
+    <rect class="src" x="40" y="300" width="160" height="80" rx="8" filter="url(#e1)"/>
+    <text class="name" x="120" y="334" data-role="label" data-bg="surface"
+          text-anchor="middle">Brand tokens</text>
+    <text class="sub" x="120" y="358" data-role="metadata" data-bg="surface"
+          text-anchor="middle">theme files</text>
+  </g>
+
+  <!-- platform components -->
+  <g data-node="" data-bg="surface">
+    <rect class="mask" x="276" y="160" width="200" height="160" rx="8"/>
+    <rect class="svc" x="276" y="160" width="200" height="160" rx="8" filter="url(#e1)"/>
+    <rect class="chip" x="288" y="176" width="36" height="20" rx="4"/>
+    <text class="tag" x="306" y="190" data-role="metadata" data-bg="surface"
+          text-anchor="middle">P1</text>
+    <text class="core" x="376" y="236" data-role="label" data-bg="surface"
+          text-anchor="middle">Evidence pass</text>
+    <text class="sub" x="376" y="266" data-role="metadata" data-bg="surface"
+          text-anchor="middle">docs · CI · code</text>
+    <text class="sub" x="376" y="292" data-role="metadata" data-bg="surface"
+          text-anchor="middle">facts, not guesses</text>
+  </g>
+  <g data-node="" data-focal="" data-bg="surface">
+    <rect class="mask" x="508" y="160" width="200" height="160" rx="8"/>
+    <rect class="focal" x="508" y="160" width="200" height="160" rx="8" filter="url(#e1)"/>
+    <rect class="chip-f" x="520" y="176" width="36" height="20" rx="4"/>
+    <text class="tagi" x="538" y="190" data-role="metadata" data-bg="surface"
+          text-anchor="middle">P2</text>
+    <text class="core" x="608" y="236" data-role="label" data-bg="surface"
+          text-anchor="middle">Design system</text>
+    <text class="subi" x="608" y="266" data-role="metadata" data-bg="surface"
+          text-anchor="middle">prettydocs.md</text>
+    <text class="subi" x="608" y="292" data-role="metadata" data-bg="surface"
+          text-anchor="middle">frozen for the run</text>
+  </g>
+  <g data-node="" data-focal="" data-bg="surface">
+    <rect class="mask" x="740" y="160" width="200" height="160" rx="8"/>
+    <rect class="focal" x="740" y="160" width="200" height="160" rx="8" filter="url(#e1)"/>
+    <rect class="chip-f" x="752" y="176" width="36" height="20" rx="4"/>
+    <text class="tagi" x="770" y="190" data-role="metadata" data-bg="surface"
+          text-anchor="middle">P7</text>
+    <text class="core" x="840" y="236" data-role="label" data-bg="surface"
+          text-anchor="middle">Gate and audit</text>
+    <text class="subi" x="840" y="266" data-role="metadata" data-bg="surface"
+          text-anchor="middle">svg_check.py</text>
+    <text class="subi" x="840" y="292" data-role="metadata" data-bg="surface"
+          text-anchor="middle">audit_visuals.py</text>
+  </g>
+
+  <!-- consumers -->
+  <g data-node="" data-bg="surface">
+    <rect class="mask" x="1000" y="92" width="160" height="80" rx="8"/>
+    <rect class="svc" x="1000" y="92" width="160" height="80" rx="8" filter="url(#e1)"/>
+    <text class="name" x="1080" y="126" data-role="label" data-bg="surface"
+          text-anchor="middle">Tier 1 docs</text>
+    <text class="sub" x="1080" y="150" data-role="metadata" data-bg="surface"
+          text-anchor="middle">8 documents</text>
+  </g>
+  <g data-node="" data-bg="surface">
+    <rect class="mask" x="1000" y="196" width="160" height="80" rx="8"/>
+    <rect class="svc" x="1000" y="196" width="160" height="80" rx="8" filter="url(#e1)"/>
+    <text class="name" x="1080" y="230" data-role="label" data-bg="surface"
+          text-anchor="middle">Run report</text>
+    <text class="sub" x="1080" y="254" data-role="metadata" data-bg="surface"
+          text-anchor="middle">phase 8</text>
+  </g>
+  <g data-node="" data-bg="surface">
+    <rect class="mask" x="1000" y="300" width="160" height="80" rx="8"/>
+    <rect class="store" x="1000" y="300" width="160" height="80" rx="8" filter="url(#e1)"/>
+    <text class="name" x="1080" y="334" data-role="label" data-bg="surface"
+          text-anchor="middle">Committed SVGs</text>
+    <text class="sub" x="1080" y="358" data-role="metadata" data-bg="surface"
+          text-anchor="middle">docs/assets/</text>
+  </g>
+
+  <!-- legend -->
+  <g data-legend="" data-bg="background">
+    <line class="hair" x1="40" y1="440" x2="1160" y2="440"/>
+    <text class="key" x="40" y="470" data-role="metadata" data-bg="background">LEGEND</text>
+    <line class="wire" x1="168" y1="464" x2="200" y2="464"/>
+    <text class="key" x="212" y="470" data-role="metadata" data-bg="background">INGEST</text>
+    <line class="wire-a" x1="336" y1="464" x2="368" y2="464"/>
+    <text class="key" x="380" y="470" data-role="metadata" data-bg="background">SERVE — FROM A FOCAL</text>
+    <line class="wire-r" x1="668" y1="464" x2="700" y2="464"/>
+    <text class="key" x="712" y="470" data-role="metadata" data-bg="background">READ-BACK — AUDIT</text>
+    <text class="key" x="40" y="498" data-role="metadata" data-bg="background">EVERY WIRE CARRIES THE FORMAT IT SPEAKS · THE ZONE IS THE SKILL · SOURCES LEFT, SURFACES RIGHT</text>
+  </g>
+</svg>

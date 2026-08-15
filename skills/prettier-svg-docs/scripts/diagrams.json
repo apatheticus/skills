@@ -1,0 +1,285 @@
+{
+  "$note": "Machine half of the diagram-type catalog. Read by svg_check.py's `diagram` check class and by validate.mjs, which fails the build if any slug here is absent from the skill's frontmatter. The prose half is reference/diagrams.md + reference/types/<slug>.md; the three must agree slug-for-slug. Entries are alphabetical. Budgets are ported from cathrynlavery/diagram-design (MIT) SKILL.md section 7; where that table names a per-type ceiling in the type's own vocabulary and that vocabulary maps onto a data-* attribute, the ceiling is written as an override here rather than left in prose. Every key here is READ by svg_check.py — a key nothing reads is a claim of enforcement that is not true, which is why `label_gap_max` was removed rather than left sitting beside `label_gap_min`: the checker measures a label against every connector in the file, so it cannot honestly say a label is too FAR from the one it belongs to. The 6-10 authoring range lives in reference/diagram-grammar.md section 7, as prose, where it belongs, and `attach_gap_min` went the same way for the same reason. `plotted` marks the five types whose node IS the datum: a gantt bar's x and width, a scatter point's cx and cy, are the measurement, so the 4-unit grid is not enforced on their nodes -- rounding them would move the number the chart exists to report. The skeleton is not a node and is still checked.",
+  "defaults": {
+    "max_nodes": 9,
+    "max_edges": 12,
+    "max_focal": 2,
+    "max_zones": 3,
+    "grid": 4,
+    "label_gap_min": 6
+  },
+  "types": {
+    "architecture": {
+      "aliases": [
+        "arch",
+        "system",
+        "components",
+        "system-architecture"
+      ],
+      "unit": "component",
+      "summary": "Components and the connections between them"
+    },
+    "bar": {
+      "aliases": [
+        "bar-chart",
+        "column",
+        "column-chart"
+      ],
+      "unit": "bar",
+      "plotted": true,
+      "max_nodes": 8,
+      "max_edges": 0,
+      "summary": "Quantitative comparison across categories"
+    },
+    "data-flow": {
+      "aliases": [
+        "dataflow",
+        "role-flow"
+      ],
+      "unit": "step",
+      "summary": "Role-scoped data flow — who does what at each pipeline step"
+    },
+    "dp-integration": {
+      "aliases": [
+        "platform-integration",
+        "integration-topology"
+      ],
+      "unit": "system",
+      "summary": "Integration topology of a data platform — sources to core to consumers"
+    },
+    "dp-security-matrix": {
+      "aliases": [
+        "permission-matrix",
+        "access-matrix",
+        "security-matrix"
+      ],
+      "unit": "cell",
+      "max_nodes": 24,
+      "max_edges": 0,
+      "summary": "Per-role or per-component access permissions matrix"
+    },
+    "er": {
+      "aliases": [
+        "erd",
+        "entity-relationship",
+        "data-model",
+        "schema"
+      ],
+      "unit": "entity",
+      "max_nodes": 8,
+      "summary": "Entities, their fields, and the relationships between them"
+    },
+    "flowchart": {
+      "aliases": [
+        "decision-tree",
+        "decision-flow",
+        "branch"
+      ],
+      "unit": "step",
+      "summary": "Decision logic with branches"
+    },
+    "gantt": {
+      "aliases": [
+        "schedule",
+        "roadmap-bars"
+      ],
+      "unit": "task",
+      "plotted": true,
+      "max_nodes": 12,
+      "max_edges": 0,
+      "summary": "Tasks and phases positioned on a timeline"
+    },
+    "high-level": {
+      "aliases": [
+        "stack-overview",
+        "cluster-overview"
+      ],
+      "unit": "service",
+      "max_zones": 4,
+      "summary": "End-to-end data stack on a container cluster"
+    },
+    "it-state": {
+      "aliases": [
+        "current-state",
+        "landscape",
+        "as-is"
+      ],
+      "unit": "system",
+      "summary": "Legacy IT landscape grouped by phase or department — the before state"
+    },
+    "layers": {
+      "aliases": [
+        "layer-stack",
+        "stack",
+        "tiers"
+      ],
+      "unit": "layer",
+      "max_nodes": 6,
+      "max_edges": 0,
+      "summary": "Stacked abstraction levels"
+    },
+    "line": {
+      "aliases": [
+        "line-chart",
+        "trend"
+      ],
+      "unit": "series",
+      "plotted": true,
+      "max_nodes": 5,
+      "max_edges": 0,
+      "summary": "Continuous trends over time"
+    },
+    "loop": {
+      "aliases": [
+        "flywheel",
+        "cycle",
+        "virtuous-cycle"
+      ],
+      "unit": "stage",
+      "max_edges": 16,
+      "summary": "Reinforcing cycle where the last step feeds the first"
+    },
+    "medallion": {
+      "aliases": [
+        "bronze-silver-gold",
+        "lakehouse-tiers"
+      ],
+      "unit": "tier",
+      "summary": "Multi-tier data storage with quality levels and access policies"
+    },
+    "nested": {
+      "aliases": [
+        "containment",
+        "scope",
+        "boundaries"
+      ],
+      "unit": "container",
+      "max_zones": 6,
+      "summary": "Hierarchy expressed through containment and scope"
+    },
+    "org-chart": {
+      "aliases": [
+        "org",
+        "reporting",
+        "ownership",
+        "escalation"
+      ],
+      "unit": "role",
+      "max_nodes": 12,
+      "summary": "Human, agent or team ownership, reporting, routing and escalation"
+    },
+    "process": {
+      "aliases": [
+        "stages",
+        "operating-model",
+        "lifecycle"
+      ],
+      "unit": "stage",
+      "summary": "Multi-actor sequential process with data handoffs"
+    },
+    "pyramid": {
+      "aliases": [
+        "funnel",
+        "hierarchy-levels",
+        "conversion"
+      ],
+      "unit": "level",
+      "max_nodes": 6,
+      "max_edges": 0,
+      "summary": "Ranked hierarchy or conversion drop-off"
+    },
+    "quadrant": {
+      "aliases": [
+        "2x2",
+        "matrix",
+        "prioritization"
+      ],
+      "unit": "item",
+      "max_nodes": 12,
+      "max_edges": 0,
+      "summary": "Two-axis positioning or prioritization"
+    },
+    "radar": {
+      "aliases": [
+        "spider",
+        "spider-chart",
+        "radar-chart"
+      ],
+      "unit": "series",
+      "plotted": true,
+      "max_nodes": 5,
+      "max_edges": 0,
+      "max_focal": 1,
+      "summary": "Several entities scored across three to five quantitative criteria"
+    },
+    "scatter": {
+      "aliases": [
+        "scatter-plot",
+        "correlation",
+        "distribution"
+      ],
+      "unit": "point",
+      "plotted": true,
+      "max_nodes": 30,
+      "max_edges": 0,
+      "summary": "Distribution and correlation between two variables"
+    },
+    "sequence": {
+      "aliases": [
+        "sequence-diagram",
+        "message-flow",
+        "interaction"
+      ],
+      "unit": "lifeline",
+      "max_nodes": 5,
+      "max_zones": 1,
+      "summary": "Time-ordered messages between actors"
+    },
+    "state": {
+      "aliases": [
+        "state-machine",
+        "statechart",
+        "fsm"
+      ],
+      "unit": "state",
+      "summary": "States, transitions and the guards between them"
+    },
+    "swimlane": {
+      "aliases": [
+        "lanes",
+        "cross-functional"
+      ],
+      "unit": "step",
+      "max_zones": 5,
+      "summary": "Cross-functional process with handoffs between owners"
+    },
+    "timeline": {
+      "aliases": [
+        "chronology",
+        "milestones",
+        "history"
+      ],
+      "unit": "event",
+      "summary": "Events positioned in time"
+    },
+    "tree": {
+      "aliases": [
+        "hierarchy",
+        "taxonomy",
+        "breakdown"
+      ],
+      "unit": "node",
+      "summary": "Parent to children relationships"
+    },
+    "venn": {
+      "aliases": [
+        "overlap",
+        "set-overlap"
+      ],
+      "unit": "set",
+      "max_nodes": 3,
+      "max_edges": 0,
+      "summary": "Overlap between sets"
+    }
+  }
+}

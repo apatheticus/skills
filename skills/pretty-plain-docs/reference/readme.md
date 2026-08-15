@@ -114,7 +114,7 @@ meaning — the components, the direction of flow, the point being made — so t
 stays fully meaningful with images off. Write alt text a screen-reader user could act
 on, not "architecture diagram."
 
-This **deliberately diverges** from `pretty-svg-docs` and `pretty-hyper-docs`, where a
+This **deliberately diverges** from `prettier-svg-docs` and `pretty-hyper-docs`, where a
 README embed gets no `<details>` block at all and rich alt text is the whole fallback.
 The reason is specific to this skill: an animated visual carries part of its meaning in
 motion, which no Mermaid graph can express, so there the alt text is the honest
