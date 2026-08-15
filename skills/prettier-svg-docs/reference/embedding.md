@@ -127,6 +127,33 @@ mechanism:
   never in a public issue.").
 - No volatile facts in alt text (it's still doc text).
 
+### What is machine-checked here, and what is not
+
+Alt text and `<desc>` are covered by **no hash** — `src_hash` covers the SVG's bytes,
+`facts_hash` covers the manifest, and embed markup is covered by neither. A re-author
+that changes the drawing and forgets the description therefore moves `src_hash` without
+moving the falsehood, which is how this skill twice shipped a board whose accessible
+name described the *previous* drawing.
+
+`audit_visuals.py` now reports **`MISDESCRIBED`** on two narrow, mechanical clauses:
+
+1. A text node whose whole content is a plain integer must appear in the alt or the
+   `<desc>` — as a numeral or as a number word, so `32` is satisfied by "thirty-two"
+   and `0` by "zero". Zero-padded step markers (`01`, `02`) are skipped.
+2. An ordinal in the alt or `<desc>` ("the ninth", "the 9th") must appear as an ordinal
+   in the drawing or in `facts[]` — but only when the drawing uses ordinals at all, so
+   ordinary positional prose ("the first card, the second…") never fires.
+
+A `data-specimen="true"` root is exempt: a contact sheet's numbers belong to the tiles
+it indexes.
+
+**Write alt text that satisfies this by construction, not by patching afterwards.** If
+the board prints a number, the description says that number. Three things it does not
+check, and they remain yours: a range ("sections 1 to 3" does not literally contain 2),
+a description of the wrong subject with no numbers in it at all, and whether the alt
+communicates *meaning* rather than appearance — which is the rule at the top of this
+section and the reason the doctrine is here rather than only in the checker.
+
 ## The pd:viz marker
 
 ```
@@ -343,6 +370,8 @@ judgment is yours (it needs the evidence pass).
 | `CONTRADICTS` | A stored fact conflicts with what the evidence pass now shows | you — the script prints each visual's `facts` list for judgment |
 | `BUDGET` | Doc exceeds its visual budget, the asset exceeds the byte cap, or **any** visual/marker found in LICENSE/NOTICE (hard violation) | script |
 | `FOREIGN` | `producer` is absent, or is neither `prettier-svg-docs` nor the legacy `more-pretty-docs` — the visual came from another skill and is a candidate for adoption | script |
+| `UNTYPED` | The manifest's `diagram_type` and the asset's `data-diagram` disagree, or a structural visual in a technical doc records neither — see [diagrams.md](diagrams.md) | script |
+| `MISDESCRIBED` | The alt text and `<desc>` no longer match what the visual draws — see [Alt-text doctrine](#alt-text-doctrine) | script |
 
 The audit also prints each visual's `style` and `relaxed` list, so a `check` run
 shows what was softened without re-running `svg_check.py` over every asset.

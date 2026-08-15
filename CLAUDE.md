@@ -62,7 +62,7 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `p
 
 ## Current state
 
-Scaffolded 2026-07-24. **Seven skills shipped** — `human-voice`, `prettier-svg-docs`, `pretty-hyper-docs`, `pretty-plain-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green at plugin version **0.19.1**. `prettier-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28, revised to its v2 spec on 2026-07-29), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. Since 0.19.0 it also ships a **27-type diagram taxonomy** with a **specimen per type** at `docs/samples/types/<slug>.svg`, all authored in `flat-material`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
+Scaffolded 2026-07-24. **Seven skills shipped** — `human-voice`, `prettier-svg-docs`, `pretty-hyper-docs`, `pretty-plain-docs`, `reflect`, `security-audit-full-report`, `website-security-scan` — and the repo validates green at plugin version **0.20.0**. `prettier-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28, revised to its v2 spec on 2026-07-29), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. Since 0.19.0 it also ships a **27-type diagram taxonomy** with a **specimen per type** at `docs/samples/types/<slug>.svg`, all authored in `flat-material`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
 
 **`svg_check.py` gates fidelity, not just safety.** Every other check class is a ceiling (filter depth, bytes, radius) or a legibility floor (font size, contrast) — none of them asks whether a visual *looks like* the style it claims, so a flat, styleless render used to pass clean. Styles now declare their material in `scripts/styles.json` via `require_filter_all`, `min_filter_depth` and `min_elements`, and the checker prints a per-file `NOTE` reporting the chain depth, filter count and drawn-element count it actually found. `deepest chain 1` under a floor of 3 is the tell that a material was faked. Two attributes drive it: `data-specimen="true"` marks a catalog sample (**`min_elements` binds only on specimens** — a README diagram with four boxes is correct at 23 elements, and padding it would be worse output), and `data-style="<slug>"` on a `<filter>` measures that chain against the floor of the style it depicts rather than the file-wide one.
 
@@ -245,6 +245,64 @@ design contract, a Layout tree omitting the entire 0.19.0 addition, and SKILL.md
 "Thirty-one named idioms" contradicted by "all thirty-two" twenty lines later. **Patch —
 no checker, style or catalog changed, so nothing previously produced stops conforming;
 `svg_check.py`, `styles.json` and `diagrams.json` are untouched.**
+
+**0.20.0 closes the open half of that entry — `MISDESCRIBED`, a machine check for
+whether a visual's description still matches what it draws — and the reusable part is
+the measurement, not the code.** Alt text and `<desc>` are covered by no hash at all
+(`src_hash` is bytes, `facts_hash` is the manifest, embed markup is covered by neither),
+which is why a re-author that updates the board and forgets the description moves
+`src_hash` without moving the falsehood. **Three of the four obvious designs were
+measured against the repo's own 16 committed embeds and rejected, and the rejection that
+matters is the intuitive one.** Requiring every drawn numeral to appear in the
+description gives **146** findings, nearly all contact-sheet chrome and chart axis
+ticks. Requiring the reverse — every number in the description to appear on the board —
+**produces the identical verdict on the buggy file and the fixed one**, because the
+description's *other* number ("a board of eight cells") is unaccounted in both; it would
+have nagged forever without once distinguishing the defect, and it is exactly the check
+a reasonable person writes first. A cardinal-plus-noun variant gives 4. What ships is
+two clauses at **0** findings across the whole corpus: a text node whose *whole content*
+is a plain integer must appear in the alt or `<desc>` as a numeral or a number word
+(`32` ↔ "thirty-two"), and an ordinal in the description must appear as an ordinal in
+the drawing or `facts[]` — **the second gated on the drawing using ordinals at all**,
+without which ordinary positional prose ("the first, extract … the second, cluster")
+fires on every board that does not number itself. `data-specimen="true"` is exempt and
+is the single change that took 146 → 0: a contact sheet's numbers belong to the tiles it
+indexes.
+
+**The regression is run against the real defect, not a fixture of it.** `git show
+ce0fb1d:` yields the pre-0.19.1 hero, and the check fires on **both** clauses there and
+is clean at `HEAD` — a green fixture suite does not substitute for that, because the
+fixtures were written after the fix and could encode the wrong shape. The suite itself
+was **mutation-tested**: disabling the specimen opt-out, the comma-grouped value regex,
+ordinal detection and number-word equivalence each reds a *distinct* fixture, and
+restoring returns 29/29. A suite that passes on the first run has proved nothing until
+you have made it fail.
+
+**Two structural notes.** The check lives in `audit_visuals.py` rather than
+`svg_check.py` because it is the only script that sees the markdown `alt` *and* the
+asset — `svg_check.py` never sees a README. And it is a **pure function on strings**,
+`describe_parity(svg_text, alt, facts)`, which is what made `scripts/test_alt_parity.py`
+possible at all: `audit_doc` has no such seam, which is precisely why `audit_visuals.py`
+had **no test of any kind** until now, and why CLAUDE.md already records three defects in
+it found by hand. Two smaller traps closed in passing: the specimen opt-out is anchored
+on `<svg` rather than the first `>` in the file, since an `<?xml?>` prolog would
+otherwise end the slice before the root tag and **silently** reopen all 146; and alt
+extraction walks the tag with the quote-stepping idiom `CENTERED` already uses, because
+alt text legitimately contains `>` (`client -> server`) — the same defect that once
+reported a correctly centered embed as `UNCENTERED`.
+
+**Scope is decided by the asset, not by staging.** `pretty-plain-docs` takes the check
+verbatim; `pretty-hyper-docs` is **permanently uncovered**, because a rendered WebP has
+no text to extract — that is a structural exclusion, not a deferral, and recording it
+here is what stops a later run reading it as drift. Since the two copies share no module,
+CI now **diffs the `describe_parity` block between them** and fails on divergence, which
+is a stronger answer than the standing "keep the three copies in step" instruction.
+**Minor, and the mechanical test decides it**: the corpus measures 0 today, but a
+downstream repo whose alt text carries this drift conformed under 0.19.x and reds under
+0.20.0 — a tightened gate, which the repo rule names directly. Known gaps, stated rather
+than papered over: a range ("sections 1 to 3" does not contain 2) is not expanded, the
+two contact sheets get no parity check by design, and the check reads numbers, not
+meaning — a description of the wrong subject with no numbers in it still passes.
 
 **`viz.json` gained `diagram_type` and `budget_cuts[]`, and `diagram_type` has three
 states rather than two.** A slug means the visual is a diagram of that type; **absent**

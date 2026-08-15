@@ -360,6 +360,7 @@ rule's absence from the prose is never mistaken for a rule's absence.
 | Byte budget | `svg_check.py` size | `ERROR` over the cap, `WARN` when dense |
 | Diagram budgets, orthogonal connectors, label clip and gap, the 4-unit grid, legend placement, geometry-is-not-animated | `svg_check.py` diagram | `ERROR`, on any visual whose root carries `data-diagram` |
 | Embeds centered, one `pd:viz` pair per visual, per-doc visual budget, LICENSE/NOTICE never visualized, foreign producers never overwritten | `audit_visuals.py` | non-zero exit |
+| Alt text and `<desc>` still describe what the visual draws — a number on the board is named in the description, an ordinal in the description is on the board | `audit_visuals.py` | `MISDESCRIBED`, non-zero exit |
 | Every diagram type in `diagrams.json` is named in the frontmatter | `validate.mjs` | CI fails the build |
 
 A `SOFTENED` line is a pass that must be reported into `relaxed[]`, a `WARN` is
@@ -414,4 +415,5 @@ tells you that you have failed, and a question tells you what to produce.
 | `scripts/styles.json` | Read by the checker; keep in step with `reference/styles/` |
 | `scripts/diagrams.json` | Read by the checker and by `validate.mjs`; keep in step with `reference/types/` |
 | `scripts/test_diagram_check.py` | After any change to the `diagram` check class |
+| `scripts/test_alt_parity.py` | After any change to `describe_parity` in `audit_visuals.py` |
 | `scripts/audit_visuals.py` | Phase 7 and `check` mode |

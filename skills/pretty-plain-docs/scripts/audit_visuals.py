@@ -51,6 +51,25 @@ CENTERED = re.compile(
     re.IGNORECASE | re.DOTALL,
 )
 
+# The whole <img> tag, then its alt out of that tag. Two steps rather than one
+# regex reaching for alt= directly, because the tag body has to be walked with the
+# same quote-stepping CENTERED uses — alt text says things like "client -> server",
+# and a naive [^>]* reads that as the end of the tag.
+IMG_TAG = re.compile(r'<img\b(?:[^>"\']|"[^"]*"|\'[^\']*\')*/?>',
+                     re.IGNORECASE | re.DOTALL)
+ALT_ATTR = re.compile(r'\balt="([^"]*)"', re.IGNORECASE | re.DOTALL)
+MD_IMAGE_ALT = re.compile(r"!\[([^\]]*)\]\([^)\s]+\)")
+
+
+def embed_alt(block: str) -> str:
+    """The alt text of the embed in this marker block, '' if there is none."""
+    tag = IMG_TAG.search(block)
+    if tag:
+        m = ALT_ATTR.search(tag.group(0))
+        return m.group(1) if m else ""
+    md = MD_IMAGE_ALT.search(block)
+    return md.group(1) if md else ""
+
 PRODUCER = "pretty-plain-docs"
 # No legacy alias, deliberately: this skill has never shipped under another name, so
 # it has no prior work to own. The siblings' producers are therefore FOREIGN here, and
@@ -98,6 +117,144 @@ BYTES_FAIL_DEFAULT, STYLE_BYTE_FLOORS = load_byte_floors()
 
 CONTRACT = ".prettydocs/prettydocs.md"       # current location
 LEGACY_CONTRACT = "docs/assets/src/DESIGN.md"  # pre-.prettydocs location
+
+
+# --- Description parity ------------------------------------------------------
+#
+# A visual's alt text and its <desc> ARE the document for a reader with images off,
+# and nothing covered them: src_hash covers the SVG's bytes, facts_hash covers the
+# manifest, and embed markup is covered by no hash at all. Two consecutive re-authors
+# in this repo shipped a board whose descriptions still described the previous
+# drawing — nine steps described as ten cells, then nine gate classes described as
+# eight — and both passed every gate that existed.
+#
+# The obvious check does not work, and it was measured rather than assumed. Requiring
+# every drawn numeral to appear in the description gives 146 findings over this repo's
+# own 16 embeds, nearly all of them contact-sheet chrome and chart axis ticks.
+# Requiring the reverse — every number in the description to appear on the board —
+# produces the IDENTICAL verdict on the buggy file and the fixed one, because the
+# description's other number ("a board of eight cells") survives both; it would have
+# nagged forever without once distinguishing the defect.
+#
+# What works is two narrow clauses, measured at 0 findings across the same corpus
+# while still failing the real defect on both of them. See describe_parity.
+
+_UNITS = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight",
+          "nine", "ten", "eleven", "twelve", "thirteen", "fourteen", "fifteen",
+          "sixteen", "seventeen", "eighteen", "nineteen"]
+_TENS = {20: "twenty", 30: "thirty", 40: "forty", 50: "fifty",
+         60: "sixty", 70: "seventy", 80: "eighty", 90: "ninety"}
+CARDINAL_WORDS: dict[int, str] = {n: w for n, w in enumerate(_UNITS)}
+CARDINAL_WORDS.update(_TENS)
+for _t, _tw in _TENS.items():
+    for _u in range(1, 10):
+        CARDINAL_WORDS.setdefault(_t + _u, f"{_tw}-{_UNITS[_u]}")
+ORDINAL_WORDS = {1: "first", 2: "second", 3: "third", 4: "fourth", 5: "fifth",
+                 6: "sixth", 7: "seventh", 8: "eighth", 9: "ninth", 10: "tenth",
+                 11: "eleventh", 12: "twelfth"}
+
+ORDINAL_SUFFIX = re.compile(r"\b(\d+)(?:st|nd|rd|th)\b", re.IGNORECASE)
+SPECIMEN_ATTR = re.compile(r'\bdata-specimen\s*=\s*["\']true["\']', re.IGNORECASE)
+DESC_BLOCK = re.compile(r"<desc\b[^>]*>(.*?)</desc\s*>", re.IGNORECASE | re.DOTALL)
+# title/desc/style hold text that is never painted. Strip them before reading the
+# drawing, or the <desc> would satisfy the very check it is the subject of.
+NOT_DRAWN = re.compile(r"<(title|desc|style)\b[^>]*>.*?</\1\s*>",
+                       re.IGNORECASE | re.DOTALL)
+# One text node's own character data. The attribute list steps over quoted values
+# rather than stopping at the first ">", the same idiom CENTERED uses and for the
+# same reason. `[^<]*` then stops at the first child element, so a <tspan> inside a
+# <text> is read as its own node — which is what makes "a node that is exactly a
+# number" a meaningful question.
+TEXT_NODE = re.compile(r"<(?:text|tspan)\b(?:[^>\"']|\"[^\"]*\"|'[^']*')*>([^<]*)",
+                       re.IGNORECASE)
+# A node that IS a number, not a node that merely contains one. "9" and "1,200"
+# qualify; "§14 em dash budget" and "SHEET 3 OF 7" do not, and that distinction is
+# what separates a headline value from chrome.
+VALUE_ONLY = re.compile(r"^(?:\d{1,3}(?:,\d{3})+|\d+)$")
+
+
+def number_forms(n: int) -> set[str]:
+    """Every spelling a description may legitimately use for n.
+
+    The ordinal counts as a form of the cardinal on purpose: a board drawing `9`
+    under GATE CLASSES is fairly described as "the ninth is diagram".
+    """
+    out = {str(n)}
+    if n >= 1000:
+        out.add(f"{n:,}")
+    word = CARDINAL_WORDS.get(n)
+    if word:
+        out.add(word)
+        out.add(word.replace("-", " "))
+    if n in ORDINAL_WORDS:
+        out.add(ORDINAL_WORDS[n])
+    return out
+
+
+def ordinals_in(text: str) -> set[int]:
+    low = text.lower()
+    found = {n for n, w in ORDINAL_WORDS.items() if re.search(rf"\b{w}\b", low)}
+    return found | {int(m.group(1)) for m in ORDINAL_SUFFIX.finditer(low)}
+
+
+def describe_parity(svg_text: str, alt: str, facts: str) -> list[str]:
+    """Do this visual's descriptions still match what it draws?
+
+    Pure on strings so it is testable without a project tree on disk —
+    scripts/test_alt_parity.py drives it directly. Two clauses:
+
+    A. A text node whose whole content is a plain integer must appear in the alt or
+       the <desc>, as a numeral or as a number word. Zero-padded numerals (01, 02)
+       are step markers rather than claims and are skipped.
+
+    B. An ordinal in the alt or <desc> must appear as an ordinal in the drawing or in
+       viz.json's facts[] — but only when the drawing uses ordinal language at all.
+       Without that gate, ordinary positional prose ("the first card, the second…")
+       fires on every board that happens not to number itself.
+
+    Skipped entirely on a `data-specimen="true"` root. A contact sheet's numbers
+    belong to the tiles it indexes, not to the sheet, and gating them here produced
+    146 of the 146 measured false positives.
+
+    Known gap, deliberately not built: a range is not expanded, so a description
+    reading "sections 1 to 3" does not literally contain 2. No measured case drives
+    it; if one appears, expand ranges here rather than loosening a clause.
+    """
+    # Anchored on "<svg" rather than the first ">" in the file: a leading
+    # <?xml ... ?> prolog or an XML comment would otherwise end the slice before the
+    # root tag, the specimen opt-out would silently stop matching, and a contact
+    # sheet would start reporting every tile's chrome. No committed file here carries
+    # a prolog; a third-party one easily could, and the failure is silent.
+    root = svg_text.find("<svg")
+    end = svg_text.find(">", root) if root != -1 else -1
+    if root != -1 and SPECIMEN_ATTR.search(svg_text[root:end if end != -1 else None]):
+        return []
+
+    desc = DESC_BLOCK.search(svg_text)
+    described = f"{alt} {desc.group(1) if desc else ''}".lower()
+    nodes = [n.strip() for n in TEXT_NODE.findall(NOT_DRAWN.sub(" ", svg_text))]
+
+    findings, seen = [], set()
+    for node in nodes:
+        if not VALUE_ONLY.match(node) or (node.startswith("0") and len(node) > 1):
+            continue
+        n = int(node.replace(",", ""))
+        if n in seen:
+            continue
+        seen.add(n)
+        if not any(re.search(rf"\b{re.escape(f)}\b", described)
+                   for f in number_forms(n)):
+            findings.append(f"the board draws {node} and neither the alt text nor "
+                            "the <desc> mentions it")
+
+    drawn_ordinals = ordinals_in(" ".join(nodes)) | ordinals_in(facts)
+    if drawn_ordinals:
+        spelled = sorted(ORDINAL_WORDS.get(n, str(n)) for n in drawn_ordinals)
+        for n in sorted(ordinals_in(described) - drawn_ordinals):
+            findings.append(
+                f"a description says {ORDINAL_WORDS.get(n, n)}, but the only "
+                f"ordinal(s) the board and facts[] carry are {', '.join(spelled)}")
+    return findings
 
 
 def sha256_file(path: Path) -> str:
@@ -221,6 +378,17 @@ def audit_doc(doc: Path, root: Path, design_hash: str | None, rows: list, proble
 
             if design_hash and meta.get("design_hash") and meta["design_hash"] != design_hash:
                 verdicts.append("DRIFT (design system changed)")
+
+
+            # The descriptions must still describe the drawing. Nothing else covers
+            # this: every hash is over bytes, and a re-author that updates the board
+            # and forgets the alt moves src_hash without moving the falsehood.
+            if asset is not None and asset.exists() \
+                    and asset.suffix.lower() == ".svg":
+                for finding in describe_parity(
+                        asset.read_text(encoding="utf-8", errors="replace"),
+                        embed_alt(block), "\n".join(facts)):
+                    verdicts.append(f"MISDESCRIBED ({finding})")
 
         rows.append({
             "doc": doc.name,
