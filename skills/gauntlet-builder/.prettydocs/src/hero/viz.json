@@ -1,0 +1,24 @@
+{
+  "name": "hero",
+  "doc": "README.md",
+  "tier": "animated-hero",
+  "producer": "prettier-svg-docs",
+  "style": "terminal-minimalist",
+  "diagram_type": null,
+  "facts": [
+    "Every settled answer becomes one binary check on the bar, judged by either 'run it' or 'A/B pick' and nothing else",
+    "A reference is named only where an A/B pick needs one; a run-it check records an em dash instead",
+    "Undecided items are enumerated U1, U2 and marked not gradeable rather than guessed",
+    "scripts/check_answer_key.py lints the emitted answer key before anything is built against it"
+  ],
+  "facts_hash": "331b04aeeee7732f23dabda950dbbafd9b76022188cdb308bd896bc3d987b26e",
+  "src_hash": "97fbc1003a68107c063344027dc5d9c280ae7b4f6707facf58876f03905e17b3",
+  "design_hash": "bc08e12e0c9757b79f5c3790da24be68e3e155f70b94fb6a915f301c10a9f4b3",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 4294
+  },
+  "relaxed": [],
+  "budget_cuts": []
+}

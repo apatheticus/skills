@@ -1,0 +1,27 @@
+{
+  "name": "gauntlet-loop",
+  "doc": "README.md",
+  "tier": "animated-flagship",
+  "producer": "prettier-svg-docs",
+  "style": "terminal-minimalist",
+  "diagram_type": "flowchart",
+  "facts": [
+    "The lead writes a delegation contract for one piece; a builder subagent produces the artifact and its evidence",
+    "A fresh critic audits the artifact against the answer key and receives neither the builder's rationale nor any prior critic's notes",
+    "A win or a tie passes and the evidence is logged; a loss returns exactly one gap, which becomes the next contract",
+    "No round count appears anywhere in the loop; the human is the stop condition"
+  ],
+  "facts_hash": "a0ecaee332c55de89ee90c70b9216ac45a13b5749cd4c6b4b07a52e99054f610",
+  "src_hash": "6f1824acb5d4938e6c842dfb0d2384ec07cee97857c087f22effbf2f3f2e20f3",
+  "design_hash": "bc08e12e0c9757b79f5c3790da24be68e3e155f70b94fb6a915f301c10a9f4b3",
+  "svg": {
+    "loop_s": 12,
+    "width": 1200,
+    "bytes": 8122
+  },
+  "relaxed": [],
+  "budget_cuts": [
+    "the ledger folded into the PASSED sublabel rather than drawn as a seventh node",
+    "the fresh-context boundary drawn as the focal border plus a callout rather than as a zone"
+  ]
+}
