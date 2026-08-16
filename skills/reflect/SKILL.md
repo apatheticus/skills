@@ -5,6 +5,7 @@ argument-hint: "[window: 30d|90d|all] [focus: free text, e.g. a project or theme
 user-invocable: true
 license: MIT
 version: 1.1.2
+disable-model-invocation: true
 ---
 
 # reflect

@@ -68,6 +68,39 @@ Scaffolded 2026-07-24. **Eight skills shipped** — `gauntlet-builder`, `human-v
 in-flight bump is not a shipped version, and this line went stale by a release because
 0.21.0 merged without it moving. `prettier-svg-docs` ships a **32-style** catalog (14 → 31 on 2026-07-25, folding in the `svg-style-exemplars` reference set; → 32 with `soft-vinyl` on 2026-07-28, revised to its v2 spec on 2026-07-29), with a full-width **specimen per style** at `docs/samples/<slug>.svg`. Since 0.19.0 it also ships a **27-type diagram taxonomy** with a **specimen per type** at `docs/samples/types/<slug>.svg`, all authored in `flat-material`. `human-voice` carries a **36-pattern** catalog. The scaffold-only `new-skill` example was removed once a real skill landed — its frontmatter reference survives as `templates/frontmatter.md`. Work lands on `stage` (pushed to `origin`, stored as `https://github.com/apatheticus/skills.git` and rewritten onto SSH per the auth note above) and reaches `main` only by PR. **This line deliberately carries no merged-PR count.** It used to, and the count was structurally unmaintainable: every PR that corrected it made it wrong by one again the moment it merged, which is exactly what happened twice. Get the number from the API instead — `gh pr list --repo apatheticus/skills --state merged --limit 100 --json number --jq 'length'` — and do not reintroduce a written total here.
 
+**0.24.0 makes seven of the eight skills explicit-invoke only, and the exception is the
+whole design.** Every skill Claude Code may auto-invoke pays for itself at *session load*:
+`description` + `when_to_use` are injected into the model's skill listing on every new
+session whether or not the skill is ever used. Across this repo that was **5,951
+characters** for the seven, spent before the user typed anything. All seven now carry
+`disable-model-invocation: true`; `human-voice` deliberately does **not**, because it fires
+on ordinary editing requests ("does this sound AI-generated?") where the user would never
+think to name a skill. The other seven are heavyweight, long-running, explicitly-driven
+workflows that a user reaches for by name — auto-invoking them was never the point.
+
+**The flag removes the whole listing entry, not just the trigger phrasing, and
+`gauntlet-builder` proved it before anything else moved.** It has carried the flag since
+0.22.0, and it was the only one of the eight absent from a live session's skill listing
+while the other seven were present with their full text — measured in a running session
+against the installed 0.22.1 plugin, not inferred from the docs. So the saving is the
+entire entry, and a slash invocation still works: `/reflect` and `/prettier-svg-docs`
+resolve exactly as before. Two consequences worth knowing. **Descriptions were deliberately
+left byte-identical** — there is nothing left to trim once the entry is gone, and
+`validate.mjs` *errors* if any of `prettier-svg-docs`' 27 `diagrams.json` type slugs stops
+appearing in `description + when_to_use`, so trimming that one is an outright build break.
+And `user-invocable: true` on `reflect` and `security-audit-full-report` is an **orthogonal
+axis** and stays: it governs the slash-command list, `disable-model-invocation` governs the
+model listing, and both true is precisely the slash-only target state. The `npx skills`
+channel needs nothing extra — it copies `SKILL.md` verbatim into `~/.claude/skills/<name>/`,
+so the frontmatter travels and Claude Code honours it identically.
+
+**Minor, and the rule decides it by the same clause 0.23.0 used.** No checker, style,
+catalog or contract file moved, so every committed asset re-gates identically — but a
+workflow that relied on describing a task and having the skill fire now requires `/name`,
+which is reachability ceasing to conform exactly as a renamed slug was. Both entries bump,
+because each owns changed skills, and the two lines re-converge at **0.24.0** having
+diverged at 0.23.1.
+
 **0.23.0 splits one plugin into two, and the load-bearing fact is that the mechanism was
 proved by install before anything in the working tree moved.** A scratch copy of the repo
 with the two-entry manifest and no `plugin.json` was registered as a separate marketplace

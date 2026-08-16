@@ -11,7 +11,7 @@
       "name": "apatheticus-skills",
       "source": "./",
       "strict": false,
-      "version": "0.23.1",
+      "version": "0.24.0",
       "description": "Documentation, writing, and self-review skills published by Zerø Effort — animated and static SVG docs, animated WebP docs, voice editing, evaluation gauntlets, and session reflection.",
       "category": "productivity",
       "keywords": [
@@ -40,7 +40,7 @@
       "name": "apatheticus-security",
       "source": "./",
       "strict": false,
-      "version": "0.23.0",
+      "version": "0.24.0",
       "description": "Security review skills published by Zerø Effort — a converging multi-cycle source audit that reports to HTML, and a live website security scan. Note that security-audit-full-report orchestrates the separately published security-audit skill and does not bundle it.",
       "category": "security",
       "keywords": [
