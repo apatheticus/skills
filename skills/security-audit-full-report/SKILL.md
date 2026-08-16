@@ -5,6 +5,7 @@ argument-hint: "[target-dir] [max-cycles] [design-system-dir]"
 user-invocable: true
 license: MIT
 version: 3.2.3
+disable-model-invocation: true
 ---
 
 # security-audit-full-report

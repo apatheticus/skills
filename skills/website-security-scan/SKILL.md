@@ -1,6 +1,7 @@
 ---
 name: website-security-scan
 description: Run a periodic external security posture scan of a website and the email domains that share its name, then produce an interactive SaaS Pro styled HTML report that tracks what changed since the last scan. Use this whenever someone wants to scan, audit, re-check or monitor a public website or domain for vulnerabilities — missing security headers, DNS or email authentication gaps (DMARC, SPF, DKIM, CAA, MTA-STS, DNSSEC), TLS and certificate problems, publicly readable files like .env or .git, exposed CMS versions, or open ports. Also use it to validate, sanity-check or push back on a third-party security assessment, vendor scan, or security scorecard rating of their own site. Trigger on requests like "scan our website", "run the monthly security check", "what changed since last month's scan", "a vendor sent us these findings, are they real", or any request to re-run a prior scan of a domain. This is for externally observable posture of a live site — for auditing source code, use the security-audit skill instead.
+disable-model-invocation: true
 ---
 
 # Website security scan
