@@ -19,4 +19,11 @@ skills-lock.json
 # browser-automation byproducts from the visual QA pass
 .playwright-mcp/
 
+# HyperFrames scratch. compositions/ holds one-off HTML compositions authored while
+# working on a skill, and hyperframes.lock.json is just a content hash of whatever
+# is in there — it tracks scratch files, not dependencies, so it is not a lockfile
+# worth committing. The doc-visual sources that ARE committed live in .prettydocs/.
+compositions/
+hyperframes.lock.json
+
 __pycache__/
