@@ -130,15 +130,18 @@ documentation, compliance and audit material, regulatory submissions.
 | Specificity currency | Cited authority: statute, standard, control ID, section reference |
 | Stance | Precise. Claim only what is sourced |
 | Person | Per the governing style guide |
-| Contractions | Per the governing style guide. Federal house style commonly disallows them |
+| Contractions | Per the governing style guide. In a U.S. government document the Federal Plain Language Guidelines affirmatively recommend them; an agency style guide may still override |
 | Lists | **Required** where they aid comprehension. §16 and §17 are off |
 | Opening | Per the mandated template |
 | Closing | Per the mandated template |
 | Sentence policy | **Cap any sentence at 30 words; target ≤20 average.** Plain-language brevity outranks burstiness here — this is the one register where the anti-detection goal loses |
 
-**Routing comes first.** For U.S. federal audiences, invoke the
-`federal-technical-writing` skill before this one. It owns the compliance
-envelope; this skill operates inside it. See "Federal routing" in `SKILL.md`.
+**Government audiences take an extra file.** Regulated is wider than government
+work — clinical, legal and safety documents live here too. When the reader *is* a
+U.S. federal, state or local government one, load
+`reference/plain-language.md` alongside this profile. It carries the Plain
+Writing Act frame, §G1–§G7, and the federal substitution table. See "Government
+documents" in `SKILL.md`.
 
 **Off in this register:** §14 (em dashes), §16 (inline-header lists), §17 (title
 case), §26 (hyphenated pairs), §28 (signposting — mandated templates require
@@ -153,11 +156,12 @@ stakes: a fabricated citation in a regulatory document is a finding, not a typo.
 strips a mandated structure, or it is skipped entirely and an evaluator reads
 obviously machine-written narrative. Both are avoidable; neither is rare.
 
-### Plain-language floor (only when no compliance skill is installed)
+### Plain-language floor (government audiences)
 
-Do **not** improvise federal compliance. If `federal-technical-writing` is
-unavailable, apply this floor, then tell the user explicitly which checks you did
-not perform.
+Apply this floor whenever the reader is a U.S. federal, state or local government
+one, then tell the user explicitly which checks you did not perform. It is the
+condensed form of `reference/plain-language.md`; load that file for the full
+envelope and the worked examples.
 
 - **Active voice.** "The agency reviews the application", not "The application is
   reviewed by the agency". Passive is acceptable only when the actor is genuinely
@@ -171,5 +175,16 @@ not perform.
 - **Concrete examples.** Every abstract requirement gets an example nearby.
 - **Define once.** Spell out each acronym on first use.
 
-This is a floor, not a substitute. It covers none of Section 508, none of GPO
-style, and none of the mandated section structures. Say so.
+Five more, each covered in full in `reference/plain-language.md` — pointers
+rather than restatements, because the examples are what make them usable:
+
+- **§G1 hidden verbs.** *decide*, not *make a determination*.
+- **§G2 noun strings.** Break any run of three or more stacked nouns.
+- **§G3 positive language.** No double negatives, no exceptions to exceptions.
+- **§G4 main idea first.** The rule comes before its conditions and exceptions.
+- **`must`, not `shall`.** Keep `shall` only inside quoted statutory text or a
+  mandated template.
+
+This is a floor, not a substitute. It covers none of Section 508, none of the GPO
+Style Manual, no agency style guide, none of the mandated section structures, and
+no testing with real readers. Say so.

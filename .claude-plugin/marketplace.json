@@ -11,7 +11,7 @@
       "name": "apatheticus-skills",
       "source": "./",
       "strict": false,
-      "version": "0.24.0",
+      "version": "0.25.0",
       "description": "Documentation, writing, and self-review skills published by Zerø Effort — animated and static SVG docs, animated WebP docs, voice editing, evaluation gauntlets, and session reflection.",
       "category": "productivity",
       "keywords": [

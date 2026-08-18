@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Count the mechanical half of human-voice's Step 4 self-check.
 
-    python3 voice_check.py <file.md> --register E|P|T|R
+    python3 voice_check.py <file.md> --register E|P|T|R [--gov]
 
 Reports, never rewrites. Tier 1 and Tier 3 vocabulary hits are defects and exit
 non-zero; everything else is advisory, because the register tables in SKILL.md
@@ -26,6 +26,18 @@ reason and is correct as written. No carve-out was added for single-word emphasi
 (`*facilitate*`): the span is identical whether the word is being mentioned or
 emphatically used, so suppressing it would trade real tier-1 detections for a
 lower false-positive rate on the rare document whose subject is the word list.
+
+--gov adds two government-scoped checks from reference/plain-language.md, and is
+rejected outside --register R because those rules are written for a U.S.
+government audience and are wrong on an essay. It covers SSG1 hidden verbs and
+SSG3 stacked negations, both WARN.
+
+There is deliberately **no SSG2 noun-string check**. Telling "laboratory animal
+facility management plan" from "New York City Department of Transportation"
+needs part-of-speech tagging, and a regex over capitalisation would flag every
+proper name in a federal document. Do not read a clean --gov run as evidence
+that noun strings were checked; they were not. Nor are the substitution table,
+SSG4, SSG5, SSG6 or SSG7 -- all of those need judgment and stay with the reader.
 """
 
 import argparse
@@ -156,6 +168,31 @@ EMOJI = re.compile(
 
 # Words that legitimately open many sentences and carry no style signal.
 OPENER_EXEMPT = {"a", "an", "the", "it", "if", "in", "to", "for", "and", "but"}
+
+# --- government-scoped patterns (--gov, Regulated only) ---------------------
+# reference/plain-language.md SSG1 and SSG3. Deliberately narrow: these fire only
+# for a U.S. government audience and would be wrong on an essay.
+
+# SSG1 hidden verbs. A weak verb propping up a nominalization. Catches the common
+# "make a determination" / "provide notification" shape, and nothing subtler --
+# an untagged regex cannot tell "provide a solution" (fine) from "provide
+# notification" (not), so both come back as WARN and a human adjudicates.
+HIDDEN_VERB = re.compile(
+    r"\b(?:mak\w+|made|tak\w+|took|giv\w+|gave|provid\w+|conduct\w*|perform\w*|"
+    r"achiev\w+|effect\w*|undertak\w+|undertook|is|are|was|were)\s+"
+    r"(?:a|an|the|in)?\s*"
+    r"\w{4,}(?:tion|sion|ment|ance|ence|ity|ancy|ency)\b",
+    re.I)
+
+# SSG3 positive language. Two or more negations in one sentence, counted rather
+# than parsed. "not ... unless ... except" is the shape that costs the reader an
+# inversion per hop.
+NEGATION = re.compile(
+    r"\b(?:not|no|never|none|nor|cannot|can't|don't|doesn't|won't|shouldn't|"
+    r"unless|except|excluding|other than|fails? to|failed to|failure to|"
+    r"notwithstanding|absent|unable|ineligible|unlawful|prohibited|"
+    r"disallowed|denied)\b",
+    re.I)
 
 
 class Finding:
@@ -389,6 +426,26 @@ def check_openers(masked, findings):
                     f"'{word}' opens {n} sentences in this section, limit 2"))
 
 
+def check_gov(masked, findings):
+    """Government-scoped checks. Only runs under --gov, only in Regulated.
+
+    Both are WARN. They are heuristics over a regex, not a parse, and a WARN that
+    a reader dismisses costs less than a rule that silently stops firing.
+    """
+    for m in HIDDEN_VERB.finditer(masked):
+        findings.append(Finding(
+            "WARN", line_of(masked, m.start()), "gov-hidden-verb",
+            f"'{' '.join(m.group(0).split())}' — hidden verb (§G1), use the verb itself"))
+
+    for off, s in sentences(masked):
+        hits = [m.group(0).lower() for m in NEGATION.finditer(s)]
+        if len(hits) >= 2:
+            findings.append(Finding(
+                "WARN", line_of(masked, off), "gov-negation",
+                f"{len(hits)} negations in one sentence ({', '.join(hits)}) — "
+                f"state it positively (§G3)"))
+
+
 def check_style(masked, reg, findings, stats):
     cfg = REGISTERS[reg]
 
@@ -449,8 +506,12 @@ def check_style(masked, reg, findings, stats):
 SEV_ORDER = {"PROBLEM": 0, "ERROR": 1, "WARN": 2, "QUERY": 3}
 
 
-def run(text, reg):
-    """Pure function on a string. Returns (findings, stats)."""
+def run(text, reg, gov=False):
+    """Pure function on a string. Returns (findings, stats).
+
+    gov=True adds the government-scoped checks. It is meaningless outside
+    Regulated and main() rejects the combination before getting here.
+    """
     masked, masked_chars = mask(text)
     findings, stats = [], {"masked_chars": masked_chars}
 
@@ -477,6 +538,8 @@ def run(text, reg):
     check_sentences(masked, reg, findings, stats)
     check_openers(masked, findings)
     check_style(masked, reg, findings, stats)
+    if gov:
+        check_gov(masked, findings)
 
     findings.sort(key=lambda f: (SEV_ORDER[f.sev], f.line))
     return findings, stats
@@ -486,7 +549,14 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     ap.add_argument("file")
     ap.add_argument("--register", required=True, choices=sorted(REGISTERS))
+    ap.add_argument("--gov", action="store_true",
+                    help="add the government-scoped checks from "
+                         "reference/plain-language.md (Regulated only)")
     args = ap.parse_args()
+
+    if args.gov and args.register != "R":
+        ap.error("--gov applies only to --register R; the plain-language rules "
+                 "are written for a U.S. government audience")
 
     try:
         text = open(args.file, encoding="utf-8").read()
@@ -494,10 +564,11 @@ def main():
         print(f"PROBLEM nothing-to-check: {exc}")
         return 1
 
-    findings, stats = run(text, args.register)
+    findings, stats = run(text, args.register, gov=args.gov)
     cfg = REGISTERS[args.register]
 
-    note = (f"NOTE    {cfg['name']} register · {stats['words']} words · "
+    note = (f"NOTE    {cfg['name']} register{' · government-scoped' if args.gov else ''} · "
+            f"{stats['words']} words · "
             f"{stats.get('sentences', 0)} sentences · "
             f"{stats['masked_chars']} chars masked as code, links or quotation")
     if "avg" in stats:
