@@ -177,10 +177,11 @@ window, the SPOF, and the missing warm-up are stated, not buried.
 
 **Register:** Regulated. User manual section for a federal customer.
 
-> **Routing note.** In a real run, invoke `federal-technical-writing` first for
-> the compliance envelope (Plain Writing Act, Section 508, GPO style, mandated
-> sections), then apply this register inside it. The rewrite below shows only
-> this skill's contribution.
+> **Scope note.** The reader here is a government one, so the rewrite runs the
+> Regulated register inside the plain-language envelope in
+> `reference/plain-language.md`. It shows the voice pass only. Section 508, GPO
+> style, agency style guides and mandated section structures are outside this
+> skill and were not checked.
 
 ### Before
 

@@ -22,8 +22,11 @@
 > [!IMPORTANT]
 > This is an editing pass over prose that already exists. It is not a drafting tool,
 > and it is not a style guide for code, config, or commit messages. For anything a
-> U.S. federal agency, evaluator, or auditor will read, the
-> `federal-technical-writing` skill runs first and wins every collision.
+> U.S. federal, state, or local government agency, evaluator, or auditor will read,
+> the regulated register runs inside a plain-language envelope drawn from the Plain
+> Writing Act of 2010 and the Federal Plain Language Guidelines. Section 508, GPO
+> style, agency style guides, and mandated section structures stay outside it, and
+> the delivery says so.
 
 ## What this is
 
@@ -104,6 +107,7 @@ human-voice/
 │   ├── patterns-core.md        the 21 always-on patterns, plus false positives
 │   ├── patterns-gated.md       the 15 register-gated patterns, plus the gate table
 │   ├── vocabulary.md           global and register-scoped word lists, with carve-outs
+│   ├── plain-language.md       government audiences only — the Plain Writing Act envelope
 │   ├── examples.md             one full worked rewrite per register
 │   └── attribution.md          provenance and license terms of the derived material
 ├── scripts/
@@ -202,6 +206,7 @@ entries in both distribution manifests. See
 - [`reference/patterns-core.md`](reference/patterns-core.md) — the 21 always-on patterns, with false positives.
 - [`reference/patterns-gated.md`](reference/patterns-gated.md) — the 15 register-gated patterns and the gate table.
 - [`reference/vocabulary.md`](reference/vocabulary.md) — the word and phrase lists.
+- [`reference/plain-language.md`](reference/plain-language.md) — government audiences only: the Plain Writing Act frame, §G1–§G7, and the federal substitution table.
 - [`reference/examples.md`](reference/examples.md) — a worked rewrite per register.
 - [`reference/attribution.md`](reference/attribution.md) — provenance of the derived material.
 - [CONTRIBUTING.md](../../CONTRIBUTING.md) — how to propose a change to this collection.

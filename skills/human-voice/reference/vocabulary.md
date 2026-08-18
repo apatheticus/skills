@@ -81,11 +81,18 @@ not another.
 | `hence` / `thereby` / `thereof` | ban | ban | ban | keep | Legal and regulatory drafting convention |
 | `subsequently` | ban | ban | keep | keep | Step ordering in a procedure; elsewhere use *then* |
 | `additionally` | ban | ban | keep | keep | Enumerating requirements; elsewhere start the sentence |
-| `shall` | ban | ban | ban | keep | Binding obligation in regulated drafting; elsewhere use *must* |
+| `shall` | ban | ban | ban | keep* | Binding obligation in regulated drafting; elsewhere use *must* |
 | `pursuant to` | ban | ban | ban | keep | Citation convention; elsewhere use *under* |
 
 Everything else that is banned in one register is banned in all four. If a word
 is not in this table and not in Tier 2, it belongs to Tier 1 or Tier 3.
+
+\* **`shall` narrows for government audiences.** The Federal Plain Language
+Guidelines require *must* for an obligation, on the grounds that courts have read
+`shall` both ways. In a U.S. government document keep `shall` only inside quoted
+statutory text or a mandated template, and write *must* everywhere else. Outside
+government — clinical, safety and private legal drafting — the `keep` above
+stands as written.
 
 ---
 
@@ -156,6 +163,11 @@ printed here: the greps this section used to carry reported every banned word a
 document was *quoting*, and the reader had to filter those by eye every time.
 
 Without Python, do the scan by reading and say so in the delivery.
+
+**Government documents take a second pass.** The federal substitution table in
+`reference/plain-language.md` carries roughly sixty pairs the tiers here do not,
+because they are solely Guideline-derived and wrong to enforce on an essay. The
+checker does not carry that table; run it by reading.
 
 A Tier 1 or Tier 3 hit is a defect and the checker exits non-zero on it. A
 **Tier 2 hit is a question** — it comes back as `QUERY`, never as a replacement.

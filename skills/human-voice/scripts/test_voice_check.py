@@ -26,11 +26,11 @@ PAD = ("The team met on Tuesday and agreed the schedule for the next quarter, "
        "then wrote the dates into the shared plan so nobody had to ask again. ")
 
 
-def check(name, text, register, expect=(), reject=()):
+def check(name, text, register, expect=(), reject=(), gov=False):
     """Assert which finding codes fire for one fixture."""
     global RUN
     RUN += 1
-    findings, _ = v.run(text, register)
+    findings, _ = v.run(text, register, gov=gov)
     codes = {f.code for f in findings}
     for code in expect:
         if code not in codes:
@@ -201,6 +201,37 @@ check("ordinary prose is not reported as unchecked",
 check("a genuinely short but checkable draft is not reported as unchecked",
       "We shipped the change on Tuesday and told the customer the same day.",
       "P", reject=["nothing-to-check"])
+
+# --- government-scoped checks (--gov, Regulated only) -----------------------
+
+check("a hidden verb is flagged under --gov",
+      PAD + "The agency will make a determination on your application.",
+      "R", expect=["gov-hidden-verb"], gov=True)
+
+check("a hidden verb is silent without --gov",
+      PAD + "The agency will make a determination on your application.",
+      "R", reject=["gov-hidden-verb"])
+
+check("a hidden verb inside a code span is not flagged",
+      PAD + "Call `make a determination` on the handler.",
+      "R", reject=["gov-hidden-verb"], gov=True)
+
+check("stacked negations are flagged under --gov",
+      PAD + "No application is ineligible unless the applicant has failed to file.",
+      "R", expect=["gov-negation"], gov=True)
+
+check("stacked negations are silent without --gov",
+      PAD + "No application is ineligible unless the applicant has failed to file.",
+      "R", reject=["gov-negation"])
+
+check("one negation in a sentence is not flagged",
+      PAD + "You must file the form before the deadline, and no fee applies.",
+      "R", reject=["gov-negation"], gov=True)
+
+check("plain government prose trips neither government check",
+      PAD + "We will decide on your application and tell you the result. "
+            "We review your file before we approve it.",
+      "R", reject=["gov-hidden-verb", "gov-negation"], gov=True)
 
 # --- exit-code contract -----------------------------------------------------
 

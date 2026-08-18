@@ -19,7 +19,8 @@ draft → audit → final process.
 Changed: every pattern carries register tags and several are now conditional or
 off by register; the vocabulary list is split into tiers with technical
 carve-outs; the personality section became one register profile rather than a
-global mode with an inline exception; a federal routing rule was added; the
+global mode with an inline exception; a government plain-language envelope was
+added (`reference/plain-language.md`, §G1–§G7); the
 em dash ban became register-scoped, then became a budget rather than a ban
 (see below).
 
@@ -86,10 +87,21 @@ four registers, gates the pattern catalog by register, resolves the original's
 conflicts with plain-language guidance, and adds the technical-term carve-outs
 that a flat blacklist breaks.
 
-## Plain-language floor
+## Plain-language envelope
 
-The floor in `registers.md` paraphrases publicly published U.S. federal
-guidance: the Plain Writing Act of 2010 (Pub. L. 111-274) and the Federal Plain
-Language Guidelines at <https://plainlanguage.gov>. U.S. government works are
-not subject to copyright. It is a floor for the case where no compliance skill is
-installed, not a compliance implementation.
+`reference/plain-language.md` and the condensed floor in `registers.md`
+paraphrase publicly published U.S. federal guidance: the Plain Writing Act of
+2010 (Pub. L. 111-274) and the Federal Plain Language Guidelines. U.S.
+government works are not subject to copyright, so no license terms attach and
+none are claimed over the paraphrase.
+
+**Where the source text lives.** `plainlanguage.gov` now redirects to
+<https://digital.gov/guides/plain-language>, whose content is a shorter
+derivative. The canonical Guidelines text is the archived site source at
+<https://github.com/GSA/plainlanguage.gov>, under `_pages/guidelines/`. Cite the
+archive; the old URL no longer resolves to the material it names.
+
+§G1–§G7 are this skill's numbering, not the Guidelines'. They sit deliberately
+outside the §1–§36 pattern catalog because they are government-scoped, and the
+catalog is not. This is an envelope around the Regulated register for one
+audience, not a compliance implementation.

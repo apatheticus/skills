@@ -1,9 +1,9 @@
 ---
 name: human-voice
-description: Remove signs of AI-generated writing and rewrite prose so it reads as human-authored, adapting to the document's register (editorial, professional, technical, regulated). Use whenever the user wants to humanize, de-AI, or de-slop text; make writing sound natural, human, or less like ChatGPT; strip AI tells, em dashes, or AI words; pass or avoid AI detection (GPTZero, Originality.ai, Turnitin, Copyleaks); or asks "does this sound AI-generated?" Also use when editing, polishing, or reviewing drafted prose for voice, tone, and readability, including blog posts, articles, thought leadership, marketing copy, memos, policies, reports, specs, technical docs, and proposals. For anything a U.S. federal agency, evaluator, or auditor will read, invoke the federal-technical-writing skill first for compliance, then apply this skill's regulated register inside those constraints.
-when_to_use: Also use it as a detector rather than an editor — audit, scan, or flag a draft for AI tells without rewriting it. Trigger on a request naming one specific tell — hedging, passive voice, filler, fluff, buzzwords, corporate speak, jargon, sycophancy, boldface overuse, emojis, curly quotes, title-case headings, signposting, rule of three, negative parallelism ("not just X, but Y"), self-answered rhetorical questions, aphorisms, manufactured kickers, synonym cycling, or promotional language. Genres also include cover letters, email, LinkedIn and social posts, grant narratives, executive summaries, runbooks, ADRs, and release notes.
+description: Remove signs of AI-generated writing. Rewrite prose so it reads as human-authored, adapting to document's register (editorial, professional, technical, regulated). Use when user wants to humanize, de-AI, or de-slop text; make writing sound natural, human, or less like ChatGPT; strip AI tells, em dashes, or AI words; pass or avoid AI detection (GPTZero, Originality.ai, Turnitin, Copyleaks); or asks "does this sound AI-generated?" Use when editing, polishing, or reviewing drafted prose for voice, tone, readability, including briefings, write-ups, blog posts, articles, thought leadership, marketing copy, memos, policies, reports, specs, technical docs, and proposals. For anything a U.S. federal, state, or local government agency, evaluator, or auditor reads, apply the regulated register inside the Plain Writing Act and Federal Plain Language Guidelines envelope in reference/plain-language.md.
+when_to_use: Also use it as a detector rather than an editor — audit, scan, or flag a draft for AI tells without rewriting it. Trigger on a request naming one specific tell — hedging, passive voice, filler, fluff, buzzwords, corporate speak, jargon, sycophancy, boldface overuse, emojis, title-case headings, signposting, rule of three, negative parallelism ("not just X, but Y"), self-answered rhetorical questions, aphorisms, manufactured kickers, synonym cycling, or promotional language. Genres also include cover letters, email, LinkedIn and social posts, grant narratives, executive summaries, runbooks, ADRs, and release notes.
 license: MIT
-version: 1.2.0
+version: 1.3.0
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, AskUserQuestion
 ---
 
@@ -17,9 +17,9 @@ patterns that register wants.
 
 Do **not** use this for drafting from nothing — it is an editing pass over prose
 that already exists. Do **not** use it as a style guide for code, config, or
-commit messages. For documents bound by federal statute, see
-[Federal routing](#federal-routing) below: this skill yields, it does not
-compete.
+commit messages. For documents written for a government reader, see
+[Government documents](#government-documents) below: the plain-language envelope
+constrains the rewrite, it does not replace it.
 
 ## When to use
 
@@ -175,32 +175,40 @@ source is missing, say what is not known or cut the sentence. Never dress a gues
 as fact, and never let a plausible-sounding invention survive because it read
 smoothly.
 
-## Federal routing
+## Government documents
 
-When the audience is a U.S. federal agency, evaluator, or auditor — proposals,
-RFP/RFI responses, user manuals, ConOps, SSPs, ATO packages, public-facing agency
-content:
+When the audience is a U.S. federal, state, or local government agency,
+evaluator, or auditor — proposals, RFP/RFI responses, user manuals, ConOps, SSPs,
+ATO packages, public-facing agency content — select the Regulated register and
+add the plain-language envelope in `reference/plain-language.md`. That file is
+government-scoped and loads for nothing else.
 
-1. **Invoke the `federal-technical-writing` skill first** if it is installed. It
-   owns the compliance envelope: Plain Writing Act, GPO Style Manual, Section 508,
-   agency voice, required document sections.
-2. **Then run this skill's Regulated register inside that envelope.**
+**What the statute actually requires.** The Plain Writing Act of 2010
+(Pub. L. 111-274) obliges agencies to write *covered documents* — the material a
+member of the public needs to obtain a benefit, comply with a requirement, or
+file taxes — in plain writing. Regulations are excluded by definition, and §6
+forecloses judicial review, so there is no compliance finding to certify against.
+The defensible claim in a delivery is "written to the Federal Plain Language
+Guidelines". "Plain Writing Act compliant" is not a claim anyone can make, and
+this skill never makes it.
 
-This is precedence, not a handoff. Do not skip the humanizing pass because the
-document is federal — an evaluator scoring narrative quality is exactly the
-reader most likely to notice machine-written prose, and a full bail-out leaves
-the highest-stakes document with zero cleanup. Roughly two-thirds of the catalog
-still applies, and much of it (§23 filler, §13 passive voice, §7 vocabulary)
-*reinforces* plain language rather than fighting it.
+Do not skip the humanizing pass because the document is governmental — an
+evaluator scoring narrative quality is exactly the reader most likely to notice
+machine-written prose, and a full bail-out leaves the highest-stakes document
+with zero cleanup. Roughly two-thirds of the catalog still applies, and much of
+it (§23 filler, §13 passive voice, §7 vocabulary) *reinforces* plain language
+rather than fighting it.
 
-Where the two collide, the compliance skill wins without argument. The specific
-collisions are §14, §16, §17, §26, §28, the burstiness thresholds, and
-contractions — all already marked ○ for Regulated above.
+Where the envelope collides with a pattern, the mandated template or the agency's
+own style guide wins without argument. The specific collisions are §14, §16, §17,
+§26, §28, the burstiness thresholds, and contractions — all already marked ○ for
+Regulated above.
 
-**If `federal-technical-writing` is not installed**, do not improvise federal
-compliance. Apply the Regulated register, then tell the user plainly which
-compliance checks you did *not* perform. `reference/registers.md` carries a
-minimal plain-language floor for this case; it is a floor, not a substitute.
+**Do not improvise the rest of federal compliance.** Section 508, the GPO Style
+Manual, agency voice guides, and mandated section structures are outside this
+skill entirely. Apply the register and the envelope, then tell the user plainly
+which checks you did *not* perform. `reference/plain-language.md` names them, and
+`reference/registers.md` carries the condensed floor.
 
 ## Step 4 — Self-check
 
@@ -227,7 +235,9 @@ Tier-2 hit comes back as a `QUERY`, never a replacement, for the reason
    defect; replace with plainer, more specific alternatives. Open
    `reference/vocabulary.md` when the checker returns a `QUERY` (Tier 2 — apply
    the carve-out rule and the delete-and-reread test) or a Tier 2b hit, where the
-   same sense is legal in one register and not another.
+   same sense is legal in one register and not another. **For a government
+   audience,** also run the federal substitution table in
+   `reference/plain-language.md`; it carries pairs the global tiers do not.
 2. **Sentence length audit.** Check against the register's targets:
 
    | | Editorial | Professional | Technical | Regulated |
@@ -237,13 +247,20 @@ Tier-2 hit comes back as a `QUERY`, never a replacement, for the reason
    | Long sentences | ≥1 over 30 words per page | occasional | occasional | **cap at 30 words** |
    | Average target | wide variance | 15–25 words | 15–25 words | **≤20 words** |
 
+   The Regulated column's ≤20 average and 30-word cap come from the Federal Plain
+   Language Guidelines and are written for a government reader. In non-government
+   Regulated work — clinical, legal, safety — treat them as targets rather than
+   the hard cap they are for an agency document.
+
 3. **Opener diversity.** Read the first word of every sentence. If any word opens
    more than twice in a section, rewrite one.
 4. **Structure.** Does it preview itself? Does the conclusion restate the
    introduction? Both are AI tells in every register. Restructure. Then read the
    last line on its own: if it exists to sound deep, delete it and end on the
    clearest concrete sentence already in the draft (§31), or add a plain takeaway
-   or next action. Do not rewrite it into a better version of itself.
+   or next action. Do not rewrite it into a better version of itself. **For a
+   government audience,** also apply §G4 in `reference/plain-language.md` — the
+   main idea comes before its exceptions and conditions, never after them.
 5. **Specificity.** Find every general claim with no supporting detail. Add the
    detail in the register's currency, or cut the claim.
 6. **Stance.** Does the piece commit to anything? Editorial takes a position,
@@ -262,8 +279,10 @@ Tier-2 hit comes back as a `QUERY`, never a replacement, for the reason
 For a detect request, Step 1b's findings report *is* the delivery. Stop there and
 offer the rewrite. For an edit, produce, in this order:
 
-1. The **register** chosen, in one line, with the reason. If federal routing
-   applied, say whether `federal-technical-writing` ran.
+1. The **register** chosen, in one line, with the reason. For a government
+   document, say that the plain-language envelope was applied and name the checks
+   that were not performed — Section 508, GPO style, agency style guides,
+   mandated section structures, and testing with real readers.
 2. The **draft rewrite**.
 3. **"What still reads as AI here?"** — answer honestly in two to five bullets.
    A draft with nothing left to flag is almost always an unexamined draft.
@@ -293,12 +312,15 @@ underperforms.
 - **Preserve meaning.** If a rewrite changes what the document asserts, it failed
   regardless of how it reads.
 - **State what you did not check.** If a register was assumed, a sample was
-  absent, or a compliance skill was unavailable, say so in the delivery.
+  absent, or a compliance area sits outside this skill, say so in the delivery.
 
 ## Reference
 
 - `reference/registers.md` — the four register profiles in full, plus the
-  plain-language floor for Regulated when no compliance skill is installed
+  condensed plain-language floor for Regulated
+- `reference/plain-language.md` — **government audiences only.** The Plain Writing
+  Act, the Federal Plain Language Guidelines, §G1–§G7, the federal substitution
+  table, and what this skill does not cover
 - `reference/patterns-core.md` — the 21 always-on patterns with before/after,
   plus the false-positive and signs-of-human-writing lists. Read every run
 - `reference/patterns-gated.md` — the 15 register-gated patterns, personality
