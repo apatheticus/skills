@@ -114,10 +114,12 @@ Shape:
 ### Phase 4 — Report
 
 Read `reference/report-guide.md` for structure, interactivity, motion, and
-the self-containment rules, and `reference/design-system/` — a bundled copy of
-the **SaaS Pro** design system: `DESIGN.md` and `MOTION.md` (the standards),
-`tokens/*.css` (four token files), `components.css` (the `sp-*` class layer),
-and `charts/` (chart geometry references, read-only — see its README).
+the self-containment rules. The report is styled in the **Neumorphic Fresh**
+design system, which is **not bundled here** — read it from the user's own
+maintained copy at `/Users/luke/scratch/Styles/Neumorphic Fresh Design System/`
+(`DESIGN.md`, `colors_and_type.css`, `components.css` for the `nf-*` layer, and
+`ui_kits/dashboard/Widgets.jsx` as the chart geometry reference). If that
+directory is missing, stop and ask — do not substitute another design system.
 Requirements in brief:
 
 - Single self-contained HTML file at `REPORT`. No external requests: vendor
