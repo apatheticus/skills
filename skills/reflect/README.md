@@ -38,6 +38,7 @@ A single interactive HTML report at `<cwd>/Outputs/Reflections/cc-reflection-<da
 - A ranked assessment, highest leverage first, that drills down from an executive summary to per-cluster evidence — verbatim quotes, session IDs, and project paths.
 - Custom inline SVG graphics throughout — hand-built charts for every number, explanatory diagrams, and decorative polish. No chart libraries, no raster images, no external requests.
 - An embedded machine-readable summary block, so the next run can diff against this one and show what you adopted, what still recurs, and what's new.
+- A check-off control on every recommendation — mark it done, won't do, or leave it open, with a one-line note. Click **Save status** and save over `Outputs/Reflections/reflect-status.json`; the next run reads it, drops what you set aside, and calls out anything you marked done that came back anyway.
 - A dedicated section for your `focus`, when you pass one.
 
 The report is styled with the **Neumorphic Fresh** design system — read from the user's own copy at `Styles/Neumorphic Fresh Design System/`, not bundled here — and opens straight from `file://`.
@@ -54,11 +55,11 @@ The report is styled with the **Neumorphic Fresh** design system — read from t
 
 | Phase | What happens |
 | --- | --- |
-| 0 · Scope | Enumerate in-window transcripts (the current session is excluded), and load the most recent prior report for trend diffing. |
+| 0 · Scope | Enumerate in-window transcripts (the current session is excluded), and load the most recent prior report plus your status ledger for trend diffing. |
 | 1 · Insights gate | Check that `/insights` data is fresh enough to corroborate; if it's stale, pause and ask before proceeding. |
 | 2 · Triage | Score every in-window session from cheap metadata so agent effort goes where the friction is. |
 | 3 · Extraction | Fan out over batched transcripts, extract schema-enforced signals, cluster them, decide a verdict per cluster, then cross-check against `/insights`. |
-| 4 · Report | Render the single self-contained HTML file with inline SVG charts and the embedded summary block. |
+| 4 · Report | Render the single self-contained HTML file with inline SVG charts, the check-off controls, and the embedded summary block. |
 | 5 · Deliver | Surface the report and a TL;DR of the top recommendations, naming anything the run had to skip. |
 
 ## What it looks for

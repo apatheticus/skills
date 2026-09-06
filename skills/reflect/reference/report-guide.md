@@ -176,6 +176,9 @@ read at a glance, so the formatting rules are tight:
 - **The meta line carries the bucket's own fact, not a generic one**: Adopted →
   the report it was first raised in; Still recurring → `streak ×N` plus the
   session count; New → the family and the session count.
+  When the status ledger has something to say about a row, that wins the meta
+  line: `tried 6 Sep — came back`, `you marked this done 6 Sep`, `set aside
+  6 Sep`. See § The status ledger.
 - **Long titles truncate, never reflow the grid.** Two-line clamp
   (`-webkit-line-clamp: 2`), `overflow-wrap: anywhere`, and `min-width: 0` on
   every flex/grid child — without that last one a single long `code` token
@@ -183,6 +186,82 @@ read at a glance, so the formatting rules are tight:
 - **A row links to its detail card** (same behaviour as an exec-summary row).
 - **An empty bucket renders an empty state**, not an empty card: one muted line
   saying what emptiness means ("nothing was adopted since 24 Aug").
+
+## The status ledger — check off what you've addressed
+
+The report is a worklist, not a bulletin. The reader marks what they have acted
+on, and the next run reads those marks back. Without this, the same finding is
+re-derived from scratch every week, and a fix that was tried and failed looks
+exactly like one that was never tried.
+
+**The file.** `OUT_DIR/reflect-status.json`, keyed by recommendation id — the
+same content-derived slug used for `id="card-<id>"`. That is why those ids must
+stay stable across editions: never renumber them, never make them positional.
+
+```json
+{ "schema": 1, "updated": "2026-09-06", "edition": "20260906",
+  "items": {
+    "zsh-glob-guard-false-positives": {
+      "state": "done",
+      "note": "added setopt no_nomatch to .zshenv — guard still fires on URLs",
+      "marked": "2026-09-06",
+      "title": "zsh-glob-guard blocks correct commands…",
+      "first_seen": "20260830", "last_seen": "20260906"
+    }
+  } }
+```
+
+`state` is one of `open`, `done`, `wontdo`. Nothing else.
+
+**Reading it (Phase 0).** Load the file if present. Merge, never overwrite:
+every item already in it keeps its `state`, `note`, `marked` and `first_seen`;
+every recommendation in this edition that is missing from it is added as `open`
+with `first_seen` set to this edition. Write the merged file back beside the
+report. Track actionable verdicts only — a `keep-doing` habit is not something
+the reader addresses, so it gets no ledger entry and no control.
+
+**What the prior states mean for this edition:**
+
+| Prior state | Recurs this window? | Do this |
+|---|---|---|
+| `done` | no | **Adopted**. Meta line: `you marked this done <date>`. |
+| `done` | yes | **Still recurring**, meta line leading with `tried <date> — came back`. Quote the reader's own `note` verbatim in the detail card, above the rationale. This is the most valuable row in the report: say plainly that the attempted fix did not hold, and make the new recommendation *different* from the one that failed. |
+| `wontdo` | either | Drop it from the ranked list. Mention it once in **Still recurring** as a muted line — `set aside <date>` plus the note — so it stays visible without nagging. Never re-rank it, never re-argue it. |
+| `open` | yes | Ordinary recurring item, streak +1. |
+| `open` | no | Ordinary adopted/resolved item. |
+
+None of this adds a fourth column. The three buckets stay.
+
+**Rendering it.** Every tracked card carries a `.stbar` as the first child of
+its `.fbody`: a three-button segmented control (`Open` / `Done` / `Won't do`)
+plus a one-line note input, `maxlength="180"`, placeholder naming what the note
+is for. Live state lives in `localStorage` under `ccr-status`. The exec-summary
+row and the card summary each carry a read-only `.stpill` showing `Done` or
+`Won't do`, `hidden` while open. The top bar carries a live count and a
+`Save status` button; the exec controls carry a `Hide checked off` toggle.
+
+Four things that are easy to get wrong, all found the hard way:
+
+- **The controls go in `.fbody`, never in `<summary>`.** A button inside a
+  `<summary>` toggles the `<details>` on every click.
+- **Do not add a grid cell to `.exec-row` for the pill.** Put it inline inside
+  the row's existing `<small>`. The row is a fixed-column grid; a seventh child
+  silently breaks the alignment of every row at once.
+- **`Hide checked off` is a toggle, not a filter chip.** Exclude it from the
+  verdict/family chip query (`#filters .nf-chip:not(.st-toggle)`), or it joins
+  the mutually-exclusive chip group and clears the active filter. It hides via
+  its own class (`.st-hidden`), independent of the search/filter `.hidden`
+  class, so the two compose instead of fighting.
+- **Repaint must not clobber a focused note input.** Guard the value write with
+  `document.activeElement !== input`, or every keystroke resets the caret.
+
+**Saving it back.** The `Save status` button writes the merged ledger out. Try
+`showSaveFilePicker()` first so the reader can drop the file straight into
+`Outputs/Reflections/`, and fall back to an `<a download>` Blob when it is
+absent or throws — the picker is unavailable from a `file://` origin in some
+browsers, and a silent failure there loses the reader's work. Swallow
+`AbortError` (the reader cancelled), fall back on anything else. Name the
+destination in the button's `title`.
 
 ## The Usage panorama — dashboard spec
 
