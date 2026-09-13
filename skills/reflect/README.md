@@ -38,9 +38,10 @@ A single interactive HTML report at `<cwd>/Outputs/Reflections/cc-reflection-<da
 - A ranked assessment, highest leverage first, that drills down from an executive summary to per-cluster evidence — verbatim quotes, session IDs, and project paths.
 - Custom inline SVG graphics throughout — hand-built charts for every number, explanatory diagrams, and decorative polish. No chart libraries, no raster images, no external requests.
 - An embedded machine-readable summary block, so the next run can diff against this one and show what you adopted, what still recurs, and what's new.
+- A check-off control on every recommendation — mark it done, won't do, or leave it open, with a one-line note. Click **Save status** and save over `Outputs/Reflections/reflect-status.json`; the next run reads it, drops what you set aside, and calls out anything you marked done that came back anyway.
 - A dedicated section for your `focus`, when you pass one.
 
-The report is styled with the bundled **SaaS Pro** design system (see [reference/design-system/](reference/design-system/)) and opens straight from `file://`.
+The report is styled with the **Neumorphic Fresh** design system — read from the user's own copy at `Styles/Neumorphic Fresh Design System/`, not bundled here — and opens straight from `file://`.
 
 ## How it works
 
@@ -54,11 +55,11 @@ The report is styled with the bundled **SaaS Pro** design system (see [reference
 
 | Phase | What happens |
 | --- | --- |
-| 0 · Scope | Enumerate in-window transcripts (the current session is excluded), and load the most recent prior report for trend diffing. |
+| 0 · Scope | Enumerate in-window transcripts (the current session is excluded), and load the most recent prior report plus your status ledger for trend diffing. |
 | 1 · Insights gate | Check that `/insights` data is fresh enough to corroborate; if it's stale, pause and ask before proceeding. |
 | 2 · Triage | Score every in-window session from cheap metadata so agent effort goes where the friction is. |
 | 3 · Extraction | Fan out over batched transcripts, extract schema-enforced signals, cluster them, decide a verdict per cluster, then cross-check against `/insights`. |
-| 4 · Report | Render the single self-contained HTML file with inline SVG charts and the embedded summary block. |
+| 4 · Report | Render the single self-contained HTML file with inline SVG charts, the check-off controls, and the embedded summary block. |
 | 5 · Deliver | Surface the report and a TL;DR of the top recommendations, naming anything the run had to skip. |
 
 ## What it looks for
@@ -149,7 +150,6 @@ skills/reflect/
 └── reference/
     ├── extraction-guide.md          Signal taxonomy, extractor prompts, JSON schemas, batching
     ├── report-guide.md              Report structure, interactivity, self-containment rules
-    └── design-system/               Bundled "SaaS Pro" design system, for the report
         ├── DESIGN.md                Colour, type, space, elevation, component rules
         ├── MOTION.md                Durations, easings, patterns, reduced motion
         ├── tokens/                  colors, typography, spacing, motion
@@ -169,7 +169,7 @@ skills/reflect/
 - [SKILL.md](SKILL.md) — the full pipeline, arguments, and guardrails.
 - [reference/extraction-guide.md](reference/extraction-guide.md) — signal taxonomy, extractor prompt template, and JSON schemas.
 - [reference/report-guide.md](reference/report-guide.md) — report structure, motion, and the self-containment rules.
-- [reference/design-system/DESIGN.md](reference/design-system/DESIGN.md) — the SaaS Pro design system used for the report.
+- The report's design system lives outside this skill: `Styles/Neumorphic Fresh Design System/DESIGN.md`.
 - [CONTRIBUTING.md](../../CONTRIBUTING.md) — how to propose a change to this collection.
 
 ## License

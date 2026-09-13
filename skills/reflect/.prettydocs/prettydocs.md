@@ -6,7 +6,10 @@ skill itself (SKILL.md, reference/), never invented. Frozen for this run.
 ## Provenance
 
 Derived from: `reference/design-system/tokens/colors.css` (the **SaaS Pro** design
-system this skill bundles and renders its report in)
+system this skill used to bundle). **That directory has since been removed** — the
+report is now rendered in Neumorphic Fresh, read from the user's own
+`Styles/Neumorphic Fresh Design System/`. The palette below is frozen and complete,
+so these README visuals still render; do not chase the dead path to re-derive.
 Derived on:   the run that re-derived this file after the report system was swapped
 Mapping:      product tokens mapped 1:1, with two computed gap-fills marked below
 
@@ -32,10 +35,10 @@ Theme:        two worlds on one page — a diffuse field of sessions brought int
 
 ## Frozen system
 
-This skill ships an identity: it bundles the **SaaS Pro** design system at
-`reference/design-system/`, and the report it produces is rendered in it. So the
-palette is **mapped** from those tokens rather than invented, and the README visuals
-look like the report the skill hands back.
+The palette below was **mapped** from the SaaS Pro tokens this skill once bundled,
+rather than invented. Those tokens are gone and the report has moved to Neumorphic
+Fresh, so this system is now purely the README's own — frozen here, self-contained,
+and no longer tracking the report's appearance.
 
 ### Palette
 

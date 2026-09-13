@@ -4,7 +4,7 @@ description: Generate a comprehensive, evidence-backed reflection report on how 
 argument-hint: "[window: 30d|90d|all] [focus: free text, e.g. a project or theme]"
 user-invocable: true
 license: MIT
-version: 1.1.2
+version: 1.3.0
 disable-model-invocation: true
 ---
 
@@ -17,6 +17,33 @@ single self-contained interactive HTML report. **This is diagnosis only** —
 build or edit nothing except the report (and its output directory). Do not
 create skills, hooks, or config changes the report recommends; recommending
 them IS the deliverable.
+
+## Step 0 — read the format sources (non-negotiable)
+
+Before generating anything, cat BOTH of these and quote their first line back in your
+response. If either read fails, STOP and report it — do not fall back to memory or to a
+previous report's shape.
+
+1. Style/format spec — `reference/report-guide.md`, resolved against this
+   skill's own directory.
+2. Last known-good exemplar — `cc-reflection-20260727.html` inside `OUT_DIR`
+   (`<invocation cwd>/Outputs/Reflections/`). That edition is the reference
+   implementation for the markup idiom; it is not simply the newest file there,
+   so do not substitute a later report.
+
+Open your response with, verbatim:
+
+    [format sources read] <guide path> | <exemplar path>
+
+Section names, order, and the dashboard come from the guide — never invented, never
+carried over from an earlier run. If the guide and the exemplar disagree, stop and ask
+which is authoritative; do not pick one.
+
+## Step 0b — verify before publishing
+
+After generating, diff your section headings against the guide's § Structure (top to
+bottom) list and print `headings match: yes/no`. `no` means fix the output, not the
+claim.
 
 ## Arguments
 
@@ -46,6 +73,12 @@ Parse from the invocation args (both optional, in any order):
    (`<script type="application/json" id="cc-reflection-data">`) for the
    trend/delta stage. If no prior report or no JSON block, skip trending
    gracefully.
+4. Read the status ledger `OUT_DIR/reflect-status.json` — what the user has
+   already checked off. Merge, never overwrite. Items marked `wontdo` are
+   dropped from the ranked list; items marked `done` that still recur in this
+   window are the report's most important rows, and their note says what was
+   already tried. Full contract in `reference/report-guide.md`
+   § The status ledger. Missing file → every item is `open`.
 
 ### Phase 1 — /insights freshness gate
 
@@ -114,10 +147,12 @@ Shape:
 ### Phase 4 — Report
 
 Read `reference/report-guide.md` for structure, interactivity, motion, and
-the self-containment rules, and `reference/design-system/` — a bundled copy of
-the **SaaS Pro** design system: `DESIGN.md` and `MOTION.md` (the standards),
-`tokens/*.css` (four token files), `components.css` (the `sp-*` class layer),
-and `charts/` (chart geometry references, read-only — see its README).
+the self-containment rules. The report is styled in the **Neumorphic Fresh**
+design system, which is **not bundled here** — read it from the user's own
+maintained copy at `/Users/luke/scratch/Styles/Neumorphic Fresh Design System/`
+(`DESIGN.md`, `colors_and_type.css`, `components.css` for the `nf-*` layer, and
+`ui_kits/dashboard/Widgets.jsx` as the chart geometry reference). If that
+directory is missing, stop and ask — do not substitute another design system.
 Requirements in brief:
 
 - Single self-contained HTML file at `REPORT`. No external requests: vendor
@@ -134,6 +169,12 @@ Requirements in brief:
 - Embed the machine-readable summary block
   (`<script type="application/json" id="cc-reflection-data">`) per the spec
   in report-guide.md — future runs depend on it.
+- Render the status ledger: the merged ledger inlined as
+  `<script type="application/json" id="cc-reflection-status">`, a check-off
+  control on every actionable card, status pills on the summary rows, and a
+  `Save status` button. Spec in report-guide.md § The status ledger. Write the
+  merged ledger back to `OUT_DIR/reflect-status.json` as well, so the file
+  exists even if the user never clicks Save.
 
 ### Phase 5 — Deliver
 
@@ -142,10 +183,19 @@ finding. In the final message: TL;DR of the top 3–5 recommendations with
 their verdicts and session counts, plus anything the run had to skip
 (insights stale, unreadable transcripts) — no silent gaps.
 
+Tell the user in one line how the loop closes: tick items off in the report as
+they address them, click **Save status**, and save over
+`Outputs/Reflections/reflect-status.json`. If the previous edition's ledger had
+anything marked done that came back this week, lead with that — it is the
+strongest signal in the report.
+
 ## Guardrails
 
 - Diagnosis only. The only writes allowed: `OUT_DIR`, the report file, and
   scratchpad temp files.
+- `OUT_DIR/reflect-status.json` is the user's record, not yours. Merge into it;
+  never reset a `state` or `note` the user set, and never drop an item just
+  because this edition did not surface it.
 - Every recommendation cites ≥1 session ID with a verbatim evidence quote;
   skill proposals cite ≥3 distinct sessions.
 - Only propose a skill for something that actually recurs — recurrence beats
