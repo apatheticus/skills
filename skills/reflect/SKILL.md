@@ -4,7 +4,7 @@ description: Generate a comprehensive, evidence-backed reflection report on how 
 argument-hint: "[window: 30d|90d|all] [focus: free text, e.g. a project or theme]"
 user-invocable: true
 license: MIT
-version: 1.2.0
+version: 1.3.0
 disable-model-invocation: true
 ---
 
@@ -17,6 +17,33 @@ single self-contained interactive HTML report. **This is diagnosis only** —
 build or edit nothing except the report (and its output directory). Do not
 create skills, hooks, or config changes the report recommends; recommending
 them IS the deliverable.
+
+## Step 0 — read the format sources (non-negotiable)
+
+Before generating anything, cat BOTH of these and quote their first line back in your
+response. If either read fails, STOP and report it — do not fall back to memory or to a
+previous report's shape.
+
+1. Style/format spec — `reference/report-guide.md`, resolved against this
+   skill's own directory.
+2. Last known-good exemplar — `cc-reflection-20260727.html` inside `OUT_DIR`
+   (`<invocation cwd>/Outputs/Reflections/`). That edition is the reference
+   implementation for the markup idiom; it is not simply the newest file there,
+   so do not substitute a later report.
+
+Open your response with, verbatim:
+
+    [format sources read] <guide path> | <exemplar path>
+
+Section names, order, and the dashboard come from the guide — never invented, never
+carried over from an earlier run. If the guide and the exemplar disagree, stop and ask
+which is authoritative; do not pick one.
+
+## Step 0b — verify before publishing
+
+After generating, diff your section headings against the guide's § Structure (top to
+bottom) list and print `headings match: yes/no`. `no` means fix the output, not the
+claim.
 
 ## Arguments
 
