@@ -76,15 +76,20 @@ input" collapses without it.
 The short list of words where the *same* sense is acceptable in one register and
 not another.
 
-| Word | E | P | T | R | Note |
-| --- | :-: | :-: | :-: | :-: | --- |
-| `hence` / `thereby` / `thereof` | ban | ban | ban | keep | Legal and regulatory drafting convention |
-| `subsequently` | ban | ban | keep | keep | Step ordering in a procedure; elsewhere use *then* |
-| `additionally` | ban | ban | keep | keep | Enumerating requirements; elsewhere start the sentence |
-| `shall` | ban | ban | ban | keep* | Binding obligation in regulated drafting; elsewhere use *must* |
-| `pursuant to` | ban | ban | ban | keep | Citation convention; elsewhere use *under* |
+| Word | E | P | T | R | C | Note |
+| --- | :-: | :-: | :-: | :-: | :-: | --- |
+| `hence` / `thereby` / `thereof` | ban | ban | ban | keep | ban | Legal and regulatory drafting convention |
+| `subsequently` | ban | ban | keep | keep | ban | Step ordering in a procedure; elsewhere use *then* |
+| `additionally` | ban | ban | keep | keep | ban | Enumerating requirements; elsewhere start the sentence |
+| `shall` | ban | ban | ban | keep* | ban | Binding obligation in regulated drafting; elsewhere use *must*. Commercial uses *will* for an obligation and *must* only for a hard gate (`commercial.md` §C2) |
+| `pursuant to` | ban | ban | ban | keep | ban | Citation convention; elsewhere use *under* |
 
-Everything else that is banned in one register is banned in all four. If a word
+Everything else that is banned in one register is banned in all five, with one
+exception: **Commercial carries its own additional lists** — unbounded
+obligation phrases, hedged modals, structural and journey metaphors, commercial
+intensifiers and significance clefts — in section 4 of `commercial.md`. They are
+kept there rather than here because "ongoing" and "should" are ordinary words in
+every other register. If a word
 is not in this table and not in Tier 2, it belongs to Tier 1 or Tier 3.
 
 \* **`shall` narrows for government audiences.** The Federal Plain Language
@@ -152,7 +157,7 @@ fighting them.
 Scan the draft before delivering:
 
 ```bash
-python3 scripts/voice_check.py <file> --register E|P|T|R
+python3 scripts/voice_check.py <file> --register E|P|T|R|C
 ```
 
 The checker carries all three tiers plus the register table, and it masks out
@@ -192,4 +197,5 @@ cover an unmarked exemplar, because a sentence quoted as an example of bad prose
 and a sentence of bad prose are the same characters on the page. A document whose
 *subject* is this word list therefore reports itself: `patterns-core.md` returns 23
 Tier 1 errors and is correct as written. On ordinary prose the rate is what you
-would expect — this skill's own README returns one, and that one is a real defect.
+would expect — this skill's own repository README returns one, and that one is a
+real defect.

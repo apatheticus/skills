@@ -1,6 +1,6 @@
 # Registers
 
-Four profiles. Pick one in Step 1 of `SKILL.md` before reading any pattern.
+Five profiles. Pick one in Step 1 of `SKILL.md` before reading any pattern.
 
 The register is not a style preference — it decides which of the 36 patterns run,
 which vocabulary tier applies, and what "sounds human" even means for this
@@ -50,8 +50,9 @@ everything the original covered.
 
 ## Professional
 
-**Genres.** Memos, policies, reports, proposals, briefs, internal comms,
-executive summaries, board material.
+**Genres.** Memos, policies, reports, briefs, internal comms, executive
+summaries, board material. A proposal or anything else a client could hold you
+to is **Commercial**, not Professional.
 
 | Field | Value |
 | --- | --- |
@@ -188,3 +189,64 @@ rather than restatements, because the examples are what make them usable:
 This is a floor, not a substitute. It covers none of Section 508, none of the GPO
 Style Manual, no agency style guide, none of the mandated section structures, and
 no testing with real readers. Say so.
+
+---
+
+## Commercial
+
+**Genres.** Client-facing commercial documents: proposals, pitch and capability
+material, RFP, RFI, DDQ and PEP responses, case studies, one-pagers, statements
+of work, work orders, task orders, engagement letters, MSA schedules, term
+sheets, letters of intent, and amendments to any of these.
+
+| Field | Value |
+| --- | --- |
+| Personality | **Off** |
+| Specificity currency | Commercial fact: the party, the quantity, the period, the named artefact, the date, the price, the acceptance test. For an outcome figure, the client, the measurement basis and its approval for external use |
+| Stance | Definite. Commit to exactly what is priced — no wider (overselling, open-ended duties) and no narrower (self-deprecating framing, bare disclaimers) |
+| Person | The named party in every obligation: "Supplier will…", "Client will…". Never "we" or "you" in operative text. First person only in a cover note |
+| Contractions | No |
+| Lists | Numbered enumerations, freely. Never three bolded lead-ins (§16), which read as a pitch deck |
+| Opening | Brief factual background, the business problem in one sentence, then the purpose: "This Document covers…". Where the client has stated the problem in their own request, restate it from their document and cite it. No section opens on a value proposition. A scope summary is a flat run of declaratives naming the performing party ("Supplier will design… Client will provide…") that closes on the outcome stated plainly |
+| Closing | The mechanism and its timer, stated flatly: effective date, acceptance, change control. Never a summary or a value line |
+| Sentence policy | 15–30 words per sentence, one obligation or claim per sentence, and no subordinate clause chained across a scope boundary. Over 30 words is a rewrite candidate everywhere; the ~35-word split for the scope summary is a cap for that section, not a licence elsewhere. No burstiness target: flat, even, definite prose is the human voice here |
+
+**Load `reference/commercial.md` with this profile, every run.** It carries the
+split between operative and non-operative text, which decides how strictly every
+other rule applies, plus §C1–§C16 and the Commercial word lists. The profile
+above is the summary; that file is the rule set.
+
+**Three skill-wide rules change here.**
+
+- **"Rewrite, do not delete" narrows to "relocate, never delete a disclosure".**
+  Every exclusion, assumption, dependency, cap and risk statement survives, moved
+  if needed. Methodology narration and a limit restated in a second place are
+  cut, because in a contract the repetition is a second term that can disagree
+  with the first.
+- **Step 2 calibration is skipped.** The client's paper and the house template set
+  the voice, not an individual writer.
+- **§21 is a blocker,** as in Professional, with a commercial edge: an outcome
+  figure without its client, basis and approval status is an unsupported claim
+  the evaluator will score down or the client will quote back.
+
+**Government buyers.** A commercial document addressed to a U.S. federal, state
+or local agency — a proposal, an RFP or RFI response — stays **Commercial** and
+also takes the plain-language envelope in `reference/plain-language.md`. Where
+they collide, Commercial wins on who owes what (named party, will/may/must) and
+on person throughout the Document, so the envelope's "you" and "we" apply only
+where `commercial.md` §1 allows first person; the envelope governs the rest, and the solicitation's mandated
+format (Section L, page limits, volume structure) wins on layout. Government
+documents that are not commercial — user manuals, ConOps, SSPs, ATO packages,
+public-facing agency content — stay Regulated.
+
+**Characteristic failure mode.** Two opposite ones, both common. Overselling:
+intensifiers, unquantified benefits and pitch-deck rhythm that read as a promise
+nobody priced. Self-sabotage: every limit kept, but worded so the document is
+honest and framed to lose money. §C10–§C16 exist for the second one, which no
+other register guards against.
+
+**Outside this skill.** Deliverables tables, acceptance-test mapping, pricing and
+milestone tables that foot, checks on the rendered PDF or Word file, and the
+audit of the pricing model behind every number. A separate contracts review
+covers them. When none ran, say in the delivery that these checks were not
+performed.

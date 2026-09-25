@@ -224,7 +224,66 @@ style rules stay untouched — those belong to the compliance skill, not this on
 
 ---
 
-## What the four have in common
+## Commercial
+
+**Register:** Commercial. Scope section of a proposal, which is operative text
+(`commercial.md` §1) even though the proposal is not yet a contract.
+
+### Before
+
+> This is not just a proof of concept — it's a production-grade platform that
+> will seamlessly transform your underwriting journey. We will leverage our
+> best-in-class extraction engine to significantly reduce re-keying, and we'll
+> provide ongoing support as required to ensure a smooth rollout.
+>
+> To be clear, we cannot guarantee data quality, and we are not responsible for
+> hosting or change management. This is only a limited initial phase (a
+> lightweight pilot, really) and the accuracy figures are indicative.
+
+### Audit
+
+- §9 pivot ("not just a proof of concept — it's…") and §14 dash
+- Tier 1 `seamlessly`; Commercial intensifier `best-in-class`;
+  Tier 2 `leverage`
+- §C6 journey metaphor; §C1 "we", "you", "your" in operative text
+- §C5 unquantified benefit ("significantly reduce re-keying") with no number and
+  no test
+- §C10 blank cheque: "ongoing support as required"
+- §C9 defensive opener ("To be clear") and §C13 two broad disclaimers
+- §C11 self-deprecation ("only a limited initial phase", "a lightweight pilot,
+  really") and §C8 a parenthetical aside
+- §C14 "indicative" on a figure, with no word on whether it is contracted
+- §C15 the section closes on its limits
+- No quantity, period or date anywhere. The rewrite cannot invent them (hard
+  limit 2), so it marks each one for the deal owner.
+
+### After
+
+> Supplier will design, build and deploy a document-extraction service that
+> removes the manual re-keying of submission data. Supplier will deploy the
+> service to production on Client's infrastructure by [date: from the milestone
+> table].
+>
+> Supplier will provide up to [hours: from the pricing model] hours of
+> post-deployment support during the [period: from the pricing model] following
+> Acceptance.
+>
+> Phase 1 covers extraction from [document types: per the scope baseline].
+> Production hosting and Client-side change management remain with Client. Data
+> quality in the source systems is Client's responsibility, and Supplier will
+> report defects it identifies during ingestion. Table 4 reports accuracy on the
+> test set defined in section 7.2; those figures are not contracted.
+
+Personality **off**. Stance **definite**: every obligation names its party, the
+support has a ceiling, and each limit is stated once as an allocation rather than
+an apology. Every exclusion in the original survives: hosting, change
+management and data quality are all still Client's, and the accuracy figures are
+still uncommitted. The bracketed fields go back to the deal owner as open items.
+Filling them from nothing would be §21, a blocker here.
+
+---
+
+## What the five have in common
 
 Every "before" above is fluent, grammatical, and confident. None is
 *wrong* in a way a spellchecker would catch. What each lacks is the thing its
@@ -236,6 +295,7 @@ register uses as evidence that a person wrote it:
 | Professional | A price, a date, an owner, a stated tradeoff |
 | Technical | A TTL, a p99, a named failure mode |
 | Regulated | A direct instruction the reader can act on |
+| Commercial | A named party, a ceiling, a date, a test |
 
 If the rewrite adds none of these, it has removed AI tells without adding a human
 voice, and it will still read as machine-written.
