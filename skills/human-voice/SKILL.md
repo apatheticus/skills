@@ -1,8 +1,8 @@
 ---
 name: human-voice
-description: Humanizing edit pass that strips AI tells from prose that already exists, in the register the document calls for (editorial, professional, technical, regulated). ALWAYS invoke this skill when the user asks to humanize, de-AI, or de-slop text; make writing sound human or less like ChatGPT; remove AI tells, AI words, or em dashes; pass AI detection (GPTZero, Turnitin, Originality.ai); asks "does this sound AI-generated?"; audit, scan, or flag a draft for AI tells without rewriting; or edit, polish, or review drafted prose for voice, tone, or readability — including a request naming one tell, such as hedging, passive voice, filler, buzzwords, corporate speak, jargon, sycophancy, or emoji and boldface overuse. Do not rewrite or clean up the prose yourself — invoke this skill first. Also invoke when the reader is a U.S. federal, state, or local government agency, evaluator, or auditor. Do not invoke for drafting from scratch, or for code, config, or commit messages.
+description: Humanizing edit pass that strips AI tells from prose that already exists, in the register the document calls for (editorial, professional, technical, regulated, commercial). ALWAYS invoke this skill when the user asks to humanize, de-AI, or de-slop text; make writing sound human or less like ChatGPT; remove AI tells, AI words, or em dashes; pass AI detection (GPTZero, Turnitin, Originality.ai); asks "does this sound AI-generated?"; audit, scan, or flag a draft for AI tells without rewriting; or edit, polish, or review drafted prose for voice, tone, or readability — including a request naming one tell, such as hedging, passive voice, filler, buzzwords, corporate speak, jargon, sycophancy, or emoji and boldface overuse. Do not rewrite or clean up the prose yourself — invoke this skill first. Also invoke for proposals, SOWs, and contracts, or when the reader is a U.S. government agency, evaluator, or auditor. Do not invoke for drafting from scratch, or for code, config, or commit messages.
 license: MIT
-version: 1.4.0
+version: 1.5.0
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, AskUserQuestion
 ---
 
@@ -42,8 +42,11 @@ not notice and cannot easily undo.
 | **Professional** | memos, policies, reports, proposals, briefs, internal comms | Off | Institutional fact — dates, names, roles, quantities | Directive — recommend without hedging |
 | **Technical** | specs, architecture docs, runbooks, API docs, RFCs, ADRs | Off | Reproducible artifact — versions, error strings, config values | Candid — state tradeoffs and limits |
 | **Regulated** | federal, legal, clinical, safety, compliance, filings | Off | Cited authority — statute, standard, control ID | Precise — claim only what is sourced |
+| **Commercial** | proposals, RFP/RFI/DDQ responses, SOWs, work and task orders, engagement letters, MSA schedules, term sheets, case studies, capability material | Off | Commercial fact — party, quantity, period, date, price, test | Definite — commit to exactly what is priced, no wider and no narrower |
 
-Default to **Professional** when unsure. Never default to Editorial: injecting
+Default to **Professional** when unsure, with one exception: if the document is
+client-facing and anything in it could be quoted back as a commitment, pick
+**Commercial**. Never default to Editorial: injecting
 voice into a document that did not want it is the most damaging failure this
 skill can produce, and it is not visible to the person who asked for it.
 
@@ -111,8 +114,8 @@ upgrade to "elements" and "components". Fall back to the register defaults only
 for what neither the draft nor a sample settles, and never manufacture texture: an
 aside you invented is as machine-made as the sentence it replaced.
 
-Skip this step for Technical and Regulated — those registers are set by house
-style and authority, not by an individual voice.
+Skip this step for Technical, Regulated and Commercial — those registers are set
+by house style, authority or the client's paper, not by an individual voice.
 
 ## Step 3 — Apply the patterns
 
@@ -125,9 +128,17 @@ switch them off. Load the one the register asks for:
 | `reference/patterns-gated.md` | The 15 register-gated patterns, plus personality injection and the gate table | Only when the register turns at least one on |
 
 Every register turns on something in the gated file, so in practice both load for
-Editorial and Professional work. Technical and Regulated turn on a handful — §11,
-§24 and §30 for Technical, §11, §18, §24 and §30 for Regulated — so read the gate
-table and those sections rather than the whole file.
+Editorial, Professional and Commercial work. Technical and Regulated turn on a
+handful — §11, §14, §18, §24, §28 and §30 for Technical, §11, §18, §24 and §30 for
+Regulated — so
+read the gate table and those sections rather than the whole file.
+
+**Commercial also loads `reference/commercial.md`, every run.** It splits the
+Document into operative text (anything that can become binding) and
+non-operative text, and adds §C1–§C16: named parties, will/may/must, no
+open-ended obligations, no self-sabotaging wording, and four hard limits — never
+delete a disclosure, never change a number, flag rather than silently override,
+and let the client's template win on layout.
 
 Vocabulary lists live separately in `reference/vocabulary.md` because they are
 register-scoped, and Step 4 explains when to open them.
@@ -136,11 +147,11 @@ register-scoped, and Step 4 explains when to open them.
 several of them actively reinforce plain-language requirements:
 
 > §1 significance inflation · §2 notability padding · §3 superficial -ing
-> analyses · §4 promotional language · §5 vague attribution *(elevate in P and R)*
+> analyses · §4 promotional language · §5 vague attribution *(elevate in P, R, C)*
 > · §6 formulaic "Challenges" sections · §7 AI vocabulary · §8 copula avoidance ·
 > §9 negative parallelism · §10 rule of three · §12 false ranges · §13 passive
-> voice *(hard rule in R)* · §15 boldface overuse · §19 curly quotes · §20 chatbot
-> artifacts · §21 speculative gap-filling *(blocker in P and R)* · §22 sycophancy ·
+> voice *(hard rule in R, C)* · §15 boldface overuse · §19 curly quotes · §20 chatbot
+> artifacts · §21 speculative gap-filling *(blocker in P, R, C)* · §22 sycophancy ·
 > §23 filler phrases · §25 generic positive conclusions · §27 authority tropes
 > *(rare outside E)* · §29 fragmented headers
 
@@ -155,9 +166,10 @@ them.
 Three gates deserve calling out here, because getting them backwards is the most
 expensive mistake available and the fix runs opposite to the obvious one:
 
-**§11 in Technical and Regulated — the fix direction reverses.** Everywhere else,
-cycling synonyms is a repetition-penalty artifact to remove. In a spec or a
-filing, a component gets the same name every time, without exception, and
+**§11 in Technical, Regulated and Commercial — the fix direction reverses.**
+Everywhere else, cycling synonyms is a repetition-penalty artifact to remove. In
+a spec, a filing or a statement of work, a component, party or deliverable gets
+the same name every time, without exception, and
 "varying" a term is a correctness bug rather than a style choice. Do not cut
 repetition of a technical term to make prose read better.
 
@@ -167,7 +179,7 @@ past 8k" is calibrated uncertainty, and it is the most valuable sentence on the
 page. Cut the first. Never cut the second. The tell is whether the qualifier
 carries information.
 
-**§21 in Professional and Regulated — elevate to a blocker.** Speculative
+**§21 in Professional, Regulated and Commercial — elevate to a blocker.** Speculative
 gap-filling in an essay is a style problem. The same sentence in a proposal, a
 policy, or a filing is a fabricated claim attributed to your organization. When a
 source is missing, say what is not known or cut the sentence. Never dress a guess
@@ -177,10 +189,17 @@ smoothly.
 ## Government documents
 
 When the audience is a U.S. federal, state, or local government agency,
-evaluator, or auditor — proposals, RFP/RFI responses, user manuals, ConOps, SSPs,
-ATO packages, public-facing agency content — select the Regulated register and
-add the plain-language envelope in `reference/plain-language.md`. That file is
-government-scoped and loads for nothing else.
+evaluator, or auditor — user manuals, ConOps, SSPs, ATO packages, public-facing
+agency content — select the Regulated register and add the plain-language
+envelope in `reference/plain-language.md`. That file is government-scoped and
+loads for nothing else.
+
+**A proposal or RFP/RFI response to an agency is Commercial, not Regulated,** and
+takes the same plain-language envelope on top. Where the two collide, Commercial
+wins on who owes what (named party, will/may/must) and on person throughout the
+Document — the envelope's "you" and "we" apply only where `commercial.md` §1
+allows first person — the envelope governs the rest, and the solicitation's
+mandated format wins on layout. `reference/registers.md` has the full rule.
 
 **What the statute actually requires.** The Plain Writing Act of 2010
 (Pub. L. 111-274) obliges agencies to write *covered documents* — the material a
@@ -200,8 +219,8 @@ rather than fighting it.
 
 Where the envelope collides with a pattern, the mandated template or the agency's
 own style guide wins without argument. The specific collisions are §14, §16, §17,
-§26, §28, the burstiness thresholds, and contractions — all already marked ○ for
-Regulated above.
+§26, §28, the burstiness thresholds, and contractions — all marked ○ for
+Regulated in the gate table in `reference/patterns-gated.md`.
 
 **Do not improvise the rest of federal compliance.** Section 508, the GPO Style
 Manual, agency voice guides, and mandated section structures are outside this
@@ -221,7 +240,7 @@ density, heading case — and skips code spans, fenced blocks, link targets and
 quoted material so a banned word inside a `code span` is never reported:
 
 ```bash
-python3 scripts/voice_check.py <file> --register E|P|T|R
+python3 scripts/voice_check.py <file> --register E|P|T|R|C
 ```
 
 The checker is optional. It is an accelerator for the three mechanical steps
@@ -239,12 +258,12 @@ Tier-2 hit comes back as a `QUERY`, never a replacement, for the reason
    `reference/plain-language.md`; it carries pairs the global tiers do not.
 2. **Sentence length audit.** Check against the register's targets:
 
-   | | Editorial | Professional | Technical | Regulated |
-   | --- | --- | --- | --- | --- |
-   | Max consecutive similar-length sentences | 3 | 4 | 4 | no limit |
-   | Sentences under 8 words | ≥2 per paragraph | ≥1 per section | as useful | as useful |
-   | Long sentences | ≥1 over 30 words per page | occasional | occasional | **cap at 30 words** |
-   | Average target | wide variance | 15–25 words | 15–25 words | **≤20 words** |
+   | | Editorial | Professional | Technical | Regulated | Commercial |
+   | --- | --- | --- | --- | --- | --- |
+   | Max consecutive similar-length sentences | 3 | 4 | 4 | no limit | no limit |
+   | Sentences under 8 words | ≥2 per paragraph | ≥1 per section | as useful | as useful | as useful |
+   | Long sentences | ≥1 over 30 words per page | occasional | occasional | **cap at 30 words** | rewrite over 30 words |
+   | Average target | wide variance | 15–25 words | 15–25 words | **≤20 words** | 15–30 words |
 
    The Regulated column's ≤20 average and 30-word cap come from the Federal Plain
    Language Guidelines and are written for a government reader. In non-government
@@ -252,9 +271,14 @@ Tier-2 hit comes back as a `QUERY`, never a replacement, for the reason
    the hard cap they are for an agency document.
 
 3. **Opener diversity.** Read the first word of every sentence. If any word opens
-   more than twice in a section, rewrite one.
+   more than twice in a section, rewrite one. **Not in Commercial,** where
+   "Supplier will… Supplier will… Client will…" is the house pattern.
 4. **Structure.** Does it preview itself? Does the conclusion restate the
-   introduction? Both are AI tells in every register. Restructure. Then read the
+   introduction? Both are AI tells in every register. Restructure. **Two
+   exceptions to the preview rule:** a Regulated mandated template, and a
+   Commercial document, where "This Document is structured as follows." and
+   "This section sets out…" are required signposting (§28 is off in both). A
+   conclusion that restates the introduction is still a tell there. Then read the
    last line on its own: if it exists to sound deep, delete it and end on the
    clearest concrete sentence already in the draft (§31), or add a plain takeaway
    or next action. Do not rewrite it into a better version of itself. **For a
@@ -264,7 +288,9 @@ Tier-2 hit comes back as a `QUERY`, never a replacement, for the reason
    detail in the register's currency, or cut the claim.
 6. **Stance.** Does the piece commit to anything? Editorial takes a position,
    Professional makes a firm recommendation, Technical names a tradeoff,
-   Regulated cites a source. A document that does none of these still reads as
+   Regulated cites a source, Commercial commits to exactly what is priced —
+   each obligation with its party, quantity, period or artefact, and nothing
+   wider or narrower. A document that does none of these still reads as
    machine-written no matter how clean the vocabulary.
 7. **Register leak.** Re-read for anything belonging to a different register: a
    first-person aside in a spec, an anecdote in a policy, a bare assertion in a
@@ -272,6 +298,9 @@ Tier-2 hit comes back as a `QUERY`, never a replacement, for the reason
    be caught by any other step.
 8. **Final read.** Ask sentence by sentence: does this sound like something only
    a language model would write? Rewrite anything that does, plainly.
+9. **Commercial only.** Run the eight additions in section 5 of
+   `reference/commercial.md` — among them the two-stage banned-construction check
+   and the self-sabotage sweep — and report each one as pass or fail.
 
 ## Step 5 — Deliver
 
@@ -281,9 +310,13 @@ offer the rewrite. For an edit, produce, in this order:
 1. The **register** chosen, in one line, with the reason. For a government
    document, say that the plain-language envelope was applied and name the checks
    that were not performed — Section 508, GPO style, agency style guides,
-   mandated section structures, and testing with real readers.
+   mandated section structures, and testing with real readers. For a Commercial
+   document, add the operative/non-operative map and name the structure,
+   numbers, rendered-file and pricing-model checks as not performed unless a
+   separate contracts review ran them.
 2. The **draft rewrite**.
 3. **"What still reads as AI here?"** — answer honestly in two to five bullets.
+   In Commercial, ask **"What still reads as AI, or as a promise nobody priced?"**
    A draft with nothing left to flag is almost always an unexamined draft.
 4. The **final rewrite** addressing those bullets.
 5. Optionally, a short changelog of what was cut and why.
@@ -296,11 +329,17 @@ underperforms.
 
 - **Rewrite, do not delete.** Cover everything the original covered. Five
   paragraphs in, five paragraphs out. Compression disguised as cleanup is the
-  most common failure of the first draft.
+  most common failure of the first draft. **In Commercial this narrows to
+  "relocate, never delete a disclosure":** every exclusion, assumption,
+  dependency and cap survives, while methodology narration and a limit restated
+  in a second place are cut.
 - **Cluster, do not snipe.** A single em dash means nothing. One `however` means
   nothing. Flag a pattern only when tells co-occur. Read the false-positive list
   in `reference/patterns-core.md` before flagging anything — a clean human writer
-  trips several of these patterns with no AI involved.
+  trips several of these patterns with no AI involved. **Not in Commercial:**
+  there every banned construction is rewritten on sight, and one is enough. A
+  single pivot or open-ended "as required" in a scope clause is a quotable
+  promise, not a style tic, whoever wrote it.
 - **Never rewrite inside quotations, titles, proper names, code identifiers,
   file paths, error strings, or citations.** A banned word inside a `code span`
   or a quoted source is being *used*, not written. This is the fastest way to
@@ -315,8 +354,11 @@ underperforms.
 
 ## Reference
 
-- `reference/registers.md` — the four register profiles in full, plus the
+- `reference/registers.md` — the five register profiles in full, plus the
   condensed plain-language floor for Regulated
+- `reference/commercial.md` — **Commercial register only.** Operative and
+  non-operative text, §C1–§C16, the Commercial word lists, the extra self-check,
+  and what this skill does not cover
 - `reference/plain-language.md` — **government audiences only.** The Plain Writing
   Act, the Federal Plain Language Guidelines, §G1–§G7, the federal substitution
   table, and what this skill does not cover

@@ -19,31 +19,36 @@ writing", and the MIT-licensed `no-ai-slop` skill. See `attribution.md`.
 
 ## The gate table
 
-| Pattern | E | P | T | R | Why it varies |
-| --- | :-: | :-: | :-: | :-: | --- |
-| §11 elegant variation | ● | ● | ◑ | ◑ | **Inverts** in Technical and Regulated — one name per thing; cutting repetition is a correctness bug |
-| §14 em dash budget | ● | ● | ● | ○ | House style governs in Regulated (GPO, agency guides) |
-| §16 inline-header lists | ● | ● | ○ | ○ | Runbooks and compliance docs are legitimately list-shaped |
-| §17 title-case headings | ● | ● | ○ | ○ | Project or agency style guide wins |
-| §18 emojis | ◐ | ● | ● | ● | Sparingly allowed in Editorial, banned elsewhere |
-| §24 excessive hedging | ● | ● | ◐ | ◐ | Calibrated uncertainty is content, not hedging |
-| §26 hyphenated pairs | ● | ● | ○ | ○ | Hyphenation is often spec- or style-defined |
-| §28 signposting | ● | ● | ● | ○ | Regulated templates mandate structural signposting |
-| §30 diff-anchored writing | ● | ● | ◑ | ● | **Elevate** in Technical — the most common failure there |
-| §31 manufactured punchlines | ● | ○ | ○ | ○ | An editorial tell; absent elsewhere |
-| §32 aphorism formulas | ● | ● | ○ | ○ | Rare in Technical and Regulated |
-| §33 rhetorical openers | ● | ● | ○ | ○ | "Let me be clear" and "I'll be honest" are memo staples, not just essay hooks |
-| §34 colon reveals | ● | ● | ○ | ○ | The labelled colon is the house pattern in T and R; the dramatic one is rare |
-| §35 faux-insight setups | ● | ○ | ○ | ○ | An editorial tell; absent elsewhere |
-| §36 rhetorical setups | ● | ○ | ○ | ○ | An editorial tell; absent elsewhere |
-| PERSONALITY (voice injection) | ● | ○ | ○ | ○ | Neutral and plain **is** the human voice for P, T, R |
+| Pattern | E | P | T | R | C | Why it varies |
+| --- | :-: | :-: | :-: | :-: | :-: | --- |
+| §11 elegant variation | ● | ● | ◑ | ◑ | ◑ | **Inverts** in Technical, Regulated and Commercial — one name per thing; cutting repetition is a correctness bug, and in a contract an alias is a second party or a second deliverable |
+| §14 em dash budget | ● | ● | ● | ○ | ◑ | House style governs in Regulated (GPO, agency guides). **Tightened** in Commercial to one per section, appositive definitions only |
+| §16 inline-header lists | ● | ● | ○ | ○ | ● | Runbooks and compliance docs are legitimately list-shaped. Three bolded lead-ins in a proposal read as a pitch deck |
+| §17 title-case headings | ● | ● | ○ | ○ | ○ | Project, agency or client style guide wins |
+| §18 emojis | ◐ | ● | ● | ● | ● | Sparingly allowed in Editorial, banned elsewhere |
+| §24 excessive hedging | ● | ● | ◐ | ◐ | ◑ | Calibrated uncertainty is content, not hedging. **Elevated** in Commercial to modal discipline — `commercial.md` §C2 |
+| §26 hyphenated pairs | ● | ● | ○ | ○ | ● | Hyphenation is often spec- or style-defined |
+| §28 signposting | ● | ● | ● | ○ | ○ | Regulated templates and commercial documents mandate structural signposting |
+| §30 diff-anchored writing | ● | ● | ◑ | ● | ● | **Elevate** in Technical — the most common failure there |
+| §31 manufactured punchlines | ● | ○ | ○ | ○ | ● | An editorial tell, and a pitch-deck one; absent from P, T and R |
+| §32 aphorism formulas | ● | ● | ○ | ○ | ● | Rare in Technical and Regulated |
+| §33 rhetorical openers | ● | ● | ○ | ○ | ● | "Let me be clear" and "I'll be honest" are memo staples, not just essay hooks |
+| §34 colon reveals | ● | ● | ○ | ○ | ● | The labelled colon is the house pattern in T and R; the dramatic one is rare |
+| §35 faux-insight setups | ● | ○ | ○ | ○ | ● | An editorial tell, and a pitch-deck one; absent from P, T and R |
+| §36 rhetorical setups | ● | ○ | ○ | ○ | ● | An editorial tell, and a pitch-deck one; absent from P, T and R |
+| PERSONALITY (voice injection) | ● | ○ | ○ | ○ | ○ | Neutral and plain **is** the human voice for P, T, R and C |
 
 ● on · ◐ limited · ◑ elevated or inverted · ○ off
+
+**Commercial carries sixteen more rules of its own**, §C1–§C16 in
+`commercial.md`. They are not patterns §37 onward: they load only for the
+Commercial register, the same way §G1–§G7 load only for a government reader.
 
 Two gates deserve spelling out, because getting them backwards is the most
 expensive mistake available here. Both are marked ◑ or ◐ above and both are
 detailed in their own sections below: **§11** reverses its fix direction in
-Technical and Regulated, and **§24** stops being a defect there. The third
+Technical, Regulated and Commercial, and **§24** stops being a defect in
+Technical and Regulated (Commercial elevates it instead). The third
 expensive gate, §21 speculative gap-filling, is always on and lives in
 `patterns-core.md`.
 
@@ -52,27 +57,29 @@ expensive gate, §21 speculative gap-filling, is always on and lives in
 ## Language and grammar
 
 ### §11. Elegant variation (synonym cycling)
-**Registers:** E P T R — **inverts in T and R**
+**Registers:** E P T R C — **inverts in T, R and C**
 
-Repetition-penalty artifacts produce needless synonym substitution. In Technical
-and Regulated this is a correctness bug, not a style issue: a component gets the
-same name every time, without exception.
+Repetition-penalty artifacts produce needless synonym substitution. In Technical,
+Regulated and Commercial this is a correctness bug, not a style issue: a
+component, party or deliverable gets the same name every time, without
+exception.
 
 **Before:** The protagonist faces many challenges. The main character must overcome obstacles. The central figure eventually triumphs.
 
 **After:** The protagonist faces many challenges but eventually triumphs.
 
-**The fix direction reverses in Technical and Regulated.** Everywhere else,
-cycling synonyms is a repetition-penalty artifact to remove. In a spec or a
-filing, "varying" a term is the defect and consistency is the fix. Do not cut
-repetition of a technical term to make prose read better.
+**The fix direction reverses in Technical, Regulated and Commercial.** Everywhere
+else, cycling synonyms is a repetition-penalty artifact to remove. In a spec, a
+filing or a statement of work, "varying" a term is the defect and consistency is
+the fix. Do not cut repetition of a technical term, a party name or a deliverable
+name to make prose read better.
 
 ---
 
 ## Style
 
 ### §14. Em dash and en dash budget
-**Registers:** E P T — **off in R** (house style governs)
+**Registers:** E P T C — **off in R** (house style governs); **tightened in C** to one per section
 
 A dash is not a tell. A dash used as the default rhythm is. Budget them instead of
 banning them: **none in short copy, one or two in a longer draft** where a dash
@@ -89,12 +96,17 @@ removed, remove every dash. Do not enforce a zero count on your own initiative i
 Editorial work, where the false-positive list is explicit that heavy em dash use
 is ordinary in edited prose.
 
+**Commercial tightens the budget.** At most one em dash per section, and only to
+set off an appositive definition. Never nest a clause inside a dash pair. A
+reviewer reading for obligations treats a dash-chained sentence as two clauses
+of uncertain force.
+
 **Before:** The term is promoted by institutions—not by the people themselves. You don't say "Netherlands, Europe" as an address—yet this continues—even in official documents.
 
 **After:** The term is promoted by institutions, not by the people themselves. You don't say "Netherlands, Europe" as an address, yet this continues in official documents.
 
 ### §16. Inline-header vertical lists
-**Registers:** E P — **off in T and R**
+**Registers:** E P C — **off in T and R**
 
 Bulleted items that open with a bolded header and a colon, where prose would
 carry the analysis better. Off in Technical and Regulated, where procedures,
@@ -108,14 +120,14 @@ guidance actively calls for lists.
 **After:** The update improves the interface and speeds up load times through optimized algorithms.
 
 ### §17. Title case in headings
-**Registers:** E P — **off in T and R** (project or agency style guide wins)
+**Registers:** E P — **off in T, R and C** (project, agency or client style guide wins)
 
 **Before:** `## Strategic Negotiations And Global Partnerships`
 
 **After:** `## Strategic negotiations and global partnerships`
 
 ### §18. Emojis
-**Registers:** E (sparingly) — banned in P T R
+**Registers:** E (sparingly) — banned in P T R C
 
 **Before:** 🚀 **Launch Phase:** The product launches in Q3
 
@@ -126,7 +138,7 @@ guidance actively calls for lists.
 ## Filler, hedging, and rhetorical moves
 
 ### §24. Excessive hedging
-**Registers:** E P — **limited in T and R**
+**Registers:** E P C — **limited in T and R**; **elevated in C** (modal discipline, `commercial.md` §C2)
 
 **Before:** It could potentially possibly be argued that the policy might have some effect on outcomes.
 
@@ -140,7 +152,7 @@ second. The test is whether the qualifier carries information the reader can act
 on.
 
 ### §26. Hyphenated word-pair overuse
-**Registers:** E P — **off in T and R**
+**Registers:** E P C — **off in T and R**
 
 **Watch:** third-party, cross-functional, client-facing, data-driven, decision-making, well-known, high-quality, real-time, long-term, end-to-end
 
@@ -153,7 +165,7 @@ Regulated, where hyphenation is usually spec- or style-defined.
 **After:** The team is cross functional, the report is high quality, and the methodology is data driven.
 
 ### §28. Signposting and announcements
-**Registers:** E P T — **off in R** (mandated templates require structural signposting)
+**Registers:** E P T — **off in R and C** (mandated templates and commercial documents require structural signposting)
 
 **Watch:** let's dive in, let's explore, let's break this down, here's what you need to know, now let's look at, in this section we will
 
@@ -162,7 +174,7 @@ Regulated, where hyphenation is usually spec- or style-defined.
 **After:** Next.js caches data at several layers, including request memoization, the data cache, and the router cache.
 
 ### §30. Diff-anchored writing
-**Registers:** E P R — **elevated in T**
+**Registers:** E P R C — **elevated in T**
 
 Prose that narrates a change rather than describing the thing. Unless the
 document is version-scoped (changelog, release notes, migration guide), it must
@@ -173,7 +185,7 @@ read coherently without knowing what changed last commit.
 **After:** This function uses a hash map for O(1) lookups, avoiding the O(n²) cost of naive iteration.
 
 ### §31. Manufactured punchlines and staccato drama
-**Registers:** E only
+**Registers:** E and C — off in P, T and R
 
 Every sentence landing like a quotable closer, then short declarative fragments
 stacked to manufacture drama. One short sentence for emphasis is fine; a run of
@@ -191,7 +203,7 @@ Smoothing the kicker into a quieter sentence leaves the piece still ending on a
 manufactured closer, which is the failure this pattern names.
 
 ### §32. Aphorism formulas
-**Registers:** E P — rare in T and R
+**Registers:** E P C — rare in T and R
 
 **Watch:** X is the Y of Z, X becomes a trap, X is not a tool but a mirror, the language of, the currency of, the architecture of
 
@@ -206,7 +218,7 @@ where the aphorism is the only place a real claim appears; then state that claim
 plainly and put it where the argument needs it, not at the end as a flourish.
 
 ### §33. Conversational rhetorical openers
-**Registers:** E P — **off in T and R**
+**Registers:** E P C — **off in T and R**
 
 **Watch:** Honestly?, Look, Here's the thing, Here's what I mean, The thing is, Let's be honest, Let me be clear, I'll be honest, The uncomfortable truth is, Real talk — used as standalone hooks or fake-candid pauses.
 
@@ -225,7 +237,7 @@ point. Keep "honestly" or "look" mid-sentence, which is ordinary speech — see 
 false-positive list in `patterns-core.md`.
 
 ### §34. Colon reveals
-**Registers:** E P — **off in T and R**
+**Registers:** E P C — **off in T and R**
 
 **Watch:** The best part:, The catch:, The result:, The problem:, The detail that makes it work:, Here's the kicker: — a bare noun phrase, a colon, then a lowercase payload.
 
@@ -247,7 +259,7 @@ Corollary: after a colon, use sentence case unless grammar, a proper noun, a
 title, or code requires otherwise.
 
 ### §35. Faux-insight setups
-**Registers:** E only
+**Registers:** E and C — off in P, T and R
 
 **Watch:** here's what nobody tells you, what most people get wrong, the part everyone misses, this is the part most people skip, nobody talks about, few people realize, the part nobody warns you about
 
@@ -264,7 +276,7 @@ Distinct from §27 authority tropes, which inflate the topic ("the real question
 is", "at its core"). This one inflates the author. §27 is in `patterns-core.md`.
 
 ### §36. Rhetorical setups and self-answered questions
-**Registers:** E only
+**Registers:** E and C — off in P, T and R
 
 **Watch:** What if I told you, Think about it:, Plot twist:, Here's a thought:, Sound familiar? — plus any question the writer poses and answers in the next breath.
 
@@ -282,8 +294,8 @@ standalone candor openers; this one covers the manufactured question.
 ## PERSONALITY — voice injection
 **Registers:** E only
 
-The only register where injecting voice is correct. In Professional, Technical
-and Regulated, neutral and plain **is** the human voice, and adding personality is
+The only register where injecting voice is correct. In Professional, Technical,
+Regulated and Commercial, neutral and plain **is** the human voice, and adding personality is
 the most damaging failure this skill can produce — it is not visible to the person
 who asked for it.
 

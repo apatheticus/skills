@@ -13,9 +13,9 @@ Four of the 21 change *severity* by register rather than switching off:
 
 | Pattern | Change |
 | --- | --- |
-| §5 vague attribution | Elevate in Professional and Regulated |
-| §13 passive voice | Hard rule in Regulated |
-| §21 speculative gap-filling | **Blocker** in Professional and Regulated |
+| §5 vague attribution | Elevate in Professional, Regulated and Commercial |
+| §13 passive voice | Hard rule in Regulated and Commercial |
+| §21 speculative gap-filling | **Blocker** in Professional, Regulated and Commercial |
 | §27 authority tropes | Rare outside Editorial |
 
 Read [False positives](#false-positives) before flagging anything. Most of these
@@ -30,7 +30,7 @@ writing". See `attribution.md`.
 ## Content patterns
 
 ### §1. Undue emphasis on significance, legacy, and broader trends
-**Registers:** E P T R
+**Registers:** E P T R C
 
 **Watch:** stands/serves as, is a testament/reminder, a vital/significant/crucial/pivotal/key role/moment, underscores its importance, reflects broader, symbolizing its enduring, contributing to the, setting the stage for, marking a shift, key turning point, evolving landscape, focal point, indelible mark, deeply rooted
 
@@ -42,7 +42,7 @@ broader trend.
 **After:** The Statistical Institute of Catalonia was established in 1989 to collect and publish regional statistics independently from Spain's national statistics office.
 
 ### §2. Undue emphasis on notability and coverage
-**Registers:** E P T R
+**Registers:** E P T R C
 
 **Watch:** independent coverage, national media outlets, written by a leading expert, active social media presence
 
@@ -51,7 +51,7 @@ broader trend.
 **After:** In a 2024 New York Times interview, she argued that AI regulation should focus on outcomes rather than methods.
 
 ### §3. Superficial analyses with -ing endings
-**Registers:** E P T R
+**Registers:** E P T R C
 
 **Watch:** highlighting, underscoring, emphasizing, ensuring, reflecting, symbolizing, contributing to, fostering, encompassing, showcasing
 
@@ -62,7 +62,7 @@ Present-participle phrases tacked onto a sentence to simulate depth.
 **After:** The temple uses blue, green, and gold. The architect said these reference local bluebonnets and the Gulf coast.
 
 ### §4. Promotional and advertisement-like language
-**Registers:** E P T R
+**Registers:** E P T R C
 
 **Watch:** boasts a, vibrant, rich (figurative), profound, enhancing its, showcasing, exemplifies, commitment to, nestled, in the heart of, groundbreaking, renowned, breathtaking, must-visit, stunning
 
@@ -71,7 +71,7 @@ Present-participle phrases tacked onto a sentence to simulate depth.
 **After:** Alamata Raya Kobo is a town in the Gonder region of Ethiopia, known for its weekly market and 18th-century church.
 
 ### §5. Vague attribution and weasel words
-**Registers:** E P T R — elevate in P and R
+**Registers:** E P T R C — elevate in P, R and C
 
 **Watch:** industry reports, observers have cited, experts argue, some critics argue, several sources
 
@@ -80,7 +80,7 @@ Present-participle phrases tacked onto a sentence to simulate depth.
 **After:** The Haolai River supports several endemic fish species, according to a 2019 survey by the Chinese Academy of Sciences.
 
 ### §6. Formulaic "Challenges and Future Prospects" sections
-**Registers:** E P T R
+**Registers:** E P T R C
 
 **Watch:** Despite its... faces several challenges, Despite these challenges, Challenges and Legacy, Future Outlook
 
@@ -93,7 +93,7 @@ Present-participle phrases tacked onto a sentence to simulate depth.
 ## Language and grammar
 
 ### §7. Overused AI vocabulary
-**Registers:** E P T R — **list is register-scoped**, see `vocabulary.md`
+**Registers:** E P T R C — **list is register-scoped**, see `vocabulary.md`
 
 Do not apply a global blacklist. Words like *robust*, *leverage*, *harness*,
 *realm*, and *navigate* are terms of art in technical writing and banning them
@@ -105,7 +105,7 @@ register-scoped tiers with carve-outs.
 **After:** Pasta dishes, introduced during Italian colonization, remain common, especially in the south.
 
 ### §8. Copula avoidance
-**Registers:** E P T R
+**Registers:** E P T R C
 
 **Watch:** serves as, stands as, marks, represents, boasts, features, offers — where "is" or "has" would do.
 
@@ -114,7 +114,7 @@ register-scoped tiers with carve-outs.
 **After:** Gallery 825 is LAAA's exhibition space. It has four rooms totaling 3,000 square feet.
 
 ### §9. Negative parallelism and tailing negation
-**Registers:** E P T R
+**Registers:** E P T R C
 
 "Not only... but...", "It's not just X, it's Y", "The question isn't X, it's Y",
 plus clipped fragments like "no guessing" or "no wasted motion" bolted onto a
@@ -130,14 +130,14 @@ model, it's the eval" becomes "The eval matters more than the model."
 **After:** The options come from the selected item, so the user does not have to guess.
 
 ### §10. Rule of three
-**Registers:** E P T R
+**Registers:** E P T R C
 
 **Before:** The event features keynote sessions, panel discussions, and networking opportunities. Attendees can expect innovation, inspiration, and industry insights.
 
 **After:** The event includes talks and panels, with time for informal networking between sessions.
 
 ### §12. False ranges
-**Registers:** E P T R
+**Registers:** E P T R C
 
 "From X to Y" where X and Y are not endpoints of any real scale.
 
@@ -146,7 +146,7 @@ model, it's the eval" becomes "The eval matters more than the model."
 **After:** The book covers the Big Bang, star formation, and current theories about dark matter.
 
 ### §13. Passive voice and subjectless fragments
-**Registers:** E P T R — hard rule in R
+**Registers:** E P T R C — hard rule in R and C (every obligation names its party)
 
 **Before:** No configuration file needed. The results are preserved automatically.
 
@@ -157,20 +157,20 @@ model, it's the eval" becomes "The eval matters more than the model."
 ## Style
 
 ### §15. Boldface overuse
-**Registers:** E P T R
+**Registers:** E P T R C
 
 **Before:** It blends **OKRs (Objectives and Key Results)**, **KPIs**, and tools such as the **Business Model Canvas (BMC)**.
 
 **After:** It blends OKRs, KPIs, and visual strategy tools like the Business Model Canvas.
 
 ### §19. Curly quotation marks
-**Registers:** E P T R
+**Registers:** E P T R C
 
 Straight quotes over `“ ”`. Weak signal alone — most editors auto-curl — but it
 counts inside a cluster. In Technical, never alter quotes inside code spans.
 
 ### §20. Chatbot correspondence artifacts
-**Registers:** E P T R
+**Registers:** E P T R C
 
 **Watch:** I hope this helps, Of course!, Certainly!, You're absolutely right, Would you like..., Want me to...?, Should I continue?, let me know, here is a...
 
@@ -179,7 +179,7 @@ counts inside a cluster. In Technical, never alter quotes inside code spans.
 **After:** The French Revolution began in 1789 when financial crisis and food shortages led to widespread unrest.
 
 ### §21. Knowledge-cutoff disclaimers and speculative gap-filling
-**Registers:** E P T R — **blocker in P and R**
+**Registers:** E P T R C — **blocker in P, R and C**
 
 **Watch:** as of [date], up to my last training update, while specific details are limited, based on available information, not publicly available, maintains a low profile, keeps personal details private, likely [grew up/studied], it is believed that
 
@@ -191,7 +191,7 @@ plausible filler. Say what is not known, or cut the sentence.
 
 **After:** Her early life is not documented in the available sources.
 
-**In Professional and Regulated this is a blocker, not a style note.**
+**In Professional, Regulated and Commercial this is a blocker, not a style note.**
 Speculative gap-filling in an essay is a style problem. The same sentence in a
 proposal, a policy, or a filing is a fabricated claim attributed to your
 organization, and in a regulatory document a fabricated citation is a finding
@@ -200,7 +200,7 @@ sentence. Never dress a guess as fact, and never let a plausible-sounding
 invention survive because it read smoothly.
 
 ### §22. Sycophantic tone
-**Registers:** E P T R
+**Registers:** E P T R C
 
 **Before:** Great question! You're absolutely right that this is complex. That's an excellent point about the economic factors.
 
@@ -211,7 +211,7 @@ invention survive because it read smoothly.
 ## Filler, hedging, and rhetorical moves
 
 ### §23. Filler phrases
-**Registers:** E P T R — reinforces plain language
+**Registers:** E P T R C — reinforces plain language
 
 - "In order to achieve this goal" → "To achieve this"
 - "Due to the fact that it was raining" → "Because it was raining"
@@ -221,7 +221,7 @@ invention survive because it read smoothly.
 - "It is important to note that the data shows" → "The data shows"
 
 ### §25. Generic positive conclusions
-**Registers:** E P T R
+**Registers:** E P T R C
 
 **Watch:** In conclusion, Ultimately, Overall, To sum up — plus any closing
 paragraph that restates the piece.
@@ -236,7 +236,7 @@ failure — inventing a closer instead of restating one — is §31, in
 `patterns-gated.md`.
 
 ### §27. Persuasive authority tropes
-**Registers:** E P T R — rare outside E
+**Registers:** E P T R C — rare outside E
 
 **Watch:** the real question is, at its core, in reality, what really matters, fundamentally, the deeper issue, the heart of the matter
 
@@ -245,7 +245,7 @@ failure — inventing a closer instead of restating one — is §31, in
 **After:** The question is whether teams can adapt. That mostly depends on whether the organization is ready to change its habits.
 
 ### §29. Fragmented headers
-**Registers:** E P T R
+**Registers:** E P T R C
 
 A heading followed by a one-line paragraph restating the heading before the real
 content starts.

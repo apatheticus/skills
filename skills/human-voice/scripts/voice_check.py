@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Count the mechanical half of human-voice's Step 4 self-check.
 
-    python3 voice_check.py <file.md> --register E|P|T|R [--gov]
+    python3 voice_check.py <file.md> --register E|P|T|R|C [--gov]
 
 Reports, never rewrites. Tier 1 and Tier 3 vocabulary hits are defects and exit
 non-zero; everything else is advisory, because the register tables in SKILL.md
@@ -28,8 +28,9 @@ emphatically used, so suppressing it would trade real tier-1 detections for a
 lower false-positive rate on the rare document whose subject is the word list.
 
 --gov adds two government-scoped checks from reference/plain-language.md, and is
-rejected outside --register R because those rules are written for a U.S.
-government audience and are wrong on an essay. It covers SSG1 hidden verbs and
+rejected outside --register R and --register C because those rules are written
+for a U.S. government audience and are wrong on an essay. C takes it for a
+proposal or RFP response addressed to an agency (reference/registers.md). It covers SSG1 hidden verbs and
 SSG3 stacked negations, both WARN.
 
 There is deliberately **no SSG2 noun-string check**. Telling "laboratory animal
@@ -38,6 +39,13 @@ needs part-of-speech tagging, and a regex over capitalisation would flag every
 proper name in a federal document. Do not read a clean --gov run as evidence
 that noun strings were checked; they were not. Nor are the substitution table,
 SSG4, SSG5, SSG6 or SSG7 -- all of those need judgment and stay with the reader.
+
+--register C adds the Commercial word lists from reference/commercial.md section
+4 as ERRORs, plus three WARN counts: broad disclaimers over one per document,
+more than one parenthetical in a sentence, and footnotes and first person. The
+operative/non-operative split needs judgment, so no check here knows which
+section is binding; a first-person hit in a cover note is a WARN a human
+dismisses.
 """
 
 import argparse
@@ -47,8 +55,8 @@ from collections import Counter
 
 # --- register configuration -------------------------------------------------
 # Thresholds come from SKILL.md Step 4.2; gates from reference/patterns-gated.md.
-# Kept inline rather than in a JSON sibling: it is a 4x4 table of numbers and a
-# second file would not earn its maintenance.
+# Kept inline rather than in a JSON sibling: it is a 5-row table of numbers and a
+# second file would not earn its maintenance. Keys absent from a row read as off.
 
 REGISTERS = {
     "E": {
@@ -90,6 +98,20 @@ REGISTERS = {
         "title_case": False,
         "hyphen_pairs": False,
         "emoji": "banned",
+    },
+    "C": {
+        "name": "Commercial",
+        "max_similar_run": None,    # flat, definite prose is the voice here
+        "avg_range": (15, 30),
+        "sentence_hard_cap": None,
+        "sentence_soft_cap": 30,    # over 30 is a rewrite candidate, a WARN
+        "dash": True,
+        "dash_per_section": 1,      # SS14 tightened: one per section
+        "title_case": False,        # client's paper governs
+        "hyphen_pairs": True,
+        "emoji": "banned",
+        "commercial": True,         # reference/commercial.md section 4
+        "openers": False,           # "Supplier will…" repeated is the house pattern
     },
 }
 
@@ -166,10 +188,54 @@ EMOJI = re.compile(
     "\U00002600-\U000026FF\U0001F900-\U0001F9FF\U0000FE0F\U00002B00-\U00002BFF]"
 )
 
+# --- Commercial-only lists (reference/commercial.md section 4) ---------------
+# Regex fragments, wrapped in word boundaries at match time. Every hit is an
+# ERROR: the justified count outside quoted client language is zero, and quoted
+# material is already masked. Bare "endeavor" is left to Tier 1 so it is not
+# reported twice.
+
+COMMERCIAL = {
+    "commercial-unbounded": [
+        r"as required", r"as needed", r"ongoing",
+        r"to (?:the )?client['’]?s satisfaction", r"including but not limited to",
+        r"best efforts?",
+    ],
+    "commercial-modal": [
+        r"should", r"aims? to", r"endeavou?rs|endeavour", r"strives? to",
+        r"works? towards?", r"(?:is|are) expected to",
+    ],
+    "commercial-metaphor": [
+        r"load[- ]bearing", r"linchpin", r"cornerstone", r"heavy lifting",
+        r"backbone of", r"(?:this|our|your)\s+(?:\w+\s+)?journey(?!\s+map)", r"trusted partners?",
+        r"north star", r"single throat to choke", r"war room", r"swim ?lanes?",
+        r"land and expand", r"quick wins?",
+    ],
+    "commercial-intensifier": [
+        r"turnkey", r"world[- ]class", r"best[- ]in[- ]class", r"bespoke",
+        r"holistic(?:ally)?", r"synergistic", r"robustly", r"transformational",
+        r"proven", r"industry[- ]leading", r"market[- ]leading",
+        r"(?:a|the)\s+leading(?!\s+(?:to|up|edge|role|cause|indicator))",
+    ],
+    "commercial-cleft": [
+        r"what this buys", r"the reason this matters",
+        r"(?:this|that) is the difference between",
+    ],
+}
+
+DISCLAIMER = re.compile(
+    r"\b(?:does not|do not|doesn't|don't|cannot|can't|will not|won't)\s+"
+    r"(?:warrant|guarantee)\b|\b(?:is|are)\s+not\s+(?:responsible|liable)\s+for\b",
+    re.I)
+
+# Case-sensitive on purpose: lowercase "us" only, so "US" and "U.S." never fire.
+FIRST_PERSON = re.compile(r"\b(?:[Ww]e|[Oo]urs?|us|[Yy]ou|[Yy]ours?)\b")
+
+FOOTNOTE = re.compile(r"\[\^[^\]\s]+\]")
+
 # Words that legitimately open many sentences and carry no style signal.
 OPENER_EXEMPT = {"a", "an", "the", "it", "if", "in", "to", "for", "and", "but"}
 
-# --- government-scoped patterns (--gov, Regulated only) ---------------------
+# --- government-scoped patterns (--gov, Regulated or Commercial) -----------
 # reference/plain-language.md SSG1 and SSG3. Deliberately narrow: these fire only
 # for a U.S. government audience and would be wrong on an essay.
 
@@ -389,6 +455,15 @@ def check_sentences(masked, reg, findings, stats):
                     "ERROR", line_of(masked, off), "length-cap",
                     f"{n} words, hard cap {cap} in {cfg['name']}"))
 
+    if cfg.get("sentence_soft_cap"):
+        cap = cfg["sentence_soft_cap"]
+        for off, s in sents:
+            n = len(words(s))
+            if n > cap:
+                findings.append(Finding(
+                    "WARN", line_of(masked, off), "length-split",
+                    f"{n} words, over {cap} in {cfg['name']} — split or rewrite"))
+
     if cfg["max_similar_run"]:
         limit = cfg["max_similar_run"]
         run_start, run = 0, [counts[0]]
@@ -427,7 +502,7 @@ def check_openers(masked, findings):
 
 
 def check_gov(masked, findings):
-    """Government-scoped checks. Only runs under --gov, only in Regulated.
+    """Government-scoped checks. Only runs under --gov, in Regulated or Commercial.
 
     Both are WARN. They are heuristics over a regex, not a parse, and a WARN that
     a reader dismisses costs less than a rule that silently stops firing.
@@ -446,10 +521,60 @@ def check_gov(masked, findings):
                 f"state it positively (§G3)"))
 
 
+def check_commercial(masked, findings):
+    """Commercial-only checks. reference/commercial.md section 4."""
+    for code, frags in COMMERCIAL.items():
+        for frag in frags:
+            for m in re.finditer(r"\b(?:" + frag + r")\b", masked, re.I):
+                findings.append(Finding(
+                    "ERROR", line_of(masked, m.start()), code,
+                    f"'{m.group(0)}' — banned in Commercial outside quoted client language"))
+
+    disclaimers = list(DISCLAIMER.finditer(masked))
+    if len(disclaimers) > 1:
+        findings.append(Finding(
+            "WARN", line_of(masked, disclaimers[1].start()), "commercial-disclaimer",
+            f"{len(disclaimers)} broad disclaimers — keep one, convert the rest "
+            f"to named exclusions (§C13)"))
+
+    for off, s in sentences(masked):
+        # A parenthesis whose only content was a quoted defined term is blank
+        # after masking -- ("Supplier") in a preamble -- and is not a parenthetical.
+        n = len(re.findall(r"\((?!\s*\))", s))
+        if n > 1:
+            findings.append(Finding(
+                "WARN", line_of(masked, off), "commercial-parens",
+                f"{n} parentheticals in one sentence — one at most (§C8)"))
+
+    for m in FOOTNOTE.finditer(masked):
+        findings.append(Finding(
+            "WARN", line_of(masked, m.start()), "commercial-footnote",
+            f"'{m.group(0)}' — no footnotes in a commercial document (§C8)"))
+
+    person = list(FIRST_PERSON.finditer(masked))
+    if person:
+        findings.append(Finding(
+            "WARN", line_of(masked, person[0].start()), "commercial-person",
+            f"{len(person)} first- or second-person words — name the party in "
+            f"operative text; a cover note may keep them (§C1)"))
+
+
 def check_style(masked, reg, findings, stats):
     cfg = REGISTERS[reg]
 
-    if cfg["dash"]:
+    if cfg["dash"] and cfg.get("dash_per_section"):
+        limit = cfg["dash_per_section"]
+        total = 0
+        for start, end in sections(masked):
+            hits = list(re.finditer(r"[—–]|(?<=\s)--(?=\s)", masked[start:end]))
+            total += len(hits)
+            if len(hits) > limit:
+                findings.append(Finding(
+                    "WARN", line_of(masked, start + hits[0].start()), "dashes",
+                    f"{len(hits)} em/en dashes in one section — {cfg['name']} "
+                    f"allows {limit}, appositive definitions only"))
+        stats["dashes"] = total
+    elif cfg["dash"]:
         hits = list(re.finditer(r"[—–]|(?<=\s)--(?=\s)", masked))
         stats["dashes"] = len(hits)
         if len(hits) > 2:
@@ -510,7 +635,8 @@ def run(text, reg, gov=False):
     """Pure function on a string. Returns (findings, stats).
 
     gov=True adds the government-scoped checks. It is meaningless outside
-    Regulated and main() rejects the combination before getting here.
+    Regulated and Commercial, and main() rejects any other combination before
+    getting here.
     """
     masked, masked_chars = mask(text)
     findings, stats = [], {"masked_chars": masked_chars}
@@ -536,8 +662,11 @@ def run(text, reg, gov=False):
 
     check_vocabulary(masked, reg, findings)
     check_sentences(masked, reg, findings, stats)
-    check_openers(masked, findings)
+    if REGISTERS[reg].get("openers", True):
+        check_openers(masked, findings)
     check_style(masked, reg, findings, stats)
+    if REGISTERS[reg].get("commercial"):
+        check_commercial(masked, findings)
     if gov:
         check_gov(masked, findings)
 
@@ -551,17 +680,22 @@ def main():
     ap.add_argument("--register", required=True, choices=sorted(REGISTERS))
     ap.add_argument("--gov", action="store_true",
                     help="add the government-scoped checks from "
-                         "reference/plain-language.md (Regulated only)")
+                         "reference/plain-language.md (Regulated or Commercial)")
     args = ap.parse_args()
 
-    if args.gov and args.register != "R":
-        ap.error("--gov applies only to --register R; the plain-language rules "
-                 "are written for a U.S. government audience")
+    if args.gov and args.register not in ("R", "C"):
+        ap.error("--gov applies only to --register R or C; the plain-language "
+                 "rules are written for a U.S. government audience")
 
     try:
         text = open(args.file, encoding="utf-8").read()
     except OSError as exc:
         print(f"PROBLEM nothing-to-check: {exc}")
+        return 1
+    except UnicodeDecodeError:
+        print("PROBLEM nothing-to-check: not a UTF-8 text file. Convert a .docx or "
+              ".pdf to text first (textutil -convert txt, pandoc, pdftotext); this "
+              "run is not performed")
         return 1
 
     findings, stats = run(text, args.register, gov=args.gov)

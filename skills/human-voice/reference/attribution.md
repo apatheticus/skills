@@ -82,10 +82,15 @@ blacklist seed list derive from a private, unversioned `human-voice` skill not
 published anywhere. No license terms attach.
 
 Substantially reworked here: the original had three content-type playbooks with
-no ending guidance for two of them and a flat global blacklist. This version has
-four registers, gates the pattern catalog by register, resolves the original's
+no ending guidance for two of them and a flat global blacklist. The reworked
+version had four registers, gates the pattern catalog by register, resolves the original's
 conflicts with plain-language guidance, and adds the technical-term carve-outs
 that a flat blacklist breaks.
+
+The fifth register, Commercial, and everything in `reference/commercial.md`
+derive from an unpublished "Prose" rule set for client-facing commercial
+writing (v0.1), supplied by the repository owner and reworked here into the
+register model.
 
 ## Plain-language envelope
 
@@ -103,5 +108,6 @@ archive; the old URL no longer resolves to the material it names.
 
 §G1–§G7 are this skill's numbering, not the Guidelines'. They sit deliberately
 outside the §1–§36 pattern catalog because they are government-scoped, and the
-catalog is not. This is an envelope around the Regulated register for one
-audience, not a compliance implementation.
+catalog is not. This is an envelope around the Regulated register — and the
+Commercial register, for a proposal addressed to an agency — for one audience,
+not a compliance implementation.

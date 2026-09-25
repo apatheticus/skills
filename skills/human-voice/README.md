@@ -7,7 +7,7 @@
 <!-- pd:badges start -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-8c2f1f.svg)](../../LICENSE)
 [![Claude Code](https://img.shields.io/badge/Claude_Code-skill-1a1a18)](SKILL.md)
-[![Registers](https://img.shields.io/badge/registers-4-1a1a18)](reference/registers.md)
+[![Registers](https://img.shields.io/badge/registers-5-1a1a18)](reference/registers.md)
 [![Patterns](https://img.shields.io/badge/patterns-36-1a1a18)](reference/patterns-core.md)
 <!-- pd:badges end -->
 
@@ -23,8 +23,8 @@
 > This is an editing pass over prose that already exists. It is not a drafting tool,
 > and it is not a style guide for code, config, or commit messages. For anything a
 > U.S. federal, state, or local government agency, evaluator, or auditor will read,
-> the regulated register runs inside a plain-language envelope drawn from the Plain
-> Writing Act of 2010 and the Federal Plain Language Guidelines. Section 508, GPO
+> the regulated register (or the commercial one, for a proposal) runs inside a
+> plain-language envelope drawn from the Plain Writing Act of 2010 and the Federal Plain Language Guidelines. Section 508, GPO
 > style, agency style guides, and mandated section structures stay outside it, and
 > the delivery says so.
 
@@ -41,21 +41,24 @@ the person who asked for the edit. So this skill picks a register before it read
 single pattern, then applies only what that register wants.
 
 It runs over blog posts, articles, memos, policies, reports, specs, runbooks, RFCs,
-proposals, and filings. It answers "does this sound AI-generated?" and it is what you
+filings, proposals, statements of work, and contracts. It answers "does this sound AI-generated?" and it is what you
 reach for when a draft has to survive a detector.
 
-## The four registers
+## The five registers
 
 Selected in step 1, before anything else, because every later decision depends on it.
 
 | Register | Genres | Personality | Specificity currency |
 | --- | --- | --- | --- |
 | Editorial | blogs, essays, thought leadership, marketing | On | Lived experience, anecdote, scene |
-| Professional | memos, policies, reports, proposals, briefs | Off | Institutional fact — dates, names, quantities |
+| Professional | memos, policies, reports, briefs | Off | Institutional fact — dates, names, quantities |
 | Technical | specs, architecture docs, runbooks, API docs, ADRs | Off | Reproducible artifact — error strings, config values |
 | Regulated | federal, legal, clinical, safety, compliance | Off | Cited authority — statute, standard, control ID |
+| Commercial | proposals, RFP responses, SOWs, task orders, engagement letters, term sheets | Off | Commercial fact — party, quantity, period, price |
 
-Professional is the default when the genre is unclear. Editorial never is. Full
+Professional is the default when the genre is unclear, unless a client will
+read the document and could quote it back as a commitment; then it is Commercial.
+Editorial never is. Full
 profiles, opening and closing rules, and each register's characteristic failure mode
 live in [`reference/registers.md`](reference/registers.md).
 
@@ -74,12 +77,12 @@ backwards is expensive:
   hedging and gets cut. "Throughput degrades above roughly 4k concurrent connections;
   we have not tested past 8k" is calibrated uncertainty and is often the most valuable
   sentence on the page. The test is whether the qualifier carries information.
-- **Speculative gap-filling in Professional and Regulated writing** is treated as a
+- **Speculative gap-filling in Professional, Regulated and Commercial writing** is treated as a
   blocker, not a style note. The same invented sentence that reads as vagueness in an
   essay is a fabricated claim attributed to your organisation in a filing.
-- **Synonym cycling inverts in Technical and Regulated writing.** Rotating terms for
-  style is a tell in an essay and a correctness bug in a spec, where a component gets
-  the same name every time. There, repetition is the fix rather than the problem.
+- **Synonym cycling inverts in Technical, Regulated and Commercial writing.** Rotating
+  terms for style is a tell in an essay and a correctness bug in a spec or a statement
+  of work, where a component, party or deliverable gets the same name every time. There, repetition is the fix rather than the problem.
 
 The catalog is split by whether a register can switch a pattern off. The 21 that
 never switch off are in [`reference/patterns-core.md`](reference/patterns-core.md),
@@ -103,7 +106,8 @@ every run, so a Regulated pass never pays for the editorial tells it cannot use.
 human-voice/
 ├── SKILL.md                    the skill: register selection, the gates, self-check, delivery
 ├── reference/
-│   ├── registers.md            the four register profiles, plus the plain-language floor
+│   ├── registers.md            the five register profiles, plus the plain-language floor
+│   ├── commercial.md           Commercial register only — operative text and §C1–§C16
 │   ├── patterns-core.md        the 21 always-on patterns, plus false positives
 │   ├── patterns-gated.md       the 15 register-gated patterns, plus the gate table
 │   ├── vocabulary.md           global and register-scoped word lists, with carve-outs
@@ -167,8 +171,8 @@ For Editorial and Professional work it reads the draft first and names three to 
 of your own voice signals to preserve, so a one-off draft with no writing sample
 still gets treated as yours. Supply your earlier writing and it calibrates to your
 sentence lengths, punctuation habits, and tics as well. Both steps are skipped for
-Technical and Regulated work, where house style and cited authority set the voice
-instead of a person.
+Technical, Regulated and Commercial work, where house style, cited authority or the
+client's paper set the voice instead of a person.
 
 ## Testing
 
@@ -202,7 +206,8 @@ entries in both distribution manifests. See
 ## Documentation
 
 - [`SKILL.md`](SKILL.md) — the skill itself: the steps, the gates, the rules.
-- [`reference/registers.md`](reference/registers.md) — the four registers in full.
+- [`reference/registers.md`](reference/registers.md) — the five registers in full.
+- [`reference/commercial.md`](reference/commercial.md) — Commercial register only: operative and non-operative text, §C1–§C16, and the Commercial word lists.
 - [`reference/patterns-core.md`](reference/patterns-core.md) — the 21 always-on patterns, with false positives.
 - [`reference/patterns-gated.md`](reference/patterns-gated.md) — the 15 register-gated patterns and the gate table.
 - [`reference/vocabulary.md`](reference/vocabulary.md) — the word and phrase lists.

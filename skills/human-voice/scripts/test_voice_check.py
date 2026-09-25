@@ -202,7 +202,7 @@ check("a genuinely short but checkable draft is not reported as unchecked",
       "We shipped the change on Tuesday and told the customer the same day.",
       "P", reject=["nothing-to-check"])
 
-# --- government-scoped checks (--gov, Regulated only) -----------------------
+# --- government-scoped checks (--gov, Regulated or Commercial) -------------
 
 check("a hidden verb is flagged under --gov",
       PAD + "The agency will make a determination on your application.",
@@ -232,6 +232,200 @@ check("plain government prose trips neither government check",
       PAD + "We will decide on your application and tell you the result. "
             "We review your file before we approve it.",
       "R", reject=["gov-hidden-verb", "gov-negation"], gov=True)
+
+# --- Commercial register (reference/commercial.md) -------------------------
+
+check("an unbounded obligation fires in Commercial",
+      PAD + "Supplier will provide ongoing support as required.",
+      "C", expect=["commercial-unbounded"])
+
+check("an unbounded obligation is silent in Professional",
+      PAD + "Supplier will provide ongoing support as required.",
+      "P", reject=["commercial-unbounded"])
+
+check("the client's own words in quotes are not flagged",
+      PAD + 'The RFP asks for "ongoing support as required" in section 4.',
+      "C", reject=["commercial-unbounded"])
+
+check("a hedged modal fires in Commercial",
+      PAD + "Supplier should deliver the accuracy report by 3 March.",
+      "C", expect=["commercial-modal"])
+
+check("a structural metaphor fires in Commercial",
+      PAD + "The data-access dependency is load-bearing for the programme.",
+      "C", expect=["commercial-metaphor"])
+
+check("a journey metaphor with one word inside still fires",
+      PAD + "Supplier will support your underwriting journey.",
+      "C", expect=["commercial-metaphor"])
+
+check("repeated party openers are the Commercial house pattern",
+      "## Scope\n\n" + PAD + "Supplier will design the service. Supplier will build "
+      "the service. Supplier will deliver the service by 3 March.",
+      "C", reject=["openers"])
+
+check("the same repeated openers still warn in Professional",
+      "## Scope\n\n" + PAD + "Supplier will design the service. Supplier will build "
+      "the service. Supplier will deliver the service by 3 March.",
+      "P", expect=["openers"])
+
+check("a customer journey map is a deliverable, not a metaphor",
+      PAD + "Supplier will deliver a customer journey map by 3 March.",
+      "C", reject=["commercial-metaphor"])
+
+check("a significance cleft fires in Commercial",
+      PAD + "This is the difference between an hour and a week of rework.",
+      "C", expect=["commercial-cleft"])
+
+check("a plain difference between two figures is not a cleft",
+      PAD + "The difference between the two quotes is 3,000 dollars.",
+      "C", reject=["commercial-cleft"])
+
+check("two broad disclaimers warn",
+      PAD + "Supplier does not warrant accuracy. Supplier is not responsible for hosting.",
+      "C", expect=["commercial-disclaimer"])
+
+check("one broad disclaimer is allowed",
+      PAD + "Supplier does not warrant accuracy outside the test set in Table 4.",
+      "C", reject=["commercial-disclaimer"])
+
+check("two parentheticals in one sentence warn",
+      PAD + "Supplier will deliver the pipeline (D4) by Sprint 3 (see section 7.2).",
+      "C", expect=["commercial-parens"])
+
+check("one parenthetical in a sentence is allowed",
+      PAD + "Supplier will deliver the pipeline by the end of Sprint 3 (D4).",
+      "C", reject=["commercial-parens"])
+
+check("a footnote warns in Commercial",
+      PAD + "Supplier will deliver the pipeline by Sprint 3.[^1]",
+      "C", expect=["commercial-footnote"])
+
+check("first person warns in Commercial",
+      PAD + "We will deliver the pipeline to you by Sprint 3.",
+      "C", expect=["commercial-person"])
+
+check("U.S. and US are not first person",
+      PAD + "Supplier will host the service in a US region under U.S. law.",
+      "C", reject=["commercial-person"])
+
+# Exactly two: the register-wide budget allows two, so only the Commercial
+# one-per-section rule can fire here.
+check("two dashes in one section warn in Commercial",
+      "## Scope\n\n" + PAD + "A *Use Case* — a single workflow — has one test.",
+      "C", expect=["dashes"])
+
+check("the same two dashes pass in Professional",
+      "## Scope\n\n" + PAD + "A *Use Case* — a single workflow — has one test.",
+      "P", reject=["dashes"])
+
+check("one appositive dash per section is allowed in Commercial",
+      "## Scope\n\n" + PAD + "A *Use Case* is a single workflow — one test, one owner.",
+      "C", reject=["dashes"])
+
+check("even-length sentences are not a burstiness problem in Commercial",
+      PAD + "Supplier will deliver the ingestion pipeline by Sprint 3. "
+            "Client will provide the claims extract by Sprint 1. "
+            "Supplier will deliver the evaluation notebook by Sprint 4. "
+            "Client will name a technical owner by the kick-off date. "
+            "Supplier will deliver the accuracy report by Sprint 4.",
+      "C", reject=["burstiness"])
+
+LONG = ("Supplier will deliver the trained extraction model, the evaluation "
+        "notebook, the written accuracy report and the deployment runbook to "
+        "Client's nominated technical owner at the Sprint 4 review meeting held "
+        "at Client's London office on the date set out in the milestone table.")
+
+check("a sentence over about 35 words warns in Commercial",
+      PAD + LONG, "C", expect=["length-split"])
+
+check("the split warning is Commercial-only",
+      PAD + LONG, "P", reject=["length-split"])
+
+check("the government checks run under Commercial with --gov",
+      PAD + "Supplier will make a determination on the change request.",
+      "C", expect=["gov-hidden-verb"], gov=True)
+
+check("a journey map with a word in between is still a deliverable",
+      PAD + "This customer journey map is due to Client by 3 March.",
+      "C", reject=["commercial-metaphor"])
+
+check("a curly apostrophe does not hide an unbounded obligation",
+      PAD + "Supplier will revise the design to Client\u2019s satisfaction.",
+      "C", expect=["commercial-unbounded"])
+
+check("proven is a banned intensifier in Commercial",
+      PAD + "Supplier brings a proven delivery method to the programme.",
+      "C", expect=["commercial-intensifier"])
+
+check("a leading provider is a banned intensifier",
+      PAD + "Supplier is a leading provider of extraction services.",
+      "C", expect=["commercial-intensifier"])
+
+check("leading to is not an intensifier",
+      PAD + "The delay in data access is the leading cause of rework in Phase 1.",
+      "C", reject=["commercial-intensifier"])
+
+check("a preamble's quoted defined terms are not stacked parentheticals",
+      PAD + 'Brightline Analytics Ltd ("Supplier") and Northwind Mutual plc ("Client") agree as follows.',
+      "C", reject=["commercial-parens"])
+
+check("a 31-word sentence warns in Commercial",
+      PAD + "Supplier will deliver the trained model, the evaluation notebook and "
+            "the written accuracy report to the nominated technical owner of "
+            "Client at the review meeting that closes Sprint 4 of Phase 1.",
+      "C", expect=["length-split"])
+
+check_sev("an unbounded obligation is an ERROR",
+          PAD + "Supplier will provide ongoing support.", "C",
+          "commercial-unbounded", "ERROR")
+
+check_sev("first person is a WARN, because a cover note may keep it",
+          PAD + "We look forward to working with Client.", "C",
+          "commercial-person", "WARN")
+
+# The --gov register guard lives in main(), so drive the CLI. A missing file makes
+# an accepted combination return 1 with a PROBLEM line; a rejected one exits 2
+# from argparse before the file is ever opened.
+def cli_exit(argv):
+    import contextlib, io
+    saved = sys.argv
+    sys.argv = ["voice_check.py", "/nonexistent/voice-check-fixture.md"] + argv
+    try:
+        with contextlib.redirect_stdout(io.StringIO()), \
+             contextlib.redirect_stderr(io.StringIO()):
+            return v.main()
+    except SystemExit as exc:
+        return exc.code
+    finally:
+        sys.argv = saved
+
+
+RUN += 1
+if cli_exit(["--register", "C", "--gov"]) != 1:
+    FAILURES.append("cli: --gov must be accepted with --register C")
+
+# A .docx is not UTF-8 text: the checker must report PROBLEM and return 1, not
+# crash with a traceback.
+_bin = __import__("tempfile").NamedTemporaryFile(suffix=".docx", delete=False)
+_bin.write(b"PK\x03\x04\x14\x00\xff\xfe\x00binary"); _bin.close()
+RUN += 1
+_saved = sys.argv
+sys.argv = ["voice_check.py", _bin.name, "--register", "C"]
+try:
+    import contextlib, io
+    with contextlib.redirect_stdout(io.StringIO()) as _out:
+        _rc = v.main()
+    if _rc != 1 or "PROBLEM" not in _out.getvalue():
+        FAILURES.append("cli: a binary .docx must print PROBLEM and return 1")
+except Exception as exc:  # a traceback is exactly the failure under test
+    FAILURES.append(f"cli: a binary .docx raised {type(exc).__name__}")
+finally:
+    sys.argv = _saved
+
+RUN += 1
+if cli_exit(["--register", "P", "--gov"]) != 2:
+    FAILURES.append("cli: --gov must be rejected with --register P")
 
 # --- exit-code contract -----------------------------------------------------
 

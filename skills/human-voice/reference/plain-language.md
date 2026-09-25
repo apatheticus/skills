@@ -9,7 +9,9 @@ strip a novelist's vocabulary. If the audience is not a government one, close
 this file and use the register profile alone.
 
 It sits alongside the Regulated register in `reference/registers.md`, which
-carries the condensed floor. Nothing here replaces a pattern in the catalog. The
+carries the condensed floor, and alongside the Commercial register when a
+proposal or RFP response is addressed to an agency; there, Commercial wins on
+who owes what and on person. Nothing here replaces a pattern in the catalog. The
 36 patterns, the always-on 21 and the gated 15, are unchanged by this file.
 
 ---
