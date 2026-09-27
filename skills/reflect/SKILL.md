@@ -4,7 +4,7 @@ description: Generate a comprehensive, evidence-backed reflection report on how 
 argument-hint: "[window: 30d|90d|all] [focus: free text, e.g. a project or theme]"
 user-invocable: true
 license: MIT
-version: 1.3.0
+version: 1.4.0
 disable-model-invocation: true
 ---
 
@@ -169,6 +169,11 @@ Requirements in brief:
 - Embed the machine-readable summary block
   (`<script type="application/json" id="cc-reflection-data">`) per the spec
   in report-guide.md — future runs depend on it.
+- Give every finding a handoff bar: the stable `#card-<id>` permalink, a
+  **Copy link** button, and a **Copy agent brief** button that writes a
+  self-contained Markdown brief the reader can paste straight into a fresh
+  agent session. Deep links must open the card they name, on load and on
+  `hashchange`. Spec in report-guide.md § Per-finding handoff.
 - Render the status ledger: the merged ledger inlined as
   `<script type="application/json" id="cc-reflection-status">`, a check-off
   control on every actionable card, status pills on the summary rows, and a

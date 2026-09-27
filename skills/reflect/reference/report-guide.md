@@ -148,10 +148,11 @@ in this report. Copy the headings verbatim.
    treatment as a detail card.
 6. **Usage panorama** — the dashboard. See its own spec below.
 7. **Findings & recommendations** — detail cards, one per cluster, **collapsed
-   by default** to summary + verdict; expand to reveal rationale, the concrete
-   example (in a copyable `<pre>` block — the exact prompt / skill description /
-   settings line), and the evidence: verbatim quotes with session ID, project,
-   and date. Corroborated-by-/insights findings get a marker.
+   by default** to summary + verdict; expand to reveal the handoff bar (see
+   § Per-finding handoff), rationale, the concrete example (in a copyable `<pre>`
+   block — the exact prompt / skill description / settings line), and the
+   evidence: verbatim quotes with session ID, project, and date.
+   Corroborated-by-/insights findings get a marker.
 8. **Methodology appendix** — window, counts, triage rules, sampling (if
    any), sessions skipped as unreadable, /insights coverage %, and
    limitations.
@@ -262,6 +263,91 @@ absent or throws — the picker is unavailable from a `file://` origin in some
 browsers, and a silent failure there loses the reader's work. Swallow
 `AbortError` (the reader cancelled), fall back on anything else. Name the
 destination in the button's `title`.
+
+## Per-finding handoff — a link and a brief
+
+Every finding has to be addressable and portable on its own. The reader's next
+move after reading a card is usually to hand that one finding to an agent to
+evaluate and, if it holds up, implement. A report they have to copy out of by
+hand loses that, so each card carries a **handoff bar**: a durable link to the
+finding, and a one-click brief that is self-contained enough to paste into a
+fresh session.
+
+**The anchor is the contract.** Every card already has `id="card-<id>"`, using
+the same content-derived slug as the status ledger. That id is the permalink:
+it must stay stable across editions, never be renumbered, never be positional.
+A link handed to an agent in October has to still resolve in a report generated
+in December.
+
+**Deep links must open what they point at.** Cards are `<details>` collapsed by
+default, so a bare anchor lands the reader on a closed card. On load — and on
+`hashchange` — read `location.hash`, and if it names a card, clear any active
+filter that would hide it, force it open, scroll it into view and flash the same
+highlight an exec-summary click gives. Without this the links are decorative.
+Clicking an exec-summary row or a "Since last report" row also updates the hash
+via `history.replaceState`, so the address bar always holds a link to whatever
+the reader is looking at.
+
+**The handoff bar** sits in `.fbody`, directly under the `.stbar` (or first, on a
+card with no ledger entry) — never in `<summary>`, where any click toggles the
+`<details>`. It holds three things:
+
+- The anchor, shown as `#card-<id>` in `--font-mono`, as a real `<a href="#...">`
+  so middle-click and "copy link address" work.
+- **Copy link** — writes the absolute URL to the clipboard:
+  `location.href.split('#')[0] + '#card-<id>'`. This resolves correctly whether
+  the report was opened from `file://` or served over HTTP, which a hard-coded
+  path would not.
+- **Copy agent brief** — writes a self-contained Markdown brief (below).
+
+**The brief.** Build it at click time from the card's own DOM and `data-*`
+attributes, not from a second embedded copy of the text — the report is already
+large and a duplicated payload doubles the findings section. Give the card the
+attributes the brief needs (`data-verdict`, `data-family`, `data-effort`,
+`data-leverage`, `data-sessions`, `data-streak`, `data-projects`, `data-title`)
+and hooks on the parts (`.f-rationale`, `.f-example`, `.ev`). Shape:
+
+````markdown
+# <title>
+
+Source: <absolute url>#card-<id>
+Finding: <id> · <report filename> · window <from> → <to>
+Verdict: <verdict> · effort <effort> · leverage <n>/10 · <n> sessions · streak ×<n>
+Family: <family> · Projects: <a, b, c>
+
+## What it costs
+<rationale>
+
+## Proposed change
+```<lang>
+<concrete example, verbatim>
+```
+
+## Evidence
+1. session <id> (<project>, severity <sev>)
+   <summary>
+   > <verbatim quote>
+...
+
+## Task
+This is a diagnosis mined from Claude Code transcripts, not a verified plan.
+Confirm the problem still exists before changing anything, then either apply the
+change above or propose a better one and say why.
+````
+
+That closing **Task** paragraph is not optional. A brief without it reads as an
+instruction to go and edit, and the findings are exactly the kind of claim that
+has been wrong before — the report's own recurring `verify-against-source-before-publishing`
+cluster is the reason it is there.
+
+**Every finding gets the bar**, including `keep-doing` wins and observations. A
+win is the most useful thing to hand an agent that is about to do similar work,
+and it is the one card type with no ledger entry, so the bar is its first child.
+
+Both buttons fall back to a hidden `<textarea>` plus `document.execCommand('copy')`
+when `navigator.clipboard` is absent or throws — it is unavailable on a `file://`
+origin in some browsers, and a silent failure here looks identical to a successful
+copy. Confirm in the button label (`Copied`) for about 1.4s, then restore it.
 
 ## The Usage panorama — dashboard spec
 
