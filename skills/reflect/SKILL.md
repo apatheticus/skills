@@ -4,7 +4,7 @@ description: Generate a comprehensive, evidence-backed reflection report on how 
 argument-hint: "[window: 30d|90d|all] [focus: free text, e.g. a project or theme]"
 user-invocable: true
 license: MIT
-version: 1.4.0
+version: 1.4.1
 disable-model-invocation: true
 ---
 
@@ -17,6 +17,67 @@ single self-contained interactive HTML report. **This is diagnosis only** —
 build or edit nothing except the report (and its output directory). Do not
 create skills, hooks, or config changes the report recommends; recommending
 them IS the deliverable.
+
+## Contents
+
+Sections, in run order:
+
+- **Run checklist** — copy it into your response and tick each gate.
+- **Step 0 — read the format sources** — hard gate before anything is
+  generated; your response opens with the `[format sources read]` line.
+- **Arguments** — window (`30d` default, `Nd`, `all`) and an optional focus.
+- **Pipeline**
+  - **Phase 0 — Scope the corpus** — `OUT_DIR`/`REPORT`, in-window
+    transcripts, the prior report's JSON, the status ledger.
+  - **Phase 1 — /insights freshness gate** — gate on recency, never coverage.
+  - **Phase 2 — Triage** — score every session from metadata; no agents.
+  - **Phase 3 — Extraction** — Workflow fan-out: extract, cluster, decide,
+    consolidate, trend.
+  - **Phase 4 — Report** — one self-contained HTML file in Neumorphic Fresh.
+  - **Step 0b — verify before publishing** — print `headings match: yes/no`.
+  - **Phase 5 — Deliver** — send the report, TL;DR, skipped items, how the
+    loop closes.
+- **Guardrails** — the write boundary, the ledger, evidence rules, privacy,
+  scale.
+
+### Reference files — bundled, one level deep, read each in full
+
+- `reference/report-guide.md` — the report's style and format spec. Read in
+  Step 0 and again in Phase 4; Phase 0 uses its § The status ledger.
+  Sections: Design system — Neumorphic Fresh · Self-containment rules ·
+  Structure (top to bottom) · The status ledger · Per-finding handoff · The
+  Usage panorama — dashboard spec · Custom SVG graphics · Interactivity &
+  motion · Embedded data block.
+- `reference/extraction-guide.md` — read in Phase 3, before authoring the
+  workflow script. Sections: Transcript anatomy · Signal families · Extractor
+  output schema · Batching · Clustering & decision stage.
+
+### External inputs — not bundled
+
+- `~/.claude/projects/**/*.jsonl` — the transcripts (Phases 0 and 3).
+- `OUT_DIR/cc-reflection-20260727.html` — the last known-good exemplar (Step 0).
+- `OUT_DIR/reflect-status.json` — the user's status ledger; read in Phase 0,
+  written back in Phase 4.
+- `~/.claude/usage-data/` — `/insights` facets, session-meta, and report
+  (Phases 1–3).
+- `/Users/luke/scratch/Styles/Neumorphic Fresh Design System/` — the report's
+  design system (Phase 4). Missing → stop and ask.
+
+## Run checklist
+
+Copy this into your response, after the `[format sources read]` line, and tick
+each box as the gate passes:
+
+```
+- [ ] Step 0   both format sources read; opening line printed
+- [ ] Phase 0  OUT_DIR resolved; transcripts listed; prior JSON + ledger loaded
+- [ ] Phase 1  /insights gate passed, or the user chose to proceed
+- [ ] Phase 2  triage list built
+- [ ] Phase 3  workflow run: extract → cluster → decide → consolidate → trend
+- [ ] Phase 4  report written to REPORT; merged ledger written to OUT_DIR
+- [ ] Step 0b  headings match: yes
+- [ ] Phase 5  report sent; TL;DR and skipped items stated
+```
 
 ## Step 0 — read the format sources (non-negotiable)
 
@@ -38,12 +99,6 @@ Open your response with, verbatim:
 Section names, order, and the dashboard come from the guide — never invented, never
 carried over from an earlier run. If the guide and the exemplar disagree, stop and ask
 which is authoritative; do not pick one.
-
-## Step 0b — verify before publishing
-
-After generating, diff your section headings against the guide's § Structure (top to
-bottom) list and print `headings match: yes/no`. `no` means fix the output, not the
-claim.
 
 ## Arguments
 
@@ -180,6 +235,12 @@ Requirements in brief:
   `Save status` button. Spec in report-guide.md § The status ledger. Write the
   merged ledger back to `OUT_DIR/reflect-status.json` as well, so the file
   exists even if the user never clicks Save.
+
+### Step 0b — verify before publishing
+
+After generating, diff your section headings against the guide's § Structure (top to
+bottom) list and print `headings match: yes/no`. `no` means fix the output, not the
+claim.
 
 ### Phase 5 — Deliver
 
