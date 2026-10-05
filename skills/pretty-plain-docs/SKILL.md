@@ -2,7 +2,7 @@
 name: pretty-plain-docs
 description: Create and maintain a repository's standard documentation — README, ARCHITECTURE, DEVELOPMENT, DEPLOYMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, plus on-demand LICENSE, NOTICE, issue/PR templates, and CODEOWNERS — and beautify it with a per-repo design system and hand-authored static SVG visuals, with zero external dependencies — nothing to install and nothing that moves. Use this whenever the user wants beautiful, illustrated, or visually polished project docs as still images; asks for no animation, or for docs that survive printing, PDF export, or a renderer that rasterises SVG; wants a static hero or static diagrams; wants doc visuals refreshed, restyled, or audited for staleness; wants a named visual style such as Swiss minimal, neo-brutalist, blueprint, or bento grid; or invokes /pretty-plain-docs. For animated SVG use the sibling prettier-svg-docs; for animated WebP or HyperFrames use pretty-hyper-docs; for plain text-only docs with no visuals, update-docs fits better.
 license: MIT
-version: 0.4.1
+version: 0.4.2
 disable-model-invocation: true
 ---
 
@@ -47,7 +47,7 @@ Sections, in run order:
 - **Run checklist** — copy it into your response and tick each gate.
 - **Preflight (probe and warn — never a STOP)** — `python3` and a browser tool; warn, never stop.
 - **Documents in scope** — Tier 1 every run, Tier 2 by name; DEPLOYMENT is signal-gated.
-- **Invocation modes** — flags, `check` mode, and the thirty-one **Styles**.
+- **Invocation modes** — flags, `check` mode, and the thirty-two **Styles**.
 - **Audience matrix** — each doc's audience and visual treatment; the Mermaid rule.
 - **Visual budget (defaults; `--budget` overrides per run)** — SVGs per doc; 60 KB warn, 150 KB fail.
 - **Target layout (the skill maintains this)** — `docs/assets/` plus `.prettydocs/` per project.
@@ -149,14 +149,14 @@ than creating duplicates.
 
 ### Styles
 
-Thirty-one named idioms, one chosen per repo, listed alphabetically:
+Thirty-two named idioms, one chosen per repo, listed alphabetically:
 
 `bento-grid` · `blueprint` · `brushed-metal` · `claymorphism` · `codex-leonardo` ·
 `console-elbow` · `digital-rain` · `draughtsman-notebook` · `editorial` ·
 `flat-material` · `glassmorphism` · `holographic-projection` · `hud` · `ide-dark` ·
 `isometric-3d` · `lofi-wireframe` · `maximalist` · `neo-brutalist` · `neumorphism` ·
 `oil-impasto` · `patent-drawing` · `pencil-lined-paper` · `rough-sketch` ·
-`schematic` · `skeuomorphic` · `swiss-minimal` · `terminal-minimalist` ·
+`schematic` · `skeuomorphic` · `soft-vinyl` · `swiss-minimal` · `terminal-minimalist` ·
 `watercolor` · `whiteboard-marker` · `wood-grain` · `y2k-retrofuturist`
 
 Common aliases resolve without asking (`brutalist`, `glass`, `soft-ui`, `swiss`,
