@@ -157,27 +157,32 @@ in this report. Copy the headings verbatim.
 1. **Hero** — title, date, analysis window, session/project counts, and a
    one-paragraph verdict of the period. The `<h1>` verdict line is the one piece
    of free text in the whole report. Subtle ambient motion; a KPI stat row under it.
-2. **Executive summary** — the ranked recommendation list, most leverage
-   first. Each row: rank, verdict badge (new-skill / automation / fix /
+2. **Executive summary** — the ranked recommendation list in impact order
+   (SKILL.md Phase 3 step 6), most impactful first, capped at `limit` rows.
+   Each row: rank, verdict badge (new-skill / automation / fix /
    keep-doing / observation), title, leverage score, effort, session count.
    Clicking a row opens and scrolls to its detail card. Filter chips by
-   **verdict *and* family**, plus a text search across all clusters.
+   **verdict *and* family**, plus a text search across all clusters. Filters
+   and search hide rows; they never reorder them. When the cap cut anything,
+   a muted footer line reads `Showing 15 of 27 · rerun with limit=all`.
 3. **Since last report** (only when a prior report existed) — see the layout
    spec below. Three columns: **Adopted / Still recurring / New**.
 4. **Focus section** (only when a focus argument was given) — deep dive on
-   the focused project/theme.
+   the focused project/theme. Not capped by `limit`: the user asked for this
+   theme by name.
 5. **Wins & playbook** — effective patterns worth keeping, same evidence
-   treatment as a detail card.
+   treatment as a detail card. Impact order, drawn from the capped list.
 6. **Usage panorama** — the dashboard. See its own spec below.
-7. **Findings & recommendations** — detail cards, one per cluster, **collapsed
-   by default** to summary + verdict; expand to reveal the handoff bar (see
+7. **Findings & recommendations** — detail cards, one per shown finding, in
+   impact order and capped at `limit`, **collapsed by default** to summary +
+   verdict; expand to reveal the handoff bar (see
    § Per-finding handoff), rationale, the concrete example (in a copyable `<pre>`
    block — the exact prompt / skill description / settings line), and the
    evidence: verbatim quotes with session ID, project, and date.
    Corroborated-by-/insights findings get a marker.
 8. **Methodology appendix** — window, counts, triage rules, sampling (if
-   any), sessions skipped as unreadable, /insights coverage %, and
-   limitations.
+   any), sessions skipped as unreadable, /insights coverage %, the `limit`
+   in force with `showing N of M`, and limitations.
 
 Findings sit **after** the panorama deliberately: the summary ranks them up top
 for the skimmer, the panorama gives the reader the shape of the week, and the
@@ -206,7 +211,13 @@ read at a glance, so the formatting rules are tight:
   (`-webkit-line-clamp: 2`), `overflow-wrap: anywhere`, and `min-width: 0` on
   every flex/grid child — without that last one a single long `code` token
   blows the column out and the three-column grid stops being three columns.
+- **Each column is in impact order.** Adopted rows use the prior edition's
+  leverage, since they have none this week.
 - **A row links to its detail card** (same behaviour as an exec-summary row).
+- **The `limit` cap does not apply here.** This section is a delta, not the
+  ranked list. A still-recurring item ranked past the cap keeps its row, with
+  no card link and `ranked #N, past limit` added to its meta line; a fix that
+  failed is the strongest signal in the report, and the cap must not bury it.
 - **An empty bucket renders an empty state**, not an empty card: one muted line
   saying what emptiness means ("nothing was adopted since 24 Aug").
 
@@ -391,7 +402,7 @@ Use this rhythm, top to bottom:
 | Detail row | Two to three mid-size tiles side by side: top tools, tool error rate, friction categories over time. | `6` / `6`, or `4`/`4`/`4` |
 | Token row | Token consumption: a stacked column per day (input / cache-write / cache-read / output), and a bar of tokens by project. | `7` / `5` |
 | Distribution | Activity heatmap (day × hour) — full width, it needs the pixels. | `12` |
-| Placement | **"Where each recommendation sits"** — the leverage × effort quadrant map. It belongs here, in the dashboard, not next to the findings. | `12` |
+| Placement | **"Where each recommendation sits"** — the leverage × effort quadrant map. It belongs here, in the dashboard, not next to the findings. It plots the shown findings only, since each point links to a card. | `12` |
 
 **Sizing.** Author each SVG at its true rendered width — a `6`-span tile is
 `viewBox="0 0 520 h"`, a `12`-span tile is `viewBox="0 0 1060 h"`. Never draw at
@@ -520,9 +531,11 @@ Embed exactly one:
   "projects": ["..."],
   "insights_coverage": 0.0,
   "tokens": {"input": 0, "cache_create": 0, "cache_read": 0, "output": 0},
+  "limit": 15,
   "recommendations": [
     {
       "id": "kebab-case-stable-id",
+      "rank": 1,
       "verdict": "new-skill|automation|fix|keep-doing|nothing",
       "title": "...",
       "family": "friction|repetition|wins|environment",
@@ -537,5 +550,8 @@ Embed exactly one:
 ```
 
 Keep `id` values stable across runs for the same underlying issue (derive
-from the cluster theme) so trend diffs work. `streak` = consecutive reports
+from the cluster theme) so trend diffs work. `recommendations` holds the
+**full** ranked list, never just the rows the cap let through, or the next
+run reads every finding past the cap as adopted. `limit` is the number in
+force, or `null` for `limit=all`; `rank` is the item's 1-based impact rank. `streak` = consecutive reports
 in which this recommendation has appeared unresolved.

@@ -1,10 +1,10 @@
 ---
 name: reflect
 description: Generate a comprehensive, evidence-backed reflection report on how the user uses Claude Code — what works, what needs improvement, and the highest-leverage changes to their setup — by mining past session transcripts in ~/.claude/projects/ with sub-agents, clustering signals across sessions, and consolidating with /insights data. Produces a polished, self-contained, interactive HTML report. Trigger when the user asks to reflect on their Claude Code usage, audit their sessions, find setup improvements, or runs /reflect.
-argument-hint: "[window: 30d|90d|all] [focus: free text, e.g. a project or theme]"
+argument-hint: "[window: 30d|90d|all] [limit=N, default 15] [focus: free text, e.g. a project or theme]"
 user-invocable: true
 license: MIT
-version: 1.4.1
+version: 1.5.0
 disable-model-invocation: true
 ---
 
@@ -25,14 +25,15 @@ Sections, in run order:
 - **Run checklist** — copy it into your response and tick each gate.
 - **Step 0 — read the format sources** — hard gate before anything is
   generated; your response opens with the `[format sources read]` line.
-- **Arguments** — window (`30d` default, `Nd`, `all`) and an optional focus.
+- **Arguments** — window (`30d` default, `Nd`, `all`), `limit=N` (15 default,
+  `all` for no cap), and an optional focus.
 - **Pipeline**
   - **Phase 0 — Scope the corpus** — `OUT_DIR`/`REPORT`, in-window
     transcripts, the prior report's JSON, the status ledger.
   - **Phase 1 — /insights freshness gate** — gate on recency, never coverage.
   - **Phase 2 — Triage** — score every session from metadata; no agents.
   - **Phase 3 — Extraction** — Workflow fan-out: extract, cluster, decide,
-    consolidate, trend.
+    consolidate, trend, then rank by impact and cap at `limit`.
   - **Phase 4 — Report** — one self-contained HTML file in Neumorphic Fresh.
   - **Step 0b — verify before publishing** — print `headings match: yes/no`.
   - **Phase 5 — Deliver** — send the report, TL;DR, skipped items, how the
@@ -73,7 +74,7 @@ each box as the gate passes:
 - [ ] Phase 0  OUT_DIR resolved; transcripts listed; prior JSON + ledger loaded
 - [ ] Phase 1  /insights gate passed, or the user chose to proceed
 - [ ] Phase 2  triage list built
-- [ ] Phase 3  workflow run: extract → cluster → decide → consolidate → trend
+- [ ] Phase 3  workflow run: extract → cluster → decide → consolidate → trend → rank
 - [ ] Phase 4  report written to REPORT; merged ledger written to OUT_DIR
 - [ ] Step 0b  headings match: yes
 - [ ] Phase 5  report sent; TL;DR and skipped items stated
@@ -102,10 +103,13 @@ which is authoritative; do not pick one.
 
 ## Arguments
 
-Parse from the invocation args (both optional, in any order):
+Parse from the invocation args (all optional, in any order):
 
 - **Window** — `30d` (default), `Nd`, or `all`. Sessions whose transcript
   mtime falls inside the window are in scope.
+- **Limit** — `limit=N`, where N is a positive integer; `limit=all` lifts the
+  cap. Default 15. The report renders the N highest-impact findings. Any other
+  value after `limit=` is an error: say so and stop, never guess.
 - **Focus** — any remaining free text (e.g. a project name, `permissions`,
   `report styling`). Scope stays global, but extractors are told to dig deeper
   on matching sessions/themes and the report gives the focus a dedicated
@@ -198,6 +202,13 @@ Shape:
 5. **Trend** — if a prior report's JSON was loaded, diff: recommendations
    adopted (signal gone), still recurring (flag streak count), new this
    report.
+6. **Rank and cap** — in script code, never by an agent. Sort the full list
+   by impact: `leverage` descending, then `effort` ascending (minutes < hour
+   < day), then distinct session count descending, then `id` ascending so
+   ties land the same every run. Number every item with its `rank`. The cap
+   is display-only: Trend, the status ledger and the embedded data block all
+   see the full ranked list, and the report renders only the top `limit`.
+   Cut earlier and finding #16 reads as adopted this week and new the next.
 
 ### Phase 4 — Report
 
@@ -215,8 +226,10 @@ Requirements in brief:
   a WebGL scene is genuinely used; fonts inline as base64 woff2 subsets or
   fall back to the system stack. It must open from `file://`, offline,
   years from now.
-- Ranked assessment, most leverage first; drill-down from executive summary
-  to per-cluster evidence (verbatim quotes, session IDs, project paths).
+- Every list of findings in impact order (Phase 3 step 6), most impactful
+  first; render only the top `limit` and state `showing N of M` whenever the
+  cap cut anything. Drill-down from executive summary to per-cluster evidence
+  (verbatim quotes, session IDs, project paths).
 - Custom inline SVG graphics throughout (spec in report-guide.md): hand-built
   charts for all data, explanatory diagrams where they make a finding land
   faster, and decorative SVG layers for aesthetic polish — no chart
@@ -245,9 +258,10 @@ claim.
 ### Phase 5 — Deliver
 
 SendUserFile the report (display: render) with a caption naming the top
-finding. In the final message: TL;DR of the top 3–5 recommendations with
-their verdicts and session counts, plus anything the run had to skip
-(insights stale, unreadable transcripts) — no silent gaps.
+finding. In the final message: TL;DR of the top 3–5 recommendations in rank
+order, with their verdicts and session counts, plus anything the run had to
+skip (insights stale, unreadable transcripts, findings past the `limit` as
+`showing N of M`) — no silent gaps.
 
 Tell the user in one line how the loop closes: tick items off in the report as
 they address them, click **Save status**, and save over
