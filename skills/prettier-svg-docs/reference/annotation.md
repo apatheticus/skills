@@ -14,6 +14,18 @@ floor a callout has to clear, and §2 gives the roles.
 
 ---
 
+## Contents
+
+- [Grammar](#grammar)
+- [The leader is not an edge](#the-leader-is-not-an-edge)
+- [Type](#type)
+- [Roles](#roles)
+- [Budget](#budget)
+- [Placement](#placement)
+- [Motion](#motion)
+- [Anti-patterns](#anti-patterns)
+- [Specimen](#specimen)
+
 ## Grammar
 
 Three parts: the text, a dashed leader, a landing dot. All three are optional to the

@@ -4,6 +4,15 @@ One full rewrite per register, each showing the delivery format from Step 5 of
 `SKILL.md`: register, draft, audit, final. Note how the *same* source failure —
 fluent, confident, unspecific prose — gets a different fix in each register.
 
+## Contents
+
+- **Editorial** — a personal blog post, where voice is the product.
+- **Professional** — an internal recommendation memo to a decision-maker.
+- **Technical** — an architecture decision record.
+- **Regulated** — a user manual section for a federal customer, inside the plain-language envelope.
+- **Commercial** — the scope section of a proposal, which is operative text.
+- **What the five have in common** — the evidence of a human each "before" lacks, by register.
+
 ---
 
 ## Editorial

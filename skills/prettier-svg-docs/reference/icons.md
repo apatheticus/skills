@@ -9,6 +9,15 @@ Ported from [`cathrynlavery/diagram-design`](https://github.com/cathrynlavery/di
 
 ---
 
+## Contents
+
+- [When an icon earns its place](#when-an-icon-earns-its-place)
+- [Looking one up](#looking-one-up)
+- [Inlining it](#inlining-it)
+- [Colour](#colour)
+- [Size](#size)
+- [Licence](#licence)
+
 ## When an icon earns its place
 
 Rarely. A labelled box says what a thing is in words the reader already has; an icon says

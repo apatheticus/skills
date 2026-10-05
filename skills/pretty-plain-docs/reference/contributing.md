@@ -6,6 +6,15 @@ specifics (branch tiers, checklist items) adapt to the project's real workflow, 
 often lives in CLAUDE.md or the git history. Apply
 [house-style.md](house-style.md) throughout.
 
+## Contents
+
+- [Truth sources for the workflow](#truth-sources-for-the-workflow)
+- [Section order](#section-order)
+- [Section guidance](#section-guidance)
+- [The checklist is project-specific](#the-checklist-is-project-specific)
+- [Visuals](#visuals)
+- [Neutral exemplar (shape only)](#neutral-exemplar-shape-only)
+
 ## Truth sources for the workflow
 
 - **CLAUDE.md / AGENTS.md** frequently document the exact branching model, commit

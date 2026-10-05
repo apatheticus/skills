@@ -12,6 +12,14 @@ SKILL.md holds the two check forms, the no-score rule, the reference rule, and t
 two-strangers test. They are not restated here; this file is the mechanics of getting
 to them.
 
+## Contents
+
+- **The design tree** — ask the whole frontier in rounds, each question with a recommended answer.
+- **Finding facts is your job, never the user's** — dispatch a background agent against primary sources instead of asking.
+- **The follow-up that produces the bar** — "How would you know if this came out wrong?", pushed until a stranger could act on it.
+- **Two modes** — naming the destination, then charting breadth-first.
+- **Gates** — five questions to answer before leaving the interview.
+
 ## The design tree
 
 Map the space as a **design tree**: every decision branches into the decisions that

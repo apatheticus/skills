@@ -15,6 +15,17 @@ Two rules govern the whole layer:
   in its entry — never off. Structural and truth gates never soften; the list is at
   the bottom of this file.
 
+## Contents
+
+- [The catalog](#the-catalog)
+- [Two dials that cut across the catalog](#two-dials-that-cut-across-the-catalog)
+- [Nearest neighbours](#nearest-neighbours)
+- [Resolution ladder](#resolution-ladder)
+- [Three things a style may not fix](#three-things-a-style-may-not-fix)
+- [The nine fields](#the-nine-fields)
+- [The fidelity floor](#the-fidelity-floor)
+- [Gate softening](#gate-softening)
+
 ## The catalog
 
 Thirty-two idioms, listed alphabetically.

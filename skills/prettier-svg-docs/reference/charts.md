@@ -10,6 +10,15 @@ chart fails it, a better chart is not the answer.
 
 ---
 
+## Contents
+
+- [1. The provenance rule](#1-the-provenance-rule)
+- [2. The facts contract](#2-the-facts-contract)
+- [3. The five types](#3-the-five-types)
+- [4. No connectors — axis honesty instead](#4-no-connectors--axis-honesty-instead)
+- [5. Roles, legend, legibility](#5-roles-legend-legibility)
+- [6. Motion](#6-motion)
+
 ## 1. The provenance rule
 
 A data chart is permitted **only when the next run can recompute every plotted value

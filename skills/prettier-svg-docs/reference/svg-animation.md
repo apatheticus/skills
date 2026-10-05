@@ -5,6 +5,14 @@ contract, the CSS patterns worth having, the one place SMIL is allowed, and the
 reduced-motion rules. `viz-production.md` owns the pipeline around it;
 `design-system.md` owns how calm the motion should be.
 
+## Contents
+
+- [The technique, and why](#the-technique-and-why)
+- [The seam contract](#the-seam-contract)
+- [The CSS patterns](#the-css-patterns)
+- [SMIL — one allowed use](#smil--one-allowed-use)
+- [The reduced-motion contract](#the-reduced-motion-contract)
+
 ## The technique, and why
 
 **Declarative CSS `@keyframes` inside an inline `<style>` element.** That is the

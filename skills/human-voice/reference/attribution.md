@@ -3,6 +3,14 @@
 This skill is a derivative work. Recording what came from where, because two of
 the three sources carry license terms.
 
+## Contents
+
+- **Pattern catalog (§1–§33)** — derived from `humanizer`, MIT, © 2025 Siqi Chen.
+- **Patterns §34–§36, and four rule changes** — derived from `no-ai-slop`, MIT, © 2026 Peter Yang.
+- **Underlying source** — Wikipedia:Signs of AI writing, CC BY-SA 4.0.
+- **Register model** — from a private, unpublished `human-voice` skill; no license terms attach.
+- **Plain-language envelope** — paraphrased U.S. federal guidance; not subject to copyright.
+
 ## Pattern catalog (§1–§33)
 
 Derived from the **`humanizer`** Claude Code skill.

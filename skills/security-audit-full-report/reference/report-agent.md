@@ -4,6 +4,21 @@ You build the **one** consolidated HTML report for a finished engagement. You we
 spawned with a cold context so that reading every run's findings and filling a
 27 KB template happens here and not in the orchestrating session.
 
+## Contents
+
+- **Your inputs** — `ENGAGEMENT`, `SKILL_DIR`, `DESIGN_SYSTEM`, `STOP_REASON`.
+- **1. Inventory, then fan out** — one `general-purpose` extractor per run, all
+  in one message.
+- **2. Extraction rules — put these in every per-run agent's prompt** —
+  confirmed findings only, traced to `findings.json`.
+- **3. The one rule that matters most — include every run** — one report, run
+  filter, cross-run duplicates shown once.
+- **3a. Completeness — the report must not overstate its own coverage** — the
+  completeness banner whenever the stop reason is not `converged`.
+- **4. Fill the template** — data-driven `F[]` and placeholders; touch no
+  severity tier.
+- **5. Return** — exactly the six-field JSON object.
+
 That session gets back the JSON object at the bottom of this file. It will not read
 the findings, the template, or the report. Everything else stays with you.
 

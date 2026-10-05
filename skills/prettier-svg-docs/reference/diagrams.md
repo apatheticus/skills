@@ -15,6 +15,16 @@ build if a slug there is missing from this skill's frontmatter.
 
 ---
 
+## Contents
+
+- [0. The don't-draw test](#0-the-dont-draw-test)
+- [1. Declare the type before you draw](#1-declare-the-type-before-you-draw)
+- [2. Pattern first, when behaviour carries the meaning](#2-pattern-first-when-behaviour-carries-the-meaning)
+- [3. The 27 types](#3-the-27-types)
+- [4. Budgets](#4-budgets)
+- [5. Universal anti-patterns](#5-universal-anti-patterns)
+- [6. Before you output](#6-before-you-output)
+
 ## 0. The don't-draw test
 
 Ask before anything else: **would the reader learn more from this than from a

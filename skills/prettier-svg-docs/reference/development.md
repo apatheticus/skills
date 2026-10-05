@@ -4,6 +4,14 @@ The hands-on guide for running, building, and troubleshooting the project locall
 Audience: engineers. Adaptive to the project type; everything here must be a real
 command that works. Apply [house-style.md](house-style.md) throughout.
 
+## Contents
+
+- [The honesty rule](#the-honesty-rule)
+- [Section order](#section-order)
+- [Section guidance](#section-guidance)
+- [Visuals](#visuals)
+- [Neutral exemplar (shape only)](#neutral-exemplar-shape-only)
+
 ## The honesty rule
 
 Every command, script, env var, and tool named here must actually exist in the repo.

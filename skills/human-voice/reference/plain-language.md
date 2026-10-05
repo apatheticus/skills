@@ -14,6 +14,17 @@ proposal or RFP response is addressed to an agency; there, Commercial wins on
 who owes what and on person. Nothing here replaces a pattern in the catalog. The
 36 patterns, the always-on 21 and the gated 15, are unchanged by this file.
 
+## Contents
+
+- **1 — What the Act requires** — covered documents, the regulations exclusion, and why no draft claims "Plain Writing Act compliant".
+- **2 — Where the text lives now** — the digital.gov redirect and the archived GSA source of the full Guidelines.
+- **3 — Coverage map** — which Guideline sections this skill already covers under another number.
+- **4 — §G1 to §G7** — seven government-only rules, from hidden verbs to definitions and abbreviations.
+- **5 — Federal substitution table** — roughly sixty high-value pairs, an excerpt, for government documents only.
+- **6 — Testing with real readers** — paraphrase and usability testing, which this skill cannot perform.
+- **7 — Out of scope, named** — Section 508, the GPO Style Manual and the rest the delivery names as unchecked.
+- **8 — Attribution** — U.S. government works, no copyright; §G1–§G7 is this skill's numbering.
+
 ---
 
 ## 1 — What the Act requires

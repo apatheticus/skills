@@ -20,6 +20,18 @@ Ported from [`cathrynlavery/diagram-design`](https://github.com/cathrynlavery/di
 
 ---
 
+## Contents
+
+- [Routing](#routing)
+- [1. Fan-in queue / bottleneck](#1-fan-in-queue--bottleneck)
+- [2. Stage framework with semantic slots](#2-stage-framework-with-semantic-slots)
+- [3. Unstructured input → structured artifact](#3-unstructured-input--structured-artifact)
+- [4. Paired policy-evaluation traces](#4-paired-policy-evaluation-traces)
+- [5. Secure paved road](#5-secure-paved-road)
+- [6. Governance / control catalog](#6-governance--control-catalog)
+- [7. Compensating security layers](#7-compensating-security-layers)
+- [Composition](#composition)
+
 ## Routing
 
 | The reader must understand… | Pattern | Nearest type |

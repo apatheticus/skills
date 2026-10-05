@@ -10,6 +10,15 @@ person who notices it is wrong.
 Read the provenance rule first. If a chart fails it, the answer is not a better
 chart.
 
+## Contents
+
+- [1. The provenance rule](#1-the-provenance-rule)
+- [2. The facts contract](#2-the-facts-contract)
+- [3. Chart types, and when each is right](#3-chart-types-and-when-each-is-right)
+- [4. Axes, ticks, gridlines, legend, colour](#4-axes-ticks-gridlines-legend-colour)
+- [5. Legibility is the binding constraint](#5-legibility-is-the-binding-constraint)
+- [6. The Mermaid fallback](#6-the-mermaid-fallback)
+
 ## 1. The provenance rule
 
 A data chart is permitted **only when the next run can recompute every plotted value

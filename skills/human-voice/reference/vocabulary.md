@@ -8,6 +8,15 @@ art.
 Three tiers. Apply Tier 1 always; add Tier 2 for the selected register; treat
 Tier 3 as phrase-level and near-global.
 
+## Contents
+
+- **Tier 1 — banned in every register** — no common technical meaning; replace on sight.
+- **Tier 2 — homonyms: ban the AI sense, keep the real one** — sense, not register, decides.
+- **Tier 2b — genuinely register-varying** — the short list where the same sense is acceptable in one register and not another.
+- **Tier 3 — phrases** — near-global, banned unless a mandated template requires the wording.
+- **Filler substitutions (all registers)** — mechanical, safe swaps that reinforce plain language.
+- **Verification** — scan the draft with `voice_check.py` before delivering.
+
 ---
 
 ## Tier 1 — banned in every register

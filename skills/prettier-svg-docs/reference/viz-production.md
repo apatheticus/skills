@@ -10,6 +10,17 @@ by the repo's frozen design system (`.prettydocs/prettydocs.md`, see
 Read `svg-animation.md` before authoring your first animated visual in a run — it
 holds the motion vocabulary and the seam contract this file assumes.
 
+## Contents
+
+- [Preconditions](#preconditions)
+- [Where things live](#where-things-live)
+- [1. Author `docs/assets/<viz-name>.svg`](#1-author-docsassetsviz-namesvg)
+- [2. Gate loop (mandatory, per visual)](#2-gate-loop-mandatory-per-visual)
+- [3. Build the filmstrip](#3-build-the-filmstrip)
+- [4. Read the pixels](#4-read-the-pixels)
+- [5. Commit the state](#5-commit-the-state)
+- [Statics](#statics)
+
 ## Preconditions
 
 - **`python3` on PATH.** Both bundled scripts are stdlib-only; no `pip install`,
