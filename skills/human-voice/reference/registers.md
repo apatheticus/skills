@@ -7,6 +7,15 @@ which vocabulary tier applies, and what "sounds human" even means for this
 document. A spec that reads like an essay has failed just as badly as an essay
 that reads like a spec.
 
+## Contents
+
+- **Editorial** — blogs, essays and marketing; personality on, opinionated stance.
+- **Professional** — memos, policies and reports; personality off, directive stance.
+- **Technical** — specs, runbooks and ADRs; personality off, candid stance.
+- **Regulated** — federal, legal, clinical and compliance material; personality off, precise stance.
+  - **Plain-language floor (government audiences)** — the condensed form of `reference/plain-language.md`.
+- **Commercial** — proposals, SOWs and other client-facing commercial documents; personality off, definite stance.
+
 ---
 
 ## Editorial

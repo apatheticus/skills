@@ -14,6 +14,20 @@ the root carries `data-diagram`.
 
 ---
 
+## Contents
+
+- [1. Semantic attributes](#1-semantic-attributes)
+- [2. Roles, and how they bind to this repo](#2-roles-and-how-they-bind-to-this-repo)
+- [3. Type ramp](#3-type-ramp)
+- [4. Connectors — the six rules](#4-connectors--the-six-rules)
+- [5. Paint order](#5-paint-order)
+- [6. Node box](#6-node-box)
+- [7. Connector labels](#7-connector-labels)
+- [8. Zones](#8-zones)
+- [9. Legend](#9-legend)
+- [10. The 4-unit grid](#10-the-4-unit-grid)
+- [11. Motion](#11-motion)
+
 ## 1. Semantic attributes
 
 The grammar is only machine-checkable because the drawing says what its parts *are*.

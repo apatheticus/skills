@@ -29,6 +29,18 @@ creating obligations nobody intended, or hiding obligations everyone assumed.
    limits. These rules still govern the prose inside it. Note the conflict and
    the accommodation in the delivery.
 
+## Contents
+
+- **1 — Operative and non-operative text** — what can become binding, and the only two relaxations allowed outside it.
+- **2 — Coverage map** — which Commercial rules already live in the catalog under another number.
+- **3 — §C1 to §C16** — the sixteen Commercial-only rules, citable by number in detect mode.
+  - **Voice** — §C1–§C4: named parties, modal discipline, plain readings, exact references.
+  - **No hype** — §C5–§C9: benefit claims, metaphors, clefts, stacked emphasis, the defensive register.
+  - **No self-sabotage** — §C10–§C16: open-ended verbs, concessions, committed numbers, the stop rule.
+- **4 — Commercial word lists** — the families `voice_check.py --register C` reports, every hit an ERROR.
+- **5 — Self-check additions** — eight extra checks for Step 4, each reported pass or fail.
+- **6 — Out of scope, named** — the structure and numbers checks every Commercial delivery names as not performed.
+
 ---
 
 ## 1 — Operative and non-operative text

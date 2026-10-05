@@ -30,6 +30,72 @@ Three principles govern everything:
 - **Style is a decision, not a mood.** The look is one named idiom, resolved once,
   written into the design system, and applied to every visual in the repo.
 
+## Contents
+
+Sections, in run order:
+
+- **Run checklist** — copy it into your response and tick each gate.
+- **Preflight (probe and warn — never a STOP)** — `python3` and a browser tool; warn, never stop.
+- **Documents in scope** — Tier 1 every run, Tier 2 by name; DEPLOYMENT is signal-gated.
+- **Invocation modes** — flags, `check` mode, and the thirty-two **Styles**.
+- **Audience matrix** — each doc's audience and its visual treatment.
+- **Visual budget (defaults; `--budget` overrides per run)** — animated vs static per doc; 60 KB warn, 150 KB fail.
+- **Target layout (the skill maintains this)** — `docs/assets/` plus `.prettydocs/` per project.
+- **Workflow**
+  - **1. Evidence pass** — facts, holder candidate, visual identity, project roots, foreign visuals.
+  - **2. Design system and style** — resolve the style, then load or derive `prettydocs.md`.
+  - **3. Plan** — classify every doc and visual; name each `diagram_type` and every budget cut.
+  - **4. Questions (batched, once, up front)** — holder, license, support channels; one batch.
+  - **5. Apply — docs** — section by section; embeds, markers, `<details>` Mermaid fallback.
+  - **6. Apply — visuals** — author → `svg_check.py` gate loop → `svg_filmstrip.py` → read the pixels → `viz.json`.
+  - **7. Verify** — the ten quality gates; `check` mode runs them read-only.
+  - **8. Report** — in-chat summary; the resolved style and every softened gate.
+- **What is enforced, and by what** — which script owns each rule, and what its failure looks like.
+- **What no script can check** — the judgments, each phrased as a question.
+
+### References
+
+| File | Read when |
+| --- | --- |
+| `reference/house-style.md` | First, every run |
+| `reference/styles.md` | Phase 2, to resolve the style |
+| `reference/styles/<slug>.md` | Phase 2, exactly one — the resolved style |
+| `reference/design-system.md` | Phase 2 |
+| `reference/diagrams.md` | Phase 3, before the plan names a `diagram_type` |
+| `reference/types/<slug>.md` | Phase 6, exactly one per diagram — the chosen type |
+| `reference/diagram-grammar.md` | Phase 6, before the first diagram of a run |
+| `reference/diagram-patterns.md` | Phase 3, when behaviour rather than structure carries the meaning |
+| `reference/charts.md` | Before plotting any number |
+| `reference/annotation.md` | Only when a diagram earns an editorial callout |
+| `reference/icons.md` | Only when a diagram earns an icon |
+| `reference/<doc>.md` / `reference/tier2/<doc>.md` | Before touching that doc |
+| `reference/embedding.md` | Before any embed, marker edit, adoption, or `check` |
+| `reference/viz-production.md` | Phase 6, before authoring any SVG |
+| `reference/svg-animation.md` | Phase 6, before the first animated visual of a run |
+| `scripts/svg_check.py` | The phase-6 gate loop (never skip it) |
+| `scripts/svg_filmstrip.py` | Phase 6, to build the scrub harness |
+| `scripts/styles.json` | Read by the checker; keep in step with `reference/styles/` |
+| `scripts/diagrams.json` | Read by the checker and by `validate.mjs`; keep in step with `reference/types/` |
+| `scripts/test_diagram_check.py` | After any change to the `diagram` check class |
+| `scripts/test_alt_parity.py` | After any change to `describe_parity` in `audit_visuals.py` |
+| `scripts/audit_visuals.py` | Phase 7 and `check` mode |
+
+## Run checklist
+
+Copy this into your response and tick each box as the gate passes:
+
+```
+- [ ] Preflight                   python3 probed; browser tool noted
+- [ ] 1. Evidence pass            facts, identity, project roots, foreign visuals gathered
+- [ ] 2. Design system and style  style resolved; prettydocs.md loaded or derived
+- [ ] 3. Plan                     docs and visuals classified; diagram_type and budget_cuts named
+- [ ] 4. Questions                one batch asked; answers persisted to .github/docsmeta.json
+- [ ] 5. Apply — docs             section by section; embeds, markers, Mermaid fallback in place
+- [ ] 6. Apply — visuals          svg_check.py 0 errors; filmstrip + pixels read; viz.json written
+- [ ] 7. Verify                   ten quality gates run; failures fixed or surfaced
+- [ ] 8. Report                   per-doc + per-visual tables; style and softened gates stated
+```
+
 ## Preflight (probe and warn — never a STOP)
 
 ```bash
@@ -391,30 +457,3 @@ tells you that you have failed, and a question tells you what to produce.
   Mermaid block.
 - **Whose artefact is this?** A visual another producer made is adopted or left alone —
   the embed is rewritten and the orphan reported, and nothing is deleted.
-
-## References
-
-| File | Read when |
-| --- | --- |
-| `reference/house-style.md` | First, every run |
-| `reference/styles.md` | Phase 2, to resolve the style |
-| `reference/styles/<slug>.md` | Phase 2, exactly one — the resolved style |
-| `reference/design-system.md` | Phase 2 |
-| `reference/diagrams.md` | Phase 3, before the plan names a `diagram_type` |
-| `reference/types/<slug>.md` | Phase 6, exactly one per diagram — the chosen type |
-| `reference/diagram-grammar.md` | Phase 6, before the first diagram of a run |
-| `reference/diagram-patterns.md` | Phase 3, when behaviour rather than structure carries the meaning |
-| `reference/charts.md` | Before plotting any number |
-| `reference/annotation.md` | Only when a diagram earns an editorial callout |
-| `reference/icons.md` | Only when a diagram earns an icon |
-| `reference/<doc>.md` / `reference/tier2/<doc>.md` | Before touching that doc |
-| `reference/embedding.md` | Before any embed, marker edit, adoption, or `check` |
-| `reference/viz-production.md` | Phase 6, before authoring any SVG |
-| `reference/svg-animation.md` | Phase 6, before the first animated visual of a run |
-| `scripts/svg_check.py` | The phase-6 gate loop (never skip it) |
-| `scripts/svg_filmstrip.py` | Phase 6, to build the scrub harness |
-| `scripts/styles.json` | Read by the checker; keep in step with `reference/styles/` |
-| `scripts/diagrams.json` | Read by the checker and by `validate.mjs`; keep in step with `reference/types/` |
-| `scripts/test_diagram_check.py` | After any change to the `diagram` check class |
-| `scripts/test_alt_parity.py` | After any change to `describe_parity` in `audit_visuals.py` |
-| `scripts/audit_visuals.py` | Phase 7 and `check` mode |

@@ -6,6 +6,25 @@ budgeted WebP. Every visual is styled by the repo's frozen design system
 (`.prettydocs/prettydocs.md`, see `design-system.md`) and embedded per
 `embedding.md`. This file is self-contained; follow it in order per visual.
 
+## Contents
+
+- [Preconditions](#preconditions)
+- [Where things live](#where-things-live)
+- [1. Scaffold](#1-scaffold)
+- [2. Author `index.html`](#2-author-indexhtml)
+  - [Seamless-loop rules (mandatory — the loop is steady-state)](#seamless-loop-rules-mandatory--the-loop-is-steady-state)
+- [3. Gate loop (mandatory, per visual)](#3-gate-loop-mandatory-per-visual)
+- [4. Render](#4-render)
+- [5. Convert to WebP](#5-convert-to-webp)
+- [6. Verify real pixels](#6-verify-real-pixels)
+- [7. Byproduct hygiene](#7-byproduct-hygiene)
+- [Static-SVG production (non-flagship visuals and banners)](#static-svg-production-non-flagship-visuals-and-banners)
+  - [GitHub-safe hard rules](#github-safe-hard-rules)
+  - [Canvas and layout](#canvas-and-layout)
+  - [Legible at rendered scale](#legible-at-rendered-scale)
+  - [Both-theme legibility](#both-theme-legibility)
+  - [Build order and check](#build-order-and-check)
+
 ## Preconditions
 
 - **HyperFrames skills current.** `SKILL.md`'s preflight already gated this; don't

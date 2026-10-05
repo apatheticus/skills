@@ -9,6 +9,14 @@ SKILL.md holds the two check forms, the no-score rule, the reference rule, the
 two-strangers test, and the not-a-spec rule. This file holds the format, the columns,
 the verdict grammar, and the gates.
 
+## Contents
+
+- **The format** — the `ANSWER-KEY.md` layout to write.
+- **Filling in the columns** — what each of check, judged by, reference and from decision must hold.
+- **Picking the ceiling** — one openable reference per engagement, allowed and usually preferred to be out of reach.
+- **Unknown is the most important section** — a pre-registered, enumerated list of what nobody has decided.
+- **Gates** — run the linter first, then the four questions no script can answer.
+
 ## The format
 
 ````markdown

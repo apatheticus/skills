@@ -4,6 +4,15 @@ States the project's security posture and — most importantly — **how to repo
 vulnerability privately**. The reporting mechanics are host-specific; the posture and
 boundary are project-specific. Apply [house-style.md](house-style.md) throughout.
 
+## Contents
+
+- [The reporting channel is the point](#the-reporting-channel-is-the-point)
+- [Visual budget: one banner, nothing else](#visual-budget-one-banner-nothing-else)
+- [Section order](#section-order)
+- [Section guidance](#section-guidance)
+- [Update behavior](#update-behavior)
+- [Neutral exemplar (shape only)](#neutral-exemplar-shape-only)
+
 ## The reporting channel is the point
 
 The single most important thing this file does is route a reporter to a *private*

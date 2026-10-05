@@ -4,6 +4,14 @@ Tells someone where to go for each kind of help, and sets honest expectations ab
 what support exists. Short, route-oriented. The channels are host-specific; the FAQ
 is project-specific. Apply [house-style.md](house-style.md) throughout.
 
+## Contents
+
+- [Visual budget: a static header at most](#visual-budget-a-static-header-at-most)
+- [Section order](#section-order)
+- [Section guidance](#section-guidance)
+- [Update behavior](#update-behavior)
+- [Neutral exemplar (shape only)](#neutral-exemplar-shape-only)
+
 ## Visual budget: a static header at most
 
 SUPPORT is a routing document, not a showcase. Its visual budget is **a single

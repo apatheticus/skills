@@ -15,6 +15,14 @@ AI involved, and a single hit proves nothing — look for **clusters**.
 Derived from the MIT-licensed `humanizer` skill, Wikipedia's "Signs of AI
 writing", and the MIT-licensed `no-ai-slop` skill. See `attribution.md`.
 
+## Contents
+
+- **The gate table** — on, limited, elevated or off per register for each gated pattern, with the reason.
+- **Language and grammar** — §11 elegant variation, which inverts in Technical, Regulated and Commercial.
+- **Style** — §14, §16–§18: em dash budget, inline-header lists, title-case headings, emojis.
+- **Filler, hedging, and rhetorical moves** — §24, §26, §28, §30–§36: hedging, hyphenated pairs, signposting, diff-anchored writing, punchlines, aphorisms, openers, colon reveals, setups.
+- **PERSONALITY — voice injection** — Editorial only; elsewhere neutral and plain is the human voice.
+
 ---
 
 ## The gate table

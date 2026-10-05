@@ -5,6 +5,15 @@ Claude Code session, plus up to three bullets flagging what you had to derive.
 
 The answer key is the floor. This file is what makes the floor run.
 
+## Contents
+
+- **What the loop is** — contract, build, blind audit, verdict, and the five things that hold it up.
+- **The template** — copy `assets/GAUNTLET.template.md` and fill its four slots, under 300 words.
+- **Harness verbs** — subagents, `/loop` and `ultracode`, named only when they earn their words.
+- **Compose-only** — write `GAUNTLET.md` and stop; run it only if the user asks.
+- **What this skill does not build** — no harness, state machine, scoring framework, capture suite or runner.
+- **Self-check before writing the file** — ten questions; any no is a rewrite.
+
 ## What the loop is
 
 ```

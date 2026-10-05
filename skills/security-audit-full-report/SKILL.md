@@ -4,7 +4,7 @@ description: Run an iterative, multi-cycle security vulnerability assessment aga
 argument-hint: "[target-dir] [max-cycles] [design-system-dir]"
 user-invocable: true
 license: MIT
-version: 3.2.3
+version: 3.2.4
 disable-model-invocation: true
 ---
 
@@ -15,6 +15,85 @@ report**. This skill orchestrates two others and re-implements neither:
 `security-audit` does the hunting, one run per cycle; the report workflow is a
 folded-in copy of `generate-cf-secaudit-report`, with its template bundled in
 `assets/`.
+
+## Contents
+
+Sections, in run order:
+
+- **The context contract — this is the design, read it first** — your session
+  holds the ledger, nothing else; every heavy step runs in a delegated agent with
+  a cold context and a fixed return contract.
+- **Run checklist** — copy it into your response and tick each gate.
+- **The two-mode contract** — PREFLIGHT or CYCLE, decided by whether the
+  engagement dir exists; determine the mode before doing anything else.
+- **§1. Preflight — verify `security-audit` is installed** — probe for it;
+  install it as a project-level skill, or stop.
+- **§2. Preflight — ensure `.audit/` is gitignored** — hygiene, not a gate.
+- **§3. Preflight — create the engagement** — `audit_state.py init`; tell the
+  user what they are buying, in hours.
+- **§4. Cycle mode — spawn, commit, decide** — read `ledger.md`, then repeat:
+  - **4a. Spawn the cycle agent** — one `general-purpose` agent named
+    `cycle-<N>`; the brief is passed by path.
+  - **4a′. Knowing the cycle is finished** — watch the disk, not the mailbox.
+  - **4b. Commit the result** — `audit_state.py commit`; structural,
+    deterministic, idempotent dedup.
+  - **4c. Act on the decision** — `continue` → 4a, `stop` → §5; a cycle that
+    died is not a cycle that found nothing.
+- **§5. Stop — build the report, then verify it** — name the stop reason
+  truthfully; report builder, then verifier.
+  - **Hand off** — path, tally, cycles and stop reason; lead with any halt or
+    unvalidated run.
+- **Resumption & edge cases** — trust `ledger.md` over context; never ask a
+  question in cycle mode.
+
+### Reference files — bundled, passed by path, never read by you
+
+Per the context contract, each brief goes to a cold agent by path ("Read
+`<skill-dir>/reference/…` and follow it exactly"). Reading one into your own
+context defeats the purpose.
+
+- `reference/cycle-agent.md` — the brief for each `cycle-<N>` agent (4a): one
+  audit cycle; returns 6 fields.
+- `reference/report-agent.md` — the brief for the `report-1` builder (§5);
+  returns 6 fields.
+- `reference/verify-agent.md` — the brief for the verifier (§5); returns 8
+  fields.
+- `scripts/audit_state.py` — run, never read: `init` (§3), `commit` (4b; returns
+  9 fields), `selfcheck` (edge cases).
+- `assets/template.html` — the report template; the report agent fills it. Never
+  read it yourself.
+
+### External inputs — not bundled
+
+- The `security-audit` skill — the required dependency that does the hunting.
+  Probed in §1 under project `.claude/skills/security-audit/` or
+  `~/.claude/skills/security-audit/`; installed from
+  `https://github.com/cloudflare/security-audit-skill` only if the user accepts.
+- `<target>/.audit/<YYYYMMDD>/` — the engagement dir. `ledger.md` is the only
+  file you read; `findings-index.json` and every `run-N/findings.json` are read by
+  the script and the agents, never by you; `run-N/` is watched with `ls -lt` only.
+- `design-system-dir` — optional argument, passed through to the report builder;
+  absent, it uses the bundled SaaS Pro tokens.
+
+## Run checklist
+
+Copy this into your response and tick each box as the gate passes. In CYCLE mode
+§1–§3 are already done; start at §4 and repeat its four lines once per cycle:
+
+```
+- [ ] Mode       PREFLIGHT or CYCLE determined from the engagement dir / ledger.md
+- [ ] §1         security-audit installed (else stopped: declined, or /reload-skills needed)
+- [ ] §2         .audit/ gitignore checked — hygiene, not a gate
+- [ ] §3         engagement initialised; cycle cap and per-cycle hours stated
+- [ ] §4a        cycle-<N> spawned as general-purpose; brief passed by path, not pasted
+- [ ] §4a′       completion established from run-N/ on disk (+ one-line probe), not the mailbox
+- [ ] §4b        audit_state.py commit run (--unvalidated when validated: false)
+- [ ] §4c        decision acted on: continue → §4a, stop → §5
+- [ ] §5         STOP_REASON read off the ledger
+- [ ] §5         report-1 built (watched on disk); verifier returned
+- [ ] §5         ledger set to status: done (halted → final log line)
+- [ ] Hand off   path, tally, cycles, stop reason, verifier result; halt/unvalidated led with
+```
 
 ## The context contract — this is the design, read it first
 

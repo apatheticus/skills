@@ -7,6 +7,15 @@ than none, because someone will follow it at 2am — so every environment, comma
 variable, endpoint, workflow, and rollback step must be verifiable in the repo. Apply
 [house-style.md](house-style.md) throughout.
 
+## Contents
+
+- [The deployability rule](#the-deployability-rule)
+- [The DEVELOPMENT boundary](#the-development-boundary)
+- [Section order](#section-order)
+- [Section guidance](#section-guidance)
+- [Visuals](#visuals)
+- [Neutral exemplar (shape only)](#neutral-exemplar-shape-only)
+
 ## The deployability rule
 
 **DEPLOYMENT is written only for a project that actually deploys somewhere.** It is

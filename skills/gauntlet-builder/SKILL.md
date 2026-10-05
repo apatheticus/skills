@@ -3,7 +3,7 @@ name: gauntlet-builder
 description: Build a Gauntlet Loop for a piece of work — the bar it gets judged against, the blind-critic contract, and the runnable aim prompt. Interviews you one question at a time, turns every answer into a binary check, and emits an answer key a fresh critic can open. Use it for a gauntlet loop, aim prompt, blind critic, builder-critic loop, adversarial acceptance, loop engineering, or a one-prompt build — or any time you want an agent to keep improving something against a real bar rather than its own private opinion of good.
 when_to_use: Also use it before building anything where the shape is not settled yet — what am I actually building, how would I know if this came out wrong, what does done mean here, write acceptance criteria, set the bar, scope this properly. It runs the interview that produces those answers, records what nobody has decided as explicitly ungradeable, and stops before implementation, because building is a separate session. Also use it to lint an existing answer key, to resume a half-finished engagement under .gauntlet/, or to turn a plan file or spec you already have into a bar and a loop prompt instead of starting the interview from scratch.
 license: MIT
-version: 1.0.0
+version: 1.0.1
 disable-model-invocation: true
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, AskUserQuestion, Task
 ---
@@ -33,6 +33,60 @@ a gauntlet loop has when nobody supplies the bar.
 > (`github.com/mattpocock/skills`). The answer-key output is not part of his design and
 > he has not endorsed it. The loop half follows the Gauntlet Loop pattern named by Matt
 > Shumer in July 2026 (`somethingbig.ai/gauntlet-loop`).
+
+## Contents
+
+Sections, in run order:
+
+- **Run checklist** — copy it into your response and tick each gate.
+- **Decide, do not build** — decide and emit; no harness, no runner. The human
+  is the stop condition.
+- **Two tiers** — the floor gates sign-off; the ceiling supplies direction and
+  never blocks.
+- **Every answer produces a check** — "How would you know if this came out
+  wrong?", judged by `run it` or `A/B pick`, never a score.
+- **Fog, and out of scope** — what cannot be phrased sharply yet becomes
+  Unknown; out of scope stops a critic winning by adding things.
+- **Running it**
+  - **0. Route first** — read `.gauntlet/` and what the user handed you; never
+    re-ask a question already answered on disk.
+  - **1. Chart** — name the destination, grill breadth-first, write `MAP.md`
+    only if something landed in the fog.
+  - **2. Work the questions** — top one first; not resolved until its check
+    exists.
+  - **3. Emit the floor** — write `ANSWER-KEY.md`, lint it, report what the
+    linter says.
+  - **4. Emit the loop** — copy the critic contract, write `GAUNTLET.md`, run its
+    ten-item self-check, then stop.
+- **Talking to the user** — ask about outcomes; the decisions are theirs.
+- **Do not fabricate** — what only running can settle gets marked, not invented.
+
+### Files
+
+| Path | Read it when |
+|---|---|
+| `reference/grill.md` | Phases 1 and 2 — the interview |
+| `reference/prototype.md` | A taste or feel question that talking cannot settle |
+| `reference/answer-key.md` | Phase 3 — the format, columns, verdict grammar, gates |
+| `reference/gauntlet.md` | Phase 4 — the emitted prompt and its self-check |
+| `reference/critic-contract.md` | Phase 4, and any time the critic's brief is in question |
+| `reference/bars.md` | Picking the ceiling, when nothing obvious presents itself |
+| `scripts/check_answer_key.py` | End of phase 3, every time |
+| `scripts/test_check_answer_key.py` | Changing the linter — CI runs it, so a new rule without a fixture reds the build |
+| `assets/*.template.md` | Copied and filled — not read for guidance |
+
+## Run checklist
+
+Track this silently and tick each box as the gate passes. Never print it to the
+user — **Talking to the user** rules out narrating files and mechanisms:
+
+```
+- [ ] 0. Route first          route picked from what is on disk; nothing already answered re-asked
+- [ ] 1. Chart                destination and out of scope named; fog not empty; MAP.md written
+- [ ] 2. Work the questions   Open questions empty; every answer carries a check, judged by, reference
+- [ ] 3. Emit the floor       ANSWER-KEY.md written; linter run and its output reported; DERIVED items reported
+- [ ] 4. Emit the loop        critic contract copied; GAUNTLET.md written; ten-item self-check passed; stopped
+```
 
 ## Decide, do not build
 
@@ -203,17 +257,3 @@ If something can only be settled by actually running it, mark it and move on. An
 answer in the map becomes an invented standard in the answer key, which becomes a critic
 grading real work against a guess — the exact failure this skill exists to prevent, now
 automated and running unattended.
-
-## Files
-
-| Path | Read it when |
-|---|---|
-| `reference/grill.md` | Phases 1 and 2 — the interview |
-| `reference/prototype.md` | A taste or feel question that talking cannot settle |
-| `reference/answer-key.md` | Phase 3 — the format, columns, verdict grammar, gates |
-| `reference/gauntlet.md` | Phase 4 — the emitted prompt and its self-check |
-| `reference/critic-contract.md` | Phase 4, and any time the critic's brief is in question |
-| `reference/bars.md` | Picking the ceiling, when nothing obvious presents itself |
-| `scripts/check_answer_key.py` | End of phase 3, every time |
-| `scripts/test_check_answer_key.py` | Changing the linter — CI runs it, so a new rule without a fixture reds the build |
-| `assets/*.template.md` | Copied and filled — not read for guidance |

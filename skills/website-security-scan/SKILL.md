@@ -23,6 +23,60 @@ because a real third-party assessment got them wrong on this exact target:
    corporate email authentication. They have different hosting, different data and
    radically different consequences. Report them separately.
 
+## Contents
+
+Sections, in run order:
+
+- **The boundary — not negotiable** — read-only or connect-only; the target's
+  own vhost versus the landlord's IP.
+- **Run checklist** — copy it into your response and tick each gate.
+- **Workflow**
+  - **1. Resolve the target profile** — read `assets/targets/<slug>.md` in full,
+    or ask the six questions once and write it.
+  - **2. Run the scan** — `scan.py`; then read `checks_run`,
+    `delta.not_retested` and `facts`.
+  - **3. Exploratory pass** — not optional; add `exploratory.` findings.
+  - **4. Write the narrative** — `narrative`, `remediation`,
+    `findings[].body_html`; leave `evidence` alone.
+  - **5. Render, verify, deliver** — `render_report.py`, then verify the
+    rendered artifact, not the code.
+- **Honesty rules** — an unrun check is not a pass; cite or do not claim; no
+  dollar-loss estimates; no control baseline that does not apply.
+- **Scheduling** — manual runs first; then monthly via cron, confirmed before
+  installing.
+
+### Files
+
+| Path | Role |
+|---|---|
+| `scripts/scan.py` | Runs the catalog. Emits findings, per-check execution state, evidence, and the delta against the previous run. |
+| `scripts/render_report.py` | Scan JSON + template → HTML. Derives KPI tiles, severity donut, change lists, port rows and methodology so the model only supplies judgment. |
+| `scripts/test_delta.py` | Self-check for the change-tracking logic. Run it after touching `compute_delta`, `ran()`, or any `COVERS_*` group — it is what proves a skipped check cannot be reported as resolved. |
+| `assets/report-template.html` | The report. Full inlined CSS from the SaaS Pro design system including six deliberate corrections to real WCAG AA failures in the DS itself, each commented. |
+| `assets/targets/<slug>.md` | Per-target config, scope statement, calibration rules, standing conditions, history. |
+| `references/check-catalog.md` | Every check ID, default severity, meaning; deliberate coverage gaps; how to add or promote a check. Read when you need to know what a finding ID means. |
+
+### External inputs — not bundled
+
+- Docker and testssl.sh — the legacy-TLS check (step 2); `--no-docker` skips it.
+- The profile's `output_dir` — where scan JSON lands and the prior run's baseline
+  is read from (step 2).
+- The `visual-output-verification` skill — how to verify the rendered report
+  (step 5).
+- The `unattended-runs` skill — read before scheduling unattended runs.
+
+## Run checklist
+
+Copy this into your response and tick each box as the gate passes:
+
+```
+- [ ] 1. Profile     profile read in full (or the six questions asked once and the profile written)
+- [ ] 2. Scan        test_delta.py run if the scanner changed; scan.py run; checks_run, delta.not_retested, facts read
+- [ ] 3. Explore     exploratory pass done; exploratory.* findings added to the JSON
+- [ ] 4. Narrative   narrative, remediation and body_html written; evidence untouched
+- [ ] 5. Render      render_report.py exits 0; rendered page verified; unchecked items stated
+```
+
 ## The boundary — not negotiable
 
 Everything this skill does is read-only or connect-only, and the distinction that
@@ -255,14 +309,3 @@ monthly. Add to `crontab -e`:
 Confirm before installing a cron — it is persistent configuration. For unattended
 runs also read the `unattended-runs` skill: nothing can prompt for approval, so
 every command must be non-interactive and writes must go where they are allowed.
-
-## Files
-
-| Path | Role |
-|---|---|
-| `scripts/scan.py` | Runs the catalog. Emits findings, per-check execution state, evidence, and the delta against the previous run. |
-| `scripts/render_report.py` | Scan JSON + template → HTML. Derives KPI tiles, severity donut, change lists, port rows and methodology so the model only supplies judgment. |
-| `scripts/test_delta.py` | Self-check for the change-tracking logic. Run it after touching `compute_delta`, `ran()`, or any `COVERS_*` group — it is what proves a skipped check cannot be reported as resolved. |
-| `assets/report-template.html` | The report. Full inlined CSS from the SaaS Pro design system including six deliberate corrections to real WCAG AA failures in the DS itself, each commented. |
-| `assets/targets/<slug>.md` | Per-target config, scope statement, calibration rules, standing conditions, history. |
-| `references/check-catalog.md` | Every check ID, default severity, meaning; deliberate coverage gaps; how to add or promote a check. Read when you need to know what a finding ID means. |

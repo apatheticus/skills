@@ -2,7 +2,7 @@
 name: pretty-plain-docs
 description: Create and maintain a repository's standard documentation — README, ARCHITECTURE, DEVELOPMENT, DEPLOYMENT, CONTRIBUTING, CODE_OF_CONDUCT, SECURITY, SUPPORT, plus on-demand LICENSE, NOTICE, issue/PR templates, and CODEOWNERS — and beautify it with a per-repo design system and hand-authored static SVG visuals, with zero external dependencies — nothing to install and nothing that moves. Use this whenever the user wants beautiful, illustrated, or visually polished project docs as still images; asks for no animation, or for docs that survive printing, PDF export, or a renderer that rasterises SVG; wants a static hero or static diagrams; wants doc visuals refreshed, restyled, or audited for staleness; wants a named visual style such as Swiss minimal, neo-brutalist, blueprint, or bento grid; or invokes /pretty-plain-docs. For animated SVG use the sibling prettier-svg-docs; for animated WebP or HyperFrames use pretty-hyper-docs; for plain text-only docs with no visuals, update-docs fits better.
 license: MIT
-version: 0.4.0
+version: 0.4.1
 disable-model-invocation: true
 ---
 
@@ -39,6 +39,60 @@ Four principles govern everything:
 - **A still is a finished composition, not a paused frame.** With no motion to carry
   meaning or hold attention, everything the visual says must be on the canvas: the
   ordering stated, the material drawn, the labels legible.
+
+## Contents
+
+Sections, in run order:
+
+- **Run checklist** — copy it into your response and tick each gate.
+- **Preflight (probe and warn — never a STOP)** — `python3` and a browser tool; warn, never stop.
+- **Documents in scope** — Tier 1 every run, Tier 2 by name; DEPLOYMENT is signal-gated.
+- **Invocation modes** — flags, `check` mode, and the thirty-one **Styles**.
+- **Audience matrix** — each doc's audience and visual treatment; the Mermaid rule.
+- **Visual budget (defaults; `--budget` overrides per run)** — SVGs per doc; 60 KB warn, 150 KB fail.
+- **Target layout (the skill maintains this)** — `docs/assets/` plus `.prettydocs/` per project.
+- **Workflow**
+  - **1. Evidence pass** — facts, holder candidate, visual identity, project roots, foreign visuals.
+  - **2. Design system and style** — resolve the style, then load or derive `prettydocs.md`.
+  - **3. Plan** — classify every doc and visual; state a style change with a count.
+  - **4. Questions (batched, once, up front)** — holder, license, support channels; one batch.
+  - **5. Apply — docs** — section by section; embeds, markers, `<details>` Mermaid.
+  - **6. Apply — visuals** — author → `svg_check.py` gate loop → read the pixels → `viz.json`.
+  - **7. Verify** — the ten quality gates; `check` mode runs them read-only.
+  - **8. Report** — in-chat summary; the resolved style and every softened gate.
+- **Non-negotiables** — nothing animates, Mermaid for every structural visual, zero checker errors.
+
+### References
+
+| File | Read when |
+| --- | --- |
+| `reference/house-style.md` | First, every run |
+| `reference/styles.md` | Phase 2, to resolve the style |
+| `reference/styles/<slug>.md` | Phase 2, exactly one — the resolved style |
+| `reference/design-system.md` | Phase 2 |
+| `reference/<doc>.md` / `reference/tier2/<doc>.md` | Before touching that doc |
+| `reference/embedding.md` | Before any embed, marker edit, adoption, or `check` |
+| `reference/viz-production.md` | Phase 6, before authoring any SVG |
+| `reference/charts.md` | Phase 6, before plotting any value |
+| `scripts/svg_check.py` | The phase-6 gate loop (never skip it) |
+| `scripts/styles.json` | Read by the checker; keep in step with `reference/styles/` |
+| `scripts/audit_visuals.py` | Phase 7 and `check` mode |
+
+## Run checklist
+
+Copy this into your response and tick each box as the gate passes:
+
+```
+- [ ] Preflight                   python3 probed; browser tool noted
+- [ ] 1. Evidence pass            facts, identity, project roots, foreign visuals gathered
+- [ ] 2. Design system and style  style resolved; prettydocs.md loaded or derived
+- [ ] 3. Plan                     every doc and visual classified; any style change counted
+- [ ] 4. Questions                one batch asked; answers persisted to .github/docsmeta.json
+- [ ] 5. Apply — docs             section by section; embeds, markers, Mermaid in place
+- [ ] 6. Apply — visuals          svg_check.py 0 errors; pixels read at 820px; viz.json written
+- [ ] 7. Verify                   ten quality gates run; failures fixed or surfaced
+- [ ] 8. Report                   per-doc + per-visual tables; style and softened gates stated
+```
 
 ## Preflight (probe and warn — never a STOP)
 
@@ -399,19 +453,3 @@ In-chat summary only (the git diff is the audit trail):
 - **Never delete another producer's artefacts.** Adoption rewrites embeds and reports
   orphans.
 - **Reflect reality, not aspiration** — in prose and in pixels.
-
-## References
-
-| File | Read when |
-| --- | --- |
-| `reference/house-style.md` | First, every run |
-| `reference/styles.md` | Phase 2, to resolve the style |
-| `reference/styles/<slug>.md` | Phase 2, exactly one — the resolved style |
-| `reference/design-system.md` | Phase 2 |
-| `reference/<doc>.md` / `reference/tier2/<doc>.md` | Before touching that doc |
-| `reference/embedding.md` | Before any embed, marker edit, adoption, or `check` |
-| `reference/viz-production.md` | Phase 6, before authoring any SVG |
-| `reference/charts.md` | Phase 6, before plotting any value |
-| `scripts/svg_check.py` | The phase-6 gate loop (never skip it) |
-| `scripts/styles.json` | Read by the checker; keep in step with `reference/styles/` |
-| `scripts/audit_visuals.py` | Phase 7 and `check` mode |

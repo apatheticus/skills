@@ -25,6 +25,15 @@ nothing. Look for **clusters**.
 Derived from the MIT-licensed `humanizer` skill and Wikipedia's "Signs of AI
 writing". See `attribution.md`.
 
+## Contents
+
+- **Content patterns** — §1–§6: significance, notability, -ing analyses, promotion, vague attribution, "Challenges" sections.
+- **Language and grammar** — §7–§10, §12, §13: AI vocabulary, copula avoidance, negative parallelism, rule of three, false ranges, passive voice.
+- **Style** — §15, §19–§22: boldface, curly quotes, chatbot artifacts, speculative gap-filling, sycophancy.
+- **Filler, hedging, and rhetorical moves** — §23, §25, §27, §29: filler, generic conclusions, authority tropes, fragmented headers.
+- **False positives** — what clean human writers trip with no AI involved; read before flagging anything.
+- **Signs of human writing — preserve these** — when these appear, lean toward leaving the prose alone.
+
 ---
 
 ## Content patterns

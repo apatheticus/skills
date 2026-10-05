@@ -6,6 +6,14 @@ understanding of the code, not manifest-reading — so the anti-fabrication rule
 hardest here. Adaptive in content, consistent in shape. Apply
 [house-style.md](house-style.md) throughout.
 
+## Contents
+
+- [The current-state rule](#the-current-state-rule)
+- [Section order](#section-order)
+- [Section guidance](#section-guidance)
+- [Visuals](#visuals)
+- [Neutral exemplar (shape only)](#neutral-exemplar-shape-only)
+
 ## The current-state rule
 
 **ARCHITECTURE describes what the repository actually is right now.** Draw only

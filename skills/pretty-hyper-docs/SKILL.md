@@ -23,6 +23,56 @@ Two principles govern everything:
   (see the matrix below), and a visual exists only where it communicates
   something to that audience faster than text would.
 
+## Contents
+
+Sections, in run order:
+
+- **Run checklist** — copy it into your response and tick each gate.
+- **Preflight gate (run before anything else)** — `hyperframes skills check`; STOP on a non-zero exit.
+- **Documents in scope** — Tier 1 every run, Tier 2 by name; DEPLOYMENT is signal-gated.
+- **Invocation modes** — flags and the read-only `check` mode.
+- **Audience matrix** — each doc's audience and its visual treatment.
+- **Visual budget (defaults; `--budget` overrides per run)** — animated vs static per doc.
+- **Target layout (the skill maintains this)** — `docs/assets/` plus `.prettydocs/` per project.
+- **Workflow**
+  - **1. Evidence pass** — facts, holder candidate, visual identity, project roots.
+  - **2. Design system** — load or derive `prettydocs.md` per project.
+  - **3. Plan** — classify every doc and visual; a prose change plans zero renders.
+  - **4. Questions (batched, once, up front)** — holder, license, support channels; one batch.
+  - **5. Apply — docs** — section by section; embeds, markers, `<details>` Mermaid fallback.
+  - **6. Apply — visuals** — scaffold → gate loop → render → `viz_to_webp.sh` → `viz.json`.
+  - **7. Verify** — the ten quality gates; `check` mode runs them read-only.
+  - **8. Report** — in-chat summary; degradation paths and anything deferred.
+- **Non-negotiables** — preflight first, no ASCII art, no volatile facts, legal text verbatim.
+
+### References
+
+| File | Read when |
+| --- | --- |
+| `reference/house-style.md` | First, every run |
+| `reference/<doc>.md` / `reference/tier2/<doc>.md` | Before touching that doc |
+| `reference/design-system.md` | Phase 2 |
+| `reference/embedding.md` | Before any embed, marker edit, or `check` |
+| `reference/viz-production.md` | Phase 6, before any render or static SVG |
+| `scripts/viz_to_webp.sh` | Called by phase 6 (never hand-roll the conversion) |
+| `scripts/audit_visuals.py` | Phase 7 and `check` mode |
+
+## Run checklist
+
+Copy this into your response and tick each box as the gate passes:
+
+```
+- [ ] Preflight gate      hyperframes skills check exit 0 (check/--no-viz skip it); ffmpeg + img2webp probed
+- [ ] 1. Evidence pass    facts, identity, project roots gathered
+- [ ] 2. Design system    prettydocs.md loaded or derived per project
+- [ ] 3. Plan             every doc and visual classified; budget respected
+- [ ] 4. Questions        one batch asked; answers persisted to .github/docsmeta.json
+- [ ] 5. Apply — docs     section by section; embeds, markers, Mermaid fallback in place
+- [ ] 6. Apply — visuals  hyperframes check 0 errors; WebP ≤2.5 MB; viz.json updated
+- [ ] 7. Verify           ten quality gates run; failures fixed or surfaced
+- [ ] 8. Report           per-doc + per-visual tables; toolchain and degradations stated
+```
+
 ## Preflight gate (run before anything else)
 
 This skill renders visuals with the HyperFrames toolchain. Check it first:
@@ -272,15 +322,3 @@ In-chat summary only (the git diff is the audit trail):
   gates check.
 - **Reproduce, don't author, legal text** (`reference/tier2/license.md`).
 - **Reflect reality, not aspiration** — in prose and in pixels.
-
-## References
-
-| File | Read when |
-| --- | --- |
-| `reference/house-style.md` | First, every run |
-| `reference/<doc>.md` / `reference/tier2/<doc>.md` | Before touching that doc |
-| `reference/design-system.md` | Phase 2 |
-| `reference/embedding.md` | Before any embed, marker edit, or `check` |
-| `reference/viz-production.md` | Phase 6, before any render or static SVG |
-| `scripts/viz_to_webp.sh` | Called by phase 6 (never hand-roll the conversion) |
-| `scripts/audit_visuals.py` | Phase 7 and `check` mode |

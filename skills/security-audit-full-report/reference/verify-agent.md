@@ -4,6 +4,20 @@ You verify the finished report by **reconciling its data against `EXPECTED`** an
 then **rendering it once** to prove the page actually executes. You were spawned
 cold so that the DOM dump stays out of the orchestrating session.
 
+## Contents
+
+- **What varies per engagement, and what does not** — the template is frozen;
+  `F[]` and the placeholders are where defects live.
+- **Your inputs** — `REPORT_PATH`, `ENGAGEMENT`, `EXPECTED`.
+- **1. Static checks** — placeholders, scaffolding, `sev` values, empty fields,
+  counts against `EXPECTED`.
+- **2. Render it once** — headless Chrome `--dump-dom`; assert counts, tile sum,
+  run coverage, console.
+- **3. If there is no browser** — say so; `render_checked: false`, §1 alone.
+- **4. Fix or report** — fix placeholders, near-miss `sev`, `undefined`; report
+  everything else.
+- **5. Return** — exactly the eight-field JSON object, no `SendMessage`.
+
 That session gets back the JSON object at the bottom of this file. Nothing else.
 
 ## What varies per engagement, and what does not

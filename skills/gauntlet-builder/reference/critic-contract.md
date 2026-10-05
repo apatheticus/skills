@@ -7,6 +7,15 @@ to a weak one, so this contract is written out rather than summarised into the p
 it does not paste it into the runnable prompt, which has a word budget the contract
 would blow on its own.
 
+## Contents
+
+- **What the critic is** — a separate agent in fresh context that never saw how the thing was built.
+- **The contract** — the auditor brief to paste, filled in, when spawning a critic.
+- **The two clauses that are not obvious** — fail closed, and the injection guard.
+- **Verdict grammar, and why it is not a punch list** — a full verdict block, then one `GAP:` line.
+- **When a wrong answer is worse than no answer** — domains where a confident fabrication does more damage than an obvious hole.
+- **Gates** — five checks on what the critic receives and how it fails.
+
 ## What the critic is
 
 A separate agent, in fresh context, that did not build the thing and has never seen how

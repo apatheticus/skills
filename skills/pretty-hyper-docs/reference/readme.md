@@ -4,6 +4,14 @@ The front door. It tells a newcomer what the project is, whether it's for them, 
 how to run it — then routes them to the deeper docs. Highly adaptive: its sections
 flex to the project type and size. Apply [house-style.md](house-style.md) throughout.
 
+## Contents
+
+- [What the README is for — and what it isn't](#what-the-readme-is-for--and-what-it-isnt)
+- [Section order](#section-order)
+- [Section guidance](#section-guidance)
+- [Visuals](#visuals)
+- [Neutral exemplar (shape only — strip all of this content)](#neutral-exemplar-shape-only--strip-all-of-this-content)
+
 ## What the README is for — and what it isn't
 
 The README covers a tight set of things: **what the repo is, the problem it solves,

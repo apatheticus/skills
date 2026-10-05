@@ -14,6 +14,22 @@ A visual that needs motion to make its point belongs in the sibling
 Data charts have their own narrow, provenance-gated path: [charts.md](charts.md).
 Read it before plotting any value; most "charts" should be structural diagrams.
 
+## Contents
+
+- [Preconditions](#preconditions)
+- [Where things live](#where-things-live)
+- [1. Author `docs/assets/<viz-name>.svg`](#1-author-docsassetsviz-namesvg)
+  - [The skeleton](#the-skeleton)
+  - [The animation ban](#the-animation-ban)
+  - [GitHub-safe hard rules](#github-safe-hard-rules)
+  - [Canvas and layout](#canvas-and-layout)
+  - [Legible at rendered scale](#legible-at-rendered-scale)
+  - [Build order](#build-order)
+  - [Byte discipline](#byte-discipline)
+- [2. Gate loop (mandatory, per visual)](#2-gate-loop-mandatory-per-visual)
+- [3. Read the pixels](#3-read-the-pixels)
+- [4. Commit the state](#4-commit-the-state)
+
 ## Preconditions
 
 - **`python3` on PATH.** Both bundled scripts are stdlib-only; no `pip install`,

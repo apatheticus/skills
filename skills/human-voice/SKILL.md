@@ -2,7 +2,7 @@
 name: human-voice
 description: Humanizing edit pass that strips AI tells from prose that already exists, in the register the document calls for (editorial, professional, technical, regulated, commercial). ALWAYS invoke this skill when the user asks to humanize, de-AI, or de-slop text; make writing sound human or less like ChatGPT; remove AI tells, AI words, or em dashes; pass AI detection (GPTZero, Turnitin, Originality.ai); asks "does this sound AI-generated?"; audit, scan, or flag a draft for AI tells without rewriting; or edit, polish, or review drafted prose for voice, tone, or readability — including a request naming one tell, such as hedging, passive voice, filler, buzzwords, corporate speak, jargon, sycophancy, or emoji and boldface overuse. Do not rewrite or clean up the prose yourself — invoke this skill first. Also invoke for proposals, SOWs, and contracts, or when the reader is a U.S. government agency, evaluator, or auditor. Do not invoke for drafting from scratch, or for code, config, or commit messages.
 license: MIT
-version: 1.5.0
+version: 1.5.1
 allowed-tools: Read, Write, Edit, Grep, Glob, Bash, AskUserQuestion
 ---
 
@@ -19,6 +19,69 @@ that already exists. Do **not** use it as a style guide for code, config, or
 commit messages. For documents written for a government reader, see
 [Government documents](#government-documents) below: the plain-language envelope
 constrains the rewrite, it does not replace it.
+
+## Contents
+
+Sections, in run order:
+
+- **Run checklist** — track each gate silently; never print it in the response.
+- **When to use** — humanize, de-AI or de-slop requests, AI-detection questions,
+  and voice, tone or readability passes on prose that already exists.
+- **Step 1 — Select the register** — before reading a single pattern. Default
+  to Professional, to Commercial when it could be quoted back as a commitment,
+  never to Editorial.
+- **Step 1b — Detect, or edit?** — detect reports each pattern with the line
+  quoted, then stops; edit is the default.
+- **Step 2 — Calibrate to the writer (Editorial and Professional)** — name three
+  to five voice signals to preserve, sample or no sample.
+- **Step 3 — Apply the patterns** — the 21 always-on patterns, the 15
+  register-gated ones, and the three gates whose fix runs opposite to the
+  obvious one.
+- **Government documents** — government audiences only: the Regulated register,
+  or Commercial for a proposal, plus the plain-language envelope.
+- **Step 4 — Self-check** — mandatory, with register-scoped thresholds;
+  `scripts/voice_check.py` counts the mechanical steps.
+- **Step 5 — Deliver** — register, draft rewrite, "What still reads as AI
+  here?", final rewrite, in that order.
+- **Rules** — rewrite, do not delete; cluster, do not snipe; never invent detail.
+- **Attribution** — the catalog derives from `humanizer` and `no-ai-slop`.
+
+### Reference
+
+- `reference/registers.md` — the five register profiles in full, plus the
+  condensed plain-language floor for Regulated
+- `reference/commercial.md` — **Commercial register only.** Operative and
+  non-operative text, §C1–§C16, the Commercial word lists, the extra self-check,
+  and what this skill does not cover
+- `reference/plain-language.md` — **government audiences only.** The Plain Writing
+  Act, the Federal Plain Language Guidelines, §G1–§G7, the federal substitution
+  table, and what this skill does not cover
+- `reference/patterns-core.md` — the 21 always-on patterns with before/after,
+  plus the false-positive and signs-of-human-writing lists. Read every run
+- `reference/patterns-gated.md` — the 15 register-gated patterns, personality
+  injection, and the gate table. Read when the register turns one on
+- `reference/vocabulary.md` — global and register-scoped word and phrase lists,
+  with the technical-term carve-outs
+- `reference/examples.md` — one full worked rewrite per register
+- `reference/attribution.md` — provenance of the derived material
+- `scripts/voice_check.py` — optional checker for the countable half of Step 4;
+  `scripts/test_voice_check.py` is its test suite
+
+## Run checklist
+
+Track this checklist silently and tick each gate as it passes. Never print it in
+your response: this skill runs on ordinary editing requests, and Step 5 fixes
+the exact shape of the deliverable.
+
+```
+- [ ] Step 1      register selected; audience and outcome settled if the draft left them open
+- [ ] Step 1b     detect or edit decided; a detect request stops at the findings report
+- [ ] Step 2      three to five voice signals named (Editorial and Professional only)
+- [ ] Step 3      patterns-core.md read; gated patterns and commercial.md loaded as the register requires
+- [ ] Government  plain-language envelope applied (government audiences only)
+- [ ] Step 4      self-check steps 1–8 run; step 9 for Commercial
+- [ ] Step 5      delivered in order: register, draft, "What still reads as AI here?", final
+```
 
 ## When to use
 
@@ -351,27 +414,6 @@ underperforms.
   regardless of how it reads.
 - **State what you did not check.** If a register was assumed, a sample was
   absent, or a compliance area sits outside this skill, say so in the delivery.
-
-## Reference
-
-- `reference/registers.md` — the five register profiles in full, plus the
-  condensed plain-language floor for Regulated
-- `reference/commercial.md` — **Commercial register only.** Operative and
-  non-operative text, §C1–§C16, the Commercial word lists, the extra self-check,
-  and what this skill does not cover
-- `reference/plain-language.md` — **government audiences only.** The Plain Writing
-  Act, the Federal Plain Language Guidelines, §G1–§G7, the federal substitution
-  table, and what this skill does not cover
-- `reference/patterns-core.md` — the 21 always-on patterns with before/after,
-  plus the false-positive and signs-of-human-writing lists. Read every run
-- `reference/patterns-gated.md` — the 15 register-gated patterns, personality
-  injection, and the gate table. Read when the register turns one on
-- `reference/vocabulary.md` — global and register-scoped word and phrase lists,
-  with the technical-term carve-outs
-- `reference/examples.md` — one full worked rewrite per register
-- `reference/attribution.md` — provenance of the derived material
-- `scripts/voice_check.py` — optional checker for the countable half of Step 4;
-  `scripts/test_voice_check.py` is its test suite
 
 ## Attribution
 

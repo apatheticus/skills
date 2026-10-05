@@ -25,6 +25,16 @@ chose. Recording one means exactly one path, so `design_hash` has something stab
 hash and drift stays detectable. Everything under [Finding the design
 language](#finding-the-design-language) is intake only.
 
+## Contents
+
+- [What counts as a project](#what-counts-as-a-project)
+- [Finding the design language](#finding-the-design-language)
+- [Migrating a project off the old layout](#migrating-a-project-off-the-old-layout)
+- [When it's frozen, when it's re-derived](#when-its-frozen-when-its-re-derived)
+- [Deriving the system](#deriving-the-system)
+- [The template (fill this into `<project>/.prettydocs/prettydocs.md`)](#the-template-fill-this-into-projectprettydocsprettydocsmd)
+- [Rules that hold regardless of derivation path](#rules-that-hold-regardless-of-derivation-path)
+
 ## What counts as a project
 
 A repo may document several projects, and each one gets its own design system. A
