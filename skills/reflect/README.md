@@ -35,7 +35,7 @@ Recommending the changes **is** the deliverable. `reflect` never implements what
 
 A single interactive HTML report at `<cwd>/Outputs/Reflections/cc-reflection-<date>.html`:
 
-- A ranked assessment, highest leverage first, that drills down from an executive summary to per-cluster evidence — verbatim quotes, session IDs, and project paths.
+- A ranked assessment, highest impact first and the top 15 by default, that drills down from an executive summary to per-cluster evidence — verbatim quotes, session IDs, and project paths.
 - Custom inline SVG graphics throughout — hand-built charts for every number, explanatory diagrams, and decorative polish. No chart libraries, no raster images, no external requests.
 - An embedded machine-readable summary block, so the next run can diff against this one and show what you adopted, what still recurs, and what's new.
 - A check-off control on every recommendation — mark it done, won't do, or leave it open, with a one-line note. Click **Save status** and save over `Outputs/Reflections/reflect-status.json`; the next run reads it, drops what you set aside, and calls out anything you marked done that came back anyway.
@@ -88,14 +88,15 @@ Each cluster then earns a verdict, gated on how many distinct sessions back it �
 Invoke the skill from any project directory — the report lands under that directory's `Outputs/`.
 
 ```text
-/reflect [window] [focus]
+/reflect [window] [limit=N] [focus]
 ```
 
-Both arguments are optional and order-independent:
+All three arguments are optional and order-independent:
 
 | Argument | Values | Default | Effect |
 | --- | --- | --- | --- |
 | Window | `30d`, `Nd`, `all` | `30d` | Sessions whose transcript falls inside the window are in scope. |
+| Limit | `limit=N`, `limit=all` | `15` | Shows the N highest-impact findings, most impactful first. The rest stay in the embedded data block for trending. |
 | Focus | any free text | none | Extractors dig deeper on matching sessions, and the report gives the focus its own section. |
 
 ### Examples
@@ -104,6 +105,7 @@ Both arguments are optional and order-independent:
 /reflect
 /reflect 90d
 /reflect all permissions
+/reflect 90d limit=5 permissions
 /reflect 30d report styling
 ```
 

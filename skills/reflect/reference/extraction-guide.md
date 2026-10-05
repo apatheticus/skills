@@ -9,7 +9,8 @@ pipeline references this file; read it before authoring the workflow script.
 - **Signal families** — friction, repetition, wins, environment gaps.
 - **Extractor output schema (per batch)** — the JSON every extractor returns.
 - **Batching** — group by project, size by priority.
-- **Clustering & decision stage** — mechanical then semantic merge; verdicts.
+- **Clustering & decision stage** — mechanical then semantic merge; verdicts;
+  impact ranking and the `limit` cap.
 
 ## Transcript anatomy (what extractors will see)
 
@@ -117,5 +118,11 @@ paraphrase. Report unreadable files, never skip silently."
 
 Enforce thresholds in script code, not just prompts: a `new-skill` verdict
 with <3 distinct sessions or `automation`/`fix` with <2 gets downgraded to an
-observation. Rank the final list by leverage descending, ties broken by lower
-effort.
+observation.
+
+Rank the final list by impact, in script code, after the Trend stage:
+`leverage` descending, then `effort` ascending (minutes < hour < day), then
+distinct session count descending, then `id` ascending. Write each item's
+`rank` into it. The `limit` argument (default 15) caps only what the report
+renders: Trend, the status ledger and the embedded data block get the full
+ranked list, so a finding past the cap is never misread as adopted.
