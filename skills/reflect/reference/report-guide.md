@@ -4,6 +4,28 @@ The report is the user's permanent record and playbook. It must be
 highly polished, easy to skim, and reward drilling down. One HTML file,
 opens from `file://`, offline, indefinitely.
 
+## Contents
+
+- **Design system — Neumorphic Fresh** — where to read it, in what order.
+  - The five brand rules — one tonal base, fresh accent, rounding, motion, copy.
+  - Theming — light *and* dark, with a real toggle.
+  - Token groups you will actually use.
+  - The `nf-*` class API — complete.
+  - Contrast — WCAG AA for everything the reader must read.
+- **Self-containment rules (hard)** — zero external requests; opens offline.
+- **Structure (top to bottom)** — the section order, copied verbatim; Step 0b
+  checks against it.
+  - "Since last report" — layout spec.
+- **The status ledger** — `reflect-status.json`: schema, reading it in Phase 0,
+  rendering and saving it in the report.
+- **Per-finding handoff** — `#card-<id>` permalink, Copy link, Copy agent brief
+  (with the brief's Markdown shape).
+- **The Usage panorama — dashboard spec** — KPI strip and charts as one dense dashboard.
+- **Custom SVG graphics (required)** — data charts, diagrams, decoration; no
+  chart libraries, no raster.
+- **Interactivity & motion** — nav, filters, search, expand/collapse, animation.
+- **Embedded data block** — `cc-reflection-data` JSON; future runs depend on it.
+
 ## Design system — Neumorphic Fresh
 
 **The report is styled in Neumorphic Fresh. It is not bundled with this skill —

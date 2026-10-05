@@ -3,6 +3,14 @@
 How the Workflow's extractor/cluster/decide stages should behave. The SKILL.md
 pipeline references this file; read it before authoring the workflow script.
 
+## Contents
+
+- **Transcript anatomy** — which JSONL events matter, and how to read huge files.
+- **Signal families** — friction, repetition, wins, environment gaps.
+- **Extractor output schema (per batch)** — the JSON every extractor returns.
+- **Batching** — group by project, size by priority.
+- **Clustering & decision stage** — mechanical then semantic merge; verdicts.
+
 ## Transcript anatomy (what extractors will see)
 
 Each `~/.claude/projects/<project-dir>/<session-id>.jsonl` line is a JSON
