@@ -155,7 +155,9 @@ Rename one here and the template must change with it.
 1. **Hero** — title, date, analysis window, session/project counts, and a
    one-paragraph verdict of the period. The `<h1>` verdict line is the one piece
    of free text in the whole report. Subtle ambient motion; a KPI stat row under it.
-2. **Executive summary** — the ranked recommendation list in impact order
+2. **Usage panorama** — the dashboard, first so the reader sees the shape of
+   the window before any ranking. See its own spec below.
+3. **Executive summary** — the ranked recommendation list in impact order
    (SKILL.md Phase 3 step 6), most impactful first, capped at `limit` rows.
    Each row: rank, verdict badge (new-skill / automation / fix /
    keep-doing / observation), title, leverage score, effort, session count.
@@ -163,15 +165,14 @@ Rename one here and the template must change with it.
    **verdict *and* family**, plus a text search across all clusters. Filters
    and search hide rows; they never reorder them. When the cap cut anything,
    a muted footer line reads `Showing 15 of 27 · rerun with limit=all`.
-3. **Since last report** (only when a prior report existed) — see the layout
+4. **Since last report** (only when a prior report existed) — see the layout
    spec below. Three columns: **Adopted / Still recurring / New**.
-4. **Focus** (only when a focus argument was given) — deep dive on the focused
+5. **Focus** (only when a focus argument was given) — deep dive on the focused
    project/theme: a summary, a row per named finding, and the full card of any
    finding ranked past the cap. Not capped by `limit`: the user asked for this
    theme by name.
-5. **Wins & playbook** — effective patterns worth keeping, same evidence
+6. **Wins & playbook** — effective patterns worth keeping, same evidence
    treatment as a detail card. Impact order, drawn from the capped list.
-6. **Usage panorama** — the dashboard. See its own spec below.
 7. **Findings & recommendations** — detail cards, one per shown finding, in
    impact order and capped at `limit`, **collapsed by default** to summary +
    verdict; expand to reveal the handoff bar (see
@@ -187,9 +188,9 @@ Rename one here and the template must change with it.
 A section with nothing to show (no prior report, no focus) is hidden along with
 its nav link; its heading stays in the template.
 
-Findings sit **after** the panorama deliberately: the summary ranks them up top
-for the skimmer, the panorama gives the reader the shape of the week, and the
-long evidence cards are the reference material you drill into last.
+The order is deliberate: the panorama sets the shape of the window first, the
+summary then ranks what to act on, and the long evidence cards sit near the
+end because they are the reference material you drill into last.
 
 ### "Since last report" — layout spec
 

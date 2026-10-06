@@ -4,7 +4,7 @@ description: Generate a comprehensive, evidence-backed reflection report on how 
 argument-hint: "[window: 30d|90d|all] [limit=N, default 15] [focus: free text, e.g. a project or theme]"
 user-invocable: true
 license: MIT
-version: 1.6.0
+version: 1.7.0
 disable-model-invocation: true
 ---
 
