@@ -7,11 +7,15 @@ skill itself (SKILL.md, reference/), never invented. Frozen for this run.
 
 Derived from: `reference/design-system/tokens/colors.css` (the **SaaS Pro** design
 system this skill used to bundle). **That directory has since been removed** — the
-report is now rendered in Neumorphic Fresh, read from the user's own
-`Styles/Neumorphic Fresh Design System/`. The palette below is frozen and complete,
-so these README visuals still render; do not chase the dead path to re-derive.
+report is now rendered in Neumorphic Fresh, bundled and frozen in
+`assets/template.html`. The palette below is frozen and complete, so these README
+visuals still render; do not chase the dead path to re-derive.
 Derived on:   the run that re-derived this file after the report system was swapped
 Mapping:      product tokens mapped 1:1, with two computed gap-fills marked below
+Re-stamped:   both manifests' `design_hash`, without re-rendering, after prose-only
+              edits to this Provenance block and to § Frozen system. No palette row,
+              role, ground, motif or type rule moved, so neither visual's contract
+              changed. A hash move from an edit like that is not a reason to re-render.
 
 This file was **re-derived, not discovered.** The design-system discovery ladder
 deliberately skips `reference/`, because a relaxed `DESIGN.md` search in this repo
