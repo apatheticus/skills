@@ -122,6 +122,7 @@ Keep using the old place with `out=Outputs/Reflections`.
 ### Prerequisites
 
 - **Claude Code**, with multi-agent orchestration (the Workflow tool) available — the extraction phase depends on it.
+- **`python3`**, standard library only — the report phase runs `scripts/render_report.py`.
 - Some existing session history under `~/.claude/projects/`. A fresh install has nothing to reflect on yet.
 - **Recommended:** run `/insights` in another session first. `reflect` uses its data to corroborate findings, and will pause to ask if that data is stale or missing.
 
@@ -163,7 +164,7 @@ skills/reflect/
 │   ├── extraction-guide.md          Signal taxonomy, extractor prompts, JSON schemas, batching
 │   └── report-guide.md              Report spec, the bundled template, the data schema
 └── scripts/
-    └── render_report.py             Fills the template with a run's data and checks the result
+    └── render_report.py             Fills the template, merges the status ledger, checks the result
 ```
 
 ## Privacy and guardrails

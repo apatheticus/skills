@@ -19,7 +19,7 @@ carry and what the reader will see, not as instructions for hand-authoring.
   headings from this list.
   - "Since last report" — layout spec.
 - **The status ledger** — `reflect-status.json`: schema, reading it in Phase 0,
-  rendering and saving it in the report.
+  the script's merge in Phase 4, rendering and saving it in the report.
 - **Per-finding handoff** — `#card-<id>` permalink, Copy link, Copy agent brief
   (with the brief's Markdown shape).
 - **The Usage panorama — dashboard spec** — KPI strip and charts as one dense dashboard.
@@ -255,11 +255,15 @@ stay stable across editions: never renumber them, never make them positional.
 `state` is one of `open`, `done`, `wontdo`. Nothing else; the script rejects
 anything else.
 
-**Reading it (Phase 0).** Load the file if present. Merge, never overwrite:
-every item already in it keeps its `state`, `note`, `marked` and `first_seen`;
-every recommendation in this edition that is missing from it is added as `open`
-with `first_seen` set to this edition. Write the merged file back beside the
-report, and pass that same file to `render_report.py --status`. Track actionable
+**Reading it (Phase 0).** Phase 0 only reads the file, if present; nothing in
+a run writes it by hand.
+
+**Merging it (Phase 4).** `render_report.py` performs the merge: it reads
+`--prior-status`, writes `--status`, and embeds that result in the report.
+These rules are the contract it implements. Merge, never overwrite: every item
+already in it keeps its `state`, `note`, `marked` and `first_seen`; every
+recommendation in this edition that is missing from it is added as `open` with
+`first_seen` set to this edition; no item is ever dropped. Track actionable
 verdicts only — a `keep-doing` habit is not something the reader addresses, so
 it gets no ledger entry and no control.
 
