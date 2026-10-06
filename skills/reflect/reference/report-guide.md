@@ -301,10 +301,12 @@ the template — keep them that way in any edit:
 
 **Saving it back.** `Save status` writes the merged ledger out. It tries
 `showSaveFilePicker()` first so the reader can drop the file straight into
-`Outputs/Reflections/`, and falls back to an `<a download>` Blob when it is
+`OUT_DIR`, beside the report, and falls back to an `<a download>` Blob when it is
 absent or throws — the picker is unavailable from a `file://` origin in some
 browsers, and a silent failure there loses the reader's work. `AbortError` (the
-reader cancelled) is swallowed; anything else falls back.
+reader cancelled) is swallowed; anything else falls back. The page never names
+a folder: `out=` can put `OUT_DIR` anywhere, so its copy says "beside this
+report" and nothing more specific.
 
 ## Per-finding handoff — a link and a brief
 
