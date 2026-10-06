@@ -4,7 +4,7 @@ description: Generate a comprehensive, evidence-backed reflection report on how 
 argument-hint: "[window: 30d|90d|all] [limit=N, default 15] [out=PATH, default ./Reflections] [focus: free text, e.g. a project or theme]"
 user-invocable: true
 license: MIT
-version: 1.8.0
+version: 1.8.1
 disable-model-invocation: true
 ---
 
@@ -18,8 +18,35 @@ build or edit nothing except the report (and its output directory). Do not
 create skills, hooks, or config changes the report recommends; recommending
 them IS the deliverable.
 
+**Needs:** Claude Code with the Workflow tool (Phase 3) and `python3`,
+standard library only (Phase 4). No Workflow tool: say so and stop before
+Phase 0.
+
+## Guardrails
+
+- Diagnosis only. The only writes allowed: `OUT_DIR` (the output folder,
+  Phase 0), the report file, and scratchpad temp files. A `PRIOR_DIR` outside
+  `OUT_DIR` is read, never written, moved or deleted.
+- `OUT_DIR/reflect-status.json` is the user's record, not yours.
+  `scripts/render_report.py` is its only writer: it merges, never resets a
+  `state` or `note` the user set, never drops an item because this edition
+  did not surface it, and writes nothing if a merge would. Never write or
+  edit the file by hand.
+- Every recommendation cites ≥1 session ID with a verbatim evidence quote;
+  skill proposals cite ≥3 distinct sessions.
+- Only propose a skill for something that actually recurs — recurrence beats
+  cleverness.
+- Transcripts contain private data. It stays in the local report; never send
+  transcript content to external services. A new `OUT_DIR` gets its
+  `.gitignore` (Phase 0 step 1) so a commit cannot carry it off either.
+- If the window yields >400 sessions (e.g. `all`), tell the user the scale,
+  then proceed with triage-weighted sampling: deep-read all high-priority
+  sessions, sample the clean remainder, and say so in the report's
+  methodology section.
+
 ## Contents
 
+Needs and Guardrails sit above this list; they hold for every phase.
 Sections, in run order:
 
 - **Run checklist** — copy it into your response and tick each gate.
@@ -41,8 +68,6 @@ Sections, in run order:
     `headings match: yes`.
   - **Phase 5 — Deliver** — send the report, TL;DR, skipped items, how the
     loop closes.
-- **Guardrails** — the write boundary, the ledger, evidence rules, privacy,
-  scale.
 
 ### Reference files — bundled, one level deep, read each in full
 
@@ -54,8 +79,8 @@ Sections, in run order:
 - `assets/template.html` — the report itself: CSS, fonts, GSAP and renderer
   inline, with sample data. About 340KB: **never Read it**; `head -40` shows
   its header comment, which is all a run needs.
-- `scripts/render_report.py` — Phase 4. Validates the data, fills the
-  template, writes the report, and checks it (Step 0b).
+- `scripts/render_report.py` — Phase 4. Validates the data, merges the
+  status ledger, fills the template, writes both, and checks them (Step 0b).
 - `reference/extraction-guide.md` — read in Phase 3, before authoring the
   workflow script. Sections: Transcript anatomy · Signal families · Extractor
   output schema · Batching · Clustering & decision stage.
@@ -65,7 +90,7 @@ Sections, in run order:
 - `~/.claude/projects/**/*.jsonl` — the transcripts (Phases 0 and 3).
 - `OUT_DIR/reflect-status.json` — the user's status ledger; read in Phase 0
   (from `PRIOR_DIR`, which is `OUT_DIR` unless an old report is migrating),
-  written back to `OUT_DIR` in Phase 4.
+  merged and written to `OUT_DIR` by `render_report.py` in Phase 4.
 - `~/.claude/usage-data/` — `/insights` facets, session-meta, and report
   (Phases 1–3).
 
@@ -80,7 +105,7 @@ each box as the gate passes:
 - [ ] Phase 1  /insights gate passed, or the user chose to proceed
 - [ ] Phase 2  triage list built
 - [ ] Phase 3  workflow run: extract → cluster → decide → consolidate → trend → rank
-- [ ] Phase 4  data JSON built; report rendered to REPORT; merged ledger in OUT_DIR
+- [ ] Phase 4  data JSON built; report rendered to REPORT; ledger merged by the script
 - [ ] Step 0b  headings match: yes
 - [ ] Phase 5  report sent; TL;DR and skipped items stated
 ```
@@ -156,11 +181,12 @@ Parse from the invocation args (all optional, in any order):
    trend/delta stage. If no prior report or no JSON block, skip trending
    gracefully.
 4. Read the status ledger `PRIOR_DIR/reflect-status.json` — what the user has
-   already checked off. Merge, never overwrite. Items marked `wontdo` are
-   dropped from the ranked list; items marked `done` that still recur in this
-   window are the report's most important rows, and their note says what was
-   already tried. Full contract in `reference/report-guide.md`
-   § The status ledger. Missing file → every item is `open`.
+   already checked off. Read only, for two things: items marked `wontdo` are
+   dropped from the ranked list, and items marked `done` that still recur in
+   this window are the report's most important rows, their note saying what
+   was already tried. The merge happens in Phase 4, in the script. Full
+   contract in `reference/report-guide.md` § The status ledger. Missing
+   file → every item is `open`.
 
 ### Phase 1 — /insights freshness gate
 
@@ -252,30 +278,36 @@ or fetch. **Never Read or hand-edit the template or the report**: both are
    project and date. Add `hero` (the one-line verdict and the paragraph),
    `prior` and `adopted` when Trend ran, `focus` when one was given,
    `panorama` from the transcript counts, and `methodology`.
-3. Write the merged ledger (Phase 0 step 4) to `OUT_DIR/reflect-status.json`
-   first, so the file exists even if the user never clicks Save.
-4. Render:
+3. Render:
 
    ```bash
    python3 <skill dir>/scripts/render_report.py \
      --data <scratchpad>/report-data.json \
+     --prior-status PRIOR_DIR/reflect-status.json \
      --status OUT_DIR/reflect-status.json --out REPORT
    ```
 
-   A data problem prints one line per missing or invalid field and writes
-   nothing. Fix the JSON and rerun; never work around the script.
+   The script reads the prior ledger (missing means empty), keeps every
+   item's `state`, `note`, `marked` and `first_seen`, adds each new
+   actionable finding as `open`, drops nothing, and writes the result to
+   `OUT_DIR` before the report, so the file exists even if the user never
+   clicks Save. A data problem prints one line per missing or invalid field
+   and writes nothing. Fix the JSON and rerun; never work around the script.
+   A bad ledger is the user's to fix: say so and stop.
 
 ### Step 0b — verify before publishing
 
-The script's own output is the gate. It must print `data blocks: round-trip
-ok`, `headings match: yes`, `external requests: none`, `block ids: each exactly
-once`, and AA contrast in both themes, and exit 0. Any other line means fix the
+The script's own output is the gate. It must print `ledger: K kept, A added,
+0 changed`, `data blocks: round-trip ok`, `headings match: yes`, `external
+requests: none`, `block ids: each exactly once`, and AA contrast in both
+themes, and exit 0. Any other line means fix the
 data (or, for a template defect, stop and say so), never the claim.
 
 ### Phase 5 — Deliver
 
-SendUserFile the report (display: render) with a caption naming the top
-finding. In the final message: TL;DR of the top 3–5 recommendations in rank
+Send the report with SendUserFile (display: render), captioned with the top
+finding, if that tool exists; otherwise print REPORT as an absolute path and
+offer to open it. In the final message: TL;DR of the top 3–5 recommendations in rank
 order, with their verdicts and session counts, plus anything the run had to
 skip (insights stale, unreadable transcripts, findings past the `limit` as
 `showing N of M`) — no silent gaps.
@@ -287,23 +319,3 @@ edition's ledger had anything marked done that came back this week, lead with
 that — it is the strongest signal in the report. If `PRIOR_DIR` was the old
 `Outputs/Reflections/`, say in one line that its history now carries on in
 `OUT_DIR` and the old folder can go once the user has checked the new report.
-
-## Guardrails
-
-- Diagnosis only. The only writes allowed: `OUT_DIR`, the report file, and
-  scratchpad temp files. A `PRIOR_DIR` outside `OUT_DIR` is read, never
-  written, moved or deleted.
-- `OUT_DIR/reflect-status.json` is the user's record, not yours. Merge into it;
-  never reset a `state` or `note` the user set, and never drop an item just
-  because this edition did not surface it.
-- Every recommendation cites ≥1 session ID with a verbatim evidence quote;
-  skill proposals cite ≥3 distinct sessions.
-- Only propose a skill for something that actually recurs — recurrence beats
-  cleverness.
-- Transcripts contain private data. It stays in the local report; never send
-  transcript content to external services. A new `OUT_DIR` gets its
-  `.gitignore` (Phase 0 step 1) so a commit cannot carry it off either.
-- If the window yields >400 sessions (e.g. `all`), tell the user the scale,
-  then proceed with triage-weighted sampling: deep-read all high-priority
-  sessions, sample the clean remainder, and say so in the report's
-  methodology section.

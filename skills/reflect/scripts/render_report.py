@@ -3,24 +3,32 @@
 render_report.py — fill the bundled reflect template with a run's JSON.
 
 The template (assets/template.html) carries all CSS, fonts, GSAP and the renderer
-inline; a run supplies only data. This script validates that data, swaps it into
-the template's three JSON blocks, writes the report, and checks the result:
+inline; a run supplies only data. This script validates that data, merges it
+into the user's status ledger, swaps both into the template's three JSON blocks,
+writes the report, and checks the result: the ledger merge kept every prior mark,
 headings against reference/report-guide.md § Structure, no external requests,
 each block id exactly once, and WCAG AA contrast for reading text in both themes.
 Any failure exits non-zero. Never Read the template or the report into context.
 
+The ledger is the user's own record, and this script is its only writer: it reads
+--prior-status (default --status), writes the merged result to --status
+atomically, and embeds that same result. A missing ledger is an empty one.
+
 Usage:
     render_report.py --data D.json --status S.json --out REPORT.html
+    render_report.py --data D.json --prior-status P.json --status S.json --out REPORT.html
     render_report.py --sample --out SAMPLE.html      # render the template's own sample
     render_report.py --vendor DESIGN_SYSTEM_DIR      # maintainer: re-vendor the CSS
 """
 
 import argparse
+import copy
 import html
 import json
 import os
 import re
 import sys
+import tempfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE = os.path.join(HERE, "..", "assets", "template.html")
@@ -33,6 +41,8 @@ VERDICTS = {"new-skill", "automation", "fix", "keep-doing", "observation", "noth
 FAMILIES = {"friction", "repetition", "wins", "environment"}
 EFFORTS = {"minutes": 0, "hour": 1, "day": 2}
 STATES = {"open", "done", "wontdo"}
+# Ledger fields the reader owns: a merge carries them over untouched, always.
+KEPT = ("state", "note", "marked", "first_seen")
 # URLs that may appear outside the data blocks: SVG namespaces and licence notices.
 URL_ALLOW = ("http://www.w3.org/", "https://gsap.com", "https://lucide.dev",
              "https://openfontlicense.org/", "https://github.com/googlefonts/sora",
@@ -49,6 +59,11 @@ def block_re(bid):
 def read_block(doc, bid):
     m = block_re(bid).search(doc)
     return json.loads(m.group(2)) if m else None
+
+
+def actionable(r):
+    # keep-doing is a habit, nothing is nothing: neither gets a ledger entry.
+    return r.get("verdict") not in ("keep-doing", "nothing")
 
 
 def encode(obj):
@@ -191,9 +206,79 @@ def validate(data, status):
         if not isinstance(v, dict) or v.get("state") not in STATES:
             errs.append("bad state: status.items.%s must be open, done or wontdo" % k)
     for r in recs:
-        if r.get("verdict") not in ("keep-doing", "nothing") and r.get("id") not in items:
+        if actionable(r) and r.get("id") not in items:
             warns.append("ledger has no entry for %s; it renders as open" % r.get("id"))
     return errs, warns
+
+
+# ---------------------------------------------------------------- ledger
+
+def load_ledger(path):
+    if not os.path.exists(path):
+        print("ledger: no file at %s, starting empty" % path)
+        return {"schema": 1, "items": {}}
+    try:
+        led = json.load(open(path, encoding="utf-8"))
+    except (OSError, ValueError) as e:
+        sys.exit("error: %s: %s; nothing written" % (path, e))
+    if not isinstance(led, dict) or not isinstance(led.get("items"), dict):
+        sys.exit("error: %s is not a status ledger (want an object with an items object); "
+                 "nothing written" % path)
+    bad = sorted(k for k, v in led["items"].items() if not isinstance(v, dict))
+    if bad:
+        sys.exit("error: %s: items must be objects: %s; nothing written" % (path, ", ".join(bad)))
+    return led
+
+
+def merge_ledger(prior, data):
+    """The template's Save button, run in code. Every prior item keeps what the
+    reader set; one this edition surfaced gets last_seen; an actionable finding
+    the ledger lacks is added as open. No id is ever dropped, wontdo included."""
+    d = data if isinstance(data, dict) else {}
+    gen = d.get("generated") if isinstance(d.get("generated"), str) else ""
+    ed = gen.replace("-", "")
+    merged = {"schema": 1, "updated": gen, "edition": ed}
+    for k, v in prior.items():
+        merged.setdefault(k, copy.deepcopy(v))
+    items = merged["items"]
+    recs = d.get("recommendations") if isinstance(d.get("recommendations"), list) else []
+    for r in recs:
+        if not isinstance(r, dict) or not isinstance(r.get("id"), str):
+            continue
+        rid, title = r["id"], r.get("title") or r["id"]
+        if rid in items:
+            items[rid]["last_seen"] = ed
+            if not items[rid].get("title"):
+                items[rid]["title"] = title
+        elif actionable(r):
+            items[rid] = {"state": "open", "note": "", "title": title,
+                          "first_seen": ed, "last_seen": ed}
+    return merged
+
+
+def check_ledger(prior, merged):
+    p, m, gone = prior["items"], merged["items"], object()
+    changed = sorted(k for k in p if k not in m or
+                     any(p[k].get(f, gone) != m[k].get(f, gone) for f in KEPT))
+    added = sum(1 for k in m if k not in p)
+    print("ledger: %d kept, %d added, %d changed" % (len(p) - len(changed), added, len(changed)))
+    if changed:
+        print("  dropped or altered: %s" % ", ".join(changed))
+    return not changed
+
+
+def write_atomic(path, text):
+    d = os.path.dirname(os.path.abspath(path))
+    os.makedirs(d, exist_ok=True)
+    fd, tmp = tempfile.mkstemp(dir=d, prefix=".%s." % os.path.basename(path), suffix=".tmp")
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as f:
+            f.write(text)
+        os.replace(tmp, path)
+    except BaseException:
+        if os.path.exists(tmp):
+            os.unlink(tmp)
+        raise
 
 
 # ---------------------------------------------------------------- post-checks
@@ -353,7 +438,9 @@ def vendor(ds_dir, tpl_path):
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--data", help="report data JSON (the cc-reflection-data block)")
-    ap.add_argument("--status", help="merged status ledger JSON (OUT_DIR/reflect-status.json)")
+    ap.add_argument("--status", help="status ledger to write and embed (OUT_DIR/reflect-status.json)")
+    ap.add_argument("--prior-status", metavar="PATH",
+                    help="status ledger to read and merge (default: --status); missing means empty")
     ap.add_argument("--out", help="report path to write")
     ap.add_argument("--sample", action="store_true", help="render the template's own sample data")
     ap.add_argument("--template", default=TEMPLATE, help="template path (default: the bundled one)")
@@ -375,11 +462,18 @@ def main():
     if a.sample:
         data, status = read_block(doc, BLOCKS[0]), read_block(doc, BLOCKS[1])
     else:
+        prior_path = a.prior_status or a.status
+        # A different prior means a migration, and that only happens when OUT_DIR
+        # has no ledger yet. One already there would be clobbered unread.
+        if os.path.realpath(prior_path) != os.path.realpath(a.status) and os.path.exists(a.status):
+            sys.exit("error: %s already exists and would be overwritten without being read; "
+                     "pass it as --prior-status, or drop --prior-status; nothing written" % a.status)
         try:
             data = json.load(open(a.data, encoding="utf-8"))
-            status = json.load(open(a.status, encoding="utf-8"))
         except (OSError, ValueError) as e:
-            sys.exit("error: %s" % e)
+            sys.exit("error: %s: %s; nothing written" % (a.data, e))
+        prior = load_ledger(prior_path)
+        status = merge_ledger(prior, data)
 
     errs, warns = validate(data, status)
     for w in warns:
@@ -388,6 +482,11 @@ def main():
         for e in errs:
             print(e)
         sys.exit("error: %d problem(s) in the data; nothing written" % len(errs))
+    if not a.sample:
+        if not check_ledger(prior, status):
+            sys.exit("error: the merge would change the reader's marks; nothing written")
+        write_atomic(a.status, json.dumps(status, indent=1, ensure_ascii=False) + "\n")
+        print("ledger: wrote %s" % a.status)
 
     meta = {"file": os.path.basename(a.out), "from": data["window"]["from"],
             "to": data["window"]["to"], "generated": data["generated"]}
