@@ -41,7 +41,7 @@ A single interactive HTML report at `<cwd>/Outputs/Reflections/cc-reflection-<da
 - A check-off control on every recommendation — mark it done, won't do, or leave it open, with a one-line note. Click **Save status** and save over `Outputs/Reflections/reflect-status.json`; the next run reads it, drops what you set aside, and calls out anything you marked done that came back anyway.
 - A dedicated section for your `focus`, when you pass one.
 
-The report is styled with the **Neumorphic Fresh** design system — read from the user's own copy at `Styles/Neumorphic Fresh Design System/`, not bundled here — and opens straight from `file://`.
+The report is styled with the **Neumorphic Fresh** design system, bundled in the skill's template along with its fonts and animation library, so it opens straight from `file://` with no network. Each run writes only data; a script pours it into the template, so every edition has the same shape.
 
 ## How it works
 
@@ -145,18 +145,17 @@ skills/reflect/
 ├── SKILL.md                         Pipeline definition and guardrails (the skill itself)
 ├── README.md                        This file
 ├── .prettydocs/                     This README's own design system, and a manifest per visual
+├── assets/
+│   └── template.html                The report: design system, fonts, GSAP, renderer, sample data
 ├── docs/
 │   └── assets/
 │       ├── hero.svg                 Sessions become signals, clusters, then verdicts
 │       └── pipeline.svg             The six phases, 0 through 5
-└── reference/
-    ├── extraction-guide.md          Signal taxonomy, extractor prompts, JSON schemas, batching
-    ├── report-guide.md              Report structure, interactivity, self-containment rules
-        ├── DESIGN.md                Colour, type, space, elevation, component rules
-        ├── MOTION.md                Durations, easings, patterns, reduced motion
-        ├── tokens/                  colors, typography, spacing, motion
-        ├── components.css           The sp-* class layer
-        └── charts/                  Chart geometry references (read-only)
+├── reference/
+│   ├── extraction-guide.md          Signal taxonomy, extractor prompts, JSON schemas, batching
+│   └── report-guide.md              Report spec, the bundled template, the data schema
+└── scripts/
+    └── render_report.py             Fills the template with a run's data and checks the result
 ```
 
 ## Privacy and guardrails
@@ -170,8 +169,8 @@ skills/reflect/
 
 - [SKILL.md](SKILL.md) — the full pipeline, arguments, and guardrails.
 - [reference/extraction-guide.md](reference/extraction-guide.md) — signal taxonomy, extractor prompt template, and JSON schemas.
-- [reference/report-guide.md](reference/report-guide.md) — report structure, motion, and the self-containment rules.
-- The report's design system lives outside this skill: `Styles/Neumorphic Fresh Design System/DESIGN.md`.
+- [reference/report-guide.md](reference/report-guide.md) — report structure, motion, the bundled template, and the data schema.
+- [assets/template.html](assets/template.html) — open it in a browser to see a full sample report; `python3 scripts/render_report.py --sample --out sample.html` renders and checks it.
 - [CONTRIBUTING.md](../../CONTRIBUTING.md) — how to propose a change to this collection.
 
 ## License

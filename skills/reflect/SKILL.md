@@ -4,7 +4,7 @@ description: Generate a comprehensive, evidence-backed reflection report on how 
 argument-hint: "[window: 30d|90d|all] [limit=N, default 15] [focus: free text, e.g. a project or theme]"
 user-invocable: true
 license: MIT
-version: 1.5.0
+version: 1.6.0
 disable-model-invocation: true
 ---
 
@@ -34,8 +34,10 @@ Sections, in run order:
   - **Phase 2 — Triage** — score every session from metadata; no agents.
   - **Phase 3 — Extraction** — Workflow fan-out: extract, cluster, decide,
     consolidate, trend, then rank by impact and cap at `limit`.
-  - **Phase 4 — Report** — one self-contained HTML file in Neumorphic Fresh.
-  - **Step 0b — verify before publishing** — print `headings match: yes/no`.
+  - **Phase 4 — Report** — write the data as JSON, then fill
+    `assets/template.html` via `scripts/render_report.py`.
+  - **Step 0b — verify before publishing** — the script's checks, ending in
+    `headings match: yes`.
   - **Phase 5 — Deliver** — send the report, TL;DR, skipped items, how the
     loop closes.
 - **Guardrails** — the write boundary, the ledger, evidence rules, privacy,
@@ -43,12 +45,16 @@ Sections, in run order:
 
 ### Reference files — bundled, one level deep, read each in full
 
-- `reference/report-guide.md` — the report's style and format spec. Read in
-  Step 0 and again in Phase 4; Phase 0 uses its § The status ledger.
-  Sections: Design system — Neumorphic Fresh · Self-containment rules ·
-  Structure (top to bottom) · The status ledger · Per-finding handoff · The
-  Usage panorama — dashboard spec · Custom SVG graphics · Interactivity &
-  motion · Embedded data block.
+- `reference/report-guide.md` — the report's spec and the data schema. Read
+  in Step 0 and again in Phase 4; Phase 0 uses its § The status ledger.
+  Sections: The bundled template · Structure (top to bottom) · The status
+  ledger · Per-finding handoff · The Usage panorama — dashboard spec · Custom
+  SVG graphics · Interactivity & motion · Embedded data block.
+- `assets/template.html` — the report itself: CSS, fonts, GSAP and renderer
+  inline, with sample data. About 340KB: **never Read it**; `head -40` shows
+  its header comment, which is all a run needs.
+- `scripts/render_report.py` — Phase 4. Validates the data, fills the
+  template, writes the report, and checks it (Step 0b).
 - `reference/extraction-guide.md` — read in Phase 3, before authoring the
   workflow script. Sections: Transcript anatomy · Signal families · Extractor
   output schema · Batching · Clustering & decision stage.
@@ -56,13 +62,10 @@ Sections, in run order:
 ### External inputs — not bundled
 
 - `~/.claude/projects/**/*.jsonl` — the transcripts (Phases 0 and 3).
-- `OUT_DIR/cc-reflection-20260727.html` — the last known-good exemplar (Step 0).
 - `OUT_DIR/reflect-status.json` — the user's status ledger; read in Phase 0,
   written back in Phase 4.
 - `~/.claude/usage-data/` — `/insights` facets, session-meta, and report
   (Phases 1–3).
-- `/Users/luke/scratch/Styles/Neumorphic Fresh Design System/` — the report's
-  design system (Phase 4). Missing → stop and ask.
 
 ## Run checklist
 
@@ -70,36 +73,36 @@ Copy this into your response, after the `[format sources read]` line, and tick
 each box as the gate passes:
 
 ```
-- [ ] Step 0   both format sources read; opening line printed
+- [ ] Step 0   guide read, template header read; opening line printed
 - [ ] Phase 0  OUT_DIR resolved; transcripts listed; prior JSON + ledger loaded
 - [ ] Phase 1  /insights gate passed, or the user chose to proceed
 - [ ] Phase 2  triage list built
 - [ ] Phase 3  workflow run: extract → cluster → decide → consolidate → trend → rank
-- [ ] Phase 4  report written to REPORT; merged ledger written to OUT_DIR
+- [ ] Phase 4  data JSON built; report rendered to REPORT; merged ledger in OUT_DIR
 - [ ] Step 0b  headings match: yes
 - [ ] Phase 5  report sent; TL;DR and skipped items stated
 ```
 
 ## Step 0 — read the format sources (non-negotiable)
 
-Before generating anything, cat BOTH of these and quote their first line back in your
+Before generating anything, read BOTH of these and quote their first line back in your
 response. If either read fails, STOP and report it — do not fall back to memory or to a
 previous report's shape.
 
 1. Style/format spec — `reference/report-guide.md`, resolved against this
-   skill's own directory.
-2. Last known-good exemplar — `cc-reflection-20260727.html` inside `OUT_DIR`
-   (`<invocation cwd>/Outputs/Reflections/`). That edition is the reference
-   implementation for the markup idiom; it is not simply the newest file there,
-   so do not substitute a later report.
+   skill's own directory. Read it in full.
+2. The template's header comment — `head -40 assets/template.html`, same
+   directory. Only those 40 lines: the rest of the file is vendored CSS, fonts
+   and GSAP, and must never be Read into context.
 
 Open your response with, verbatim:
 
-    [format sources read] <guide path> | <exemplar path>
+    [format sources read] <guide path> | <template path>
 
-Section names, order, and the dashboard come from the guide — never invented, never
-carried over from an earlier run. If the guide and the exemplar disagree, stop and ask
-which is authoritative; do not pick one.
+Section names, order, and the dashboard come from the template, which the guide
+specifies — never invented, never carried over from an earlier run. If the guide
+and the template's header disagree, stop and ask which is authoritative; do not
+pick one.
 
 ## Arguments
 
@@ -212,48 +215,42 @@ Shape:
 
 ### Phase 4 — Report
 
-Read `reference/report-guide.md` for structure, interactivity, motion, and
-the self-containment rules. The report is styled in the **Neumorphic Fresh**
-design system, which is **not bundled here** — read it from the user's own
-maintained copy at `/Users/luke/scratch/Styles/Neumorphic Fresh Design System/`
-(`DESIGN.md`, `colors_and_type.css`, `components.css` for the `nf-*` layer, and
-`ui_kits/dashboard/Widgets.jsx` as the chart geometry reference). If that
-directory is missing, stop and ask — do not substitute another design system.
-Requirements in brief:
+The report is `assets/template.html` filled with this run's data. You write
+JSON; `scripts/render_report.py` writes the HTML. The template already carries
+the Neumorphic Fresh design system, fonts, GSAP, every chart, the ledger
+controls, the handoff bar and the motion, so there is nothing to style, vendor
+or fetch. **Never Read or hand-edit the template or the report**: both are
+~340KB, and a hand edit is exactly the drift the template exists to stop.
 
-- Single self-contained HTML file at `REPORT`. No external requests: vendor
-  GSAP inline (curl the minified build and embed); include three.js only if
-  a WebGL scene is genuinely used; fonts inline as base64 woff2 subsets or
-  fall back to the system stack. It must open from `file://`, offline,
-  years from now.
-- Every list of findings in impact order (Phase 3 step 6), most impactful
-  first; render only the top `limit` and state `showing N of M` whenever the
-  cap cut anything. Drill-down from executive summary to per-cluster evidence
-  (verbatim quotes, session IDs, project paths).
-- Custom inline SVG graphics throughout (spec in report-guide.md): hand-built
-  charts for all data, explanatory diagrams where they make a finding land
-  faster, and decorative SVG layers for aesthetic polish — no chart
-  libraries, no raster images.
-- Embed the machine-readable summary block
-  (`<script type="application/json" id="cc-reflection-data">`) per the spec
-  in report-guide.md — future runs depend on it.
-- Give every finding a handoff bar: the stable `#card-<id>` permalink, a
-  **Copy link** button, and a **Copy agent brief** button that writes a
-  self-contained Markdown brief the reader can paste straight into a fresh
-  agent session. Deep links must open the card they name, on load and on
-  `hashchange`. Spec in report-guide.md § Per-finding handoff.
-- Render the status ledger: the merged ledger inlined as
-  `<script type="application/json" id="cc-reflection-status">`, a check-off
-  control on every actionable card, status pills on the summary rows, and a
-  `Save status` button. Spec in report-guide.md § The status ledger. Write the
-  merged ledger back to `OUT_DIR/reflect-status.json` as well, so the file
-  exists even if the user never clicks Save.
+1. Re-read `reference/report-guide.md` § Embedded data block: it is the full
+   schema, and the script enforces it.
+2. Build `report-data.json` in the scratchpad from the workflow output. It
+   holds the **full** ranked list with `rank` from Phase 3 step 6 and the
+   `limit` in force; the renderer applies the cap. Each finding carries its
+   rationale, its concrete example (the exact prompt, skill description or
+   settings line), and its evidence as verbatim quotes with session ID,
+   project and date. Add `hero` (the one-line verdict and the paragraph),
+   `prior` and `adopted` when Trend ran, `focus` when one was given,
+   `panorama` from the transcript counts, and `methodology`.
+3. Write the merged ledger (Phase 0 step 4) to `OUT_DIR/reflect-status.json`
+   first, so the file exists even if the user never clicks Save.
+4. Render:
+
+   ```bash
+   python3 <skill dir>/scripts/render_report.py \
+     --data <scratchpad>/report-data.json \
+     --status OUT_DIR/reflect-status.json --out REPORT
+   ```
+
+   A data problem prints one line per missing or invalid field and writes
+   nothing. Fix the JSON and rerun; never work around the script.
 
 ### Step 0b — verify before publishing
 
-After generating, diff your section headings against the guide's § Structure (top to
-bottom) list and print `headings match: yes/no`. `no` means fix the output, not the
-claim.
+The script's own output is the gate. It must print `data blocks: round-trip
+ok`, `headings match: yes`, `external requests: none`, `block ids: each exactly
+once`, and AA contrast in both themes, and exit 0. Any other line means fix the
+data (or, for a template defect, stop and say so), never the claim.
 
 ### Phase 5 — Deliver
 
