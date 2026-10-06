@@ -1,10 +1,10 @@
 ---
 name: reflect
 description: Generate a comprehensive, evidence-backed reflection report on how the user uses Claude Code — what works, what needs improvement, and the highest-leverage changes to their setup — by mining past session transcripts in ~/.claude/projects/ with sub-agents, clustering signals across sessions, and consolidating with /insights data. Produces a polished, self-contained, interactive HTML report. Trigger when the user asks to reflect on their Claude Code usage, audit their sessions, find setup improvements, or runs /reflect.
-argument-hint: "[window: 30d|90d|all] [limit=N, default 15] [focus: free text, e.g. a project or theme]"
+argument-hint: "[window: 30d|90d|all] [limit=N, default 15] [out=PATH, default ./Reflections] [focus: free text, e.g. a project or theme]"
 user-invocable: true
 license: MIT
-version: 1.7.0
+version: 1.8.0
 disable-model-invocation: true
 ---
 
@@ -26,7 +26,8 @@ Sections, in run order:
 - **Step 0 — read the format sources** — hard gate before anything is
   generated; your response opens with the `[format sources read]` line.
 - **Arguments** — window (`30d` default, `Nd`, `all`), `limit=N` (15 default,
-  `all` for no cap), and an optional focus.
+  `all` for no cap), `out=PATH` (`./Reflections/` default), and an optional
+  focus.
 - **Pipeline**
   - **Phase 0 — Scope the corpus** — `OUT_DIR`/`REPORT`, in-window
     transcripts, the prior report's JSON, the status ledger.
@@ -62,8 +63,9 @@ Sections, in run order:
 ### External inputs — not bundled
 
 - `~/.claude/projects/**/*.jsonl` — the transcripts (Phases 0 and 3).
-- `OUT_DIR/reflect-status.json` — the user's status ledger; read in Phase 0,
-  written back in Phase 4.
+- `OUT_DIR/reflect-status.json` — the user's status ledger; read in Phase 0
+  (from `PRIOR_DIR`, which is `OUT_DIR` unless an old report is migrating),
+  written back to `OUT_DIR` in Phase 4.
 - `~/.claude/usage-data/` — `/insights` facets, session-meta, and report
   (Phases 1–3).
 
@@ -113,6 +115,12 @@ Parse from the invocation args (all optional, in any order):
 - **Limit** — `limit=N`, where N is a positive integer; `limit=all` lifts the
   cap. Default 15. The report renders the N highest-impact findings. Any other
   value after `limit=` is an error: say so and stop, never guess.
+- **Output** — `out=PATH`, the folder the report and its ledger go to.
+  Default `Reflections/` in the launch folder: the session's primary working
+  directory, where Claude Code was started, never wherever the shell has
+  since `cd`'d to. A relative PATH resolves against that same launch folder;
+  `~` expands; quote a PATH with spaces (`out="My Reports"`). An empty
+  `out=` is an error: say so and stop.
 - **Focus** — any remaining free text (e.g. a project name, `permissions`,
   `report styling`). Scope stays global, but extractors are told to dig deeper
   on matching sessions/themes and the report gives the focus a dedicated
@@ -122,20 +130,32 @@ Parse from the invocation args (all optional, in any order):
 
 ### Phase 0 — Scope the corpus
 
-1. Resolve `OUT_DIR = <invocation cwd>/Outputs/Reflections/` and
-   `REPORT = OUT_DIR/cc-reflection-$(date +%Y%m%d).html`. Create `OUT_DIR` if
-   missing.
+1. Resolve `OUT_DIR` from `out=` (see Arguments; default
+   `<launch folder>/Reflections/`) and
+   `REPORT = OUT_DIR/cc-reflection-$(date +%Y%m%d).html`. If `OUT_DIR` is
+   missing, create it and write `OUT_DIR/.gitignore` holding the single line
+   `*`: the report quotes private transcripts, and a launch folder is often a
+   repo root, so git must never see the folder. Write that file only into a
+   folder this run created. A folder that already existed is left alone,
+   because `out=` may name one the user keeps in git on purpose, and a user
+   who deleted the file wants the reports tracked. Set
+   `PRIOR_DIR = OUT_DIR`, with one exception for reports made
+   before 1.8.0, which wrote to `<launch folder>/Outputs/Reflections/`: when
+   `out=` was not given, `OUT_DIR` holds no `cc-reflection-*.html` and no
+   `reflect-status.json`, and that old folder holds either, set `PRIOR_DIR`
+   to the old folder. It is read-only; this run still writes only to
+   `OUT_DIR`, and Phase 5 says so.
 2. Enumerate transcripts: `find ~/.claude/projects -name '*.jsonl'` filtered
    by mtime within the window. **Exclude the currently running session's own
    transcript** (its sessionId is in this conversation's context) and any
    `memory/` files. Record per file: project dir, session ID (basename), size,
    mtime.
-3. Read prior reports: list `OUT_DIR/cc-reflection-*.html` older than today.
+3. Read prior reports: list `PRIOR_DIR/cc-reflection-*.html` older than today.
    From the most recent, extract the embedded JSON block
    (`<script type="application/json" id="cc-reflection-data">`) for the
    trend/delta stage. If no prior report or no JSON block, skip trending
    gracefully.
-4. Read the status ledger `OUT_DIR/reflect-status.json` — what the user has
+4. Read the status ledger `PRIOR_DIR/reflect-status.json` — what the user has
    already checked off. Merge, never overwrite. Items marked `wontdo` are
    dropped from the ranked list; items marked `done` that still recur in this
    window are the report's most important rows, and their note says what was
@@ -262,14 +282,17 @@ skip (insights stale, unreadable transcripts, findings past the `limit` as
 
 Tell the user in one line how the loop closes: tick items off in the report as
 they address them, click **Save status**, and save over
-`Outputs/Reflections/reflect-status.json`. If the previous edition's ledger had
-anything marked done that came back this week, lead with that — it is the
-strongest signal in the report.
+`OUT_DIR/reflect-status.json`, written as the real path. If the previous
+edition's ledger had anything marked done that came back this week, lead with
+that — it is the strongest signal in the report. If `PRIOR_DIR` was the old
+`Outputs/Reflections/`, say in one line that its history now carries on in
+`OUT_DIR` and the old folder can go once the user has checked the new report.
 
 ## Guardrails
 
 - Diagnosis only. The only writes allowed: `OUT_DIR`, the report file, and
-  scratchpad temp files.
+  scratchpad temp files. A `PRIOR_DIR` outside `OUT_DIR` is read, never
+  written, moved or deleted.
 - `OUT_DIR/reflect-status.json` is the user's record, not yours. Merge into it;
   never reset a `state` or `note` the user set, and never drop an item just
   because this edition did not surface it.
@@ -278,7 +301,8 @@ strongest signal in the report.
 - Only propose a skill for something that actually recurs — recurrence beats
   cleverness.
 - Transcripts contain private data. It stays in the local report; never send
-  transcript content to external services.
+  transcript content to external services. A new `OUT_DIR` gets its
+  `.gitignore` (Phase 0 step 1) so a commit cannot carry it off either.
 - If the window yields >400 sessions (e.g. `all`), tell the user the scale,
   then proceed with triage-weighted sampling: deep-read all high-priority
   sessions, sample the clean remainder, and say so in the report's

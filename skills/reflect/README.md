@@ -33,12 +33,12 @@ Recommending the changes **is** the deliverable. `reflect` never implements what
 
 ## What you get
 
-A single interactive HTML report at `<cwd>/Outputs/Reflections/cc-reflection-<date>.html`:
+A single interactive HTML report at `Reflections/cc-reflection-<date>.html`, in the folder you launched Claude Code from (or wherever `out=` points):
 
 - A ranked assessment, highest impact first and the top 15 by default, that drills down from an executive summary to per-cluster evidence — verbatim quotes, session IDs, and project paths.
 - Custom inline SVG graphics throughout — hand-built charts for every number, explanatory diagrams, and decorative polish. No chart libraries, no raster images, no external requests.
 - An embedded machine-readable summary block, so the next run can diff against this one and show what you adopted, what still recurs, and what's new.
-- A check-off control on every recommendation — mark it done, won't do, or leave it open, with a one-line note. Click **Save status** and save over `Outputs/Reflections/reflect-status.json`; the next run reads it, drops what you set aside, and calls out anything you marked done that came back anyway.
+- A check-off control on every recommendation — mark it done, won't do, or leave it open, with a one-line note. Click **Save status** and save over the `reflect-status.json` beside the report; the next run reads it, drops what you set aside, and calls out anything you marked done that came back anyway.
 - A dedicated section for your `focus`, when you pass one.
 
 The report is styled with the **Neumorphic Fresh** design system, bundled in the skill's template along with its fonts and animation library, so it opens straight from `file://` with no network. Each run writes only data; a script pours it into the template, so every edition has the same shape.
@@ -85,18 +85,19 @@ Each cluster then earns a verdict, gated on how many distinct sessions back it �
 
 ## Usage
 
-Invoke the skill from any project directory — the report lands under that directory's `Outputs/`.
+Invoke the skill from any project directory. The report lands in a `Reflections/` folder there, unless `out=` sends it somewhere else.
 
 ```text
-/reflect [window] [limit=N] [focus]
+/reflect [window] [limit=N] [out=PATH] [focus]
 ```
 
-All three arguments are optional and order-independent:
+All four arguments are optional and order-independent:
 
 | Argument | Values | Default | Effect |
 | --- | --- | --- | --- |
 | Window | `30d`, `Nd`, `all` | `30d` | Sessions whose transcript falls inside the window are in scope. |
 | Limit | `limit=N`, `limit=all` | `15` | Shows the N highest-impact findings, most impactful first. The rest stay in the embedded data block for trending. |
+| Output | `out=PATH` | `./Reflections` | The folder for the report and its status ledger. A relative path resolves against the folder Claude Code was launched from; `~` expands. |
 | Focus | any free text | none | Extractors dig deeper on matching sessions, and the report gives the focus its own section. |
 
 ### Examples
@@ -106,8 +107,15 @@ All three arguments are optional and order-independent:
 /reflect 90d
 /reflect all permissions
 /reflect 90d limit=5 permissions
+/reflect out=~/Notes/Reflections
 /reflect 30d report styling
 ```
+
+**Kept out of git.** The report quotes your transcripts word for word, so when `reflect` creates its output folder it also drops a `.gitignore` of `*` inside it. Git never sees the folder, even at a repo root. A folder that already existed is never given one. Delete the file if you want your reports tracked; `reflect` won't put it back.
+
+**Upgrading from before 1.8.0?** Older reports went to `Outputs/Reflections/`. The first run without `out=` reads your last report and status ledger from there, then writes everything to `Reflections/` from then on. It never touches the old folder; delete it once you're happy.
+
+Keep using the old place with `out=Outputs/Reflections`.
 
 ## Getting started
 
