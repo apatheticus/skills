@@ -4,6 +4,7 @@
   "tier": "animated-flagship",
   "producer": "pretty-svg-docs",
   "style": "glassmorphism",
+  "diagram_type": null,
   "facts": [
     "The pipeline has six phases, numbered 0 through 5",
     "Phase 0 scopes the corpus and loads the most recent prior report for trend diffing",
@@ -15,7 +16,7 @@
   ],
   "facts_hash": "8862876d778e86f3577ab83da43ae01334086acdd480d717ba6628520f14e7e3",
   "src_hash": "e4fb539ecb169c18b1ae7853bc02f931010123d23e2ecc525c5f773dda13b77b",
-  "design_hash": "317d66ef1fa69bf59ee20c0a026c08680b48fa08bdc416a20728bc55ab1080d3",
+  "design_hash": "36c53bc2cafe66c198b3520e53047ba21766f2ad53d1b7e20fd8c8e7518a90a4",
   "design_source_path": "reference/design-system/tokens/colors.css",
   "design_source_hash": "3fdb2e89e30e4855ff1192036211d3b541a28217110d22077fe4dd20823cf7d4",
   "svg": {
