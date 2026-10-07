@@ -9,8 +9,9 @@ pipeline references this file; read it before authoring the workflow script.
 - **Signal families** — friction, repetition, wins, environment gaps.
 - **Extractor output schema (per batch)** — the JSON every extractor returns.
 - **Batching** — group by project, size by priority.
-- **Clustering & decision stage** — mechanical then semantic merge; verdicts;
-  impact ranking and the `limit` cap.
+- **Clustering & decision stage** — mechanical then semantic merge; verdicts.
+- **Workflow return value** — the one object the script returns, which
+  `scripts/assemble.py` reads.
 
 ## Transcript anatomy (what extractors will see)
 
@@ -116,13 +117,41 @@ paraphrase. Report unreadable files, never skip silently."
 }
 ```
 
-Enforce thresholds in script code, not just prompts: a `new-skill` verdict
-with <3 distinct sessions or `automation`/`fix` with <2 gets downgraded to an
-observation.
+Thresholds, ranking, Trend and the `limit` cap all happen in
+`scripts/assemble.py`, after the workflow: the workflow returns clusters and
+decisions unranked and unfiltered.
 
-Rank the final list by impact, in script code, after the Trend stage:
-`leverage` descending, then `effort` ascending (minutes < hour < day), then
-distinct session count descending, then `id` ascending. Write each item's
-`rank` into it. The `limit` argument (default 15) caps only what the report
-renders: Trend, the status ledger and the embedded data block get the full
-ranked list, so a finding past the cap is never misread as adopted.
+## Workflow return value
+
+The script's `return`, exactly this shape. The Workflow tool writes it under
+`result` in the output file the task notification names; `assemble.py` reads
+that file directly.
+
+```json
+{
+  "signals_count": 0,
+  "unreadable": ["session ids an extractor could not read"],
+  "failed_batches": ["labels of batches whose agent failed"],
+  "clusters": [{
+    "id": "kebab-case slug: the prior edition's id when it is the same issue",
+    "title": "...", "family": "friction|repetition|wins|environment",
+    "summary": "...", "session_ids": ["..."],
+    "evidence": [{"quote": "verbatim", "summary": "...", "session_id": "...",
+                  "project": "...", "date": "YYYY-MM-DD", "severity": "high|medium|low"}]
+  }],
+  "decisions": [{
+    "id": "the cluster's id", "verdict": "new-skill|automation|fix|keep-doing|nothing",
+    "rationale": "...", "example": "the decision's concrete_example", "example_lang": "json|bash|markdown|text",
+    "effort": "minutes|hour|day", "leverage": 1
+  }],
+  "consolidation": {
+    "corroboration": [{"id": "...", "corroborated": true, "note": "what /insights says, one sentence"}],
+    "additions": ["a cluster object merged with its decision, for what only /insights surfaced"]
+  }
+}
+```
+
+One decision per cluster, matched by `id`; a cluster with no decision is
+skipped and named in `assemble.py`'s output. Keep `evidence` quotes verbatim
+and unlabelled (no `User:` prefix, no narration): `verify_quotes.py` drops any
+quote it cannot find in the session it cites.
