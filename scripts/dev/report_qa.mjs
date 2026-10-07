@@ -84,8 +84,10 @@ const url = `${origin}/report.html`;
 
 // ---------------------------------------------------------------- browser
 
+// cwd: OUT, because playwright-cli writes a page snapshot into ./.playwright-cli/ on
+// every navigation, and the repo root is no place for those.
 const cli = async (...args) =>
-  (await run('playwright-cli', [SESSION, ...args], { maxBuffer: 1 << 24 })).stdout;
+  (await run('playwright-cli', [SESSION, ...args], { cwd: OUT, maxBuffer: 1 << 24 })).stdout;
 const evalJson = async (fn) => JSON.parse(await cli('--raw', 'eval', fn));
 const consoleErrors = async () => {
   const out = await cli('console', 'error');
