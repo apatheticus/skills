@@ -19,6 +19,7 @@
  * No dependencies. Node >= 18.
  */
 
+import { execFileSync } from 'node:child_process';
 import { readdirSync, readFileSync, writeFileSync, existsSync, statSync } from 'node:fs';
 import { join, dirname, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -462,6 +463,38 @@ if (!existsSync(README)) {
       }
     }
   }
+}
+
+// ----------------------------------------------------------- machine paths
+
+// The repo is public and installs on other machines, so a path into one user's disk
+// is a leak and a dead link at once: a reference file once sent an agent to a home
+// folder that existed only on the author's Mac. Scans tracked text files only.
+const MACHINE_PATH_RE =
+  /(?<![\w.])(?:\/Users\/[A-Za-z]|\/Volumes\/[A-Za-z]|\/private\/(?:tmp|var)\/|\/home\/[a-z]|[A-Z]:\\Users\\)/;
+
+let tracked = [];
+try {
+  tracked = execFileSync('git', ['ls-files', '-z'], { cwd: ROOT, encoding: 'utf8' })
+    .split('\0')
+    .filter(Boolean);
+} catch {
+  warn('.', '`git ls-files` failed, so the machine-path check was skipped');
+}
+for (const file of tracked) {
+  let text;
+  try {
+    text = readFileSync(join(ROOT, file), 'utf8');
+  } catch {
+    continue;
+  }
+  if (text.includes('\0')) continue; // binary
+  text.split('\n').forEach((line, i) => {
+    const hit = line.match(MACHINE_PATH_RE);
+    if (!hit) return;
+    const path = line.slice(hit.index).split(/[\s`'"()<>\]]/)[0].slice(0, 80);
+    err(`${file}:${i + 1}`, `machine-specific path \`${path}\` — use a relative path, \`~\`, or a placeholder`);
+  });
 }
 
 // ------------------------------------------------------------------ report

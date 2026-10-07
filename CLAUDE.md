@@ -4,7 +4,7 @@ Public repository publishing agent skills, installable two ways from one source 
 
 ## Facts
 
-- GitHub: `apatheticus/skills`, personal account, MIT, public — nothing secret, no machine-specific absolute paths.
+- GitHub: `apatheticus/skills`, personal account, MIT, public — nothing secret, no machine-specific absolute paths (`validate.mjs` errors on them in any tracked file).
 - Git auth pins to the personal SSH key by directory via `core.sshCommand` in an `includeIf` gitconfig — see the `github-identities` skill for the machine-side wiring. The stored `origin` is the HTTPS URL and is correct as-is — `url."git@github.com:".insteadOf` rewrites it transparently, which is why `git remote get-url` and `git config remote.origin.url` disagree. Do not "fix" the remote.
 - Distribution 1 — skills.sh: `npx skills add apatheticus/skills`, which discovers `skills/*/SKILL.md` directly from GitHub. **No npm publish is involved**; `package.json` is `private: true` and exists only to hold the validation scripts.
 - Distribution 2 — Claude Code plugin: marketplace `apatheticus`, publishing **two** plugins — `apatheticus-skills` and `apatheticus-security`. Both source the repo root, so both channels read the same `skills/` directory with no duplication.
