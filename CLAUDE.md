@@ -62,7 +62,7 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `m
 
 ## Checkers — all of these fail open
 
-**CI runs `validate.mjs` and nothing else.** It never runs `svg_check.py`, `audit_visuals.py`, `audit_state.py`, `render_report.py`, or any `.prettydocs/` manifest check, so a red asset gate reaches `main` looking green. Run them by hand before shipping a visual or script change.
+**CI runs only some checkers; `.github/workflows/validate.yml` is the list.** Anything missing from it reaches `main` looking green: today that includes `audit_state.py`, `render_report.py`, `website-security-scan/scripts/test_delta.py`, and `audit_visuals.py` for every skill that does not ship its own copy. Run those by hand before shipping a visual or script change.
 
 - **`svg_check.py` without `--design` and `--style` checks almost nothing and still prints `0 error(s)`.** No `--design` means an empty palette, so every contrast test degrades to a WARN and the off-system-colour gate never fires; no `--style` means no style invariant or fidelity floor applies. Always pass both.
 - **`data-bg` naming a role that does not resolve is a WARN, not an error**, and the contrast floor is then not applied to that text at all. Treat `text has no data-bg ground in scope` as a failure.
