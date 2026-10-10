@@ -4,7 +4,7 @@ description: Generate a comprehensive, evidence-backed reflection report on how 
 argument-hint: "[window: 30d|90d|all] [limit=N, default 15] [out=PATH, default ./Reflections] [focus: free text, e.g. a project or theme]"
 user-invocable: true
 license: MIT
-version: 1.8.1
+version: 1.9.0
 disable-model-invocation: true
 ---
 
@@ -56,14 +56,15 @@ Sections, in run order:
   `all` for no cap), `out=PATH` (`./Reflections/` default), and an optional
   focus.
 - **Pipeline**
-  - **Phase 0 — Scope the corpus** — `OUT_DIR`/`REPORT`, in-window
-    transcripts, the prior report's JSON, the status ledger.
+  - **Phase 0 — Scope the corpus** — `OUT_DIR`/`REPORT`, `corpus.py` for the
+    in-window transcripts and their counts, the prior report, the ledger.
   - **Phase 1 — /insights freshness gate** — gate on recency, never coverage.
-  - **Phase 2 — Triage** — score every session from metadata; no agents.
-  - **Phase 3 — Extraction** — Workflow fan-out: extract, cluster, decide,
-    consolidate, trend, then rank by impact and cap at `limit`.
-  - **Phase 4 — Report** — write the data as JSON, then fill
-    `assets/template.html` via `scripts/render_report.py`.
+  - **Phase 2 — Triage** — batch by the priority `corpus.py` scored; no agents.
+  - **Phase 3 — Extraction** — Workflow fan-out: extract, cluster (reusing
+    prior ids), decide, consolidate.
+  - **Phase 4 — Report** — `assemble.py` builds and ranks the data,
+    `verify_quotes.py` checks every quote, `render_report.py` fills
+    `assets/template.html`.
   - **Step 0b — verify before publishing** — the script's checks, ending in
     `headings match: yes`.
   - **Phase 5 — Deliver** — send the report, TL;DR, skipped items, how the
@@ -79,6 +80,14 @@ Sections, in run order:
 - `assets/template.html` — the report itself: CSS, fonts, GSAP and renderer
   inline, with sample data. About 340KB: **never Read it**; `head -40` shows
   its header comment, which is all a run needs.
+- `scripts/corpus.py` — Phases 0 and 2. Scopes the transcripts, excludes this
+  session and its forks, counts the panorama, scores triage priority.
+- `scripts/workflow_result.py` — reads a Workflow output file's `result` and
+  undoes the harness's `<\` and `Assistant\:` escaping; `assemble.py` uses it.
+- `scripts/assemble.py` — Phase 4. Builds `report-data.json`: thresholds,
+  ledger `wontdo`, streak, trend, adopted, rank.
+- `scripts/verify_quotes.py` — Phase 4. Keeps only verbatim evidence,
+  re-ranks.
 - `scripts/render_report.py` — Phase 4. Validates the data, merges the
   status ledger, fills the template, writes both, and checks them (Step 0b).
 - `reference/extraction-guide.md` — read in Phase 3, before authoring the
@@ -101,11 +110,11 @@ each box as the gate passes:
 
 ```
 - [ ] Step 0   guide read, template header read; opening line printed
-- [ ] Phase 0  OUT_DIR resolved; transcripts listed; prior JSON + ledger loaded
+- [ ] Phase 0  OUT_DIR resolved; corpus.py ran, this session excluded; prior report + ledger found
 - [ ] Phase 1  /insights gate passed, or the user chose to proceed
-- [ ] Phase 2  triage list built
-- [ ] Phase 3  workflow run: extract → cluster → decide → consolidate → trend → rank
-- [ ] Phase 4  data JSON built; report rendered to REPORT; ledger merged by the script
+- [ ] Phase 2  batches built from corpus.json priorities
+- [ ] Phase 3  workflow run: extract → cluster → decide → consolidate
+- [ ] Phase 4  assemble.py + verify_quotes.py ran, rebuilt quotes read; report rendered; ledger merged by the script
 - [ ] Step 0b  headings match: yes
 - [ ] Phase 5  report sent; TL;DR and skipped items stated
 ```
@@ -170,16 +179,26 @@ Parse from the invocation args (all optional, in any order):
    `reflect-status.json`, and that old folder holds either, set `PRIOR_DIR`
    to the old folder. It is read-only; this run still writes only to
    `OUT_DIR`, and Phase 5 says so.
-2. Enumerate transcripts: `find ~/.claude/projects -name '*.jsonl'` filtered
-   by mtime within the window. **Exclude the currently running session's own
-   transcript** (its sessionId is in this conversation's context) and any
-   `memory/` files. Record per file: project dir, session ID (basename), size,
-   mtime.
-3. Read prior reports: list `PRIOR_DIR/cc-reflection-*.html` older than today.
-   From the most recent, extract the embedded JSON block
-   (`<script type="application/json" id="cc-reflection-data">`) for the
-   trend/delta stage. If no prior report or no JSON block, skip trending
-   gracefully.
+2. Scope and count the corpus in one call, into `WORK`, a new folder in the
+   scratchpad:
+
+   ```bash
+   python3 <skill dir>/scripts/corpus.py --window <window> \
+     --self ${CLAUDE_SESSION_ID} --out WORK/corpus.json
+   ```
+
+   Claude Code fills in `${CLAUDE_SESSION_ID}` with this run's id when it loads
+   the skill. The script drops that session and every transcript that
+   continues into it (a fork or resume carries this conversation's history),
+   then records each in-window transcript's path, project, size, counts and
+   triage priority, and builds the Usage panorama. If it stops because
+   `--self` was not filled in, pass the id from this session's own transcript
+   file name. `corpus.json` is the corpus for every later phase.
+3. Find the prior report: the most recent `PRIOR_DIR/cc-reflection-*.html`
+   older than today. Read its embedded `cc-reflection-data` block for the
+   recommendation ids and titles the cluster stage reuses (Phase 3 step 5);
+   `assemble.py` reads the same file for Trend in Phase 4. No prior report
+   means no Trend.
 4. Read the status ledger `PRIOR_DIR/reflect-status.json` — what the user has
    already checked off. Read only, for two things: items marked `wontdo` are
    dropped from the ranked list, and items marked `done` that still recur in
@@ -210,14 +229,13 @@ the methodology appendix.
 
 ### Phase 2 — Triage (cheap, no agents)
 
-Use `session-meta` + `facets` JSON to score every in-window session before
-spending agent tokens. High-priority markers: friction_counts non-empty,
-outcome not `fully_achieved`, tool_errors high relative to message count,
-user_interruptions > 0, very long sessions, sessions matching the focus.
-Low-priority: short clean sessions with `fully_achieved` + satisfied. Sessions
-with no meta/facet default to medium. Output a triage list: every session gets
-read, but priority determines batch depth (high-priority sessions get smaller
-batches / deeper reads; low-priority sessions get skim batches).
+`corpus.py` already scored every session from its counts and the /insights
+facets: `priority` is `high` (friction, an unfinished outcome, many errors,
+interruptions, very long), `low` (short, clean, `fully_achieved`), `medium`
+(everything else, including no facet), or `empty` (no turns in the window).
+Raise sessions matching the focus to `high` and leave out `empty`. Every other
+session gets read; priority sets batch depth (high-priority sessions get
+smaller batches and deeper reads, low-priority ones skim batches).
 
 ### Phase 3 — Extraction (Workflow fan-out)
 
@@ -225,7 +243,8 @@ Orchestrate with the **Workflow tool** (the user opted into multi-agent
 orchestration by invoking this skill). Read
 `reference/extraction-guide.md` for the signal taxonomy, extractor prompt
 template, JSON schemas, and batching rules, then author the workflow script.
-Shape:
+It returns exactly the object in § Workflow return value, which `assemble.py`
+reads in Phase 4. Shape:
 
 1. **Extract** — `pipeline()` over transcript batches (group by project;
    ~5–15 sessions per batch by priority and size; pass file paths, not
@@ -248,16 +267,16 @@ Shape:
    and `~/.claude/usage-data/report.html`: where they agree, mark the finding
    corroborated; where /insights surfaces something extraction missed, add it
    with its own evidence.
-5. **Trend** — if a prior report's JSON was loaded, diff: recommendations
-   adopted (signal gone), still recurring (flag streak count), new this
-   report.
-6. **Rank and cap** — in script code, never by an agent. Sort the full list
-   by impact: `leverage` descending, then `effort` ascending (minutes < hour
-   < day), then distinct session count descending, then `id` ascending so
-   ties land the same every run. Number every item with its `rank`. The cap
-   is display-only: Trend, the status ledger and the embedded data block all
-   see the full ranked list, and the report renders only the top `limit`.
-   Cut earlier and finding #16 reads as adopted this week and new the next.
+5. **Reuse ids** — give the cluster stage the prior edition's recommendation
+   ids and titles: a cluster that is the same issue keeps the prior `id`, or
+   Trend reads it as adopted and new at once. `assemble.py` computes streak,
+   trend and adopted from those ids in Phase 4.
+6. **Rank and cap** — `assemble.py` ranks in code in Phase 4, never an agent:
+   `leverage` descending, then `effort` ascending, then distinct sessions
+   descending, then `id`. The cap is display-only: Trend, the status ledger
+   and the embedded data block all see the full ranked list, and the report
+   renders only the top `limit`. Cut earlier and finding #16 reads as adopted
+   this week and new the next.
 
 ### Phase 4 — Report
 
@@ -270,19 +289,34 @@ or fetch. **Never Read or hand-edit the template or the report**: both are
 
 1. Re-read `reference/report-guide.md` § Embedded data block: it is the full
    schema, and the script enforces it.
-2. Build `report-data.json` in the scratchpad from the workflow output. It
-   holds the **full** ranked list with `rank` from Phase 3 step 6 and the
-   `limit` in force; the renderer applies the cap. Each finding carries its
-   rationale, its concrete example (the exact prompt, skill description or
-   settings line), and its evidence as verbatim quotes with session ID,
-   project and date. Add `hero` (the one-line verdict and the paragraph),
-   `prior` and `adopted` when Trend ran, `focus` when one was given,
-   `panorama` from the transcript counts, and `methodology`.
+2. Write `WORK/narrative.json`, the prose only this run can write: `hero`
+   (the one-line verdict and the paragraph), `focus` when one was given, and
+   `methodology` (triage, sampled, pipeline, limitations), shaped as
+   `assemble.py`'s docstring shows. Then build the data and check its quotes:
+
+   ```bash
+   python3 <skill dir>/scripts/assemble.py --workflow <the workflow's output file> \
+     --corpus WORK/corpus.json --narrative WORK/narrative.json \
+     --prior-report <Phase 0 step 3's report, if any> \
+     --status PRIOR_DIR/reflect-status.json --limit <limit> \
+     --out WORK/report-data.json
+   python3 <skill dir>/scripts/verify_quotes.py \
+     --data WORK/report-data.json --corpus WORK/corpus.json
+   ```
+
+   `assemble.py` joins clusters to decisions, applies the verdict thresholds,
+   drops findings the ledger marks `wontdo`, sets streak, trend and adopted,
+   ranks the **full** list, and copies in the corpus counts and panorama.
+   `verify_quotes.py` keeps only evidence found verbatim in the session it
+   cites and prints a line for every quote it rebuilt or dropped. Read each
+   `rebuilt` line: a rebuilt quote can keep a real but off-topic fragment. Fix
+   a problem at its source (`narrative.json`, or a rerun workflow stage) and
+   rerun both scripts.
 3. Render:
 
    ```bash
    python3 <skill dir>/scripts/render_report.py \
-     --data <scratchpad>/report-data.json \
+     --data WORK/report-data.json \
      --prior-status PRIOR_DIR/reflect-status.json \
      --status OUT_DIR/reflect-status.json --out REPORT
    ```

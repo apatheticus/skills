@@ -4,7 +4,7 @@ Public repository publishing agent skills, installable two ways from one source 
 
 ## Facts
 
-- GitHub: `apatheticus/skills`, personal account, MIT, public — nothing secret, no machine-specific absolute paths.
+- GitHub: `apatheticus/skills`, personal account, MIT, public — nothing secret, no machine-specific absolute paths (`validate.mjs` errors on them in any tracked file).
 - Git auth pins to the personal SSH key by directory via `core.sshCommand` in an `includeIf` gitconfig — see the `github-identities` skill for the machine-side wiring. The stored `origin` is the HTTPS URL and is correct as-is — `url."git@github.com:".insteadOf` rewrites it transparently, which is why `git remote get-url` and `git config remote.origin.url` disagree. Do not "fix" the remote.
 - Distribution 1 — skills.sh: `npx skills add apatheticus/skills`, which discovers `skills/*/SKILL.md` directly from GitHub. **No npm publish is involved**; `package.json` is `private: true` and exists only to hold the validation scripts.
 - Distribution 2 — Claude Code plugin: marketplace `apatheticus`, publishing **two** plugins — `apatheticus-skills` and `apatheticus-security`. Both source the repo root, so both channels read the same `skills/` directory with no duplication.
@@ -62,13 +62,13 @@ CI (`.github/workflows/validate.yml`) runs `validate` on push/PR and fails if `m
 
 ## Checkers — all of these fail open
 
-**CI runs `validate.mjs` and nothing else.** It never runs `svg_check.py`, `audit_visuals.py`, `audit_state.py`, `render_report.py`, or any `.prettydocs/` manifest check, so a red asset gate reaches `main` looking green. Run them by hand before shipping a visual or script change.
+**CI runs only some checkers; `.github/workflows/validate.yml` is the list.** Anything missing from it reaches `main` looking green: today that includes `audit_state.py`, `render_report.py`, `website-security-scan/scripts/test_delta.py`, and `audit_visuals.py` for every skill that does not ship its own copy. Run those by hand before shipping a visual or script change.
 
 - **`svg_check.py` without `--design` and `--style` checks almost nothing and still prints `0 error(s)`.** No `--design` means an empty palette, so every contrast test degrades to a WARN and the off-system-colour gate never fires; no `--style` means no style invariant or fidelity floor applies. Always pass both.
 - **`data-bg` naming a role that does not resolve is a WARN, not an error**, and the contrast floor is then not applied to that text at all. Treat `text has no data-bg ground in scope` as a failure.
 - **`audit_visuals.py` takes doc *files*; the directory goes in `--root`.** A path prefixed with the skill name doubles against `--root` and reports every doc missing; a bare `README.md` from the repo root audits the *repo's* README against a skill's manifests. Working form: `( cd "$skill" && python3 scripts/audit_visuals.py --root . *.md )`.
 - **`BUDGETS.get()` returns `None` for an unlisted doc, which the checker reads as *unlimited*, silently.** Any new Tier-1 doc type needs its `BUDGETS` row in the same change.
-- **`render_report.py --sample` is the only gate on `reflect`'s template, and it cannot see layout.** It checks headings against `report-guide.md` § Structure, external URLs, block ids and AA contrast, then prints green for a page whose grid has collapsed. Its contrast pairs are hard-coded in `check_contrast()` to mirror the `color-mix` percentages in `style#report`: change one without the other and it measures a colour the page no longer uses. After any template edit, look at the sample in both themes at 1280 and 375 wide.
+- **`render_report.py --sample` gates `reflect`'s data, not its layout; `node scripts/dev/report_qa.mjs` is the layout gate.** The renderer checks headings against `report-guide.md` § Structure, external URLs, block ids and AA contrast, then prints green for a page whose grid has collapsed. Its contrast pairs are hard-coded in `check_contrast()` to mirror the `color-mix` percentages in `style#report`: change one without the other and it measures a colour the page no longer uses. After any template edit, run `report_qa.mjs`: it fails on overflow, console errors, off-host requests and a broken h2 order at 1280 and 375 wide in both themes, then saves a full-page PNG of each. Look at the PNGs too; it cannot judge a cramped or clipped chart.
 - There is **no shared module** — three copies of `audit_visuals.py`, two of `svg_check.py` and `styles.json`. Keep them in step. CI diffs the `describe_parity` block between the two copies that carry it and fails on divergence.
 
 ## Per-skill landmines
